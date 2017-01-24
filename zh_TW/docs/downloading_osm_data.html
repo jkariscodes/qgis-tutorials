@@ -119,6 +119,7 @@
 <li class="toctree-l1"><a class="reference internal" href="find_neighbor_polygons.html">在同一圖層中尋找相鄰的多邊形</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">資料表連接 (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS 學習資源</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">資料來源</a></li>
 </ul>
@@ -223,12 +224,12 @@
 <li><p class="first"><strong>OSM Place Search</strong> 會在 QGIS 中安裝一個叫做 <span class="guilabel">OSM place search...</span> 的面板。</p>
 </li>
 </ol>
-<img alt="../_images/224.png" class="align-center" src="../_images/224.png" />
+<img alt="../_images/225.png" class="align-center" src="../_images/225.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first"><strong>OpenLayers plugin</strong> 會在 <em>附加元件</em> 或是 <em>網路</em> 的選單中新增一個選項。這個外掛讓你可以在 QGIS 中直接瀏覽網路上提供地圖的不同來源。現在我們就來試試看下載開放街圖的底圖，選擇 <span class="menuselection">附加元件（或網路） ‣ OpenLayers plugin ‣ Add OpenStreetMap layer</span> （譯註：實際的位置和名稱，可能會隨著你的 QGIS 版本的不同而有些微變化）。</p>
 </li>
 </ol>
-<img alt="../_images/315.png" class="align-center" src="../_images/315.png" />
+<img alt="../_images/316.png" class="align-center" src="../_images/316.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">接著 QGIS 中就可以看到世界地圖了。</p>
 </li>
@@ -237,17 +238,17 @@
 <p class="first admonition-title">註解</p>
 <p class="last">如果你沒看到任何資料的話，有可能是你沒有連上網，因為這些資料都是直接從網路上下載的。你可以使用 <em>平移地圖</em> 鈕把底圖稍微移動一下，讓 QGIS 立刻從線上更新圖資。</p>
 </div>
-<img alt="../_images/410.png" class="align-center" src="../_images/410.png" />
+<img alt="../_images/411.png" class="align-center" src="../_images/411.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">來找看看倫敦吧。在 <strong>OSM Place Search</strong> 面板中的 <span class="guilabel">Name contains...</span> 欄位輸入 london，然後就會出現一堆結果，滑鼠移過去時會顯示這些地方在世界地圖上的位置。選擇第一個結果，它就是那個在英國的倫敦市，然後按下 <span class="guilabel">Zoom</span> 的按鈕。</p>
 </li>
 </ol>
-<img alt="../_images/510.png" class="align-center" src="../_images/510.png" />
+<img alt="../_images/511.png" class="align-center" src="../_images/511.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">然後底圖就會移到倫敦市附近。使用 <span class="guilabel">放大</span> 鈕可以更進一步放大到你想看的範圍，在本教學中，我們就把它移到倫敦市中心附近吧，如圖所示。</p>
 </li>
 </ol>
-<img alt="../_images/69.png" class="align-center" src="../_images/69.png" />
+<img alt="../_images/610.png" class="align-center" src="../_images/610.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">選擇 <span class="menuselection">向量 ‣ OpenStreetMap ‣ 下載資料</span>，以下載目前顯示在畫布上的地圖區域。</p>
 </li>
@@ -281,7 +282,7 @@
 <li><p class="first"><code class="docutils literal"><span class="pre">london.osm.db</span></code> 檔案內含有所有 OSM 的資料結構，像是點、線、多邊形等等，不過一個 GIS 圖層通常只能有一種資料結構，所以我們必須要決定要讀取哪一種。我們的任務是要找出酒吧的位置，所以在 <span class="guilabel">導出類型</span> 中，選擇 <span class="guilabel">點(節點)</span> 就可以了。假設今天你要取得的是道路的資料，那麼這邊就要選「<span class="guilabel">線集(總是開口)</span>」。接下來在 <span class="guilabel">輸出圖層名稱</span> 那邊填上 <code class="docutils literal"><span class="pre">london_points</span></code>。這些點的 GIS 資料有位置和屬性資訊 2 個部分，由於我們要找的只有酒吧這種設施，所以這兩個資訊都要載入。因此在底下的 <span class="guilabel">導出標籤</span> 欄位中，先按一下 <span class="guilabel">從資料庫載入</span>，然後你就可以看到所有存在 <code class="docutils literal"><span class="pre">london.osm.db</span></code> 裡面的屬性，最後勾選 <span class="guilabel">name</span> 和 <a href="#id1"><span class="problematic" id="id2">:guilabel:`amenity 兩個標籤（譯註：amenity 指福利設施，包含酒吧這種類型的商家）。如果你想知道所有的屬性意思，請參閱 `OSM Tags &lt;http://wiki.openstreetmap.org/wiki/Tags&gt;`_</span></a>。把 <span class="guilabel">處理完成後載入 QGIS 地圖中</span> 打勾，就可以按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1211.png" class="align-center" src="../_images/1211.png" />
+<img alt="../_images/1212.png" class="align-center" src="../_images/1212.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">回到 QGIS 主畫面中就可以看到有個叫做 <code class="docutils literal"><span class="pre">london_points</span></code> 的新圖層出現了。這個圖層含有這個視窗下所有的 OSM 資料庫中的點資訊，所以我們還必須要挑出標明為酒吧的點。右鍵按下 <code class="docutils literal"><span class="pre">london_points</span></code> 圖層然後 <span class="guilabel">開啟屬性表格</span>。</p>
 </li>
@@ -342,7 +343,7 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      最後更新日期是 Jan 23, 2017.<br/>
+      最後更新日期是 Jan 24, 2017.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

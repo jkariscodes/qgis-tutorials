@@ -117,6 +117,7 @@
 <li class="toctree-l1"><a class="reference internal" href="find_neighbor_polygons.html">Naburige polygonen in een laag zoeken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Samenvoegen van tabellen uitvoeren (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS bronnen om te leren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Gebruik van gegevens</a></li>
 </ul>
@@ -200,7 +201,7 @@
 <div class="admonition warning">
 <p class="first admonition-title">Waarschuwing</p>
 <p>Plug-in qgis2leaf wordt niet langer actief ontwikkeld. De functionaliteit van deze plug-in is opgenomen in een nieuwe plug-in, genaamd <strong>qgis2web</strong>.</p>
-<p class="last">See <a href="#id1"><span class="problematic" id="id2">:docs:`web_mapping_with_qgis2web`</span></a> tutorial for an updated version of
+<p class="last">See <a class="reference internal" href="web_mapping_with_qgis2web.html"><em>Web Mapping with QGIS2Web</em></a> tutorial for an updated version of
 this tutorial.</p>
 </div>
 <p>Leaflet is een populaire open-source Javascript-bibliotheek voor het bouwen van toepassingen voor webkaarten. de plug-in <strong>qgis2leaf</strong> verschaft een eenvoudige manier om uw kaart van QGIS te exporteren naar een functionerende, op Leaflet gebaseerde, webkaart. Deze plug-in is een handige manier om te beginnen met webkaarten en een interactieve webkaart te maken vanuit uw statische GIS gegevenslagen.</p>
@@ -221,7 +222,7 @@ this tutorial.</p>
 <h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
 <p>We zullen de gegevensset <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/airports/">Airports</a> van Natural Earth gebruiken.</p>
 <p>Download het <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">shapefile Airports</a>.</p>
-<p>Gegevensbron <a class="reference internal" href="credits.html#naturalearth" id="id3">[NATURALEARTH]</a></p>
+<p>Gegevensbron <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
@@ -234,22 +235,22 @@ this tutorial.</p>
 <li><p class="first">Pak het gedownloade bestand <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code> uit. Open QGIS en ga naar <span class="menuselection">Karatlagen ‣ Laag toevoegen ‣ Vectorlaag toevoegen</span>. Blader naar de plaats waar de bestanden werden uitgepakt en selecteer <code class="docutils literal"><span class="pre">ne_10m_airports.shp</span></code>. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/230.png" class="align-center" src="../_images/230.png" />
+<img alt="../_images/234.png" class="align-center" src="../_images/234.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Gebruik, als de laag <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> eenmaal is geladen, het gereedschap <span class="guilabel">Objecten identificeren</span> om op een object te klikken en de attributen daarvan te bekijken. We zullen een kaart met vliegvelden maken, waarbij we de vliegvelden classificeren in 3 categorieën. Het attribuut <code class="docutils literal"><span class="pre">type</span></code> zal handig zijn bij het classificeren van de objecten.</p>
 </li>
 </ol>
-<img alt="../_images/322.png" class="align-center" src="../_images/322.png" />
+<img alt="../_images/323.png" class="align-center" src="../_images/323.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> en selecteer <span class="guilabel">Open attributentabel</span>.</p>
 </li>
 </ol>
-<img alt="../_images/416.png" class="align-center" src="../_images/416.png" />
+<img alt="../_images/417.png" class="align-center" src="../_images/417.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">klik, in het dialoogvenster van de attributentabel, op de knop <span class="guilabel">Bewerken aan/uitzetten</span>. Klik, als de laag in de modus bewerken staat, op de knop <span class="guilabel">Open veldberekening</span>.</p>
 </li>
 </ol>
-<img alt="../_images/516.png" class="align-center" src="../_images/516.png" />
+<img alt="../_images/517.png" class="align-center" src="../_images/517.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">We willen een nieuw attribuut maken, genaamd <code class="docutils literal"><span class="pre">type_code</span></code> waar we de belangrijkste vliegvelden de waarde 3 geven, gemiddelde vliegvelden de waarde 2 en alle andere de waarde 1. We kunnen het argument <em>CASE</em> gebruiken en een expressie schrijven die zal zoeken naar de waarde van het attribuut <code class="docutils literal"><span class="pre">type</span></code> en  een attribuut <code class="docutils literal"><span class="pre">type_code</span></code> zal maken dat is gebaseerd op de voorwaarde. Selecteer het vak <span class="guilabel">Nieuw veld aanmaken</span> en voer <code class="docutils literal"><span class="pre">type_code</span></code> in als de <span class="guilabel">Naam voor veld</span>. Selecteer <span class="guilabel">Geheel getal (integer)</span> als <span class="guilabel">Type voor veld</span>. Voer, in het venster <span class="guilabel">Expressie</span>, de volgende tekst in.</p>
 </li>
@@ -260,7 +261,7 @@ this tutorial.</p>
 END
 </pre></div>
 </div>
-<img alt="../_images/615.png" class="align-center" src="../_images/615.png" />
+<img alt="../_images/616.png" class="align-center" src="../_images/616.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Terug in het venster <span class="guilabel">Attributentabel</span> zult u aan het einde een nieuwe kolom zien. Verifieer dat uw expressie juist heeft gewerkt en klik op de knop <span class="guilabel">Bewerken aan/uitzetten</span> om de wijzigingen op te slaan.</p>
 </li>
@@ -290,7 +291,7 @@ END
 <li><p class="first">ga naar de map met de uitvoer op uw schijf als het exporteren is voltooid. Open het bestand <code class="docutils literal"><span class="pre">index.html</span></code> in een browser. U zult een interactieve webkaart zien die een replica is van de kaart van QGIS. U kunt op de kaart in- en uitzoomen en die verschuiven en ook op een object klikken om een pop-upvenster te verkrijgen met informatie over de attributen. U kunt de inhoud van deze map naar een webserver kopiëren om een webkaart te hebben met volledige mogelijkheden.</p>
 </li>
 </ol>
-<img alt="../_images/1215.png" class="align-center" src="../_images/1215.png" />
+<img alt="../_images/1216.png" class="align-center" src="../_images/1216.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Nu zullen we enkele geavanceerde mogelijkheden van deze plug-in verkennen die u in staat zullen stellen de kaart verder aan te passen. Zoals u heeft gezien bevatte de pop-up alle attributen van de objecten. Sommige attributen zijn niet erg nuttig en over het algemeen ziet de pop-up er lelijk uit. We kunnen de standaard pop-up vervangen door ons eigen aangepaste HTML om het veel beter te maken. Dat wordt bereikt door de aangepaste HTML toe te voegen in een kolom, genaamd <code class="docutils literal"><span class="pre">html_exp</span></code>. klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> en selecteer <span class="guilabel">Open attributentabel</span>.</p>
 </li>
@@ -357,7 +358,7 @@ END
 <li><p class="first">Noem, in het dialoogvenster <span class="guilabel">Vectorlaal opslaan als...</span>, het uitvoerbestand <code class="docutils literal"><span class="pre">major_airports.shp</span></code>. Selecteer <span class="guilabel">Voeg opgeslagen bestand toe aan kaart</span> en klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/234.png" class="align-center" src="../_images/234.png" />
+<img alt="../_images/235.png" class="align-center" src="../_images/235.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first">Als de laag <code class="docutils literal"><span class="pre">major_airports</span></code> eenmaal is geladen in QGIS, klik er met rechts op en selecteer <span class="guilabel">Open attributentabel</span>.</p>
 </li>
@@ -432,7 +433,7 @@ width="100%" height="600px"></iframe>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Jan 23, 2017.<br/>
+      Laatste aanpassing op Jan 24, 2017.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
