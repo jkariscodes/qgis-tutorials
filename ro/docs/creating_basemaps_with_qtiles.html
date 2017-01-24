@@ -272,7 +272,7 @@ for X coordinates and then the actual tiles named for Y coordinates.</li>
 </ol>
 <img alt="../_images/47.png" class="align-center" src="../_images/47.png" />
 <ol class="arabic simple" start="5">
-<li>In the parent directory of top-levle tiles directory, you will find a
+<li>In the parent directory of top-level tiles directory, you will find a
 <code class="docutils literal"><span class="pre">QTiles.html</span></code> file. This is a simple viewer to explore the tiles using the
 Leaflet web mapping library.</li>
 </ol>
@@ -282,6 +282,45 @@ Leaflet web mapping library.</li>
 and pan around to see the tiles seamlessly form the original raster layer.</li>
 </ol>
 <img alt="../_images/66.png" class="align-center" src="../_images/66.png" />
+<ol class="arabic simple" start="7">
+<li>You can use these tiles with any web-mapping library that supports XYZ
+tiling schemes and overlay other layers on top. To demonstrate the
+usefulness and portability of such tiles, we will now add the tiles created
+in this tutorial as the basemap for the airports map created in
+<a class="reference internal" href="web_mapping_with_qgis2web.html"><em>Web Mapping with QGIS2Web</em></a> tutorial. In that tutorial, we chose to use
+a ready-made basemap from OpenStreetMap. We can easily swap that with our
+own custom basemap created in this tutorial. Go to the output directory
+where the qgis2web map was exported. Open the <span class="menuselection">Layers ‣
+layers.js</span> file created during the export.</li>
+</ol>
+<img alt="../_images/76.png" class="align-center" src="../_images/76.png" />
+<ol class="arabic simple" start="8">
+<li>Locate the code block where the <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">B</span> <span class="pre">&amp;</span> <span class="pre">W</span></code> base layer is defined.</li>
+</ol>
+<img alt="../_images/86.png" class="align-center" src="../_images/86.png" />
+<ol class="arabic simple" start="9">
+<li>Replace the definition of the base layer with our own tiles. At this point,
+the tiles exist only on your computer, so the URL will be the local
+directory. But you can also upload the tiles to a server and give the URL of
+the server. Change the title and source with appropriate values for Natural
+Earth. Save the file.</li>
+</ol>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">new</span> <span class="nx">ol</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">Tile</span><span class="p">({</span>
+ <span class="s1">&#39;title&#39;</span><span class="o">:</span> <span class="s1">&#39;Natural Earth 2&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="s1">&#39;base&#39;</span><span class="p">,</span>
+ <span class="nx">source</span><span class="o">:</span> <span class="k">new</span> <span class="nx">ol</span><span class="p">.</span><span class="nx">source</span><span class="p">.</span><span class="nx">XYZ</span><span class="p">({</span>
+     <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;C://Users/Ujaval/Desktop/QTiles/{z}/{x}/{y}.png&#39;</span><span class="p">,</span>
+     <span class="nx">attributions</span><span class="o">:</span> <span class="p">[</span><span class="k">new</span> <span class="nx">ol</span><span class="p">.</span><span class="nx">Attribution</span><span class="p">({</span><span class="nx">html</span><span class="o">:</span> <span class="s1">&#39;Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.&#39;</span><span class="p">})]</span>
+ <span class="p">})</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<img alt="../_images/96.png" class="align-center" src="../_images/96.png" />
+<ol class="arabic simple" start="10">
+<li>Open the web map in a browser and you will see that the B &amp; W OSM layer is
+replaced by our freshly created tiles.</li>
+</ol>
+<img alt="../_images/106.png" class="align-center" src="../_images/106.png" />
 </div>
 </div>
 
