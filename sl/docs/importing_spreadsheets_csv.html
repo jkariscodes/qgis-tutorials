@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Importing Spreadsheets or CSV files &mdash; QGIS Tutorials and Tips</title>
+    <title>Uvoz podatkov preglednic ali datotek CSV &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -84,10 +84,10 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Making a Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Importing Spreadsheets or CSV files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Uvoz podatkov preglednic ali datotek CSV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Using Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Searching and Downloading OpenStreetMap Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Basic Vector Styling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Iskanje in prenos podatkov OpenStreetMap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Osnovno oblikovanje vektorskih slojev</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calculating Line Lengths and Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping</a></li>
@@ -208,49 +208,54 @@
       
 
   <div class="section" id="importing-spreadsheets-or-csv-files">
-<h1>Importing Spreadsheets or CSV files<a class="headerlink" href="#importing-spreadsheets-or-csv-files" title="Povezava na naslov">¶</a></h1>
-<p>Many times the GIS data comes in a table or an Excel spreadsheet. Also, if you have a list lat/long coordinates, you can easily import this data in your GIS project.</p>
+<h1>Uvoz podatkov preglednic ali datotek CSV<a class="headerlink" href="#importing-spreadsheets-or-csv-files" title="Povezava na naslov">¶</a></h1>
+<p>Podatke za analizo in kartiranje pogosto dobimo v obliki tabel ali preglednic Excel. Če se v tabeli nahajajo stolpci s koordinatami x/y ali lat/long, jo lahko enostavno uvozite v QGIS projekt.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
-<p>We will be importing a text file of earthquake data to QGIS.</p>
+<h2>Pregled naloge<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
+<p>Podatke o potresih bomo iz besedilne datoteke uvozili v QGIS.</p>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
-<p>NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Learn more.</a></p>
-<p>Download <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">Significant Earthquake Database</a> text file.</p>
-<p>For convenience, you may directly download a copy of both the datasets from the links
-below:</p>
+<h2>Pridobivanje podatkov<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
+<p>National Geophysical Data Center, ki deluje v okviru ameriške agencije NOAA je pripravil ogromno bazo podatkov o večljih potresih od leta 2150 p.n.št. <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Več o bazi.</a></p>
+<p>Poberite besedilno datoteko <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">Significant Earthquake Database</a>.</p>
+<p>Kopijo podatkov lahko poberete tudi neposredno s spodnjega naslov:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
-<p>Data Source <a class="reference internal" href="credits.html#ngdc" id="id1">[NGDC]</a></p>
+<p>Vir podatkov <a class="reference internal" href="credits.html#ngdc" id="id1">[NGDC]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
+<h2>Postopek<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
 <ol class="arabic simple">
-<li>Examine your tabular data source. To import this data to QGIS, you will have to save it as a text file and need at least 2 columns which contain the X and Y coordinates. If you have a spreadsheet, use <cite>Save As</cite> function in your program to save it as a <cite>Tab Delimited File</cite> or a <cite>Comma Separated Values (CSV)</cite> file. Once you have the data exported this way, you can open it in a text editor such as Notepad to view the contents. In case of the Significant Earthquake Database, the data already comes as a text file which contains latitude and longitude of the earthquake centers along with other related attributes. You will see that each field is separated by a TAB.</li>
+<li><p class="first">Oglejte si originalno datoteko. Če želite tovrstne podatke uvoziti v QGIS, jih morate shraniti v besedilno datoteko z najmanj dvema stolpcema, ki vsebujeta koordinati X in Y. Če uporabljate preglednico, recimo Excel, podatke shranite z ukazom <cite>Save As</cite> in kot izhodni tip datoteke izberite <cite>Tab Delimited File</cite> ali <cite>Comma Separated Values (CSV)</cite>. Ko boste podatke izvozili, jih odprite z urejevalnikom (Notepad, Notepad++) in si oglejte vsebino datoteke. V primeru baze <em>Significant Earthquake Database</em> so podatki že v pravi obliki in vsebujejo geografsko dolžino in širino središč potresov, skupaj z ustreznimi atributi. Videli boste, da so polja ločena s tabulatorji.</p>
+</li>
 </ol>
 <img alt="../_images/170.png" class="align-center" src="../_images/170.png" />
 <ol class="arabic simple" start="2">
-<li>Open QGIS. Click on <span class="menuselection">Layers ‣ Add Delimited Text Layer</span>.</li>
+<li><p class="first">Odprite QGIS. Izberite menu <span class="menuselection">Layers ‣ Add Delimited Text Layer</span>.</p>
+</li>
 </ol>
 <img alt="../_images/229.png" class="align-center" src="../_images/229.png" />
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">Create a Layer from a Delimited Text File</span> dialog, click on <span class="guilabel">Browse</span> and specify the path to the text file you downloaded. In the <span class="guilabel">File format</span> section, select <span class="guilabel">Custom delimiters</span> and check <span class="guilabel">Tab</span>. The <span class="guilabel">Geometry definition</span> secction will be auto-populated if it finds a suitable X and Y coordinate fields. In our case they are <em>LONGITUDE</em> and <em>LATITUDE</em>. You may change it if the import selects the wrong fields. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">V pogovornem oknu <span class="guilabel">Create a Layer from a Delimited Text File</span>, kliknite <span class="guilabel">Browse</span> in določite pot do datoteke, ki ste jo pobrali. V delu <span class="guilabel">File format</span>, izerite <span class="guilabel">Custom delimiters</span> in preverite, da je vključen <span class="guilabel">Tab</span>. Polje <span class="guilabel">Geometry definition</span> se bo samodejno zapolnilo, če bo program našel primerne koordinate X in Y. V našem primeru sta to <em>LONGITUDE</em> in <em>LATITUDE</em>. Izbor lahko spremenite, če je program izbral napačna polja. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Opomba</p>
-<p class="last">It is easy to confuse X and Y coordinates. Latitude specifies the north-south position of a point and hence it is a <strong>Y</strong> coordinate. Similarly Longitude specifies the east-west position of a point and it is a <strong>X</strong> coordinate.</p>
+<p class="last">Koordinati X in Y je zelo lahko zamešati. Geografska širina (Longitude) določa položaj v smeri sever-jug in je torej koordinata <strong>Y</strong>. Geografska dolžina (Latitude) pa določa položaj v smeri vzhod-zahod in je koordinata <strong>X</strong>.</p>
 </div>
 <img alt="../_images/320.png" class="align-center" src="../_images/320.png" />
 <ol class="arabic simple" start="4">
-<li>You may see some errors displayed in the next dialog. The erros in this file are mainly due to missing X or Y fields. You may examine these errors and fix the problems in your source file. For this tutorial, you may ignore these errors.</li>
+<li><p class="first">V naslednjem pogovornem oknu boste morda dobili nekaj obvestil o napakah. V glavnem gre za manjkajoča polja X ali Y. Napake lahko pregledate in jih odpravite v vhodni datoteki. Za to vadnico pa lahko napake tudi ignorirate.</p>
+</li>
 </ol>
 <img alt="../_images/415.png" class="align-center" src="../_images/415.png" />
 <ol class="arabic simple" start="5">
-<li>Next, a <span class="guilabel">Coordinate Reference System Selector</span> will ask you to select a coordinate reference system. Since the earthquake coordinates are in latitudes and longitudes, you should select <cite>WGS 84</cite>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">V oknu <span class="guilabel">Coordinate Reference System Selector</span> boste morali izbrati koordinatni sistem. Ker so koordinate podane kot geografske širine in dolžine, izberite <cite>WGS 84</cite>. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/515.png" class="align-center" src="../_images/515.png" />
 <ol class="arabic simple" start="6">
-<li>You will now see that the data will be imported and displayed in the QGIS canvas.</li>
+<li><p class="first">Podatki, ki ste jih uvozili, se bodo pojavili v glavnem oknu QGISa.</p>
+</li>
 </ol>
 <img alt="../_images/614.png" class="align-center" src="../_images/614.png" />
 </div>
@@ -278,7 +283,7 @@ below:</p>
     </p>
     <p>
         &copy; Vse pravice pridržane 2016, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno Jan 31, 2017.<br/>
+      Zadnjič posodobljeno Feb 21, 2017.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

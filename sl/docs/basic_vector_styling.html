@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basic Vector Styling &mdash; QGIS Tutorials and Tips</title>
+    <title>Osnovno oblikovanje vektorskih slojev &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="Calculating Line Lengths and Statistics" href="calculating_line_lengths.html" />
-    <link rel="prev" title="Searching and Downloading OpenStreetMap Data" href="downloading_osm_data.html" />
+    <link rel="prev" title="Iskanje in prenos podatkov OpenStreetMap" href="downloading_osm_data.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -84,10 +84,10 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Making a Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Uvoz podatkov preglednic ali datotek CSV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Using Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Searching and Downloading OpenStreetMap Data</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Basic Vector Styling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Iskanje in prenos podatkov OpenStreetMap</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Osnovno oblikovanje vektorskih slojev</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calculating Line Lengths and Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping</a></li>
@@ -131,7 +131,7 @@
               
                 
   <li>
-    <a href="downloading_osm_data.html" title="Previous Chapter: Searching and Downloading OpenStreetMap Data"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Searching and Do...</span>
+    <a href="downloading_osm_data.html" title="Previous Chapter: Iskanje in prenos podatkov OpenStreetMap"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Iskanje in preno...</span>
     </a>
   </li>
   <li>
@@ -208,66 +208,58 @@
       
 
   <div class="section" id="basic-vector-styling">
-<h1>Basic Vector Styling<a class="headerlink" href="#basic-vector-styling" title="Povezava na naslov">¶</a></h1>
-<p>To create a map, one has to style the GIS data and present it in a form that is
-visually informative. There are a large number of options available in QGIS to
-apply different types of symbology to the underlying data. In this tutorial, we
-will explore some basics of styling.</p>
+<h1>Osnovno oblikovanje vektorskih slojev<a class="headerlink" href="#basic-vector-styling" title="Povezava na naslov">¶</a></h1>
+<p>Ko ustvarjamo karto, moramo podatke GIS predstaviti na kar se da vizualno privlačen način. QGIS za to ponuja številne možnosti, saj lahko podatke prikažemo z najrazličnejšo simbologijo. V tej vadnici si bomo ogledali osnovno oblikovanje vektorskih slojev.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
-<p>We will style a vector layer to show life expectancy in different countries of the world.</p>
+<h2>Pregled naloge<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
+<p>Oblikovali bomo vektroski sloj, s katerimo bomo prikazali pričakovano življenjsko dobo v različnih državah sveta.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Povezava na naslov">¶</a></h3>
+<h3>Česa se bomo še naučili<a class="headerlink" href="#other-skills-you-will-learn" title="Povezava na naslov">¶</a></h3>
 <ul class="simple">
-<li>View the attribute table of a vector layer.</li>
+<li><p class="first">Pregledovanje atributne tabele vektorskega sloja.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
-<p>The data we will use is from <a class="reference external" href="http://nelson.wisc.edu/sage/index.php">Center for Sustainability and the Global
-Environment (SAGE)</a> at the
-University of Wisconsin-Madison.</p>
-<p>You can download the <a class="reference external" href="http://nelson.wisc.edu/sage/data-and-models/atlas/data.php?incdataset=Life%20Expectancy">Life Expectancy GIS Grid data</a>
-from the human impact dataset.</p>
-<p>For convenience, you may directly download a copy of the dataset from the
-link below:</p>
+<h2>Pridobivanje podatkov<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
+<p>Uporabili bomo podatke, ki jih je pripravil <a class="reference external" href="http://nelson.wisc.edu/sage/index.php">Center for Sustainability and the Global Environment (SAGE)</a> na University of Wisconsin-Madison.</p>
+<p>Podatke lahko poberte na naslovu <a class="reference external" href="http://nelson.wisc.edu/sage/data-and-models/atlas/data.php?incdataset=Life%20Expectancy">Life Expectancy GIS Grid data</a>
+iz podatkovne zbirke <cite>Human Impact</cite>.</p>
+<p>Lahko jih poberete tudi neposredno na spodnji povezavi:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/lifeexpectancy.zip">lifeexpectancy.zip</a></p>
-<p>Data Source <a class="reference internal" href="credits.html#sage" id="id1">[SAGE]</a></p>
+<p>Vir podatkov <a class="reference internal" href="credits.html#sage" id="id1">[SAGE]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
+<h2>Postopek<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
 <ol class="arabic simple">
-<li>Open QGIS and go to <span class="menuselection">Layer ‣ Add Vector Layer..</span>.</li>
+<li><p class="first">Odprite QGIS in izberite <span class="menuselection">Layer ‣ Add Vector Layer..</span>.</p>
+</li>
 </ol>
 <img alt="../_images/112.png" class="align-center" src="../_images/112.png" />
 <ol class="arabic simple" start="2">
-<li>Browse to the downloaded <code class="docutils literal"><span class="pre">lifeexpectancy.zip</span></code> file and click
-<span class="guilabel">Open</span>. Select <code class="docutils literal"><span class="pre">newsweek_data.shp</span></code> and click <span class="guilabel">Open</span>.
-Next you will be prompted for choosing the CRS. Select <cite>WGS84 EPSG:4326</cite>
-as the Coordinate Reference System (CRS).</li>
+<li><p class="first">Poiščite pobrano datoteko <code class="docutils literal"><span class="pre">lifeexpectancy.zip</span></code> in kliknite <span class="guilabel">Open</span>. Izberite <code class="docutils literal"><span class="pre">newsweek_data.shp</span></code> in kliknite <span class="guilabel">Open</span>. V naslednjem koraku je potrebno določiti Coordinate Reference System (CRS). Izberite <cite>WGS84 EPSG:4326</cite>.</p>
+</li>
 </ol>
 <img alt="../_images/210.png" class="align-center" src="../_images/210.png" />
 <ol class="arabic simple" start="3">
-<li>The shapefile contained within the zip file is now loaded and you can see
-the default style applied to it.</li>
+<li><p class="first">Datoteka shape, ki jo vsebuje podatkovni sloj, je prikazana s privzetim slogom.</p>
+</li>
 </ol>
 <img alt="../_images/35.png" class="align-center" src="../_images/35.png" />
 <ol class="arabic simple" start="4">
-<li>Right click on the layer name and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Desno kliknite sloj in izberite <span class="guilabel">Open Attribute Table</span>.</p>
+</li>
 </ol>
 <img alt="../_images/42.png" class="align-center" src="../_images/42.png" />
 <ol class="arabic simple" start="5">
-<li>Explore the different attributes. To style a layer, we must pick an
-<cite>attribute</cite> or a <cite>column</cite> that would represent the map we are trying to
-create. Since we want to create a layer represting life expectancy, i.e. the
-average age till a person lives in a country, the field <span class="guilabel">LIFEXPCT</span>
-is the attribute we want to use in styling.</li>
+<li><p class="first">Raziščite različne atribute. Če želimo podatkovni sloj oblikovati, moramo izbrati <cite>atribut</cite> oziroma <cite>stolpec</cite> s podatki, ki jih želimo prikazati na karti. Ker želimo prikazati življenjsko dobo, to je povprečno starost, ki jo doživijo osebe v posamezni državi, bomo za oblikovanje izberali atribut <span class="guilabel">LIFEXPCT</span>.</p>
+</li>
 </ol>
 <img alt="../_images/52.png" class="align-center" src="../_images/52.png" />
 <ol class="arabic simple" start="6">
-<li>Close the attribute table. Right click on the layer again and choose
-<span class="guilabel">Properties</span>.</li>
+<li><p class="first">Zaprite atributno tablo. Ponovno desno kliknite sloj in izberite <span class="guilabel">Properties</span>.</p>
+</li>
 </ol>
 <img alt="../_images/62.png" class="align-center" src="../_images/62.png" />
 <ol class="arabic simple" start="7">
@@ -279,115 +271,75 @@ displacement</span>. We will explore the first three in this tutorial.</li>
 </ol>
 <img alt="../_images/72.png" class="align-center" src="../_images/72.png" />
 <ol class="arabic simple" start="8">
-<li>Select <span class="guilabel">Single Symbol</span>. This option allows you to choose a single
-style that will be applied to all the features in the layer. Since this is a
-polygon dataset, you have two basic choices. You can <cite>fill</cite> the polygon, or
-you can style with only <cite>outline</cite>. You can choose the <span class="guilabel">dotted</span>
-pattern fill and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Izberite možnost <span class="guilabel">Single Symbol</span>. S to lahko določite slog, s katerim bodo prikazani vsi elementi podatkovnega sloja. Ker gre za poligonski sloj, imamo na razpolago dve osnovni možnosti. Lahko zapolnimo <cite>Fill</cite> poligon ali pa ga lahko oblikujemo samo z obrobo <cite>Outline</cite>. Izberite vzorec <span class="guilabel">dotted</span> in kliknite gumb <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/82.png" class="align-center" src="../_images/82.png" />
 <ol class="arabic simple" start="9">
-<li>You will see a new style applied to the layer with the fill pattern you
-chose.</li>
+<li><p class="first">Sloj bo prikazan z vzorcem, ki smo ga izbrali.</p>
+</li>
 </ol>
 <img alt="../_images/92.png" class="align-center" src="../_images/92.png" />
 <ol class="arabic simple" start="10">
-<li>You will see that this Single Symbol style isn’t useful in communicating
-the life expectancy data we are trying to map. Let us explore another
-styling option. Right-click the layer again and choose
-<span class="guilabel">Properties</span>. This time choose <span class="guilabel">Categorized</span> from the
-<span class="guilabel">Style</span> tab. Categorized means the features in the layer will be
-shown in different shades of a color based on unique values in an attribute
-field. Choose <span class="guilabel">LIFEXPCT</span> value as the <span class="guilabel">Column</span>. Choose
-a <span class="guilabel">color ramp</span> of your choice and click <span class="guilabel">Classify</span>
-at the bottom. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Vendar pa tak način prikaza ni primern za predstavitev pričakovane življenjske dobe, kar je naš cilj. Raziščimo torej druge možnosti oblikovanja. Ponovno desno kliknite sloj in izberite <span class="guilabel">Properties</span>. Tokrat na kartici <span class="guilabel">Categorized</span> izberite <span class="guilabel">Style</span> tab. Kategorizirano pomeni, da bodo podatki sloja prikazani v različnih odtenkih barve glede na vrednosti izbranega atributa. V polju <span class="guilabel">Column</span> izberite vrednost <span class="guilabel">LIFEXPCT</span>. Izberite želeno barvno skalo <span class="guilabel">Color ramp</span> in kliknite gumb <span class="guilabel">Classify</span> na dnu. Kliknite  <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/102.png" class="align-center" src="../_images/102.png" />
 <ol class="arabic simple" start="11">
-<li>You will see different countries appearing in shades of blue. Lighter
-shades meaning lower life expectancy and darker shades meaning higher life
-expectancy. This representation of the data is more useful and clearly show
-how life expectancy in developed countries vs. developing countries. This
-would be the type of style we set out to create.</li>
+<li><p class="first">Države sveta bodo prikazane v različnih barvnih odtenkih. Svetlejši odtenki pomenijo krajšo pričakovano življenjsko dobo, temnejši pa daljšo. Ta način prikaza podatkov je veliko bolj učinkovit in omogoča hitre analize, recimo primerjavo dolžine življenske dobe med razvitimi in nerazvitimi državami. To je torej slog, ki usteza našemu namenu.</p>
+</li>
 </ol>
 <img alt="../_images/113.png" class="align-center" src="../_images/113.png" />
 <ol class="arabic" start="12">
-<li><p class="first">Let us explore the <span class="guilabel">Graduated</span> symbology type in the <span class="guilabel">Style</span>
-dialog now. Graduated symbology type allows you to break down the data in a column in
-unique <em>classes</em> and choose a different style for each of the classes. We
-can think of classifying our life expectancy data into 3 classes, <code class="docutils literal"><span class="pre">LOW</span></code>,
-<code class="docutils literal"><span class="pre">MEDIUM</span></code> and <code class="docutils literal"><span class="pre">HIGH</span></code>. Choose <span class="guilabel">LIFEXPCT</span> as the <span class="guilabel">Column</span> and
-choose <span class="guilabel">3</span> as the classes. You will see there are many <span class="guilabel">Mode</span>
-optionsa vailable. Let us see the logic behind each of these modes.
-There are 5 modes available. <span class="guilabel">Equal Interval</span>,
-<span class="guilabel">Quantile</span>, <span class="guilabel">Natural Breaks (Jenks)</span>,
-<span class="guilabel">Standard Deviation</span> and <span class="guilabel">Pretty Breaks</span>.
-These modes use different statistical algorithms to break down the data
-into separate classes.</p>
+<li><p class="first">Oglejmo si še slog <span class="guilabel">Graduated</span>, ki se prav tako nahaja v pogovornem oknu <span class="guilabel">Style</span>. S tem slogom lahko podatke razdelimo v <em>razrede</em> glede na izbrani atribut in za vsak razred izberemo drugačen slog. Recimo, da želimo pričakovano življensko dobo razdeliti v tri razrede, in sicer <code class="docutils literal"><span class="pre">Nizka</span></code>, <code class="docutils literal"><span class="pre">Srednja</span></code> in <code class="docutils literal"><span class="pre">Visoka</span></code>. V polju <span class="guilabel">Column</span> izberite vrednost <span class="guilabel">LIFEXPCT</span> in  <span class="guilabel">3</span> kot število razredov. Na razpolago imamo 5 načinov razdelitve v razrede, kar določamo v menuju <span class="guilabel">Mode</span>. Oglejmo si logiko, ki tiči za naslednjimi petimi možnostmi: <span class="guilabel">Equal Interval</span>, <span class="guilabel">Quantile</span>, <span class="guilabel">Natural Breaks (Jenks)</span>, <span class="guilabel">Standard Deviation</span> in <span class="guilabel">Pretty Breaks</span>. Ti načini uporabljajo različne statistične algoritme za delitev razpona vrednosti v kategorije.</p>
 <ul class="simple">
-<li>Equal Interval: As the name suggests, this method will will create classes
-which are at the same size. If our data ranges from 0-100 and we want 10
-classes, this method would create a class from 0-10, 10-20, 20-30 and so on
-, keeping each class the same size of 10 units.</li>
-<li>Quantile - This method will decide the classes such that number of values
-in each class are the same. If there are 100 values and we want 4
-classes, quantile method will decide the classes such that each class
-will have 25 values.</li>
-<li>Natural Breaks (Jenks) - This algorithm tries to find natural groupings
-of data to create classes. The resulting classes will be such that there
-will be maximum variance between individual classes and least variance
-within each class.</li>
-<li>Standard Deviation - This method will calculate the mean of the data, and
-create classes based on standard deviation from the mean.</li>
-<li>Pretty Breaks - This is based on the statistical package R’s pretty
-algorithm. It is a bit complex, but the <cite>pretty</cite> in the name means it
-creates class boundaries that are round numbers.</li>
+<li><p class="first">Equal Interval - kot pove ime, metoda ustvari razrede, ki so enako veliki. Če imamo podatke v razponu 0-100 in želimo 10 razredov, bomo dobili razrede 0-10, 10-20, 20-30 in tako dalje, pri čemer bo vsak razred velik 10 enot.</p>
+</li>
+<li><p class="first">Quantile - metoda bo določila razrede tako, da bo v vsakem eneako število elementov. Če imamo 100 vrednosti in želimo 4 razrede, bo v vsakem 25 vrednosti.</p>
+</li>
+<li><p class="first">Natural Breaks (Jenks) - metoda poskuša v podatkih poiskati naravne prolome ali razmike. Končni razredi bodo taki, da bo varianca med razredi največja in znotraj razreda najmanjša.</p>
+</li>
+<li><p class="first">Standard Deviation - metoda izračuna povprečje podatkov in določi razrede glede na standardno devianco oziroma odstopanje od povprečja.</p>
+</li>
+<li><p class="first">Pretty Breaks - metoda temelji na algoritmu Pretty, ki ga vsebuje statistični programski jezik R. Sam postopek je sicer precej zapleten, pomembno pa je vedeti, da program poišče optimalne intervale, ki jih ločujejo cele vrednosti.</p>
+</li>
 </ul>
-<p>To keep things simple, let’s use the Quantile method. Click <span class="guilabel">Classify</span> at the
-bottom and you will see 3 classes show up with their corresponding values.
-Click <span class="guilabel">OK</span>.</p>
+<p>Ker ne želimo dodatno zapletati, bomo izbrali metodo Quantile. Na dnu zaslona kliknite <span class="guilabel">Classify</span> in podatki bodo prikazani v 3 razredih skupaj s pripadajočimi vrednostmi. Kliknite <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Opomba</p>
-<p class="last">For an attribute to be used in <span class="guilabel">Graduated</span> style, it must be a numeric field. Integer and Real
-values are fine, but if the attribute field type is String, it cannot be
-used with this styling option.</p>
+<p class="last">Da lahko atribut uporabimo s slogom <span class="guilabel">Graduated</span>, mora imeti numerične vrednosti. Cele - Integer - and in realne - Real - vrednosti so primerne, tekstovne - String - pa ne.</p>
 </div>
 <img alt="../_images/122.png" class="align-center" src="../_images/122.png" />
 <ol class="arabic simple" start="13">
-<li>You will see a map showing countries in either of 3 colors representing
-average life expectancy in the country.</li>
+<li><p class="first">Zemljevid prikazuje države v 3 barvah glede na pričakovano življenjsko dobo.</p>
+</li>
 </ol>
 <img alt="../_images/132.png" class="align-center" src="../_images/132.png" />
 <ol class="arabic simple" start="14">
-<li>Now go back to the <span class="guilabel">Style</span> dialog by right clicking the layer and choosing
-<span class="guilabel">Properties</span>. There are some more styling options available.
-You can click on the Symbol for each of the classes and choose a different style.
-We will choose Red, Yellow and Green fill colors to indicate low, medium and high life expectancy.</li>
+<li><p class="first">Z desnim klikom in izbiro <span class="guilabel">Properties</span> se vrnite v pogovorno okno <span class="guilabel">Style</span>. Na voljo imamo še nekaj možnosti oblikovanja. Za vsak razred lahko izberemo različen način prikaza. Izbrali bomo rdečo, rumeno in zeleno barvo kot polnilo s čimer bomo nakazali nizko, srednjo in dolgo živlejnsko dobo.</p>
+</li>
 </ol>
 <img alt="../_images/142.png" class="align-center" src="../_images/142.png" />
 <ol class="arabic simple" start="15">
-<li>In the <span class="guilabel">Symbol Selector</span> dialog, click on <span class="guilabel">Color</span>
-selector.</li>
+<li><p class="first">Dvakrat kliknite simbol in v pogovornem oknu <span class="guilabel">Symbol Selector</span> izberite <span class="guilabel">Color</span>.</p>
+</li>
 </ol>
 <img alt="../_images/152.png" class="align-center" src="../_images/152.png" />
 <ol class="arabic simple" start="16">
-<li>Click on a color fom the <span class="guilabel">Select Color</span> dialog.</li>
+<li><p class="first">Izberite ustrezno barvo v oknu <span class="guilabel">Select Color</span>.</p>
+</li>
 </ol>
 <img alt="../_images/162.png" class="align-center" src="../_images/162.png" />
 <ol class="arabic simple" start="17">
-<li>Back in the <span class="guilabel">Layer Properties</span> dialog, you can double-click on the
-<span class="guilabel">Label</span> column next to each value and enter the text that you
-want to display. Similarly, you may double-click on the <span class="guilabel">Value</span>
-column to edit the selected ranges. Click <span class="guilabel">OK</span> once you are
-satisfied with the classes.</li>
+<li><p class="first">Ko se vrnemo v okno <span class="guilabel">Layer Properties</span>, dvakrat kliknemo na oznako <span class="guilabel">Label</span> poleg vrednosti in vpišemo besedilo, ki ga želimo izpisati. Podobno lahko z dvoklikom <span class="guilabel">Value</span> spremenimo razpon vrednosti. Ko boste z rezultati zadovoljni kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/171.png" class="align-center" src="../_images/171.png" />
 <ol class="arabic simple" start="18">
-<li>This style definitely conveys a lot more useful map than the previous two
-attempts. There are clearly marked class names and colors to represent our
-interpretation of the life expectancy values.</li>
+<li><p class="first">Uporabljani slog zanesljivo pove o podatkih veliko več kot prejšnja dva poskusa kartiranja. Pričakovana življenjska doba je prikazana z jasnimi oznakami in razumljivimi barvami.</p>
+</li>
 </ol>
 <img alt="../_images/182.png" class="align-center" src="../_images/182.png" />
 </div>
@@ -415,7 +367,7 @@ interpretation of the life expectancy values.</li>
     </p>
     <p>
         &copy; Vse pravice pridržane 2016, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno Jan 31, 2017.<br/>
+      Zadnjič posodobljeno Feb 21, 2017.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

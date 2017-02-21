@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Creating Basemaps with QTiles &mdash; QGIS Tutorials and Tips</title>
+    <title>Basiskaarten maken met QTiles &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="QGIS bronnen om te leren" href="learning_resources.html" />
-    <link rel="prev" title="Web Mapping with QGIS2Web" href="web_mapping_with_qgis2web.html" />
+    <link rel="prev" title="In kaart brengen op het web met QGIS2Web" href="web_mapping_with_qgis2web.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -118,8 +118,8 @@
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Taken voor QGIS uitvoeren en in schema zetten</a></li>
 <li class="toctree-l1"><a class="reference internal" href="find_neighbor_polygons.html">Naburige polygonen in een laag zoeken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Samenvoegen van tabellen uitvoeren (PyQGIS)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">In kaart brengen op het web met QGIS2Web</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Basiskaarten maken met QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS bronnen om te leren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Gebruik van gegevens</a></li>
 </ul>
@@ -131,7 +131,7 @@
               
                 
   <li>
-    <a href="web_mapping_with_qgis2web.html" title="Previous Chapter: Web Mapping with QGIS2Web"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Web Mapping with...</span>
+    <a href="web_mapping_with_qgis2web.html" title="Previous Chapter: In kaart brengen op het web met QGIS2Web"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; In kaart brengen...</span>
     </a>
   </li>
   <li>
@@ -208,104 +208,67 @@
       
 
   <div class="section" id="creating-basemaps-with-qtiles">
-<h1>Creating Basemaps with QTiles<a class="headerlink" href="#creating-basemaps-with-qtiles" title="Permalink naar deze titel">¶</a></h1>
-<p>Tiles have revolutionized the idea of web mapping and has given us fast and
-easy access to large datasets. Tiling schemes divide the world into small tiles
-(typically 256 x 256 pixels) for each zoom level and pre-render datasets to
-these tiles. This way only a small fraction of a large dataset is served to the
-user at any given time - resulting in a map that can be zoomed or panned with
-ease over the internet. There are many methods to create tiles from GIS
-datasets. One easy way to create tiles from your QGIS project is a plugin
-called <strong>QTiles</strong>. In this tutorial, you will learn how to create PNG tiles
-from any set of layers loaded in QGIS and create a basemap to be used in a web
-mapping project.</p>
+<h1>Basiskaarten maken met QTiles<a class="headerlink" href="#creating-basemaps-with-qtiles" title="Permalink naar deze titel">¶</a></h1>
+<p>Tegels hebben een revolutie veroorzaakt met betrekking tot het idee van het maken van kaarten voor het web en hebben ons snel en eenvoudig toegang gegeven tot grote sets met gegevens. Schema&#8217;s voor tegels verdelen de wereld in smalle tegels (gewoonlijk 256 x 256 pixels) voor elk zoomniveau en renderen vooraf gegevenssets naar deze tegels. Op deze manier wordt op een bepaald tijdstip slechts een klein gedeelte van een enorme gegevensset ter beschikking gesteld van de gebruiker - wat resulteert in een kaart waarop gemakkelijk kan worden gezoomd en geschoven over het internet. Eer bestaan veel methoden om tegels te maken uit gegevenssets van GIS datasets. Eén gemakkelijke manier om tegels te maken vanuit uw project van QGIS is een plug-in, genaamd <strong>QTiles</strong>. In deze handleiding zult u leren hoe PNG-tegels te maken vanuit een willekeurige set lagen die zijn geladen in QGIS en een basiskaart te maken die kan worden gebruikt in een project voor webkaarten.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will create tiles from the Natural Earth raster covering the entire planet.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen tegels maken vanuit het raster van Natural Earth dat de gehele planeet bedekt.</p>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-2/">Natural Earth 2</a>
-dataset from Natural Earth.</p>
-<p>Download the medium-size <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/NE2_LR_LC_SR_W_DR.zip">Natural Earth II with Shaded Relief, Water, and
-Drainages</a>
-zip file.</p>
-<p>Data Source <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen de gegevensset <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-2/">Natural Earth 2</a> van Natural Earth gebruiken.</p>
+<p>Download het mediumgrote zip-bestand <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/NE2_LR_LC_SR_W_DR.zip">Natural Earth II with Shaded Relief, Water, and Drainages</a> .</p>
+<p>Gegevensbron <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li>Unzip the downloaded <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.zip</span></code> file to a folder on your
-computer. Open QGIS and go to
-<span class="menuselection">Layer ‣ Add Raster Layer</span>. Browse to the location of the
-extracted files and select <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.tif</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Pak het gedownloade bestand <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.zip`</span></code> uit op uw computer. Open QGIS en ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Rasterlaag toevoegen</span>. Blader naar de plaats waar de bestanden werden uitgepakt en selecteer <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.tif</span></code>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/126.png" class="align-center" src="../_images/126.png" />
 <ol class="arabic simple" start="2">
-<li>Install the <code class="docutils literal"><span class="pre">QTiles</span></code> plugin by going to <span class="menuselection">Plugins ‣ Manage and
-Install Plugin</span>. Note that the plugin is currently marked <strong>experimental</strong>,
-so you will need to check <span class="guilabel">Show also experimental plugins</span> in
-Plugin Settings. (See <a class="reference internal" href="using_plugins.html"><em>Plug-ins gebruiken</em></a> for more details on installing
-plugins in QGIS). Once the plugin is installed, go to
-<span class="menuselection">Plugins ‣ QTiles ‣ QTiles</span>.</li>
+<li><p class="first">Installeer de plug-in <code class="docutils literal"><span class="pre">QTiles</span></code> door te gaan naar <span class="menuselection">Plug-ins ‣ Plug-ins beheren en installeren</span>. Onthoud dat de plug-in momenteel is gemarkeerd als <strong>experimental</strong>, dus u dient <span class="guilabel">Ook de experimentele plug-ins tonen</span> in Plug-ins Extra te selecteren. (Bekijk <a class="reference internal" href="using_plugins.html"><em>Plug-ins gebruiken</em></a> voor meer details over het installeren van plug-ins in QGIS). Ga, als de plug-in eenmaal is geïnstalleerd, naar <span class="menuselection">Plug-ins ‣ QTiles ‣ QTiles</span>.</p>
+</li>
 </ol>
 <img alt="../_images/217.png" class="align-center" src="../_images/217.png" />
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">QTiles</span> dialog, select <span class="guilabel">Directory</span> as the
-<span class="guilabel">Output</span> and browse to a folder of your choice where the output
-tiles will be created. Choose <span class="guilabel">Layer extent</span> of the
-<code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W</span></code> layer as the extent of the tiles. Set the
-<span class="guilabel">Maximum Zoom</span> to <code class="docutils literal"><span class="pre">6</span></code>. Expand the <span class="guilabel">Parameters</span> section
-and check the <span class="guilabel">Write Leaflet-based viewer</span>. Click <span class="guilabel">Run</span>
-to start the process of rendering the tiles.</li>
+<li><p class="first">Selecteer, in het dialoogvenster van <span class="guilabel">QTiles</span>, <span class="guilabel">Directory</span> voor de <span class="guilabel">Output</span> en blader naar een map van uw keuze waar de uitvoerbestanden zullen worden gemaakt. Kies <span class="guilabel">Layer extent</span> van de laag <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W</span></code> als het bereik van de tegels. Stel de <span class="guilabel">Maximum Zoom</span> in op <code class="docutils literal"><span class="pre">6</span></code>. Vergroot het gedeelte <span class="guilabel">Parameters</span> en selecteer de <span class="guilabel">Write Leaflet-based viewer</span>. Klik op <span class="guilabel">Run</span> om het proces voor het renderen van de tegels te beginnen.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">The number of tiles increase 4 times for every additional zoom level
-and since our layer has an extend of the entire world - there will be millions
-of tiles at higher zoom levels.</p>
+<p class="last">Het aantal tegels neemt met de factor toe voor elk aanvullend zoomniveau en omdat uw laag een bereik heeft voor de gehele wereld - zullen er miljoenen tegels zijn voor de hogere zoomniveaus.</p>
 </div>
 <img alt="../_images/310.png" class="align-center" src="../_images/310.png" />
 <ol class="arabic simple" start="4">
-<li>Once the process finishes, close the <span class="guilabel">QTiles</span> dialog and browse to
-the output folder you had selected. You will notice folders for each zoom
-level upto the maximum zoom level. Each folder further contains subfolder
-for X coordinates and then the actual tiles named for Y coordinates.</li>
+<li><p class="first">Als het proces eenmaal is voltooid, sluit het dialoogvenster <span class="guilabel">QTiles</span> en blader naar de map voor de uitvoer die u had geselecteerd. U zult zien dat er mappen zijn voor elk zoomniveau tot het maximale niveau. Elke verdere map bevat submap voor X-coördinaten en dan de feitelijke tegels benoemd voor  Y-coördinaten.</p>
+</li>
 </ol>
 <img alt="../_images/47.png" class="align-center" src="../_images/47.png" />
 <ol class="arabic simple" start="5">
-<li>In the parent directory of top-level tiles directory, you will find a
-<code class="docutils literal"><span class="pre">QTiles.html</span></code> file. This is a simple viewer to explore the tiles using the
-Leaflet web mapping library.</li>
+<li><p class="first">In de bovenste map van de hoogste niveau van de map voor de tegels, zult u een bestand <code class="docutils literal"><span class="pre">QTiles.html</span></code> vinden. Dit is een eenvoudige viewer om de tegels te kunnen verkennen met behulp van de bibliotheek Leaflet web mapping.</p>
+</li>
 </ol>
 <img alt="../_images/57.png" class="align-center" src="../_images/57.png" />
 <ol class="arabic simple" start="6">
-<li>Double-click the <code class="docutils literal"><span class="pre">QTiles.html</span></code> to open it in a web browser. You can zoom
-and pan around to see the tiles seamlessly form the original raster layer.</li>
+<li><p class="first">Dubbelklik op het bestand <code class="docutils literal"><span class="pre">QTiles.html</span></code> om het te openen in een webbrowser. U kunt inzoomen en verschuiven om de tegels naadloos te zien vanuit de originele rasterlaag.</p>
+</li>
 </ol>
 <img alt="../_images/66.png" class="align-center" src="../_images/66.png" />
 <ol class="arabic simple" start="7">
-<li>You can use these tiles with any web-mapping library that supports XYZ
-tiling schemes and overlay other layers on top. To demonstrate the
-usefulness and portability of such tiles, we will now add the tiles created
-in this tutorial as the basemap for the airports map created in
-<a class="reference internal" href="web_mapping_with_qgis2web.html"><em>Web Mapping with QGIS2Web</em></a> tutorial. In that tutorial, we chose to use
-a ready-made basemap from OpenStreetMap. We can easily swap that with our
-own custom basemap created in this tutorial. Go to the output directory
-where the qgis2web map was exported. Open the <span class="menuselection">Layers ‣
-layers.js</span> file created during the export.</li>
+<li><p class="first">U kunt deze tegels gebruiken met elke willekeurige bibliotheek voor kaarten op het web die schema&#8217;s voor tegels met XYZ ondersteunt en andere lagen er overheen leggen. We zullen, om het nut en de portabiliteit van dergelijke tegels te demonstreren, de in deze handleiding gemaakte tegels toevoegen als de basiskaart voor de kaart met vliegvelden die in de handleiding <a class="reference internal" href="web_mapping_with_qgis2web.html"><em>In kaart brengen op het web met QGIS2Web</em></a> werd gemaakt. In die handleiding kozen we ervoor om een reeds gemaakte basiskaart uit OpenStreetMap te gebruiken. We kunnen die eenvoudig omruilen met onze eigen basiskaart die we in deze handleiding hebben gemaakt. Ga naar de map voor de uitvoer van waaruit de kaart van qgis2web werd geëxporteerd. Open het bestand <span class="menuselection">Kaartlagen ‣ layers.js</span> dat tijdens het exporteren werd gemaakt.</p>
+</li>
 </ol>
 <img alt="../_images/76.png" class="align-center" src="../_images/76.png" />
 <ol class="arabic simple" start="8">
-<li>Locate the code block where the <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">B</span> <span class="pre">&amp;</span> <span class="pre">W</span></code> base layer is defined.</li>
+<li><p class="first">Zoek naar het codeblok waar de basislaag <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">B</span> <span class="pre">&amp;</span> <span class="pre">W</span></code> is gedefinieerd.</p>
+</li>
 </ol>
 <img alt="../_images/86.png" class="align-center" src="../_images/86.png" />
 <ol class="arabic simple" start="9">
-<li>Replace the definition of the base layer with our own tiles. At this point,
-the tiles exist only on your computer, so the URL will be the local
-directory. But you can also upload the tiles to a server and give the URL of
-the server. Change the title and source with appropriate values for Natural
-Earth. Save the file.</li>
+<li><p class="first">Vervang de definitie van de basislaag door onze eigen tegels. Op dit punt bestaan de tegels alleen nog op uw computer, dus zal de URL de lokale map zijn. Maar u kunt de tegels ook uploaden naar een server en de URL van de server opgeven. Wijzig de titel en de bron met de toepasselijke waarden voor Natural Earth. Sla het bestand op.</p>
+</li>
 </ol>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="k">new</span> <span class="nx">ol</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">Tile</span><span class="p">({</span>
  <span class="s1">&#39;title&#39;</span><span class="o">:</span> <span class="s1">&#39;Natural Earth 2&#39;</span><span class="p">,</span>
@@ -319,8 +282,8 @@ Earth. Save the file.</li>
 </div>
 <img alt="../_images/96.png" class="align-center" src="../_images/96.png" />
 <ol class="arabic simple" start="10">
-<li>Open the web map in a browser and you will see that the B &amp; W OSM layer is
-replaced by our freshly created tiles.</li>
+<li><p class="first">Open de webkaart in een browser en u zult zien dat de laag B &amp; W OSM is vervangen door uw nieuw gemaakte tegels.</p>
+</li>
 </ol>
 <img alt="../_images/106.png" class="align-center" src="../_images/106.png" />
 </div>
@@ -348,7 +311,7 @@ replaced by our freshly created tiles.</li>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Jan 31, 2017.<br/>
+      Laatste aanpassing op Feb 21, 2017.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
