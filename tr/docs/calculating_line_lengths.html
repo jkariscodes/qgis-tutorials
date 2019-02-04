@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Calculating Line Lengths and Statistics &mdash; QGIS Tutorials and Tips</title>
+    <title>Çizgi Uzunluğunu ve İstatistiklerini Hesaplama &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Eklentileri Kullanma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">OpenStreetMap Verisinde Arama Yapma ve Veriyi İndirme</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Temel Vektör Stili</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Calculating Line Lengths and Statistics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Çizgi Uzunluğunu ve İstatistiklerini Hesaplama</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Working with Terrain Data</a></li>
@@ -208,44 +208,40 @@
       
 
   <div class="section" id="calculating-line-lengths-and-statistics">
-<h1>Calculating Line Lengths and Statistics<a class="headerlink" href="#calculating-line-lengths-and-statistics" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
-<p>QGIS has built-in functions to calculate various properties based on the
-geometry of the feature - such as length, area, perimeter etc. This tutorial
-will show how to use <strong>Field Calculator</strong> to add a column with a value
-representing length of each feature.</p>
+<h1>Çizgi Uzunluğunu ve İstatistiklerini Hesaplama<a class="headerlink" href="#calculating-line-lengths-and-statistics" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<p>QGIS uzunluk, alan, çevre vb. özelliklerin geometrisine dayanan çeşitli özellikleri hesaplamak için yerleşik işlevlere sahiptir. Bu eğitim, her özelliğin uzunluğunu gösteren bir değere sahip bir sütun eklemek için ** Field Calculator ** &#8216;ın nasıl kullanılacağını gösterecektir.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Göreve Genel Bakış<a class="headerlink" href="#overview-of-the-task" title="Bu başlığın kalıcı bağlantısı">¶</a></h2>
-<p>We will use a polyline shapefile of railroads in North America and try to
-determine the total length of railroads in the United States.</p>
+<p>Kuzey Amerika&#8217;daki demiryolu hatlarının şekil çizgilerini kullanacağız ve Amerika Birleşik Devletleri&#8217;ndeki demiryollarının toplam uzunluğunu belirlemeye çalışacağız.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Öğreneceğiniz diğer beceriler<a class="headerlink" href="#other-skills-you-will-learn" title="Bu başlığın kalıcı bağlantısı">¶</a></h3>
 <ul class="simple">
-<li>Using expressions to select features.</li>
-<li>Re-projecting a layer from Geographic to Projected Coordinate Reference
-System(CRS).</li>
-<li>Viewing statistics for values of an attribute in a layer.</li>
+<li><p class="first">Özellikleri seçmek için ifadeleri kullanma.</p>
+</li>
+<li><p class="first">Bir katmanın Coğrafi Konumdan Projected Coordinate Reference System&#8217;e (CRS)  yeniden yansıtılması.</p>
+</li>
+<li><p class="first">Bir katmandaki bir özniteliğin değerlerine ait istatistikleri görüntüleme.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Veriyi elde edin<a class="headerlink" href="#get-the-data" title="Bu başlığın kalıcı bağlantısı">¶</a></h2>
-<p><a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/railroads/">Natural Earth</a>
-has a public domain railroads dataset. Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads_north_america.zip">North America supplement</a>
-zip file from the portal.</p>
-<p>For convenience, you may directly download a copy of the dataset from the link
-below:</p>
+<p>Natural Earth &lt;<a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/railroads/">http://www.naturalearthdata.com/downloads/10m-cultural-vectors/railroads/</a>&gt;`_  bir kamu malı demiryolu veri setine sahiptir. Portaldan &lt;<a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads_north_america.zip">http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads_north_america.zip</a>&gt;`_  Kuzey Amerika ek zip dosyasını indirin.</p>
+<p>Kolaylık sağlamak için, veri setinin bir kopyasını doğrudan aşağıdaki bağlantıdan indirebilirsiniz:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_railroads_north_america.zip">ne_10m_railroads_north_america..zip</a></p>
 <p>Veri Kaynağı : <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>İşlem Basamakları<a class="headerlink" href="#procedure" title="Bu başlığın kalıcı bağlantısı">¶</a></h2>
 <ol class="arabic simple">
-<li>Go to <span class="menuselection">Layer ‣ Add Vector Layer</span>.</li>
+<li><p class="first">Menüden <cite>Layer &#8211;&gt; Add Vector Layer</cite> seçin.</p>
+</li>
 </ol>
 <img alt="../_images/118.png" class="align-center" src="../_images/118.png" />
 <ol class="arabic simple" start="2">
-<li>Browse to the <code class="docutils literal"><span class="pre">ne_10m_railroads_north_america.zip</span></code> file and click
-<span class="guilabel">OK</span>.</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">ne_10m_railroads_north_america.zip</span></code> dosyasını bulun ve <cite>OK</cite> tıklayın.</p>
+</li>
 </ol>
 <img alt="../_images/215.png" class="align-center" src="../_images/215.png" />
 <ol class="arabic simple" start="3">
@@ -254,124 +250,91 @@ below:</p>
 </ol>
 <img alt="../_images/38.png" class="align-center" src="../_images/38.png" />
 <ol class="arabic simple" start="4">
-<li>Once the layer is loaded, you will notice that the layer has lines
-representing railroads for all of North America. Since we want to calculate
-line lengths only for United States railroads, we need to select the lines
-that fall in the United States. Right-click on the layer and select
-<span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Katman yüklendiğinde, katmanın tüm Kuzey Amerika için demiryollarını temsil eden çizgilere sahip olduğunu fark edeceksiniz. Sadece Amerika Birleşik Devletleri demiryolları için hat uzunluklarını hesaplamak istediğimizden, Amerika Birleşik Devletleri&#8217;nde yer alan hatları seçmemiz gerekiyor. Katmanı sağ tıklayın ve <a href="#id1"><span class="problematic" id="id2">`</span></a>Attribute Table`ı seçin.</p>
+</li>
 </ol>
 <img alt="../_images/45.png" class="align-center" src="../_images/45.png" />
 <ol class="arabic simple" start="5">
-<li>The layer has an attribute called <span class="guilabel">sov_a3</span>. This is the 3 letter
-code for the country that a particular feature falls in. We can use the
-value of this attribute to select features that are in USA.</li>
+<li><p class="first">Katman <cite>sov_a3</cite> adında bi özniteliğe sahiptir. Bu, ülkenin girilen belirli bir özelliğinin 3 harfli kodudur. ABD&#8217;deki özellikleri seçmek için bu niteliğin değerini kullanabiliriz.</p>
+</li>
 </ol>
 <img alt="../_images/55.png" class="align-center" src="../_images/55.png" />
 <ol class="arabic simple" start="6">
-<li>In the <span class="guilabel">Attribute Table</span> window, click the <span class="guilabel">Select
-features using an expression</span> button.</li>
+<li><p class="first"><cite>Attribute Table</cite> penceresinde <cite>Select features using an expression</cite> butonuna tıklayın.</p>
+</li>
 </ol>
 <img alt="../_images/65.png" class="align-center" src="../_images/65.png" />
 <ol class="arabic simple" start="7">
-<li>A new dialog <span class="guilabel">Select By Expression</span> will open. Find the attribute
-<span class="guilabel">sov_a3</span> under <span class="guilabel">Fields and Values</span> in the
-<span class="guilabel">Functions list</span> section. Double-click on it to add it to the
-<span class="guilabel">Expression</span> text area. Complete the expression by typing in
-<code class="docutils literal"><span class="pre">&quot;sov_a3&quot;</span> <span class="pre">=</span> <span class="pre">'USA'</span></code>. Click <span class="guilabel">Select</span> followed by
-<span class="guilabel">Close</span>.</li>
+<li><p class="first">Yeni bir <cite>Select By Expression</cite> penceresi açılacak. <cite>Functions list</cite> bölümünde <cite>Fields and Values</cite> altında <cite>sov_a3</cite> ü bulun. <cite>Expression</cite> metin alanına eklemek için çift tıklayın. <code class="docutils literal"><span class="pre">&quot;sov_a3&quot;</span> <span class="pre">=</span> <span class="pre">'USA'</span></code> yazarak ifadeyi tamamlayın. <a href="#id1"><span class="problematic" id="id2">`</span></a>Select`i , ardından <a href="#id3"><span class="problematic" id="id4">`</span></a>Close`u tıklayın.</p>
+</li>
 </ol>
 <img alt="../_images/75.png" class="align-center" src="../_images/75.png" />
 <ol class="arabic simple" start="8">
-<li>Back in the main QGIS window, you will see that all lines that fall in USA
-are selected and appear in yellow.</li>
+<li><p class="first">QGIS ana penceresine dönün, ABD&#8217;deki tüm çizgilerin seçildiğini ve sarı renkte göründüğünü göreceksiniz.</p>
+</li>
 </ol>
 <img alt="../_images/85.png" class="align-center" src="../_images/85.png" />
 <ol class="arabic simple" start="9">
-<li>Now let&#8217;s save our selection to a new shapefile. Right-click on the
-<code class="docutils literal"><span class="pre">ne_10m_railroads_north_america</span></code> layer and select <span class="guilabel">Save
-Selection As...</span>.</li>
+<li><p class="first">Şimdi seçimimizi yeni bir şekil dosyasına kaydedelim. <code class="docutils literal"><span class="pre">ne_10m_railroads_north_america</span></code>  katmanına sağ tıklayın ve <cite>Save Selection As...</cite> i seçin.</p>
+</li>
 </ol>
 <img alt="../_images/95.png" class="align-center" src="../_images/95.png" />
 <ol class="arabic simple" start="10">
-<li>Click <span class="guilabel">Browse</span> and name the output file as <code class="docutils literal"><span class="pre">usa_railroads.shp</span></code>.
-We also want to change the CRS of the layer. Click on <span class="guilabel">Browse</span>
-next to <span class="guilabel">CRS</span>.</li>
+<li><p class="first"><cite>Browse`u tıklayın ve output dosyasını ``usa_railroads.shp`</cite> olarak isimlendirin. Ayrıca katmanın CRS&#8217;ni değiştirmek istiyoruz. CRS&#8217;nin yanındaki <a href="#id1"><span class="problematic" id="id2">`</span></a>Browse`a tıklayın.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Not</p>
-<p class="last">The built-in functions that use a feature&#8217;s geometry for calculation use the
-units of the layer&#8217;s CRS. Geographic Coordinate Reference System(CRS) such
-as <em>EPSG:4326</em> have <strong>degrees</strong> as units - so the length of the feature
-would be in <strong>degrees</strong> and area in <strong>square degrees</strong> - which is
-meaningless. You need to use a Projected Coordinate Reference System with
-units of <strong>meters</strong> or <strong>feet</strong> to perform such calculations.</p>
+<p class="last">Hesaplama için bir özelliğin geometrisini  kullanan yerleşik işlevler, katmanın CRS birimlerini kullanır. <em>EPSG:4326</em> gibi Geographic Coordinate Reference System(CRS), birim olarak ** derece ** değerine sahiptir. Bu nedenle, uzunluk özelliği ** derece ** ve alan  ** kare cinsinden** - anlamsızdır. Bu tür hesaplamaları gerçekleştirmek için, ** metre ** veya ** feet ** birimleri olan bir Projected Coordinate Reference System kullanmanız gerekir.</p>
 </div>
 <img alt="../_images/105.png" class="align-center" src="../_images/105.png" />
 <ol class="arabic simple" start="11">
-<li>Since we are interested in calculating length, let’s select an equidistance
-projection. Type <span class="guilabel">north america equ</span> in the <span class="guilabel">Filter</span>
-search box. In the results pane below, select
-<span class="guilabel">North_America_Equidistant_Conic EPSG:102010</span> as the CRS. Click
-<span class="guilabel">OK</span>.</li>
+<li><p class="first">Uzunluğun hesaplanmasıyla ilgilendiğimiz için, bir projeksiyon eşitliği seçelim. <cite>Filter</cite>  arama kutusuna <cite>north america equ</cite>  yazın. Aşağı bölmedeki sonuçlarda, CRS olarak North_America_Equidistant_Conic EPSG:102010 seçin. <cite>OK</cite> tıklayın.</p>
+</li>
 </ol>
 <img alt="../_images/119.png" class="align-center" src="../_images/119.png" />
 <ol class="arabic simple" start="12">
-<li>In the <span class="guilabel">Save vector layer as...</span> dialog, check the <span class="guilabel">Add
-saved file to map</span> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first"><cite>Save vector layer as...</cite> penceresinde <cite>Add saved file to map`i işaretleyin ve `OK</cite> tıklayın.</p>
+</li>
 </ol>
 <img alt="../_images/125.png" class="align-center" src="../_images/125.png" />
 <ol class="arabic simple" start="13">
-<li>Once the export process finishes, you will see a new layer <code class="docutils literal"><span class="pre">usa_railroads</span></code>
-loaded in QGIS. You can uncheck the box next to
-<code class="docutils literal"><span class="pre">ne_10m_railroads_north_america</span></code> layer to turn it off as we don&#8217;t need it
-anymore.</li>
+<li><p class="first">Dışa aktarma işlemi tamalandığında, QGIS&#8217;de yüklenen yeni bir katman <code class="docutils literal"><span class="pre">usa_railroads</span></code> göreceksiniz. Artık ihtiyacımız olmadığından <code class="docutils literal"><span class="pre">ne_10m_railroads_north_america</span></code> katmanını kapatmak için yanındaki kutunun işareti kaldırabilirsiniz.</p>
+</li>
 </ol>
 <img alt="../_images/135.png" class="align-center" src="../_images/135.png" />
 <ol class="arabic simple" start="14">
-<li>Right-click on the <code class="docutils literal"><span class="pre">usa_railroads</span></code> layer and select
-<span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">usa_railroads</span></code> katmanına sağa tıklayın ve <cite>Open Attribute Table</cite> ı seçin.</p>
+</li>
 </ol>
 <img alt="../_images/145.png" class="align-center" src="../_images/145.png" />
 <ol class="arabic simple" start="15">
-<li>Now it is time to add a column with length of each feature. Put the layer
-in editing mode by clicking on the <span class="guilabel">Toggle editing</span> button. Once
-in editing mode, click the <span class="guilabel">Open field calculator</span> button.</li>
+<li><p class="first">Şimdi her özelliğin uzunluğuna sahip bir sütun eklemenin zamanı geldi. Katmanı düzenleme moduna getirerek: <cite>Toggle editing</cite> butonuna tılayın. Düzenleme modundayken <cite>Open field calculator</cite> butonuna tıklayın.</p>
+</li>
 </ol>
 <img alt="../_images/155.png" class="align-center" src="../_images/155.png" />
 <ol class="arabic simple" start="16">
-<li>In the <span class="guilabel">Field Calculator</span>, check <span class="guilabel">Create a new
-field</span>. Enter <strong>length_km</strong> as the <span class="guilabel">Output field name</span>. Choose
-<strong>Decimal number (real)</strong> as the <span class="guilabel">Output field type</span>. Change the
-output <span class="guilabel">Precision</span> to <strong>2</strong>. In the <span class="guilabel">Function list</span>
-panel, find the <span class="guilabel">$length</span> under <span class="guilabel">Geometry</span>.
-Double-click it to add it to the <span class="guilabel">Expression</span>. Complete the
-expression as <code class="docutils literal"><span class="pre">$length</span> <span class="pre">/</span> <span class="pre">1000</span></code> because our layer CRS is in <strong>meters</strong>
-unit and we want the output in <strong>km</strong>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first"><cite>Field Calculator`da, `Create a new field</cite> işaretleyin. <cite>Output field name</cite> olarak <strong>length_km</strong> girin. <cite>Output field type</cite> olarak <strong>Decimal number (real)</strong> seçin. <cite>Precision`ı 2 olarak değiştirin. `Function list</cite> bölümünde <cite>Geometry</cite> altında <cite>$length</cite> i bulun. <cite>Expression</cite> a eklemek için çift tıklayın. Bizim CRS katmanımız ** metre ** biriminde ve biz de ** km ** cinsinden çıkışı istediğimiz için ifadeyi `` $ length / 1000`` olarak tamamlayın. <cite>OK</cite> tıklayın.</p>
+</li>
 </ol>
 <img alt="../_images/165.png" class="align-center" src="../_images/165.png" />
 <ol class="arabic simple" start="17">
-<li>Back in <span class="guilabel">Attribute Table</span>, you will see a new column
-<span class="guilabel">length_km</span> appear. Click the <span class="guilabel">Toggle editing</span> button
-to save the changes to the attribute table.</li>
+<li><p class="first"><cite>Attribute Table`a geri dönün. yeni bir sütun `length_km</cite> olduğunu göreceksiniz. Attribute table&#8217;daki değişiklikleri kaydetmek için <cite>Toggle editing</cite> butonuna tıklayın.</p>
+</li>
 </ol>
 <img alt="../_images/174.png" class="align-center" src="../_images/174.png" />
 <ol class="arabic simple" start="18">
-<li><p class="first">Katmanımızdaki her bir çizginin uzunluğunu elde ettiğimize göre , tümünü kolayca toplayarak &#8216;&#8217; Toplam &#8216;&#8217; uzunluğu bulabiliriz. &#8216;Vektör &#8211;&gt; Analiz Araçları &#8211;&gt; Temel İstatistikler&#8217; e gidiniz.</p>
+<li><p class="first">Katmanımızdaki her bir çizginin uzunluğunu elde ettiğimize göre , tümünü kolayca toplayarak &#8216;&#8217; Toplam &#8216;&#8217; uzunluğu bulabiliriz. <cite>Vector &#8211;&gt; Analysis Tools &#8211;&gt; Basic Statistics</cite> e gidiniz.</p>
 </li>
 </ol>
 <img alt="../_images/185.png" class="align-center" src="../_images/185.png" />
 <ol class="arabic simple" start="19">
-<li>Select the <span class="guilabel">Input Vector layer</span> as <code class="docutils literal"><span class="pre">usa_railroads</span></code>. Choose the
-<span class="guilabel">Target field</span> as <code class="docutils literal"><span class="pre">length_km</span></code> and click <span class="guilabel">OK</span>. You
-will see various statistics appear. The <span class="guilabel">Sum</span> value is the total
-length of the railroads that we are looking to find.</li>
+<li><p class="first"><cite>Input Vector layer`i ``usa_railroads`</cite> olarak seçin. <cite>Target field</cite> olarak <code class="docutils literal"><span class="pre">length_km</span></code> seçiniz ve <cite>OK</cite> tıklayın. Çeşitli istatistikler göreceksiniz. <cite>Sum</cite> değeri, bulmaya çalıştığımız demiryollarının toplam uzunluğudur.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Not</p>
-<p class="last">This answer will vary slightly if a different projection is chosen.In
-practice, line lengths for roads and other linear features are measured on
-the ground and provided as attributes to the dataset. This method works in
-absence of such attribute and as an approximation of actual line lengths.</p>
+<p class="last">Farklı bir projeksiyon seçilirse, bu cevap biraz değişecektir. Pratikte, yollar ve diğer doğrusal özellikler için hat uzunlukları yerde ölçülmekte ve veri setine nitelik olarak verilmektedir. Bu yöntem, böylesi nitelik yokluğunda ve gerçek çizgi uzunluklarının bir yaklaşımı olarak çalışır.</p>
 </div>
 <img alt="../_images/193.png" class="align-center" src="../_images/193.png" />
 </div>
@@ -399,7 +362,7 @@ absence of such attribute and as an approximation of actual line lengths.</p>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Son güncelleme: Apr 30, 2018.<br/>
+      Son güncelleme: Feb 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
