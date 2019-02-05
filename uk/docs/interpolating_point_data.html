@@ -29,7 +29,7 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Пакетна обробка за допомогою Середовища обробки" href="batch_processing.html" />
+    <link rel="next" title="Batch Processing using Processing Framework (QGIS3)" href="3/batch_processing.html" />
     <link rel="prev" title="Вибірка растрових даних із використанням точок або багатокутників" href="sampling_raster_data.html" />
 
 <meta charset='utf-8'>
@@ -104,7 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Аналіз найближчого сусідства</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Вибірка растрових даних із використанням точок або багатокутників</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Інтерполяція точкових даних</a></li>
-<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Пакетна обробка за допомогою Середовища обробки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Автоматизація складних робочих процесів за допомогою Редактора моделей</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Автоматизація створення мап за допомогою Print Composer Atlas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Використання QGIS Browser</a></li>
@@ -121,6 +121,7 @@
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Створення Basemaps з QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Навчальні матеріали з QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Джерела даних</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
 </ul>
 </ul>
 </li>
@@ -134,7 +135,7 @@
     </a>
   </li>
   <li>
-    <a href="batch_processing.html" title="Next Chapter: Пакетна обробка за допомогою Середовища обробки"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Пакетна обробка ... &raquo;</span>
+    <a href="3/batch_processing.html" title="Next Chapter: Batch Processing using Processing Framework (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Batch Processing... &raquo;</span>
     </a>
   </li>
               
@@ -238,42 +239,42 @@
 <li><p class="first">Запустіть QGIS і перейдіть у меню <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector Layer</span>.</p>
 </li>
 </ol>
-<img alt="../_images/178.png" class="align-center" src="../_images/178.png" />
+<img alt="../_images/180.png" class="align-center" src="../_images/180.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Перейдіть до завантаженого файлу <code class="docutils literal"><span class="pre">Shapefiles.zip</span></code> і виберіть його. Натисніть кнопку <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/230.png" class="align-center" src="../_images/230.png" />
+<img alt="../_images/236.png" class="align-center" src="../_images/236.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">В діалоговому вікні <span class="guilabel">Select layers to add...</span>, затисніть клавішу <code class="kbd docutils literal"><span class="pre">Shift</span></code> і виберіть шари <code class="docutils literal"><span class="pre">Arlington_Soundings_2007_stpl83.shp</span></code> і <code class="docutils literal"><span class="pre">Boundary2004_550_stpl83.shp</span></code>. Натисніть <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/322.png" class="align-center" src="../_images/322.png" />
+<img alt="../_images/323.png" class="align-center" src="../_images/323.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Ви побачите 3 завантажені шари в QGIS. Шар <code class="docutils literal"><span class="pre">Boundary2004_550_stpl83</span></code> являє собою межі озера. Зніміть галочку поруч із ним в Змісті.</p>
 </li>
 </ol>
-<img alt="../_images/416.png" class="align-center" src="../_images/416.png" />
+<img alt="../_images/417.png" class="align-center" src="../_images/417.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Ми покажемо дані із другого шару <code class="docutils literal"><span class="pre">Arlington_Soundings_2007_stpl83</span></code>. Хоча дані виглядають як лінії, насправді це набір дуже близько розташованих точок.</p>
 </li>
 </ol>
-<img alt="../_images/516.png" class="align-center" src="../_images/516.png" />
+<img alt="../_images/517.png" class="align-center" src="../_images/517.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Натисніть кнопку <span class="guilabel">Zoom</span> і виберіть невелику область на екрані. Якщо ви збільшите зображення ви побачите точки. Кожна точка представляє собою заміри зроблені за допомогою <em>Ехолоту</em> у координатах, що були записані обладнанням <em>DGPS</em>.</p>
 </li>
 </ol>
-<img alt="../_images/615.png" class="align-center" src="../_images/615.png" />
+<img alt="../_images/616.png" class="align-center" src="../_images/616.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Виберіть інструмент <span class="guilabel">Identify</span> і натисніть на точку. Ви побачите відкриту панель <span class="guilabel">Identify Results</span> зліва із значенням атрибуту точки. В даному випадку, атрибут <code class="docutils literal"><span class="pre">ELEVATION</span></code> містить глибину озера в заданій позиції. Оскільки нашою задачею є створення профілю глибини і контурів рельєфу, ми використаємо ці значення на вхід процедури інтерполяції.</p>
 </li>
 </ol>
-<img alt="../_images/714.png" class="align-center" src="../_images/714.png" />
+<img alt="../_images/715.png" class="align-center" src="../_images/715.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Переконайтеся, що <code class="docutils literal"><span class="pre">Плагін</span> <span class="pre">Інтерполяції</span></code> ввімкнено. Дивіться  <a class="reference internal" href="using_plugins.html"><em>Використання додатків</em></a>, щоб дізнатися як включати плагіни. Якщо плагін ввімкнено, перейдіть до меню <span class="menuselection">Растр ‣ Інтерполяція ‣ Інтерполяція</span>.</p>
 </li>
 </ol>
-<img alt="../_images/814.png" class="align-center" src="../_images/814.png" />
+<img alt="../_images/815.png" class="align-center" src="../_images/815.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">В діалоговому вікні <span class="guilabel">Інтерполяція</span> виберіть <code class="docutils literal"><span class="pre">Arlington_Soundings_2007_stpl83</span></code> в якості <span class="guilabel">Vector layers</span> на панелі <span class="guilabel">Input</span>. Виберіть <code class="docutils literal"><span class="pre">ELEVATION</span></code> в якості:guilabel:<cite>Interpolation attribute</cite>. Натисніть <span class="guilabel">Add</span>. Введіть значення <code class="docutils literal"><span class="pre">5</span></code> в полях <span class="guilabel">Cellsize X</span> і <span class="guilabel">Cellsize Y</span>. Це значення задає розмір кожного пікселю в вихідній сітці. Оскільки ваші дані спроектовані в системі CRS із одиницями виміру <strong>Feet-US</strong>, на основі вашого вибору, розмір сітки буде <strong>5 футів</strong>. Натисніть кнопку <span class="guilabel">...</span> поруч із <span class="guilabel">Output file</span> і назвіть вихідний файл <code class="docutils literal"><span class="pre">elevation_tin.tif</span></code>. Натисніть <span class="guilabel">OK</span>.</p>
 </li>
@@ -282,62 +283,62 @@
 <p class="first admonition-title">Примітка</p>
 <p class="last">Результат інтерполяції може значно відрізнятися залежно від методу і параметрів, які ви виберете. Інтерполяція в QGIS підтримує методи: <em>Триангульована нерегулярна мережа (TIN)</em> і <em>Інверсне зваження відстаней (IDW)</em>. TIN метод зазвичай використовується для даних рельєфу, в той час як метод IDW використовується для інтерполяції інших типів даних таких як концентрації мінералів, населення і ін.. Дивіться модуль <a class="reference external" href="http://docs.qgis.org/2.2/en/docs/gentle_gis_introduction/spatial_analysis_interpolation.html">Просторовий аналіз</a>  документації QGIS для більш детальної інформації.</p>
 </div>
-<img alt="../_images/913.png" class="align-center" src="../_images/913.png" />
+<img alt="../_images/914.png" class="align-center" src="../_images/914.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Ви побачите новий шар <code class="docutils literal"><span class="pre">elevation_tin</span></code>  завантажений в QGIS. Натисніть правою кнопкою миші на шар і виберіть <span class="guilabel">Zoom to layer</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1013.png" class="align-center" src="../_images/1013.png" />
+<img alt="../_images/1014.png" class="align-center" src="../_images/1014.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Тепер ви побачите створену поверхню у повному обсязі. Інтерполяція не дає точного результату за межами області зібраних даних. Давайте обріжемо вихідну поверхню по межі краю озера. Перейдіть в меню <span class="menuselection">Raster ‣ Extraction ‣ Clipper</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1116.png" class="align-center" src="../_images/1116.png" />
+<img alt="../_images/1117.png" class="align-center" src="../_images/1117.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Назвіть <span class="guilabel">Вихідний файл</span> як <cite>elevation_tin_clipped.tif`</cite>. Виберіть значення <span class="guilabel">Cliiped mode</span> як <span class="guilabel">Mask layer</span>. Виберіть <code class="docutils literal"><span class="pre">Boundary2004_550_stpl83</span></code> як <span class="guilabel">Mask layer`</span>. Натисніть <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1215.png" class="align-center" src="../_images/1215.png" />
+<img alt="../_images/1216.png" class="align-center" src="../_images/1216.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Новий растр <code class="docutils literal"><span class="pre">elevation_tin_clipped</span></code> буде завантажено в QGIS. Тепер ми стилізуємо цей шар аби показати зміну висот. Зверніть увагу на значення мінімальної і максимальної висоти для шару <code class="docutils literal"><span class="pre">elevation_tin</span></code>. Натисніть праву кнопку миші на шарі  <code class="docutils literal"><span class="pre">elevation_tin_clipped</span></code> і виберіть <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1313.png" class="align-center" src="../_images/1313.png" />
+<img alt="../_images/1314.png" class="align-center" src="../_images/1314.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Перейдіть до вкладки <span class="guilabel">Стиль</span>. Виберіть <span class="guilabel">Render type</span> як <code class="docutils literal"><span class="pre">Singleband</span> <span class="pre">pseudocolor</span></code>. На панелі  <span class="guilabel">Generate new color map</span> виберіть <code class="docutils literal"><span class="pre">Спектральний</span></code> спад кольору. Оскільки ми хочемо створити карту глибин, що є протилежним до карти висот, виберіть пункт <span class="guilabel">Інвертувати</span>. Це задасть сині кольори для глибоких частин і червоні для мілких ділянок. Натисніть <span class="guilabel">Классифікувати</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1411.png" class="align-center" src="../_images/1411.png" />
+<img alt="../_images/1412.png" class="align-center" src="../_images/1412.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Перейдіть до вкладки <span class="guilabel">Прозорість</span>. Ми хочемо усунути чорні пікселі із нашого результату. Введіть <code class="docutils literal"><span class="pre">0</span></code> у поле <span class="guilabel">Additional no data value</span>. Натисніть <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1511.png" class="align-center" src="../_images/1511.png" />
+<img alt="../_images/1512.png" class="align-center" src="../_images/1512.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Тепер ви маєте карту рельєфу озера, створену із окремих вимірювань глибини. Давайте тепер створимо контури. Перейдіть у меню <span class="menuselection">Raster ‣ Extraction ‣ Contours</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1610.png" class="align-center" src="../_images/1610.png" />
+<img alt="../_images/1611.png" class="align-center" src="../_images/1611.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">У діалоговому вікні <span class="guilabel">Contour</span>, введіть <code class="docutils literal"><span class="pre">contours</span></code> у поле <span class="guilabel">Output file for contour lines</span>. Ми побудуємо контурні лінії із інтервалом в 5 футів, тому введіть <code class="docutils literal"><span class="pre">5.00</span></code> в якості <span class="guilabel">Interval between contour lines</span>. Перевірте поле <span class="guilabel">Attribute name</span>. Натисніть <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/179.png" class="align-center" src="../_images/179.png" />
+<img alt="../_images/1710.png" class="align-center" src="../_images/1710.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Контурні лінії будуть завантажені на шар <code class="docutils literal"><span class="pre">contours</span></code> після завершення обробки. Натисніть правою кнопкою миші на шар і виберіть <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/189.png" class="align-center" src="../_images/189.png" />
+<img alt="../_images/1810.png" class="align-center" src="../_images/1810.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Перейдіть на вкладку <span class="guilabel">Labels</span> tab. Виберіть пункт <span class="guilabel">Label this layer with</span> і виберіть в якості поля - <code class="docutils literal"><span class="pre">ELEV</span></code>. Виберіть <code class="docutils literal"><span class="pre">Curved</span></code> в якості типу   <span class="guilabel">Placement</span> і натисніть <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/197.png" class="align-center" src="../_images/197.png" />
+<img alt="../_images/198.png" class="align-center" src="../_images/198.png" />
 <ol class="arabic simple" start="20">
 <li><p class="first">Ви побачите, що кожна контурна лінія має відповідні позначки із висотою вздовж лінії.</p>
 </li>
 </ol>
-<img alt="../_images/204.png" class="align-center" src="../_images/204.png" />
+<img alt="../_images/205.png" class="align-center" src="../_images/205.png" />
 </div>
 </div>
 
@@ -363,7 +364,7 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Востаннє оновлено Feb 04, 2019.<br/>
+      Востаннє оновлено Feb 05, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

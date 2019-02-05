@@ -105,7 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Анализ ближайшего соседства</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Отбор проб растровых данных с помощью точек или полигонов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Интерполяция точечных данных</a></li>
-<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Выполнение пакетных файлов с помощью среды обработки</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Автоматизация сложных рабочих процессов с помощью Редактора моделей</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Автоматизация создания карт с помощью Print Composer Atlas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Использование QGIS Browser</a></li>
@@ -122,6 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Учебные материалы по QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Источники данных</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
 </ul>
 </ul>
 </li>
@@ -221,22 +222,22 @@
 <li><p class="first">Откройте QGIS и перейдите к меню <span class="menuselection">Layer ‣ Add WMS Layer...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1146.png" class="align-center" src="../_images/1146.png" />
+<img alt="../_images/1148.png" class="align-center" src="../_images/1148.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Во вкладке <span class="guilabel">Layers</span> нажмите на кнопку <span class="guilabel">New</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2101.png" class="align-center" src="../_images/2101.png" />
+<img alt="../_images/2104.png" class="align-center" src="../_images/2104.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Озаглавьте ваше соединение. Это не имя слоя, а имя сервиса, который предоставляет слой WMS. Обычно один сервис предлагает несколько слоев, которые можно добавить к вашему проекту. Адрес, который нужен, чтобы получить доступ к слою WMS, называется <em>GetCapabilities</em>. При доступе к серверу WMS с помощью этого параметра в строке адреса, он возвращает список имеющихся слоев с различными метаданными. В данном случае назовите соединение <code class="docutils literal"><span class="pre">MRDATA</span> <span class="pre">USGS</span></code> и введите в строку GetCapabilities URL как <code class="docutils literal"><span class="pre">http://mrdata.usgs.gov/services/ca?request=getcapabilities&amp;service=WMS&amp;version=1.1.1&amp;</span></code>.  Нажмите <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/354.png" class="align-center" src="../_images/354.png" />
+<img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Затем нажмите на кнопку <span class="guilabel">Connect</span>  чтобы получить список имеющихся слоев. Вы заметите, что напротив слоев перечислены различные идентификаторы. Идентификатор <code class="docutils literal"><span class="pre">0</span></code> означает, что вы добавите на карту все слои. Если вам нужны не все слои, вы можете раскрыть список, нажав на  <span class="guilabel">+</span> и выбрав интересующий слой. Для этого урока выберите слой <code class="docutils literal"><span class="pre">0</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/438.png" class="align-center" src="../_images/438.png" />
+<img alt="../_images/439.png" class="align-center" src="../_images/439.png" />
 <ol class="arabic" start="5">
 <li><p class="first">В разделе <span class="guilabel">Image encoding</span> вам нужно выбрать формат изображения. Формат изображения имеет большое значение, и ваш выбор зависит от конкретного случая использования. Вот несколько советов.</p>
 <ul class="simple">
@@ -252,22 +253,22 @@
 <p>Для этого урока выберите формат <span class="guilabel">JPEG</span>. Изменение <span class="guilabel">Layer name</span>, если хотите, и нажмите <span class="guilabel">Add</span>.</p>
 </li>
 </ol>
-<img alt="../_images/539.png" class="align-center" src="../_images/539.png" />
+<img alt="../_images/540.png" class="align-center" src="../_images/540.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Вы увидите, что слой загружен в QGIS. Вы можете масштабировать/перемещать его, как и любой другой слой. WMS работает так: каждый раз, когда вы масштабируете/перемещаете слой, он посылает координаты вашей области просмотра на сервер, и сервер создает изображение для этой области и возвращает его клиенту. Так что будет некоторая задержка, прежде чем вы увидите изображение для области после приближения. Кроме того, поскольку данные, которые Вы видите, являются изображением, нет никакого способа, чтобы запросить атрибуты, как в обычном векторном слое или снимке.</p>
 </li>
 </ol>
-<img alt="../_images/637.png" class="align-center" src="../_images/637.png" />
+<img alt="../_images/638.png" class="align-center" src="../_images/638.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Можно, однако,посмотреть некоторые метаданные о слое. Щелкните правой кнопкой мыши на слое и выберите <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/736.png" class="align-center" src="../_images/736.png" />
+<img alt="../_images/737.png" class="align-center" src="../_images/737.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Вы заметите, что диалоговое окно <span class="guilabel">Properties</span> выглядит по-другому и имеет меньше вкладок. Вы можете перейти на вкладку <span class="guilabel">Metadata</span>, чтобы узнать больше об сервисе WMS и слоях.</p>
 </li>
 </ol>
-<img alt="../_images/835.png" class="align-center" src="../_images/835.png" />
+<img alt="../_images/836.png" class="align-center" src="../_images/836.png" />
 </div>
 </div>
 
@@ -293,7 +294,7 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Обновлено: Feb 04, 2019.<br/>
+      Обновлено: Feb 05, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
