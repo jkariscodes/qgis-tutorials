@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Leaflet Web Maps with qgis2leaf &mdash; QGIS Tutorials and Tips</title>
+    <title>Peta Web Leaflet dengan qgis2leaf &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,10 +101,10 @@
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Membuat Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Melakukan Queries Spasial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analisa Tetangga Terdekat</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Data Raster menggunakan Poin atau Poligon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolasi Data Poin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Composer Atlas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Menggunakan QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="counting_vertices.html">Menghitung jumlah vertices pada sebuah Layer</a></li>
@@ -112,8 +112,8 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Memulai Pemrograman Phyton</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Building a Python Plugin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Using Custom Python Expression Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Writing Python Scripts for Processing Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Menulis Skrip Pythin untuk Framework Pemrosessan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Menjalankan dan Menjadwalkan Pekerjaan Pemrosesan QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="find_neighbor_polygons.html">Menemukan Polygon Neighbor atau Tetangga pada Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
@@ -199,7 +199,7 @@
       
 
   <div class="section" id="leaflet-web-maps-with-qgis2leaf">
-<h1>Leaflet Web Maps with qgis2leaf<a class="headerlink" href="#leaflet-web-maps-with-qgis2leaf" title="Link permanen untuk headline ini">¶</a></h1>
+<h1>Peta Web Leaflet dengan qgis2leaf<a class="headerlink" href="#leaflet-web-maps-with-qgis2leaf" title="Link permanen untuk headline ini">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Peringatan</p>
 <p>qgis2leaf plugin is no longer in active development. The functionality of
@@ -207,74 +207,56 @@ this plugin is folded into a new plugin called <strong>qgis2web</strong>.</p>
 <p class="last">See <a class="reference internal" href="web_mapping_with_qgis2web.html"><em>Web Mapping with QGIS2Web</em></a> tutorial for an updated version of
 this tutorial.</p>
 </div>
-<p>Leaflet is a popular open-source Javascript library for building web mapping
-applications. <strong>qgis2leaf</strong> plugin provides a simple way to export your QGIS
-map to a functioning leaflet-based web map. This plugin is a useful way to get
-started with web mapping and create an interactive web map from your static GIS
-data layers.</p>
+<p>Leaflet adalah sebuah library javascript open-source yang dikenal untuk membangun aplikasi pemetaan berbasis web. Plugin <strong>qgis2leaf</strong> menyediakan cara yang sederhana untuk mengekspor Peta QGIS anda ke peta web berbasis leaflet yang berfungsi. Plugin ini merupakan cara yang berguna untuk memulai pemetaan berbasis web dan membuat peta web interaktif dari layer data GIS statis.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
-<p>We will create a leaflet web map of world&#8217;s airports.</p>
+<h2>Tinjauan Tugas<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
+<p>Kita akan membuat sebuah Peta web leaflet untuk Airport Dunia.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanen untuk headline ini">¶</a></h3>
+<h3>Skill lain yang akan anda pelajari<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanen untuk headline ini">¶</a></h3>
 <ul class="simple">
-<li>Using <code class="docutils literal"><span class="pre">CASE</span></code> SQL statement in Field Calculator to create new field values
-based on different conditions.</li>
-<li>Locating and using SVG custom icons in QGIS.</li>
+<li><p class="first">Menggunakaan statement SQL xxx pada Field Calculator untuk menghasilkan nilai field yang baru berdasarkan kondisi yang berbeda.</p>
+</li>
+<li><p class="first">Mencari lokasi dan memakai ikon kustom SVG di QGIS</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Link permanen untuk headline ini">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/airports/">Airports</a>
-dataset from Natural Earth.</p>
-<p>Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">Airports shapefile</a>.</p>
-<p>Data Source <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<h2>Mendapatkan data<a class="headerlink" href="#get-the-data" title="Link permanen untuk headline ini">¶</a></h2>
+<p>Kita akan menggunakan dataset  <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/airports/">Airports</a> dari Natural Earth.</p>
+<p>Unduh <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">Airports shapefile</a>.</p>
+<p>Sumber data <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link permanen untuk headline ini">¶</a></h2>
+<h2>Prosedur<a class="headerlink" href="#procedure" title="Link permanen untuk headline ini">¶</a></h2>
 <ol class="arabic simple">
-<li>Install the <code class="docutils literal"><span class="pre">qgis2leaf</span></code> plugin by going to <span class="menuselection">Plugins ‣
-Manage and Install Plugin</span>. Note that the plugin is currently marked
-<strong>experimental</strong>, so you will need to check <span class="guilabel">Show also
-experimental plugins</span> in Plugin Settings. (See <a class="reference internal" href="using_plugins.html"><em>Menggunakan Plugins</em></a> for more details on
-installing plugins in QGIS)</li>
+<li><p class="first">Install plugin <code class="docutils literal"><span class="pre">qgis2leaf</span></code> dengan mengakses <span class="menuselection">Plugins ‣ Manage and Install Plugin</span> . Perhatikan bahwa plugin bertanda <strong>experimental</strong> , jadi anda perlu untuk memberi tanda cek <span class="guilabel">Show also experimental plugins</span> pada pengaturan plugin. (lihat <code class="xref doc docutils literal"><span class="pre">docs/using_plugins</span></code> untuk detail lebih dalam menginstall plugin di QGIS )</p>
+</li>
 </ol>
-<img alt="../_images/190.png" class="align-center" src="../_images/190.png" />
+<img alt="../_images/1101.png" class="align-center" src="../_images/1101.png" />
 <ol class="arabic simple" start="2">
-<li>Unzip the downloaded <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code> file. Open QGIS and go to
-<span class="menuselection">Layer ‣ Add Vector Layer</span>. Browse to the location when the
-files were extracted and select <code class="docutils literal"><span class="pre">ne_10m_airports.shp</span></code>. Click
-<span class="guilabel">OK</span>.</li>
+<li><p class="first">Unzip file hasil unduh <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code> . Buka QGIS dan akses <span class="menuselection">Layer ‣ Add Vector Layer</span> . Jelajahi lokasi dimana file diekstrak dan pilih <code class="docutils literal"><span class="pre">ne_10m_airports.shp</span></code> . Klik <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../_images/237.png" class="align-center" src="../_images/237.png" />
+<img alt="../_images/246.png" class="align-center" src="../_images/246.png" />
 <ol class="arabic simple" start="3">
-<li>Once the <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> layer is loaded, use the <span class="guilabel">Identify</span>
-tool to click on any feature and look at the attributes. We will create an
-airport map where we classify the airports into 3 categories. The attribute
-<code class="docutils literal"><span class="pre">type</span></code> will be useful when classifying the features.</li>
+<li><p class="first">Ketika layer <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> terbuka, gunakan tool <span class="guilabel">Identify</span>  untuk mengklik fitur mana saja dan melihat attributnya. Kita akan membuat sebuah peta airport dimana kita mengklasifikasijan airport menjadi 3 bagian. Attribut <code class="docutils literal"><span class="pre">type</span></code> akan berguna saat kita mengklasifikasi fitur.</p>
+</li>
 </ol>
-<img alt="../_images/324.png" class="align-center" src="../_images/324.png" />
+<img alt="../_images/325.png" class="align-center" src="../_images/325.png" />
 <ol class="arabic simple" start="4">
-<li>Right-click the <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> layer and select <span class="guilabel">Open
-Attribute Table</span>.</li>
+<li><p class="first">Klik kanan pada layer <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> dan pilih <span class="guilabel">Open Attribute Table</span>.</p>
+</li>
 </ol>
-<img alt="../_images/418.png" class="align-center" src="../_images/418.png" />
+<img alt="../_images/419.png" class="align-center" src="../_images/419.png" />
 <ol class="arabic simple" start="5">
-<li>In the attribute table dialog, click the <span class="guilabel">Toggle Editing</span> button.
-Once the layer is in editing mode, click the <span class="guilabel">Open Field
-Calculator</span> button.</li>
+<li><p class="first">Pada dialog attribut tabel, klik tombol <span class="guilabel">Toggle Editing</span> . Ketika layer berada dalam mode editing, klik tombol <span class="guilabel">Open Field Calculator</span> .</p>
+</li>
 </ol>
-<img alt="../_images/518.png" class="align-center" src="../_images/518.png" />
+<img alt="../_images/519.png" class="align-center" src="../_images/519.png" />
 <ol class="arabic simple" start="6">
-<li>We want to create a new attribute called <code class="docutils literal"><span class="pre">type_code</span></code> where we give major
-airports a value of 3, mid-sized airports a value of 2 and all others a
-value of 1. We can use the <em>CASE</em> statement and write an expression that
-will look at the value of <code class="docutils literal"><span class="pre">type</span></code> attribute and create a <code class="docutils literal"><span class="pre">type_code</span></code>
-attribute based on the condition. Check the <span class="guilabel">Create a new field</span>
-box and enter <code class="docutils literal"><span class="pre">type_code</span></code> as the <span class="guilabel">Output field name</span>. Select
-<span class="guilabel">Whole number (integer)</span> as the <span class="guilabel">Output field type</span>. In
-the <span class="guilabel">Expression</span> window, enter the following text.</li>
+<li><p class="first">Kita ingin membuat sebuah attribut baru bernama <code class="docutils literal"><span class="pre">type_code</span></code> dimana kita memberikan airport besar dengan nilai 3, airport ukuran sedang bernilai 2 dan yang lain bernilai 1. Kita dapat menggunakan statement <em>CASE</em>  dan menulis sebuah ekspresi yang akan melihat nilai dari attribut <code class="docutils literal"><span class="pre">type</span></code> dan membuat attribut <code class="docutils literal"><span class="pre">type_code</span></code> berdasarkan kondisi. Beri tanda cek pada kotak <span class="guilabel">Create a new field</span> dan masukkan <code class="docutils literal"><span class="pre">type_code</span></code> sebagai <span class="guilabel">Output field name</span> . Pilih <span class="guilabel">Whole number (integer)</span> sebagai <span class="guilabel">Output field type</span>. Pada jendela :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Expression , masukkan teks berikut.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre>CASE  WHEN &quot;type&quot; LIKE &#39;%major%&#39;  THEN 3
  WHEN &quot;type&quot; LIKE &#39;%mid%&#39; THEN 2
@@ -282,76 +264,50 @@ the <span class="guilabel">Expression</span> window, enter the following text.</
 END
 </pre></div>
 </div>
-<img alt="../_images/617.png" class="align-center" src="../_images/617.png" />
+<img alt="../_images/618.png" class="align-center" src="../_images/618.png" />
 <ol class="arabic simple" start="7">
-<li>Back in the <span class="guilabel">Attribute Table</span> window, you will see a new column at
-the end. Verify that your expression worked correctly and click the
-<span class="guilabel">Toggle Editing</span> button to save the changes.</li>
+<li><p class="first">Kembali pada jendela <span class="guilabel">Attribute Table</span> , anda akan melihat kolom baru di akhir. Verifikasi bahwa ekspresi anda bekerja dengan baik dan klik tombol <span class="guilabel">Toggle Editing</span> untuk menyimpan perubahan.</p>
+</li>
 </ol>
-<img alt="../_images/716.png" class="align-center" src="../_images/716.png" />
+<img alt="../_images/717.png" class="align-center" src="../_images/717.png" />
 <ol class="arabic simple" start="8">
-<li>Now we will style the airports layer using the newly created <code class="docutils literal"><span class="pre">type_code</span></code>
-attribute. Right-click the <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> layer and select
-<span class="guilabel">Properties</span>.</li>
+<li><p class="first">Sekarang anda akan melakukan style menggunakan attribut yang baru dibuat yaitu <code class="docutils literal"><span class="pre">type_code</span></code> . Klik kanan layer <cite>ne_10m_airports`</cite> dan pilih <span class="guilabel">Properties</span>.</p>
+</li>
 </ol>
-<img alt="../_images/816.png" class="align-center" src="../_images/816.png" />
+<img alt="../_images/817.png" class="align-center" src="../_images/817.png" />
 <ol class="arabic simple" start="9">
-<li>Select the <span class="guilabel">Style</span> tab in the <span class="guilabel">Layer Properties</span> dialog.
-Select <span class="guilabel">Categorized</span> style from the drop-down menu and choose
-<code class="docutils literal"><span class="pre">type_code</span></code> as the <span class="guilabel">Column</span>. Choose a color ramp of your choice
-and click <span class="guilabel">Classify</span>. Click <span class="guilabel">OK</span> to go back to the main
-QGIS window.</li>
+<li><p class="first">Pilih tab <span class="guilabel">Style</span> pada dialog <span class="guilabel">Layer Properties</span> . Pilih style <span class="guilabel">Categorized</span> dari menu dropdown dan pilih <code class="docutils literal"><span class="pre">type_code</span></code> sebagai <span class="guilabel">Column</span> . Pilih color ramp pilhan anda dan klik <span class="guilabel">Classify</span> . Klik <span class="guilabel">OK</span> untuk kembali ke jendela utama QGIS.</p>
+</li>
 </ol>
-<img alt="../_images/915.png" class="align-center" src="../_images/915.png" />
+<img alt="../_images/916.png" class="align-center" src="../_images/916.png" />
 <ol class="arabic simple" start="10">
-<li>Here you will see a nicely styled airport map. Let&#8217;s export this to create
-an interactive web map. Go to <span class="menuselection">Web ‣ qgis2leaf ‣ Exports
-a QGIS Project to a working leaflet webmap</span>.</li>
+<li><p class="first">Disini anda akan melihat sebuah airport map yang sudah distyle. Mari ekspor ini untuk membuat sebuah peta web interaktif. Akses <span class="menuselection">Web ‣ qgis2leaf ‣ Exports a QGIS Project to a working leaflet webmap</span>.</p>
+</li>
 </ol>
-<img alt="../_images/1015.png" class="align-center" src="../_images/1015.png" />
+<img alt="../_images/1016.png" class="align-center" src="../_images/1016.png" />
 <ol class="arabic simple" start="11">
-<li>In the <span class="guilabel">QGIS 2 Leaflet</span> dialog, click <span class="guilabel">Get Layers</span> to
-get the refreshed layer list. Select the <span class="guilabel">Full screen</span> option to
-have a full screen web map. Choose <span class="guilabel">layer extent</span> as the
-<span class="guilabel">Extent</span> of the exported map. Choose a <span class="guilabel">Output project
-folder</span> on your system where the plugin will write the output files. Click
-<span class="guilabel">OK</span>.</li>
+<li><p class="first">Pada dialog <span class="guilabel">QGIS 2 Leaflet</span> , klik <span class="guilabel">Get Layers</span> untuk memperoleh daftar layer yang dibuka ulang. Pilih opsi <span class="guilabel">Full screen</span> untuk memiliki sebuah peta web full screen. Pilih <span class="guilabel">layer extent</span> sebagai <span class="guilabel">Extent</span> dari peta yang terekspor. Pilih sebuah <span class="guilabel">Output project folder</span> pada sistem anda di mana plugin akan menulis file output. Klik <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../_images/1118.png" class="align-center" src="../_images/1118.png" />
+<img alt="../_images/1119.png" class="align-center" src="../_images/1119.png" />
 <ol class="arabic simple" start="12">
-<li>Once the export process finishes, locate the output folder on your disk.
-Open the <code class="docutils literal"><span class="pre">index.html</span></code> file in a browser. You will see an interactive web
-map that is a replica of the QGIS map. You can zoom and pan around the map
-and also click on any feature to get an popup window with attribute
-information. You can copy the contents of this folder to a web server to
-have a full featured web map.</li>
+<li><p class="first">Ketika proses ekspor selesai, cari lokasi folder output pada disk anda. Buka file <code class="docutils literal"><span class="pre">index.html</span></code> dengan sebuah browser. Anda akan melihat sebuah peta web interaktif yang merupakan sebuah replika dari Peta QGIS. Anda akan menzoom dan pan sekitaran peta dan juga mengklik fitur mana saja untuk memperoleh jendela pop-up dengan informasi attribut. Anda dapat mengkopi isi dari folder ini ke server web agar memiliki peta web yang berfungsi secara penuh.</p>
+</li>
 </ol>
 <img alt="../_images/1217.png" class="align-center" src="../_images/1217.png" />
 <ol class="arabic simple" start="13">
-<li>Now we will explore some advanced features of this plugin that will allow
-you to customize the map further. If you noticed, the popup contained all
-the attributes of the feature. Some attributes are not very useful and
-overall the pop up looks ugly. We can replace the default popup with our
-own custom HTML to make it much better. This is achieved by added the
-custom HTML in a column named <code class="docutils literal"><span class="pre">html_exp</span></code>. Right-click the
-<code class="docutils literal"><span class="pre">ne_10m_airports</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Sekaran kita akan mengeksplor sejumlah kegunaan advance dari plugin ini yang membuat anda dapat mengkustom peta lebih jauh lagi. Jika anda perhatikan, jendela pop-up berisi attribut dari sebuah fitur. Sejumlah attribut tidak begitu berguna dan rata-rata pop-up tidak terlihat baik. Kita akan menganti pop-up awalo dengan HTML kustom kita untuk membuatnya lebih baik. Ini dapat dicapai dengan menambah HTML kustom pada sebuah kolom bernama <code class="docutils literal"><span class="pre">html_exp</span></code> , Klik kanan layer <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> dan pilih <span class="guilabel">Open Attribute Table</span>.</p>
+</li>
 </ol>
-<img alt="../_images/1315.png" class="align-center" src="../_images/1315.png" />
+<img alt="../_images/1316.png" class="align-center" src="../_images/1316.png" />
 <ol class="arabic simple" start="14">
-<li>In the attribute table dialog, click the <span class="guilabel">Toggle Editing</span> button.
-Once the layer is in editing mode, click the <span class="guilabel">Open Field
-Calculator</span> button.</li>
+<li><p class="first">Pada dialog attribut tabel, klik tombol <span class="guilabel">Toggle Editing</span> . Ketika layer berada dalam mode editing, klik tombol <span class="guilabel">Open Field Calculator</span> .</p>
+</li>
 </ol>
-<img alt="../_images/1413.png" class="align-center" src="../_images/1413.png" />
+<img alt="../_images/1414.png" class="align-center" src="../_images/1414.png" />
 <ol class="arabic simple" start="15">
-<li>Check the <span class="guilabel">Create a new field</span> box and enter <code class="docutils literal"><span class="pre">html_exp</span></code> as the
-<span class="guilabel">Output field name</span>. Choose <span class="guilabel">Text (string)</span> as the
-<span class="guilabel">Output field type</span>. Since we will be creating a long HTML
-string, choose <code class="docutils literal"><span class="pre">200</span></code> as the <span class="guilabel">Output field width</span>. Enter the
-following expression in the <span class="guilabel">Expression</span> area. The
-complex-looking expression simply defines a HTML table and substitutes cell
-values from attributes <code class="docutils literal"><span class="pre">iata_code</span></code>, <code class="docutils literal"><span class="pre">name</span></code> and <code class="docutils literal"><span class="pre">type</span></code>. Check the
-<span class="guilabel">Output preview</span> to ensure the expression is correct.</li>
+<li><p class="first">Beri tanda cek pada box <span class="guilabel">Create a new field</span> dan masukkan <code class="docutils literal"><span class="pre">html_exp</span></code> sebagai <span class="guilabel">Output field name</span> . Pilih <span class="guilabel">Text (string)</span> sebagai <span class="guilabel">Output field type</span> . Karena kita akan membuat sebuat string HTML yang panjang, pilih <code class="docutils literal"><span class="pre">200</span></code> untuk <span class="guilabel">Output field width</span> , Masukkan ekspresi berikut pada area <span class="guilabel">Expression</span> . Ekspresi yang terlihat rumit mendefinisikan sebuah tabel HTML dan mengganti nilai cell dari attribut  <code class="docutils literal"><span class="pre">iata_code</span></code>, <code class="docutils literal"><span class="pre">name</span></code>  dan <code class="docutils literal"><span class="pre">type</span></code> .Beri tanda cek pada <span class="guilabel">Output preview</span> untuk memastikan ekspresinya benar.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre>concat(&#39;&lt;h3&gt;&#39;, &quot;iata_code&quot;, &#39;&lt;/h3&gt;&lt;table&gt;&#39;, &#39;&lt;tr&gt;&lt;td&gt;Airport Name: &lt;b&gt; &#39;,
 &quot;name&quot;, &#39;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Category: &lt;b&gt; &#39;, &quot;type&quot;,
@@ -360,113 +316,93 @@ values from attributes <code class="docutils literal"><span class="pre">iata_cod
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Catatan</p>
-<p class="last">The shapefile format can contain a maximum of 254 characters in a field. If
-you want to store longer text in the field, choose another format.</p>
+<p class="last">Format shapefile dapat berisi maksimum 254 karakter pada sebuah field. Jika anda ingin menyimpan teks yang lebih panjang, pilih format yang lain.</p>
 </div>
-<img alt="../_images/1513.png" class="align-center" src="../_images/1513.png" />
+<img alt="../_images/1514.png" class="align-center" src="../_images/1514.png" />
 <ol class="arabic simple" start="16">
-<li>Back in the <span class="guilabel">Attribute Table</span> window, you will see a new column at
-the end. Verify that your expression worked correctly and click the
-<span class="guilabel">Toggle Editing</span> button to save the changes.</li>
+<li><p class="first">Kembali pada jendela <span class="guilabel">Attribute Table</span> , anda akan melihat kolom baru di akhir. Verifikasi bahwa ekspresi anda bekerja dengan baik dan klik tombol <span class="guilabel">Toggle Editing</span> untuk menyimpan perubahan.</p>
+</li>
 </ol>
-<img alt="../_images/1612.png" class="align-center" src="../_images/1612.png" />
+<img alt="../_images/1613.png" class="align-center" src="../_images/1613.png" />
 <ol class="arabic simple" start="17">
-<li>Now export the map again using <span class="menuselection">Web ‣ qgis2leaf ‣
-Exports a QGIS Project to a working leaflet webmap</span>.</li>
+<li><p class="first">Sekarang ekspor kembali peta menggunakan <span class="menuselection">Web ‣ qgis2leaf ‣ Exports a QGIS Project to a working leaflet webmap</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1711.png" class="align-center" src="../_images/1711.png" />
 <ol class="arabic simple" start="18">
-<li>Choose the options as before.</li>
+<li><p class="first">Memilih opsi seperti sebelumnya.</p>
+</li>
 </ol>
-<img alt="../_images/1811.png" class="align-center" src="../_images/1811.png" />
+<img alt="../_images/1812.png" class="align-center" src="../_images/1812.png" />
 <ol class="arabic simple" start="19">
-<li>Go to the output folder once the export process finishes. You will have a
-subfolder with the present timestamp. Locate the <code class="docutils literal"><span class="pre">index.html</span></code> file inside
-it and open it in a browser. Click on any feature and look at the popup.
-You will notice that it looks a lot cleaner and informative.</li>
+<li><p class="first">Akses folder output ketika proses eksport selesai. Anda akan memiliki sebuah subfolder dengan waktu aktual. Cari lokasi file xxx dan buka dengan sebuah browser. Klik pada fitur apa saja dan lihat ke jendela pop-up. Anda akan melihat bahwa peta terlihat lebih bersih dan informatif.</p>
+</li>
 </ol>
-<img alt="../_images/199.png" class="align-center" src="../_images/199.png" />
+<img alt="../_images/1911.png" class="align-center" src="../_images/1911.png" />
 <ol class="arabic simple" start="20">
-<li>Another useful feature of the <code class="docutils literal"><span class="pre">qgis2leaf</span></code> plugin is the ability to
-specify a custom icon to use with the web map. This is accomplished by
-specifying the path to the custom icon in a field called <code class="docutils literal"><span class="pre">icon_exp</span></code>. We
-will create a new layer containing only the major airports and style using
-a custom SVG icon.  Locate the <span class="guilabel">Select features using an
-expression</span> tool from the toolbar.</li>
+<li><p class="first">Kegunaan lain dari plugin <code class="docutils literal"><span class="pre">qgis2leaf</span></code> adalah kemampuan untuk menentukan sebuah ikon kustom untuk digunakan dengan peta web. Ini terselesaikan dengan menentukan path atau alamat ke ikon kustom di sebuah field bernama <code class="docutils literal"><span class="pre">icon_exp</span></code>. Kita akan membuat sebuah layer baru hanya berisi airport besar dan style menggunakan sebuah ikon SVG kustom. Cari lokasi tool <span class="guilabel">Select features using an expression</span> dari toolbar.</p>
+</li>
 </ol>
-<img alt="../_images/206.png" class="align-center" src="../_images/206.png" />
+<img alt="../_images/207.png" class="align-center" src="../_images/207.png" />
 <ol class="arabic simple" start="21">
-<li>Enter the expression below and press <span class="guilabel">Select</span> to select all major
-airports.</li>
+<li><p class="first">Masukkan ekspresi dibawah dan tekan <span class="guilabel">Select</span> untuk memilih semua airport besar.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre>&quot;type_code&quot; = 3
 </pre></div>
 </div>
 <img alt="../_images/2112.png" class="align-center" src="../_images/2112.png" />
 <ol class="arabic simple" start="22">
-<li>Right-click the <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> airports and select <span class="guilabel">Save
-Selection As...</span>.</li>
+<li><p class="first">Klik kanan airport  <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> dan pilih <span class="guilabel">Save Selection As...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2210.png" class="align-center" src="../_images/2210.png" />
 <ol class="arabic simple" start="23">
-<li>In the <span class="guilabel">Save vector layer as...</span> dialog, name the output file as
-<code class="docutils literal"><span class="pre">major_airports.shp</span></code>. Check the <span class="guilabel">Add saved file to map</span> and
-click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Pada dialog <span class="guilabel">Save vector layer as...</span> , beri nama file output sebagai <code class="docutils literal"><span class="pre">major_airports.shp</span></code> . Beri tanda cek pada <span class="guilabel">Add saved file to map</span> dan <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../_images/238.png" class="align-center" src="../_images/238.png" />
+<img alt="../_images/2310.png" class="align-center" src="../_images/2310.png" />
 <ol class="arabic simple" start="24">
-<li>Once the <code class="docutils literal"><span class="pre">major_airports</span></code> layer is loaded in QGIS, right-click it and
-select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Ketika layer <code class="docutils literal"><span class="pre">major_airports</span></code> sudah terbuka di QGIS, klik kanan layernya dan pilih <span class="guilabel">Open Attribute Table</span>.</p>
+</li>
 </ol>
-<img alt="../_images/245.png" class="align-center" src="../_images/245.png" />
+<img alt="../_images/247.png" class="align-center" src="../_images/247.png" />
 <ol class="arabic simple" start="25">
-<li>In the attribute table dialog, click the <span class="guilabel">Toggle Editing</span> button.
-Once the layer is in editing mode, click the <span class="guilabel">Open Field
-Calculator</span> button.</li>
+<li><p class="first">Pada dialog attribut tabel, klik tombol <span class="guilabel">Toggle Editing</span> . Ketika layer berada dalam mode editing, klik tombol <span class="guilabel">Open Field Calculator</span> .</p>
+</li>
 </ol>
-<img alt="../_images/254.png" class="align-center" src="../_images/254.png" />
+<img alt="../_images/255.png" class="align-center" src="../_images/255.png" />
 <ol class="arabic simple" start="26">
-<li>In <span class="guilabel">Field Calculator</span> dialog, enter <code class="docutils literal"><span class="pre">icon_exp</span></code> as the
-<span class="guilabel">Output field name</span>. Make it a <span class="guilabel">Text (string)</span> type. In
-the <span class="guilabel">Expression</span> area, enter the following expression.</li>
+<li><p class="first">Pada dialog <span class="guilabel">Field Calculator</span> , masukkan <code class="docutils literal"><span class="pre">icon_exp</span></code> sebagai <span class="guilabel">Output field name</span> . Buat dalam tipe <span class="guilabel">Text (string)</span> . Pada area <span class="guilabel">Expression</span> , masukkan ekspresi berikut.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre>&#39;airport.svg&#39;
 </pre></div>
 </div>
-<img alt="../_images/264.png" class="align-center" src="../_images/264.png" />
+<img alt="../_images/265.png" class="align-center" src="../_images/265.png" />
 <ol class="arabic simple" start="27">
-<li>Save your edits by clicking the <span class="guilabel">Toggle Editing</span> button in the
-<span class="guilabel">Attribute Table</span>.</li>
+<li><p class="first">Simpan hasil edit dengan mengklik tombol <span class="guilabel">Toggle Editing</span> pada <span class="guilabel">Attribute Table</span>.</p>
+</li>
 </ol>
-<img alt="../_images/274.png" class="align-center" src="../_images/274.png" />
+<img alt="../_images/275.png" class="align-center" src="../_images/275.png" />
 <ol class="arabic simple" start="28">
-<li>Open the <code class="docutils literal"><span class="pre">qgis2leaf</span></code> plugin from <span class="menuselection">Web ‣ qgis2leaf ‣ Exports
-a QGIS Project to a working leaflet webmap</span>. Click <span class="guilabel">Get Layers</span>
-button to fetch both the layers from QGIS. There are many different pre-made tile layers
-availalbe for basemaps. In this map, we can try something different and load the <span class="guilabel">Stamen Watercolor</span> as the
-<span class="guilabel">Basemap</span>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Buka plugin <code class="docutils literal"><span class="pre">qgis2leaf</span></code> dari <span class="menuselection">Web ‣ qgis2leaf ‣ Exports a QGIS Project to a working leaflet webmap</span> . Klik tombol <span class="guilabel">Get Layers</span> untuk menarik kedua layer dari QGIS. Ada banyak layer yang sudah jadi tersedia sebagai Peta dasar atau basemap. Pada peta ini, kita dapat mencoba sesuatu yang berbeda dan membuka <span class="guilabel">Stamen Watercolor</span> sebagai guilabel:<cite>Basemap</cite> . Klik <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../_images/282.png" class="align-center" src="../_images/282.png" />
+<img alt="../_images/283.png" class="align-center" src="../_images/283.png" />
 <ol class="arabic simple" start="29">
-<li>If you remember we specified <code class="docutils literal"><span class="pre">airport.svg</span></code> as the icon for the airports.
-We need to add that icon manually to the output directory. QGIS comes with
-a large collection of icons. On Windows, these icons are located at
-<span class="menuselection">C: ‣ OSGEO4W64 ‣ apps ‣ qgis ‣ svg</span>. The path may
-differ depending on your platform and install type. Locate that directory
-and choose an icon you like. For our map, we can try the
-<code class="docutils literal"><span class="pre">amenity=airport.svg</span></code> icon located under <code class="docutils literal"><span class="pre">transport</span></code> category.</li>
+<li><p class="first">Jika anda ingat kita menentukan <code class="docutils literal"><span class="pre">airport.svg</span></code> sebagai ikon untuk airport. Kita perlu untuk menambah ikon tersebut secara manual ke direktori output. Qgis dilengkapi dengan koleksi besar dari ikon. Pada Windows, ikon ini berlokasi di <span class="menuselection">C: ‣ OSGEO4W64 ‣ apps ‣ qgis ‣ svg</span> . Path atau alamat mungkin berbeda bergantung pada platform dan tipe installan. Cari lokasi direktori tersebut dan pilih sebuah ikon yang anda minati. Untuk peta kita, kita dapat mencoba ikon <code class="docutils literal"><span class="pre">amenity=airport.svg</span></code> yang berlokasi di kategori <code class="docutils literal"><span class="pre">transport</span></code> .</p>
+</li>
 </ol>
-<img alt="../_images/293.png" class="align-center" src="../_images/293.png" />
+<img alt="../_images/294.png" class="align-center" src="../_images/294.png" />
 <ol class="arabic simple" start="30">
-<li>Copy and paste this icon in the output directory you had specified when exporting
-the map. Rename it as <code class="docutils literal"><span class="pre">airport.svg</span></code>.</li>
+<li><p class="first">Copy dan Paste ikon ini pada direktori putput yang sudah ditentukan saat mengekspor peta. Ganti nama dengan <code class="docutils literal"><span class="pre">airport.svg</span></code>.</p>
+</li>
 </ol>
 <img alt="../_images/303.png" class="align-center" src="../_images/303.png" />
 <ol class="arabic simple" start="31">
-<li>Now open the <code class="docutils literal"><span class="pre">index.html</span></code> file located in the folder. You will see a
-beautiful basemap with our custom icons for the major airports. Also notice
-the layer panel at top-right corner which has layer display control for
-both the layers.</li>
+<li><p class="first">Sekarang buka file <code class="docutils literal"><span class="pre">index.html</span></code> yang berlokasi di folder. Anda akan melihat sebuah peta dasar atau basemap yang indah denga ikon kustom kita untuk airport besar. Juga perhatikan panel layer pada sudut kanan atas yang memiliki kontrol tampilanlayer untuk kedua layer.</p>
+</li>
 </ol>
 <img alt="../_images/3110.png" class="align-center" src="../_images/3110.png" />
 <p>Hope this tutorial gives you a head start in creating web maps. Below is the
@@ -500,7 +436,7 @@ width="100%" height="600px"></iframe>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Feb 05, 2019.<br/>
+      Terakhir diperbarui pada Feb 20, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

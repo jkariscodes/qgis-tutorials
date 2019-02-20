@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Writing Python Scripts for Processing Framework &mdash; QGIS Tutorials and Tips</title>
+    <title>Menulis Skrip Pythin untuk Framework Pemrosessan &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -30,7 +30,7 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Running and Scheduling QGIS Processing Jobs" href="running_qgis_jobs.html" />
+    <link rel="next" title="Menjalankan dan Menjadwalkan Pekerjaan Pemrosesan QGIS" href="running_qgis_jobs.html" />
     <link rel="prev" title="Using Custom Python Expression Functions" href="custom_python_functions.html" />
 
 <meta charset='utf-8'>
@@ -103,10 +103,10 @@
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Membuat Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Melakukan Queries Spasial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analisa Tetangga Terdekat</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Data Raster menggunakan Poin atau Poligon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolasi Data Poin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Composer Atlas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Menggunakan QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="counting_vertices.html">Menghitung jumlah vertices pada sebuah Layer</a></li>
@@ -114,8 +114,8 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Memulai Pemrograman Phyton</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Building a Python Plugin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Using Custom Python Expression Functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Writing Python Scripts for Processing Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Menulis Skrip Pythin untuk Framework Pemrosessan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Menjalankan dan Menjadwalkan Pekerjaan Pemrosesan QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="find_neighbor_polygons.html">Menemukan Polygon Neighbor atau Tetangga pada Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
@@ -136,7 +136,7 @@
     </a>
   </li>
   <li>
-    <a href="running_qgis_jobs.html" title="Next Chapter: Running and Scheduling QGIS Processing Jobs"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Running and Sche... &raquo;</span>
+    <a href="running_qgis_jobs.html" title="Next Chapter: Menjalankan dan Menjadwalkan Pekerjaan Pemrosesan QGIS"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Menjalankan dan ... &raquo;</span>
     </a>
   </li>
               
@@ -209,7 +209,7 @@
       
 
   <div class="section" id="writing-python-scripts-for-processing-framework">
-<h1>Writing Python Scripts for Processing Framework<a class="headerlink" href="#writing-python-scripts-for-processing-framework" title="Link permanen untuk headline ini">¶</a></h1>
+<h1>Menulis Skrip Pythin untuk Framework Pemrosessan<a class="headerlink" href="#writing-python-scripts-for-processing-framework" title="Link permanen untuk headline ini">¶</a></h1>
 <p>One can write standalone pyqgis scripts that can be run via the Python Console
 in QGIS. With a few tweaks, you can make your standalone scripts run via the
 Processing Framework. This has several advantages. First, taking user input and
@@ -219,55 +219,36 @@ allows it to be part of any Processing Model or be run as a Batch job with
 multiple inputs. This tutorial will show how to write a custom python script
 that can be part of the Processing Framework in QGIS.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
-<p>Our script will perform a dissolve operation based on a field chosen by the
-user. It will also sum up values of another field for the dissolved features.
-In the example, we will dissolve a world shapefile based on a <code class="docutils literal"><span class="pre">SUBREGION</span></code>
-attribute and sum up <code class="docutils literal"><span class="pre">POP_EST</span></code> field to calculate total population in the
-dissolved region.</p>
+<h2>Tinjauan Tugas<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
+<p>Skript kita akan melakukan sebuah operasi dissolve berdasarkan sebuah field yang dipilih oleh user. Ini juga akan menjumlahkan nilai dari field lain untuk fitur yang terdissolve atau larut. Pada contoh ini, kita akan mendissolve sebuah shapefile dunia berdasarkan attribut <code class="docutils literal"><span class="pre">SUBREGION</span></code> dan menjumlahkan field  <code class="docutils literal"><span class="pre">POP_EST</span></code> untuk menghitung total populasi pada wilayah yang terdissolve.</p>
 <div class="admonition note">
 <p class="first admonition-title">Catatan</p>
-<p class="last">If you are looking to do a Dissolve operation along with Statistics, you can
-use the excellent <code class="docutils literal"><span class="pre">DissolveWithStats</span></code> plugin. This script is a
-demonstration how to implement similar functionality via a Processing
-script.</p>
+<p class="last">Jika anda mencoba untuk melakukan operasi dissolve dengan statistiknya, anda dapat menggunakan plugin <code class="docutils literal"><span class="pre">DissolveWithStats</span></code> . Skrip ini adalah sebuah demonstrasi bagaimana mengimplementasikan fungsi serupa melalui sebuah skript processing.</p>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Link permanen untuk headline ini">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Countries</a>
-dataset from Natural Earth.</p>
-<p>Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - countries shapefile.</a>.</p>
-<p>Data Source <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
-<p>For convenience, you may directly download a copy of the dataset from the links
-below:</p>
+<h2>Mendapatkan data<a class="headerlink" href="#get-the-data" title="Link permanen untuk headline ini">¶</a></h2>
+<p>Kita akan menggunakan dataset <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Countries</a> dari Natural Earth.</p>
+<p>Unduh  <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - countries shapefile.</a>.</p>
+<p>Sumber Data: <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>Untuk kenyamanan, anda bisa secara langsung mengunduh sebuah kopi dari kedua dataset dari link di bawah:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">ne_10_admin_0_countries.zip</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link permanen untuk headline ini">¶</a></h2>
+<h2>Prosedur<a class="headerlink" href="#procedure" title="Link permanen untuk headline ini">¶</a></h2>
 <ol class="arabic simple">
-<li>Open QGIS and go to <span class="menuselection">Layers ‣ Add Vector ‣ Add Vector
-Layer</span>. Browse to the downloaded <code class="docutils literal"><span class="pre">ne_10_admin_0_countries.zip</span></code> file and
-load the <code class="docutils literal"><span class="pre">ne_10_admin_0_countries</span></code> layer. Go to <span class="menuselection">Processing
-‣ Toolbox</span>.</li>
+<li><p class="first">Buka QGIS dan akses <span class="menuselection">Layers ‣ Add Vector ‣ Add Vector Layer</span> . Jelajahi file unduhan <code class="docutils literal"><span class="pre">ne_10_admin_0_countries.zip</span></code> dan buka layer <code class="docutils literal"><span class="pre">ne_10_admin_0_countries</span></code> . Akses <span class="menuselection">Processing ‣ Toolbox</span>.</p>
+</li>
 </ol>
-<img alt="../_images/1109.png" class="align-center" src="../_images/1109.png" />
+<img alt="../_images/1128.png" class="align-center" src="../_images/1128.png" />
 <ol class="arabic simple" start="2">
-<li>Expand the <span class="guilabel">Scripts</span> group in the <span class="guilabel">Processing Toolbox</span>
-and select <span class="guilabel">Create a new script</span>.</li>
+<li><p class="first">Telusuri grup <span class="guilabel">Scripts</span> pada <span class="guilabel">Processing Toolbox</span>  dan pilih <span class="guilabel">Create a new script</span>.</p>
+</li>
 </ol>
-<img alt="../_images/270.png" class="align-center" src="../_images/270.png" />
+<img alt="../_images/288.png" class="align-center" src="../_images/288.png" />
 <ol class="arabic simple" start="3">
-<li>For a python script to be recognized as a Processing script, the beginning
-of the script must be the specifications of the input and outputs. This will
-be used to construct the user interface to run the script. You can learn
-more about the format of these lines from <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/scripts.html">QGIS Processing Documentation</a>.
-Enter the following lines in the <span class="guilabel">Script editor</span>. Here we are
-specifying 3 user inputs: <code class="docutils literal"><span class="pre">dissolve_layer</span></code>, <code class="docutils literal"><span class="pre">dissolve_field</span></code> and
-<code class="docutils literal"><span class="pre">sum_field</span></code>. Note that we are adding <code class="docutils literal"><span class="pre">dissolve_layer</span></code> after both the
-field input definitions. This means that input will be pre-populated with
-choice of fields from the <code class="docutils literal"><span class="pre">dissolve_layer</span></code>. We also specify the
-<code class="docutils literal"><span class="pre">output_layer</span></code> as the output vector layer. Click <span class="guilabel">Save</span> button.</li>
+<li><p class="first">Untuk sebuah skript python agar bisa dikenal sebagai skrip processing, permulaan skrip adalah spesifikasi dari indput dan output. Ini akan digunakan untuk mengkonstruksi user interface untuk menjalankan skript. Anda dapat belajar lebih banyak tentang format dari hal ini dari <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/scripts.html">QGIS Processing Documentation</a> . Masukkan lines berikut pada <span class="guilabel">Script editor</span> . Disini kita menspesifikasi 3 input dari user: <code class="docutils literal"><span class="pre">dissolve_layer</span></code>, <code class="docutils literal"><span class="pre">dissolve_field</span></code> dan <code class="docutils literal"><span class="pre">sum_field</span></code> . Perhatikan bahwa kita menambahkan <code class="docutils literal"><span class="pre">dissolve_layer</span></code> setelah kedua field memasukkan definisi. Ini berarti bahwa input akan semacam dikumpulkan dengan pilihan field dari <code class="docutils literal"><span class="pre">dissolve_layer</span></code> . Kita juga akan menentukan <code class="docutils literal"><span class="pre">output_layer</span></code> sebagai layer output. Klik tombol <span class="guilabel">Save</span></p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre>##dissolve_layer=vector
 ##dissolve_field=field dissolve_layer
@@ -275,24 +256,24 @@ choice of fields from the <code class="docutils literal"><span class="pre">disso
 ##output_layer=output vector
 </pre></div>
 </div>
-<img alt="../_images/338.png" class="align-center" src="../_images/338.png" />
+<img alt="../_images/339.png" class="align-center" src="../_images/339.png" />
 <ol class="arabic simple" start="4">
 <li>Name the script <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> and save it at the default location
 under <span class="menuselection">.qgis2 ‣ processing ‣ scripts</span> folder.</li>
 </ol>
-<img alt="../_images/427.png" class="align-center" src="../_images/427.png" />
+<img alt="../_images/428.png" class="align-center" src="../_images/428.png" />
 <ol class="arabic simple" start="5">
 <li>Back in the <span class="guilabel">Script editor</span>, click <span class="guilabel">Run algorithm</span>
 button to preview the user interface.</li>
 </ol>
-<img alt="../_images/528.png" class="align-center" src="../_images/528.png" />
+<img alt="../_images/529.png" class="align-center" src="../_images/529.png" />
 <ol class="arabic simple" start="6">
 <li>You can see that just by adding a few lines, we have a nice user interface
 for the user to specify the inputs. It is also consistent with all other
 Processing algorithms, so there is no learning curve involved in using your
 custom algorithm.</li>
 </ol>
-<img alt="../_images/626.png" class="align-center" src="../_images/626.png" />
+<img alt="../_images/627.png" class="align-center" src="../_images/627.png" />
 <ol class="arabic simple" start="7">
 <li>In the <span class="guilabel">Script editor</span>, enter the following code. You will notice
 that we are using some special methods such as <code class="docutils literal"><span class="pre">processing.getObject()</span></code>
@@ -322,7 +303,7 @@ to get familiar with the syntax.</p>
 <span class="k">print</span> <span class="n">unique_values</span>
 </pre></div>
 </div>
-<img alt="../_images/725.png" class="align-center" src="../_images/725.png" />
+<img alt="../_images/726.png" class="align-center" src="../_images/726.png" />
 <ol class="arabic simple" start="8">
 <li>While writing code, it is important to be able to see errors and debug your
 code. Your processing scripts can be debugged easily via the built-in Python
@@ -330,24 +311,24 @@ Console. In the main QGIS window, go to <span class="menuselection">Plugins ‣ 
 Console</span>. Once the console is open, find your script in the
 <span class="guilabel">Processing Toolbox</span> and double-click it to launch it.</li>
 </ol>
-<img alt="../_images/824.png" class="align-center" src="../_images/824.png" />
+<img alt="../_images/825.png" class="align-center" src="../_images/825.png" />
 <ol class="arabic simple" start="9">
 <li>Select <code class="docutils literal"><span class="pre">SUBREGION</span></code> as the <span class="guilabel">dissolve field</span>. You may choose any
 field as the <span class="guilabel">sum field</span> as the script doesn&#8217;t have any code yet
 to deal with it. Click <span class="guilabel">Run</span>.</li>
 </ol>
-<img alt="../_images/922.png" class="align-center" src="../_images/922.png" />
+<img alt="../_images/923.png" class="align-center" src="../_images/923.png" />
 <ol class="arabic simple" start="10">
 <li>You will see an error dialog. This is expected since the script is
 incomplete and doesn&#8217;t generate any output yet.</li>
 </ol>
-<img alt="../_images/1023.png" class="align-center" src="../_images/1023.png" />
+<img alt="../_images/1024.png" class="align-center" src="../_images/1024.png" />
 <ol class="arabic simple" start="11">
 <li>In the main QGIS windows, you will see the debug output from the script
 printed in the console. This is useful way to add print statements and see
 intermediate variable values.</li>
 </ol>
-<img alt="../_images/1126.png" class="align-center" src="../_images/1126.png" />
+<img alt="../_images/1129.png" class="align-center" src="../_images/1129.png" />
 <ol class="arabic simple" start="12">
 <li>Let&#8217;s go back to editing the script by right-clicking the script and select
 <span class="guilabel">Edit script</span>.</li>
@@ -384,7 +365,7 @@ existing dissolve algorithm in QGIS via processing using
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1321.png" class="align-center" src="../_images/1321.png" />
+<img alt="../_images/1322.png" class="align-center" src="../_images/1322.png" />
 <ol class="arabic simple" start="14">
 <li>Run the algorithm by selecting <code class="docutils literal"><span class="pre">SUBREGION</span></code> as the <span class="guilabel">dissolve
 field</span> and <code class="docutils literal"><span class="pre">POP_EST</span></code> as the <span class="guilabel">sum field</span>. Click <span class="guilabel">Run</span>.</li>
@@ -394,13 +375,13 @@ field</span> and <code class="docutils literal"><span class="pre">POP_EST</span>
 <p class="last">The processing algorithm may take upto 10 minutes to finish depending on
 your system.</p>
 </div>
-<img alt="../_images/1420.png" class="align-center" src="../_images/1420.png" />
+<img alt="../_images/1421.png" class="align-center" src="../_images/1421.png" />
 <ol class="arabic simple" start="15">
 <li>Once the processing finishes, you can use the <span class="guilabel">Identify</span> tool and
 click on any polygon. You will see the newly added <code class="docutils literal"><span class="pre">SUM</span></code> field with the
 <code class="docutils literal"><span class="pre">POP_EST</span></code> values from all original polygons added up.</li>
 </ol>
-<img alt="../_images/1519.png" class="align-center" src="../_images/1519.png" />
+<img alt="../_images/1520.png" class="align-center" src="../_images/1520.png" />
 <ol class="arabic simple" start="16">
 <li>You will note that all other fields in the output are still present. When
 you dissolve many features to create a single feature, it doesn&#8217;t make
@@ -419,7 +400,7 @@ original layer. Click <span class="guilabel">Save</span> button and close the wi
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1618.png" class="align-center" src="../_images/1618.png" />
+<img alt="../_images/1619.png" class="align-center" src="../_images/1619.png" />
 <ol class="arabic simple" start="17">
 <li>One of the hidden features of the Processing Framework is that all
 algorithms can work on selected features of a layer. This is very helpful
@@ -436,16 +417,16 @@ America and click <span class="guilabel">Select</span>.</li>
 <div class="highlight-none"><div class="highlight"><pre>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
 </pre></div>
 </div>
-<img alt="../_images/1817.png" class="align-center" src="../_images/1817.png" />
+<img alt="../_images/1818.png" class="align-center" src="../_images/1818.png" />
 <ol class="arabic simple" start="19">
 <li>You will see the selected features highlighted in yellow. Right-click the
 <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> script and select <span class="guilabel">Execute</span>.</li>
 </ol>
-<img alt="../_images/1915.png" class="align-center" src="../_images/1915.png" />
+<img alt="../_images/1917.png" class="align-center" src="../_images/1917.png" />
 <ol class="arabic simple" start="20">
 <li>Select the inputs as before and click <span class="guilabel">Run</span>.</li>
 </ol>
-<img alt="../_images/2012.png" class="align-center" src="../_images/2012.png" />
+<img alt="../_images/2013.png" class="align-center" src="../_images/2013.png" />
 <ol class="arabic simple" start="22">
 <li>A new <code class="docutils literal"><span class="pre">output</span> <span class="pre">layer</span></code> will be added to QGIS. This will contain dissolved
 geometries only from the selected features in the input layer. You will
@@ -464,7 +445,7 @@ button.</li>
 detailed help will be available to all users of your script in the
 <span class="guilabel">Help</span> tab when they launch the algorithm.</li>
 </ol>
-<img alt="../_images/2314.png" class="align-center" src="../_images/2314.png" />
+<img alt="../_images/2315.png" class="align-center" src="../_images/2315.png" />
 <p>Below is the complete script for reference. You may modify it to suit your
 needs.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">##dissolve_layer=vector</span>
@@ -540,7 +521,7 @@ needs.</p>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Feb 05, 2019.<br/>
+      Terakhir diperbarui pada Feb 20, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

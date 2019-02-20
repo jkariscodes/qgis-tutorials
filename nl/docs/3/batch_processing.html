@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Batch Processing using Processing Framework (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Massa verwerken met behulp van Framework Processing (QGIS 3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,7 +30,7 @@
     <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
-    <link rel="next" title="Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen" href="../processing_graphical_modeler.html" />
+    <link rel="next" title="Automating Complex Workflows using Processing Modeler (QGIS3)" href="processing_graphical_modeler.html" />
     <link rel="prev" title="Interpoleren van puntgegevens" href="../interpolating_point_data.html" />
 
 <meta charset='utf-8'>
@@ -105,8 +105,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../nearest_neighbor_analysis.html">Analyse Nearest Neighbor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Batch Processing using Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../automating_map_creation.html">Maken van kaarten automatiseren met Atlas van Printvormgeving</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../counting_vertices.html">Aantal punten in een laag tellen</a></li>
@@ -122,7 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../creating_basemaps_with_qtiles.html">Basiskaarten maken met QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../learning_resources.html">QGIS bronnen om te leren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../credits.html">Gebruik van gegevens</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS2)</a></li>
 </ul>
 </ul>
 </li>
@@ -136,7 +136,7 @@
     </a>
   </li>
   <li>
-    <a href="../processing_graphical_modeler.html" title="Next Chapter: Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Complexe werkstr... &raquo;</span>
+    <a href="processing_graphical_modeler.html" title="Next Chapter: Automating Complex Workflows using Processing Modeler (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Automating Compl... &raquo;</span>
     </a>
   </li>
               
@@ -209,177 +209,205 @@
       
 
   <div class="section" id="batch-processing-using-processing-framework-qgis3">
-<h1>Batch Processing using Processing Framework (QGIS3)<a class="headerlink" href="#batch-processing-using-processing-framework-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>The <em>Processing Framework</em> in QGIS provides an environment within
-QGIS to run native and third-party algorithms for processing data. It contains
-a nice batch processing interface that allows one to execute an algorithm on
-several layers easily. Batch processing is a useful tool that can save manual
-effort and help you automate repetitive tasks.</p>
+<h1>Massa verwerken met behulp van Framework Processing (QGIS 3)<a class="headerlink" href="#batch-processing-using-processing-framework-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>Het <em>Processing Framework</em> in QGIS verschaft een omgeving binnen QGIS om eigen en algoritmes van derde partijen uit te voeren om gegevens te verwerken. Het bevat een leuke interface voor massaverwerking die het mogelijk maakt om eenvoudig een algoritme op meerdere lagen uit te voeren. Massa verwerken is een handig programma dat veel handwerk kan besparen en u helpt uw herhalende taken te automatiseren.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will take several global vector layers and clip them to the extent of Africa
-in a single batch command.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen een aantal globale vectorlagen nemen en die verkleinen tot het bereik van Afrika in één enkele massaopdracht.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
-<li>Create a <strong>Filter</strong> to remove unwanted features from a layer without creating a new layer.</li>
-<li>Merge multiple layers into a single Geopackage file.</li>
+<li><p class="first">Een <strong>Filter</strong> maken om ongewenste objecten uit een laag te verwijderen zonder een nieuwe laag te maken.</p>
+</li>
+<li><p class="first">Meerdere lagen samenvoegen tot één bestand voor Geopackage.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> has several global vector
-layers. Download the following layers</p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> heeft verschillende globale vectorlagen. Download de volgende lagen</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Countries</a></li>
 <li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads.zip">Railroads</a></li>
 <li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_ports.zip">Ports</a></li>
 <li><a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_urban_areas.zip">Urban Areas</a></li>
 </ul>
-<p>For convenience, you may directly download a geopackage containing the above layers from below:</p>
+<p>Voor het gemak kunt u direct een Geopackage downloaden dat bovenstaande lagen bevat vanaf de link hieronder:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_global.gpkg">ne_global.gpkg</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>Gegevensbron: <a class="reference internal" href="../credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal"><span class="pre">zip</span></code> or the <code class="docutils literal"><span class="pre">gpkg</span></code>  entry and select the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer. Drag the layer to the canvas.</li>
+<li><p class="first">Zoek, in het paneel QGIS Browser, de map waar u uw gegevens hebt gedownload. Vergroot het item <code class="docutils literal"><span class="pre">zip</span></code> of <code class="docutils literal"><span class="pre">gpkg</span></code> en selecteer de laag <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code>. Sleep de laag naar het kaartvenster.</p>
+</li>
 </ol>
 <img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
 <ol class="arabic simple" start="2">
-<li>You will see the layer loaded in the Layers panel. As our task is to clip the global layers to the boundary of Africa, we need to first prepare a layer containg features only from that continent. Let&#8217;s look at the attribute table to see what column can be used to query features belonging to a particular continent. Right-click the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">U zult de laag zie die is geladen in het paneel Lagen. We dienen eerst een laag voor te bereiden die de alleen de objecten bevat van dat continent, omdat onze taak is om de globale lagen te vclippen tot de grenzen van Afrika. Laten we eens naar de attributentabel kiojken om te zien welke kolom gebruikt kan worden om objecten te bevragen die tot een bepaald continent behoren. Klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> en selecteer <span class="guilabel">Attributentabel openen</span>.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">Tip: You can also use the keyboard shortcut <code class="kbd docutils literal"><span class="pre">F6</span></code> to open the attribute table of the selected layer.</p>
+<p class="last">Tip: U kunt ook de sneltoets <code class="kbd docutils literal"><span class="pre">F6</span></code> gebruiken om de attributentabel van de geselecteerde laag te openen.</p>
 </div>
 <img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">Attribute Table</span> window, as you scroll horizontally, you will see that the data contains an attribute called <strong>CONTINENT</strong>. We can use this attribute to filter features.</li>
+<li><p class="first">Wanneer u horizontaal scrollt in het venster <span class="guilabel">Attributentabel</span>, zult u zien dat de gegevens een attribuut bevatten, genaamd <strong>CONTINENT</strong>. We kunnen dat attribuut gebruiken om objecten te filteren.</p>
+</li>
 </ol>
 <img alt="../../_images/3.png" class="align-center" src="../../_images/3.png" />
 <ol class="arabic simple" start="4">
-<li>Close the attribute table and return to the main QGIS window. Right-click the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer and select <span class="guilabel">Filter</span>.</li>
+<li><p class="first">Sluit de attributentabel en ga terug naar het hoofdvenster van QGIS. Klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> en selecteer <span class="guilabel">Filteren</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/4.png" class="align-center" src="../../_images/4.png" />
 <ol class="arabic simple" start="5">
-<li>In the <span class="guilabel">Query Builder</span> window, select the <strong>CONTINENT</strong> field and click <span class="guilabel">Sample</span>. This will populate the <span class="guilabel">Values</span> panel with the a subset of values of that attribute from features. This step is useful to get an understanding of what type of values are present in your dataset. We can see that our dataset contains contains a value called <strong>Africa</strong> among others.</li>
+<li><p class="first">Selecteer, in het venster <span class="guilabel">Querybouwer</span>, het veld <strong>CONTINENT</strong> en klik op <span class="guilabel">Voorbeeld</span>. Dit zal het paneel <span class="guilabel">Waarden</span> vullen met een subset van waarden van dat attribuut uit objecten. Deze stap is nuttig om te begrijpen welke typen waarden aanwezig zijn in uw gegevensset. We zien dat onze gegevensset een waarde, genaamd <strong>Africa</strong>, bevat, naast andere.</p>
+</li>
 </ol>
 <img alt="../../_images/5.png" class="align-center" src="../../_images/5.png" />
 <ol class="arabic simple" start="6">
-<li>Now enter the expression in the <span class="guilabel">Provider specific filter expression</span> textbox. You can click the <strong>CONTINENT</strong> label, followed by <span class="guilabel">=</span> button and <strong>Africa</strong> label. Or you can type the following expression in the textbox. Click <span class="guilabel">OK</span> after entering the expression.</li>
+<li><p class="first">Voer nu de expressie in in het tekstvak <span class="guilabel">Provider-specifieke filter-expressie</span>. U kunt klikken op het label <strong>CONTINENT</strong> gevolgd door de knop <span class="guilabel">=</span> en het label <strong>Africa</strong>. Of u kunt de volledige expressie in het tekstvak typen. Klik op <span class="guilabel">OK</span> na het invoeren van de expressie.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre>&quot;CONTINENT&quot; = &#39;Africa&#39;
 </pre></div>
 </div>
 <img alt="../../_images/6.png" class="align-center" src="../../_images/6.png" />
 <ol class="arabic simple" start="7">
-<li>You will see that the map canvas now contains only the countries from Africa. Note the filter icon next to the layer name indicating that that layer a filter applied to it. If you wanted to see and use all the features from the layer, you can click the filter icon and clear the expression. For now, we will keep the filter so we can clip other layers to Africa.</li>
+<li><p class="first">U zult zien dat het kaartvenster nu alleen de landen van Afrika bevat. Merk het filterpictogram op dat naast de laagnaam staat war aangeeft dat op die laag een filter is toegepast. U kunt kliken op het filterpictogram en de expressie leegmaken, als u alle objecten van de laag wilde zien en gebruiken. Voor nu zullen we het filter behouden zodat we andere lagen naar Afrika kunnen clippen.</p>
+</li>
 </ol>
 <img alt="../../_images/7.png" class="align-center" src="../../_images/7.png" />
 <ol class="arabic simple" start="8">
-<li>We are now ready to run the batch process to clip the layers. Locate the natural earth global layers <code class="docutils literal"><span class="pre">ne_10m_railroads</span></code>, <code class="docutils literal"><span class="pre">ne_10m_ports</span></code> and <code class="docutils literal"><span class="pre">ne_10m_urban_areas</span></code> in the <span class="guilabel">QGIS Browser</span> panel. Hold the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and click each layer to select them. Once selected, drag them to the canvas.</li>
+<li><p class="first">We zijn nu klaar om het proces van masaverwerking uit te voeren om de lagen te clippen. Zoek de globale lagen van Natural Earth <code class="docutils literal"><span class="pre">ne_10m_railroads</span></code>, <code class="docutils literal"><span class="pre">ne_10m_ports</span></code> en <code class="docutils literal"><span class="pre">ne_10m_urban_areas</span></code> op in het paneel <span class="guilabel">QGIS Browser</span>. Houd de <code class="kbd docutils literal"><span class="pre">Ctrl</span></code>-toets ingedrukt en klik op elke laag om die te selecteren. Sleep ze, eenmaal geselecteerd, naar het kaartvenster.</p>
+</li>
 </ol>
 <img alt="../../_images/8.png" class="align-center" src="../../_images/8.png" />
 <ol class="arabic simple" start="9">
-<li>Once the layers are loaded, you will notice that they are global layers and have features spanning all the countries.  Now, it&#8217;s time to start our batch clip process to clip these layers to Africa. Open <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">Als de lagen eenmaal zijn geladen zult u zien dat zij globale lagen zijn en objecten hebben die in alle landen voorkomen. Nu is het tijd om ons proces voor massaverwerking voor clippen uit te voeren om deze lagen te clippen tot alleen Afrika. Open <span class="menuselection">Processing ‣ Toolbox</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/9.png" class="align-center" src="../../_images/9.png" />
 <ol class="arabic simple" start="10">
-<li>Browse all available algorithms and find the <span class="guilabel">Clip</span> tool from <span class="menuselection">Vector overlay ‣ Clip</span>. You may also use the <span class="guilabel">Search</span> box to easily find the algorithm as well.</li>
+<li><p class="first">Blader door alle beschikbare algoritmen en zoek naar het gereedschap <span class="guilabel">Clippen</span> via <span class="menuselection">Vector op elkaar leggen ‣ Clippen</span>. U kunt ook het vak <span class="guilabel">Zoeken...</span> gebruiken om eenvoudig het algoritme te vinden.</p>
+</li>
 </ol>
 <img alt="../../_images/10.png" class="align-center" src="../../_images/10.png" />
 <ol class="arabic simple" start="11">
-<li>Right-click the <span class="guilabel">Clip</span> algorithm and select <span class="guilabel">Execute as Batch Process</span>.</li>
+<li><p class="first">Klik met rechts op het algoritme <span class="guilabel">Clippen</span> en selecteer <span class="guilabel">Uitvoeren als batch-proces</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/11.png" class="align-center" src="../../_images/11.png" />
 <ol class="arabic simple" start="12">
-<li>In the <span class="guilabel">Batch Processing</span> dialog, the first tab is <span class="guilabel">Parameters</span> where we define our inputs. Each row in the table represents 1 processing task. Click <span class="guilabel">Add row</span> button to add a new row. As our task involves 3 layers, add 3 rows.</li>
+<li><p class="first">In het dialoogvenster <span class="guilabel">Batch Processing</span>, is de eerste tab <span class="guilabel">Parameters</span> waar we onze invoer definiëren. Elke regel in de tabel vertegenwoordigt 1 taak voor de verwerking. Klik op de knop <span class="guilabel">Regel toevoegen</span> om een nieuwe regel toe te voegen. Voeg drie regels toe omdat onze taak 3 lagen omvat.</p>
+</li>
 </ol>
 <img alt="../../_images/12.png" class="align-center" src="../../_images/12.png" />
 <ol class="arabic simple" start="13">
-<li>Click the <span class="guilabel">...</span> next to the first row in the <span class="guilabel">Input layers</span> column. Select <span class="guilabel">Select from Open Layers</span>.</li>
+<li><p class="first">Klik op <span class="guilabel">...</span> naast de eerste regel in de kolom <span class="guilabel">Invoerlaag</span>. Selecteer <span class="guilabel">Uit geopende kaartlagen selecteren</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
 <ol class="arabic simple" start="14">
-<li>In the <span class="guilabel">Multiple selection</span> dialog, check the 3 layers that we want to clip and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">Mervoudige selecties</span>, de 3 lagen die we willen clippen en klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/14.png" class="align-center" src="../../_images/14.png" />
 <ol class="arabic simple" start="15">
-<li>You will notice that the <span class="guilabel">Input layer</span> columns will be auto-populated with all layers you had selected. Next, we need to select the layer containing the boundary to clip our input layers. Click the <span class="guilabel">...</span> button for the first row under <span class="guilabel">Overlay layer</span> column and select <span class="guilabel">Select form Open Layers</span>.</li>
+<li><p class="first">U zult zien dat de kolom :<cite>Invoerlaag</cite> automatisch is gevuld met alle lagen die u had geselecteerd. U kunt de knop <span class="guilabel">Add row</span> gebruiken om meer rijen toe te voegen en meer invoer te definiëren. Vervolgens moeten we de laag selecteren die de grens bevat om onze invoerlagen te clippen. Klik op de knop <span class="guilabel">...</span> voor de eerste regel in de kolom <span class="guilabel">Overleglaag</span> en selecteer <span class="guilabel">Uit geopende kaartlagen selecteren</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
 <ol class="arabic simple" start="16">
-<li>In the <span class="guilabel">Multiple selection</span> dialog, check <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">Meervoudige selecties</span>, <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> en klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
 <ol class="arabic simple" start="17">
-<li>Since the clip layer is the same for all our inputs, a handy shortcut is to double-click the column header <span class="guilabel">Overlay layer</span> and the same layer will be auto-filled for all the rows.</li>
+<li><p class="first">Een handige sneltoets is, omdat de te clippen laag dezelfde is voor alle invoerlagen, om dubbel te klikken op de kolomkop <span class="guilabel">Overleglaag</span> en dezelfde laag zal automatisch wordne gevuld voor alle regels.</p>
+</li>
 </ol>
 <img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
 <ol class="arabic simple" start="18">
-<li>Next, we need to define our outputs.  Click the <span class="guilabel">...</span> buton next to the first row in the <span class="guilabel">Clipped</span> column.</li>
+<li><p class="first">Vervolgens dienen we onze uitvoer te definiëren. Klik op de knop <span class="guilabel">...</span> naast de eerste regel in de kolom <span class="guilabel">Geclipt</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
 <ol class="arabic simple" start="19">
-<li>Browse the the directory where you want your output layers. Type the filename as <code class="docutils literal"><span class="pre">clipped_</span></code> and click <span class="guilabel">Save</span>.</li>
+<li><p class="first">Blader naar de map waar u uw uitvoerlagen wilt opslaan. Typ de bestandsnaam in als <code class="docutils literal"><span class="pre">clipped_</span></code> en klik op <span class="guilabel">Opslaan</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/19.png" class="align-center" src="../../_images/19.png" />
 <ol class="arabic simple" start="20">
-<li>You will see a new <span class="guilabel">Autofill settings</span> dialog pop up. Select <code class="docutils literal"><span class="pre">Fill</span> <span class="pre">with</span> <span class="pre">parameter</span> <span class="pre">values</span></code> as the <span class="guilabel">Autofill mode</span>. Select <code class="docutils literal"><span class="pre">Input</span> <span class="pre">layer</span></code> as the <span class="guilabel">Parameter to use</span>. This setting will add the input file name to the output along with the specified <code class="docutils literal"><span class="pre">clipped_</span></code> filename. This is important to ensure all the output files have unique names and they do not overwrite each other.</li>
+<li><p class="first">U zult een nieuw dialoogvenster <span class="guilabel">Instelling automatisch vullen</span> zien verschijnen. Selecteer <code class="docutils literal"><span class="pre">Vullen</span> <span class="pre">met</span> <span class="pre">parameterwaarden</span></code> als de <span class="guilabel">Modus Automatisch vullen</span>. Selecteer <code class="docutils literal"><span class="pre">Invoerlaag</span></code> als de <span class="guilabel">Parameter om te gebruiken</span>. Deze instelling zal de naam van het invoerbestand toevoegen aan het uitvoerbestand samen met het gespecificeerde bestandsnaam <code class="docutils literal"><span class="pre">clipped_</span></code>. Dit is belangrijk om er voor te zorgen dat alle uitvoerbestanden unieke namen hebben en zij elkaar niet overschrijven.</p>
+</li>
 </ol>
 <img alt="../../_images/20.png" class="align-center" src="../../_images/20.png" />
 <ol class="arabic simple" start="21">
-<li>Now we are ready to start the batch procesing. Make sure to check <span class="guilabel">Load layers on completion</span> and click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Nu kunnen we het proces van massa-verwerking starten. Zorg er voor dat <span class="guilabel">Uitvoerbestand openen na uitvoeren algoritme</span> is geselecteerd en klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/21.png" class="align-center" src="../../_images/21.png" />
 <ol class="arabic simple" start="22">
-<li>The clip algorithm will run for each of the inputs and create output files are we have specified. Once the batch process finishes, click <span class="guilabel">Close</span> to return to QGIS.</li>
+<li><p class="first">Het algoritme clippen zal worden uitgevoerd voor elk van de invoerbestanden en de uitvoerbestanden maken die we hebben gespecificeerd. Klik op <span class="guilabel">Sluiten</span> om terug te keren naar QGIS als het proces voor massaverwerking is voltooid.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">Tip: QGIS can now run Processing tasks in the background without blocking the user interface. So if your batch process is taking long, you can close the dialog and continue to work on other tasks in QGIS while the process keeps running in the background.</p>
+<p class="last">Tip: QGIS kan nu taken van Processing op de achtergrond uitvoeren zonder de gebrukersinterface af te dekken. Als uw proces voor massverwerking dus lang duurt kunt u het dialoogvenster sluiten en doorgaan met werken aan andere taken in QGIS terwijl het proces uitgevoerd blijft worden op de achtergrond.</p>
 </div>
 <img alt="../../_images/22.png" class="align-center" src="../../_images/22.png" />
 <ol class="arabic simple" start="23">
-<li>Back in the main QGIS window, you will see the layers added to QGIS canvas. As you will notice, all the global layers are properly clipped to the continent boundary that we had specified.</li>
+<li><p class="first">Terug in het hoofdvenster van QGIS zult u zien dat de lagen zijn toegevoegd aan het kaartvenster van QGIS. Zoals u zult zien zijn alle globale lagen netjes verkleind tot de grens van het continent dat we hadden gespecificeerd.</p>
+</li>
 </ol>
 <img alt="../../_images/23.png" class="align-center" src="../../_images/23.png" />
 <ol class="arabic simple" start="24">
-<li>We have accomplished the task of clipping multiple layers in a batch. But QGIS3 has another handy feature that will help you save and deliver the result in a more efficient way. If you wanted to deliver the clipped layers to someone, you would zip the individual files outside of QGIS. A better option to to package the output layers in a single Geopackage. In the <span class="guilabel">QGIS Browser</span>, locate the clipped output layers. You may have to click the <span class="guilabel">Refresh</span> button to see the newly added files.</li>
+<li><p class="first">We hebben de taak van het clippen van meerdere lagen in massa volbracht. Maar QGIS3 heeft een andere nuttige mogelijkheid die u zal helpen het resultaat op een meer efficiënte manier op te slaan en af te leveren. Als u de geclipte lagen wilde aflveren aan iemand zou u de individuele bestanden waarschijnlijk buiten QGIS inpakken (zippen). Een betere optie is im de uitvoerbestanden te verpakken in één enkel bestand voor Geopackage. In de <span class="guilabel">QGIS Browser</span>, zoek de geclipte uitvoerlagen op. U moet misschien op de knop <span class="guilabel">Bijwerken</span> drukken op de nieuw toegvoegde bestanden te kunnen zien.</p>
+</li>
 </ol>
 <img alt="../../_images/24.png" class="align-center" src="../../_images/24.png" />
 <ol class="arabic simple" start="25">
-<li>Hold <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and select the layers. Drag them to the canvas to load them in QGIS.</li>
+<li><p class="first">Houdt de <code class="kbd docutils literal"><span class="pre">Ctrl</span></code>-toets ingedrukt en selecteer de lagen. Sleep ze naar het kaartvenster om ze in QGIS te laden.</p>
+</li>
 </ol>
 <img alt="../../_images/25.png" class="align-center" src="../../_images/25.png" />
 <ol class="arabic simple" start="25">
-<li>In <span class="guilabel">Processing Toolbox</span>, locate the <span class="menuselection">Database ‣ Package layers</span> tool.</li>
+<li><p class="first">Zoek, in <span class="guilabel">Processing Toolbox</span>, het gereedschap <span class="menuselection">Database ‣ Pakketlagen</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/26.png" class="align-center" src="../../_images/26.png" />
 <ol class="arabic simple" start="27">
-<li>In the <span class="guilabel">Package layers</span> dialog, click the <span class="guilabel">...</span> button next to <span class="guilabel">Input layers</span>.</li>
+<li><p class="first">Klik, in het dialoogvenster <span class="guilabel">Pakketlagen</span>, op de knop <span class="guilabel">...</span> naast <span class="guilabel">Invoerlagen</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/27.png" class="align-center" src="../../_images/27.png" />
 <ol class="arabic simple" start="28">
-<li>In the <span class="guilabel">Multiple selection</span> dialog, check the <code class="docutils literal"><span class="pre">clipped_ne_10m_ports</span></code>, <code class="docutils literal"><span class="pre">clipped_ne_10m_railroads</span></code> and <code class="docutils literal"><span class="pre">clipped_ne_10m_urban_areas</span></code> layers. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">Meervoudige selecties</span>, de lagen <code class="docutils literal"><span class="pre">clipped_ne_10m_ports</span></code>, <code class="docutils literal"><span class="pre">clipped_ne_10m_railroads</span></code> en <code class="docutils literal"><span class="pre">clipped_ne_10m_urban_areas</span></code>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/28.png" class="align-center" src="../../_images/28.png" />
 <ol class="arabic simple" start="29">
-<li>Once the input layers are selected, click the <span class="guilabel">...</span> next to <span class="guilabel">Destination Geopackage</span> and choose <span class="guilabel">Save To File</span>.</li>
+<li><p class="first">Als de invoerlagen eenmaal zijn geselecteerd, klik op de <span class="guilabel">...</span> naast <span class="guilabel">Doel Geopackage</span> en kies <span class="guilabel">Opslaan als bestand</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/29.png" class="align-center" src="../../_images/29.png" />
 <ol class="arabic simple" start="30">
-<li>Enter the output file name as <code class="docutils literal"><span class="pre">clipped_layers</span></code>.</li>
+<li><p class="first">Voer de naam voor het uitvoerbestand in als <code class="docutils literal"><span class="pre">geclipte_lagen</span></code>.</p>
+</li>
 </ol>
 <img alt="../../_images/30.png" class="align-center" src="../../_images/30.png" />
 <ol class="arabic simple" start="31">
-<li>Click <span class="guilabel">Run</span> to start the packaging process.</li>
+<li><p class="first">Klik op <span class="guilabel">Uitvoeren</span> om het proces van verpakken te starten.</p>
+</li>
 </ol>
 <img alt="../../_images/31.png" class="align-center" src="../../_images/31.png" />
 <ol class="arabic simple" start="32">
-<li>Once the process finishes, you will see a new geopackage file in your <span class="guilabel">QGIS Browser</span> containing all the clipped output layers. This is a single file on your computer that contains all the output layers.</li>
+<li><p class="first">Als het proces is voltooid zult u een nieuw bestand voor Geopackage zien in uw <span class="guilabel">QGIS Browser</span> dat alle geclipte uitvoerlagen bevat. Dit is één enkel bestand op uw computer dat alle uitvoerlagen bevat.</p>
+</li>
 </ol>
 <img alt="../../_images/32.png" class="align-center" src="../../_images/32.png" />
 </div>
@@ -407,7 +435,7 @@ layers. Download the following layers</p>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Feb 05, 2019.<br/>
+      Laatste aanpassing op Feb 20, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
