@@ -107,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Maken van kaarten automatiseren met Atlas van Printvormgeving</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="counting_vertices.html">Aantal punten in een laag tellen</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
@@ -228,17 +228,17 @@
 <li><p class="first">Unzip en neem het bsq-bestand uit. Op Windows kunt u het uitstekende <a class="reference external" href="http://www.7-zip.org/">7-Zip programma</a>  gebruiken om het .gz-bestand te lezen en uit te pakken. U zult zien dat u slechts één .bsq-betand heeft, genaamd <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code>. Er is geen hdr-bestand.</p>
 </li>
 </ol>
-<img alt="../_images/1104.png" class="align-center" src="../_images/1104.png" />
+<img alt="../_images/1106.png" class="align-center" src="../_images/1106.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Merk op dat als u het bestand <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> probeert te openen in QGIS zoals het is, zult u een foutbericht krijgen.</p>
 </li>
 </ol>
-<img alt="../_images/258.png" class="align-center" src="../_images/258.png" />
+<img alt="../_images/260.png" class="align-center" src="../_images/260.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Om dit probleem te verhelpen zullen we een header-bestand maken met de extensie <code class="docutils literal"><span class="pre">.hdr</span></code>. Het header-bestand bevat informatie over de gegevensset en hoe het is georganiseerd. Gewoonlijk wordt deze informatie verschaft als deel van de Metadata voor de gegevensset. Als u de metadata niet heeft, bekijk dan de website of documentatie voor tips. Sommige informatie kan worden geraden als u het niet weet. In het geval van deze gegevensset, koppelt de downloadpagina voor de gegevens naar de <a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.glcf">metadata</a>. Download de metadata en open die.</p>
 </li>
 </ol>
-<img alt="../_images/329.png" class="align-center" src="../_images/329.png" />
+<img alt="../_images/340.png" class="align-center" src="../_images/340.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Het .hdr-bestand moet een plain text-bestand zijn in de volgende indeling. Enkele van deze parameters worden ons gegeven en andere moeten worden uitgewerkt. <a class="reference external" href="http://www.gdal.org/frmt_various.html">Leer meer over de indeling</a>.</p>
 </li>
@@ -258,17 +258,17 @@ byteorder &lt;byte order in which image pixel values are stored, msb or lsb&gt;
 <li><p class="first">Open een tekstbewerker en maak een bestand in de indeling zoals is gespecificeerd in de vorige stap. Sla het bestand op als <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.hdr</span></code>. Zorg er voor dat het bestand geen <code class="docutils literal"><span class="pre">.txt</span></code> aan het einde heeft staan. Enkele van de waarden in de tekstbestanden zijn eenvoudig te begrijpen. De <strong>ncols</strong> en <strong>nrows</strong> komen uit de metadata als Number of Lines en Number of Pixels per Line. De <strong>cellsize</strong> is 1 zoals de Pixel resolution uit de metadata. De coördinaten X,Y uit de linker benedenhoek moeten door ons worden uitgewerkt. Omdat het bestand de gehele wereld bedekt en de eenheden lat/long zijn, zijn <strong>xllcorner</strong> en <strong>yllcorner</strong> respectievelijk -180 en -90. We hebben geen enkele informatie over de waarde voor Geen gegevens, dus -9999 is een veilige keuze. Opnieuw vanuit de metadata, is Byte het Pixel Format, dus <strong>nbits</strong> moet gelijk zijn aan 8 en pixeltype moet zijn <strong>byte_unsigned</strong>. We hebben geen informatie over de byte volgorde, dus laat die als msbfirst. U kunt het correct opgemaakte HDR-bestand dowloaden vanaf <a class="reference external" href="../../downloads/gl-latlong-1deg-landcover.hdr">hier</a>.</p>
 </li>
 </ol>
-<img alt="../_images/522.png" class="align-center" src="../_images/522.png" />
+<img alt="../_images/523.png" class="align-center" src="../_images/523.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Plaats, nu u het header-bestand heeft, het in dezelfde map als <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code>. Ga dan in QGIS naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Rasterlaag toevoegen</span>. Selecteer <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> als uw invoer en klik op <span class="guilabel">Openen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/621.png" class="align-center" src="../_images/621.png" />
+<img alt="../_images/622.png" class="align-center" src="../_images/622.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">In het volgende scherm zou u gevraagd kunnen worden een CRS te kiezen. Kies, omdat de gegevens in Lat/Long zijn, <strong>WGS84 EPSG:4326</strong> als uw CRS. Nu zult u de gegevensset zien geladen in QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/720.png" class="align-center" src="../_images/720.png" />
+<img alt="../_images/721.png" class="align-center" src="../_images/721.png" />
 </div>
 </div>
 

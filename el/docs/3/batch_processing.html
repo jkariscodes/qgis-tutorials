@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Παρεμβάλλοντας τα σημεία δεδομένων</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../automating_map_creation.html">Αυτόματη δημιουργία χάρτη χρησιμοποιώντας την Σύνθεση Εκτύπωσης Ατλαντα</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Χρησιμοποιώντας το QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../counting_vertices.html">Μέτρηση του Aριθμού των Kορυφών σε ένα Επίπεδο</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Ανοίγοντας BIL,BIP ή BSQ αρχεία στο QGIS</a></li>
@@ -245,7 +245,7 @@ layers. Download the following layers</p>
 <ol class="arabic simple">
 <li>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal"><span class="pre">zip</span></code> or the <code class="docutils literal"><span class="pre">gpkg</span></code>  entry and select the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer. Drag the layer to the canvas.</li>
 </ol>
-<img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
+<img alt="../../_images/110.png" class="align-center" src="../../_images/110.png" />
 <ol class="arabic simple" start="2">
 <li>You will see the layer loaded in the Layers panel. As our task is to clip the global layers to the boundary of Africa, we need to first prepare a layer containg features only from that continent. Let&#8217;s look at the attribute table to see what column can be used to query features belonging to a particular continent. Right-click the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
@@ -253,86 +253,86 @@ layers. Download the following layers</p>
 <p class="first admonition-title">Note</p>
 <p class="last">Tip: You can also use the keyboard shortcut <code class="kbd docutils literal"><span class="pre">F6</span></code> to open the attribute table of the selected layer.</p>
 </div>
-<img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
+<img alt="../../_images/210.png" class="align-center" src="../../_images/210.png" />
 <ol class="arabic simple" start="3">
 <li>In the <span class="guilabel">Attribute Table</span> window, as you scroll horizontally, you will see that the data contains an attribute called <strong>CONTINENT</strong>. We can use this attribute to filter features.</li>
 </ol>
-<img alt="../../_images/3.png" class="align-center" src="../../_images/3.png" />
+<img alt="../../_images/310.png" class="align-center" src="../../_images/310.png" />
 <ol class="arabic simple" start="4">
 <li>Close the attribute table and return to the main QGIS window. Right-click the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer and select <span class="guilabel">Filter</span>.</li>
 </ol>
-<img alt="../../_images/4.png" class="align-center" src="../../_images/4.png" />
+<img alt="../../_images/41.png" class="align-center" src="../../_images/41.png" />
 <ol class="arabic simple" start="5">
 <li>In the <span class="guilabel">Query Builder</span> window, select the <strong>CONTINENT</strong> field and click <span class="guilabel">Sample</span>. This will populate the <span class="guilabel">Values</span> panel with the a subset of values of that attribute from features. This step is useful to get an understanding of what type of values are present in your dataset. We can see that our dataset contains contains a value called <strong>Africa</strong> among others.</li>
 </ol>
-<img alt="../../_images/5.png" class="align-center" src="../../_images/5.png" />
+<img alt="../../_images/51.png" class="align-center" src="../../_images/51.png" />
 <ol class="arabic simple" start="6">
 <li>Now enter the expression in the <span class="guilabel">Provider specific filter expression</span> textbox. You can click the <strong>CONTINENT</strong> label, followed by <span class="guilabel">=</span> button and <strong>Africa</strong> label. Or you can type the following expression in the textbox. Click <span class="guilabel">OK</span> after entering the expression.</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre>&quot;CONTINENT&quot; = &#39;Africa&#39;
 </pre></div>
 </div>
-<img alt="../../_images/6.png" class="align-center" src="../../_images/6.png" />
+<img alt="../../_images/61.png" class="align-center" src="../../_images/61.png" />
 <ol class="arabic simple" start="7">
 <li>You will see that the map canvas now contains only the countries from Africa. Note the filter icon next to the layer name indicating that that layer a filter applied to it. If you wanted to see and use all the features from the layer, you can click the filter icon and clear the expression. For now, we will keep the filter so we can clip other layers to Africa.</li>
 </ol>
-<img alt="../../_images/7.png" class="align-center" src="../../_images/7.png" />
+<img alt="../../_images/71.png" class="align-center" src="../../_images/71.png" />
 <ol class="arabic simple" start="8">
 <li>We are now ready to run the batch process to clip the layers. Locate the natural earth global layers <code class="docutils literal"><span class="pre">ne_10m_railroads</span></code>, <code class="docutils literal"><span class="pre">ne_10m_ports</span></code> and <code class="docutils literal"><span class="pre">ne_10m_urban_areas</span></code> in the <span class="guilabel">QGIS Browser</span> panel. Hold the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and click each layer to select them. Once selected, drag them to the canvas.</li>
 </ol>
-<img alt="../../_images/8.png" class="align-center" src="../../_images/8.png" />
+<img alt="../../_images/81.png" class="align-center" src="../../_images/81.png" />
 <ol class="arabic simple" start="9">
 <li>Once the layers are loaded, you will notice that they are global layers and have features spanning all the countries.  Now, it&#8217;s time to start our batch clip process to clip these layers to Africa. Open <span class="menuselection">Processing ‣ Toolbox</span>.</li>
 </ol>
-<img alt="../../_images/9.png" class="align-center" src="../../_images/9.png" />
+<img alt="../../_images/91.png" class="align-center" src="../../_images/91.png" />
 <ol class="arabic simple" start="10">
 <li>Browse all available algorithms and find the <span class="guilabel">Clip</span> tool from <span class="menuselection">Vector overlay ‣ Clip</span>. You may also use the <span class="guilabel">Search</span> box to easily find the algorithm as well.</li>
 </ol>
-<img alt="../../_images/10.png" class="align-center" src="../../_images/10.png" />
+<img alt="../../_images/101.png" class="align-center" src="../../_images/101.png" />
 <ol class="arabic simple" start="11">
 <li>Right-click the <span class="guilabel">Clip</span> algorithm and select <span class="guilabel">Execute as Batch Process</span>.</li>
 </ol>
-<img alt="../../_images/11.png" class="align-center" src="../../_images/11.png" />
+<img alt="../../_images/111.png" class="align-center" src="../../_images/111.png" />
 <ol class="arabic simple" start="12">
 <li>In the <span class="guilabel">Batch Processing</span> dialog, the first tab is <span class="guilabel">Parameters</span> where we define our inputs. Each row in the table represents 1 processing task. Click <span class="guilabel">Add row</span> button to add a new row. As our task involves 3 layers, add 3 rows.</li>
 </ol>
-<img alt="../../_images/12.png" class="align-center" src="../../_images/12.png" />
+<img alt="../../_images/121.png" class="align-center" src="../../_images/121.png" />
 <ol class="arabic simple" start="13">
 <li>Click the <span class="guilabel">...</span> next to the first row in the <span class="guilabel">Input layers</span> column. Select <span class="guilabel">Select from Open Layers</span>.</li>
 </ol>
-<img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
+<img alt="../../_images/131.png" class="align-center" src="../../_images/131.png" />
 <ol class="arabic simple" start="14">
 <li>In the <span class="guilabel">Multiple selection</span> dialog, check the 3 layers that we want to clip and click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../../_images/14.png" class="align-center" src="../../_images/14.png" />
+<img alt="../../_images/141.png" class="align-center" src="../../_images/141.png" />
 <ol class="arabic simple" start="15">
 <li>You will notice that the <span class="guilabel">Input layer</span> columns will be auto-populated with all layers you had selected. Next, we need to select the layer containing the boundary to clip our input layers. Click the <span class="guilabel">...</span> button for the first row under <span class="guilabel">Overlay layer</span> column and select <span class="guilabel">Select form Open Layers</span>.</li>
 </ol>
-<img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
+<img alt="../../_images/151.png" class="align-center" src="../../_images/151.png" />
 <ol class="arabic simple" start="16">
 <li>In the <span class="guilabel">Multiple selection</span> dialog, check <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> and click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
+<img alt="../../_images/161.png" class="align-center" src="../../_images/161.png" />
 <ol class="arabic simple" start="17">
 <li>Since the clip layer is the same for all our inputs, a handy shortcut is to double-click the column header <span class="guilabel">Overlay layer</span> and the same layer will be auto-filled for all the rows.</li>
 </ol>
-<img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
+<img alt="../../_images/171.png" class="align-center" src="../../_images/171.png" />
 <ol class="arabic simple" start="18">
 <li>Next, we need to define our outputs.  Click the <span class="guilabel">...</span> buton next to the first row in the <span class="guilabel">Clipped</span> column.</li>
 </ol>
-<img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
+<img alt="../../_images/181.png" class="align-center" src="../../_images/181.png" />
 <ol class="arabic simple" start="19">
 <li>Browse the the directory where you want your output layers. Type the filename as <code class="docutils literal"><span class="pre">clipped_</span></code> and click <span class="guilabel">Save</span>.</li>
 </ol>
-<img alt="../../_images/19.png" class="align-center" src="../../_images/19.png" />
+<img alt="../../_images/191.png" class="align-center" src="../../_images/191.png" />
 <ol class="arabic simple" start="20">
 <li>You will see a new <span class="guilabel">Autofill settings</span> dialog pop up. Select <code class="docutils literal"><span class="pre">Fill</span> <span class="pre">with</span> <span class="pre">parameter</span> <span class="pre">values</span></code> as the <span class="guilabel">Autofill mode</span>. Select <code class="docutils literal"><span class="pre">Input</span> <span class="pre">layer</span></code> as the <span class="guilabel">Parameter to use</span>. This setting will add the input file name to the output along with the specified <code class="docutils literal"><span class="pre">clipped_</span></code> filename. This is important to ensure all the output files have unique names and they do not overwrite each other.</li>
 </ol>
-<img alt="../../_images/20.png" class="align-center" src="../../_images/20.png" />
+<img alt="../../_images/201.png" class="align-center" src="../../_images/201.png" />
 <ol class="arabic simple" start="21">
 <li>Now we are ready to start the batch procesing. Make sure to check <span class="guilabel">Load layers on completion</span> and click <span class="guilabel">Run</span>.</li>
 </ol>
-<img alt="../../_images/21.png" class="align-center" src="../../_images/21.png" />
+<img alt="../../_images/211.png" class="align-center" src="../../_images/211.png" />
 <ol class="arabic simple" start="22">
 <li>The clip algorithm will run for each of the inputs and create output files are we have specified. Once the batch process finishes, click <span class="guilabel">Close</span> to return to QGIS.</li>
 </ol>
@@ -340,47 +340,47 @@ layers. Download the following layers</p>
 <p class="first admonition-title">Note</p>
 <p class="last">Tip: QGIS can now run Processing tasks in the background without blocking the user interface. So if your batch process is taking long, you can close the dialog and continue to work on other tasks in QGIS while the process keeps running in the background.</p>
 </div>
-<img alt="../../_images/22.png" class="align-center" src="../../_images/22.png" />
+<img alt="../../_images/221.png" class="align-center" src="../../_images/221.png" />
 <ol class="arabic simple" start="23">
 <li>Back in the main QGIS window, you will see the layers added to QGIS canvas. As you will notice, all the global layers are properly clipped to the continent boundary that we had specified.</li>
 </ol>
-<img alt="../../_images/23.png" class="align-center" src="../../_images/23.png" />
+<img alt="../../_images/231.png" class="align-center" src="../../_images/231.png" />
 <ol class="arabic simple" start="24">
 <li>We have accomplished the task of clipping multiple layers in a batch. But QGIS3 has another handy feature that will help you save and deliver the result in a more efficient way. If you wanted to deliver the clipped layers to someone, you would zip the individual files outside of QGIS. A better option to to package the output layers in a single Geopackage. In the <span class="guilabel">QGIS Browser</span>, locate the clipped output layers. You may have to click the <span class="guilabel">Refresh</span> button to see the newly added files.</li>
 </ol>
-<img alt="../../_images/24.png" class="align-center" src="../../_images/24.png" />
+<img alt="../../_images/241.png" class="align-center" src="../../_images/241.png" />
 <ol class="arabic simple" start="25">
 <li>Hold <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and select the layers. Drag them to the canvas to load them in QGIS.</li>
 </ol>
-<img alt="../../_images/25.png" class="align-center" src="../../_images/25.png" />
+<img alt="../../_images/251.png" class="align-center" src="../../_images/251.png" />
 <ol class="arabic simple" start="25">
 <li>In <span class="guilabel">Processing Toolbox</span>, locate the <span class="menuselection">Database ‣ Package layers</span> tool.</li>
 </ol>
-<img alt="../../_images/26.png" class="align-center" src="../../_images/26.png" />
+<img alt="../../_images/261.png" class="align-center" src="../../_images/261.png" />
 <ol class="arabic simple" start="27">
 <li>In the <span class="guilabel">Package layers</span> dialog, click the <span class="guilabel">...</span> button next to <span class="guilabel">Input layers</span>.</li>
 </ol>
-<img alt="../../_images/27.png" class="align-center" src="../../_images/27.png" />
+<img alt="../../_images/271.png" class="align-center" src="../../_images/271.png" />
 <ol class="arabic simple" start="28">
 <li>In the <span class="guilabel">Multiple selection</span> dialog, check the <code class="docutils literal"><span class="pre">clipped_ne_10m_ports</span></code>, <code class="docutils literal"><span class="pre">clipped_ne_10m_railroads</span></code> and <code class="docutils literal"><span class="pre">clipped_ne_10m_urban_areas</span></code> layers. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../../_images/28.png" class="align-center" src="../../_images/28.png" />
+<img alt="../../_images/281.png" class="align-center" src="../../_images/281.png" />
 <ol class="arabic simple" start="29">
 <li>Once the input layers are selected, click the <span class="guilabel">...</span> next to <span class="guilabel">Destination Geopackage</span> and choose <span class="guilabel">Save To File</span>.</li>
 </ol>
-<img alt="../../_images/29.png" class="align-center" src="../../_images/29.png" />
+<img alt="../../_images/291.png" class="align-center" src="../../_images/291.png" />
 <ol class="arabic simple" start="30">
 <li>Enter the output file name as <code class="docutils literal"><span class="pre">clipped_layers</span></code>.</li>
 </ol>
-<img alt="../../_images/30.png" class="align-center" src="../../_images/30.png" />
+<img alt="../../_images/301.png" class="align-center" src="../../_images/301.png" />
 <ol class="arabic simple" start="31">
 <li>Click <span class="guilabel">Run</span> to start the packaging process.</li>
 </ol>
-<img alt="../../_images/31.png" class="align-center" src="../../_images/31.png" />
+<img alt="../../_images/311.png" class="align-center" src="../../_images/311.png" />
 <ol class="arabic simple" start="32">
 <li>Once the process finishes, you will see a new geopackage file in your <span class="guilabel">QGIS Browser</span> containing all the clipped output layers. This is a single file on your computer that contains all the output layers.</li>
 </ol>
-<img alt="../../_images/32.png" class="align-center" src="../../_images/32.png" />
+<img alt="../../_images/321.png" class="align-center" src="../../_images/321.png" />
 </div>
 </div>
 
