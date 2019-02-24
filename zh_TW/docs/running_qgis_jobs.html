@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="在同一圖層中尋找相鄰的多邊形" href="find_neighbor_polygons.html" />
-    <link rel="prev" title="撰寫 Python 腳本並在處理框架下執行" href="processing_python_scripts.html" />
+    <link rel="prev" title="Writing Python Scripts for Processing Framework (QGIS3)" href="3/processing_python_scripts.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -114,7 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Python 程式設計的初步上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">以 Python 製作附加元件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">使用自訂的 Python 表達式函數</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">撰寫 Python 腳本並在處理框架下執行</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">執行 QGIS 工作排程</a></li>
 <li class="toctree-l1"><a class="reference internal" href="find_neighbor_polygons.html">在同一圖層中尋找相鄰的多邊形</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">資料表連接 (PyQGIS)</a></li>
@@ -132,7 +132,7 @@
               
                 
   <li>
-    <a href="processing_python_scripts.html" title="Previous Chapter: 撰寫 Python 腳本並在處理框架下執行"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; 撰寫 Python 腳本並在處理...</span>
+    <a href="3/processing_python_scripts.html" title="Previous Chapter: Writing Python Scripts for Processing Framework (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Writing Python S...</span>
     </a>
   </li>
   <li>
@@ -238,7 +238,7 @@
 <li><p class="first">首先我們來手動清理此 shapefile，熟悉一下我們等一下要在 Python 腳本中加入的指令。打開 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入圖層 ‣ 加入向量圖層</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1137.png" class="align-center" src="../_images/1137.png" />
+<img alt="../_images/1140.png" class="align-center" src="../_images/1140.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">選擇下載後解壓縮的內容中的 <code class="docutils literal"><span class="pre">roads.shp</span></code> 並按下 <span class="guilabel">確定</span>。</p>
 </li>
@@ -248,17 +248,17 @@
 <li><p class="first">第一件事是重投影道路圖層到專案的 CRS，這樣一來我們就可以使用 <em>公尺</em> 而不是角度來當作等下分析使用的單位。選擇 <span class="menuselection">地理運算 ‣ 工具箱</span>。</p>
 </li>
 </ol>
-<img alt="../_images/355.png" class="align-center" src="../_images/355.png" />
+<img alt="../_images/356.png" class="align-center" src="../_images/356.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">尋找 <span class="guilabel">Reproject layer</span> 工具，點兩下開啟對話窗。</p>
 </li>
 </ol>
-<img alt="../_images/432.png" class="align-center" src="../_images/432.png" />
+<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">在 <span class="guilabel">Reproject layer</span> 視窗中，<span class="guilabel">輸入圖層</span> 選擇 <code class="docutils literal"><span class="pre">roads</span></code>，<span class="guilabel">目標 CRS</span> 選擇 <code class="docutils literal"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code>，按下 <span class="guilabel">Run</span>。</p>
 </li>
 </ol>
-<img alt="../_images/533.png" class="align-center" src="../_images/533.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">處理完成後可以看到重投影的圖層已載入到 QGIS 中。選擇 <span class="menuselection">地理運算 ‣ 歷程與日誌</span>。</p>
 </li>
@@ -268,7 +268,7 @@
 <li><p class="first">在 <span class="guilabel">歷程與日誌</span> 視窗中，展開 <span class="guilabel">Algorithm</span> 資料夾然後選擇最新一筆的紀錄，就會看到完整的處理指令顯示在下方面板中。這就是我們等下要使用在腳本內的指令。</p>
 </li>
 </ol>
-<img alt="../_images/730.png" class="align-center" src="../_images/730.png" />
+<img alt="../_images/731.png" class="align-center" src="../_images/731.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">回到 QGIS 視窗，按下右下角的 <span class="guilabel">CRS</span> 按鈕。</p>
 </li>
@@ -278,7 +278,7 @@
 <li><p class="first">在 <span class="guilabel">專案屬性 | CRS</span> 視窗中，勾選 <span class="guilabel">開啟即時 CRS 轉換</span>，然後選擇 <code class="docutils literal"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> 為專案 CRS，這樣就能確保原本的圖層和重投影過的圖層都會正確顯示。</p>
 </li>
 </ol>
-<img alt="../_images/927.png" class="align-center" src="../_images/927.png" />
+<img alt="../_images/928.png" class="align-center" src="../_images/928.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">現在我們要來執行清理操作了。GRASS 具有強大的拓樸清理工具，在 QGIS 中可透過 <code class="docutils literal"><span class="pre">v.clean</span></code> 運算法存取。在 <span class="guilabel">地理運算工具箱</span> 中尋找此演算法，然後點兩下開啟視窗。</p>
 </li>
@@ -288,12 +288,12 @@
 <li><p class="first">有關此工具的更多說明，可以在 <span class="guilabel">Help</span> 分頁中找到，而在此教學中，我們要使用 <code class="docutils literal"><span class="pre">snap</span></code> 工具來清除任何在 1 公尺之內多餘的線條頂點。在 <span class="guilabel">Layer to clean</span> 中選擇 <code class="docutils literal"><span class="pre">Reprojected</span> <span class="pre">layer</span></code>，然後在 <span class="guilabel">Cleaning tool</span> 中選擇 <code class="docutils literal"><span class="pre">snap</span></code>，在 <span class="guilabel">Threshold</span> 中輸入 <code class="docutils literal"><span class="pre">1.00</span></code>，其他欄位留白，按下 <span class="guilabel">Run</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1138.png" class="align-center" src="../_images/1138.png" />
+<img alt="../_images/1141.png" class="align-center" src="../_images/1141.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">處理完成後，會有 2 個新圖層加入 QGIS 中。<code class="docutils literal"><span class="pre">Cleaned</span></code> 是經過拓樸誤差修正後的圖層，而 <code class="docutils literal"><span class="pre">Errors</span></code> 則顯示了有修改過的圖徵，因此你可以參考 Errors 圖層，縮放地圖以查看被移除的頂點們。</p>
 </li>
 </ol>
-<img alt="../_images/1228.png" class="align-center" src="../_images/1228.png" />
+<img alt="../_images/1229.png" class="align-center" src="../_images/1229.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">選擇 <span class="menuselection">地理運算 ‣ 歷程與日誌</span>，然後查看我們等一下要使用的命令列指令。</p>
 </li>
@@ -324,7 +324,7 @@ python c:\Users\Ujaval\Desktop\download_and_clean.py
 pause
 </pre></div>
 </div>
-<img alt="../_images/1425.png" class="align-center" src="../_images/1425.png" />
+<img alt="../_images/1426.png" class="align-center" src="../_images/1426.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">建立新的 Python 檔然後輸入以下程式碼，檔名取為 <code class="docutils literal"><span class="pre">download_and_clean.py</span></code> 然後儲存至桌面。</p>
 </li>
@@ -333,12 +333,12 @@ pause
 <span class="k">print</span> <span class="s">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1524.png" class="align-center" src="../_images/1524.png" />
+<img alt="../_images/1525.png" class="align-center" src="../_images/1525.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">切換到桌面，找到 <code class="docutils literal"><span class="pre">launch.bat</span></code> 然後點它兩下，腳本會開始執行，並會同時開啟一個命令列視窗。如果你在命令列視窗中看到了 <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code> 字樣出現，那就表示之前的設定和操作一切順利。如果你發現錯誤或沒有看到以上文字的話，請檢查 <code class="docutils literal"><span class="pre">launch.bat</span></code> 的內容，然後確認所有的路徑在你的作業系統中都是正確的。</p>
 </li>
 </ol>
-<img alt="../_images/1623.png" class="align-center" src="../_images/1623.png" />
+<img alt="../_images/1624.png" class="align-center" src="../_images/1624.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">回到文字編輯器，編輯 <code class="docutils literal"><span class="pre">download_and_clean.py</span></code> 並加入以下的程式碼。這個段落用來快速啟動 QGIS，如果你在 QGIS 中執行腳本，並不需要此段落；但由於我們要在 QGIS 不開啟的狀況下執行，程式最前端就必須放上這幾行，同時要注意有把使用者名稱改成你自己的才行。完成之後，存檔然後再次執行 <code class="docutils literal"><span class="pre">launch.bat</span></code>，如果你看到 <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code> 列印出來，就表示可以開始在腳本中加入地理運算的流程了。</p>
 </li>
@@ -362,7 +362,7 @@ pause
 <span class="k">print</span> <span class="s">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1721.png" class="align-center" src="../_images/1721.png" />
+<img alt="../_images/1722.png" class="align-center" src="../_images/1722.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">我們從地理運算的歷程日誌中看到的第一個運算指令，就是要放在這邊的重投影指令。因此，貼上此段指令到腳本中，然後前後加入如下所示的幾行。注意運算指令的回傳值為字典（dict）變數，其中包含了輸出圖層的路徑，因此我們在這邊把字典存成 <code class="docutils literal"><span class="pre">ret</span></code> 然後再列印出重投影後圖層的路徑。</p>
 </li>
@@ -374,7 +374,7 @@ pause
 <span class="k">print</span> <span class="n">output</span>
 </pre></div>
 </div>
-<img alt="../_images/1822.png" class="align-center" src="../_images/1822.png" />
+<img alt="../_images/1823.png" class="align-center" src="../_images/1823.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">透過 <code class="docutils literal"><span class="pre">launch.bat</span></code> 執行此腳本，就可以看到新建立的重投影圖層的路徑。</p>
 </li>
@@ -445,7 +445,7 @@ pause
 <li><p class="first">在 <span class="guilabel">觸發程序</span> 設定中選擇 <code class="docutils literal"><span class="pre">每天</span></code>，然後按 <span class="guilabel">下一步</span>。</p>
 </li>
 </ol>
-<img alt="../_images/2512.png" class="align-center" src="../_images/2512.png" />
+<img alt="../_images/2513.png" class="align-center" src="../_images/2513.png" />
 <ol class="arabic simple" start="26">
 <li><p class="first">選擇你喜歡的時段然後按 <span class="guilabel">下一步</span>。</p>
 </li>
@@ -552,7 +552,7 @@ pause
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      最後更新日期是 Feb 23, 2019.<br/>
+      最後更新日期是 Feb 24, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
