@@ -211,6 +211,10 @@
   <div class="section" id="writing-python-scripts-for-processing-framework-qgis3">
 <h1>Writing Python Scripts for Processing Framework (QGIS3)<a class="headerlink" href="#writing-python-scripts-for-processing-framework-qgis3" title="Permalink to this headline">¶</a></h1>
 <p>One can write standalone pyqgis scripts that can be run via the Python Console in QGIS. With a few tweaks, you can make your standalone scripts run via the Processing Framework. This has several advantages. First, taking user input and writing output files is far easier because Processing Framework offers standardized user interface for these. Second, having your script in the Processing Toolbox also allows it to be part of any Processing Model or be run as a Batch job with multiple inputs. This tutorial will show how to write a custom python script that can be part of the Processing Framework in QGIS.</p>
+<div class="admonition note">
+<p class="first admonition-title">註解</p>
+<p class="last">The Processing API was completely overhauled in QGIS3. Please refer to <a class="reference external" href="https://raw.githubusercontent.com/qgis/QGIS/master/doc/porting_processing.dox">this guide</a> for best practices and tips.</p>
+</div>
 <div class="section" id="overview-of-the-task">
 <h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
 <p>Our script will perform a dissolve operation based on a field chosen by the user. It will also sum up values of another field for the dissolved features. In the example, we will dissolve a world shapefile based on a <code class="docutils literal"><span class="pre">CONTINENT</span></code> attribute and sum up <code class="docutils literal"><span class="pre">POP_EST</span></code> field to calculate total population in the dissolved region.</p>
@@ -239,7 +243,7 @@ dataset from Natural Earth.</p>
 </ol>
 <img alt="../../_images/313.png" class="align-center" src="../../_images/313.png" />
 <ol class="arabic simple" start="4">
-<li>As you scroll down, you will see methods that assign name, group, description etc. to the script. Change the return values for <code class="docutils literal"><span class="pre">name</span></code> method to be <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code>, <code class="docutils literal"><span class="pre">displayName</span></code> method to <code class="docutils literal"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">Sum</span></code>, <code class="docutils literal"><span class="pre">group</span></code> method and <code class="docutils literal"><span class="pre">groupId</span></code> method to  <code class="docutils literal"><span class="pre">scripts</span></code>. Change the return value of <code class="docutils literal"><span class="pre">shortHelpString</span></code> method to a description that will appear to the user. Click the <span class="guilabel">Save</span> button.</li>
+<li>As you scroll down, you will see methods that assign name, group, description etc. to the script. Change the return values for <em>name</em> method to be <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code>, <em>displayName</em> method to <code class="docutils literal"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">Sum</span></code>, <em>group</em> method and <em>groupId</em> method to  <code class="docutils literal"><span class="pre">scripts</span></code>. Change the return value of <em>shortHelpString</em> method to a description that will appear to the user. Click the <span class="guilabel">Save</span> button.</li>
 </ol>
 <img alt="../../_images/43.png" class="align-center" src="../../_images/43.png" />
 <ol class="arabic simple" start="5">
@@ -274,7 +278,7 @@ under <span class="menuselection">profiles ‣ default ‣ processing ‣ script
 </ol>
 <img alt="../../_images/73.png" class="align-center" src="../../_images/73.png" />
 <ol class="arabic simple" start="8">
-<li>Now we define our custom logic for processing data in the <code class="docutils literal"><span class="pre">processAlgorithm</span></code> method. This method gets passed a dictionary called <code class="docutils literal"><span class="pre">parameters</span></code>. It contains the inputs that the user has selected. There are helper methods that allow you to take these inputs and create appropriate objects. We first get our inputs using <code class="docutils literal"><span class="pre">parameterAsSource</span></code> and <code class="docutils literal"><span class="pre">parameterAsStrong</span></code> methods. Next we want to create a feature sink where we will write the output. QGIS3 has a new class called <code class="docutils literal"><span class="pre">classQgsFeatureSink</span></code> which is the preferred way to create objects that can accept new features. The output needs only 2 fields - one for the value of dissolved field and another for the sum of the selected field.</li>
+<li>Now we define our custom logic for processing data in the <code class="docutils literal"><span class="pre">processAlgorithm</span></code> method. This method gets passed a dictionary called <code class="docutils literal"><span class="pre">parameters</span></code>. It contains the inputs that the user has selected. There are helper methods that allow you to take these inputs and create appropriate objects. We first get our inputs using <code class="docutils literal"><span class="pre">parameterAsSource</span></code> and <code class="docutils literal"><span class="pre">parameterAsString</span></code> methods. Next we want to create a feature sink where we will write the output. QGIS3 has a new class called <code class="docutils literal"><span class="pre">QgsFeatureSink</span></code> which is the preferred way to create objects that can accept new features. The output needs only 2 fields - one for the value of dissolved field and another for the sum of the selected field.</li>
 </ol>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="n">QVariant</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="n">QgsField</span><span class="p">,</span> <span class="n">QgsFields</span>
@@ -370,7 +374,7 @@ under <span class="menuselection">profiles ‣ default ‣ processing ‣ script
 </ol>
 <img alt="../../_images/133.png" class="align-center" src="../../_images/133.png" />
 <ol class="arabic simple" start="14">
-<li>One another advantage of writing processing script is that the methods within the Processing Framework are aware of layer selection and automatically filter your inputs to use only the selected features. Here&#8217;s a quick demonstration of this functionality. Let&#8217;s say we want to dissolve only certain continents. Let&#8217;s create a selection using <span class="guilabel">Select feature by Expression</span> tool.</li>
+<li>One another advantage of writing processing script is that the methods within the Processing Framework are aware of layer selection and automatically filter your inputs to use only the selected features. This happens because we are defining our input as a <code class="docutils literal"><span class="pre">QgsProcessingParameterFeatureSource</span></code>. A feature source allows use of ANY object which contains vector features, not just a vector layer, so when there are selected features in your layer and ask Processing to use selected features, the input is passed on to your script as a <code class="docutils literal"><span class="pre">QgsProcessingFeatureSource</span></code> object containing selected features and not the full vector layer. Here&#8217;s a quick demonstration of this functionality. Let&#8217;s say we want to dissolve only certain continents. Let&#8217;s create a selection using <span class="guilabel">Select feature by Expression</span> tool.</li>
 </ol>
 <img alt="../../_images/143.png" class="align-center" src="../../_images/143.png" />
 <ol class="arabic simple" start="15">
@@ -610,7 +614,7 @@ under <span class="menuselection">profiles ‣ default ‣ processing ‣ script
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      最後更新日期是 Feb 24, 2019.<br/>
+      最後更新日期是 Feb 25, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
