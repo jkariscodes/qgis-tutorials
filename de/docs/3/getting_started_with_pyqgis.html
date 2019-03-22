@@ -222,170 +222,114 @@
 
   <div class="section" id="using-the-qgis-python-console-qgis3">
 <h1>Using the QGIS Python console (QGIS3)<a class="headerlink" href="#using-the-qgis-python-console-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>QGIS has a powerful programming interface that allows you to extend the
-core functionality of the software as well as write scripts to automate
-your tasks. QGIS supports the popular Python scripting language. Even if
-you are a beginner, learning a little bit of Python and QGIS programming
-interface will allow you to be much more productive in your work. This
-tutorial assumes no prior programming knowledge and is intended to give
-an introduction to python scripting in QGIS (PyQGIS).</p>
-<p>This tutorial is based on <a class="reference external" href="https://www.qgistutorials.com/en/">&#8220;QGIS Tutorials and Tips
-v1.0&#8221;</a> by Ujaval Gandhi, updated
-to use Python 3 and QGis 3 by Ian Turton.</p>
+<p>QGIS has a powerful programming interface that allows you to extend the core functionality of the software as well as write scripts to automate your tasks. QGIS supports the popular Python scripting language. Even if you are a beginner, learning a little bit of Python and QGIS programming interface will allow you to be much more productive in your work. This tutorial assumes no prior programming knowledge and is intended to give an introduction to python scripting in QGIS (PyQGIS).</p>
 <div class="section" id="overview-of-the-task">
 <h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
-<p>We will load a vector point layer representing all major airports and
-use python scripting to create a text file with the airport name,
-airport code, latitude and longitude for each of the airport in the
-layer.</p>
+<p>We will load a vector point layer representing all major airports and use python scripting to create a text file with the airport name, airport code, latitude and longitude for each of the airport in the layer.</p>
 </div>
 <div class="section" id="get-the-data">
 <h2>Get the data<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
-<p>We will use the
-<a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/airports/">Airports</a>
-dataset from Natural Earth.</p>
-<p>Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">Airports
-shapefile</a>.</p>
+<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/airports/">Airports</a> dataset from Natural Earth.</p>
+<p>Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">Airports shapefile</a>.</p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li>In QGIS, go to Layers &#8211;&gt; Add Vector Layer. Browse to the downloaded
-<code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code> file and click Open. Select the
-<code class="docutils literal"><span class="pre">ne_10m_airports.shp</span></code> layer and click OK. Or drag and drop the
-<code class="docutils literal"><span class="pre">.zip</span></code> or <code class="docutils literal"><span class="pre">.shp</span></code> file into the map window.</li>
+<li>Locate the <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code> file in the QGIS Browser and expand it. Select the <code class="docutils literal"><span class="pre">ne_10m_airports.shp</span></code> file and drag it to the canvas.</li>
+</ol>
+<img alt="../../_images/113.png" class="align-center" src="../../_images/113.png" />
+<ol class="arabic simple" start="2">
 <li>You will see the <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> layer loaded in QGIS.</li>
 </ol>
-<blockquote>
-<div><img alt="../../_images/213.png" class="align-center" src="../../_images/213.png" />
-</div></blockquote>
+<img alt="../../_images/213.png" class="align-center" src="../../_images/213.png" />
 <ol class="arabic simple" start="3">
-<li>Select the Identify tool and click on any of the points to examine
-the available attributes. You will see that the name of the airport
-and it&#8217;s 3 digit code are contained in the attributes <code class="docutils literal"><span class="pre">name</span></code> and
-<code class="docutils literal"><span class="pre">iata_code</span></code> respectively.</li>
+<li>Select the  <span class="guilabel">Identify</span> tool and click on any of the points to examine the available attributes. You will see that the name of the airport and it&#8217;s 3 digit code are contained in the attributes <code class="docutils literal"><span class="pre">name</span></code> and <code class="docutils literal"><span class="pre">iata_code</span></code> respectively. You can close the <span class="guilabel">Identify</span> window.</li>
 </ol>
-<blockquote>
-<div><img alt="../../_images/313.png" class="align-center" src="../../_images/313.png" />
-</div></blockquote>
+<img alt="../../_images/313.png" class="align-center" src="../../_images/313.png" />
 <ol class="arabic simple" start="4">
-<li>QGIS provides a built-in console where you can type python commands
-and get the result. This console is a great way to learn scripting
-and also to do quick data processing. Open the Python Console by
-going to Plugins &#8211;&gt; Python Console.</li>
+<li>QGIS provides a built-in console where you can type python commands and get the result. This console is a great way to learn scripting and also to do quick data processing. Open the Python Console by going to <span class="menuselection">Plugins ‣ Python Console</span>.</li>
 </ol>
-<blockquote>
-<div><img alt="../../_images/43.png" class="align-center" src="../../_images/43.png" />
-</div></blockquote>
-<ol class="arabic" start="5">
-<li><p class="first">You will see a new panel open at the bottom of QGIS canvas. You will
-see a prompt like <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> at the bottom where you can type commands.
-For interacting with the QGIS environment, we must use the <code class="docutils literal"><span class="pre">iface</span></code>
-variable. To access the currently active layer in QGIS, you can type
-the following and press Enter. This command fetches the reference to
-the currently loaded layer and stores it in the <code class="docutils literal"><span class="pre">layer</span></code> variable.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
+<img alt="../../_images/43.png" class="align-center" src="../../_images/43.png" />
+<ol class="arabic simple" start="5">
+<li>You will see a new panel open at the bottom of QGIS canvas. You will see a prompt like <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> at the bottom where you can type commands. For interacting with the QGIS environment, we must use the <code class="docutils literal"><span class="pre">iface</span></code> variable. To access the currently active layer in QGIS, you can type the following and press <code class="kbd docutils literal"><span class="pre">Enter</span></code>. This command fetches the reference to the currently loaded layer and stores it in the <code class="docutils literal"><span class="pre">layer</span></code> variable.</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 </pre></div>
 </div>
-</li>
+<img alt="../../_images/53.png" class="align-center" src="../../_images/53.png" />
+<ol class="arabic simple" start="6">
+<li>There is a handy function called <code class="docutils literal"><span class="pre">dir()</span></code> in python that shows you all available methods for any object. This is useful when you are not sure what functions are available for the object. Run the following command to see what operations we can do on the <code class="docutils literal"><span class="pre">layer</span></code> variable.</li>
 </ol>
-<blockquote>
-<div><img alt="../../_images/53.png" class="align-center" src="../../_images/53.png" />
-</div></blockquote>
-<ol class="arabic" start="6">
-<li><p class="first">There is a handy function called <code class="docutils literal"><span class="pre">dir()</span></code> in python that shows you
-all available methods for any object. This is useful when you are
-not sure what functions are available for the object. Run the
-following command to see what operations we can do on the <code class="docutils literal"><span class="pre">layer</span></code>
-variable.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="nb">dir</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">dir</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../../_images/63.png" class="align-center" src="../../_images/63.png" />
-</li>
-<li><p class="first">You will see a long list of available functions. For now, we will
-use a function called <code class="docutils literal"><span class="pre">getFeatures()</span></code> which will gets you the
-reference to all features of a layer. In our case, each feature will
-be a point representing an airport. You can type the following
-command to iterate through each of the features in the current
-layer. Make sure to add 2 spaces before typing the second line.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<ol class="arabic simple" start="7">
+<li>You will see a long list of available functions. For now, we will use a function called <code class="docutils literal"><span class="pre">getFeatures()</span></code> which will gets you the reference to all features of a layer. In our case, each feature will be a point representing an airport. You can type the following command to iterate through each of the features in the current layer.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Bemerkung</p>
+<p class="last">Indentation (or number of spaces before each statement) is very important in Python. If you get error in this step, make sure you have added 2 spaces before typing the second line.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+  <span class="k">print</span> <span class="n">f</span>
 </pre></div>
 </div>
-<img alt="../../_images/73.png" class="align-center" src="../../_images/73.png" />
-</li>
-<li><p class="first">As you will see in the output, each line contains a reference to a
-feature within the layer. The reference to the feature is stored in
-the <code class="docutils literal"><span class="pre">f</span></code> variable. We can use the <code class="docutils literal"><span class="pre">f</span></code> variable to access the
-attributes of each feature. Type the following to print the <code class="docutils literal"><span class="pre">name</span></code>
-and <code class="docutils literal"><span class="pre">iata_code</span></code> for each airport feature.</p>
-<div class="code python highlight-python"><div class="highlight"><pre>for f in layer.getFeatures():
-  print(f&quot;{f[&#39;name&#39;]}, {f[&#39;iata_code&#39;]}&quot;)
+<img alt="../../_images/7.gif" class="align-center" src="../../_images/7.gif" />
+<ol class="arabic simple" start="8">
+<li>As you will see in the output, each line contains a reference to a feature within the layer. The reference to the feature is stored in the <code class="docutils literal"><span class="pre">f</span></code> variable. We can use the <code class="docutils literal"><span class="pre">f</span></code> variable to access the attributes of each feature. Type the following to print the <code class="docutils literal"><span class="pre">name</span></code> and <code class="docutils literal"><span class="pre">iata_code</span></code> for each airport feature.</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;iata_code&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<img alt="../../_images/82.png" class="align-center" src="../../_images/82.png" />
-</li>
-<li><p class="first">So now you know how to programatically access the attribute of each
-feature in a layer. Now, let&#8217;s see how we can access the coordinates
-of the feature. The coordinates of a vector feature can be accessed
-by calling the <code class="docutils literal"><span class="pre">geometry()</span></code> function. This function returns a
-geometry object that we can store in the variable <code class="docutils literal"><span class="pre">geom</span></code>. You can
-run <code class="docutils literal"><span class="pre">asPoint()</span></code> function on the geometry object to get the x and y
-coordinates of the point. If your feature is a line or a polygon,
-you can use <code class="docutils literal"><span class="pre">asPolyline()</span></code> or <code class="docutils literal"><span class="pre">asPolygon()</span></code> functions. Type the
-following code at the prompt and press Enter to see the x and y
-coordinates of each feature.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+<img alt="../../_images/8.gif" class="align-center" src="../../_images/8.gif" />
+<ol class="arabic simple" start="9">
+<li>So now you know how to programatically access the attribute of each feature in a layer. Let&#8217;s see how we can access the coordinates of the feature. The coordinates of a vector feature can be accessed by calling the <code class="docutils literal"><span class="pre">geometry()</span></code> function. This function returns a geometry object that we can store in the variable <code class="docutils literal"><span class="pre">geom</span></code>. You can run <code class="docutils literal"><span class="pre">asPoint()</span></code> function on the geometry object to get the x and y coordinates of the point. If your feature is a line or a polygon, you can use <code class="docutils literal"><span class="pre">asPolyline()</span></code> or <code class="docutils literal"><span class="pre">asPolygon()</span></code> functions. Type the following code at the prompt and press <code class="kbd docutils literal"><span class="pre">Enter</span></code> to see the x and y coordinates of each feature.</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
   <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
   <span class="k">print</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">())</span>
 </pre></div>
 </div>
-<img alt="../../_images/93.png" class="align-center" src="../../_images/93.png" />
-</li>
-<li><p class="first">What if we wanted to get only the <code class="docutils literal"><span class="pre">x</span></code> cordinate of the feature?
-You can call the <code class="docutils literal"><span class="pre">x()</span></code> function on the point object and get its x
-coordinate.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+<img alt="../../_images/9.gif" class="align-center" src="../../_images/9.gif" />
+<ol class="arabic simple" start="10">
+<li>What if we wanted to get only the <code class="docutils literal"><span class="pre">x</span></code> cordinate of the feature? You can call the <code class="docutils literal"><span class="pre">x()</span></code> function on the point object and get its x coordinate.</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
   <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
   <span class="k">print</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
 </pre></div>
 </div>
-<img alt="../../_images/102.png" class="align-center" src="../../_images/102.png" />
-</li>
-<li><p class="first">Now we have all the pieces that we can stitch together to generate
-our desired output. Type the following code to print the name,
-<code class="docutils literal"><span class="pre">iata_code</span></code>, <code class="docutils literal"><span class="pre">latitude</span></code> and <code class="docutils literal"><span class="pre">longitude</span></code> of each of the airport
-features. The <code class="docutils literal"><span class="pre">%s</span></code> and <code class="docutils literal"><span class="pre">%f</span></code> notations are ways to format a
-string and number variables.</p>
-<div class="code python highlight-python"><div class="highlight"><pre>for f in layer.getFeatures():
-  geom = f.geometry()
-  print(f&quot;{f[&#39;name&#39;]:40s}\t{f[&#39;iata_code&#39;]},\t({geom.asPoint().y():.2f},{geom.asPoint().x():.2f})&quot;)
-</pre></div>
-</div>
-<img alt="../../_images/113.png" class="align-center" src="../../_images/113.png" />
-</li>
-<li><p class="first">You can see the output printed on the console. A more useful way to
-store the output would be in a file. You can type the following code
-to create a file and write the output there. Replace the file path
-with a path on your own system. Note that we add <code class="docutils literal"><span class="pre">\n</span></code> at the end
-of our line formatting. This is to add a newline after we add the
-data for each feature.</p>
-<div class="code python highlight-python"><div class="highlight"><pre>with open(&quot;/home/ian/airports.csv&quot;,&quot;w&quot;) as output_file:
-    for f in layer.getFeatures():
-        geom = f.geometry()
-        line = f&quot;{f[&#39;name&#39;]:50s}\t{f[&#39;iata_code&#39;]},\t({geom.asPoint().y():.2f},{geom.asPoint().x():.2f})\n&quot;
-        o=output_file.write(line)
-</pre></div>
-</div>
-<img alt="../../_images/123.png" class="align-center" src="../../_images/123.png" />
-</li>
-<li><p class="first">You can go to the output file location you specified and open the
-text file. You will see the data from the airports shapefile that we
-extracted using python scripting.</p>
-<img alt="../../_images/133.png" class="align-center" src="../../_images/133.png" />
-</li>
+<img alt="../../_images/10.gif" class="align-center" src="../../_images/10.gif" />
+<ol class="arabic simple" start="11">
+<li>Now we have all the pieces that we can stitch together to generate our desired output. Type the following code to print the name, iata_code, latitude and longitude of each of the airport features. Here we are using the <code class="docutils literal"><span class="pre">.format()</span></code> method which gives more control on printing multiple variables. The <code class="docutils literal"><span class="pre">.2f</span></code> notation is to limit the coordinates to 2 decimals.</li>
 </ol>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+  <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">&#39;{},{},{:.2f},{:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;iata_code&#39;</span><span class="p">],</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()))</span>
+</pre></div>
+</div>
+<img alt="../../_images/11.gif" class="align-center" src="../../_images/11.gif" />
+<ol class="arabic simple" start="12">
+<li>You can see the output printed on the console. A more useful way to store the output would be in a file. You can type the following code to create a file and write the output there. Replace the file path with a path on your own system. Note that we add <code class="docutils literal"><span class="pre">\n</span></code> at the end of our line formatting. This is to add a newline after we add the data for each feature.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Bemerkung</p>
+<p class="last">There are 2 levels of code blocks below. Do make sure to add 4 spaces to the code starting line 3.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/Users/ujaval/Desktop/airports.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+  <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s">&#39;{},{},{:.2f},{:.2f}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;iata_code&#39;</span><span class="p">],</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/12.gif" class="align-center" src="../../_images/12.gif" />
+<ol class="arabic simple" start="13">
+<li>You can go to the output file location you specified and open the text file. You will see the data from the airports shapefile that we extracted using python scripting.</li>
+</ol>
+<img alt="../../_images/133.png" class="align-center" src="../../_images/133.png" />
 </div>
 </div>
 
@@ -411,7 +355,7 @@ extracted using python scripting.</p>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Mar 12, 2019.<br/>
+      Zuletzt aktualisiert am Mar 22, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
