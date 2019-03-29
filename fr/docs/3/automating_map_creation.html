@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Automating Map Creation with Print Layout Atlas (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Création automatisée de cartes avec l’Atlas de l’outil de mise en page (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -82,7 +82,7 @@
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../making_a_map.html">Créer une carte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_attributes.html">Travailler avec les attributs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../importing_spreadsheets_csv.html">Importer des tableurs ou des fichiers CSV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_plugins.html">Using Plugins</a></li>
@@ -107,14 +107,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpolating Point Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Traitement par lots en utilisant le framework de traitement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Création automatisée de cartes avec l&#8217;Atlas de l&#8217;outil de mise en page (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Using the QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../counting_vertices.html">Counting Number of Vertices in a Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Écrire des scripts Python pour la structure de traitement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find_neighbor_polygons.html">Find Neighbor Polygons in a Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
@@ -231,52 +231,47 @@
       
 
   <div class="section" id="automating-map-creation-with-print-layout-atlas-qgis3">
-<h1>Automating Map Creation with Print Layout Atlas (QGIS3)<a class="headerlink" href="#automating-map-creation-with-print-layout-atlas-qgis3" title="Lien permanent vers ce titre">¶</a></h1>
-<p>If your organization publishes printed or online maps, you often would need to
-create many maps with the same template - usually one for each administrative
-unit or a region of interest. Creating these maps manually can take a long time
-and if you want to update these on a regular basis, it can turn into a chore.
-QGIS has a tool called <code class="docutils literal"><span class="pre">Atlas</span></code> that can help you create a map template and
-easily publish a large number of maps for different geographic regions. If you
-are not familiar with the basics of Print Layout, please go through the
-<a class="reference internal" href="../making_a_map.html"><em>Créer une carte</em></a> tutorial.</p>
+<h1>Création automatisée de cartes avec l&#8217;Atlas de l&#8217;outil de mise en page (QGIS3)<a class="headerlink" href="#automating-map-creation-with-print-layout-atlas-qgis3" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Si votre organisation publie des cartes papier ou en ligne, vous pouvez avoir besoin de créer plusieurs cartes à partir du même modèle, cela peut être une carte par zone administrative ou sur différentes régions. La création manuelle de ces cartes peut prendre du temps et si vous souhaitez les mettre à jour régulièrement, cela peut devenir une véritable corvée. QGIS dispose de l&#8217;outil  <code class="docutils literal"><span class="pre">Atlas</span></code>  qui peut vous permettre de créer un modèle utilisable pour les différentes régions à cartographier.
+Si vous n&#8217;êtes pas familier avec l&#8217;outil de mise en page, vous pouvez reprendre le tutoriel <a class="reference internal" href="making_a_map.html"><em>Making a Map (QGIS3)</em></a></p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Lien permanent vers ce titre">¶</a></h2>
-<p>This tutorial shows how to create wetlands map for each county in the state of
-Hawaii.</p>
+<h2>Description de la tache<a class="headerlink" href="#overview-of-the-task" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ce tutoriel vous montre comment créer une carte des zones humides pour chaque région de l&#8217;état de Hawaii</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>Autres compétences abordées<a class="headerlink" href="#other-skills-you-will-learn" title="Lien permanent vers ce titre">¶</a></h3>
 <ul class="simple">
-<li>Using <code class="docutils literal"><span class="pre">Inverted</span> <span class="pre">Polygons</span></code> style renderer to fill areas outside of polygons.</li>
-<li>Write an expression in the <code class="docutils literal"><span class="pre">Rule</span> <span class="pre">Based</span></code> style renderer to show only
-the current feature in Atlas.</li>
-<li>Write an expression to create dynamic labels in Print Layout.</li>
-<li>Using <code class="docutils literal"><span class="pre">Shapeburst</span> <span class="pre">fill</span></code> style renderer to create a dual-tone polygon fill.</li>
+<li><p class="first">Utiliser le style &#8220;polygones inversé&#8221; pour représenter les zones hors des polygones.</p>
+</li>
+<li><p class="first">Réaliser un style basé sur une règle pour représenter uniquement les entités présentes dans un Atlas</p>
+</li>
+<li><p class="first">Ecrivez une expression pour créer des étiquettes dynamiques dans la mise en page.</p>
+</li>
+<li><p class="first">Utilier le style &#8220;Remplissage dégradé en suivant la forme&#8221; pour créer un remplissage avec deux couleurs.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Lien permanent vers ce titre">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://planning.hawaii.gov/gis/download-gis-data/">GIS Data Layers</a> from <a class="reference external" href="http://planning.hawaii.gov/">State of Hawaii -
-Office of Planning</a></p>
-<p>Download the <a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip">Wetlands</a> layer from
-Biologic and Ecologic category.</p>
-<p>Download the <a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/county10.shp.zip">Census County Boundaries 2010</a> layer from the
-Cultural and Demographic category.</p>
-<p>For convenience, you may directly download a copy of both the datasets from the links
-below:</p>
+<h2>Obtenir les données<a class="headerlink" href="#get-the-data" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Nous allons utiliser les données SIG &lt;<a class="reference external" href="http://planning.hawaii.gov/gis/download-gis-data/">http://planning.hawaii.gov/gis/download-gis-data/</a>&gt;`_ du service de planification de l&#8217;état de Hawaii  &lt;<a class="reference external" href="http://planning.hawaii.gov/">http://planning.hawaii.gov/</a>&gt;`_</p>
+<p>Téléchargez la couche de   <a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip">zones humides</a>  depuis la catégorie  Biologie et écologie.</p>
+<p>Télécharger les données du <a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/county10.shp.zip">Recensement County Boundaries 2010</a>
+depuis la catégorie culture et démographie</p>
+<p>Par soucis de simplicité, les deux jeux de données sont téléchargeables directement aux liens ci-dessous:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/HI_Wetlands.shp.zip">HI_Wetlands.shp.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/county10.shp.zip">county10.shp.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#hawaii" id="id1">[HAWAII]</a></p>
+<p>Source des données <a class="reference internal" href="../credits.html#hawaii" id="id1">[HAWAII]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Lien permanent vers ce titre">¶</a></h2>
 <ol class="arabic simple">
-<li>Locate the <code class="docutils literal"><span class="pre">HI_Wetlands.shp.zip</span></code> file in the QGIS Browser and expand it. Select the <code class="docutils literal"><span class="pre">HI_Wetlands_Poly.shp</span></code> file and drag it to the canvas. This layer contains polygons representing wetlands in the entire state of Hawaii.</li>
+<li><p class="first">Utilisez l&#8217;explorateur QGIS pour trouver le fichier &#8220;HI_Wetlands.sh.zip&#8221; et le décompresser. Sélectionnez le fichier &#8220;HI_Wetlands_Poly.shp&#8221; et glissez-le dans le canevas de carte. Cette couche contient des polygones qui représentent les marais dans l&#8217;état d&#8217;Hawaii.</p>
+</li>
 </ol>
 <img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
 <ol class="arabic simple" start="2">
-<li>Since we want to make separate wetlands map for each county in the state, we will need the county boundaries layer. Browse to the <code class="docutils literal"><span class="pre">county10.shp.zip</span></code> file and expand it. Select the <code class="docutils literal"><span class="pre">county10.shp</span></code> file and drag it to the canvas.</li>
+<li><p class="first">Étant donné que nous souhaitons réaliser des cartes différentes pour chaque région de l&#8217;état, nous allons utiliser la couche de frontière. Trouver le fichier <code class="docutils literal"><span class="pre">county10.shp.zip</span></code> puis décompressez-le. Sélectionnez  le fichier &#8220;country10.shp&#8221; et glissez-le dans le canevas de carte.</p>
+</li>
 </ol>
 <img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
 <ol class="arabic simple" start="3">
@@ -477,7 +472,7 @@ below:</p>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Mis à jour le Mar 28, 2019.<br/>
+      Mis à jour le Mar 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

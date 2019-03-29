@@ -80,7 +80,7 @@
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introductie</a></li>
-<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Een kaart maken</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Werken met attributen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Werkbladen of CSV-bestanden importeren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Plug-ins gebruiken</a></li>
@@ -104,7 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="counting_vertices.html">Aantal punten in een laag tellen</a></li>
@@ -112,7 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Python-scripts schrijven voor framework Processing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Taken voor QGIS uitvoeren en in schema zetten</a></li>
 <li class="toctree-l1"><a class="reference internal" href="find_neighbor_polygons.html">Naburige polygonen in een laag zoeken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Samenvoegen van tabellen uitvoeren (PyQGIS)</a></li>
@@ -224,7 +224,7 @@
 <h1>Python-scripts schrijven voor framework Processing<a class="headerlink" href="#writing-python-scripts-for-processing-framework" title="Permalink naar deze titel">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Waarschuwing</p>
-<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/processing_python_scripts.html"><em>Writing Python Scripts for Processing Framework (QGIS3)</em></a></p>
+<p class="last">Een nieuwe versie van deze handleiding is beschikbaar op <a class="reference internal" href="3/processing_python_scripts.html"><em>Python-scripts schrijven voor framework Processing (QGIS3)</em></a></p>
 </div>
 <p>Men kan zelfstandige scripts in Pyqgis schrijven die kunnen worden uitgevoerd in de Python Console in QGIS. Met een aantal aanpassingen kunt u uw scripts voor Pyqgis ook uitvoeren via het framework Processing. Dat heeft een aantal voordelen. Ten eerste is het invoeren van invoer door de gebruiker en het schrijven van uitvoerbestanden veel eenvoudiger omdat het framework Processing hier een gestandaardiseerde gebruikersinterface voor biedt. Ten tweede, door uw script te hebben in de Processing Toolbox kan het ook deel uitmaken van elk Model voor Processing of worden uitgevoerd als een Batch-taak met meerdere invoer. Deze handleiding zal laten zien hoe een aangepast script voor Python te schrijven dat deel kan uitmaken van het framework Processing in QGIS.</p>
 <div class="section" id="overview-of-the-task">
@@ -249,12 +249,12 @@
 <li><p class="first">Open QGIS en ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Vectorlaag toevoegen</span>. Blader naar het gedownloade bestand <code class="docutils literal"><span class="pre">ne_10_admin_0_countries.zip</span></code> en laadt de laag <code class="docutils literal"><span class="pre">ne_10_admin_0_countries</span></code>. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1137.png" class="align-center" src="../_images/1137.png" />
+<img alt="../_images/1141.png" class="align-center" src="../_images/1141.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Vergroot de groep <span class="guilabel">Scripts</span> in de <span class="guilabel">Processing Toolbox</span> en selecteer <span class="guilabel">Nieuw script aanmaken</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2101.png" class="align-center" src="../_images/2101.png" />
+<img alt="../_images/2104.png" class="align-center" src="../_images/2104.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Het begin van het script moet voldoen aan de specificaties voor invoer en uitvoer om een script voor Python te kunnen laten herkennen als een script voor Processing. Dat zal worden gebruikt om de gebruikersinterface te construeren om het script uit te voeren. U kunt meer te weten komen over de indeling van deze regels in de <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/scripts.html">QGIS Processing-documentatie</a>. Voer de volgende regels in de <span class="guilabel">Script editor</span> in. Hier specificeren we 3 gebruikersinvoeren: <code class="docutils literal"><span class="pre">dissolve_layer</span></code>, <code class="docutils literal"><span class="pre">dissolve_field</span></code> en <code class="docutils literal"><span class="pre">sum_field</span></code>. Merk op dat we <code class="docutils literal"><span class="pre">dissolve_layer</span></code> toevoegen na de beide definities voor veldinvoer. Dit betekent dat de invoer vooraf zal worden gevuld met de keuze van de velden in <code class="docutils literal"><span class="pre">dissolve_layer</span></code>. We specificeren ook de <code class="docutils literal"><span class="pre">output_layer</span></code> als de uitvoer vectorlaag. Klik op de knop <span class="guilabel">Opslaan</span>.</p>
 </li>
@@ -265,7 +265,7 @@
 ##output_layer=output vector
 </pre></div>
 </div>
-<img alt="../_images/355.png" class="align-center" src="../_images/355.png" />
+<img alt="../_images/360.png" class="align-center" src="../_images/360.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Noem het script <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> en sla het op op de standaard locatie in de map <span class="menuselection">.qgis2 ‣ processing ‣ scripts</span>.</p>
 </li>
@@ -275,12 +275,12 @@
 <li><p class="first">Klik, terug in de <span class="guilabel">Script editor</span>, op de knop <span class="guilabel">Start algoritme</span> om een voorbeeld te zien van de gebruikersinterface.</p>
 </li>
 </ol>
-<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
+<img alt="../_images/535.png" class="align-center" src="../_images/535.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">U ziet dat we, slechts door het toevoegen van een aantal regels, een keurige gebruikersinterface hebben om de invoer te kunnen specificeren. Het is ook consistent met alle andere algoritmes voor Processing, dus is er geen leercurve voor het gebruiken van uw eigen aangepaste algoritme.</p>
 </li>
 </ol>
-<img alt="../_images/631.png" class="align-center" src="../_images/631.png" />
+<img alt="../_images/632.png" class="align-center" src="../_images/632.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Voer, in de <span class="guilabel">Script editor</span>, de volgende code in. Het zal u opvallen dat we enkele speciale methoden gebruiken zoals <code class="docutils literal"><span class="pre">processing.getObject()</span></code> en <code class="docutils literal"><span class="pre">processing.features()</span></code>. Dit zijn wrappers voor het gemak die het eenvoudiger maken om met gegevens te werken. U kunt hier meer over te weten komen in het gedeelte <a class="reference external" href="https://docs.qgis.org/2.8/nl/docs/user_manual/processing/console.html#additional-functions-for-handling-data">Aanvullende functies voor het afhandelen van gegevens</a> van de QGIS Processing-documentatie. Klik op <span class="guilabel">Opslaan</span> om de nieuw ingevoerde code op te slaan en dan op de knop <span class="guilabel">X</span> om de bewerker te sluiten.</p>
 </li>
@@ -303,32 +303,32 @@
 <span class="k">print</span> <span class="n">unique_values</span>
 </pre></div>
 </div>
-<img alt="../_images/730.png" class="align-center" src="../_images/730.png" />
+<img alt="../_images/731.png" class="align-center" src="../_images/731.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Bij het schrijven van code is het belangrijk om de fouten te kunnen zien en uw code te kunnen debuggen. Uw scripts voor Processing kunnen eenvoudig worden gedebugd via de ingebouwde Python Console. Ga, in het hoofdvenster van QGIS, naar <span class="menuselection">Plug-ins ‣ Python Console</span>. Zoek, als de console eenmaal is geopend, naar uw script in de <span class="guilabel">Processing Toolbox</span> en dubbelklik erop om het te starten.</p>
 </li>
 </ol>
-<img alt="../_images/827.png" class="align-center" src="../_images/827.png" />
+<img alt="../_images/829.png" class="align-center" src="../_images/829.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Selecteer <code class="docutils literal"><span class="pre">SUBREGION</span></code> als het <span class="guilabel">dissolve field</span>. U mag elk veld kiezen als het <span class="guilabel">sum field</span> omdat het script nog geen code heeft om dat af te handelen. Klik op <span class="guilabel">Run</span>.</p>
 </li>
 </ol>
-<img alt="../_images/927.png" class="align-center" src="../_images/927.png" />
+<img alt="../_images/928.png" class="align-center" src="../_images/928.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">U zult een dialoogvenster voor foutberichten zien. Dat werd verwacht omdat het script nog niet volledig is en nog geen uitvoer genereert.</p>
 </li>
 </ol>
-<img alt="../_images/1026.png" class="align-center" src="../_images/1026.png" />
+<img alt="../_images/1028.png" class="align-center" src="../_images/1028.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">In het hoofdvenster van QGIS zult u de uitvoer voor debuggen van het script zien afgedrukt in de console. Dit is een handige manier om argumenten voor afdrukken toe te voegen en tussenliggende waarden voor variabelen te zien.</p>
 </li>
 </ol>
-<img alt="../_images/1138.png" class="align-center" src="../_images/1138.png" />
+<img alt="../_images/1142.png" class="align-center" src="../_images/1142.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Laten we terug gaan naar het bewerken van het script door met rechts te klikken op het script en te selecteren <span class="guilabel">Script bewerken</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1228.png" class="align-center" src="../_images/1228.png" />
+<img alt="../_images/1229.png" class="align-center" src="../_images/1229.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Voer de volgende code in om het script te voltooien. Merk op dat we het bestaande algoritme Dissolve in QGIS gebruiken via Processing met behulp van de methode <code class="docutils literal"><span class="pre">processing.runalg()</span></code>.</p>
 </li>
@@ -359,7 +359,7 @@
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1326.png" class="align-center" src="../_images/1326.png" />
+<img alt="../_images/1327.png" class="align-center" src="../_images/1327.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Voer het algoritme uit door <code class="docutils literal"><span class="pre">SUBREGION</span></code> te selecteren als het <span class="guilabel">dissolve field</span> en <code class="docutils literal"><span class="pre">POP_EST</span></code> als het <span class="guilabel">sum field</span>. Klik op <span class="guilabel">Run</span>.</p>
 </li>
@@ -388,12 +388,12 @@
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1621.png" class="align-center" src="../_images/1621.png" />
+<img alt="../_images/1622.png" class="align-center" src="../_images/1622.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Eén van de verborgen mogelijkheden van het framework Processing is dat alle algoritmes kunnen werken op geselecteerde objecten van een laag. Dat is enorm handig als u een algoritme wilt uitvoeren op een subset van een laag. Omdat ons script de methode <code class="docutils literal"><span class="pre">processing.features()</span></code> gebruikt om objecten te lezen, zal het de huidige selectie respecteren. Laten we, om dat te demonstreren, eerst een selectie maken. Klik op de knop <span class="guilabel">Selecteren van objecten gebruik makend van een expressie</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1720.png" class="align-center" src="../_images/1720.png" />
+<img alt="../_images/1721.png" class="align-center" src="../_images/1721.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Voer de volgende expressie in om objecten te selecteren uit Noord- en Zuid-Amerika en klik op <span class="guilabel">Selecteren</span>.</p>
 </li>
@@ -401,7 +401,7 @@
 <div class="highlight-none"><div class="highlight"><pre>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
 </pre></div>
 </div>
-<img alt="../_images/1821.png" class="align-center" src="../_images/1821.png" />
+<img alt="../_images/1822.png" class="align-center" src="../_images/1822.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">U zult de geselecteerde objecten zien geaccentueerd in geel. Klik met rechts op het script <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> en selecteer <span class="guilabel">Uitvoeren</span>.</p>
 </li>
@@ -411,7 +411,7 @@
 <li><p class="first">Selecteer de invoer zoals eerder en klik op <span class="guilabel">Run</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2015.png" class="align-center" src="../_images/2015.png" />
+<img alt="../_images/2016.png" class="align-center" src="../_images/2016.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">Een nieuwe <code class="docutils literal"><span class="pre">output</span> <span class="pre">layer</span></code> zal worden toegevoegd aan QGIS. Deze zal alleen de ontbonden geometrieën bevatten uit de geselecteerde objecten van de invoerlaag. U zult ook zien dat de <code class="docutils literal"><span class="pre">output</span> <span class="pre">layer</span></code>, zoals verwacht, slechts 2 velden zal bevatten.</p>
 </li>
@@ -421,12 +421,12 @@
 <li><p class="first">Een laatste maar belangrijk resterend punt is om ons algoritme te documenteren. Het framework Processing heeft leuke gereedschappen om Help te schrijven en er toegang tot te verkrijgen. Ga naar de <span class="guilabel">Script editor</span> en klik op de knop <span class="guilabel">Help-script bewerken</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2217.png" class="align-center" src="../_images/2217.png" />
+<img alt="../_images/2218.png" class="align-center" src="../_images/2218.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first">Vul de details in voor de verschillende elementen en klik op <span class="guilabel">OK</span>. Nu zal een gedetailleerde Help beschikbaar zijn voor alle gebruikers van uw script op de tab <span class="guilabel">Help</span> als zij het algoritme starten.</p>
 </li>
 </ol>
-<img alt="../_images/2316.png" class="align-center" src="../_images/2316.png" />
+<img alt="../_images/2317.png" class="align-center" src="../_images/2317.png" />
 <p>Hieronder staat het volledige script als verwijzing. U kunt het aanpassen zodat het aan uw eigen wensen voldoet.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">##dissolve_layer=vector</span>
 <span class="c">##dissolve_field=field dissolve_layer</span>
@@ -501,7 +501,7 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Mar 28, 2019.<br/>
+      Laatste aanpassing op Mar 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

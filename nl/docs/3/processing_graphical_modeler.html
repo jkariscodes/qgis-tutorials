@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Automating Complex Workflows using Processing Modeler (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -82,7 +82,7 @@
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introductie</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../making_a_map.html">Een kaart maken</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_attributes.html">Werken met attributen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../importing_spreadsheets_csv.html">Werkbladen of CSV-bestanden importeren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_plugins.html">Plug-ins gebruiken</a></li>
@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../counting_vertices.html">Aantal punten in een laag tellen</a></li>
@@ -114,7 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Python-scripts schrijven voor framework Processing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Taken voor QGIS uitvoeren en in schema zetten</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find_neighbor_polygons.html">Naburige polygonen in een laag zoeken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Samenvoegen van tabellen uitvoeren (PyQGIS)</a></li>
@@ -231,156 +231,186 @@
       
 
   <div class="section" id="automating-complex-workflows-using-processing-modeler-qgis3">
-<h1>Automating Complex Workflows using Processing Modeler (QGIS3)<a class="headerlink" href="#automating-complex-workflows-using-processing-modeler-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>GIS Workflows typically involve many steps - with each step generating intermediate output that is used by the next step. If you change the input data or want to tweak a parameter, you will need to run through the entire process again manually.  Fortunately, QGIS has a graphical modeler built-in that can help you define your workflow and run it with a single invocation. You can also run these workflows as a batch over a large number of inputs.</p>
+<h1>Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)<a class="headerlink" href="#automating-complex-workflows-using-processing-modeler-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>Werkstromen in GIS omvatten gewoonlijk vele stappen - waarin elke stap een tussenliggend resultaat genereert die wordt gebruikt in de volgende stap. Als u de invoergegevens wijzigt of een parameter aan wilt passen, zult u opnieuw handmatig het gehele proces moeten uitvoeren. Gelukkig heeft QGIS Grafische modellen bouwen ingebouwd dat u kan helpen uw werkstroom te definiëren en die uit te voeren met één enkele druk op de knop. U kunt deze werkstromen ook als batch uitvoeren over een groot aantal invoeren.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will take a point layer of maritime piracy incidents and create a processing model to produce a density map by aggregating them over a global hexagonal grid.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen een puntenlaag gebruiken van marietieme incidenten met piraten en een model voor verwerking maken om een dichtheidskaart te produceren door ze samen te voegen over een globaal hexagonaal raster.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
-<li>Using a global equal area projection and setting the Project CRS.</li>
-<li>Applying a Graduated symbology to a polygon layer.</li>
+<li><p class="first">Gebruiken van een globale equal area-projectie en instellen van het CRS voor het project.</p>
+</li>
+<li><p class="first">Toepassen van een symbologie Gradueel op een polygoonlaag.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p>National Geospatial-Intelligence Agency&#8217;s <a class="reference external" href="https://msi.nga.mil/NGAPortal/MSI.portal">Maritime Safety Information portal</a> provides a shapefile of all incidencts of maritine piracy in the form on <a class="reference external" href="https://msi.nga.mil/NGAPortal/MSI.portal?_nfpb=true&amp;_pageLabel=msi_portal_page_65">Anti-shipping Activity Messages</a>. Download the <a class="reference external" href="https://msi.nga.mil/MSISiteContent/StaticFiles/Files/ASAM_shp.zip">Arc Shape file</a> version of the database.</p>
-<p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> has several global vector
-layers. Download the <a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip">10m Physical Vectors - Land</a> containing Land polygons.</p>
-<p>For convenience, you may directly download a copy of the above layers from below:</p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p>National Geospatial-Intelligence Agency&#8217;s <a class="reference external" href="https://msi.nga.mil/NGAPortal/MSI.portal">Maritime Safety Information portal</a> verschaft een shapefile van alle incidenten van maritieme piraterij in de vorm van <a class="reference external" href="https://msi.nga.mil/NGAPortal/MSI.portal?_nfpb=true&amp;_pageLabel=msi_portal_page_65">Anti-shipping Activity Messages</a>. Download de <a class="reference external" href="https://msi.nga.mil/MSISiteContent/StaticFiles/Files/ASAM_shp.zip">Arc Shapefile</a> versie van de database.</p>
+<p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> heeft verscheidene globale vectorlagen. Download de <a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip">10m Physical Vectors - Land</a> die polygonen voor landen bevat.</p>
+<p>Voor het gemak kunt u direct een kopie downloaden van bovenstaande lagen vanaf de link hieronder:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ASAM_shp.zip">ASAM_shp.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_land.zip">ne_10m_land.zip</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#nga-msi" id="id1">[NGA_MSI]</a> <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
+<p>Gegevensbron: <a class="reference internal" href="../credits.html#nga-msi" id="id1">[NGA_MSI]</a> <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal"><span class="pre">ne_10m_land.zip</span></code> and select the <code class="docutils literal"><span class="pre">ne_10m_land.shp</span></code> layer. Drag the layer to the canvas. Next, locate the <code class="docutils literal"><span class="pre">ASAM_shp.zip</span></code> file. Expand it and select the <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18.shp</span></code> layer and drag it on to the canvas.</li>
+<li><p class="first">Zoek, in het paneel QGIS Browser, de map waar u uw gegevens hebt gedownload. Vergroot het item <code class="docutils literal"><span class="pre">ne_10m_land.zip</span></code> en selecteer de laag <code class="docutils literal"><span class="pre">ne_10m_land.shp</span></code>. Sleep de laag naar het kaartvenster. Zoek vervolgens het bestand <code class="docutils literal"><span class="pre">ASAM_shp.zip</span></code> op. Vergroot het en selecteer de laag <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18.shp</span></code> en sleep die naar het kaartvenster.</p>
+</li>
 </ol>
-<img alt="../../_images/116.png" class="align-center" src="../../_images/116.png" />
+<img alt="../../_images/119.png" class="align-center" src="../../_images/119.png" />
 <ol class="arabic simple" start="2">
-<li>The <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18.shp</span></code> layer does not have projection information associated with it, so you will be prompted to select a CRS in the <span class="guilabel">Coordinate Reference System Selector</span>. Here, the points are in the Latitude and Longitude coordinates, so select the <code class="docutils literal"><span class="pre">WGS</span> <span class="pre">84</span></code> CRS and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">De laag <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18.shp</span></code> heeft geen informatie over de projectie in zich, u zult dus gevraagd worden een CRS te selecteren in <span class="guilabel">Keuze Coördinaten ReferentieSysteem</span>. De punten staan hier in coördinaten van latitude en longitude, dus selecteer het CRS <code class="docutils literal"><span class="pre">WGS</span> <span class="pre">84</span></code> en klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/216.png" class="align-center" src="../../_images/216.png" />
+<img alt="../../_images/218.png" class="align-center" src="../../_images/218.png" />
 <ol class="arabic simple" start="3">
-<li>Once the layer is loaded, you can see the individual points representing incidents of piracy locations. Let&#8217;s start building our Processing model to process these layers. Go to <span class="menuselection">Processing ‣ Graphical Modeler...</span>.</li>
+<li><p class="first">Als de laag eenmaal is geladen kunt u de individuele punten zien die locaties van incidenten van piraterij weergeven. Laten we beginnen met het bouwen van ons model voor Processing om deze lagen te verwerken. Ga naar <span class="menuselection">Processing ‣ Grafische modellen bouwen…</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/315.png" class="align-center" src="../../_images/315.png" />
+<img alt="../../_images/317.png" class="align-center" src="../../_images/317.png" />
 <ol class="arabic simple" start="4">
-<li>In the <span class="guilabel">Processing Modeler</span> dialog, locate the <span class="guilabel">Model Properties</span> panel. Enter <code class="docutils literal"><span class="pre">piracy</span> <span class="pre">hexbin</span></code> as the <span class="guilabel">Name</span> of the model and <code class="docutils literal"><span class="pre">projects</span></code> as the <span class="guilabel">Groups</span>. Click the <span class="guilabel">Save</span> button.</li>
+<li><p class="first">Zoek, in het dialoogvenster <span class="guilabel">Processing - Grafische modellen bouwen…</span>, het paneel <span class="guilabel">Modeleigenschappen</span> op. Voer <code class="docutils literal"><span class="pre">piraterij</span> <span class="pre">hexbin</span></code> in als de <span class="guilabel">Naam</span> van het model en <code class="docutils literal"><span class="pre">Projecten</span></code> als de <span class="guilabel">Groepen</span>. Klik op de knop <span class="guilabel">Opslaan</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/45.png" class="align-center" src="../../_images/45.png" />
 <ol class="arabic simple" start="5">
-<li>Save the model as <code class="docutils literal"><span class="pre">piracy_hexbin</span></code>.</li>
+<li><p class="first">Sla het model op als <code class="docutils literal"><span class="pre">piraterij_hexbin</span></code>.</p>
+</li>
 </ol>
-<img alt="../../_images/55.png" class="align-center" src="../../_images/55.png" />
+<img alt="../../_images/56.png" class="align-center" src="../../_images/56.png" />
 <ol class="arabic simple" start="6">
-<li>Now we can start building a graphical model of our processing pipeline.  The <span class="guilabel">Processing modeler</span> dialog contains a left-hand panel and a main canvas. On he left-hand panel, locate the <span class="guilabel">Inputs</span> panel listing various types of input data types. Scroll down and select the <span class="guilabel">+ Vector Layer</span> input. Drag it to the canvas.</li>
+<li><p class="first">Nu kunnen we beginnen met het bouwen van een grafisch model van onze pijplijn voor de verwerking. Het dialoogvenster <span class="guilabel">Processing - Grafische modellen bouwen</span> bevat een paneel aan de linkerkant en een hoofdvenster. Zoek, in het paneel aan de linkerkant, het paneel <span class="guilabel">Invoer</span>  dat verschillende typen voor gegevenstypen voor invoer vermeld. Scroll naar beneden en selecteer de invoer <span class="guilabel">+ Vectorlaag</span>. Sleep het naar het kaartvenster.</p>
+</li>
 </ol>
-<img alt="../../_images/65.png" class="align-center" src="../../_images/65.png" />
+<img alt="../../_images/66.png" class="align-center" src="../../_images/66.png" />
 <ol class="arabic simple" start="7">
-<li>Enter <code class="docutils literal"><span class="pre">Input</span> <span class="pre">Points</span></code> as the <span class="guilabel">Parameter name</span> and <code class="docutils literal"><span class="pre">Point</span></code> as the <span class="guilabel">Geometry type</span>. This input represents the piracy incidents point layer.</li>
+<li><p class="first">Voer <code class="docutils literal"><span class="pre">Invoer</span> <span class="pre">punten</span></code> in als de <span class="guilabel">Parameternaam</span> en <code class="docutils literal"><span class="pre">Punt</span></code> als het <span class="guilabel">Type geometrie</span>. Deze invoer geeft de puntenlaag van piraterij-incidenten weer.</p>
+</li>
 </ol>
-<img alt="../../_images/74.png" class="align-center" src="../../_images/74.png" />
+<img alt="../../_images/75.png" class="align-center" src="../../_images/75.png" />
 <ol class="arabic simple" start="8">
-<li>Next, drag another <span class="guilabel">+ Vector Layer</span> input to the canvas. Enter <code class="docutils literal"><span class="pre">Base</span> <span class="pre">Layer</span></code> as the <span class="guilabel">Parameter name</span> and <code class="docutils literal"><span class="pre">Polygon</span></code> as the <span class="guilabel">Geometry type</span>. This input represents the natural earth global land layer.</li>
+<li><p class="first">Sleep vervolgens nog een andere invoer <span class="guilabel">+ Vectorlaag</span> in het kaartvenster. Voer <code class="docutils literal"><span class="pre">Basislaag</span></code> in als de <span class="guilabel">Parameternaam</span> en <code class="docutils literal"><span class="pre">Polygoon</span></code> als het <span class="guilabel">Type geometrie</span>. Deze invoer geeft de Natural Earth globale landlaag weer.</p>
+</li>
 </ol>
-<img alt="../../_images/83.png" class="align-center" src="../../_images/83.png" />
+<img alt="../../_images/85.png" class="align-center" src="../../_images/85.png" />
 <ol class="arabic simple" start="9">
-<li>As we are generating a global hexagonal grid, we can ask the user to supply us the grid size as an input instead of hard-coding it as part of our model. This way, the user can quickly experiment with different grid sizes without changing the model at all. select a <span class="guilabel">+ Number</span> input and drag it to the canvas. Enter <code class="docutils literal"><span class="pre">Grid</span> <span class="pre">Size</span></code> as the <span class="guilabel">Parameter name</span> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">We vragen, omdat we een globaal hexagonaal raster genereren, de gebruiker om de grootte van het raster op te geven als invoer, in plaats van het hard te coderen als deel van ons model. Op deze manier kan de gebruiker snel experimenteren met verschillende grootten van het raster zonder op enige manier het model aan te passen. Selecteer een invoer <span class="guilabel">+ Getal</span> en sleep het in het kaartvenster. Voer <code class="docutils literal"><span class="pre">Rastergrootte</span></code> in als de <span class="guilabel">Parameternaam</span> en klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/94.png" class="align-center" src="../../_images/94.png" />
+<img alt="../../_images/95.png" class="align-center" src="../../_images/95.png" />
 <ol class="arabic simple" start="10">
-<li>Now that we have our user inputs defined, we are ready to add processing steps. All of the processing algorithms are available to you under the <span class="guilabel">Algorithms</span> tab. The first step in our pipeline will be to reproject the base layer to the Project CRS.  Search for <code class="docutils literal"><span class="pre">Reproject</span> <span class="pre">layer</span></code> algorithm and drag it to the canvas.</li>
+<li><p class="first">Nu we onze gebruikersinvoer gedefinieerd hebben, zijn we klaar om de stappen voor de verwerking toe te voegen. Alle algoritmen voor verwerking zijn beschikbaar voor u onder de tab <span class="guilabel">Algoritmen</span>. De eerste stap in onze pijplijn zal zijn om de basislaag opnieuw te projecteren naar het Project CRS.  Zoek naar het algoritme <code class="docutils literal"><span class="pre">Laag</span> <span class="pre">opnieuw</span> <span class="pre">projecteren</span></code> en sleep het naar het kaartvenster.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">The necessity of this reprojection step will become clear shortly. The grid generation algorithm requires us to specify the extent of the grid in the unit of the Project CRS. We can supply this reprojected layer to compute this extent.</p>
+<p class="last">De noodzakelijkheid van de stap om opnieuw te projecteren zal snel duidelijk worden. Het algoritme voor het genereren van het raster eist van ons om het bereik van het raster te specificeren in de eenheid van het Project CRS. We kunnen deze opnieuw geprojecteerde laag aanbieden om dat bereik te berekenen.</p>
 </div>
-<img alt="../../_images/103.png" class="align-center" src="../../_images/103.png" />
+<img alt="../../_images/105.png" class="align-center" src="../../_images/105.png" />
 <ol class="arabic simple" start="11">
-<li>In the <span class="guilabel">Reproject layer</span> dialog, select <code class="docutils literal"><span class="pre">Base</span> <span class="pre">Layer</span></code> as the <span class="guilabel">Input layer</span>. Check the <span class="guilabel">Use project CRS</span> as the <span class="guilabel">Target CRS</span>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">Laag opnieuw projecteren</span>, <code class="docutils literal"><span class="pre">Basislaag</span></code> als de <span class="guilabel">Invoerlaag</span>. Selecteer <span class="guilabel">Project-CRS gebruiken</span> als het <span class="guilabel">Doel-CRS</span>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/117.png" class="align-center" src="../../_images/117.png" />
+<img alt="../../_images/1110.png" class="align-center" src="../../_images/1110.png" />
 <ol class="arabic simple" start="12">
-<li>In the <span class="guilabel">Processing Modeler</span> canvas, you will notice a connection appear between the <span class="guilabel">+ Base Layer</span> input and the <span class="guilabel">Reproject layer</span> algorithm. This connection indicates the flow of our processing pipeline. Next step is to create a hexagonal grid. Search for the <code class="docutils literal"><span class="pre">Create</span> <span class="pre">grid</span></code> algorithm and drag it to the canvas.</li>
+<li><p class="first">In het kaartvenster van <span class="guilabel">Processing - Grafische modellen bouwen</span>, zult u een verbinding zien verschijnen tussen de invoer <span class="guilabel">+ Basislaag</span> en het algoritme <span class="guilabel">Laag opnieuw projecteren</span>. Deze verbinding geeft de stroomrichting aan van onze pijlijn voor d everwerking. De volgende stap is om een hexagonaal raster te maken. Zoek naar het algoritme <code class="docutils literal"><span class="pre">Grid</span> <span class="pre">maken</span></code> en sleep het naar het kaartvenster.</p>
+</li>
 </ol>
-<img alt="../../_images/124.png" class="align-center" src="../../_images/124.png" />
+<img alt="../../_images/125.png" class="align-center" src="../../_images/125.png" />
 <ol class="arabic simple" start="13">
-<li>In the <span class="guilabel">Generate grid</span> dialog, choose <code class="docutils literal"><span class="pre">Hexagon</span> <span class="pre">(polygon)</span></code> as the <span class="guilabel">Grid type</span>. Select <code class="docutils literal"><span class="pre">Extent</span> <span class="pre">of</span> <span class="pre">'Reprojected'</span> <span class="pre">from</span> <span class="pre">algorithm</span> <span class="pre">'Reproject</span> <span class="pre">Layer'</span></code> as the <span class="guilabel">Grid extent</span>. Click the <span class="guilabel">123</span> button under the <span class="guilabel">Horizonal spacing</span> label and choose <span class="guilabel">Model input</span>.</li>
+<li><p class="first">Kies, in het dialoogvenster <span class="guilabel">Grid maken</span>, <code class="docutils literal"><span class="pre">Hexagoon</span> <span class="pre">(polygoon)</span></code> als het <span class="guilabel">Type raster</span>. Selecteer <code class="docutils literal"><span class="pre">Extent</span> <span class="pre">of</span> <span class="pre">'Opnieuw</span> <span class="pre">geprojecteerd'</span> <span class="pre">van</span> <span class="pre">het</span> <span class="pre">algoritme</span> <span class="pre">'Laag</span> <span class="pre">opnieuw</span> <span class="pre">projecteren'</span></code> als het <span class="guilabel">Grid-bereik</span>. Klik op de knop <span class="guilabel">123</span> onder het label <span class="guilabel">Horizontale afstand</span> en kies <span class="guilabel">Invoer model</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/135.png" class="align-center" src="../../_images/135.png" />
+<img alt="../../_images/136.png" class="align-center" src="../../_images/136.png" />
 <ol class="arabic simple" start="14">
-<li>Select <code class="docutils literal"><span class="pre">Grid</span> <span class="pre">Size</span></code> input for <span class="guilabel">Using model input</span>. Repeat the same process for <span class="guilabel">Vertical Spacing</span>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selecteer invoer <code class="docutils literal"><span class="pre">Rastergrootte</span></code> voor <span class="guilabel">Invoer model gebruiken</span>. Herhaal hetzelfde proces voor <span class="guilabel">Verticale afstand</span>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/144.png" class="align-center" src="../../_images/144.png" />
 <ol class="arabic simple" start="15">
-<li>At this point, we have a global hexagonal grid. The grid spans the full extent of the base layer, including land areas and places where there are no points. Let&#8217;s filter out those grid polygons where there are no input points. Search for <code class="docutils literal"><span class="pre">Extract</span> <span class="pre">by</span> <span class="pre">location</span></code> algorithm and drag it to the canvas.</li>
+<li><p class="first">Op dit punt hebben we een globaal hexagonaal raster. Het raster omvat het volledige breik van de basislaag, inclusief landgebieden en plaatsen waar geen punten zijn. Laten we die rasterpolygonen waar geen invoerpunten zijn er uit filteren. Zoek naar het algoritme <code class="docutils literal"><span class="pre">Extract</span> <span class="pre">by</span> <span class="pre">location</span></code> en sleep het naar het kaartvenster.</p>
+</li>
 </ol>
 <img alt="../../_images/154.png" class="align-center" src="../../_images/154.png" />
 <ol class="arabic simple" start="16">
-<li>For <span class="guilabel">Extract features from</span>, select <code class="docutils literal"><span class="pre">'Grid'</span> <span class="pre">from</span> <span class="pre">algorithm</span> <span class="pre">'Generate</span> <span class="pre">Grid'</span></code>, <span class="guilabel">Where the features (geometric predicate)</span> as <code class="docutils literal"><span class="pre">Intersect</span></code> and <span class="guilabel">By compating to the features from</span> as <code class="docutils literal"><span class="pre">Input</span> <span class="pre">points</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selecteer voor <span class="guilabel">Objecten uitnemen uit</span> <code class="docutils literal"><span class="pre">'Raster'</span> <span class="pre">van</span> <span class="pre">het</span> <span class="pre">algoritme</span> <span class="pre">'Grid</span> <span class="pre">maken'</span></code>, <span class="guilabel">Waar de objecten (geometrisch voorvoegsel)</span> als <code class="docutils literal"><span class="pre">kruisen</span> <span class="pre">met</span></code> en <span class="guilabel">Door objecten te vergelijken van</span> als <code class="docutils literal"><span class="pre">Invoer</span> <span class="pre">punten</span></code>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/162.png" class="align-center" src="../../_images/162.png" />
+<img alt="../../_images/163.png" class="align-center" src="../../_images/163.png" />
 <ol class="arabic simple" start="17">
-<li>Now we have only those grid polygons that contain some input points. To aggregate these points, we will use <code class="docutils literal"><span class="pre">Count</span> <span class="pre">points</span> <span class="pre">in</span> <span class="pre">polygon</span></code> algorithm. Search and drag it to the canvas.</li>
+<li><p class="first">Nu hebben we alleen die polygonen van het raster die ook enkele invoerpunten bevatten. We zullen het algoritme <code class="docutils literal"><span class="pre">Punten</span> <span class="pre">in</span> <span class="pre">polygonen</span> <span class="pre">tellen</span></code> gebruiken om deze punten samen te voegen. Zoek het op en sleep het naar het kaartvenster.</p>
+</li>
 </ol>
-<img alt="../../_images/173.png" class="align-center" src="../../_images/173.png" />
+<img alt="../../_images/174.png" class="align-center" src="../../_images/174.png" />
 <ol class="arabic simple" start="18">
-<li>Select <code class="docutils literal"><span class="pre">'Extracted</span> <span class="pre">(location)'</span> <span class="pre">from</span> <span class="pre">algorithm</span> <span class="pre">'Extract</span> <span class="pre">by</span> <span class="pre">location'</span></code> as the value for <span class="guilabel">Polygons</span>. The <span class="guilabel">Points</span> layer would be <code class="docutils literal"><span class="pre">Input</span> <span class="pre">Points</span></code>. At the bottom, name the <span class="guilabel">Count</span> output layer as <code class="docutils literal"><span class="pre">Aggregated</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selecteer <code class="docutils literal"><span class="pre">'Uitgenomen</span> <span class="pre">(locatie)'</span> <span class="pre">from</span> <span class="pre">algorithm</span> <span class="pre">'Extract</span> <span class="pre">by</span> <span class="pre">location'</span></code> als de waarde voor <span class="guilabel">Polygonen</span>. De laag:guilabel:<cite>Punten</cite> zou <code class="docutils literal"><span class="pre">Invoer</span> <span class="pre">punten</span></code> moeten zijn. Noem, aan de onderzijde, de uitvoerlaag <span class="guilabel">Telling</span> <code class="docutils literal"><span class="pre">Samengevoegd</span></code>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/183.png" class="align-center" src="../../_images/183.png" />
+<img alt="../../_images/184.png" class="align-center" src="../../_images/184.png" />
 <ol class="arabic simple" start="19">
-<li>The model is now complete. Click the <span class="guilabel">Save</span> button.</li>
+<li><p class="first">Het model is nu compleet. Klik op de knop <span class="guilabel">Opslaan</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/193.png" class="align-center" src="../../_images/193.png" />
+<img alt="../../_images/194.png" class="align-center" src="../../_images/194.png" />
 <ol class="arabic simple" start="20">
-<li>Switch to the main QGIS window. You can find your newly created model in the <span class="guilabel">Processing Toolbox</span> under <span class="menuselection">Models ‣ projects ‣ piracy_hexbin</span>. Now it is time to run and test the model. As our goal is to aggregate the input points over hexagonal grids, it is important that the grids are generated using a equal-area projection. This will ensure that regardless of the location of the grid, it will cover exactly the same area. Our model doesn&#8217;t explicitely ask for a CRS, but uses whatever CRS is set as the <strong>Project CRS</strong>. Let&#8217;s choose a global equal area projection as the Project CRS. Go to <span class="menuselection">Project ‣ Properties</span>.</li>
+<li><p class="first">Schakel over naar het hoofdvenster van QGIS. U kunt u nieuw gemaakte model vinden in de <span class="guilabel">Processing Toolbox</span> onder <span class="menuselection">Modellen ‣ Projecten ‣ piraterij_hexbin</span>. Nu is het tijd om het uit te voeren en het model te testen. Het is beangrijk dat de ratsers wordne gegenereerd met behulp van een equal-area projectie omdat ons doel is om de invoerpunten samen te voegen in hexagonale rasters. Dit zal er voor zorgen, ongeacht de locatie van het raster, exact hetzelfde gebied te bedekken. Ons model vraagt niet expliciet naar een CRS, maar gebruikt altijd het CRS datis ingesteld als het <strong>Project CRS</strong>. Laten we een globale equal area projectie kiezen als het Project CRS. Ga naar <span class="menuselection">Project ‣ Eigenschappen</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/203.png" class="align-center" src="../../_images/203.png" />
+<img alt="../../_images/204.png" class="align-center" src="../../_images/204.png" />
 <ol class="arabic simple" start="21">
-<li>In the <span class="guilabel">Project Properties</span> dialog, switch to the <span class="guilabel">CRS</span> tab. We will use a global <strong>Mollweide</strong> projection for this exercise which is a equal area projection. Search for <code class="docutils literal"><span class="pre">Mollweide</span></code> in the <span class="guilabel">Filter</span> box and select <code class="docutils literal"><span class="pre">World_Mollweide</span> <span class="pre">EPSG:54009</span></code> as the CRS. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Schakel, in het dialoggvenster <span class="guilabel">Projecteigenschappen</span>, over naar de tab <span class="guilabel">CRS</span>. We zullen een globale <strong>Mollweide</strong> projectie gebruiken voor deze oefening, wat een equal area projectie is. Zoek naar <code class="docutils literal"><span class="pre">Mollweide</span></code> in het vak <span class="guilabel">Filter</span> en selecteer <code class="docutils literal"><span class="pre">World_Mollweide</span> <span class="pre">EPSG:54009</span></code> als het CRS. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/217.png" class="align-center" src="../../_images/217.png" />
+<img alt="../../_images/219.png" class="align-center" src="../../_images/219.png" />
 <ol class="arabic simple" start="22">
-<li>You will see the layers getting reprojected on-the-fly to the selected CRS. Locate the <code class="docutils literal"><span class="pre">piracy_hexbin</span></code> model in the <span class="guilabel">Processing Toolbox</span> and double-click it.</li>
+<li><p class="first">U zult zien dat de lagen direct opnieuw geprojecteerd worden naar het geselecteerde CRS. Zoek naar het model <code class="docutils literal"><span class="pre">piraterij_hexbin</span></code> in de <span class="guilabel">Processing Toolbox</span> en dubbelklik er op.</p>
+</li>
 </ol>
-<img alt="../../_images/223.png" class="align-center" src="../../_images/223.png" />
+<img alt="../../_images/224.png" class="align-center" src="../../_images/224.png" />
 <ol class="arabic simple" start="23">
-<li>Our <span class="guilabel">Base Layer</span> is the <code class="docutils literal"><span class="pre">ne_10m_land</span></code> and the <span class="guilabel">Input Points</span> layer is <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18</span></code>. The <span class="guilabel">Grid Size</span> needs to be specified in the units of the selected CRS. The World_Mollweide CRS unit is meters, so we specify <code class="docutils literal"><span class="pre">100000</span></code> m (100 Kms) as the <span class="guilabel">Grid Size</span>. Click <span class="guilabel">Run</span> to start the processing pipeline. Once the process finishes, click <span class="guilabel">Close</span>.</li>
+<li><p class="first">Onze <span class="guilabel">Basislaag</span> is de laag <code class="docutils literal"><span class="pre">ne_10m_land</span></code> en de laag <span class="guilabel">Invoer punten</span> is <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18</span></code>. De <span class="guilabel">Rastergrootte</span> dient te zijn gespecificeerd in de eenheden van het geselecteerde CRS. De eenheid voor het CRS World_Mollweide is meters, dus specificeren we <code class="docutils literal"><span class="pre">100000</span></code> m (100 Kms) als de <span class="guilabel">Rastergrootte</span>. Klik op <span class="guilabel">Uitvoeren</span> om het verwerken van de pijplijn te beginnen. Klik, als het proces eenmaal is voltooid, op <span class="guilabel">Close</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/232.png" class="align-center" src="../../_images/232.png" />
+<img alt="../../_images/233.png" class="align-center" src="../../_images/233.png" />
 <ol class="arabic simple" start="24">
-<li>You will see a new layer <code class="docutils literal"><span class="pre">Aggregated</span></code> loaded as the result of the model. As you explore, you will notice the layer contains an attribute called <em>NUMPOINTS</em> containing the number of piracy incidents points contained within that grid feature. Let&#8217;s style this layer to display this information better. Right-click the <code class="docutils literal"><span class="pre">Aggregated</span></code> layer and select <span class="guilabel">Properties</span>.</li>
+<li><p class="first">U zult dien dat een nieuwe laag <code class="docutils literal"><span class="pre">Samengevoegd</span></code> is geladen als resultaat van het model. Als u verder gaat verkennen zult u opmerken dat de laag een attribuut bevat, genaamd <em>NUMPOINTS</em>, dat het aantal punten van incidenten met piraten bevat binnen dat object van het raster. Laten we deze laag opmaken zodat die informatie beter wordt weergegeven. Klik met rechts op de laag <code class="docutils literal"><span class="pre">Samengevoegd</span></code> en selecteer <span class="guilabel">Eigenschappen</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/243.png" class="align-center" src="../../_images/243.png" />
+<img alt="../../_images/244.png" class="align-center" src="../../_images/244.png" />
 <ol class="arabic simple" start="25">
-<li>Switch to the <span class="guilabel">Symbology</span> tab. Select <code class="docutils literal"><span class="pre">Graduated</span></code> symbology and <code class="docutils literal"><span class="pre">NUMPOINTS</span></code> as the <span class="guilabel">Column</span>. Click <code class="docutils literal"><span class="pre">Change..</span></code> next to <span class="guilabel">Symbol</span> label.</li>
+<li><p class="first">Schakel naar de tab <span class="guilabel">Symbologie</span>. Selecteer de symbologie <code class="docutils literal"><span class="pre">Gradueel</span></code> en <code class="docutils literal"><span class="pre">NUMPOINTS</span></code> als de <span class="guilabel">Kolom</span>. Klik op <code class="docutils literal"><span class="pre">Wijizgen…</span></code> naast het label <span class="guilabel">Symbool</span>.</p>
+</li>
 </ol>
-<img alt="../../_images/253.png" class="align-center" src="../../_images/253.png" />
+<img alt="../../_images/254.png" class="align-center" src="../../_images/254.png" />
 <ol class="arabic simple" start="26">
-<li>Select <span class="guilabel">Simple fill</span> symbol and check the <span class="guilabel">Transparent Stroke</span> button under <span class="guilabel">Stroke color</span>. This is to make the hexagon edges transparent.</li>
+<li><p class="first">Selecteer het symbool <span class="guilabel">Standaard vulling</span> en sekecteer het vak <span class="guilabel">Transparante lijn</span> onder <span class="guilabel">Lijnkleur</span>. Dit om de randen van de hexagonen transparant te maken.</p>
+</li>
 </ol>
-<img alt="../../_images/263.png" class="align-center" src="../../_images/263.png" />
+<img alt="../../_images/264.png" class="align-center" src="../../_images/264.png" />
 <ol class="arabic simple" start="27">
-<li>Click the dropdown next to <span class="guilabel">Color ramp</span> and select the <code class="docutils literal"><span class="pre">Viridis</span></code> ramp. Click the dropdown again and select <span class="guilabel">Invert Color Ramp</span> to reverse the order of color.</li>
+<li><p class="first">Klik op de keuzelijst naast <span class="guilabel">Kleurverloop</span> en selecteer het kleurverloop <code class="docutils literal"><span class="pre">Viridis</span></code>. Klik opnieuw op de keuzelijst en selecteer <span class="guilabel">Kleurverloop omdraaien</span> om de volgorde van de kleuren om te draaien.</p>
+</li>
 </ol>
-<img alt="../../_images/273.png" class="align-center" src="../../_images/273.png" />
+<img alt="../../_images/274.png" class="align-center" src="../../_images/274.png" />
 <ol class="arabic simple" start="28">
-<li>The Graduated symbology will divide the values in the selected column into distinct classes and assign a different color to each of the classes. Select <code class="docutils literal"><span class="pre">Natural</span> <span class="pre">Breaks</span> <span class="pre">(Jenks)</span></code> as the <span class="guilabel">Mode</span> and click <span class="guilabel">Classify</span> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">De symbologie Graduaeel zal de waarden in de geselecteerde kolom verdelen in afzonderlijke klassen en een verschillende kleur aan elk van die klassen toewijzen. Selecteer <code class="docutils literal"><span class="pre">Natuurlijke</span> <span class="pre">grenzen</span> <span class="pre">(Jenks)</span></code> als de <span class="guilabel">Modus</span> en klik op <span class="guilabel">Classificeren</span> en klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">see <a class="reference internal" href="../basic_vector_styling.html"><em>Basis opmaken van vectoren</em></a> for a detailed explanation of different modes.</p>
+<p class="last">bekijk <a class="reference internal" href="../basic_vector_styling.html"><em>Basis opmaken van vectoren</em></a> voor een gedetailleerde uitleg van de verschillende modi.</p>
 </div>
-<img alt="../../_images/283.png" class="align-center" src="../../_images/283.png" />
+<img alt="../../_images/284.png" class="align-center" src="../../_images/284.png" />
 <ol class="arabic simple" start="29">
-<li>Back in the main QGIS window, turn off the <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18</span></code> layer. You will see a nice visualization of piracy hotspots across the globe.</li>
+<li><p class="first">Schakel, terug in het hoofdvenster van QGIS, de laag <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18</span></code> uit. U zult een aardige visualisatie van hotspots van piraterij over de gehele wereld zien.</p>
+</li>
 </ol>
-<img alt="../../_images/293.png" class="align-center" src="../../_images/293.png" />
-<p>Now that you have encoded the full data pipeline in the model, it is easy to reproduce your results. A model also allows you to experiment quickly without manually repeating each intermediate step every time. If your inputs change over time, say an updated database of piracy is released after a few months, you can run your model on that input to generate a similar visualization without having to remember each step.</p>
+<img alt="../../_images/294.png" class="align-center" src="../../_images/294.png" />
+<p>Nu u de volledige pijplijn voor de gegevens het gecodeerd in het model, is het eenvoudig om uw resultaten te reproduceren. Een model stelt u ook in staat om snel te experimenteren zonder elke keer elke tussenliggende stap opnieuw uit te moeten voeren. Als uw invoer gedurende de tijd wijzigt, bijvoorbeeld een bijgewerkte database van piraterij wordt na een paar maanden uitgegeven, kunt u uw model op die invoer uitvoeren om een soortgelijke visualisatie te genereren zonder elke stap te hoevn onthouden.</p>
 </div>
 </div>
 
@@ -406,7 +436,7 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Mar 28, 2019.<br/>
+      Laatste aanpassing op Mar 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
