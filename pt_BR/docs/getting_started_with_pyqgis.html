@@ -263,7 +263,7 @@
 <li><p class="first">Você verá um novo painel aberto na parte inferior do QGIS. Você verá um prompt como <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> na parte inferior onde você pode digitar comandos. Para interagir com o ambiente QGIS, devemos usar avariável  <code class="docutils literal"><span class="pre">iface</span></code>. Para acessar a camada ativa no momento no QGIS, você pode digitar o seguinte e pressione <code class="kbd docutils literal"><span class="pre">Enter</span></code>. Este comando obtém a referência para a camada atualmente carregada e armazena na variável <code class="docutils literal"><span class="pre">layer</span></code>.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../_images/522.png" class="align-center" src="../_images/522.png" />
@@ -271,7 +271,7 @@
 <li><p class="first">Há uma função útil chamada <code class="docutils literal"><span class="pre">dir()</span></code> no python que mostra todos os métodos disponíveis para qualquer objeto. Isso é útil quando você não tem certeza do quais funções estão disponíveis para o objeto. Execute o seguinte comando para ver quais as operações que podemos fazer sobre a variável <code class="docutils literal"><span class="pre">layer</span></code>.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="nb">dir</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/620.png" class="align-center" src="../_images/620.png" />
@@ -279,7 +279,7 @@
 <li><p class="first">Você verá uma longa lista de funções disponíveis. Por agora, vamos usar uma função chamada <code class="docutils literal"><span class="pre">getFeatures()</span></code> que recebe a referência a todas as características de uma camada. No nosso caso, cada recurso será um ponto que representa um aeroporto. Você pode digitar o seguinte comando para percorrer cada um dos recursos na camada atual. Certifique-se de adicionar 2 espaços antes de digitar a segunda linha.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
   <span class="k">print</span> <span class="n">f</span>
 </pre></div>
 </div>
@@ -288,8 +288,8 @@
 <li><p class="first">Como você verá na saída, cada linha contém uma referência a um recurso dentro da camada. A referência ao recurso é armazenada na variável <code class="docutils literal"><span class="pre">f</span></code>. Podemos usar a variável <code class="docutils literal"><span class="pre">f</span></code> para acessar os atributos de cada recurso. Digite o seguinte para imprimir o <code class="docutils literal"><span class="pre">iata_code</span></code> e o <code class="docutils literal"><span class="pre">name</span></code>  para cada recurso aeroporto.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
-  <span class="k">print</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;iata_code&#39;</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+  <span class="k">print</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;iata_code&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/819.png" class="align-center" src="../_images/819.png" />
@@ -297,7 +297,7 @@
 <li><p class="first">Então agora você sabe como acessar programaticamente o atributo de cada recurso em uma camada. Agora, vamos ver como podemos acessar as coordenadas do recurso. As coordenadas de um recurso vetorial podem ser acessadas chamando a função  <code class="docutils literal"><span class="pre">geometry()</span></code>. Esta função retorna um objeto de geometria que pode armazenar na variável <code class="docutils literal"><span class="pre">geom</span></code>. Você pode executar a função <code class="docutils literal"><span class="pre">asPoint()</span></code> no objeto de geometria para obter as  coordenadas x e y do ponto. Se o recurso é uma linha ou um polígono, você pode usar as funções <code class="docutils literal"><span class="pre">asPolyline()</span></code> ou <code class="docutils literal"><span class="pre">asPolygon()</span></code> . Digite o seguinte código e pressione <code class="kbd docutils literal"><span class="pre">Enter</span></code> para ver a coordenadas x e y de cada recurso.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
   <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
   <span class="k">print</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span>
 </pre></div>
@@ -307,7 +307,7 @@
 <li><p class="first">O que se poderia fazer para obter apenas a coordenada <code class="docutils literal"><span class="pre">x</span></code> do recurso? Você pode chamar os função <code class="docutils literal"><span class="pre">x()</span></code> sobre o objeto de ponto e obter sua coordenada x.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
   <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
   <span class="k">print</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
 </pre></div>
@@ -317,9 +317,9 @@
 <li><p class="first">Agora temos todas as peças que possamos unir para gerar a saída desejada. Digite o seguinte código para imprimir o nome, iata_code, latitude e longitude de cada uma das características do aeroporto. O <code class="docutils literal"><span class="pre">%s</span></code> e <code class="docutils literal"><span class="pre">%f</span></code> são maneiras de formatar uma string e número de variáveis.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
   <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
-  <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%f</span><span class="s">, </span><span class="si">%f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;iata_code&#39;</span><span class="p">],</span>
+  <span class="k">print</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%f</span><span class="s1">, </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;iata_code&#39;</span><span class="p">],</span>
          <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -328,12 +328,12 @@
 <li><p class="first">Você pode ver a saída impressa no console. Uma maneira mais útil para armazenar a saída seria em um arquivo. Você pode digitar o seguinte código para criar um arquivo e escrever a saída nele. Substitua o caminho do arquivo com um caminho em seu próprio sistema. Note que nós adicionamos <code class="docutils literal"><span class="pre">\n</span></code> no final da nossa formatação de linha. Este vai adicionar uma nova linha depois de adicionar os dados para cada recurso. Você também deve observar a linha <code class="docutils literal"><span class="pre">unicode_line</span> <span class="pre">=</span> <span class="pre">line.encode</span> <span class="pre">('utf-8')</span></code>. Desde a nossa camada contém algumas características com caracteres Unicode, não podemos simplesmente escrevê-lo para um arquivo de texto. Nós precisamos codificar o texto usando a codificação UTF-8 e, em seguida, escrever para o arquivo de texto.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;c:/Users/Ujaval/Desktop/airports.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;c:/Users/Ujaval/Desktop/airports.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
   <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
-  <span class="n">line</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%f</span><span class="s">, </span><span class="si">%f</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s">&#39;iata_code&#39;</span><span class="p">],</span>
+  <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%f</span><span class="s1">, </span><span class="si">%f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;iata_code&#39;</span><span class="p">],</span>
           <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
-  <span class="n">unicode_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+  <span class="n">unicode_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
   <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">unicode_line</span><span class="p">)</span>
 <span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>

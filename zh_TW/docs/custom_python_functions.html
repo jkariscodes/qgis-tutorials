@@ -274,11 +274,11 @@
 <p class="first admonition-title">註解</p>
 <p class="last">UTM 是依照經度把全球投影成 1 到 60 區，每個 UTM 分區都是經度 6 度寬。這裡我們使用的是簡單的數學公式，依照經度的數值來尋找適當的 UTM 分區，所以請注意這個公式並不處理一些比較特殊的 UTM 分區。</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">qgis.gui</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">GetUtmZone</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
     <span class="n">centroid</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
     <span class="n">longitude</span> <span class="o">=</span> <span class="n">centroid</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
@@ -286,11 +286,11 @@
     <span class="n">zone_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(((</span><span class="n">longitude</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="n">latitude</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s">&#39;N&#39;</span>
+        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s">&#39;S&#39;</span>
+        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span>
 
-    <span class="k">return</span> <span class="s">&#39;</span><span class="si">%d%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/517.png" class="align-center" src="../_images/517.png" />
@@ -303,7 +303,7 @@
 <li><p class="first">切換到 <span class="guilabel">表示式</span> 分頁，在 <span class="guilabel">Select by expression</span> 視窗中，可看到在 <span class="guilabel">函數列表</span> 的區塊中有個 <span class="guilabel">Custom</span> 群組，其中會出現一個新的函數 <code class="docutils literal"><span class="pre">GetUtmZone</span></code>，這代表我們現在可以像使用其他函數一樣使用這個函數了。在文字編輯器中輸入以下表達式，就可以選擇所有落在 <code class="docutils literal"><span class="pre">40N</span></code> 的 UTM 分區中的點。按下 <span class="guilabel">選取</span>。（譯按：隨著 QGIS 版本的不同，你可能會看到 <code class="docutils literal"><span class="pre">$GetUtmZone</span></code> 或 <code class="docutils literal"><span class="pre">GetUtmZone()</span></code>，但都是一樣的操作方法。）</p>
 </li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre>$GetUtmZone = &#39;40N&#39;
+<div class="highlight-none"><div class="highlight"><pre><span></span>$GetUtmZone = &#39;40N&#39;
 </pre></div>
 </div>
 <img alt="../_images/715.png" class="align-center" src="../_images/715.png" />
@@ -326,7 +326,7 @@
 <li><p class="first">你會再次看到熟悉的表達式編輯器。我們要利用 <code class="docutils literal"><span class="pre">concat</span></code> 函數來連接 <code class="docutils literal"><span class="pre">name</span></code> 屬性和 GetUtmZone 函數的輸出字串，因此輸入以下的表達式後，按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
+<div class="highlight-none"><div class="highlight"><pre><span></span>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
 </pre></div>
 </div>
 <img alt="../_images/1119.png" class="align-center" src="../_images/1119.png" />

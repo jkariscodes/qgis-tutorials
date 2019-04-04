@@ -274,11 +274,11 @@
 <p class="first admonition-title">Notitie</p>
 <p class="last">UTM-zones zijn projectiezones op de lengtegraad, genummerd van 1 tot en met 60. Elke UTM-zone is 6 graden breed. Hier gebruiken we een eenvoudige wiskundige formule om de toepasselijke zone te zoeken voor een bepaalde waarde voor de lengtegraad. Onthoud dat deze formule niet enige bijzondere UTM-zones dekt.</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">qgis.gui</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">GetUtmZone</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
     <span class="n">centroid</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
     <span class="n">longitude</span> <span class="o">=</span> <span class="n">centroid</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
@@ -286,11 +286,11 @@
     <span class="n">zone_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(((</span><span class="n">longitude</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="n">latitude</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s">&#39;N&#39;</span>
+        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s">&#39;S&#39;</span>
+        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span>
 
-    <span class="k">return</span> <span class="s">&#39;</span><span class="si">%d%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/517.png" class="align-center" src="../_images/517.png" />
@@ -303,7 +303,7 @@
 <li><p class="first">Schakel naar de tab <span class="guilabel">Expressie</span> in het dialoogvenster <span class="guilabel">Selecteren met expressie</span>. Zoek en vergroot de groep <span class="guilabel">Custom</span> in het gedeelte <span class="guilabel">Functies</span>. U zult een nieuwe aangepaste functie <code class="docutils literal"><span class="pre">$GetUtmZone</span></code> in de lijst zien. We kunnen nu deze functie nu gebruiken in expressies, net als alle andere functies. Typ de volgende expressie in de bewerker. Deze expressie zal alle punten selecteren die in de UTM Zone <code class="docutils literal"><span class="pre">40N</span></code> vallen. Klik op <span class="guilabel">Selecteren</span>.</p>
 </li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre>$GetUtmZone = &#39;40N&#39;
+<div class="highlight-none"><div class="highlight"><pre><span></span>$GetUtmZone = &#39;40N&#39;
 </pre></div>
 </div>
 <img alt="../_images/715.png" class="align-center" src="../_images/715.png" />
@@ -326,7 +326,7 @@
 <li><p class="first">U zult opnieuw de bekende expressiebewerker zien. We zullen de functie <code class="docutils literal"><span class="pre">concat</span></code> gebruiken om de waarde van het veld <code class="docutils literal"><span class="pre">name</span></code> samen te voegen met het resultaat van onze aangepaste functie $GetUtmZone. Voer de volgende expressie in en klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
+<div class="highlight-none"><div class="highlight"><pre><span></span>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
 </pre></div>
 </div>
 <img alt="../_images/1119.png" class="align-center" src="../_images/1119.png" />

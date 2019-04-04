@@ -284,7 +284,7 @@ field input definitions. This means that input will be pre-populated with
 choice of fields from the <code class="docutils literal"><span class="pre">dissolve_layer</span></code>. We also specify the
 <code class="docutils literal"><span class="pre">output_layer</span></code> as the output vector layer. Click <span class="guilabel">Save</span> button.</li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre>##dissolve_layer=vector
+<div class="highlight-none"><div class="highlight"><pre><span></span>##dissolve_layer=vector
 ##dissolve_field=field dissolve_layer
 ##sum_field=field dissolve_layer
 ##output_layer=output vector
@@ -323,14 +323,14 @@ newly entered code and then the <span class="guilabel">X</span> button to close 
 <a class="reference external" href="https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions">list comprehension tutorial</a>
 to get familiar with the syntax.</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">inlayer</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">dissolve_layer</span><span class="p">)</span>
 <span class="n">dissolve_field_index</span> <span class="o">=</span> <span class="n">inlayer</span><span class="o">.</span><span class="n">fieldNameIndex</span><span class="p">(</span><span class="n">dissolve_field</span><span class="p">)</span>
 <span class="n">sum_field_index</span> <span class="o">=</span> <span class="n">inlayer</span><span class="o">.</span><span class="n">fieldNameIndex</span><span class="p">(</span><span class="n">sum_field</span><span class="p">)</span>
 
-<span class="c"># Find unique values present in the dissolve field</span>
+<span class="c1"># Find unique values present in the dissolve field</span>
 <span class="n">unique_values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">[</span><span class="n">dissolve_field</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span>
 <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">inlayer</span><span class="p">)])</span>
 
@@ -373,7 +373,7 @@ intermediate variable values.</li>
 existing dissolve algorithm in QGIS via processing using
 <code class="docutils literal"><span class="pre">processing.runalg()</span></code> method.</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># Create a dictionary to hold values from the sum field</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary to hold values from the sum field</span>
 <span class="n">sum_unique_values</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">inlayer</span><span class="p">)]</span>
 
@@ -381,19 +381,19 @@ existing dissolve algorithm in QGIS via processing using
     <span class="n">val_list</span> <span class="o">=</span> <span class="p">[</span> <span class="n">f_attr</span><span class="p">[</span><span class="n">sum_field_index</span><span class="p">]</span> <span class="k">for</span> <span class="n">f_attr</span> <span class="ow">in</span> <span class="n">attrs</span> <span class="k">if</span> <span class="n">f_attr</span><span class="p">[</span><span class="n">dissolve_field_index</span><span class="p">]</span> <span class="o">==</span> <span class="n">unique_value</span><span class="p">]</span>
     <span class="n">sum_unique_values</span><span class="p">[</span><span class="n">unique_value</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">val_list</span><span class="p">)</span>
 
-<span class="c"># Run the regular Dissolve algorithm</span>
-<span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s">&quot;qgis:dissolve&quot;</span><span class="p">,</span> <span class="n">dissolve_layer</span><span class="p">,</span> <span class="s">&quot;false&quot;</span><span class="p">,</span>
+<span class="c1"># Run the regular Dissolve algorithm</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s2">&quot;qgis:dissolve&quot;</span><span class="p">,</span> <span class="n">dissolve_layer</span><span class="p">,</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
     <span class="n">dissolve_field</span><span class="p">,</span> <span class="n">output_layer</span><span class="p">)</span>
 
-<span class="c"># Add a new attribute called &#39;SUM&#39; in the output layer</span>
+<span class="c1"># Add a new attribute called &#39;SUM&#39; in the output layer</span>
 <span class="n">outlayer</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">output_layer</span><span class="p">)</span>
 <span class="n">provider</span> <span class="o">=</span> <span class="n">outlayer</span><span class="o">.</span><span class="n">dataProvider</span><span class="p">()</span>
-<span class="n">provider</span><span class="o">.</span><span class="n">addAttributes</span><span class="p">([</span><span class="n">QgsField</span><span class="p">(</span><span class="s">&#39;SUM&#39;</span><span class="p">,</span> <span class="n">QVariant</span><span class="o">.</span><span class="n">Double</span><span class="p">)])</span>
+<span class="n">provider</span><span class="o">.</span><span class="n">addAttributes</span><span class="p">([</span><span class="n">QgsField</span><span class="p">(</span><span class="s1">&#39;SUM&#39;</span><span class="p">,</span> <span class="n">QVariant</span><span class="o">.</span><span class="n">Double</span><span class="p">)])</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">updateFields</span><span class="p">()</span>
 
-<span class="c"># Set the value of the &#39;SUM&#39; field for each feature</span>
+<span class="c1"># Set the value of the &#39;SUM&#39; field for each feature</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">startEditing</span><span class="p">()</span>
-<span class="n">new_field_index</span> <span class="o">=</span> <span class="n">outlayer</span><span class="o">.</span><span class="n">fieldNameIndex</span><span class="p">(</span><span class="s">&#39;SUM&#39;</span><span class="p">)</span>
+<span class="n">new_field_index</span> <span class="o">=</span> <span class="n">outlayer</span><span class="o">.</span><span class="n">fieldNameIndex</span><span class="p">(</span><span class="s1">&#39;SUM&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">outlayer</span><span class="p">):</span>
   <span class="n">outlayer</span><span class="o">.</span><span class="n">changeAttributeValue</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">id</span><span class="p">(),</span> <span class="n">new_field_index</span><span class="p">,</span> <span class="n">sum_unique_values</span><span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="n">dissolve_field</span><span class="p">]])</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
@@ -423,7 +423,7 @@ sense to keep the original fields in the output. Go back to the
 except the <code class="docutils literal"><span class="pre">SUM</span></code> field and the field that was used to dissolve the
 original layer. Click <span class="guilabel">Save</span> button and close the window.</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># Delete all fields except dissolve field and the newly created &#39;SUM&#39; field.</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Delete all fields except dissolve field and the newly created &#39;SUM&#39; field.</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">startEditing</span><span class="p">()</span>
 
 <span class="n">fields_to_delete</span> <span class="o">=</span> <span class="p">[</span><span class="n">fid</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">fields</span><span class="p">()))</span> <span class="k">if</span> <span class="n">fid</span> <span class="o">!=</span> <span class="n">new_field_index</span> <span class="ow">and</span> <span class="n">fid</span> <span class="o">!=</span> <span class="n">dissolve_field_index</span><span class="p">]</span>
@@ -447,7 +447,7 @@ on the <span class="guilabel">Select features using an expression</span> button.
 <li>Enter the following expression to select features from North and South
 America and click <span class="guilabel">Select</span>.</li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
+<div class="highlight-none"><div class="highlight"><pre><span></span>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
 </pre></div>
 </div>
 <img alt="../_images/1822.png" class="align-center" src="../_images/1822.png" />
@@ -481,10 +481,10 @@ detailed help will be available to all users of your script in the
 <img alt="../_images/2317.png" class="align-center" src="../_images/2317.png" />
 <p>Below is the complete script for reference. You may modify it to suit your
 needs.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">##dissolve_layer=vector</span>
-<span class="c">##dissolve_field=field dissolve_layer</span>
-<span class="c">##sum_field=field dissolve_layer</span>
-<span class="c">##output_layer=output vector</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">##dissolve_layer=vector</span>
+<span class="c1">##dissolve_field=field dissolve_layer</span>
+<span class="c1">##sum_field=field dissolve_layer</span>
+<span class="c1">##output_layer=output vector</span>
 
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="o">*</span>
@@ -493,10 +493,10 @@ needs.</p>
 <span class="n">dissolve_field_index</span> <span class="o">=</span> <span class="n">inlayer</span><span class="o">.</span><span class="n">fieldNameIndex</span><span class="p">(</span><span class="n">dissolve_field</span><span class="p">)</span>
 <span class="n">sum_field_index</span> <span class="o">=</span> <span class="n">inlayer</span><span class="o">.</span><span class="n">fieldNameIndex</span><span class="p">(</span><span class="n">sum_field</span><span class="p">)</span>
 
-<span class="c"># Find unique values present in the dissolve field</span>
+<span class="c1"># Find unique values present in the dissolve field</span>
 <span class="n">unique_values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">[</span><span class="n">dissolve_field</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">inlayer</span><span class="p">)])</span>
 
-<span class="c"># Create a dictionary to hold values from the sum field</span>
+<span class="c1"># Create a dictionary to hold values from the sum field</span>
 <span class="n">sum_unique_values</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">inlayer</span><span class="p">)]</span>
  
@@ -504,24 +504,24 @@ needs.</p>
     <span class="n">val_list</span> <span class="o">=</span> <span class="p">[</span> <span class="n">f_attr</span><span class="p">[</span><span class="n">sum_field_index</span><span class="p">]</span> <span class="k">for</span> <span class="n">f_attr</span> <span class="ow">in</span> <span class="n">attrs</span> <span class="k">if</span> <span class="n">f_attr</span><span class="p">[</span><span class="n">dissolve_field_index</span><span class="p">]</span> <span class="o">==</span> <span class="n">unique_value</span><span class="p">]</span>
     <span class="n">sum_unique_values</span><span class="p">[</span><span class="n">unique_value</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">val_list</span><span class="p">)</span>
 
-<span class="c"># Run the regular Dissolve algorithm</span>
-<span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s">&quot;qgis:dissolve&quot;</span><span class="p">,</span> <span class="n">dissolve_layer</span><span class="p">,</span> <span class="s">&quot;false&quot;</span><span class="p">,</span>
+<span class="c1"># Run the regular Dissolve algorithm</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s2">&quot;qgis:dissolve&quot;</span><span class="p">,</span> <span class="n">dissolve_layer</span><span class="p">,</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
     <span class="n">dissolve_field</span><span class="p">,</span> <span class="n">output_layer</span><span class="p">)</span>
 
-<span class="c"># Add a new attribute called &#39;SUM&#39; in the output layer</span>
+<span class="c1"># Add a new attribute called &#39;SUM&#39; in the output layer</span>
 <span class="n">outlayer</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">output_layer</span><span class="p">)</span>
 <span class="n">provider</span> <span class="o">=</span> <span class="n">outlayer</span><span class="o">.</span><span class="n">dataProvider</span><span class="p">()</span>
-<span class="n">provider</span><span class="o">.</span><span class="n">addAttributes</span><span class="p">([</span><span class="n">QgsField</span><span class="p">(</span><span class="s">&#39;SUM&#39;</span><span class="p">,</span> <span class="n">QVariant</span><span class="o">.</span><span class="n">Double</span><span class="p">)])</span>
+<span class="n">provider</span><span class="o">.</span><span class="n">addAttributes</span><span class="p">([</span><span class="n">QgsField</span><span class="p">(</span><span class="s1">&#39;SUM&#39;</span><span class="p">,</span> <span class="n">QVariant</span><span class="o">.</span><span class="n">Double</span><span class="p">)])</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">updateFields</span><span class="p">()</span>
 
-<span class="c"># Set the value of the &#39;SUM&#39; field for each feature</span>
+<span class="c1"># Set the value of the &#39;SUM&#39; field for each feature</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">startEditing</span><span class="p">()</span>
-<span class="n">new_field_index</span> <span class="o">=</span> <span class="n">outlayer</span><span class="o">.</span><span class="n">fieldNameIndex</span><span class="p">(</span><span class="s">&#39;SUM&#39;</span><span class="p">)</span>
+<span class="n">new_field_index</span> <span class="o">=</span> <span class="n">outlayer</span><span class="o">.</span><span class="n">fieldNameIndex</span><span class="p">(</span><span class="s1">&#39;SUM&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">outlayer</span><span class="p">):</span>
   <span class="n">outlayer</span><span class="o">.</span><span class="n">changeAttributeValue</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">id</span><span class="p">(),</span> <span class="n">new_field_index</span><span class="p">,</span> <span class="n">sum_unique_values</span><span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="n">dissolve_field</span><span class="p">]])</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 
-<span class="c"># Delete all fields except dissolve field and the newly created &#39;SUM&#39; field</span>
+<span class="c1"># Delete all fields except dissolve field and the newly created &#39;SUM&#39; field</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">startEditing</span><span class="p">()</span>
 <span class="n">fields_to_delete</span> <span class="o">=</span> <span class="p">[</span><span class="n">fid</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">fields</span><span class="p">()))</span> <span class="k">if</span> <span class="n">fid</span> <span class="o">!=</span> <span class="n">new_field_index</span> <span class="ow">and</span> <span class="n">fid</span> <span class="o">!=</span> <span class="n">dissolve_field_index</span><span class="p">]</span>
 <span class="n">provider</span><span class="o">.</span><span class="n">deleteAttributes</span><span class="p">(</span><span class="n">fields_to_delete</span><span class="p">)</span>

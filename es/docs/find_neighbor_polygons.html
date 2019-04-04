@@ -132,11 +132,11 @@
               
                 
   <li>
-    <a href="running_qgis_jobs.html" title="Previous Chapter: Running and Scheduling QGIS Processing Jobs"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Running and Sche...</span>
+    <a href="running_qgis_jobs.html" title="Previous Chapter: Running and Scheduling QGIS Processing Jobs"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Running and S...</span>
     </a>
   </li>
   <li>
-    <a href="performing_table_joins_pyqgis.html" title="Next Chapter: Realización de uniones de tabla (PyQGIS)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Realización de u... &raquo;</span>
+    <a href="performing_table_joins_pyqgis.html" title="Next Chapter: Realización de uniones de tabla (PyQGIS)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Realización d... &raquo;</span>
     </a>
   </li>
               
@@ -305,87 +305,87 @@ were added by the script.</li>
 <img alt="../_images/817.png" class="align-center" src="../_images/817.png" />
 <p>Below is the complete script for reference. You may modify it to suit your
 needs.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">################################################################################</span>
-<span class="c"># Copyright 2014 Ujaval Gandhi</span>
-<span class="c">#</span>
-<span class="c">#This program is free software; you can redistribute it and/or</span>
-<span class="c">#modify it under the terms of the GNU General Public License</span>
-<span class="c">#as published by the Free Software Foundation; either version 2</span>
-<span class="c">#of the License, or (at your option) any later version.</span>
-<span class="c">#</span>
-<span class="c">#This program is distributed in the hope that it will be useful,</span>
-<span class="c">#but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="c">#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="c">#GNU General Public License for more details.</span>
-<span class="c">#</span>
-<span class="c">#You should have received a copy of the GNU General Public License</span>
-<span class="c">#along with this program; if not, write to the Free Software</span>
-<span class="c">#Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</span>
-<span class="c">#</span>
-<span class="c">################################################################################</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
+<span class="c1"># Copyright 2014 Ujaval Gandhi</span>
+<span class="c1">#</span>
+<span class="c1">#This program is free software; you can redistribute it and/or</span>
+<span class="c1">#modify it under the terms of the GNU General Public License</span>
+<span class="c1">#as published by the Free Software Foundation; either version 2</span>
+<span class="c1">#of the License, or (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1">#You should have received a copy of the GNU General Public License</span>
+<span class="c1">#along with this program; if not, write to the Free Software</span>
+<span class="c1">#Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</span>
+<span class="c1">#</span>
+<span class="c1">################################################################################</span>
 <span class="kn">from</span> <span class="nn">qgis.utils</span> <span class="kn">import</span> <span class="n">iface</span>
 <span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="n">QVariant</span>
 
-<span class="c"># Replace the values below with values from your layer.</span>
-<span class="c"># For example, if your identifier field is called &#39;XYZ&#39;, then change the line</span>
-<span class="c"># below to _NAME_FIELD = &#39;XYZ&#39;</span>
-<span class="n">_NAME_FIELD</span> <span class="o">=</span> <span class="s">&#39;NAME&#39;</span>
-<span class="c"># Replace the value below with the field name that you want to sum up.</span>
-<span class="c"># For example, if the # field that you want to sum up is called &#39;VALUES&#39;, then</span>
-<span class="c"># change the line below to _SUM_FIELD = &#39;VALUES&#39;</span>
-<span class="n">_SUM_FIELD</span> <span class="o">=</span> <span class="s">&#39;POP_EST&#39;</span>
+<span class="c1"># Replace the values below with values from your layer.</span>
+<span class="c1"># For example, if your identifier field is called &#39;XYZ&#39;, then change the line</span>
+<span class="c1"># below to _NAME_FIELD = &#39;XYZ&#39;</span>
+<span class="n">_NAME_FIELD</span> <span class="o">=</span> <span class="s1">&#39;NAME&#39;</span>
+<span class="c1"># Replace the value below with the field name that you want to sum up.</span>
+<span class="c1"># For example, if the # field that you want to sum up is called &#39;VALUES&#39;, then</span>
+<span class="c1"># change the line below to _SUM_FIELD = &#39;VALUES&#39;</span>
+<span class="n">_SUM_FIELD</span> <span class="o">=</span> <span class="s1">&#39;POP_EST&#39;</span>
 
-<span class="c"># Names of the new fields to be added to the layer</span>
-<span class="n">_NEW_NEIGHBORS_FIELD</span> <span class="o">=</span> <span class="s">&#39;NEIGHBORS&#39;</span>
-<span class="n">_NEW_SUM_FIELD</span> <span class="o">=</span> <span class="s">&#39;SUM&#39;</span>
+<span class="c1"># Names of the new fields to be added to the layer</span>
+<span class="n">_NEW_NEIGHBORS_FIELD</span> <span class="o">=</span> <span class="s1">&#39;NEIGHBORS&#39;</span>
+<span class="n">_NEW_SUM_FIELD</span> <span class="o">=</span> <span class="s1">&#39;SUM&#39;</span>
 
 <span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 
-<span class="c"># Create 2 new fields in the layer that will hold the list of neighbors and sum</span>
-<span class="c"># of the chosen field.</span>
+<span class="c1"># Create 2 new fields in the layer that will hold the list of neighbors and sum</span>
+<span class="c1"># of the chosen field.</span>
 <span class="n">layer</span><span class="o">.</span><span class="n">startEditing</span><span class="p">()</span>
 <span class="n">layer</span><span class="o">.</span><span class="n">dataProvider</span><span class="p">()</span><span class="o">.</span><span class="n">addAttributes</span><span class="p">(</span>
         <span class="p">[</span><span class="n">QgsField</span><span class="p">(</span><span class="n">_NEW_NEIGHBORS_FIELD</span><span class="p">,</span> <span class="n">QVariant</span><span class="o">.</span><span class="n">String</span><span class="p">),</span>
          <span class="n">QgsField</span><span class="p">(</span><span class="n">_NEW_SUM_FIELD</span><span class="p">,</span> <span class="n">QVariant</span><span class="o">.</span><span class="n">Int</span><span class="p">)])</span>
 <span class="n">layer</span><span class="o">.</span><span class="n">updateFields</span><span class="p">()</span>
-<span class="c"># Create a dictionary of all features</span>
+<span class="c1"># Create a dictionary of all features</span>
 <span class="n">feature_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="o">.</span><span class="n">id</span><span class="p">():</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">()}</span>
 
-<span class="c"># Build a spatial index</span>
+<span class="c1"># Build a spatial index</span>
 <span class="n">index</span> <span class="o">=</span> <span class="n">QgsSpatialIndex</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
     <span class="n">index</span><span class="o">.</span><span class="n">insertFeature</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-<span class="c"># Loop through all features and find features that touch each feature</span>
+<span class="c1"># Loop through all features and find features that touch each feature</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&#39;Working on </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="p">[</span><span class="n">_NAME_FIELD</span><span class="p">]</span>
+    <span class="k">print</span> <span class="s1">&#39;Working on </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="p">[</span><span class="n">_NAME_FIELD</span><span class="p">]</span>
     <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
-    <span class="c"># Find all features that intersect the bounding box of the current feature.</span>
-    <span class="c"># We use spatial index to find the features intersecting the bounding box</span>
-    <span class="c"># of the current feature. This will narrow down the features that we need</span>
-    <span class="c"># to check neighboring features.</span>
+    <span class="c1"># Find all features that intersect the bounding box of the current feature.</span>
+    <span class="c1"># We use spatial index to find the features intersecting the bounding box</span>
+    <span class="c1"># of the current feature. This will narrow down the features that we need</span>
+    <span class="c1"># to check neighboring features.</span>
     <span class="n">intersecting_ids</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">boundingBox</span><span class="p">())</span>
-    <span class="c"># Initalize neighbors list and sum</span>
+    <span class="c1"># Initalize neighbors list and sum</span>
     <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">neighbors_sum</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">intersecting_id</span> <span class="ow">in</span> <span class="n">intersecting_ids</span><span class="p">:</span>
-        <span class="c"># Look up the feature from the dictionary</span>
+        <span class="c1"># Look up the feature from the dictionary</span>
         <span class="n">intersecting_f</span> <span class="o">=</span> <span class="n">feature_dict</span><span class="p">[</span><span class="n">intersecting_id</span><span class="p">]</span>
 
-        <span class="c"># For our purpose we consider a feature as &#39;neighbor&#39; if it touches or</span>
-        <span class="c"># intersects a feature. We use the &#39;disjoint&#39; predicate to satisfy</span>
-        <span class="c"># these conditions. So if a feature is not disjoint, it is a neighbor.</span>
+        <span class="c1"># For our purpose we consider a feature as &#39;neighbor&#39; if it touches or</span>
+        <span class="c1"># intersects a feature. We use the &#39;disjoint&#39; predicate to satisfy</span>
+        <span class="c1"># these conditions. So if a feature is not disjoint, it is a neighbor.</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">!=</span> <span class="n">intersecting_f</span> <span class="ow">and</span>
             <span class="ow">not</span> <span class="n">intersecting_f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">disjoint</span><span class="p">(</span><span class="n">geom</span><span class="p">)):</span>
             <span class="n">neighbors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intersecting_f</span><span class="p">[</span><span class="n">_NAME_FIELD</span><span class="p">])</span>
             <span class="n">neighbors_sum</span> <span class="o">+=</span> <span class="n">intersecting_f</span><span class="p">[</span><span class="n">_SUM_FIELD</span><span class="p">]</span>
-    <span class="n">f</span><span class="p">[</span><span class="n">_NEW_NEIGHBORS_FIELD</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">[</span><span class="n">_NEW_NEIGHBORS_FIELD</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
     <span class="n">f</span><span class="p">[</span><span class="n">_NEW_SUM_FIELD</span><span class="p">]</span> <span class="o">=</span> <span class="n">neighbors_sum</span>
-    <span class="c"># Update the layer with new attribute values.</span>
+    <span class="c1"># Update the layer with new attribute values.</span>
     <span class="n">layer</span><span class="o">.</span><span class="n">updateFeature</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="n">layer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">&#39;Processing complete.&#39;</span>
+<span class="k">print</span> <span class="s1">&#39;Processing complete.&#39;</span>
 </pre></div>
 </div>
 </div>

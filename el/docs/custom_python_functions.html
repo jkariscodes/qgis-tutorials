@@ -273,11 +273,11 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Οι χρονικές ζώνες είναι ζώνες προβολής κατά γεωγραφικό μήκος με αρίθμηση από το 1 ως το 60. Κάθε χρονική ζώνη έχει πλάτος 6 μοίρες. Εδώ θα χρησιμοποιήσουμε μια απλή μαθηματική εξίσωση για να βρούμε την κατάλληλη ζώνη για την δοσμένη τιμή του γεωγραφικού μήκους. Θυμηθείτε οτι αυτή η εξίσωση δεν καλύπτει μερικές ειδικές χρονικές ζώνες.</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">qgis.gui</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">GetUtmZone</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
     <span class="n">centroid</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
     <span class="n">longitude</span> <span class="o">=</span> <span class="n">centroid</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
@@ -285,11 +285,11 @@
     <span class="n">zone_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(((</span><span class="n">longitude</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="n">latitude</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s">&#39;N&#39;</span>
+        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s">&#39;S&#39;</span>
+        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span>
 
-    <span class="k">return</span> <span class="s">&#39;</span><span class="si">%d%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/517.png" class="align-center" src="../_images/517.png" />
@@ -302,7 +302,7 @@
 <li><p class="first">Μεταφερθείτε στην καρτέλα <span class="guilabel">Expression</span> στο παράθυρο διαλόγου  <span class="guilabel">Select by expression</span>. Βρείτε και επεκτείνετε την ομάδα:guilabel:<cite>Custom</cite> στο τμήμα  <span class="guilabel">Functions</span>. Τώρα θα παρατηρήσετε οτι μια καινούρια προσαρμοσμένη συνάρτηση, η <code class="docutils literal"><span class="pre">$GetUtmZone</span></code> υπάρχει μέσα στην λίστα. Τώρα μπορούμε να χρησιμοποιήσουμε αυτή την συνάρτηση μέσα σε εντολή, όπως κάθε άλλη συνάρτηση. πληκτρολογήστε την παρακάτω εντολή στον επεξεργαστή. Αυτή η εντολή θα επιλέξει όλα τα σημεία τα οποία βρίσκονται μέσα στην χρονική ζώνη <code class="docutils literal"><span class="pre">40N</span></code>. Πατήστε  <span class="guilabel">Select</span>.</p>
 </li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre>$GetUtmZone = &#39;40N&#39;
+<div class="highlight-none"><div class="highlight"><pre><span></span>$GetUtmZone = &#39;40N&#39;
 </pre></div>
 </div>
 <img alt="../_images/715.png" class="align-center" src="../_images/715.png" />
@@ -325,7 +325,7 @@
 <li><p class="first">Θα δείτε την γνωστή εντολή στον επεξεργαστή πάλι. Θα χρησιμοποιήσουμε τώρα την συνάρτηση <code class="docutils literal"><span class="pre">concat</span></code> για να ενώσουμε την τιμή με το πεδίο &#8220;όνομα&#8221; και το αποτέλεσμα από την προσαρμοσμένη συνάρτηση $GetUtmZone. Εισάγετε τις παρακάτω εντολές και πατήστε  <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
+<div class="highlight-none"><div class="highlight"><pre><span></span>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
 </pre></div>
 </div>
 <img alt="../_images/1119.png" class="align-center" src="../_images/1119.png" />
