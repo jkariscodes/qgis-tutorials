@@ -1,35 +1,25 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_TW">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Batch Processing using Processing Framework (QGIS2) &mdash; QGIS Tutorials and Tips</title>
-    
+    <title>Batch Processing using Processing Framework (QGIS2) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <link rel="search" title="搜尋" href="../search.html" />
     <link rel="prev" title="資料來源" href="credits.html" />
 
 <meta charset='utf-8'>
@@ -50,8 +40,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -83,7 +72,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">簡介</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">屬性的操作</a></li>
-<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">匯入工作表或 CSV 檔</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">使用附加元件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">搜尋和下載開放街圖資料</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">基本向量資料樣式設定</a></li>
@@ -121,7 +110,7 @@
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">用 QTiles 製作基底地圖</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS 學習資源</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">資料來源</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Batch Processing using Processing Framework (QGIS2)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Batch Processing using Processing Framework (QGIS2)</a></li>
 </ul>
 </ul>
 </li>
@@ -226,133 +215,110 @@
       
 
   <div class="section" id="batch-processing-using-processing-framework-qgis2">
-<h1>Batch Processing using Processing Framework (QGIS2)<a class="headerlink" href="#batch-processing-using-processing-framework-qgis2" title="Permalink to this headline">¶</a></h1>
+<h1>Batch Processing using Processing Framework (QGIS2)<a class="headerlink" href="#batch-processing-using-processing-framework-qgis2" title="本標題的永久連結">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">警告</p>
-<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/batch_processing.html"><em>Batch Processing using Processing Framework (QGIS3)</em></a></p>
+<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/batch_processing.html"><span class="doc">Batch Processing using Processing Framework (QGIS3)</span></a></p>
 </div>
 <p>QGIS 2.0 引進了一個稱為<strong>處理框架（Processing Framework）</strong>的新概念。它的前身是 <strong>Sextante</strong>，旨在為 QGIS 提供可以用來執行原生或第三方提供的演算法來處理資料的環境。此概念包含一個很棒的批次處理介面，讓使用者可以簡單地對許多圖層執行程式計算。這個批次處理工具可以自動處理重複的工作，為你省去許多時間精力。</p>
 <div class="section" id="overview-of-the-task">
-<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
+<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="本標題的永久連結">¶</a></h2>
 <p>我們要只使用一個批次指令，來裁切幾個全球的向量圖層的非洲大陸區域資料。</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
+<h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="本標題的永久連結">¶</a></h3>
 <ul class="simple">
-<li><p class="first">融合 (Dissolve) 圖層中具有相同屬性的多邊形圖徵</p>
-</li>
+<li>融合 (Dissolve) 圖層中具有相同屬性的多邊形圖徵</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>取得資料<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>取得資料<a class="headerlink" href="#get-the-data" title="本標題的永久連結">¶</a></h2>
 <p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> 可以載到以下幾個向量圖層：</p>
 <ul class="simple">
-<li><p class="first"><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - 國界（Countries）</a></p>
-</li>
-<li><p class="first"><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads.zip">鐵路（Railroads）</a></p>
-</li>
-<li><p class="first"><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_ports.zip">港口（Ports）</a></p>
-</li>
-<li><p class="first"><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">機場（Airports）</a></p>
-</li>
+<li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - 國界（Countries）</a></li>
+<li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads.zip">鐵路（Railroads）</a></li>
+<li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_ports.zip">港口（Ports）</a></li>
+<li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">機場（Airports）</a></li>
 </ul>
 <p>下載後，把所有的 shapefile 都解壓縮到同一個資料夾。</p>
 <p>資料來源  <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>操作流程<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
+<h2>操作流程<a class="headerlink" href="#procedure" title="本標題的永久連結">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>。</p>
-</li>
+<li>選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>。</li>
 </ol>
-<img alt="../_images/140.png" class="align-center" src="../_images/140.png" />
+<img alt="../_images/149.png" class="align-center" src="../_images/149.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">選擇剛下載的 Admin 0 - Countries <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries.shp</span></code> 並按下 <span class="guilabel">確定</span>。</p>
-</li>
+<li>選擇剛下載的 Admin 0 - Countries <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.shp</span></code> 並按下 <span class="guilabel">確定</span>。</li>
 </ol>
 <img alt="../_images/229.png" class="align-center" src="../_images/229.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">由於我們的任務是裁切全球圖層到非洲大陸的範圍，因此需要先準備一個多邊形圖層，描繪出非洲大陸的外框。本圖層具有一個稱為 <strong>CONTINENT</strong> 的屬性，我們可以利用一個稱為「<em>融合（Dissolve）</em>」的地理運算工具，來融合所有具有相同屬性的非洲國家（多邊形）成為一個大的多邊形。</p>
-</li>
+<li>由於我們的任務是裁切全球圖層到非洲大陸的範圍，因此需要先準備一個多邊形圖層，描繪出非洲大陸的外框。本圖層具有一個稱為 <strong>CONTINENT</strong> 的屬性，我們可以利用一個稱為「<em>融合（Dissolve）</em>」的地理運算工具，來融合所有具有相同屬性的非洲國家（多邊形）成為一個大的多邊形。</li>
 </ol>
-<img alt="../_images/326.png" class="align-center" src="../_images/326.png" />
+<img alt="../_images/327.png" class="align-center" src="../_images/327.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">選擇 <span class="menuselection">向量 ‣ 地理運算工具 ‣ 融合</span>，開啟 <span class="guilabel">融合</span> 工具。</p>
-</li>
+<li>選擇 <span class="menuselection">向量 ‣ 地理運算工具 ‣ 融合</span>，開啟 <span class="guilabel">融合</span> 工具。</li>
 </ol>
-<img alt="../_images/410.png" class="align-center" src="../_images/410.png" />
+<img alt="../_images/411.png" class="align-center" src="../_images/411.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">在 <span class="guilabel">輸入向量圖層</span> 中輸入 <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code>，<span class="guilabel">融合欄位</span> 選擇 <code class="docutils literal"><span class="pre">CONTINENT</span></code>，輸出檔命名為 <code class="docutils literal"><span class="pre">continents.shp</span></code>，然後勾選 <span class="guilabel">加入結果至 QGIS 地圖中</span>。</p>
-</li>
+<li>在 <span class="guilabel">輸入向量圖層</span> 中輸入 <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code>，<span class="guilabel">融合欄位</span> 選擇 <code class="docutils literal notranslate"><span class="pre">CONTINENT</span></code>，輸出檔命名為 <code class="docutils literal notranslate"><span class="pre">continents.shp</span></code>，然後勾選 <span class="guilabel">加入結果至 QGIS 地圖中</span>。</li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">如果你想要不管屬性、融合<strong>所有</strong>的多邊形的話，可以在 <span class="guilabel">融合欄位</span> 中選擇 <span class="guilabel">&#8211; 全部融合 &#8211;</span>，這樣的話所有的多邊形就會融合成一個。</p>
+<p class="first admonition-title">備註</p>
+<p class="last">如果你想要不管屬性、融合<strong>所有</strong>的多邊形的話，可以在 <span class="guilabel">融合欄位</span> 中選擇 <span class="guilabel">– 全部融合 –</span>，這樣的話所有的多邊形就會融合成一個。</p>
 </div>
 <img alt="../_images/511.png" class="align-center" src="../_images/511.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">融合的處理需要一些時間。當處理完畢後，名為 <code class="docutils literal"><span class="pre">continent</span></code> 的新圖層會加到 QGIS 中，使用工具列上的 <span class="guilabel">選取圖徵</span> 工具，點選非洲大陸，把大陸外框的多邊形選取起來。</p>
-</li>
+<li>融合的處理需要一些時間。當處理完畢後，名為 <code class="docutils literal notranslate"><span class="pre">continent</span></code> 的新圖層會加到 QGIS 中，使用工具列上的 <span class="guilabel">選取圖徵</span> 工具，點選非洲大陸，把大陸外框的多邊形選取起來。</li>
 </ol>
 <img alt="../_images/610.png" class="align-center" src="../_images/610.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">在 <code class="docutils literal"><span class="pre">continents</span></code> 圖層上按右鍵選擇 <span class="guilabel">存檔為...</span>，勾選 <span class="guilabel">儲存僅選取的圖徵</span>。（譯按：舊一點的 QGIS 版本可以直接選擇 <span class="guilabel">儲存選取範圍為...</span>）</p>
-</li>
+<li>在 <code class="docutils literal notranslate"><span class="pre">continents</span></code> 圖層上按右鍵選擇 <span class="guilabel">存檔為…</span>，勾選 <span class="guilabel">儲存僅選取的圖徵</span>。（譯按：舊一點的 QGIS 版本可以直接選擇 <span class="guilabel">儲存選取範圍為…</span>）</li>
 </ol>
 <img alt="../_images/710.png" class="align-center" src="../_images/710.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">輸出檔案命名為 <code class="docutils literal"><span class="pre">africa.shp</span></code>，由於我們只需要大陸的形狀，不在乎其屬性值，因此 <span class="guilabel">忽略屬性建立</span> 的框框也可以勾選起來。順便確認 <span class="guilabel">加入儲存檔案至地圖中</span> 有勾選後，按下 <span class="guilabel">確定</span>。</p>
-</li>
+<li>輸出檔案命名為 <code class="docutils literal notranslate"><span class="pre">africa.shp</span></code>，由於我們只需要大陸的形狀，不在乎其屬性值，因此 <span class="guilabel">忽略屬性建立</span> 的框框也可以勾選起來。順便確認 <span class="guilabel">加入儲存檔案至地圖中</span> 有勾選後，按下 <span class="guilabel">確定</span>。</li>
 </ol>
 <img alt="../_images/89.png" class="align-center" src="../_images/89.png" />
 <ol class="arabic simple" start="9">
-<li><p class="first">現在 QGIS 已載入了 <code class="docutils literal"><span class="pre">africa</span></code> 圖層，圖層內只有一個非洲的多邊形。現在我們可以開始批次剪下檔案了。開啟 <span class="menuselection">地理運算 ‣ 工具箱</span>。</p>
-</li>
+<li>現在 QGIS 已載入了 <code class="docutils literal notranslate"><span class="pre">africa</span></code> 圖層，圖層內只有一個非洲的多邊形。現在我們可以開始批次剪下檔案了。開啟 <span class="menuselection">地理運算 ‣ 工具箱</span>。</li>
 </ol>
 <img alt="../_images/910.png" class="align-center" src="../_images/910.png" />
 <ol class="arabic simple" start="10">
-<li><p class="first">在所有可用的運算法中搜尋並找到 <span class="guilabel">裁切</span>（Clip）工具。它可能會放在 <span class="menuselection">geoalgorithms ‣ 向量 ‣ 疊層</span> 目錄底下，或是舊版的 <span class="menuselection">QGIS geoalgorithms ‣ Vector overlay tools</span> 底下。你也可以使用 <span class="guilabel">搜尋</span> 框簡單查詢此運算法的位置。</p>
-</li>
+<li>在所有可用的運算法中搜尋並找到 <span class="guilabel">裁切</span>（Clip）工具。它可能會放在 <span class="menuselection">geoalgorithms ‣ 向量 ‣ 疊層</span> 目錄底下，或是舊版的 <span class="menuselection">QGIS geoalgorithms ‣ Vector overlay tools</span> 底下。你也可以使用 <span class="guilabel">搜尋</span> 框簡單查詢此運算法的位置。</li>
 </ol>
 <img alt="../_images/109.png" class="align-center" src="../_images/109.png" />
 <ol class="arabic simple" start="11">
-<li><p class="first">右鍵點選 <span class="guilabel">裁切</span> 運算法然後選擇 <span class="guilabel">以批次方式執行</span>。</p>
-</li>
+<li>右鍵點選 <span class="guilabel">裁切</span> 運算法然後選擇 <span class="guilabel">以批次方式執行</span>。</li>
 </ol>
 <img alt="../_images/1115.png" class="align-center" src="../_images/1115.png" />
 <ol class="arabic simple" start="12">
-<li><p class="first">在 <span class="guilabel">批次處理中</span> 的視窗中，第一個分頁「<span class="guilabel">參數</span>」就是我們給定輸入檔案的地方。請點選第一行的 <span class="guilabel">輸入圖層</span> 框旁邊的 <span class="guilabel">...</span> 按鈕。</p>
-</li>
+<li>在 <span class="guilabel">批次處理中</span> 的視窗中，第一個分頁「<span class="guilabel">參數</span>」就是我們給定輸入檔案的地方。請點選第一行的 <span class="guilabel">輸入圖層</span> 框旁邊的 <span class="guilabel">…</span> 按鈕。</li>
 </ol>
 <img alt="../_images/1212.png" class="align-center" src="../_images/1212.png" />
 <ol class="arabic simple" start="13">
-<li><p class="first">切換至你剛下載的有關全球交通的 shapefile 的資料夾，按住 <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> 鍵然後選擇所有你想要裁切的圖層。你也可以使用 <code class="kbd docutils literal"><span class="pre">Shift</span></code> 或 <code class="kbd docutils literal"><span class="pre">Ctrl-A</span></code> 進行多重選取。接著按下 <span class="guilabel">開啟舊檔</span>。</p>
-</li>
+<li>切換至你剛下載的有關全球交通的 shapefile 的資料夾，按住 <kbd class="kbd docutils literal notranslate">Ctrl</kbd> 鍵然後選擇所有你想要裁切的圖層。你也可以使用 <kbd class="kbd docutils literal notranslate">Shift</kbd> 或 <kbd class="kbd docutils literal notranslate">Ctrl-A</kbd> 進行多重選取。接著按下 <span class="guilabel">開啟舊檔</span>。</li>
 </ol>
 <img alt="../_images/1311.png" class="align-center" src="../_images/1311.png" />
 <ol class="arabic simple" start="14">
-<li><p class="first">你會看到 <span class="guilabel">輸入圖層</span> 欄位現在已經自動填上我們剛才選擇的檔案。你可以使用 <span class="guilabel">加入一列資料</span> 的按鈕增加更多欄位，一次處理更多資料。接下來，我們要選擇含有裁切邊界的圖層，因此請點選 <span class="guilabel">裁切圖層</span> 旁邊的 <span class="guilabel">...</span> 鈕，選擇 <code class="docutils literal"><span class="pre">africa.shp</span></code>。由於我們要用同一個圖層裁切所有的輸入檔，因此可以在 <span class="guilabel">裁切圖層</span> 的標題地方點兩下，此圖層就會自動填到所有的空白行中。接下來我們要設定輸出檔案，請點選在 <span class="guilabel">剪下</span> 一欄旁邊的 <span class="guilabel">...</span> 鈕。</p>
-</li>
+<li>你會看到 <span class="guilabel">輸入圖層</span> 欄位現在已經自動填上我們剛才選擇的檔案。你可以使用 <span class="guilabel">加入一列資料</span> 的按鈕增加更多欄位，一次處理更多資料。接下來，我們要選擇含有裁切邊界的圖層，因此請點選 <span class="guilabel">裁切圖層</span> 旁邊的 <span class="guilabel">…</span> 鈕，選擇 <code class="docutils literal notranslate"><span class="pre">africa.shp</span></code>。由於我們要用同一個圖層裁切所有的輸入檔，因此可以在 <span class="guilabel">裁切圖層</span> 的標題地方點兩下，此圖層就會自動填到所有的空白行中。接下來我們要設定輸出檔案，請點選在 <span class="guilabel">剪下</span> 一欄旁邊的 <span class="guilabel">…</span> 鈕。</li>
 </ol>
-<img alt="../_images/149.png" class="align-center" src="../_images/149.png" />
+<img alt="../_images/1410.png" class="align-center" src="../_images/1410.png" />
 <ol class="arabic simple" start="15">
-<li><p class="first">瀏覽到你想要儲存輸出檔的資料夾內，檔名輸入為 <code class="docutils literal"><span class="pre">clipped_</span></code>，然後按下 <span class="guilabel">存檔</span>。</p>
-</li>
+<li>瀏覽到你想要儲存輸出檔的資料夾內，檔名輸入為 <code class="docutils literal notranslate"><span class="pre">clipped_</span></code>，然後按下 <span class="guilabel">存檔</span>。</li>
 </ol>
 <img alt="../_images/159.png" class="align-center" src="../_images/159.png" />
 <ol class="arabic simple" start="16">
-<li><p class="first">你會看到有個 <span class="guilabel">自動填滿選項</span> 的視窗出現。<span class="guilabel">自動填滿模式</span> 選擇 <span class="guilabel">填上參數值</span>，<span class="guilabel">使用的參數</span> 選擇 <span class="guilabel">輸入圖層</span>。此設定會讓所有的輸出檔檔名為輸入檔檔名之前再加上 <code class="docutils literal"><span class="pre">output_</span></code> 文字。此步驟非常重要，務必確認出各個輸出檔檔名都是獨一無二的，才不會發生互相覆蓋的情況。</p>
-</li>
+<li>你會看到有個 <span class="guilabel">自動填滿選項</span> 的視窗出現。<span class="guilabel">自動填滿模式</span> 選擇 <span class="guilabel">填上參數值</span>，<span class="guilabel">使用的參數</span> 選擇 <span class="guilabel">輸入圖層</span>。此設定會讓所有的輸出檔檔名為輸入檔檔名之前再加上 <code class="docutils literal notranslate"><span class="pre">output_</span></code> 文字。此步驟非常重要，務必確認出各個輸出檔檔名都是獨一無二的，才不會發生互相覆蓋的情況。</li>
 </ol>
 <img alt="../_images/168.png" class="align-center" src="../_images/168.png" />
 <ol class="arabic simple" start="17">
-<li><p class="first">現在批次處理已經準備就緒，請按下 <span class="guilabel">Run</span>。</p>
-</li>
+<li>現在批次處理已經準備就緒，請按下 <span class="guilabel">Run</span>。</li>
 </ol>
 <img alt="../_images/178.png" class="align-center" src="../_images/178.png" />
 <ol class="arabic simple" start="18">
-<li><p class="first">裁切運算將執行在你剛剛指定的輸入檔上，然後製作成為輸出檔。批次處理完成後，產生的圖層會載入到 QGIS 中，你會發現這些全球的圖層都被裁切到只剩下非洲大陸的區域了。</p>
-</li>
+<li>裁切運算將執行在你剛剛指定的輸入檔上，然後製作成為輸出檔。批次處理完成後，產生的圖層會載入到 QGIS 中，你會發現這些全球的圖層都被裁切到只剩下非洲大陸的區域了。</li>
 </ol>
 <img alt="../_images/189.png" class="align-center" src="../_images/189.png" />
 </div>
@@ -380,8 +346,8 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      最後更新日期是 Mar 29, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      最後更新於 4月 04, 2019。<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

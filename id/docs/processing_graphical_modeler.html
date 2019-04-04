@@ -1,35 +1,25 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Otomatisasi Workflow Kompleks menggunakan Processing Modeler &mdash; QGIS Tutorials and Tips</title>
-    
+    <title>Otomatisasi Workflow Kompleks menggunakan Processing Modeler &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <link rel="search" title="Pencarian" href="../search.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -49,8 +39,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -82,7 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Pengantar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Bekerja dengan Attribut</a></li>
-<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Mengimpor file Spreadsheet atau CSV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Menggunakan Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Mencari dan mengunduh data OpenSteetMap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Styling Dasar Vektor</a></li>
@@ -224,7 +213,7 @@
 <h1>Otomatisasi Workflow Kompleks menggunakan Processing Modeler<a class="headerlink" href="#automating-complex-workflows-using-processing-modeler" title="Link permanen untuk headline ini">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Peringatan</p>
-<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/processing_graphical_modeler.html"><em>Automating Complex Workflows using Processing Modeler (QGIS3)</em></a></p>
+<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/processing_graphical_modeler.html"><span class="doc">Automating Complex Workflows using Processing Modeler (QGIS3)</span></a></p>
 </div>
 <p>Alur kerja GIS secara tipikal melalui banyak tahap - dengan sebuah tahap menghasilkan output sekunder yang digunakan di tahap berikutnya. Jika anda mengubah data input atau ingin mengoptimalkan sebuah paramaterm anda akan perlu menjalankan seluruh proses tadi secara manual. Beruntung, QGIS memiliki graphical modeler built-in yang dapat menolong anda mendefiniskan alur kerja anda dan menjalankannya dengan sebuah seruan. Anda dapat menjalankan alur kerja ini  sebagai sebuah batch atau tumpukan banyak input.</p>
 <div class="section" id="overview-of-the-task">
@@ -250,32 +239,25 @@ below if you wish to work on this tutorial:</p>
 <h2>Prosedur<a class="headerlink" href="#procedure" title="Link permanen untuk headline ini">¶</a></h2>
 <p>Alur kerja kita untuk latihan ini akan terbagi menjadi tahap-tahap berikut.</p>
 <ul class="simple">
-<li><p class="first">Aplikasikan sebuah algoritma xxx pada inputan  raster landcover. Ini akan mengurangi noise pada output kita dengan mengeliminasi pixel-pixel terisolir.</p>
-</li>
-<li><p class="first">Mengkonversi hasil raster ke sebuah layer polygon.</p>
-</li>
-<li><p class="first">Query  sebuah nilai kelas dari tabel attribut layer poligon dan membuat sebuah layer poigon dari kelas tersebut.</p>
-</li>
+<li>Aplikasikan sebuah algoritma xxx pada inputan  raster landcover. Ini akan mengurangi noise pada output kita dengan mengeliminasi pixel-pixel terisolir.</li>
+<li>Mengkonversi hasil raster ke sebuah layer polygon.</li>
+<li>Query  sebuah nilai kelas dari tabel attribut layer poligon dan membuat sebuah layer poigon dari kelas tersebut.</li>
 </ul>
 <p>Tahap-tahap berikut adalah meringkas proses untuk mengkoding proses di atas menjadi sebuah model dan menjalankannya pada dataset yang sudah diunduh.</p>
 <ol class="arabic simple">
-<li><p class="first">Luncurkan QGIS dan akses <span class="menuselection">Processing ‣ Graphical Modeler...</span>.</p>
-</li>
+<li>Luncurkan QGIS dan akses <span class="menuselection">Processing ‣ Graphical Modeler...</span>.</li>
 </ol>
 <img alt="../_images/1139.png" class="align-center" src="../_images/1139.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">Dialog <span class="guilabel">Processing modeler</span> berisi sebuah panel sebelah kiri dan kanvas utama. Pilih tab <span class="guilabel">Inputs</span> pada panel kiri dan drag <span class="guilabel">+ Raster layer</span> ke kanvas.</p>
-</li>
+<li>Dialog <span class="guilabel">Processing modeler</span> berisi sebuah panel sebelah kiri dan kanvas utama. Pilih tab <span class="guilabel">Inputs</span> pada panel kiri dan drag <span class="guilabel">+ Raster layer</span> ke kanvas.</li>
 </ol>
 <img alt="../_images/2103.png" class="align-center" src="../_images/2103.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">Sebuah dialog <span class="guilabel">Parameter definition</span> akan muncul . Tekan <code class="docutils literal"><span class="pre">Input</span></code> dengan <span class="guilabel">Parameter name</span> dan tandai <code class="docutils literal"><span class="pre">Yes</span></code> untuk guilabel:<cite>Required</cite> . Klik <span class="guilabel">OK</span>.</p>
-</li>
+<li>Sebuah dialog <span class="guilabel">Parameter definition</span> akan muncul . Tekan <code class="docutils literal notranslate"><span class="pre">Input</span></code> dengan <span class="guilabel">Parameter name</span> dan tandai <code class="docutils literal notranslate"><span class="pre">Yes</span></code> untuk guilabel:<cite>Required</cite> . Klik <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/359.png" class="align-center" src="../_images/359.png" />
+<img alt="../_images/360.png" class="align-center" src="../_images/360.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">Anda akan melihat sebuah kotak dengan nama <span class="guilabel">Input</span> muncul di kanvas. Ini merepresentasikan raster landcover yang kita gunakan sebagai input. Langkah selanjutnya adalah untuk mengaplikasikan sebuah algoritma <code class="docutils literal"><span class="pre">Majority</span> <span class="pre">filter</span></code> . Pindah ke tab <span class="guilabel">Algorithm</span> dari sudut kiri-bawah. Cari algoritma dan anda akan menemukannya pada provider <span class="guilabel">SAGA</span> . Drag atau bawa ke kanvas.</p>
-</li>
+<li>Anda akan melihat sebuah kotak dengan nama <span class="guilabel">Input</span> muncul di kanvas. Ini merepresentasikan raster landcover yang kita gunakan sebagai input. Langkah selanjutnya adalah untuk mengaplikasikan sebuah algoritma <code class="docutils literal notranslate"><span class="pre">Majority</span> <span class="pre">filter</span></code> . Pindah ke tab <span class="guilabel">Algorithm</span> dari sudut kiri-bawah. Cari algoritma dan anda akan menemukannya pada provider <span class="guilabel">SAGA</span> . Drag atau bawa ke kanvas.</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Catatan</p>
@@ -285,15 +267,13 @@ Interface</span> of the Processing Toolbox. Switch to the <span class="guilabel"
 Interface</span> by using the dropdown at the bottom of the Processing
 Toolbox in the main QGIS window.</p>
 </div>
-<img alt="../_images/432.png" class="align-center" src="../_images/432.png" />
+<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">Sebuah dialog konfigurasi untuk <span class="guilabel">Majority Filter</span>  akan dihadirkan. Biarkan nilai atau angka pada pengaturan awal dan klik <span class="guilabel">OK</span>.</p>
-</li>
+<li>Sebuah dialog konfigurasi untuk <span class="guilabel">Majority Filter</span>  akan dihadirkan. Biarkan nilai atau angka pada pengaturan awal dan klik <span class="guilabel">OK</span>.</li>
 </ol>
 <img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">Anda akan melihat bahwa sekarang ada sebuah kotak baru bernama <span class="guilabel">Majority Filter</span> di kanvas dan ini terkoneksi dengan box  <span class="guilabel">Input</span> . Ini terjadi karena algoritma <span class="guilabel">Majority Filter</span> memakai raster <span class="guilabel">Input</span> sebagai inputnya. Langkah berikut pada alur kerja kita adalah dengan mengkonversi output dari majority filter ke vektor. Temukan algoritma <cite>Polygonize (raster to vector)`</cite> dan drag ke kanvas.</p>
-</li>
+<li>Anda akan melihat bahwa sekarang ada sebuah kotak baru bernama <span class="guilabel">Majority Filter</span> di kanvas dan ini terkoneksi dengan box  <span class="guilabel">Input</span> . Ini terjadi karena algoritma <span class="guilabel">Majority Filter</span> memakai raster <span class="guilabel">Input</span> sebagai inputnya. Langkah berikut pada alur kerja kita adalah dengan mengkonversi output dari majority filter ke vektor. Temukan algoritma <cite>Polygonize (raster to vector)`</cite> dan drag ke kanvas.</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Catatan</p>
@@ -301,131 +281,108 @@ Toolbox in the main QGIS window.</p>
 </div>
 <img alt="../_images/631.png" class="align-center" src="../_images/631.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">Pilih &#8216;Filtered Grid&#8217; dari algoritma &#8216;Majority Filter&#8217; sebagai nilai untuk <span class="guilabel">Input layer</span>. Klik <span class="guilabel">OK</span>.</p>
-</li>
+<li>Pilih 'Filtered Grid' dari algoritma 'Majority Filter' sebagai nilai untuk <span class="guilabel">Input layer</span>. Klik <span class="guilabel">OK</span>.</li>
 </ol>
 <img alt="../_images/730.png" class="align-center" src="../_images/730.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">Langkah final pada alur kerja adal untuk melakukan query pada nilai kelas dan membuat layer baru dari fitur yang cocok. Temukan algoritma <code class="docutils literal"><span class="pre">Extract</span> <span class="pre">by</span> <span class="pre">attribute</span></code> dan drag ke kanvas.</p>
-</li>
+<li>Langkah final pada alur kerja adal untuk melakukan query pada nilai kelas dan membuat layer baru dari fitur yang cocok. Temukan algoritma <code class="docutils literal notranslate"><span class="pre">Extract</span> <span class="pre">by</span> <span class="pre">attribute</span></code> dan drag ke kanvas.</li>
 </ol>
 <img alt="../_images/828.png" class="align-center" src="../_images/828.png" />
 <ol class="arabic simple" start="9">
-<li><p class="first">Pilih &#8216;Vectorized&#8217; dari algoritma &#8216;Polygonize (raster to vector)&#8217; sebagai <span class="guilabel">Input Layer</span> . Kita ingin mengekstrak pixel-pixel yang merepresentaikan Croplands atau lahan pertanian. Nilai pixel yang sesuai dengan kelas ini adalah 12. (lihat <a class="reference external" href="http://www.landcover.org/data/lc/">Code Values</a>). Masukkan <code class="docutils literal"><span class="pre">DN</span></code> pada <span class="guilabel">Selection attribute</span> dan <code class="docutils literal"><span class="pre">12</span></code> untuk <span class="guilabel">value</span>. Karena output dari operasi ini akan menjadi hasil akhir, kita perlu memeberi nama outputnya. Masukkan <code class="docutils literal"><span class="pre">vectorized</span> <span class="pre">class</span></code> sebagai <span class="guilabel">Output</span> .</p>
-</li>
+<li>Pilih 'Vectorized' dari algoritma 'Polygonize (raster to vector)' sebagai <span class="guilabel">Input Layer</span> . Kita ingin mengekstrak pixel-pixel yang merepresentaikan Croplands atau lahan pertanian. Nilai pixel yang sesuai dengan kelas ini adalah 12. (lihat <a class="reference external" href="http://www.landcover.org/data/lc/">Code Values</a>). Masukkan <code class="docutils literal notranslate"><span class="pre">DN</span></code> pada <span class="guilabel">Selection attribute</span> dan <code class="docutils literal notranslate"><span class="pre">12</span></code> untuk <span class="guilabel">value</span>. Karena output dari operasi ini akan menjadi hasil akhir, kita perlu memeberi nama outputnya. Masukkan <code class="docutils literal notranslate"><span class="pre">vectorized</span> <span class="pre">class</span></code> sebagai <span class="guilabel">Output</span> .</li>
 </ol>
 <img alt="../_images/927.png" class="align-center" src="../_images/927.png" />
 <ol class="arabic simple" start="10">
-<li><p class="first">Masukkan  <span class="guilabel">Model name</span> dengan  <code class="docutils literal"><span class="pre">vectorize</span></code> dan  <span class="guilabel">Group name</span> sebagai <code class="docutils literal"><span class="pre">raster</span></code> . Klik tombol <span class="guilabel">Save</span></p>
-</li>
+<li>Masukkan  <span class="guilabel">Model name</span> dengan  <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> dan  <span class="guilabel">Group name</span> sebagai <code class="docutils literal notranslate"><span class="pre">raster</span></code> . Klik tombol <span class="guilabel">Save</span></li>
 </ol>
 <img alt="../_images/1027.png" class="align-center" src="../_images/1027.png" />
 <ol class="arabic simple" start="11">
-<li><p class="first">Beri nama model <code class="docutils literal"><span class="pre">vectorize</span></code> dan klik <span class="guilabel">Save</span>.</p>
-</li>
+<li>Beri nama model <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> dan klik <span class="guilabel">Save</span>.</li>
 </ol>
 <img alt="../_images/1140.png" class="align-center" src="../_images/1140.png" />
 <ol class="arabic simple" start="12">
-<li><p class="first">^Sekarang saatnya untuk meguji model kita. Tutup modeler dam pindah ke jendela utama QGIS. Akses <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer...</span>.</p>
-</li>
+<li>^Sekarang saatnya untuk meguji model kita. Tutup modeler dam pindah ke jendela utama QGIS. Akses <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer...</span>.</li>
 </ol>
 <img alt="../_images/1228.png" class="align-center" src="../_images/1228.png" />
 <ol class="arabic simple" start="13">
-<li><p class="first">Jelajahi file unduhan <code class="docutils literal"><span class="pre">LC_hd_global_2001.tif.gz</span></code> dan klik <span class="guilabel">Open</span> . Ketika raster terbuka, akses <span class="menuselection">Processing ‣ Toolbox</span>.</p>
-</li>
+<li>Jelajahi file unduhan <code class="docutils literal notranslate"><span class="pre">LC_hd_global_2001.tif.gz</span></code> dan klik <span class="guilabel">Open</span> . Ketika raster terbuka, akses <span class="menuselection">Processing ‣ Toolbox</span>.</li>
 </ol>
 <img alt="../_images/1326.png" class="align-center" src="../_images/1326.png" />
 <ol class="arabic simple" start="14">
-<li><p class="first">Temukan model yang baru saja dihasilkan pada <span class="menuselection">Models ‣ raster ‣ vectorize</span> . Dobel-klik untuk meluncurkan model.</p>
-</li>
+<li>Temukan model yang baru saja dihasilkan pada <span class="menuselection">Models ‣ raster ‣ vectorize</span> . Dobel-klik untuk meluncurkan model.</li>
 </ol>
-<img alt="../_images/1424.png" class="align-center" src="../_images/1424.png" />
+<img alt="../_images/1425.png" class="align-center" src="../_images/1425.png" />
 <ol class="arabic simple" start="15">
-<li><p class="first">Pilih <code class="docutils literal"><span class="pre">LC_hd_global_2001</span></code> sebagai <span class="guilabel">Input</span> dan klik <span class="guilabel">Run</span>.</p>
-</li>
+<li>Pilih <code class="docutils literal notranslate"><span class="pre">LC_hd_global_2001</span></code> sebagai <span class="guilabel">Input</span> dan klik <span class="guilabel">Run</span>.</li>
 </ol>
 <img alt="../_images/1523.png" class="align-center" src="../_images/1523.png" />
 <ol class="arabic simple" start="16">
-<li><p class="first">Anda akan melihat semua langkah-langkah tereksekusi tanpa ada input dari user. Ketika proses selesai, sebuah layer baru <code class="docutils literal"><span class="pre">vectorized_class</span></code> akan ditambahkan ke QGIS. Mari meningkatkan model sedikit. Klik kanan pada model <code class="docutils literal"><span class="pre">vectorize</span></code> <code class="docutils literal"><span class="pre">vectorize</span></code>  dan pilih <span class="guilabel">Edit model</span>.</p>
-</li>
+<li>Anda akan melihat semua langkah-langkah tereksekusi tanpa ada input dari user. Ketika proses selesai, sebuah layer baru <code class="docutils literal notranslate"><span class="pre">vectorized_class</span></code> akan ditambahkan ke QGIS. Mari meningkatkan model sedikit. Klik kanan pada model <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> <code class="docutils literal notranslate"><span class="pre">vectorize</span></code>  dan pilih <span class="guilabel">Edit model</span>.</li>
 </ol>
 <img alt="../_images/1621.png" class="align-center" src="../_images/1621.png" />
 <ol class="arabic simple" start="17">
-<li><p class="first">Pada step 12, kita melakukan hard-coding pada nilai <code class="docutils literal"><span class="pre">12</span></code> sebagai nilai kelas. Daripada itu, kita dapat menentukannya sebagai sebuah input parameter yang user bisa ubah. Untuk menambah hal ini, pindah ke tab <span class="guilabel">Inputs</span> dan drag <span class="guilabel">+ String</span>  ke model.</p>
-</li>
+<li>Pada step 12, kita melakukan hard-coding pada nilai <code class="docutils literal notranslate"><span class="pre">12</span></code> sebagai nilai kelas. Daripada itu, kita dapat menentukannya sebagai sebuah input parameter yang user bisa ubah. Untuk menambah hal ini, pindah ke tab <span class="guilabel">Inputs</span> dan drag <span class="guilabel">+ String</span>  ke model.</li>
 </ol>
 <img alt="../_images/1720.png" class="align-center" src="../_images/1720.png" />
 <ol class="arabic simple" start="18">
-<li><p class="first">Masukkan <span class="guilabel">Parameter Name</span> sebagai <code class="docutils literal"><span class="pre">Class</span></code>. Masukkan <a href="#id1"><span class="problematic" id="id2">``</span></a>12``sebagai <span class="guilabel">Default value</span>.</p>
-</li>
+<li>Masukkan <span class="guilabel">Parameter Name</span> sebagai <code class="docutils literal notranslate"><span class="pre">Class</span></code>. Masukkan <a href="#id1"><span class="problematic" id="id2">``</span></a>12``sebagai <span class="guilabel">Default value</span>.</li>
 </ol>
 <img alt="../_images/1821.png" class="align-center" src="../_images/1821.png" />
 <ol class="arabic simple" start="19">
-<li><p class="first">Sekarang kita akan mengubah algoritma <code class="docutils literal"><span class="pre">Extract</span> <span class="pre">by</span> <span class="pre">attribute</span></code> untuk menggunakan input ini daripada nilai hasil hard-koding tadi. Klik tombol <span class="guilabel">Edit</span> pada box <span class="guilabel">Extract by attribute</span></p>
-</li>
+<li>Sekarang kita akan mengubah algoritma <code class="docutils literal notranslate"><span class="pre">Extract</span> <span class="pre">by</span> <span class="pre">attribute</span></code> untuk menggunakan input ini daripada nilai hasil hard-koding tadi. Klik tombol <span class="guilabel">Edit</span> pada box <span class="guilabel">Extract by attribute</span></li>
 </ol>
 <img alt="../_images/1918.png" class="align-center" src="../_images/1918.png" />
 <ol class="arabic simple" start="20">
-<li><p class="first">Klik panah dropdown untuk <span class="guilabel">Value</span> dan pilih <code class="docutils literal"><span class="pre">Class</span></code> . Klik <span class="guilabel">OK</span>.</p>
-</li>
+<li>Klik panah dropdown untuk <span class="guilabel">Value</span> dan pilih <code class="docutils literal notranslate"><span class="pre">Class</span></code> . Klik <span class="guilabel">OK</span>.</li>
 </ol>
 <img alt="../_images/2015.png" class="align-center" src="../_images/2015.png" />
 <ol class="arabic simple" start="21">
-<li><p class="first">Anda akan melihat bahwa dari diagram model  bahwa algoritma <span class="guilabel">Extract by attribute</span> sekarang menggunakan 2 input. Modeler memiliki sebuah shortcut untuk meluncurkan model dan mengujinya. Klik tombol <span class="guilabel">Run</span> dari toolbar</p>
-</li>
+<li>Anda akan melihat bahwa dari diagram model  bahwa algoritma <span class="guilabel">Extract by attribute</span> sekarang menggunakan 2 input. Modeler memiliki sebuah shortcut untuk meluncurkan model dan mengujinya. Klik tombol <span class="guilabel">Run</span> dari toolbar</li>
 </ol>
-<img alt="../_images/2118.png" class="align-center" src="../_images/2118.png" />
+<img alt="../_images/2119.png" class="align-center" src="../_images/2119.png" />
 <ol class="arabic simple" start="22">
-<li><p class="first">Perhatikan bahwa dialog model memiliki sebuah field baru yang dapat diedit bernama <span class="guilabel">Class</span> . Masukkan nilai  <code class="docutils literal"><span class="pre">16</span></code> pada <span class="guilabel">Class</span>  dan klik <span class="guilabel">Run</span>.</p>
-</li>
+<li>Perhatikan bahwa dialog model memiliki sebuah field baru yang dapat diedit bernama <span class="guilabel">Class</span> . Masukkan nilai  <code class="docutils literal notranslate"><span class="pre">16</span></code> pada <span class="guilabel">Class</span>  dan klik <span class="guilabel">Run</span>.</li>
 </ol>
 <img alt="../_images/2217.png" class="align-center" src="../_images/2217.png" />
 <ol class="arabic simple" start="23">
-<li><p class="first">Ketika proses selesai, anda akan melihat bahwa dengan sebuah klik, kita dapat menjalankan sebuah alur kerja yang kompleks dan mengekstrak area untuk kelas 16.</p>
-</li>
+<li>Ketika proses selesai, anda akan melihat bahwa dengan sebuah klik, kita dapat menjalankan sebuah alur kerja yang kompleks dan mengekstrak area untuk kelas 16.</li>
 </ol>
 <img alt="../_images/2316.png" class="align-center" src="../_images/2316.png" />
 <ol class="arabic simple" start="24">
-<li><p class="first">Karena sekarang model kita sudah siap, kita dapat menjalankannya sama mudahnya pada raster baru. Buka file <code class="docutils literal"><span class="pre">LC_hd_global_2012.tif.gz</span></code> dengan mengakses <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer...</span> . Klik model <span class="guilabel">vectorize`</span> dari panel <span class="guilabel">Processing Toolbox</span></p>
-</li>
+<li>Karena sekarang model kita sudah siap, kita dapat menjalankannya sama mudahnya pada raster baru. Buka file <code class="docutils literal notranslate"><span class="pre">LC_hd_global_2012.tif.gz</span></code> dengan mengakses <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer...</span> . Klik model <span class="guilabel">vectorize`</span> dari panel <span class="guilabel">Processing Toolbox</span></li>
 </ol>
 <img alt="../_images/2414.png" class="align-center" src="../_images/2414.png" />
 <ol class="arabic simple" start="25">
-<li><p class="first">Ambil layer <code class="docutils literal"><span class="pre">LC_hd_global_2012</span></code> sebagai <span class="guilabel">Input</span> dan klik <span class="guilabel">Run</span>.</p>
-</li>
+<li>Ambil layer <code class="docutils literal notranslate"><span class="pre">LC_hd_global_2012</span></code> sebagai <span class="guilabel">Input</span> dan klik <span class="guilabel">Run</span>.</li>
 </ol>
 <img alt="../_images/2514.png" class="align-center" src="../_images/2514.png" />
 <ol class="arabic simple" start="26">
-<li><p class="first">Ketika putput baru sudah terbuka, anda dapat membandingkan perbedaan pada lahan pertanian dari 2001 sampai 2012.</p>
-</li>
+<li>Ketika putput baru sudah terbuka, anda dapat membandingkan perbedaan pada lahan pertanian dari 2001 sampai 2012.</li>
 </ol>
 <img alt="../_images/2614.png" class="align-center" src="../_images/2614.png" />
 <ol class="arabic simple" start="27">
-<li><p class="first">Selalu menjadi ide yang bagus untuk mendambah dokentasi pada model anda. Modeler memiliki built-in: guilabel:<cite>Help editor</cite>  yang membolehkan anda untuk mencangkokkan help langsung di model. Kkik kanan pada model <code class="docutils literal"><span class="pre">vectorize</span></code> dan pilih <span class="guilabel">Edit model</span>.</p>
-</li>
+<li>Selalu menjadi ide yang bagus untuk mendambah dokentasi pada model anda. Modeler memiliki built-in: guilabel:<cite>Help editor</cite>  yang membolehkan anda untuk mencangkokkan help langsung di model. Kkik kanan pada model <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> dan pilih <span class="guilabel">Edit model</span>.</li>
 </ol>
 <img alt="../_images/2713.png" class="align-center" src="../_images/2713.png" />
 <ol class="arabic simple" start="28">
-<li><p class="first">Klik tombol <span class="guilabel">Edit model help</span> dari toolbar.</p>
-</li>
+<li>Klik tombol <span class="guilabel">Edit model help</span> dari toolbar.</li>
 </ol>
 <img alt="../_images/2811.png" class="align-center" src="../_images/2811.png" />
 <ol class="arabic simple" start="29">
-<li><p class="first">Pada dialog <span class="guilabel">Help editor</span> , pilih item apa saja dari panel <span class="guilabel">Select element to edit</span> dan masukkan teks help pada <span class="guilabel">Element description</span> . Klik <span class="guilabel">OK</span> . Help ini akan tersedia di tab <span class="guilabel">Help</span> saat anda meluncurkan model untuk dieksekusi.</p>
-</li>
+<li>Pada dialog <span class="guilabel">Help editor</span> , pilih item apa saja dari panel <span class="guilabel">Select element to edit</span> dan masukkan teks help pada <span class="guilabel">Element description</span> . Klik <span class="guilabel">OK</span> . Help ini akan tersedia di tab <span class="guilabel">Help</span> saat anda meluncurkan model untuk dieksekusi.</li>
 </ol>
 <img alt="../_images/2910.png" class="align-center" src="../_images/2910.png" />
-<p>Model dapat menjadi penghemat waktu yang sangat baik dan membuat anda membuat alur kerja anda sekali dan menjalankannya berkali-kali. Anda dapat juga membagi model anda dengan user lain. File model tersimpan di direktori <code class="docutils literal"><span class="pre">.qgis2</span></code> .Anda dapat mengirim file <code class="docutils literal"><span class="pre">.model</span></code> ke user lain yang dapat mengkopinya ke direktori yang sesuai pada komputer mereja dan model ini akan muncul pada <span class="guilabel">Processing toolbox</span> . Lokasi direktori model akan bergantung pada platform sebagai berikut: (ganti <code class="docutils literal"><span class="pre">username</span></code> dengan nama_login anda)</p>
+<p>Model dapat menjadi penghemat waktu yang sangat baik dan membuat anda membuat alur kerja anda sekali dan menjalankannya berkali-kali. Anda dapat juga membagi model anda dengan user lain. File model tersimpan di direktori <code class="docutils literal notranslate"><span class="pre">.qgis2</span></code> .Anda dapat mengirim file <code class="docutils literal notranslate"><span class="pre">.model</span></code> ke user lain yang dapat mengkopinya ke direktori yang sesuai pada komputer mereja dan model ini akan muncul pada <span class="guilabel">Processing toolbox</span> . Lokasi direktori model akan bergantung pada platform sebagai berikut: (ganti <code class="docutils literal notranslate"><span class="pre">username</span></code> dengan nama_login anda)</p>
 <p><strong>Windows</strong></p>
-<div class="highlight-none"><div class="highlight"><pre>c:\Users\username\.qgis2\processing\models\
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>c:\Users\username\.qgis2\processing\models\
 </pre></div>
 </div>
 <p><strong>Mac</strong></p>
-<div class="highlight-none"><div class="highlight"><pre>/Users/username/.qgis2/processing/models/
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/username/.qgis2/processing/models/
 </pre></div>
 </div>
 <p><strong>Linux</strong></p>
-<div class="highlight-none"><div class="highlight"><pre>/home/username/.qgis2/processing/models/
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/home/username/.qgis2/processing/models/
 </pre></div>
 </div>
 </div>
@@ -453,8 +410,8 @@ Toolbox in the main QGIS window.</p>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Mar 29, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Terakhir diperbarui pada Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>
