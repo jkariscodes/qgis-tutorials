@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_TW">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>在 QGIS 中開啟 BIL、BIP 或 BSQ 格式檔案 &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>在 QGIS 中開啟 BIL、BIP 或 BSQ 格式檔案 &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="搜尋" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="Getting Started With Python Programming (QGIS3)" href="3/getting_started_with_pyqgis.html" />
     <link rel="prev" title="計算向量圖層中的多邊形頂點數" href="counting_vertices.html" />
 
@@ -41,7 +51,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -99,7 +110,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">使用 QGIS 瀏覽器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="counting_vertices.html">計算向量圖層中的多邊形頂點數</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">在 QGIS 中開啟 BIL、BIP 或 BSQ 格式檔案</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">在 QGIS 中開啟 BIL、BIP 或 BSQ 格式檔案</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
@@ -125,7 +136,7 @@
     </a>
   </li>
   <li>
-    <a href="3/getting_started_with_pyqgis.html" title="Next Chapter: Getting Started With Python Programming (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Getting Start... &raquo;</span>
+    <a href="3/getting_started_with_pyqgis.html" title="Next Chapter: Getting Started With Python Programming (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Getting Started ... &raquo;</span>
     </a>
   </li>
               
@@ -220,13 +231,13 @@
       
 
   <div class="section" id="open-bil-bip-or-bsq-files-in-qgis">
-<h1>在 QGIS 中開啟 BIL、BIP 或 BSQ 格式檔案<a class="headerlink" href="#open-bil-bip-or-bsq-files-in-qgis" title="本標題的永久連結">¶</a></h1>
+<h1>在 QGIS 中開啟 BIL、BIP 或 BSQ 格式檔案<a class="headerlink" href="#open-bil-bip-or-bsq-files-in-qgis" title="Permalink to this headline">¶</a></h1>
 <p>在處理遙測和科學資料時，常會遇到像是 <strong>BIL</strong>、<strong>BIP</strong> 或 <strong>BSQ</strong> 類型的格式。QGIS 用來讀取影像資料的 <a class="reference external" href="http://www.gdal.org">GDAL 函式庫</a>有支援此類格式，但它沒有辦法直接開啟這些檔案。這裡我們要展示如果從此格式建立相關的支援檔案，讓它們可以在 QGIS 中讀取。</p>
 <p>波段依行交錯排列 (Band interleaved by line，BIL)、波段依像素交錯排列 (Band interleaved by pixel，BIP)，與波段序排列 (Band sequential，BSQ) 是三種常用於多波段影像儲存的格式。(<a class="reference external" href="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=BIL,_BIP,_and_BSQ_raster_files">更多資訊請參考這裡</a>)</p>
-<p>一般來說，這些檔案都會附有一個 <code class="docutils literal notranslate"><span class="pre">.hdr</span></code> 檔。如果你的資料集之中有 <code class="docutils literal notranslate"><span class="pre">.hdr</span></code> 檔，請務必確認 .bil、.bsq 或 .bip 的主檔名與 .hdr 檔相同，而且他們必須在同一個資料夾之中。舉例來說，如果有個檔案名稱為 <code class="docutils literal notranslate"><span class="pre">image.bil</span></code>，伴隨的檔案應為 <code class="docutils literal notranslate"><span class="pre">image.hdr</span></code>，而且會與 <code class="docutils literal notranslate"><span class="pre">image.bil</span></code> 位在相同資料夾。如此一來，當你選擇 <span class="menuselection">圖層 ‣ 加入影像圖層</span>，然後開啟 <code class="docutils literal notranslate"><span class="pre">image.bil</span></code> 時，就不會出現任何問題。</p>
-<p>有些時候，這些檔案偏偏就是沒有 <code class="docutils literal notranslate"><span class="pre">.hdr</span></code> 檔。這種情況下，你需要利用本教學的方法自己創造一個才行。</p>
+<p>一般來說，這些檔案都會附有一個 <code class="docutils literal"><span class="pre">.hdr</span></code> 檔。如果你的資料集之中有 <code class="docutils literal"><span class="pre">.hdr</span></code> 檔，請務必確認 .bil、.bsq 或 .bip 的主檔名與 .hdr 檔相同，而且他們必須在同一個資料夾之中。舉例來說，如果有個檔案名稱為 <code class="docutils literal"><span class="pre">image.bil</span></code>，伴隨的檔案應為 <code class="docutils literal"><span class="pre">image.hdr</span></code>，而且會與 <code class="docutils literal"><span class="pre">image.bil</span></code> 位在相同資料夾。如此一來，當你選擇 <span class="menuselection">圖層 ‣ 加入影像圖層</span>，然後開啟 <code class="docutils literal"><span class="pre">image.bil</span></code> 時，就不會出現任何問題。</p>
+<p>有些時候，這些檔案偏偏就是沒有 <code class="docutils literal"><span class="pre">.hdr</span></code> 檔。這種情況下，你需要利用本教學的方法自己創造一個才行。</p>
 <div class="section" id="get-the-data">
-<h2>取得資料<a class="headerlink" href="#get-the-data" title="本標題的永久連結">¶</a></h2>
+<h2>取得資料<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
 <p>我們要使用 <a class="reference external" href="http://glcf.umd.edu/">全球土地覆蓋設施（Global Land Cover Facility）</a>提供的 <a class="reference external" href="http://glcf.umd.edu/data/landcover/data.shtml">AVHRR 全球土地覆蓋分類資料（Global Land Cover Classification data）</a>作為示例。</p>
 <p>此資料集以 <strong>BSQ</strong> 檔發布。<a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.bsq.gz">下載像素解析度 1 度的資料集</a></p>
 <p>為了方便起見，你也可以直接用下面的連結下載：</p>
@@ -234,23 +245,27 @@
 <p>資料來源 <a class="reference internal" href="credits.html#glcf" id="id1">[GLCF]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>操作流程<a class="headerlink" href="#procedure" title="本標題的永久連結">¶</a></h2>
+<h2>操作流程<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>解壓縮並取出 .bsq 檔：如使用 Windows，可以使用 <a class="reference external" href="http://www.7-zip.org/">7-Zip</a> 讀取和解壓縮 .gz 檔。你會看到壓縮檔中只有一個叫做 <code class="docutils literal notranslate"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 的 .bsq 檔，沒有 hdr 檔。</li>
+<li><p class="first">解壓縮並取出 .bsq 檔：如使用 Windows，可以使用 <a class="reference external" href="http://www.7-zip.org/">7-Zip</a> 讀取和解壓縮 .gz 檔。你會看到壓縮檔中只有一個叫做 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 的 .bsq 檔，沒有 hdr 檔。</p>
+</li>
 </ol>
 <img alt="../_images/1129.png" class="align-center" src="../_images/1129.png" />
 <ol class="arabic simple" start="2">
-<li>如果你嘗試在 QGIS 中開啟 <code class="docutils literal notranslate"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 的話，會有錯誤訊息顯示。</li>
+<li><p class="first">如果你嘗試在 QGIS 中開啟 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 的話，會有錯誤訊息顯示。</p>
+</li>
 </ol>
 <img alt="../_images/289.png" class="align-center" src="../_images/289.png" />
 <ol class="arabic simple" start="3">
-<li>如要克服此錯誤，我們得自己創造一個副檔名為 <code class="docutils literal notranslate"><span class="pre">.hdr</span></code> 的檔案。hdr 意味著檔頭（header），內含著資料集的結構以及各種資訊。這些資訊通常可以在資料集的詮釋資料（Metadata）中找到，如果你連詮釋資料都沒有，找看看資料來源的網站或文件說明有沒有提供。有些資訊就算你不知道，也可以用猜的。在本例中，資料的下載頁面有提供連結至<a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.glcf">詮釋資料</a>，把它下載下來然後開啟它。</li>
+<li><p class="first">如要克服此錯誤，我們得自己創造一個副檔名為 <code class="docutils literal"><span class="pre">.hdr</span></code> 的檔案。hdr 意味著檔頭（header），內含著資料集的結構以及各種資訊。這些資訊通常可以在資料集的詮釋資料（Metadata）中找到，如果你連詮釋資料都沒有，找看看資料來源的網站或文件說明有沒有提供。有些資訊就算你不知道，也可以用猜的。在本例中，資料的下載頁面有提供連結至<a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.glcf">詮釋資料</a>，把它下載下來然後開啟它。</p>
+</li>
 </ol>
 <img alt="../_images/354.png" class="align-center" src="../_images/354.png" />
 <ol class="arabic simple" start="4">
-<li>.hdr 檔必須要是純文字檔案，並且編排為以下的格式才行。我們已經找到某些參數了，但其他的還需要花點心力。<a class="reference external" href="http://www.gdal.org/frmt_various.html">格式的細節請參考這裡</a>。</li>
+<li><p class="first">.hdr 檔必須要是純文字檔案，並且編排為以下的格式才行。我們已經找到某些參數了，但其他的還需要花點心力。<a class="reference external" href="http://www.gdal.org/frmt_various.html">格式的細節請參考這裡</a>。</p>
+</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ncols &lt;number of columns or width of the raster&gt;
+<div class="highlight-none"><div class="highlight"><pre>ncols &lt;number of columns or width of the raster&gt;
 nrows &lt;number of rows or height of the raster&gt;
 cellsize &lt;pixel size or resolution&gt;
 xllcorner &lt;X coordinate of lower-left corner of the raster&gt;
@@ -262,15 +277,18 @@ byteorder &lt;byte order in which image pixel values are stored, msb or lsb&gt;
 </pre></div>
 </div>
 <ol class="arabic simple" start="5">
-<li>打開文字編輯器，然後依照前一個步驟的註明的格式輸入，再把檔案另存為 <code class="docutils literal notranslate"><span class="pre">gl-latlong-1deg-landcover.hdr</span></code>。務必確認你的檔名結尾不是 <code class="docutils literal notranslate"><span class="pre">.txt</span></code>。在文字檔中的某些值很容易理解：<strong>ncols</strong> 和 <strong>nrows</strong> 是影像的行數和每行的像素數目，可以從詮釋資料找到；<strong>cellsize</strong> 是像素解析度，詮釋資料中為 1。左下角的 X 與 Y 座標（<strong>xllcorner</strong> 和 <strong>yllcorner</strong>）要靠我們決定，由於影像覆蓋全球，又使用經緯度編排，<strong>xllcorner</strong> 和 <strong>yllcorner</strong> 可以分別設為 -180 和 -90。無資料值（nodata_value）的資訊也找不到，用猜的話 -9999 是個較保險的數值。從詮釋資料中，我們還可找到像素格式（Pixel Format）是 Byte，所以 <strong>nbits</strong> 要填上 8，然後 <strong>pixeltype</strong> 則為 <a href="#id1"><span class="problematic" id="id2">**</span></a>byte_unsigned**（無號位元組）。我們也沒有位元組順序（byteorder）的資訊，所以來試試看 msbfirst（最高有效位）。你也可以從<a class="reference external" href="../../downloads/gl-latlong-1deg-landcover.hdr">這裡</a>下載正確格式的 hdr 檔。</li>
+<li><p class="first">打開文字編輯器，然後依照前一個步驟的註明的格式輸入，再把檔案另存為 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.hdr</span></code>。務必確認你的檔名結尾不是 <code class="docutils literal"><span class="pre">.txt</span></code>。在文字檔中的某些值很容易理解：<strong>ncols</strong> 和 <strong>nrows</strong> 是影像的行數和每行的像素數目，可以從詮釋資料找到；<strong>cellsize</strong> 是像素解析度，詮釋資料中為 1。左下角的 X 與 Y 座標（<strong>xllcorner</strong> 和 <strong>yllcorner</strong>）要靠我們決定，由於影像覆蓋全球，又使用經緯度編排，<strong>xllcorner</strong> 和 <strong>yllcorner</strong> 可以分別設為 -180 和 -90。無資料值（nodata_value）的資訊也找不到，用猜的話 -9999 是個較保險的數值。從詮釋資料中，我們還可找到像素格式（Pixel Format）是 Byte，所以 <strong>nbits</strong> 要填上 8，然後 <strong>pixeltype</strong> 則為 <a href="#id1"><span class="problematic" id="id2">**</span></a>byte_unsigned**（無號位元組）。我們也沒有位元組順序（byteorder）的資訊，所以來試試看 msbfirst（最高有效位）。你也可以從<a class="reference external" href="../../downloads/gl-latlong-1deg-landcover.hdr">這裡</a>下載正確格式的 hdr 檔。</p>
+</li>
 </ol>
 <img alt="../_images/528.png" class="align-center" src="../_images/528.png" />
 <ol class="arabic simple" start="6">
-<li>現在我們有檔頭檔案了，把它移到與 <code class="docutils literal notranslate"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 相同的目錄下，然後再 QGIS 中選擇 <span class="menuselection">圖層 ‣ 加入影像圖層</span>，選擇 <code class="docutils literal notranslate"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 作為輸入檔案然後按下 <span class="guilabel">開啟</span>。</li>
+<li><p class="first">現在我們有檔頭檔案了，把它移到與 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 相同的目錄下，然後再 QGIS 中選擇 <span class="menuselection">圖層 ‣ 加入影像圖層</span>，選擇 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 作為輸入檔案然後按下 <span class="guilabel">開啟</span>。</p>
+</li>
 </ol>
 <img alt="../_images/626.png" class="align-center" src="../_images/626.png" />
 <ol class="arabic simple" start="7">
-<li>接下來的視窗會要你選擇 CRS。由於檔案是以經緯度編排，這邊的 CRS 要選 <strong>WGS84 EPSG:4326</strong>。最後，你就可以看到 QGIS 已經載入本資料了。</li>
+<li><p class="first">接下來的視窗會要你選擇 CRS。由於檔案是以經緯度編排，這邊的 CRS 要選 <strong>WGS84 EPSG:4326</strong>。最後，你就可以看到 QGIS 已經載入本資料了。</p>
+</li>
 </ol>
 <img alt="../_images/725.png" class="align-center" src="../_images/725.png" />
 </div>
@@ -298,8 +316,8 @@ byteorder &lt;byte order in which image pixel values are stored, msb or lsb&gt;
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      最後更新於 4月 04, 2019。<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+      最後更新日期是 Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

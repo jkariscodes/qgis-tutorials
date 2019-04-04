@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ro">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Automatizarea Creării Hărților cu ajutorul Atlasului Compozitorului de Hărți &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>Automatizarea Creării Hărților cu ajutorul Atlasului Compozitorului de Hărți &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="Căutare" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -39,7 +48,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -210,26 +220,29 @@
       
 
   <div class="section" id="automating-map-creation-with-print-composer-atlas">
-<h1>Automatizarea Creării Hărților cu ajutorul Atlasului Compozitorului de Hărți<a class="headerlink" href="#automating-map-creation-with-print-composer-atlas" title="Link permanent la acest titlu">¶</a></h1>
+<h1>Automatizarea Creării Hărților cu ajutorul Atlasului Compozitorului de Hărți<a class="headerlink" href="#automating-map-creation-with-print-composer-atlas" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">Atenționare</p>
-<p class="last">O nouă versiune a acestui tutorial este disponibilă la <a class="reference internal" href="3/automating_map_creation.html"><span class="doc">Automating Map Creation with Print Layout Atlas (QGIS3)</span></a></p>
+<p class="first admonition-title">Warning</p>
+<p class="last">O nouă versiune a acestui tutorial este disponibilă la <a class="reference internal" href="3/automating_map_creation.html"><em>Automating Map Creation with Print Layout Atlas (QGIS3)</em></a></p>
 </div>
-<p>Dacă organizația dvs. publică hărți imprimate sau online, apare adesea nevoia de a crea o serie de hărți pe baza aceluiași șablon - de obicei câte unul pentru fiecare unitate administrativă sau regiune de interes. Crearea manuală a acestor hărți poate dura o lungă perioadă de timp, iar dacă acestea trebuie să fie actualizate în mod regulat, atunci totul se poate transforma într-o adevărată corvoadă. QGIS dispune de un instrument numit <code class="docutils literal notranslate"><span class="pre">Atlas</span></code> care vă poate ajuta să creați un șablon, pe baza căruia să publicați cu ușurință un număr mare de hărți, pentru diferite regiuni geografice. Dacă nu sunteți familiarizați cu elementele de bază ale Compozitorului de Hărți, puteți parcurge tutorialul <a class="reference internal" href="making_a_map.html"><span class="doc">Crearea unei Hărți</span></a>.</p>
+<p>Dacă organizația dvs. publică hărți imprimate sau online, apare adesea nevoia de a crea o serie de hărți pe baza aceluiași șablon - de obicei câte unul pentru fiecare unitate administrativă sau regiune de interes. Crearea manuală a acestor hărți poate dura o lungă perioadă de timp, iar dacă acestea trebuie să fie actualizate în mod regulat, atunci totul se poate transforma într-o adevărată corvoadă. QGIS dispune de un instrument numit <code class="docutils literal"><span class="pre">Atlas</span></code> care vă poate ajuta să creați un șablon, pe baza căruia să publicați cu ușurință un număr mare de hărți, pentru diferite regiuni geografice. Dacă nu sunteți familiarizați cu elementele de bază ale Compozitorului de Hărți, puteți parcurge tutorialul <a class="reference internal" href="making_a_map.html"><em>Crearea unei Hărți</em></a>.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
 <p>Acest tutorial vă arată cum să creați harta zonelor mlăștinoase pentru fiecare regiune din statul Hawaii.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Alte competențe pe care le veți dobândi<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanent la acest titlu">¶</a></h3>
+<h3>Alte competențe pe care le veți dobândi<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Cum se utilizează stilul de randare <code class="docutils literal notranslate"><span class="pre">Poligoane</span> <span class="pre">Inversate</span></code>, pentru a umple zonele din afara poligoanelor.</li>
-<li>Cum să utilizați o expresie din stilul de randare <code class="docutils literal notranslate"><span class="pre">Bazat</span> <span class="pre">pe</span> <span class="pre">Reguli</span></code>, pentru a arăta numai entitatea curentă din Atlas.</li>
-<li>Aplicarea expresiilor, pentru a crea etichete dinamice în Compozitorul de Hărți.</li>
+<li><p class="first">Cum se utilizează stilul de randare <code class="docutils literal"><span class="pre">Poligoane</span> <span class="pre">Inversate</span></code>, pentru a umple zonele din afara poligoanelor.</p>
+</li>
+<li><p class="first">Cum să utilizați o expresie din stilul de randare <code class="docutils literal"><span class="pre">Bazat</span> <span class="pre">pe</span> <span class="pre">Reguli</span></code>, pentru a arăta numai entitatea curentă din Atlas.</p>
+</li>
+<li><p class="first">Aplicarea expresiilor, pentru a crea etichete dinamice în Compozitorul de Hărți.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Vom folosi <a class="reference external" href="http://planning.hawaii.gov/gis/download-gis-data/">Straturile de Date GIS</a> din <a class="reference external" href="http://planning.hawaii.gov/">Statul Hawaii - Biroul de Planificare</a></p>
 <p>Descărcați stratul de <a href="#id2"><span class="problematic" id="id3">`Zone umede http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip&gt;`_</span></a> din categoriile Biologică și Ecologică.</p>
 <p>Descărcați stratul <a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/county10.shp.zip">Limitelor recensământului regional 2010</a> din categoria Cultură și Demografie.</p>
@@ -239,153 +252,188 @@
 <p>Sursa de date: <a class="reference internal" href="credits.html#hawaii" id="id1">[HAWAII]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedura<a class="headerlink" href="#procedure" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Procedura<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Lansați QGIS și mergeți la <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector Layer</span>.</li>
+<li><p class="first">Lansați QGIS și mergeți la <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector Layer</span>.</p>
+</li>
 </ol>
 <img alt="../_images/130.png" class="align-center" src="../_images/130.png" />
 <ol class="arabic simple" start="2">
-<li>Navigați la fișierul <code class="docutils literal notranslate"><span class="pre">HI_Wetlands.shp.zip</span></code>, apoi faceți clic pe <span class="guilabel">Open</span>.</li>
+<li><p class="first">Navigați la fișierul <code class="docutils literal"><span class="pre">HI_Wetlands.shp.zip</span></code>, apoi faceți clic pe <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/226.png" class="align-center" src="../_images/226.png" />
 <ol class="arabic simple" start="3">
-<li>Selectați stratul <code class="docutils literal notranslate"><span class="pre">HI_Wetlands_Poly</span></code>, apoi faceți clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selectați stratul <code class="docutils literal"><span class="pre">HI_Wetlands_Poly</span></code>, apoi faceți clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/324.png" class="align-center" src="../_images/324.png" />
 <ol class="arabic simple" start="4">
-<li>Veți vedea poligoanele care reprezintă zonele umede din întregul stat Hawaii. Din moment ce dorim să creăm hărți separate ale zonelor umede pentru fiecare ținut din stat, vom avea nevoie de stratul cu granițele ținuturilor. Mergeți la <span class="menuselection">Strat ‣ Adăugare Strat ‣ Adăugare Strat Vectorial</span> și navigați la fișierul <code class="docutils literal notranslate"><span class="pre">county10.shp.zip</span></code>. Clic <span class="guilabel">Deschidere</span>.</li>
+<li><p class="first">Veți vedea poligoanele care reprezintă zonele umede din întregul stat Hawaii. Din moment ce dorim să creăm hărți separate ale zonelor umede pentru fiecare ținut din stat, vom avea nevoie de stratul cu granițele ținuturilor. Mergeți la <span class="menuselection">Strat ‣ Adăugare Strat ‣ Adăugare Strat Vectorial</span> și navigați la fișierul <code class="docutils literal"><span class="pre">county10.shp.zip</span></code>. Clic <span class="guilabel">Deschidere</span>.</p>
+</li>
 </ol>
 <img alt="../_images/49.png" class="align-center" src="../_images/49.png" />
 <ol class="arabic simple" start="5">
-<li>Mergeți la <span class="menuselection">Project ‣ New Print Composer</span>.</li>
+<li><p class="first">Mergeți la <span class="menuselection">Project ‣ New Print Composer</span>.</p>
+</li>
 </ol>
 <img alt="../_images/59.png" class="align-center" src="../_images/59.png" />
 <ol class="arabic simple" start="6">
-<li>Lăsați gol câmpul titlu al compozitorului, apoi faceți clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">Lăsați gol câmpul titlu al compozitorului, apoi faceți clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/68.png" class="align-center" src="../_images/68.png" />
 <ol class="arabic simple" start="7">
-<li>Mergeți la <span class="menuselection">Layout ‣ Add Map</span>.</li>
+<li><p class="first">Mergeți la <span class="menuselection">Layout ‣ Add Map</span>.</p>
+</li>
 </ol>
 <img alt="../_images/78.png" class="align-center" src="../_images/78.png" />
 <ol class="arabic simple" start="8">
-<li>Desenați un dreptunghi, ținând apăsat butonul stâng al mouse-ului, în zona în care se dorește inserarea hărții.</li>
+<li><p class="first">Desenați un dreptunghi, ținând apăsat butonul stâng al mouse-ului, în zona în care se dorește inserarea hărții.</p>
+</li>
 </ol>
 <img alt="../_images/87.png" class="align-center" src="../_images/87.png" />
 <ol class="arabic simple" start="9">
-<li>În partea de jos a filei <span class="guilabel">Proprietăți Element</span> bifați caseta  <span class="guilabel">Controlat de atlas</span>. Aceasta va indica compozitorului că întinderea hărții afișate în această hartă va fi determinată de instrumentul <code class="docutils literal notranslate"><span class="pre">Atlas</span></code>.</li>
+<li><p class="first">În partea de jos a filei <span class="guilabel">Proprietăți Element</span> bifați caseta  <span class="guilabel">Controlat de atlas</span>. Aceasta va indica compozitorului că întinderea hărții afișate în această hartă va fi determinată de instrumentul <code class="docutils literal"><span class="pre">Atlas</span></code>.</p>
+</li>
 </ol>
 <img alt="../_images/98.png" class="align-center" src="../_images/98.png" />
 <ol class="arabic simple" start="10">
-<li>Mergeți în fila <span class="guilabel">Generare Atlas</span>. Bifați caseta <span class="guilabel">Generează un atlas</span>. Selectați <code class="docutils literal notranslate"><span class="pre">county10</span></code> ca și <span class="guilabel">Strat de acoperire</span>. Acest lucru va indica faptul că dorim să creăm 1 hartă, pentru fiecare entitate poligonală din stratul <code class="docutils literal notranslate"><span class="pre">county10</span></code>. Puteți bifa, de asemenea,  <span class="guilabel">Strat de acoperire ascuns</span>, astfel încât entitățile să nu apară pe hartă.</li>
+<li><p class="first">Mergeți în fila <span class="guilabel">Generare Atlas</span>. Bifați caseta <span class="guilabel">Generează un atlas</span>. Selectați <code class="docutils literal"><span class="pre">county10</span></code> ca și <span class="guilabel">Strat de acoperire</span>. Acest lucru va indica faptul că dorim să creăm 1 hartă, pentru fiecare entitate poligonală din stratul <code class="docutils literal"><span class="pre">county10</span></code>. Puteți bifa, de asemenea,  <span class="guilabel">Strat de acoperire ascuns</span>, astfel încât entitățile să nu apară pe hartă.</p>
+</li>
 </ol>
 <img alt="../_images/107.png" class="align-center" src="../_images/107.png" />
 <ol class="arabic simple" start="11">
-<li>Observați că imaginea hărții nu se schimbă după configurarea setărilor Atlasului. Mergeți la <span class="menuselection">Atlas ‣ Preview Atlas</span>.</li>
+<li><p class="first">Observați că imaginea hărții nu se schimbă după configurarea setărilor Atlasului. Mergeți la <span class="menuselection">Atlas ‣ Preview Atlas</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1113.png" class="align-center" src="../_images/1113.png" />
 <ol class="arabic simple" start="12">
-<li>Acum, veți vedea harta reîmprospătându-se, pzezentându-vă modul în care va arăta o hartă individuală. Observați că în partea din dreapta-jos se arată numărul curent al entităților din stratul de acoperire.</li>
+<li><p class="first">Acum, veți vedea harta reîmprospătându-se, pzezentându-vă modul în care va arăta o hartă individuală. Observați că în partea din dreapta-jos se arată numărul curent al entităților din stratul de acoperire.</p>
+</li>
 </ol>
 <img alt="../_images/1210.png" class="align-center" src="../_images/1210.png" />
 <ol class="arabic simple" start="13">
-<li>Aveți posibilitatea să examinați modul în care va arăta harta pentru fiecare dintre poligoanele ținuturilor. Mergeți la <span class="menuselection">Atlas ‣ Următoarea Entitate</span>.</li>
+<li><p class="first">Aveți posibilitatea să examinați modul în care va arăta harta pentru fiecare dintre poligoanele ținuturilor. Mergeți la <span class="menuselection">Atlas ‣ Următoarea Entitate</span>.</p>
+</li>
 </ol>
 <img alt="../_images/139.png" class="align-center" src="../_images/139.png" />
 <ol class="arabic simple" start="14">
-<li>Atlasul va randa harta, până la extinderea următoarei entități din stratul de acoperire.</li>
+<li><p class="first">Atlasul va randa harta, până la extinderea următoarei entități din stratul de acoperire.</p>
+</li>
 </ol>
 <img alt="../_images/147.png" class="align-center" src="../_images/147.png" />
 <ol class="arabic simple" start="15">
-<li>Haideți să adăugăm o etichetă pe hartă. Mergeți la <span class="menuselection">Layout ‣ Add Label</span>.</li>
+<li><p class="first">Haideți să adăugăm o etichetă pe hartă. Mergeți la <span class="menuselection">Layout ‣ Add Label</span>.</p>
+</li>
 </ol>
 <img alt="../_images/157.png" class="align-center" src="../_images/157.png" />
 <ol class="arabic simple" start="16">
-<li>În fila <span class="guilabel">Item properties</span>, faceți clic pe butonul <span class="guilabel">Inserare expresie…</span>.</li>
+<li><p class="first">În fila <span class="guilabel">Item properties</span>, faceți clic pe butonul <span class="guilabel">Inserare expresie...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/166.png" class="align-center" src="../_images/166.png" />
 <ol class="arabic simple" start="17">
-<li>Eticheta hărții poate folosi atributele din stratul de acoperire. Funcția <code class="docutils literal notranslate"><span class="pre">concat</span></code> este folosită pentru a uni mai multe elemente de text într-unul singur. În acest caz, vom alipi valoarea atributului <code class="docutils literal notranslate"><span class="pre">NAME10</span></code> la stratul <code class="docutils literal notranslate"><span class="pre">county10</span></code> cu textul <code class="docutils literal notranslate"><span class="pre">County</span> <span class="pre">of</span></code>. Adăugați o expresie ca mai jos, apoi faceți clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">Eticheta hărții poate folosi atributele din stratul de acoperire. Funcția <code class="docutils literal"><span class="pre">concat</span></code> este folosită pentru a uni mai multe elemente de text într-unul singur. În acest caz, vom alipi valoarea atributului <code class="docutils literal"><span class="pre">NAME10</span></code> la stratul <code class="docutils literal"><span class="pre">county10</span></code> cu textul <code class="docutils literal"><span class="pre">County</span> <span class="pre">of</span></code>. Adăugați o expresie ca mai jos, apoi faceți clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>concat(&#39;County of &#39;, &quot;NAME10&quot;)
+<div class="highlight-none"><div class="highlight"><pre>concat(&#39;County of &#39;, &quot;NAME10&quot;)
 </pre></div>
 </div>
 <ol class="arabic simple" start="18">
-<li>Stabiliți dimensiunea fontului după plac.</li>
+<li><p class="first">Stabiliți dimensiunea fontului după plac.</p>
+</li>
 </ol>
 <img alt="../_images/187.png" class="align-center" src="../_images/187.png" />
 <ol class="arabic simple" start="19">
-<li>Adăugați o etichetă și introduceți <code class="docutils literal notranslate"><span class="pre">Harta</span> <span class="pre">Zonelor</span> <span class="pre">Umede</span></code> sub <span class="guilabel">Proprietățile principale</span>. Deoarece nu există nici o expresie aici, acest text va rămâne același pe toate hărțile.</li>
+<li><p class="first">Adăugați o etichetă și introduceți <code class="docutils literal"><span class="pre">Harta</span> <span class="pre">Zonelor</span> <span class="pre">Umede</span></code> sub <span class="guilabel">Proprietățile principale</span>. Deoarece nu există nici o expresie aici, acest text va rămâne același pe toate hărțile.</p>
+</li>
 </ol>
 <img alt="../_images/196.png" class="align-center" src="../_images/196.png" />
 <ol class="arabic simple" start="20">
-<li>Mergeți la <span class="menuselection">Atlas ‣ Ultima Entitate</span> și verificați dacă etichetele hărții funcționează așa cum este prevăzut. Veți observa că harta zonelor umede are poligoane care se extind în ocean, ceea ce arată urât. Putem schimba stilul acelor zonelor, pentru a le ascunde.</li>
+<li><p class="first">Mergeți la <span class="menuselection">Atlas ‣ Ultima Entitate</span> și verificați dacă etichetele hărții funcționează așa cum este prevăzut. Veți observa că harta zonelor umede are poligoane care se extind în ocean, ceea ce arată urât. Putem schimba stilul acelor zonelor, pentru a le ascunde.</p>
+</li>
 </ol>
 <img alt="../_images/205.png" class="align-center" src="../_images/205.png" />
 <ol class="arabic simple" start="21">
-<li>Să mergem în fereastra principală a QGIS. Clic-dreapta pe stratul <code class="docutils literal notranslate"><span class="pre">county10</span></code>, apoi selectați <span class="guilabel">Properties</span>.</li>
+<li><p class="first">Să mergem în fereastra principală a QGIS. Clic-dreapta pe stratul <code class="docutils literal"><span class="pre">county10</span></code>, apoi selectați <span class="guilabel">Properties</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2111.png" class="align-center" src="../_images/2111.png" />
 <ol class="arabic simple" start="22">
-<li>În fila <span class="guilabel">Stil</span>, selectați renderul <span class="guilabel">Inverted polygons</span>. Acest render  stilizează <cite>exteriorul</cite> poligonului - nu interiorul. Alegeți culoarea albă pentru umplere, apoi faceți clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">În fila <span class="guilabel">Stil</span>, selectați renderul <span class="guilabel">Inverted polygons</span>. Acest render  stilizează <cite>exteriorul</cite> poligonului - nu interiorul. Alegeți culoarea albă pentru umplere, apoi faceți clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/227.png" class="align-center" src="../_images/227.png" />
 <ol class="arabic simple" start="23">
-<li>Comutați la fereastra Compozitorului de Hărți. Dacă vreți să observați efectul de inversare a poligoanelor, trebuie debifată caseta <span class="guilabel">Strat de Acoperire Ascuns</span> de sub <span class="guilabel">Generare Atlas</span>. Veți vedea că imaginea randată este curată acum, iar zonele din afara poligonului de acoperire nu sunt vizibile.</li>
+<li><p class="first">Comutați la fereastra Compozitorului de Hărți. Dacă vreți să observați efectul de inversare a poligoanelor, trebuie debifată caseta <span class="guilabel">Strat de Acoperire Ascuns</span> de sub <span class="guilabel">Generare Atlas</span>. Veți vedea că imaginea randată este curată acum, iar zonele din afara poligonului de acoperire nu sunt vizibile.</p>
+</li>
 </ol>
 <img alt="../_images/234.png" class="align-center" src="../_images/234.png" />
 <ol class="arabic simple" start="24">
-<li>Există o problemă, totuși. Puteți observa zone ale hărții, din afara limitei stratului de acoperire, care sunt încă vizibile. Acest lucru se datorează faptului că Atlasul nu ascunde în mod automat alte entități. Acest lucru poate fi util în unele cazuri, dar pentru scopul nostru, vrem să arătăm doar zonele umede ale ținutului pentru care se generează harta. Pentru a remedia acest lucru, reveniți la fereastra principală a QGIS și faceți clic-dreapta pe stratul <code class="docutils literal notranslate"><span class="pre">county10</span></code>, apoi selectați <span class="guilabel">Proprietăți</span>.</li>
+<li><p class="first">Există o problemă, totuși. Puteți observa zone ale hărții, din afara limitei stratului de acoperire, care sunt încă vizibile. Acest lucru se datorează faptului că Atlasul nu ascunde în mod automat alte entități. Acest lucru poate fi util în unele cazuri, dar pentru scopul nostru, vrem să arătăm doar zonele umede ale ținutului pentru care se generează harta. Pentru a remedia acest lucru, reveniți la fereastra principală a QGIS și faceți clic-dreapta pe stratul <code class="docutils literal"><span class="pre">county10</span></code>, apoi selectați <span class="guilabel">Proprietăți</span>.</p>
+</li>
 </ol>
 <img alt="../_images/245.png" class="align-center" src="../_images/245.png" />
 <ol class="arabic simple" start="25">
-<li>În fila <span class="guilabel">Style</span>, selectați renderul <span class="guilabel">Rule-based</span> ca și <span class="guilabel">Sub render</span>. Dublu-clic pe zona de sub <span class="guilabel">Regulă</span>.</li>
+<li><p class="first">În fila <span class="guilabel">Style</span>, selectați renderul <span class="guilabel">Rule-based</span> ca și <span class="guilabel">Sub render</span>. Dublu-clic pe zona de sub <span class="guilabel">Regulă</span>.</p>
+</li>
 </ol>
 <img alt="../_images/255.png" class="align-center" src="../_images/255.png" />
 <ol class="arabic simple" start="26">
-<li>Clic pe butonul <span class="guilabel">…</span> de lângă <span class="guilabel">Filter</span>.</li>
+<li><p class="first">Clic pe butonul <span class="guilabel">...</span> de lângă <span class="guilabel">Filter</span>.</p>
+</li>
 </ol>
 <img alt="../_images/265.png" class="align-center" src="../_images/265.png" />
 <ol class="arabic simple" start="27">
-<li>În <span class="guilabel">Constructorul de expresii</span>, extindeți grupul de funcții <span class="guilabel">Atlas</span>. Funcția <code class="docutils literal notranslate"><span class="pre">$atlasfeatureid</span></code> va returna entitatea selectată în prezent. Vom construi o expresie care va alege numai entitatea selectată în mod curent în Atlas. Introduceți expresia de mai jos:</li>
+<li><p class="first">În <span class="guilabel">Constructorul de expresii</span>, extindeți grupul de funcții <span class="guilabel">Atlas</span>. Funcția <code class="docutils literal"><span class="pre">$atlasfeatureid</span></code> va returna entitatea selectată în prezent. Vom construi o expresie care va alege numai entitatea selectată în mod curent în Atlas. Introduceți expresia de mai jos:</p>
+</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$id = $atlasfeatureid
+<div class="highlight-none"><div class="highlight"><pre>$id = $atlasfeatureid
 </pre></div>
 </div>
 <img alt="../_images/275.png" class="align-center" src="../_images/275.png" />
 <ol class="arabic simple" start="28">
-<li>Înapoi, în fereastra Compozitorului de Hărți, faceți clic pe butonul <span class="guilabel">Actualizarea previzualizării</span> din fila <span class="guilabel">Proprietățile itemului</span>, pentru a vedea modificările. Observați că acum este afișată numai zona care acoperă limita ținutului.</li>
+<li><p class="first">Înapoi, în fereastra Compozitorului de Hărți, faceți clic pe butonul <span class="guilabel">Actualizarea previzualizării</span> din fila <span class="guilabel">Proprietățile itemului</span>, pentru a vedea modificările. Observați că acum este afișată numai zona care acoperă limita ținutului.</p>
+</li>
 </ol>
 <img alt="../_images/285.png" class="align-center" src="../_images/285.png" />
 <ol class="arabic simple" start="29">
-<li>Vom adăuga o altă etichetă dinamică pentru a afișa data curentă. Mergeți la <span class="menuselection">Aspect ‣ Adăugare Etichetă</span> și selectați zona de pe hartă. Faceți clic pe butonul <span class="guilabel">Inserați o expresie</span>.</li>
+<li><p class="first">Vom adăuga o altă etichetă dinamică pentru a afișa data curentă. Mergeți la <span class="menuselection">Aspect ‣ Adăugare Etichetă</span> și selectați zona de pe hartă. Faceți clic pe butonul <span class="guilabel">Inserați o expresie</span>.</p>
+</li>
 </ol>
 <img alt="../_images/295.png" class="align-center" src="../_images/295.png" />
 <ol class="arabic simple" start="30">
-<li>Extindeți grupul de funcții <span class="guilabel">Date and Time</span> și căutați funcția <code class="docutils literal notranslate"><span class="pre">$now</span></code>. Aceasta returnează ora sistemului actual. Funcția <code class="docutils literal notranslate"><span class="pre">todate()</span></code> o va converti într-un șir. Introduceți expresia de mai jos:</li>
+<li><p class="first">Extindeți grupul de funcții <span class="guilabel">Date and Time</span> și căutați funcția <code class="docutils literal"><span class="pre">$now</span></code>. Aceasta returnează ora sistemului actual. Funcția <code class="docutils literal"><span class="pre">todate()</span></code> o va converti într-un șir. Introduceți expresia de mai jos:</p>
+</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>concat(&#39;Created on: &#39;, todate($now))
+<div class="highlight-none"><div class="highlight"><pre>concat(&#39;Created on: &#39;, todate($now))
 </pre></div>
 </div>
 <img alt="../_images/304.png" class="align-center" src="../_images/304.png" />
 <ol class="arabic simple" start="31">
-<li>Adăugați o altă etichetă, citând sursa de date. Puteți adăuga, de asemenea, alte elemente, cum ar fi o săgeată indicând nordul hărții, scara grafică etc., așa cum se descrie în tutorialul <a class="reference internal" href="making_a_map.html"><span class="doc">Crearea unei Hărți</span></a>.</li>
+<li><p class="first">Adăugați o altă etichetă, citând sursa de date. Puteți adăuga, de asemenea, alte elemente, cum ar fi o săgeată indicând nordul hărții, scara grafică etc., așa cum se descrie în tutorialul <a class="reference internal" href="making_a_map.html"><em>Crearea unei Hărți</em></a>.</p>
+</li>
 </ol>
 <img alt="../_images/3110.png" class="align-center" src="../_images/3110.png" />
 <ol class="arabic simple" start="32">
-<li>Odată ce vă place aspectul hărții, mergeți la <span class="menuselection">Atlas ‣ Exportare Atlas sub formă de Imagini</span>.</li>
+<li><p class="first">Odată ce vă place aspectul hărții, mergeți la <span class="menuselection">Atlas ‣ Exportare Atlas sub formă de Imagini</span>.</p>
+</li>
 </ol>
 <img alt="../_images/325.png" class="align-center" src="../_images/325.png" />
 <ol class="arabic simple" start="33">
-<li>Selectați un director de pe calculatorul dumneavoastră și faceți clic pe <span class="guilabel">Choose</span>.</li>
+<li><p class="first">Selectați un director de pe calculatorul dumneavoastră și faceți clic pe <span class="guilabel">Choose</span>.</p>
+</li>
 </ol>
 <img alt="../_images/332.png" class="align-center" src="../_images/332.png" />
 <ol class="arabic simple" start="34">
-<li>Instrumentul Atlas va parcurge fiecare element din stratul de acoperire și va crea imagini separate ale hărții, pe baza modelului creat. Puteți vedea imaginile în director, o dată ce procesul s-a încheiat.</li>
+<li><p class="first">Instrumentul Atlas va parcurge fiecare element din stratul de acoperire și va crea imagini separate ale hărții, pe baza modelului creat. Puteți vedea imaginile în director, o dată ce procesul s-a încheiat.</p>
+</li>
 </ol>
 <img alt="../_images/342.png" class="align-center" src="../_images/342.png" />
 <ol class="arabic simple" start="35">
-<li>Aici sunt imaginile de referință ale hărții.</li>
+<li><p class="first">Aici sunt imaginile de referință ale hărții.</p>
+</li>
 </ol>
 <img alt="../_images/35_1.jpg" class="align-center" src="../_images/35_1.jpg" />
 <img alt="../_images/35_2.jpg" class="align-center" src="../_images/35_2.jpg" />
@@ -417,8 +465,8 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Ultima actualizare la apr. 04, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+      Last updated on Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ro">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Utilizarea Funcțiilor pentru Expresiile Python Personalizate &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>Utilizarea Funcțiilor pentru Expresiile Python Personalizate &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="Căutare" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -39,7 +48,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -210,58 +220,64 @@
       
 
   <div class="section" id="using-custom-python-expression-functions">
-<h1>Utilizarea Funcțiilor pentru Expresiile Python Personalizate<a class="headerlink" href="#using-custom-python-expression-functions" title="Link permanent la acest titlu">¶</a></h1>
+<h1>Utilizarea Funcțiilor pentru Expresiile Python Personalizate<a class="headerlink" href="#using-custom-python-expression-functions" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">Atenționare</p>
-<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/custom_python_functions.html"><span class="doc">Using Custom Python Expression Functions (QGIS3)</span></a></p>
+<p class="first admonition-title">Warning</p>
+<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/custom_python_functions.html"><em>Using Custom Python Expression Functions (QGIS3)</em></a></p>
 </div>
 <p>Expresiile din QGIS au o mare putere, fiind utilizate în mai multe funcțiuni de bază - selectare, calculul valorilor unui câmp, stilizare, etichetare etc. QGIS are, de asemenea suport pentru expresii definite de către utilizator. Cu un pic de programare python puteți defini propriile funcții, care pot fi utilizate în cadrul motorului de expresii.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
 <p>Vom defini o funcție personalizată care găsește Zona UTM a unei entități din hartă, apoi vom folosi această funcție pentru a scrie o expresie care afișează zona UTM sub formă de sfat, la trecerea pe deasupra punctului.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Alte competențe pe care le veți dobândi<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanent la acest titlu">¶</a></h3>
+<h3>Alte competențe pe care le veți dobândi<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Cum să utilizați instrumentul <code class="docutils literal notranslate"><span class="pre">Indicii</span> <span class="pre">Hartă</span></code> pentru a afișa textul personalizat, la trecerea pe deasupra unei entități.</li>
+<li><p class="first">Cum să utilizați instrumentul <code class="docutils literal"><span class="pre">Indicii</span> <span class="pre">Hartă</span></code> pentru a afișa textul personalizat, la trecerea pe deasupra unei entități.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Vom folosi setul de date <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Locuri Populate</a> de la Natural Earth. Descărcați setul de date <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">simplu (cu mai puține coloane)</a></p>
 <p>Pentru comoditate, puteți descărca o copie a setului de date direct de la adresa de mai jos:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_populated_places_simple.zip">ne_10m_populated_places_simple.zip</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedura<a class="headerlink" href="#procedure" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Procedura<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Lansați QGIS și mergeți la <span class="menuselection">Strat ‣ Adăugare Strat ‣ Adăugare Strat Vectorial</span>.</li>
+<li><p class="first">Lansați QGIS și mergeți la <span class="menuselection">Strat ‣ Adăugare Strat ‣ Adăugare Strat Vectorial</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1100.png" class="align-center" src="../_images/1100.png" />
 <ol class="arabic simple" start="2">
-<li>Navigați la fișierul descărcat, <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.zip</span></code>, apoi faceți clic pe <span class="guilabel">Open</span>.</li>
+<li><p class="first">Navigați la fișierul descărcat, <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code>, apoi faceți clic pe <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/240.png" class="align-center" src="../_images/240.png" />
 <ol class="arabic simple" start="3">
-<li>Mergeți la <span class="menuselection">Vizualizare ‣ Selectare ‣ Selectare După Expresie…</span>.</li>
+<li><p class="first">Mergeți la <span class="menuselection">Vizualizare ‣ Selectare ‣ Selectare După Expresie...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/335.png" class="align-center" src="../_images/335.png" />
 <ol class="arabic simple" start="4">
-<li>Comutați pe fila <span class="guilabel">Editorul de Funcții</span>. Aici puteți scrie orice cod PyQGIS, care va fi executat de către motorul de expresii.</li>
+<li><p class="first">Comutați pe fila <span class="guilabel">Editorul de Funcții</span>. Aici puteți scrie orice cod PyQGIS, care va fi executat de către motorul de expresii.</p>
+</li>
 </ol>
 <img alt="../_images/417.png" class="align-center" src="../_images/417.png" />
 <ol class="arabic simple" start="5">
-<li>Vom defini o funcție particularizată, denumită <code class="docutils literal notranslate"><span class="pre">GetUtmZone</span></code>, care va calcula numărul zonei UTM pentru fiecare entitate. Deoarece funcțiile personalizate din QGIS lucrează la nivel de entitate. Vom folosi centrul de greutate al geometriei entității și vom calcula Zona UTM din latitudinea și longitudinea geometriei centroidului. Vom adăuga, de asemenea, denumirea «N» sau «S», pentru a indica dacă zona este în emisfera nordică sau sudică. Introduceți codul de mai jos în editor, denumiți fișierul ca <code class="docutils literal notranslate"><span class="pre">utm_zones.py</span></code>, apoi faceți clic pe <span class="guilabel">Salvare fișier</span>.</li>
+<li><p class="first">Vom defini o funcție particularizată, denumită <code class="docutils literal"><span class="pre">GetUtmZone</span></code>, care va calcula numărul zonei UTM pentru fiecare entitate. Deoarece funcțiile personalizate din QGIS lucrează la nivel de entitate. Vom folosi centrul de greutate al geometriei entității și vom calcula Zona UTM din latitudinea și longitudinea geometriei centroidului. Vom adăuga, de asemenea, denumirea &#8216;N&#8217; sau &#8216;S&#8217;, pentru a indica dacă zona este în emisfera nordică sau sudică. Introduceți codul de mai jos în editor, denumiți fișierul ca <code class="docutils literal"><span class="pre">utm_zones.py</span></code>, apoi faceți clic pe <span class="guilabel">Salvare fișier</span>.</p>
+</li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Notă</p>
+<p class="first admonition-title">Note</p>
 <p class="last">Zonele UTM sunt zone de proiecție longitudinale, numerotate de la 1 la 60. Fiecare zonă UTM are o dimensiune de 6 grade. Aici vom folosi o formulă matematică simplă, pentru a găsi zona adecvată pentru o valoare longitudinală dată. Rețineți că această formulă nu acoperă unele zone UTM speciale.</p>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">qgis.gui</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">GetUtmZone</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
     <span class="n">centroid</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
     <span class="n">longitude</span> <span class="o">=</span> <span class="n">centroid</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
@@ -269,58 +285,68 @@
     <span class="n">zone_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(((</span><span class="n">longitude</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="n">latitude</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
+        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s">&#39;N&#39;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span>
+        <span class="n">zone_letter</span> <span class="o">=</span> <span class="s">&#39;S&#39;</span>
 
-    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">&#39;</span><span class="si">%d%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/517.png" class="align-center" src="../_images/517.png" />
 <ol class="arabic simple" start="6">
-<li>Faceți clic pe <span class="guilabel">Rulare Script</span>. Aceasta va executa codul python și va înregistra funcția <code class="docutils literal notranslate"><span class="pre">GetUtmZone</span></code> în motorul de expresii. Rețineți că acest lucru este necesar să aibă loc o singură dată. O dată ce funcția este înregistrată, ea va fi întotdeauna la dispoziția motorului de expresii.</li>
+<li><p class="first">Faceți clic pe <span class="guilabel">Rulare Script</span>. Aceasta va executa codul python și va înregistra funcția <code class="docutils literal"><span class="pre">GetUtmZone</span></code> în motorul de expresii. Rețineți că acest lucru este necesar să aibă loc o singură dată. O dată ce funcția este înregistrată, ea va fi întotdeauna la dispoziția motorului de expresii.</p>
+</li>
 </ol>
 <img alt="../_images/615.png" class="align-center" src="../_images/615.png" />
 <ol class="arabic simple" start="7">
-<li>Comutați în fila <span class="guilabel">Expresiilor</span> a dialogului <span class="guilabel">Selectare după expresie</span>. Găsiți și extindeți grupul <span class="guilabel">Personalizate</span> din secțiunea <span class="guilabel">Funcțiilor</span>. Veți observa o nouă funcție personalizată, <code class="docutils literal notranslate"><span class="pre">$GetUtmZone</span></code>, în listă. Putem folosi de acum această funcție în cadrul expresiilor, la fel ca oricare altă funcție. Tastați următoarea expresie în editor. Această expresie va selecta toate punctele care se încadrează în Zona UTM <code class="docutils literal notranslate"><span class="pre">40N</span></code>. Faceți clic pe <span class="guilabel">Selectare</span>.</li>
+<li><p class="first">Comutați în fila <span class="guilabel">Expresiilor</span> a dialogului <span class="guilabel">Selectare după expresie</span>. Găsiți și extindeți grupul <span class="guilabel">Personalizate</span> din secțiunea <span class="guilabel">Funcțiilor</span>. Veți observa o nouă funcție personalizată, <code class="docutils literal"><span class="pre">$GetUtmZone</span></code>, în listă. Putem folosi de acum această funcție în cadrul expresiilor, la fel ca oricare altă funcție. Tastați următoarea expresie în editor. Această expresie va selecta toate punctele care se încadrează în Zona UTM <code class="docutils literal"><span class="pre">40N</span></code>. Faceți clic pe <span class="guilabel">Selectare</span>.</p>
+</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$GetUtmZone = &#39;40N&#39;
+<div class="highlight-none"><div class="highlight"><pre>$GetUtmZone = &#39;40N&#39;
 </pre></div>
 </div>
 <img alt="../_images/715.png" class="align-center" src="../_images/715.png" />
 <ol class="arabic simple" start="8">
-<li>În fereastra principală a QGIS, veți observa unele entități evidențiate în galben. Acestea sunt punctele care se încadrează în zona UTM specificată în expresie.</li>
+<li><p class="first">În fereastra principală a QGIS, veți observa unele entități evidențiate în galben. Acestea sunt punctele care se încadrează în zona UTM specificată în expresie.</p>
+</li>
 </ol>
 <img alt="../_images/814.png" class="align-center" src="../_images/814.png" />
 <ol class="arabic simple" start="9">
-<li>Ați văzut cum am definit și folosit o funcție personalizată, pentru a selecta entitățile duiupă o expresie. Vom folosi acum aceeași funcție într-un alt context. Una dintre bijuteriile ascunse în QGIS este instrumentul <code class="docutils literal notranslate"><span class="pre">Indiciile</span> <span class="pre">Hărții</span></code>. Acest instrument arată textul definit de utilizator atunci când treceți peste un element. Faceți clic dreapta pe stratul <cite>ne_10m_populated_places_simple`</cite>, apoi selectați <span class="guilabel">Proprietăți</span>.</li>
+<li><p class="first">Ați văzut cum am definit și folosit o funcție personalizată, pentru a selecta entitățile duiupă o expresie. Vom folosi acum aceeași funcție într-un alt context. Una dintre bijuteriile ascunse în QGIS este instrumentul <code class="docutils literal"><span class="pre">Indiciile</span> <span class="pre">Hărții</span></code>. Acest instrument arată textul definit de utilizator atunci când treceți peste un element. Faceți clic dreapta pe stratul <cite>ne_10m_populated_places_simple`</cite>, apoi selectați <span class="guilabel">Proprietăți</span>.</p>
+</li>
 </ol>
 <img alt="../_images/915.png" class="align-center" src="../_images/915.png" />
 <ol class="arabic simple" start="10">
-<li>Comutați la fila <span class="guilabel">Afișare</span>, apoi selectați <span class="guilabel">HTML</span>. Aici puteți introduce un text oarecare, care va fi afișat atunci când treceți peste entitățile stratului. Mai mult, puteți folosi valori și expresii din câmpurile stratului pentru a defini un mesaj mult mai util. Faceți clic pe butonul <span class="guilabel">Introduceți expresie…</span>.</li>
+<li><p class="first">Comutați la fila <span class="guilabel">Afișare</span>, apoi selectați <span class="guilabel">HTML</span>. Aici puteți introduce un text oarecare, care va fi afișat atunci când treceți peste entitățile stratului. Mai mult, puteți folosi valori și expresii din câmpurile stratului pentru a defini un mesaj mult mai util. Faceți clic pe butonul <span class="guilabel">Introduceți expresie...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1014.png" class="align-center" src="../_images/1014.png" />
 <ol class="arabic simple" start="11">
-<li>Veți vedea din nou editorul de expresii familiar. Vom folosi funcția <code class="docutils literal notranslate"><span class="pre">concat</span></code> pentru a alătura valoarea câmpului <code class="docutils literal notranslate"><span class="pre">name</span></code> rezultatului funcției noastre personalizate, $GetUtmZone. Introduceți următoarea expresie, apoi faceți clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">Veți vedea din nou editorul de expresii familiar. Vom folosi funcția <code class="docutils literal"><span class="pre">concat</span></code> pentru a alătura valoarea câmpului <code class="docutils literal"><span class="pre">name</span></code> rezultatului funcției noastre personalizate, $GetUtmZone. Introduceți următoarea expresie, apoi faceți clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
+<div class="highlight-none"><div class="highlight"><pre>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
 </pre></div>
 </div>
 <img alt="../_images/1119.png" class="align-center" src="../_images/1119.png" />
 <ol class="arabic simple" start="12">
-<li>Veți vedea expresia introdusă ca valoare a textului <span class="guilabel">Display</span>. Faceți clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">Veți vedea expresia introdusă ca valoare a textului <span class="guilabel">Display</span>. Faceți clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1216.png" class="align-center" src="../_images/1216.png" />
 <ol class="arabic simple" start="13">
-<li>Înainte de a continua, haideți să de-selectăm funcțiile alese în pasul anterior. Mergeți la <span class="menuselection">Vizualizare ‣ Selectare ‣ Deselectează Entitățile din Toate Straturile</span>.</li>
+<li><p class="first">Înainte de a continua, haideți să de-selectăm funcțiile alese în pasul anterior. Mergeți la <span class="menuselection">Vizualizare ‣ Selectare ‣ Deselectează Entitățile din Toate Straturile</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1315.png" class="align-center" src="../_images/1315.png" />
 <ol class="arabic simple" start="14">
-<li>Activați instrumentul <code class="docutils literal notranslate"><span class="pre">Indiciile</span> <span class="pre">Hărții</span></code> mergând la <span class="menuselection">Vizualizare ‣ Indiciile Hărții</span>.</li>
+<li><p class="first">Activați instrumentul <code class="docutils literal"><span class="pre">Indiciile</span> <span class="pre">Hărții</span></code> mergând la <span class="menuselection">Vizualizare ‣ Indiciile Hărții</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1414.png" class="align-center" src="../_images/1414.png" />
 <ol class="arabic simple" start="15">
-<li>Măriți oricare zonă a hărții și deplasați cursorul mouse-ului peste o entitate oarecare. Veți vedea numele orașului și zona UTM corespunzătoare, afișate ca indiciu în hartă.</li>
+<li><p class="first">Măriți oricare zonă a hărții și deplasați cursorul mouse-ului peste o entitate oarecare. Veți vedea numele orașului și zona UTM corespunzătoare, afișate ca indiciu în hartă.</p>
+</li>
 </ol>
 <img alt="../_images/1513.png" class="align-center" src="../_images/1513.png" />
 </div>
@@ -348,8 +374,8 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Ultima actualizare la apr. 04, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+      Last updated on Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="id">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Sampling Data Raster menggunakan Poin atau Poligon &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>Sampling Data Raster menggunakan Poin atau Poligon &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="Pencarian" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="Interpolasi Data Poin" href="interpolating_point_data.html" />
     <link rel="prev" title="Analisa Tetangga Terdekat" href="nearest_neighbor_analysis.html" />
 
@@ -41,7 +51,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -92,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Membuat Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Melakukan Queries Spasial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analisa Tetangga Terdekat</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Sampling Data Raster menggunakan Poin atau Poligon</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Sampling Data Raster menggunakan Poin atau Poligon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolasi Data Poin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
@@ -121,11 +132,11 @@
               
                 
   <li>
-    <a href="nearest_neighbor_analysis.html" title="Previous Chapter: Analisa Tetangga Terdekat"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Analisa Tetan...</span>
+    <a href="nearest_neighbor_analysis.html" title="Previous Chapter: Analisa Tetangga Terdekat"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Analisa Tetangga...</span>
     </a>
   </li>
   <li>
-    <a href="interpolating_point_data.html" title="Next Chapter: Interpolasi Data Poin"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Interpolasi Data Poin &raquo;</span>
+    <a href="interpolating_point_data.html" title="Next Chapter: Interpolasi Data Poin"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Interpolasi Data... &raquo;</span>
     </a>
   </li>
               
@@ -221,15 +232,17 @@
 
   <div class="section" id="sampling-raster-data-using-points-or-polygons">
 <h1>Sampling Data Raster menggunakan Poin atau Poligon<a class="headerlink" href="#sampling-raster-data-using-points-or-polygons" title="Link permanen untuk headline ini">¶</a></h1>
-<p>Banyak dataset sains dan lingkungan berupa raster bergrid. Data elevasi (DEM) juga terdistribusi berupa file raster. Pada raster file ini, parameter yang tersaji terencoded sebagai nilai pixel raster. Seringkalim diperlukan untuk mengekstrak nilai pixel pada lokasi tertentu atau mengagregasi mereka pada sejumlah area. Fungsi ini tersedia di QGIS dalam 2 plugin - <code class="docutils literal notranslate"><span class="pre">Point</span> <span class="pre">Sampling</span> <span class="pre">Tool</span></code> dan <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span> <span class="pre">plugin</span></code>.</p>
+<p>Banyak dataset sains dan lingkungan berupa raster bergrid. Data elevasi (DEM) juga terdistribusi berupa file raster. Pada raster file ini, parameter yang tersaji terencoded sebagai nilai pixel raster. Seringkalim diperlukan untuk mengekstrak nilai pixel pada lokasi tertentu atau mengagregasi mereka pada sejumlah area. Fungsi ini tersedia di QGIS dalam 2 plugin - <code class="docutils literal"><span class="pre">Point</span> <span class="pre">Sampling</span> <span class="pre">Tool</span></code> dan <code class="docutils literal"><span class="pre">Zonal</span> <span class="pre">Statistics</span> <span class="pre">plugin</span></code>.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Tinjauan Tugas<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
 <p>Diberikan sebuah grid raster untuk temperatur maksimum di AS, kita perlu untuk mengekstrak temperatur pada semua area urban dan juga menghitung temperatur rata-rata untuk setiap county di AS.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Skill lain yang akan anda pelajari<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanen untuk headline ini">¶</a></h3>
 <ul class="simple">
-<li>mere-proyeksi sebuah layer vektor.</li>
-<li>Pilih dan hapus beberapa layer dari Table of Content QGIS.</li>
+<li><p class="first">mere-proyeksi sebuah layer vektor.</p>
+</li>
+<li><p class="first">Pilih dan hapus beberapa layer dari Table of Content QGIS.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -239,7 +252,7 @@
 <a class="reference external" href="http://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/">GIS data</a> related to
 temperature and precipitation in the US. Download the <a class="reference external" href="ftp://ftp.cpc.ncep.noaa.gov/GIS/GRADS_GIS/GeoTIFF/TEMP/us_tmax/">latest grid filei for
 maximum temperatures</a>. The file
-will be named <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float.tif</span></code></p>
+will be named <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float.tif</span></code></p>
 <p>Kita akan menggunakan sebuah file CSV dari <a class="reference external" href="https://www.census.gov/geo/maps-data/data/gazetteer2013.html">2013 US Gazetteer</a> merepresentasikan area urban di AS. Unduh <a class="reference external" href="http://www2.census.gov/geo/gazetteer/2013_Gazetteer/2013_Gaz_ua_national.zip">Urban Areas Gazetteer File</a></p>
 <p>Karena kita ingin mengagregasi temperatur pada tiap county, kita akan menggunakan <a class="reference external" href="https://www.census.gov/cgi-bin/geo/shapefiles2013/main">2013 TIGER/Line Shapefiles</a> . Unduh <a class="reference external" href="http://www2.census.gov/geo/tiger/TIGER2013/COUNTY/tl_2013_us_county.zip">Counties (and equivalents) shapefile</a>.</p>
 <p>For convenience, you may directly download a copy of the datasets from the
@@ -252,91 +265,113 @@ links below:</p>
 <div class="section" id="procedure">
 <h2>Prosedur<a class="headerlink" href="#procedure" title="Link permanen untuk headline ini">¶</a></h2>
 <ol class="arabic simple">
-<li>Akses <span class="menuselection">Layer ‣ Add Raster Layer</span> dan jelajahi ke file unduhan <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float.tif</span></code> dan klik <span class="guilabel">Open</span>.</li>
+<li><p class="first">Akses <span class="menuselection">Layer ‣ Add Raster Layer</span> dan jelajahi ke file unduhan <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float.tif</span></code> dan klik <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1149.png" class="align-center" src="../_images/1149.png" />
 <ol class="arabic simple" start="2">
-<li>Ketika layer terbuka, pilih took <span class="guilabel">Identify</span> dan klik di amna saja pada layer. Anda akan melihat nilai temperatur dalam celseius atau Band 1 di lokasi.</li>
+<li><p class="first">Ketika layer terbuka, pilih took <span class="guilabel">Identify</span> dan klik di amna saja pada layer. Anda akan melihat nilai temperatur dalam celseius atau Band 1 di lokasi.</p>
+</li>
 </ol>
 <img alt="../_images/2108.png" class="align-center" src="../_images/2108.png" />
 <ol class="arabic simple" start="3">
-<li>Sekarang unzip file unduhan <code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national.zip</span></code> dan ekstrak file <code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national.txt</span></code> pada disk anda. Akses <span class="menuselection">Layer ‣ Add Delimited Text Layer</span>.</li>
+<li><p class="first">Sekarang unzip file unduhan <code class="docutils literal"><span class="pre">2013_Gaz_ua_national.zip</span></code> dan ekstrak file <code class="docutils literal"><span class="pre">2013_Gaz_ua_national.txt</span></code> pada disk anda. Akses <span class="menuselection">Layer ‣ Add Delimited Text Layer</span>.</p>
+</li>
 </ol>
 <img alt="../_images/366.png" class="align-center" src="../_images/366.png" />
 <ol class="arabic simple" start="4">
-<li>Pada dialog <span class="guilabel">Create a Layer from Delimited Text File</span> , klik <span class="guilabel">Browse</span> dan <code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national.txt</span></code> . Pilih <span class="guilabel">Tab</span> pada  <span class="guilabel">Custom delimiters</span> . Koordinat poin dalam lintang atau latitude dan bujur atau longitude, jadi pilih <span class="guilabel">INTPTLONG</span> sebagai  <span class="guilabel">X field</span> dan <span class="guilabel">INTPTLAT</span> sebagai <span class="guilabel">Y field</span> . Beri tanda cek pada box <span class="guilabel">Use spatial index</span> dan klik <span class="guilabel">OK</span>.</li>
+<li><p class="first">Pada dialog <span class="guilabel">Create a Layer from Delimited Text File</span> , klik <span class="guilabel">Browse</span> dan <code class="docutils literal"><span class="pre">2013_Gaz_ua_national.txt</span></code> . Pilih <span class="guilabel">Tab</span> pada  <span class="guilabel">Custom delimiters</span> . Koordinat poin dalam lintang atau latitude dan bujur atau longitude, jadi pilih <span class="guilabel">INTPTLONG</span> sebagai  <span class="guilabel">X field</span> dan <span class="guilabel">INTPTLAT</span> sebagai <span class="guilabel">Y field</span> . Beri tanda cek pada box <span class="guilabel">Use spatial index</span> dan klik <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/438.png" class="align-center" src="../_images/438.png" />
 <ol class="arabic simple" start="5">
-<li>Sekarang kita siap untuk mengekstrak nilai temperatur dari layer raster,. Install plugin <code class="docutils literal notranslate"><span class="pre">Point</span> <span class="pre">Sampling</span> <span class="pre">Tool</span></code> . Lihat <span class="xref std std-doc">docs/using_plugins</span> untuk deteil bagaimana menginstall plugins.</li>
+<li><p class="first">Sekarang kita siap untuk mengekstrak nilai temperatur dari layer raster,. Install plugin <code class="docutils literal"><span class="pre">Point</span> <span class="pre">Sampling</span> <span class="pre">Tool</span></code> . Lihat <code class="xref doc docutils literal"><span class="pre">docs/using_plugins</span></code> untuk deteil bagaimana menginstall plugins.</p>
+</li>
 </ol>
 <img alt="../_images/539.png" class="align-center" src="../_images/539.png" />
 <ol class="arabic simple" start="6">
-<li>Buka dialog plugin dari <span class="menuselection">Plugins ‣ Analyses ‣ Point sampling tool</span>.</li>
+<li><p class="first">Buka dialog plugin dari <span class="menuselection">Plugins ‣ Analyses ‣ Point sampling tool</span>.</p>
+</li>
 </ol>
 <img alt="../_images/636.png" class="align-center" src="../_images/636.png" />
 <ol class="arabic simple" start="7">
-<li>Pada dialog <span class="guilabel">Point Sampling Tool</span> , pilih <code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national</span></code> sebagai <span class="guilabel">Layer containing sampling points</span> . Kita harus secara eksplisit mengambil field dari layer input yang kita inginkan pada layer output. Pilih field <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> dan <code class="docutils literal notranslate"><span class="pre">NAME</span></code> dari layer <code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national</span></code> . Kita dapat mensampel nilai dari beberapa band raster sekali bersamaan, tapi karena raster kita hanya memiliki 1 band, pilih <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float:</span> <span class="pre">Band</span> <span class="pre">1</span></code> . Beri nama layer vektor output sebagai <code class="docutils literal notranslate"><span class="pre">max_temparature_at_urban_locations.shp</span></code> . Klik <span class="guilabel">OK</span> untuk memulai proses sampling. Klik <span class="guilabel">Close</span> ketika proses selesai.</li>
+<li><p class="first">Pada dialog <span class="guilabel">Point Sampling Tool</span> , pilih <code class="docutils literal"><span class="pre">2013_Gaz_ua_national</span></code> sebagai <span class="guilabel">Layer containing sampling points</span> . Kita harus secara eksplisit mengambil field dari layer input yang kita inginkan pada layer output. Pilih field <code class="docutils literal"><span class="pre">GEOID</span></code> dan <code class="docutils literal"><span class="pre">NAME</span></code> dari layer <code class="docutils literal"><span class="pre">2013_Gaz_ua_national</span></code> . Kita dapat mensampel nilai dari beberapa band raster sekali bersamaan, tapi karena raster kita hanya memiliki 1 band, pilih <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float:</span> <span class="pre">Band</span> <span class="pre">1</span></code> . Beri nama layer vektor output sebagai <code class="docutils literal"><span class="pre">max_temparature_at_urban_locations.shp</span></code> . Klik <span class="guilabel">OK</span> untuk memulai proses sampling. Klik <span class="guilabel">Close</span> ketika proses selesai.</p>
+</li>
 </ol>
 <img alt="../_images/735.png" class="align-center" src="../_images/735.png" />
 <ol class="arabic simple" start="8">
-<li>Anda akan melihat sebuah layer baru <code class="docutils literal notranslate"><span class="pre">max_temparature_at_urban_locations</span></code> terbuka di QGIS. Gunakan tool <span class="guilabel">Identify</span> untuk mengklik  poin mana saja untuk melihat attribut. Anda akan melihat field <code class="docutils literal notranslate"><span class="pre">us.tmax_no</span></code> - yang berisi nilai pixel raster pada lokasi poin.</li>
+<li><p class="first">Anda akan melihat sebuah layer baru <code class="docutils literal"><span class="pre">max_temparature_at_urban_locations</span></code> terbuka di QGIS. Gunakan tool <span class="guilabel">Identify</span> untuk mengklik  poin mana saja untuk melihat attribut. Anda akan melihat field <code class="docutils literal"><span class="pre">us.tmax_no</span></code> - yang berisi nilai pixel raster pada lokasi poin.</p>
+</li>
 </ol>
 <img alt="../_images/833.png" class="align-center" src="../_images/833.png" />
 <ol class="arabic simple" start="9">
-<li>Bagian pertama dari anlisis kita sudah selesai. Mari hapus layer yang tidak diperlukan. Tahan <kbd class="kbd docutils literal notranslate">Shift</kbd>  dan pilih layer <code class="docutils literal notranslate"><span class="pre">max_temparature_at_urban_locations</span></code> dan <code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national</span></code>  . Klik-kanan dan pilih <span class="guilabel">Remove</span> untuk menghapus mereka dari QGIS TOC atau Table of Content.</li>
+<li><p class="first">Bagian pertama dari anlisis kita sudah selesai. Mari hapus layer yang tidak diperlukan. Tahan <code class="kbd docutils literal"><span class="pre">Shift</span></code>  dan pilih layer <code class="docutils literal"><span class="pre">max_temparature_at_urban_locations</span></code> dan <code class="docutils literal"><span class="pre">2013_Gaz_ua_national</span></code>  . Klik-kanan dan pilih <span class="guilabel">Remove</span> untuk menghapus mereka dari QGIS TOC atau Table of Content.</p>
+</li>
 </ol>
 <img alt="../_images/932.png" class="align-center" src="../_images/932.png" />
 <ol class="arabic simple" start="10">
-<li>Akses <span class="menuselection">Layer ‣ Add Vector Layer</span> . Jelajahi file unduhan <code class="docutils literal notranslate"><span class="pre">tl_2013_us_county.zip</span></code> dan klik <span class="guilabel">Open</span> . Pilih <code class="docutils literal notranslate"><span class="pre">tl_2013_us_county.shp</span></code> sebagai layer dan klik:guilabel:<cite>OK</cite>.</li>
+<li><p class="first">Akses <span class="menuselection">Layer ‣ Add Vector Layer</span> . Jelajahi file unduhan <code class="docutils literal"><span class="pre">tl_2013_us_county.zip</span></code> dan klik <span class="guilabel">Open</span> . Pilih <code class="docutils literal"><span class="pre">tl_2013_us_county.shp</span></code> sebagai layer dan klik:guilabel:<cite>OK</cite>.</p>
+</li>
 </ol>
 <img alt="../_images/1032.png" class="align-center" src="../_images/1032.png" />
 <ol class="arabic simple" start="11">
-<li><code class="docutils literal notranslate"><span class="pre">tl_2013_us_county</span></code> akan ditambahkan ke QGIS. Layer ini dalam proyeksi <code class="docutils literal notranslate"><span class="pre">EPSG:4269</span> <span class="pre">NAD83</span></code>  . Ini tidak sesuai dengan proyeksi dari layer raster. Kita akan mere-proyeksi layer ini ke proyeksi <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code></li>
+<li><p class="first"><code class="docutils literal"><span class="pre">tl_2013_us_county</span></code> akan ditambahkan ke QGIS. Layer ini dalam proyeksi <code class="docutils literal"><span class="pre">EPSG:4269</span> <span class="pre">NAD83</span></code>  . Ini tidak sesuai dengan proyeksi dari layer raster. Kita akan mere-proyeksi layer ini ke proyeksi <code class="docutils literal"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code></p>
+</li>
 </ol>
 <img alt="../_images/1150.png" class="align-center" src="../_images/1150.png" />
 <ol class="arabic simple" start="12">
-<li>Klik kanan layer <code class="docutils literal notranslate"><span class="pre">tl_2013_us_county</span></code> dan pilih <span class="guilabel">Save As..</span>.</li>
+<li><p class="first">Klik kanan layer <code class="docutils literal"><span class="pre">tl_2013_us_county</span></code> dan pilih <span class="guilabel">Save As..</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1233.png" class="align-center" src="../_images/1233.png" />
 <ol class="arabic simple" start="13">
-<li>Pada dialog <span class="guilabel">Save Vector layer as..</span>, klik <span class="guilabel">Browse</span> dan beri nama output file sebagai <code class="docutils literal notranslate"><span class="pre">counties.shp</span></code> . Pilih <span class="guilabel">Selected CRS</span> dari menu dropdown <span class="guilabel">CRS</span> . Klik <span class="guilabel">Browse</span> dan pilih <code class="docutils literal notranslate"><span class="pre">WGS</span> <span class="pre">84</span></code> sebgai CRS. Beri tanda cek pada <span class="guilabel">Add saved file to map</span> dan klik <span class="guilabel">OK</span>.</li>
+<li><p class="first">Pada dialog <span class="guilabel">Save Vector layer as..</span>, klik <span class="guilabel">Browse</span> dan beri nama output file sebagai <code class="docutils literal"><span class="pre">counties.shp</span></code> . Pilih <span class="guilabel">Selected CRS</span> dari menu dropdown <span class="guilabel">CRS</span> . Klik <span class="guilabel">Browse</span> dan pilih <code class="docutils literal"><span class="pre">WGS</span> <span class="pre">84</span></code> sebgai CRS. Beri tanda cek pada <span class="guilabel">Add saved file to map</span> dan klik <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1331.png" class="align-center" src="../_images/1331.png" />
 <ol class="arabic simple" start="14">
-<li>Sebuah layer baru bernama <code class="docutils literal notranslate"><span class="pre">counties</span></code> akan ditambahkan ke QGIS.</li>
+<li><p class="first">Sebuah layer baru bernama <code class="docutils literal"><span class="pre">counties</span></code> akan ditambahkan ke QGIS.</p>
+</li>
 </ol>
 <img alt="../_images/1430.png" class="align-center" src="../_images/1430.png" />
 <ol class="arabic simple" start="15">
-<li>Aktifkan <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span> <span class="pre">Plugins</span></code> . ini adalah plugin inti, jadi sudah terinstall. Lihat <span class="xref std std-doc">docs/using_plugins</span> untuk mengetahui bagaimana mengaktifkan plugin inti.</li>
+<li><p class="first">Aktifkan <code class="docutils literal"><span class="pre">Zonal</span> <span class="pre">Statistics</span> <span class="pre">Plugins</span></code> . ini adalah plugin inti, jadi sudah terinstall. Lihat <code class="xref doc docutils literal"><span class="pre">docs/using_plugins</span></code> untuk mengetahui bagaimana mengaktifkan plugin inti.</p>
+</li>
 </ol>
 <img alt="../_images/1528.png" class="align-center" src="../_images/1528.png" />
 <ol class="arabic simple" start="16">
-<li>Akses <span class="menuselection">Raster ‣ Zonal statistics ‣ Zonal statistics</span>.</li>
+<li><p class="first">Akses <span class="menuselection">Raster ‣ Zonal statistics ‣ Zonal statistics</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1626.png" class="align-center" src="../_images/1626.png" />
 <ol class="arabic simple" start="17">
-<li>Pilih <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float</span></code> sebagai <span class="guilabel">Raster layer</span> dan <code class="docutils literal notranslate"><span class="pre">counties</span></code> sebagai <span class="guilabel">Polygon layer containing the zones</span>. Masukkan <code class="docutils literal notranslate"><span class="pre">ZS_</span></code> sebagai <span class="guilabel">Output column prefix</span> . Klik <span class="guilabel">OK</span>.</li>
+<li><p class="first">Pilih <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float</span></code> sebagai <span class="guilabel">Raster layer</span> dan <code class="docutils literal"><span class="pre">counties</span></code> sebagai <span class="guilabel">Polygon layer containing the zones</span>. Masukkan <code class="docutils literal"><span class="pre">ZS_</span></code> sebagai <span class="guilabel">Output column prefix</span> . Klik <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1725.png" class="align-center" src="../_images/1725.png" />
 <ol class="arabic simple" start="18">
-<li>Analisis mungkin membutuhkan beberapa waktu bergantung pada ukuran dataset.</li>
+<li><p class="first">Analisis mungkin membutuhkan beberapa waktu bergantung pada ukuran dataset.</p>
+</li>
 </ol>
 <img alt="../_images/1826.png" class="align-center" src="../_images/1826.png" />
 <ol class="arabic simple" start="19">
-<li>Ketika proses selesai, pilih layer <code class="docutils literal notranslate"><span class="pre">counties</span></code> . Gunakan tool <span class="guilabel">Identify</span> dan klik pada poligon county mana saja. Anda akan melihat tiga attribut baru ditambahkan ke layer : <cite>ZS_count`</cite> , <code class="docutils literal notranslate"><span class="pre">ZS_mean</span></code> dan <code class="docutils literal notranslate"><span class="pre">ZS_sum</span></code> . Attribut ini berisi jumlah pixel raster, rata-rata nilai pixel raster dan jumlah nilai pixek raster secara berurutan. Karena kita tertarik pada tempertaur rata-rata, field <code class="docutils literal notranslate"><span class="pre">ZS_mean</span></code> akan menjadi yang kita cari.</li>
+<li><p class="first">Ketika proses selesai, pilih layer <code class="docutils literal"><span class="pre">counties</span></code> . Gunakan tool <span class="guilabel">Identify</span> dan klik pada poligon county mana saja. Anda akan melihat tiga attribut baru ditambahkan ke layer : <cite>ZS_count`</cite> , <code class="docutils literal"><span class="pre">ZS_mean</span></code> dan <code class="docutils literal"><span class="pre">ZS_sum</span></code> . Attribut ini berisi jumlah pixel raster, rata-rata nilai pixel raster dan jumlah nilai pixek raster secara berurutan. Karena kita tertarik pada tempertaur rata-rata, field <code class="docutils literal"><span class="pre">ZS_mean</span></code> akan menjadi yang kita cari.</p>
+</li>
 </ol>
 <img alt="../_images/1923.png" class="align-center" src="../_images/1923.png" />
 <ol class="arabic simple" start="20">
-<li>Mari menstyle layer ini untuk membuat sebuah peta temperatur. Klik-kanan layer <code class="docutils literal notranslate"><span class="pre">counties</span></code> dan pilih <span class="guilabel">Properties</span>.</li>
+<li><p class="first">Mari menstyle layer ini untuk membuat sebuah peta temperatur. Klik-kanan layer <code class="docutils literal"><span class="pre">counties</span></code> dan pilih <span class="guilabel">Properties</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2020.png" class="align-center" src="../_images/2020.png" />
 <ol class="arabic simple" start="21">
-<li>Pindah ke tab <span class="guilabel">Style</span> . Pilih style <span class="guilabel">Graduated</span> dan pilih <code class="docutils literal notranslate"><span class="pre">ZS_mean</span></code>  sebagai <span class="guilabel">Column</span> . Pilih <span class="guilabel">Color Ramp</span> dan <span class="guilabel">Mode</span> sesuai pilihan anda. Klik <span class="guilabel">Classify</span> untuk membuat kelas-kelas. Klik <span class="guilabel">OK</span>. (lihat <span class="xref std std-doc">docs/pembuatan_vector_sederhana</span> untuk detail lebih dalam styling )</li>
+<li><p class="first">Pindah ke tab <span class="guilabel">Style</span> . Pilih style <span class="guilabel">Graduated</span> dan pilih <code class="docutils literal"><span class="pre">ZS_mean</span></code>  sebagai <span class="guilabel">Column</span> . Pilih <span class="guilabel">Color Ramp</span> dan <span class="guilabel">Mode</span> sesuai pilihan anda. Klik <span class="guilabel">Classify</span> untuk membuat kelas-kelas. Klik <span class="guilabel">OK</span>. (lihat <code class="xref doc docutils literal"><span class="pre">docs/pembuatan_vector_sederhana</span></code> untuk detail lebih dalam styling )</p>
+</li>
 </ol>
 <img alt="../_images/2123.png" class="align-center" src="../_images/2123.png" />
 <ol class="arabic simple" start="22">
-<li>Anda akan melihat poligon county yang sudah distyle menggunakan temperatur maksimum rata-rata dari grid raster.</li>
+<li><p class="first">Anda akan melihat poligon county yang sudah distyle menggunakan temperatur maksimum rata-rata dari grid raster.</p>
+</li>
 </ol>
 <img alt="../_images/2221.png" class="align-center" src="../_images/2221.png" />
 </div>
@@ -365,7 +400,7 @@ links below:</p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
       Terakhir diperbarui pada Apr 04, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

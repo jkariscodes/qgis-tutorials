@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ro">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Rularea și programarea Activităților de Prelucrare QGIS &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>Rularea și programarea Activităților de Prelucrare QGIS &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="Căutare" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="Găsirea Poligoanelor Învecinate Dintr-un Strat" href="find_neighbor_polygons.html" />
     <link rel="prev" title="Writing Python Scripts for Processing Framework (QGIS3)" href="3/processing_python_scripts.html" />
 
@@ -41,7 +50,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -104,7 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Rularea și programarea Activităților de Prelucrare QGIS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Rularea și programarea Activităților de Prelucrare QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="find_neighbor_polygons.html">Găsirea Poligoanelor Învecinate Dintr-un Strat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Realizarea Uniunii Tabelelor (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Maparea Web cu ajutorul QGIS2Web</a></li>
@@ -121,11 +131,11 @@
               
                 
   <li>
-    <a href="3/processing_python_scripts.html" title="Previous Chapter: Writing Python Scripts for Processing Framework (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Writing Pytho...</span>
+    <a href="3/processing_python_scripts.html" title="Previous Chapter: Writing Python Scripts for Processing Framework (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Writing Python S...</span>
     </a>
   </li>
   <li>
-    <a href="find_neighbor_polygons.html" title="Next Chapter: Găsirea Poligoanelor Învecinate Dintr-un Strat"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Găsirea Polig... &raquo;</span>
+    <a href="find_neighbor_polygons.html" title="Next Chapter: Găsirea Poligoanelor Învecinate Dintr-un Strat"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Găsirea Poligoan... &raquo;</span>
     </a>
   </li>
               
@@ -220,88 +230,105 @@
       
 
   <div class="section" id="running-and-scheduling-qgis-processing-jobs">
-<h1>Rularea și programarea Activităților de Prelucrare QGIS<a class="headerlink" href="#running-and-scheduling-qgis-processing-jobs" title="Link permanent la acest titlu">¶</a></h1>
+<h1>Rularea și programarea Activităților de Prelucrare QGIS<a class="headerlink" href="#running-and-scheduling-qgis-processing-jobs" title="Permalink to this headline">¶</a></h1>
 <p>Puteți automatiza o mulțime de sarcini în QGIS folosind scriptarea Python (PyQGIS) și cadrul de Procesare. De cele mai multe ori, veți rula manual aceste scripturi, atât timp cât este deschis QGIS. Deși acest lucru este util, de multe ori e nevoie de o modalitate de a rula aceste activități prin intermediul liniei de comandă, fără a fi nevoie de deschiderea QGIS. Din fericire, puteți scrie scripturi python de sine stătătoare, care folosesc bibliotecile QGIS, și care pot fi rulate prin intermediul liniei de comandă. In acest tutorial, vom învăța cum să scriem și să programăm o acțiune care utilizează cadrul de Procesare din QGIS.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
 <p>Să spunem că lucrăm la unele analize folosind fișierele shape ale unei regiuni. Fișierele shape sunt actualizate zilnic și avem nevoie întotdeauna cel mai recent fișier. Dar înainte de a putea folosi aceste fișiere, trebuie să efectuăm o curățare a datelor. Putem seta o acțiune QGIS care automatizează acest proces, și care rulează zilnic, astfel încât să aveți ultimele fișiere shape curățate. Vom scrie un script Python de sine stătător, care descarcă un fișier shape și rulează operațiuni de curățare topologică o dată pe zi.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Alte competențe pe care le veți dobândi<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanent la acest titlu">¶</a></h3>
+<h3>Alte competențe pe care le veți dobândi<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Descărcarea și dezarhivarea fișierelor folosind Python.</li>
-<li>Rularea oricărui algoritm de prelucrare prin PyQGIS.</li>
-<li>Repararea erorilor topologice dintr-un strat vectorial.</li>
+<li><p class="first">Descărcarea și dezarhivarea fișierelor folosind Python.</p>
+</li>
+<li><p class="first">Rularea oricărui algoritm de prelucrare prin PyQGIS.</p>
+</li>
+<li><p class="first">Repararea erorilor topologice dintr-un strat vectorial.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.geofabrik.de/">Geofabrik</a> furnizează zilnic seturi de date conținând fișiere shape actualizate ale <a class="reference external" href="http://www.openstreetmap.org/">OpenStreetMap</a>.</p>
 <p>Vom folosi <a class="reference external" href="http://download.geofabrik.de/australia-oceania.html">fișierele shape pentru Fiji</a> în cadrul acestui exercițiu. Descărcați <a class="reference external" href="http://download.geofabrik.de/australia-oceania/fiji-latest.shp.zip">fiji-latest.shp.zip</a> și dezarhivați-l într-un dosar de pe discul dvs.</p>
 <p>Sursa de date <a class="reference internal" href="credits.html#geofabrik" id="id1">[GEOFABRIK]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedura<a class="headerlink" href="#procedure" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Procedura<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Vom trece mai întâi prin procesul manual de curățare a fișierului shape, pentru a nota comenzile pe care le vom folosi în scriptul python. Lansați QGIS și mergeți la <span class="menuselection">Strat ‣ Adăugare Strat ‣ Adăugare Strat Vectorial</span>.</li>
+<li><p class="first">Vom trece mai întâi prin procesul manual de curățare a fișierului shape, pentru a nota comenzile pe care le vom folosi în scriptul python. Lansați QGIS și mergeți la <span class="menuselection">Strat ‣ Adăugare Strat ‣ Adăugare Strat Vectorial</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1147.png" class="align-center" src="../_images/1147.png" />
 <ol class="arabic simple" start="2">
-<li>Navigați la folderul care conține fișierele shape dezarhivate, apoi selectați fișierul <code class="docutils literal notranslate"><span class="pre">roads.shp</span></code> și faceți clic pe <span class="guilabel">Open</span>.</li>
+<li><p class="first">Navigați la folderul care conține fișierele shape dezarhivate, apoi selectați fișierul <code class="docutils literal"><span class="pre">roads.shp</span></code> și faceți clic pe <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2107.png" class="align-center" src="../_images/2107.png" />
 <ol class="arabic simple" start="3">
-<li>În primul rând trebuie să reproiectăm stratul drumurilor, folosind un CRS Proiectat. Aceasta ne va permite să folosim ca unități <em>metrii</em> în locul gradelor, atunci când se va efectua o analiză. Deschideți <span class="menuselection">Procesare ‣ Instrumentar</span>.</li>
+<li><p class="first">În primul rând trebuie să reproiectăm stratul drumurilor, folosind un CRS Proiectat. Aceasta ne va permite să folosim ca unități <em>metrii</em> în locul gradelor, atunci când se va efectua o analiză. Deschideți <span class="menuselection">Procesare ‣ Instrumentar</span>.</p>
+</li>
 </ol>
 <img alt="../_images/365.png" class="align-center" src="../_images/365.png" />
 <ol class="arabic simple" start="4">
-<li>Căutați instrumentul <span class="guilabel">Reproiectare strat</span>. Faceți dublu clic pe el pentru a lansa dialogul.</li>
+<li><p class="first">Căutați instrumentul <span class="guilabel">Reproiectare strat</span>. Faceți dublu clic pe el pentru a lansa dialogul.</p>
+</li>
 </ol>
 <img alt="../_images/437.png" class="align-center" src="../_images/437.png" />
 <ol class="arabic simple" start="5">
-<li>În dialogul <span class="guilabel">Reproiectare strat</span>, folosiți stratul <code class="docutils literal notranslate"><span class="pre">roads</span></code> ca <span class="guilabel">Strat de intrare</span>. Vom folosi CRS-ul <code class="docutils literal notranslate"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> ca <span class="guilabel">CRS Destinație</span>. Clic pe <span class="guilabel">Rulează</span>.</li>
+<li><p class="first">În dialogul <span class="guilabel">Reproiectare strat</span>, folosiți stratul <code class="docutils literal"><span class="pre">roads</span></code> ca <span class="guilabel">Strat de intrare</span>. Vom folosi CRS-ul <code class="docutils literal"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> ca <span class="guilabel">CRS Destinație</span>. Clic pe <span class="guilabel">Rulează</span>.</p>
+</li>
 </ol>
 <img alt="../_images/538.png" class="align-center" src="../_images/538.png" />
 <ol class="arabic simple" start="6">
-<li>O dată ce procesul s-a încheiat, stratul reproiectat se va încărca în QGIS. Mergeți la <span class="menuselection">Procesare ‣ Istoric și Jurnal..</span>.</li>
+<li><p class="first">O dată ce procesul s-a încheiat, stratul reproiectat se va încărca în QGIS. Mergeți la <span class="menuselection">Procesare ‣ Istoric și Jurnal..</span>.</p>
+</li>
 </ol>
 <img alt="../_images/635.png" class="align-center" src="../_images/635.png" />
 <ol class="arabic simple" start="7">
-<li>În dialogul <span class="guilabel">Istoric și Jurnal</span>, expandați folderul <span class="guilabel">Algoritm</span> și selectați ultima intrare. Veți vedea comanda completă de procesare afișată în panoul de jos. Notați această comandă, pentru a o utiliza în script-ul nostru.</li>
+<li><p class="first">În dialogul <span class="guilabel">Istoric și Jurnal</span>, expandați folderul <span class="guilabel">Algoritm</span> și selectați ultima intrare. Veți vedea comanda completă de procesare afișată în panoul de jos. Notați această comandă, pentru a o utiliza în script-ul nostru.</p>
+</li>
 </ol>
 <img alt="../_images/734.png" class="align-center" src="../_images/734.png" />
 <ol class="arabic simple" start="8">
-<li>Înapoi în fereastra principală a QGIS, faceți clic pe butonul <span class="guilabel">CRS</span> din colțul din dreapta-jos.</li>
+<li><p class="first">Înapoi în fereastra principală a QGIS, faceți clic pe butonul <span class="guilabel">CRS</span> din colțul din dreapta-jos.</p>
+</li>
 </ol>
 <img alt="../_images/832.png" class="align-center" src="../_images/832.png" />
 <ol class="arabic simple" start="9">
-<li>În dialogul <span class="guilabel">Proprietățile Proiectului | CRS</span>, bifați <span class="guilabel">Activează transformarea din zbor a CRS-ului</span>, apoi selectați <code class="docutils literal notranslate"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> ca CRS. Acest lucru vă asigură că straturile noastre originale și cele reproiectate se vor alinia corect.</li>
+<li><p class="first">În dialogul <span class="guilabel">Proprietățile Proiectului | CRS</span>, bifați <span class="guilabel">Activează transformarea din zbor a CRS-ului</span>, apoi selectați <code class="docutils literal"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> ca CRS. Acest lucru vă asigură că straturile noastre originale și cele reproiectate se vor alinia corect.</p>
+</li>
 </ol>
 <img alt="../_images/931.png" class="align-center" src="../_images/931.png" />
 <ol class="arabic simple" start="10">
-<li>Acum, vom rula operația de curățare. GRASS având un set foarte puternic de instrumente de curățare topologică. Acestea sunt disponibile în QGIS prin algoritmul <code class="docutils literal notranslate"><span class="pre">v.clean</span></code>. Căutați acest algoritm în <span class="guilabel">Instrumentarul de Procesare</span>, apoi faceți dublu clic pe el pentru a lansa dialogul.</li>
+<li><p class="first">Acum, vom rula operația de curățare. GRASS având un set foarte puternic de instrumente de curățare topologică. Acestea sunt disponibile în QGIS prin algoritmul <code class="docutils literal"><span class="pre">v.clean</span></code>. Căutați acest algoritm în <span class="guilabel">Instrumentarul de Procesare</span>, apoi faceți dublu clic pe el pentru a lansa dialogul.</p>
+</li>
 </ol>
 <img alt="../_images/1031.png" class="align-center" src="../_images/1031.png" />
 <ol class="arabic simple" start="11">
-<li>Puteți citi despre mai multe instrumente diferite și despre opțiunile acestora în fila <span class="guilabel">Ajutor</span>. Pentru acest tutorial, vom folosi instrumentul <code class="docutils literal notranslate"><span class="pre">snap</span></code> pentru a elimina vertexurile duplicate, care se află cel mult la 1 metru unul față de celălalt. Selectați <code class="docutils literal notranslate"><span class="pre">Stratul</span> <span class="pre">reproiectat</span></code> ca <span class="guilabel">Stratul de curățat</span>. Alegeți <code class="docutils literal notranslate"><span class="pre">snap</span></code> ca <span class="guilabel">Instrument de curățare</span>. Introduceți <code class="docutils literal notranslate"><span class="pre">1.00</span></code> ca <span class="guilabel">Prag</span>. Lăsați celelalte câmpuri goale și faceți clic pe <span class="guilabel">Rulează</span>.</li>
+<li><p class="first">Puteți citi despre mai multe instrumente diferite și despre opțiunile acestora în fila <span class="guilabel">Ajutor</span>. Pentru acest tutorial, vom folosi instrumentul <code class="docutils literal"><span class="pre">snap</span></code> pentru a elimina vertexurile duplicate, care se află cel mult la 1 metru unul față de celălalt. Selectați <code class="docutils literal"><span class="pre">Stratul</span> <span class="pre">reproiectat</span></code> ca <span class="guilabel">Stratul de curățat</span>. Alegeți <code class="docutils literal"><span class="pre">snap</span></code> ca <span class="guilabel">Instrument de curățare</span>. Introduceți <code class="docutils literal"><span class="pre">1.00</span></code> ca <span class="guilabel">Prag</span>. Lăsați celelalte câmpuri goale și faceți clic pe <span class="guilabel">Rulează</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1148.png" class="align-center" src="../_images/1148.png" />
 <ol class="arabic simple" start="12">
-<li>După ce termină prelucrarea, veți vedea 2 straturi noi adăugate în QGIS. <code class="docutils literal notranslate"><span class="pre">Stratul</span> <span class="pre">vectorial</span> <span class="pre">curățat</span></code> este stratul cu erori topologice corectate. Veți avea, de asemenea, un <code class="docutils literal notranslate"><span class="pre">Strat</span> <span class="pre">cu</span> <span class="pre">erori</span></code> care va evidenția entitățile care au fost reparate. Puteți utiliza stratul erorilor ca un ghid și să-l măriți, pentru a vedea vertexurile care au fost eliminate.</li>
+<li><p class="first">După ce termină prelucrarea, veți vedea 2 straturi noi adăugate în QGIS. <code class="docutils literal"><span class="pre">Stratul</span> <span class="pre">vectorial</span> <span class="pre">curățat</span></code> este stratul cu erori topologice corectate. Veți avea, de asemenea, un <code class="docutils literal"><span class="pre">Strat</span> <span class="pre">cu</span> <span class="pre">erori</span></code> care va evidenția entitățile care au fost reparate. Puteți utiliza stratul erorilor ca un ghid și să-l măriți, pentru a vedea vertexurile care au fost eliminate.</p>
+</li>
 </ol>
 <img alt="../_images/1232.png" class="align-center" src="../_images/1232.png" />
 <ol class="arabic simple" start="13">
-<li>Mergeți în dialogul <span class="menuselection">Procesare ‣ Istoric și Jurnal</span> și notați comanda de procesare completă, pentru o utilizare ulterioară.</li>
+<li><p class="first">Mergeți în dialogul <span class="menuselection">Procesare ‣ Istoric și Jurnal</span> și notați comanda de procesare completă, pentru o utilizare ulterioară.</p>
+</li>
 </ol>
 <img alt="../_images/1330.png" class="align-center" src="../_images/1330.png" />
 <ol class="arabic simple" start="14">
-<li>Acum suntem gata să începem codificarea. Vedeți secțiunea unui <strong>Editor de Text sau IDE Python</strong> în tutorialul <a class="reference internal" href="building_a_python_plugin.html"><span class="doc">Construirea unui Plugin Python</span></a> pentru instrucțiunile de instalare. Pentru rularea script-urilor python standalone, care utilizează QGIS, trebuie să setați diverse opțiuni de configurare. O modalitate bună de a rula scripturi independente este de a le lansa printr-un fișier <code class="docutils literal notranslate"><span class="pre">.bat</span></code>. Acest fișier va stabili mai întâi opțiunile de configurare corecte, apoi va apela script-ul python. Creați un nou fișier numit <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> și introduceți textul următor. Modificați valorile în funcție de configurația QGIS. Nu uitați să înlocuiți numele de utilizator cu al dvs. în calea către script-ul python. Căile din acest fișier vor fi similare pe sistemul dumneavoastră, cu acelea ale QGIS, dacă l-ați instalat prin <code class="docutils literal notranslate"><span class="pre">Programul</span> <span class="pre">de</span> <span class="pre">instalare</span> <span class="pre">OSGeo4W</span></code>. Salvați fișierul pe desktop.</li>
+<li><p class="first">Acum suntem gata să începem codificarea. Vedeți secțiunea unui <strong>Editor de Text sau IDE Python</strong> în tutorialul <a class="reference internal" href="building_a_python_plugin.html"><em>Construirea unui Plugin Python</em></a> pentru instrucțiunile de instalare. Pentru rularea script-urilor python standalone, care utilizează QGIS, trebuie să setați diverse opțiuni de configurare. O modalitate bună de a rula scripturi independente este de a le lansa printr-un fișier <code class="docutils literal"><span class="pre">.bat</span></code>. Acest fișier va stabili mai întâi opțiunile de configurare corecte, apoi va apela script-ul python. Creați un nou fișier numit <code class="docutils literal"><span class="pre">launch.bat</span></code> și introduceți textul următor. Modificați valorile în funcție de configurația QGIS. Nu uitați să înlocuiți numele de utilizator cu al dvs. în calea către script-ul python. Căile din acest fișier vor fi similare pe sistemul dumneavoastră, cu acelea ale QGIS, dacă l-ați instalat prin <code class="docutils literal"><span class="pre">Programul</span> <span class="pre">de</span> <span class="pre">instalare</span> <span class="pre">OSGeo4W</span></code>. Salvați fișierul pe desktop.</p>
+</li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Notă</p>
+<p class="first admonition-title">Note</p>
 <p class="last">Utilizatorii de Linux și Mac trebuie să creeze un script pentru linia de comandă, în scopul stabilirii căilor și variabilelor de mediu.</p>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REM Change OSGEO4W_ROOT to point to the base install folder
+<div class="highlight-none"><div class="highlight"><pre>REM Change OSGEO4W_ROOT to point to the base install folder
 SET OSGEO4W_ROOT=C:\OSGeo4W64
 SET QGISNAME=qgis
 SET QGIS=%OSGEO4W_ROOT%\apps\%QGISNAME%
@@ -320,190 +347,205 @@ pause
 </div>
 <img alt="../_images/1429.png" class="align-center" src="../_images/1429.png" />
 <ol class="arabic simple" start="15">
-<li>Creați un nou fișier python și introduceți următorul cod. Denumiți fișierul ca <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code>, apoi salvați-l pe desktop.</li>
+<li><p class="first">Creați un nou fișier python și introduceți următorul cod. Denumiți fișierul ca <code class="docutils literal"><span class="pre">download_and_clean.py</span></code>, apoi salvați-l pe desktop.</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="k">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">print</span> <span class="s">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
 <img alt="../_images/1527.png" class="align-center" src="../_images/1527.png" />
 <ol class="arabic simple" start="16">
-<li>Comutați la Desktop-ul dvs. și localizați pictograma <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code>. Faceți dublu clic pe el pentru a lansa o nouă fereastră de comandă și rulați scriptul. Dacă vedeți <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code> afișat în fereastra de comandă, instalarea și configurarea au fost corecte. Dacă vedeți erori sau nu vedeți textul, verificați fișierul <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> și asigurați-vă că toate căile se potrivesc cu locațiile de pe sistemul dumneavoastră.</li>
+<li><p class="first">Comutați la Desktop-ul dvs. și localizați pictograma <code class="docutils literal"><span class="pre">launch.bat</span></code>. Faceți dublu clic pe el pentru a lansa o nouă fereastră de comandă și rulați scriptul. Dacă vedeți <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code> afișat în fereastra de comandă, instalarea și configurarea au fost corecte. Dacă vedeți erori sau nu vedeți textul, verificați fișierul <code class="docutils literal"><span class="pre">launch.bat</span></code> și asigurați-vă că toate căile se potrivesc cu locațiile de pe sistemul dumneavoastră.</p>
+</li>
 </ol>
 <img alt="../_images/1625.png" class="align-center" src="../_images/1625.png" />
 <ol class="arabic simple" start="17">
-<li>Înapoi în editorul de text, modificați scriptul <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code> și adăugați următorul cod. Acesta este codul bootstrap de inițializare a QGIS. El este inutil dacă scriptul se execută din interiorul QGIS. Dar din moment ce îl executăm din afară, este necesar să-l adăugăm la început. Asigurați-vă că înlocuiți numele de utilizator cu al dvs. După efectuarea acestor modificări, salvați din nou fișierul, apoi rulați <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code>. Dacă apare afișat <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code>, sunteți gata să adăugați logica de procesare a script-ului.</li>
+<li><p class="first">Înapoi în editorul de text, modificați scriptul <code class="docutils literal"><span class="pre">download_and_clean.py</span></code> și adăugați următorul cod. Acesta este codul bootstrap de inițializare a QGIS. El este inutil dacă scriptul se execută din interiorul QGIS. Dar din moment ce îl executăm din afară, este necesar să-l adăugăm la început. Asigurați-vă că înlocuiți numele de utilizator cu al dvs. După efectuarea acestor modificări, salvați din nou fișierul, apoi rulați <code class="docutils literal"><span class="pre">launch.bat</span></code>. Dacă apare afișat <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code>, sunteți gata să adăugați logica de procesare a script-ului.</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="c1"># Initialize QGIS Application</span>
-<span class="n">QgsApplication</span><span class="o">.</span><span class="n">setPrefixPath</span><span class="p">(</span><span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">OSGeo4W64</span><span class="se">\\</span><span class="s2">apps</span><span class="se">\\</span><span class="s2">qgis&quot;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c"># Initialize QGIS Application</span>
+<span class="n">QgsApplication</span><span class="o">.</span><span class="n">setPrefixPath</span><span class="p">(</span><span class="s">&quot;C:</span><span class="se">\\</span><span class="s">OSGeo4W64</span><span class="se">\\</span><span class="s">apps</span><span class="se">\\</span><span class="s">qgis&quot;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">QgsApplication</span><span class="p">([],</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">QgsApplication</span><span class="o">.</span><span class="n">initQgis</span><span class="p">()</span>
 
-<span class="c1"># Add the path to Processing framework</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">Ujaval</span><span class="se">\\</span><span class="s1">.qgis2</span><span class="se">\\</span><span class="s1">python</span><span class="se">\\</span><span class="s1">plugins&#39;</span><span class="p">)</span>
+<span class="c"># Add the path to Processing framework</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;c:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">Ujaval</span><span class="se">\\</span><span class="s">.qgis2</span><span class="se">\\</span><span class="s">python</span><span class="se">\\</span><span class="s">plugins&#39;</span><span class="p">)</span>
 
-<span class="c1"># Import and initialize Processing framework</span>
+<span class="c"># Import and initialize Processing framework</span>
 <span class="kn">from</span> <span class="nn">processing.core.Processing</span> <span class="kn">import</span> <span class="n">Processing</span>
 <span class="n">Processing</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="kn">import</span> <span class="nn">processing</span>
 
-<span class="k">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
+<span class="k">print</span> <span class="s">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
 <img alt="../_images/1724.png" class="align-center" src="../_images/1724.png" />
 <ol class="arabic simple" start="18">
-<li>Reveniți la prima comandă de prelucrare pe care am salvat-o în jurnal. Aceasta a fost comanda de reproiectare a unui strat. Lipiți comanda pentru script și adăugați codul înconjurător, după cum urmează. Așa cum se observă, comenzile de prelucrare returnează calea către straturile de ieșire sub formă de dicționar. Această valoare este stocată ca <code class="docutils literal notranslate"><span class="pre">ret</span></code> și afișează calea către stratul reproiectat.</li>
+<li><p class="first">Reveniți la prima comandă de prelucrare pe care am salvat-o în jurnal. Aceasta a fost comanda de reproiectare a unui strat. Lipiți comanda pentru script și adăugați codul înconjurător, după cum urmează. Așa cum se observă, comenzile de prelucrare returnează calea către straturile de ieșire sub formă de dicționar. Această valoare este stocată ca <code class="docutils literal"><span class="pre">ret</span></code> și afișează calea către stratul reproiectat.</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">roads_shp_path</span> <span class="o">=</span> <span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">Ujaval</span><span class="se">\\</span><span class="s2">Downloads</span><span class="se">\\</span><span class="s2">fiji-latest.shp</span><span class="se">\\</span><span class="s2">roads.shp&quot;</span>
-<span class="n">ret</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s1">&#39;qgis:reprojectlayer&#39;</span><span class="p">,</span> <span class="n">roads_shp_path</span><span class="p">,</span> <span class="s1">&#39;EPSG:3460&#39;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">roads_shp_path</span> <span class="o">=</span> <span class="s">&quot;C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">Ujaval</span><span class="se">\\</span><span class="s">Downloads</span><span class="se">\\</span><span class="s">fiji-latest.shp</span><span class="se">\\</span><span class="s">roads.shp&quot;</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s">&#39;qgis:reprojectlayer&#39;</span><span class="p">,</span> <span class="n">roads_shp_path</span><span class="p">,</span> <span class="s">&#39;EPSG:3460&#39;</span><span class="p">,</span>
 <span class="bp">None</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;OUTPUT&#39;</span><span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">&#39;OUTPUT&#39;</span><span class="p">]</span>
 <span class="k">print</span> <span class="n">output</span>
 </pre></div>
 </div>
 <img alt="../_images/1825.png" class="align-center" src="../_images/1825.png" />
 <ol class="arabic simple" start="19">
-<li>Rulați scriptul, cu ajutorul <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code>, apoi veți vedea calea către noul strat reproiectat creat.</li>
+<li><p class="first">Rulați scriptul, cu ajutorul <code class="docutils literal"><span class="pre">launch.bat</span></code>, apoi veți vedea calea către noul strat reproiectat creat.</p>
+</li>
 </ol>
 <img alt="../_images/1922.png" class="align-center" src="../_images/1922.png" />
 <ol class="arabic simple" start="20">
-<li>Acum adăugați codul pentru curățarea topologică. Deoarece acesta este rezultatul nostru final, vom adăuga căile fișierului de ieșire, ca ultimele 2 argumente pentru algoritmul <code class="docutils literal notranslate"><span class="pre">grass.v.clean</span></code>. Dacă nu le completați, rezultatul va fi creat într-un director temporar.</li>
+<li><p class="first">Acum adăugați codul pentru curățarea topologică. Deoarece acesta este rezultatul nostru final, vom adăuga căile fișierului de ieșire, ca ultimele 2 argumente pentru algoritmul <code class="docutils literal"><span class="pre">grass.v.clean</span></code>. Dacă nu le completați, rezultatul va fi creat într-un director temporar.</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s2">&quot;grass:v.clean&quot;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s">&quot;grass:v.clean&quot;</span><span class="p">,</span>
                   <span class="n">output</span><span class="p">,</span>
                   <span class="mi">1</span><span class="p">,</span>
                   <span class="mi">1</span><span class="p">,</span>
                   <span class="bp">None</span><span class="p">,</span>
                   <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                   <span class="mf">0.0001</span><span class="p">,</span>
-                  <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">Ujaval</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">clean.shp&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;C:\Users</span><span class="se">\\</span><span class="s1">Ujaval</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">errors.shp&#39;</span><span class="p">)</span>
+                  <span class="s">&#39;C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">Ujaval</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">clean.shp&#39;</span><span class="p">,</span>
+                  <span class="s">&#39;C:\Users</span><span class="se">\\</span><span class="s">Ujaval</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">errors.shp&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/2019.png" class="align-center" src="../_images/2019.png" />
 <ol class="arabic simple" start="21">
-<li>Rulați scriptul și veți vedea 2 fișiere shape nou create pe desktop. Acesta completează partea de procesare a script-ului. Haideți să adăugăm codul pentru a descărca datele de pe site-ul original, și să-l dezarhivăm în mod automat. Vom stoca, de asemenea, calea către fișierul dezarhivat într-o variabilă pe care o putem transmite algoritmului de procesare ulterioară. Va trebui să importăm unele module suplimentare pentru a face acest lucru. (Vedeți sfârșitul tutorialului pentru script-ul complet, cu toate modificările)</li>
+<li><p class="first">Rulați scriptul și veți vedea 2 fișiere shape nou create pe desktop. Acesta completează partea de procesare a script-ului. Haideți să adăugăm codul pentru a descărca datele de pe site-ul original, și să-l dezarhivăm în mod automat. Vom stoca, de asemenea, calea către fișierul dezarhivat într-o variabilă pe care o putem transmite algoritmului de procesare ulterioară. Va trebui să importăm unele module suplimentare pentru a face acest lucru. (Vedeți sfârșitul tutorialului pentru script-ul complet, cu toate modificările)</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
 
 <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
-<span class="n">download_url</span> <span class="o">=</span> <span class="s1">&#39;http://download.geofabrik.de/australia-oceania/fiji-latest.shp.zip&#39;</span>
-<span class="k">print</span> <span class="s1">&#39;Downloading file&#39;</span>
+<span class="n">download_url</span> <span class="o">=</span> <span class="s">&#39;http://download.geofabrik.de/australia-oceania/fiji-latest.shp.zip&#39;</span>
+<span class="k">print</span> <span class="s">&#39;Downloading file&#39;</span>
 <span class="nb">zip</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">download_url</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="nb">zip</span><span class="p">)</span> <span class="k">as</span> <span class="n">zf</span><span class="p">:</span>
     <span class="n">files</span> <span class="o">=</span> <span class="n">zf</span><span class="o">.</span><span class="n">namelist</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-        <span class="k">if</span> <span class="s1">&#39;roads&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s">&#39;roads&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
             <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
             <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s1">&#39;roads.shp&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s">&#39;roads.shp&#39;</span><span class="p">:</span>
                 <span class="n">roads_shp_path</span> <span class="o">=</span> <span class="n">file_path</span>
 </pre></div>
 </div>
 <img alt="../_images/2122.png" class="align-center" src="../_images/2122.png" />
 <ol class="arabic simple" start="22">
-<li>Rulați scriptul finalizat. De fiecare dată când rulați scriptul, o copie proaspătă a datelor va fi descărcată și procesată.</li>
+<li><p class="first">Rulați scriptul finalizat. De fiecare dată când rulați scriptul, o copie proaspătă a datelor va fi descărcată și procesată.</p>
+</li>
 </ol>
 <img alt="../_images/2220.png" class="align-center" src="../_images/2220.png" />
 <ol class="arabic simple" start="23">
-<li>Pentru a automatiza rularea acestui script pe o bază zilnică, putem folosi <code class="docutils literal notranslate"><span class="pre">Programatorul</span> <span class="pre">de</span> <span class="pre">Sarcini</span></code> din Windows. Lansați Programatorul de Sarcini și faceți clic pe <span class="guilabel">Creează o Acțiune de Bază</span>.</li>
+<li><p class="first">Pentru a automatiza rularea acestui script pe o bază zilnică, putem folosi <code class="docutils literal"><span class="pre">Programatorul</span> <span class="pre">de</span> <span class="pre">Sarcini</span></code> din Windows. Lansați Programatorul de Sarcini și faceți clic pe <span class="guilabel">Creează o Acțiune de Bază</span>.</p>
+</li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Notă</p>
+<p class="first admonition-title">Note</p>
 <p class="last">Utilizatorii de Linux și Mac pot folosi acțiuni cron pentru programarea sarcinilor.</p>
 </div>
 <img alt="../_images/2319.png" class="align-center" src="../_images/2319.png" />
 <ol class="arabic simple" start="24">
-<li>Denumiți sarcina „Descărcare zilnică și Curățare”, apoi faceți clic pe <span class="guilabel">Next</span>.</li>
+<li><p class="first">Denumiți sarcina &#8220;Descărcare zilnică și Curățare&#8221;, apoi faceți clic pe <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2416.png" class="align-center" src="../_images/2416.png" />
 <ol class="arabic simple" start="25">
-<li>Selectați <code class="docutils literal notranslate"><span class="pre">Zilnic</span></code> ca <span class="guilabel">Declanșator</span>, apoi faceți clic pe <span class="guilabel">Next</span></li>
+<li><p class="first">Selectați <code class="docutils literal"><span class="pre">Zilnic</span></code> ca <span class="guilabel">Declanșator</span>, apoi faceți clic pe <span class="guilabel">Next</span></p>
+</li>
 </ol>
 <img alt="../_images/2515.png" class="align-center" src="../_images/2515.png" />
 <ol class="arabic simple" start="26">
-<li>Selectați o dată pe placul dumneavoastră, apoi faceți clic pe <span class="guilabel">Next</span>.</li>
+<li><p class="first">Selectați o dată pe placul dumneavoastră, apoi faceți clic pe <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2615.png" class="align-center" src="../_images/2615.png" />
 <ol class="arabic simple" start="27">
-<li>Selectați <code class="docutils literal notranslate"><span class="pre">Rulează</span> <span class="pre">un</span> <span class="pre">program</span></code> ca <span class="guilabel">Intrare</span>, apoi efectuați clic pe <span class="guilabel">Next</span>.</li>
+<li><p class="first">Selectați <code class="docutils literal"><span class="pre">Rulează</span> <span class="pre">un</span> <span class="pre">program</span></code> ca <span class="guilabel">Intrare</span>, apoi efectuați clic pe <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2714.png" class="align-center" src="../_images/2714.png" />
 <ol class="arabic simple" start="28">
-<li>Clic pe <span class="guilabel">Răsfoire</span> și localizați scriptul <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code>. Clic <span class="guilabel">Next</span>.</li>
+<li><p class="first">Clic pe <span class="guilabel">Răsfoire</span> și localizați scriptul <code class="docutils literal"><span class="pre">launch.bat</span></code>. Clic <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2812.png" class="align-center" src="../_images/2812.png" />
 <ol class="arabic simple" start="29">
-<li>Faceți clic pe <span class="guilabel">Finish</span> din ultimul ecran, pentru a planifica sarcina. Acum, scriptul se va lansa automat la ora specificată, pentru a vă oferi zilnic o copie recentă și curată a datelor.</li>
+<li><p class="first">Faceți clic pe <span class="guilabel">Finish</span> din ultimul ecran, pentru a planifica sarcina. Acum, scriptul se va lansa automat la ora specificată, pentru a vă oferi zilnic o copie recentă și curată a datelor.</p>
+</li>
 </ol>
 <img alt="../_images/2911.png" class="align-center" src="../_images/2911.png" />
-<p>Mai jos este scriptul <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code>, pentru referința dvs.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">qgis.core</span> <span class="k">import</span> <span class="o">*</span>
+<p>Mai jos este scriptul <code class="docutils literal"><span class="pre">download_and_clean.py</span></code>, pentru referința dvs.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
 
-<span class="c1"># Initialize QGIS Application</span>
-<span class="n">QgsApplication</span><span class="o">.</span><span class="n">setPrefixPath</span><span class="p">(</span><span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">OSGeo4W64</span><span class="se">\\</span><span class="s2">apps</span><span class="se">\\</span><span class="s2">qgis&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">QgsApplication</span><span class="p">([],</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c"># Initialize QGIS Application</span>
+<span class="n">QgsApplication</span><span class="o">.</span><span class="n">setPrefixPath</span><span class="p">(</span><span class="s">&quot;C:</span><span class="se">\\</span><span class="s">OSGeo4W64</span><span class="se">\\</span><span class="s">apps</span><span class="se">\\</span><span class="s">qgis&quot;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">QgsApplication</span><span class="p">([],</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">QgsApplication</span><span class="o">.</span><span class="n">initQgis</span><span class="p">()</span>
 
-<span class="c1"># Add the path to Processing framework  </span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">Ujaval</span><span class="se">\\</span><span class="s1">.qgis2</span><span class="se">\\</span><span class="s1">python</span><span class="se">\\</span><span class="s1">plugins&#39;</span><span class="p">)</span>
+<span class="c"># Add the path to Processing framework  </span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;c:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">Ujaval</span><span class="se">\\</span><span class="s">.qgis2</span><span class="se">\\</span><span class="s">python</span><span class="se">\\</span><span class="s">plugins&#39;</span><span class="p">)</span>
 
-<span class="c1"># Import and initialize Processing framework</span>
-<span class="kn">from</span> <span class="nn">processing.core.Processing</span> <span class="k">import</span> <span class="n">Processing</span>
+<span class="c"># Import and initialize Processing framework</span>
+<span class="kn">from</span> <span class="nn">processing.core.Processing</span> <span class="kn">import</span> <span class="n">Processing</span>
 <span class="n">Processing</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="kn">import</span> <span class="nn">processing</span>
 
-<span class="c1"># Download and unzip the latest shapefile</span>
+<span class="c"># Download and unzip the latest shapefile</span>
 <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
-<span class="n">download_url</span> <span class="o">=</span> <span class="s1">&#39;http://download.geofabrik.de/australia-oceania/fiji-latest.shp.zip&#39;</span>
-<span class="nb">print</span> <span class="s1">&#39;Downloading file&#39;</span>
+<span class="n">download_url</span> <span class="o">=</span> <span class="s">&#39;http://download.geofabrik.de/australia-oceania/fiji-latest.shp.zip&#39;</span>
+<span class="k">print</span> <span class="s">&#39;Downloading file&#39;</span>
 <span class="nb">zip</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">download_url</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="nb">zip</span><span class="p">)</span> <span class="k">as</span> <span class="n">zf</span><span class="p">:</span>
     <span class="n">files</span> <span class="o">=</span> <span class="n">zf</span><span class="o">.</span><span class="n">namelist</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-        <span class="k">if</span> <span class="s1">&#39;roads&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s">&#39;roads&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
             <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
             <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s1">&#39;roads.shp&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s">&#39;roads.shp&#39;</span><span class="p">:</span>
                 <span class="n">roads_shp_path</span> <span class="o">=</span> <span class="n">file_path</span>
 
-<span class="nb">print</span> <span class="s1">&#39;Downloaded file to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">roads_shp_path</span>
+<span class="k">print</span> <span class="s">&#39;Downloaded file to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">roads_shp_path</span>
 
-<span class="c1"># Reproject the Roads layer</span>
-<span class="nb">print</span> <span class="s1">&#39;Reprojecting the roads layer&#39;</span>
+<span class="c"># Reproject the Roads layer</span>
+<span class="k">print</span> <span class="s">&#39;Reprojecting the roads layer&#39;</span>
 
-<span class="n">ret</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s1">&#39;qgis:reprojectlayer&#39;</span><span class="p">,</span> <span class="n">roads_shp_path</span><span class="p">,</span> <span class="s1">&#39;EPSG:3460&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;OUTPUT&#39;</span><span class="p">]</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s">&#39;qgis:reprojectlayer&#39;</span><span class="p">,</span> <span class="n">roads_shp_path</span><span class="p">,</span> <span class="s">&#39;EPSG:3460&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">&#39;OUTPUT&#39;</span><span class="p">]</span>
 
-<span class="c1"># Clean the Roads layer</span>
-<span class="nb">print</span> <span class="s1">&#39;Cleaning the roads layer&#39;</span>
+<span class="c"># Clean the Roads layer</span>
+<span class="k">print</span> <span class="s">&#39;Cleaning the roads layer&#39;</span>
 
-<span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s2">&quot;grass:v.clean&quot;</span><span class="p">,</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="s">&quot;grass:v.clean&quot;</span><span class="p">,</span>
                   <span class="n">output</span><span class="p">,</span>
                   <span class="mi">1</span><span class="p">,</span>
                   <span class="mi">1</span><span class="p">,</span>
-                  <span class="kc">None</span><span class="p">,</span>
+                  <span class="bp">None</span><span class="p">,</span>
                   <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                   <span class="mf">0.0001</span><span class="p">,</span>
-                  <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">Ujaval</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">clean.shp&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;C:\Users</span><span class="se">\\</span><span class="s1">Ujaval</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">errors.shp&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="s1">&#39;Success&#39;</span>
+                  <span class="s">&#39;C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">Ujaval</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">clean.shp&#39;</span><span class="p">,</span>
+                  <span class="s">&#39;C:\Users</span><span class="se">\\</span><span class="s">Ujaval</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">errors.shp&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;Success&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -531,8 +573,8 @@ pause
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Ultima actualizare la apr. 04, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+      Last updated on Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

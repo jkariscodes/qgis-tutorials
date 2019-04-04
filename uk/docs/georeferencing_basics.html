@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="uk">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Геоприв’язування топографічних листів та сканованих мап &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>Геоприв’язування топографічних листів та сканованих мап &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="Пошук" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="Прив’язування аерофотознімків" href="advanced_georeferencing.html" />
     <link rel="prev" title="Робота з проекціями" href="working_with_projections.html" />
 
@@ -40,7 +50,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -82,7 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Робота з даними рельєфу</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Робота з даними WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Робота з проекціями</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Геоприв’язування топографічних листів та сканованих мап</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Геоприв’язування топографічних листів та сканованих мап</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Прив’язування аерофотознімків</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Оцифровування картографічних даних</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Встановлення зв’язків між таблицями</a></li>
@@ -120,11 +131,11 @@
               
                 
   <li>
-    <a href="working_with_projections.html" title="Previous Chapter: Робота з проекціями"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Робота з проекціями</span>
+    <a href="working_with_projections.html" title="Previous Chapter: Робота з проекціями"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Робота з проекці...</span>
     </a>
   </li>
   <li>
-    <a href="advanced_georeferencing.html" title="Next Chapter: Прив’язування аерофотознімків"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Прив’язування... &raquo;</span>
+    <a href="advanced_georeferencing.html" title="Next Chapter: Прив’язування аерофотознімків"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Прив’язування ае... &raquo;</span>
     </a>
   </li>
               
@@ -220,14 +231,15 @@
 
   <div class="section" id="georeferencing-topo-sheets-and-scanned-maps">
 <h1>Геоприв’язування топографічних листів та сканованих мап<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps" title="Постійне посилання на цей заголовок">¶</a></h1>
-<p>В більшості проектів GIS необхідно виконати геоприв’язку деяких растрових даних. <em>Геоприв’язування</em> це процес надання координат реального світу кожному пікселю растра. Дуже часто ці координати отримують виконуючи обхід ділянки - збираючи координати із GPS приймачем для декількох об’єктів на зображенні або мапі, які легко ідентифікувати. В деяких випадках, коли ви збираєтесь оцифрувати відскановану карту, координати можна отримати із міток на самій мапі. Використовуючи задані координати або НОТ-ки (Наземні Опорні Точки), зображення буде трансформоване, так щоб відповідати обраній системі координат. В цьому уроці будуть обговорені концепції, стратегії і інструменти в середовищі QGIS, які дозволяють здійснити геоприв’язку з високою точністю.</p>
+<p>В більшості проектів GIS необхідно виконати геоприв&#8217;язку деяких растрових даних. <em>Геоприв&#8217;язування</em> це процес надання координат реального світу кожному пікселю растра. Дуже часто ці координати отримують виконуючи обхід ділянки - збираючи координати із GPS приймачем для декількох об&#8217;єктів на зображенні або мапі, які легко ідентифікувати. В деяких випадках, коли ви збираєтесь оцифрувати відскановану карту, координати можна отримати із міток на самій мапі. Використовуючи задані координати або НОТ-ки (Наземні Опорні Точки), зображення буде трансформоване, так щоб відповідати обраній системі координат. В цьому уроці будуть обговорені концепції, стратегії і інструменти в середовищі QGIS, які дозволяють здійснити геоприв&#8217;язку з високою точністю.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Огляд завдання<a class="headerlink" href="#overview-of-the-task" title="Постійне посилання на цей заголовок">¶</a></h2>
-<p>Використаємо скановану карту південної Індії 1870 року і виконаємо її геоприв’язку за допомогою QGIS.</p>
+<p>Використаємо скановану карту південної Індії 1870 року і виконаємо її геоприв&#8217;язку за допомогою QGIS.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Додаткові навички<a class="headerlink" href="#other-skills-you-will-learn" title="Постійне посилання на цей заголовок">¶</a></h3>
 <ul class="simple">
-<li>Як визначити датум і систему координат старих мап.</li>
+<li><p class="first">Як визначити датум і систему координат старих мап.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -244,67 +256,82 @@
 core plugin - meaning it is already part of your QGIS installation. You just
 need to enable it. Go to <span class="menuselection">Plugins ‣ Manage and Install
 Plugins</span> and enable the <span class="guilabel">Georeferencer GDAL</span> plugin in the
-<span class="guilabel">Installed</span> tab. See <a class="reference internal" href="using_plugins.html"><span class="doc">Використання додатків</span></a> for more details on how to
+<span class="guilabel">Installed</span> tab. See <a class="reference internal" href="using_plugins.html"><em>Використання додатків</em></a> for more details on how to
 work with plugins.</p>
 <img alt="../_images/1104.png" class="align-center" src="../_images/1104.png" />
 <ol class="arabic simple" start="2">
-<li>Планіг встановлено в меню Растр. Перейдіть у <span class="menuselection">Растр‣ Геоприв’язувач ‣ Геоприв’язувач</span>, щоб відкрити плагін.</li>
+<li><p class="first">Планіг встановлено в меню Растр. Перейдіть у <span class="menuselection">Растр‣ Геоприв&#8217;язувач ‣ Геоприв&#8217;язувач</span>, щоб відкрити плагін.</p>
+</li>
 </ol>
 <img alt="../_images/259.png" class="align-center" src="../_images/259.png" />
 <ol class="arabic simple" start="3">
-<li>Вікно плагіну поділене на 2 секції. Верхня секція де показується растрове зображення і нижня секція де показується таблиця ваших НОТ-ок (наземних опорних точок).</li>
+<li><p class="first">Вікно плагіну поділене на 2 секції. Верхня секція де показується растрове зображення і нижня секція де показується таблиця ваших НОТ-ок (наземних опорних точок).</p>
+</li>
 </ol>
 <img alt="../_images/340.png" class="align-center" src="../_images/340.png" />
 <ol class="arabic simple" start="4">
-<li>Тепер ми відкриємо JPG зображення. Перейдіть в меню  <span class="menuselection">File ‣ Open Raster</span>. Виберіть завантажене зображення відсканованої мапи і натисніть <span class="guilabel">Open</span>.</li>
+<li><p class="first">Тепер ми відкриємо JPG зображення. Перейдіть в меню  <span class="menuselection">File ‣ Open Raster</span>. Виберіть завантажене зображення відсканованої мапи і натисніть <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/421.png" class="align-center" src="../_images/421.png" />
 <ol class="arabic simple" start="5">
-<li>На наступному екрані вас попросять вказати систему координат (СК) для растру. Це необхідно аби задати проекцію і датум ваших контрольних точок. Якщо ви отримали контрольні точки за допомогою GPS приймача, ви будете мати СК WGS84. Якщо ви виконуєте геоприв’язку відсканованої мапи як ця, ви можете отримати інформацію про СК з самої мапи. Дивлячись на нашу карту ми бачимо що дані лише координати Широта/Довгота. Немає інформації про датум, тому ми маємо самостійно підібрати датум, що підходить. Оскільки це Індія і мапа досить стара, датум мапи Еверест 1830 дасть хороший результат.</li>
+<li><p class="first">На наступному екрані вас попросять вказати систему координат (СК) для растру. Це необхідно аби задати проекцію і датум ваших контрольних точок. Якщо ви отримали контрольні точки за допомогою GPS приймача, ви будете мати СК WGS84. Якщо ви виконуєте геоприв&#8217;язку відсканованої мапи як ця, ви можете отримати інформацію про СК з самої мапи. Дивлячись на нашу карту ми бачимо що дані лише координати Широта/Довгота. Немає інформації про датум, тому ми маємо самостійно підібрати датум, що підходить. Оскільки це Індія і мапа досить стара, датум мапи Еверест 1830 дасть хороший результат.</p>
+</li>
 </ol>
 <img alt="../_images/521.png" class="align-center" src="../_images/521.png" />
 <ol class="arabic simple" start="6">
-<li>Ви побачите зображення, яке буде завантажене в верхню секцію.</li>
+<li><p class="first">Ви побачите зображення, яке буде завантажене в верхню секцію.</p>
+</li>
 </ol>
 <img alt="../_images/619.png" class="align-center" src="../_images/619.png" />
 <ol class="arabic simple" start="7">
-<li>Ви можете використовувати елементи управління збільшення/прокрутки на панелі інструментів, щоб дізнатися більше про карту.</li>
+<li><p class="first">Ви можете використовувати елементи управління збільшення/прокрутки на панелі інструментів, щоб дізнатися більше про карту.</p>
+</li>
 </ol>
 <img alt="../_images/719.png" class="align-center" src="../_images/719.png" />
 <ol class="arabic simple" start="8">
-<li>Тепер нам потрібно призначити координати деяким точкам на цій карті. Якщо ви подивитеся більш уважно, ви побачите координатну сітку з мітками. Використовуючи цю сітку, ви можете визначити координати точок X і Y де перетинаються лінії сітки. Натисніть на панелі інструментів кнопку <span class="guilabel">Add Point</span>.</li>
+<li><p class="first">Тепер нам потрібно призначити координати деяким точкам на цій карті. Якщо ви подивитеся більш уважно, ви побачите координатну сітку з мітками. Використовуючи цю сітку, ви можете визначити координати точок X і Y де перетинаються лінії сітки. Натисніть на панелі інструментів кнопку <span class="guilabel">Add Point</span>.</p>
+</li>
 </ol>
 <img alt="../_images/818.png" class="align-center" src="../_images/818.png" />
 <ol class="arabic simple" start="9">
-<li>У спливаючому вікні введіть координати. Запам’ятайте що X=довгота і Y=широта. Натисніть кнопку <span class="guilabel">OK</span>.</li>
+<li><p class="first">У спливаючому вікні введіть координати. Запам&#8217;ятайте що X=довгота і Y=широта. Натисніть кнопку <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/918.png" class="align-center" src="../_images/918.png" />
 <ol class="arabic simple" start="10">
-<li>Ви побачите, що таблиця опорних точок тепер має рядок із деталями про вашу першу додану НОТ.</li>
+<li><p class="first">Ви побачите, що таблиця опорних точок тепер має рядок із деталями про вашу першу додану НОТ.</p>
+</li>
 </ol>
 <img alt="../_images/1017.png" class="align-center" src="../_images/1017.png" />
 <ol class="arabic simple" start="11">
-<li>Точно так само, додайте принаймні 4 опорні точки, що охоплюють все зображення. Чим більше буде у вас точок, тим точніше ваше зображення буде зареєстроване у цільових координатах.</li>
+<li><p class="first">Точно так само, додайте принаймні 4 опорні точки, що охоплюють все зображення. Чим більше буде у вас точок, тим точніше ваше зображення буде зареєстроване у цільових координатах.</p>
+</li>
 </ol>
 <img alt="../_images/1122.png" class="align-center" src="../_images/1122.png" />
 <ol class="arabic simple" start="12">
-<li>Як тільки точок буде досить, перейдіть до <span class="menuselection">Settings -&gt; Transformation settings</span>.</li>
+<li><p class="first">Як тільки точок буде досить, перейдіть до <span class="menuselection">Settings -&gt; Transformation settings</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1219.png" class="align-center" src="../_images/1219.png" />
 <ol class="arabic simple" start="13">
-<li>У діалоговому вікні <span class="guilabel">Transformation settings</span> виберіть в полі <span class="guilabel">Transformation type</span> варіант <span class="guilabel">Thin Plate Spline</span>. Назвіть ваш вихідний растр як <span class="guilabel">1870_southern_india_modified.tif</span>. Виберіть <span class="guilabel">EPSG:4326</span>  в якості цільової SRS, так що вихідне зображення буде в широко сумісних координатах. Переконайтесь що опція <span class="guilabel">Load in QGIS вибрана. Натисніть кнопку :guilabel:`OK</span>.</li>
+<li><p class="first">У діалоговому вікні <span class="guilabel">Transformation settings</span> виберіть в полі <span class="guilabel">Transformation type</span> варіант <span class="guilabel">Thin Plate Spline</span>. Назвіть ваш вихідний растр як <span class="guilabel">1870_southern_india_modified.tif</span>. Виберіть <span class="guilabel">EPSG:4326</span>  в якості цільової SRS, так що вихідне зображення буде в широко сумісних координатах. Переконайтесь що опція <span class="guilabel">Load in QGIS вибрана. Натисніть кнопку :guilabel:`OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1318.png" class="align-center" src="../_images/1318.png" />
 <ol class="arabic simple" start="14">
-<li>Поверніться до вікна <span class="guilabel">Georeferencer</span> і виберіть <span class="menuselection">File ‣ Start georeferencing</span>. Це почне процес перетворення зображення з використанням НОТ-ок і створення вихідного растру.</li>
+<li><p class="first">Поверніться до вікна <span class="guilabel">Georeferencer</span> і виберіть <span class="menuselection">File ‣ Start georeferencing</span>. Це почне процес перетворення зображення з використанням НОТ-ок і створення вихідного растру.</p>
+</li>
 </ol>
 <img alt="../_images/1417.png" class="align-center" src="../_images/1417.png" />
 <ol class="arabic simple" start="15">
-<li>Як тільки процес буде виконано, ви побачите геоприв’язаний шар доданий до QGIS</li>
+<li><p class="first">Як тільки процес буде виконано, ви побачите геоприв&#8217;язаний шар доданий до QGIS</p>
+</li>
 </ol>
 <img alt="../_images/1516.png" class="align-center" src="../_images/1516.png" />
 <ol class="arabic simple" start="16">
-<li>Геоприв’язка тепер виконана. Але як завжди, є хорошою практикою перевірити свою роботу. Як можна перевірити, що геоприв’язка є точною? В даному випадку, завантажити завантажити шейп-файл кордонів країн із довіреного джерела, такого як набір даних Natural Earth і порівняти їх. Ви побачите, що вони збігаються досить добре. Якщо там є якісь помилки, їх краще виправити додавши більше контрольних точок, зміною параметрів перетворення і спробувавши вибрати інший датум.</li>
+<li><p class="first">Геоприв&#8217;язка тепер виконана. Але як завжди, є хорошою практикою перевірити свою роботу. Як можна перевірити, що геоприв&#8217;язка є точною? В даному випадку, завантажити завантажити шейп-файл кордонів країн із довіреного джерела, такого як набір даних Natural Earth і порівняти їх. Ви побачите, що вони збігаються досить добре. Якщо там є якісь помилки, їх краще виправити додавши більше контрольних точок, зміною параметрів перетворення і спробувавши вибрати інший датум.</p>
+</li>
 </ol>
 <img alt="../_images/1614.png" class="align-center" src="../_images/1614.png" />
 </div>
@@ -332,8 +359,8 @@ work with plugins.</p>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Востаннє оновлено квіт. 04, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+      Востаннє оновлено Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

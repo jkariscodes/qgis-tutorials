@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt_BR">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Construindo um complemento com Python &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>Construindo um complemento com Python &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -39,7 +49,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -213,12 +224,12 @@
 <h1>Construindo um complemento com Python<a class="headerlink" href="#building-a-python-plugin" title="Link permanente para este título">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Aviso</p>
-<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/building_a_python_plugin.html"><span class="doc">Building a Python Plugin (QGIS3)</span></a></p>
+<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/building_a_python_plugin.html"><em>Building a Python Plugin (QGIS3)</em></a></p>
 </div>
-<p>Complementos são uma ótima maneira de estender a funcionalidade do QGIS. Você pode escrever complementos usando Python que podem variar desde adicionar um botão simples até kits de ferramentas sofisticadas. Este tutorial irá descrever o processo envolvido na criação de seu ambiente de desenvolvimento, o desenho da interface do usuário para um plugin e escrever o código para interagir com o QGIS. Por favor, reveja o <span class="xref std std-doc">getting_started_with_pyqgis`tutorial getting_started_with_pyqgis</span> para se familiarizar com o básico.</p>
+<p>Complementos são uma ótima maneira de estender a funcionalidade do QGIS. Você pode escrever complementos usando Python que podem variar desde adicionar um botão simples até kits de ferramentas sofisticadas. Este tutorial irá descrever o processo envolvido na criação de seu ambiente de desenvolvimento, o desenho da interface do usuário para um plugin e escrever o código para interagir com o QGIS. Por favor, reveja o <code class="xref doc docutils literal"><span class="pre">getting_started_with_pyqgis`tutorial</span> <span class="pre">getting_started_with_pyqgis</span></code> para se familiarizar com o básico.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Visão geral da tarefa<a class="headerlink" href="#overview-of-the-task" title="Link permanente para este título">¶</a></h2>
-<p>Vamos desenvolver um plugin simples chamado <code class="docutils literal notranslate"><span class="pre">Salvar</span> <span class="pre">Atributos</span></code> que permitirá aos usuários escolher uma camada vetorial e escrever seus atributos para um arquivo CSV.</p>
+<p>Vamos desenvolver um plugin simples chamado <code class="docutils literal"><span class="pre">Salvar</span> <span class="pre">Atributos</span></code> que permitirá aos usuários escolher uma camada vetorial e escrever seus atributos para um arquivo CSV.</p>
 </div>
 <div class="section" id="get-the-tools">
 <h2>Obter as Ferramentas<a class="headerlink" href="#get-the-tools" title="Link permanente para este título">¶</a></h2>
@@ -229,17 +240,17 @@
 </div>
 <div class="section" id="python-bindings-for-qt">
 <h3>Ligações Python para o Qt<a class="headerlink" href="#python-bindings-for-qt" title="Link permanente para este título">¶</a></h3>
-<p>Uma vez que estamos a desenvolver um plugin em Python, é preciso instalar os vínculos python para o Qt. O método para a instalação destes dependerá da plataforma que você está usando. Para a construção de plugins precisamos do ferramenta de linha de comando <code class="docutils literal notranslate"><span class="pre">pyrcc4</span></code>.</p>
+<p>Uma vez que estamos a desenvolver um plugin em Python, é preciso instalar os vínculos python para o Qt. O método para a instalação destes dependerá da plataforma que você está usando. Para a construção de plugins precisamos do ferramenta de linha de comando <code class="docutils literal"><span class="pre">pyrcc4</span></code>.</p>
 <p><strong>Windows</strong></p>
-<p>Faça o download do instalador <a class="reference external" href="http://trac.osgeo.org/osgeo4w/">OSGeo4W rede</a> e escolha <span class="guilabel">Express Desktop install</span>. Instale o pacote <code class="docutils literal notranslate"><span class="pre">QGIS</span></code>. Após a instalação, você será capaz de acessar a ferramenta <code class="docutils literal notranslate"><span class="pre">pyrcc4</span></code> via <span class="guilabel">OSGeo4W Shell</span>.</p>
+<p>Faça o download do instalador <a class="reference external" href="http://trac.osgeo.org/osgeo4w/">OSGeo4W rede</a> e escolha <span class="guilabel">Express Desktop install</span>. Instale o pacote <code class="docutils literal"><span class="pre">QGIS</span></code>. Após a instalação, você será capaz de acessar a ferramenta <code class="docutils literal"><span class="pre">pyrcc4</span></code> via <span class="guilabel">OSGeo4W Shell</span>.</p>
 <p><strong>Mac</strong></p>
-<p>Instale o gerenciador de pacotes <a class="reference external" href="http://brew.sh">Homebrew</a>. Instale o pacote <code class="docutils literal notranslate"><span class="pre">PyQt</span></code> executando o seguinte comando:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>brew install pyqt
+<p>Instale o gerenciador de pacotes <a class="reference external" href="http://brew.sh">Homebrew</a>. Instale o pacote <code class="docutils literal"><span class="pre">PyQt</span></code> executando o seguinte comando:</p>
+<div class="highlight-none"><div class="highlight"><pre>brew install pyqt
 </pre></div>
 </div>
 <p><strong>Linux</strong></p>
-<p>Dependendo da sua distribuição, encontre e instale o <code class="docutils literal notranslate"><span class="pre">pacote</span> <span class="pre">python-qt4</span></code>. No Ubuntu e distribuições baseadas no Debian, você pode executar o seguinte comando:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-qt4
+<p>Dependendo da sua distribuição, encontre e instale o <code class="docutils literal"><span class="pre">pacote</span> <span class="pre">python-qt4</span></code>. No Ubuntu e distribuições baseadas no Debian, você pode executar o seguinte comando:</p>
+<div class="highlight-none"><div class="highlight"><pre>sudo apt-get install python-qt4
 </pre></div>
 </div>
 </div>
@@ -256,7 +267,7 @@
 </div>
 <div class="section" id="plugin-builder-plugin">
 <h3>Complemento para construir um complemento<a class="headerlink" href="#plugin-builder-plugin" title="Link permanente para este título">¶</a></h3>
-<p>Existe um complemento no QGIS útil chamado `` Plugin Builder`` que cria todos os arquivos necessários e o código clichê para um plugin. Encontre e instale o complemento <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>. Veja <a class="reference internal" href="using_plugins.html"><span class="doc">Using Plugins</span></a> para obter mais detalhes sobre como instalar complementos.</p>
+<p>Existe um complemento no QGIS útil chamado `` Plugin Builder`` que cria todos os arquivos necessários e o código clichê para um plugin. Encontre e instale o complemento <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>. Veja <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a> para obter mais detalhes sobre como instalar complementos.</p>
 </div>
 <div class="section" id="plugins-reloader-plugin">
 <h3>Complemento para recarregar complementos<a class="headerlink" href="#plugins-reloader-plugin" title="Link permanente para este título">¶</a></h3>
@@ -270,99 +281,118 @@
 <div class="section" id="procedure">
 <h2>Procedimento<a class="headerlink" href="#procedure" title="Link permanente para este título">¶</a></h2>
 <ol class="arabic simple">
-<li>Abra o QGIS. Vá até <span class="menuselection">Complementos‣ Plugin Builder ‣ Plugin Builder</span>.</li>
+<li><p class="first">Abra o QGIS. Vá até <span class="menuselection">Complementos‣ Plugin Builder ‣ Plugin Builder</span>.</p>
+</li>
 </ol>
 <img alt="../_images/150.png" class="align-center" src="../_images/150.png" />
 <ol class="arabic simple" start="2">
-<li>Você vai ver o  <span class="guilabel">QGIS Plugin Builder</span>  com um formulário. Você pode preencher o formulário com detalhes relativos ao nosso complemento. A <span class="guilabel">Class name</span>  será o nome da classe Python contendo a lógica do plugin. Esta será também o nome da pasta que contém todos os arquivos do plugin. Digite <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> como o nome da classe. A <span class="guilabel">Plugin name</span> é o nome sob o qual o seu plugin será exibido no <span class="guilabel">Gerenciador de complementos</span>. Digite o nome como <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code>. Adicione uma descrição no campo  <span class="guilabel">Description</span>. O <span class="guilabel">Module name</span> será o nome do arquivo python principal para o plugin. Inseri-lo como <code class="docutils literal notranslate"><span class="pre">save_attributes</span></code>. Deixe os números de versão como estão. A <span class="guilabel">Text for menu item</span>  de menu será como os usuários vão encontrar o seu plugin no menu do QGIS. Inseri-lo como <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code>. Digite seu nome e endereço de e-mail nos campos apropriados. O campo <span class="guilabel">Menu</span>  vai decidir onde seu complemento será adicionado no QGIS. O nosso complemento é para dados vetoriais, selecione <code class="docutils literal notranslate"><span class="pre">Vector</span></code>. Verifique a caixa <span class="guilabel">Flag the plugin as experimental</span> na parte inferior. Clique em <span class="guilabel">OK`</span>.</li>
+<li><p class="first">Você vai ver o  <span class="guilabel">QGIS Plugin Builder</span>  com um formulário. Você pode preencher o formulário com detalhes relativos ao nosso complemento. A <span class="guilabel">Class name</span>  será o nome da classe Python contendo a lógica do plugin. Esta será também o nome da pasta que contém todos os arquivos do plugin. Digite <code class="docutils literal"><span class="pre">SaveAttributes</span></code> como o nome da classe. A <span class="guilabel">Plugin name</span> é o nome sob o qual o seu plugin será exibido no <span class="guilabel">Gerenciador de complementos</span>. Digite o nome como <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span></code>. Adicione uma descrição no campo  <span class="guilabel">Description</span>. O <span class="guilabel">Module name</span> será o nome do arquivo python principal para o plugin. Inseri-lo como <code class="docutils literal"><span class="pre">save_attributes</span></code>. Deixe os números de versão como estão. A <span class="guilabel">Text for menu item</span>  de menu será como os usuários vão encontrar o seu plugin no menu do QGIS. Inseri-lo como <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code>. Digite seu nome e endereço de e-mail nos campos apropriados. O campo <span class="guilabel">Menu</span>  vai decidir onde seu complemento será adicionado no QGIS. O nosso complemento é para dados vetoriais, selecione <code class="docutils literal"><span class="pre">Vector</span></code>. Verifique a caixa <span class="guilabel">Flag the plugin as experimental</span> na parte inferior. Clique em <span class="guilabel">OK`</span>.</p>
+</li>
 </ol>
 <img alt="../_images/230.png" class="align-center" src="../_images/230.png" />
 <ol class="arabic simple" start="3">
-<li>Em seguida, você será solicitado a escolher um diretório para o seu plugin. Você precisa navegar para a pasta de complementos python do QGIS no seu computador e selecionar <span class="guilabel">Select Folder</span>. Normalmente, o diretório <code class="docutils literal notranslate"><span class="pre">.qgis2/</span></code> está localizado em seu diretório pessoal. O local da pasta <code class="docutils literal notranslate"><span class="pre">plugin</span></code> vai depender de sua plataforma como segue: (Substitua <code class="docutils literal notranslate"><span class="pre">username</span></code> com o seu nome de login)</li>
+<li><p class="first">Em seguida, você será solicitado a escolher um diretório para o seu plugin. Você precisa navegar para a pasta de complementos python do QGIS no seu computador e selecionar <span class="guilabel">Select Folder</span>. Normalmente, o diretório <code class="docutils literal"><span class="pre">.qgis2/</span></code> está localizado em seu diretório pessoal. O local da pasta <code class="docutils literal"><span class="pre">plugin</span></code> vai depender de sua plataforma como segue: (Substitua <code class="docutils literal"><span class="pre">username</span></code> com o seu nome de login)</p>
+</li>
 </ol>
 <p><strong>Windows</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>c:\Users\username\.qgis2\python\plugins
+<div class="highlight-none"><div class="highlight"><pre>c:\Users\username\.qgis2\python\plugins
 </pre></div>
 </div>
 <p><strong>Mac</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/username/.qgis2/python/plugins
+<div class="highlight-none"><div class="highlight"><pre>/Users/username/.qgis2/python/plugins
 </pre></div>
 </div>
 <p><strong>Linux</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/home/username/.qgis2/python/plugins
+<div class="highlight-none"><div class="highlight"><pre>/home/username/.qgis2/python/plugins
 </pre></div>
 </div>
 <img alt="../_images/328.png" class="align-center" src="../_images/328.png" />
 <ol class="arabic simple" start="4">
-<li>Você verá um diálogo de confirmação uma vez que seu modelo de complemento for criado. Observe o caminho para a pasta do complemento.</li>
+<li><p class="first">Você verá um diálogo de confirmação uma vez que seu modelo de complemento for criado. Observe o caminho para a pasta do complemento.</p>
+</li>
 </ol>
 <img alt="../_images/412.png" class="align-center" src="../_images/412.png" />
 <ol class="arabic simple" start="5">
-<li>Antes de podermos usar o complemento recém-criado, é preciso compilar o arquivo <code class="docutils literal notranslate"><span class="pre">resources.qrc</span></code> que foi criado pelo Plugin Builder. Inicie o :guilabel: <cite>OSGeo4W Shell</cite> em janelas ou em um terminal no Mac ou Linux.</li>
+<li><p class="first">Antes de podermos usar o complemento recém-criado, é preciso compilar o arquivo <code class="docutils literal"><span class="pre">resources.qrc</span></code> que foi criado pelo Plugin Builder. Inicie o :guilabel: <cite>OSGeo4W Shell</cite> em janelas ou em um terminal no Mac ou Linux.</p>
+</li>
 </ol>
 <img alt="../_images/512.png" class="align-center" src="../_images/512.png" />
 <ol class="arabic simple" start="6">
-<li>Navegue até a pasta de complementos em que a saída do <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> foi criada. Você pode usar o comando <code class="docutils literal notranslate"><span class="pre">cd</span></code> seguido do caminho para o diretório.</li>
+<li><p class="first">Navegue até a pasta de complementos em que a saída do <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> foi criada. Você pode usar o comando <code class="docutils literal"><span class="pre">cd</span></code> seguido do caminho para o diretório.</p>
+</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd c:\Users\username\.qgis2\python\plugins\SaveAttributes
+<div class="highlight-none"><div class="highlight"><pre>cd c:\Users\username\.qgis2\python\plugins\SaveAttributes
 </pre></div>
 </div>
 <img alt="../_images/611.png" class="align-center" src="../_images/611.png" />
 <ol class="arabic simple" start="7">
-<li>Uma vez que você está no diretório, tipo `` make``. Isto irá executar o comando `` pyrcc4`` que tínhamos instalado como parte de ligações Qt para Python.</li>
+<li><p class="first">Uma vez que você está no diretório, tipo `` make``. Isto irá executar o comando `` pyrcc4`` que tínhamos instalado como parte de ligações Qt para Python.</p>
+</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make
+<div class="highlight-none"><div class="highlight"><pre>make
 </pre></div>
 </div>
 <img alt="../_images/711.png" class="align-center" src="../_images/711.png" />
 <ol class="arabic simple" start="8">
-<li>Agora estamos prontos para ter um primeiro olhar para o novo complemento que criamos. Feche o QGIS e abra-o novamente. vá para <span class="menuselection">Plugins ‣ Gerenciar e instalar complementos</span> e permita que o complemento <code class="docutils literal notranslate"><span class="pre">Salvar</span> <span class="pre">Attributes</span></code> no <span class="guilabel">guia Installed</span>. Você vai notar que há um novo ícone na barra de ferramentas e uma nova entrada de menu em <span class="menuselection">Vector ‣ Save Atributos -&gt; Save Atributos como CSV`</span>. Selecione-o para iniciar o diálogo do complemento.</li>
+<li><p class="first">Agora estamos prontos para ter um primeiro olhar para o novo complemento que criamos. Feche o QGIS e abra-o novamente. vá para <span class="menuselection">Plugins ‣ Gerenciar e instalar complementos</span> e permita que o complemento <code class="docutils literal"><span class="pre">Salvar</span> <span class="pre">Attributes</span></code> no <span class="guilabel">guia Installed</span>. Você vai notar que há um novo ícone na barra de ferramentas e uma nova entrada de menu em <span class="menuselection">Vector ‣ Save Atributos -&gt; Save Atributos como CSV`</span>. Selecione-o para iniciar o diálogo do complemento.</p>
+</li>
 </ol>
 <img alt="../_images/810.png" class="align-center" src="../_images/810.png" />
 <ol class="arabic simple" start="9">
-<li>Você vai notar uma nova caixa de diálogo em branco chamada <span class="guilabel">Save Attributes</span>. Feche este diálogo.</li>
+<li><p class="first">Você vai notar uma nova caixa de diálogo em branco chamada <span class="guilabel">Save Attributes</span>. Feche este diálogo.</p>
+</li>
 </ol>
 <img alt="../_images/911.png" class="align-center" src="../_images/911.png" />
 <ol class="arabic simple" start="10">
-<li>Agora vamos projetar sua caixa de diálogo e adicionar alguns elementos da interface do usuário para ele. Abra o programa <code class="docutils literal notranslate"><span class="pre">Qt</span> <span class="pre">Creator</span></code> e  <span class="guilabel">File –&gt; Open File or Project…</span>.</li>
+<li><p class="first">Agora vamos projetar sua caixa de diálogo e adicionar alguns elementos da interface do usuário para ele. Abra o programa <code class="docutils literal"><span class="pre">Qt</span> <span class="pre">Creator</span></code> e  <span class="guilabel">File &#8211;&gt; Open File or Project...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1010.png" class="align-center" src="../_images/1010.png" />
 <ol class="arabic simple" start="11">
-<li>Navegue até o diretório do complemento e selecione o arquivo <code class="docutils literal notranslate"><span class="pre">save_attributes_dialog_base.ui</span></code>. Clique em <span class="guilabel">Open</span>.</li>
+<li><p class="first">Navegue até o diretório do complemento e selecione o arquivo <code class="docutils literal"><span class="pre">save_attributes_dialog_base.ui</span></code>. Clique em <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1116.png" class="align-center" src="../_images/1116.png" />
 <ol class="arabic simple" start="12">
-<li>Você verá a caixa de diálogo em branco do plugin. Você pode arrastar e soltar elementos do painel do lado esquerdo da caixa de diálogo. Nós vamos adicionar um  <span class="guilabel">Combo Box</span> do tipo <span class="guilabel">Input Widget</span>. Arraste-o para a janela do complemento.</li>
+<li><p class="first">Você verá a caixa de diálogo em branco do plugin. Você pode arrastar e soltar elementos do painel do lado esquerdo da caixa de diálogo. Nós vamos adicionar um  <span class="guilabel">Combo Box</span> do tipo <span class="guilabel">Input Widget</span>. Arraste-o para a janela do complemento.</p>
+</li>
 </ol>
 <img alt="../_images/1213.png" class="align-center" src="../_images/1213.png" />
 <ol class="arabic simple" start="13">
-<li>Redimensionar a caixa de combinação e ajuste seu tamanho. Agora arraste <span class="guilabel">Display Widget</span> no diálogo.</li>
+<li><p class="first">Redimensionar a caixa de combinação e ajuste seu tamanho. Agora arraste <span class="guilabel">Display Widget</span> no diálogo.</p>
+</li>
 </ol>
 <img alt="../_images/1312.png" class="align-center" src="../_images/1312.png" />
 <ol class="arabic simple" start="14">
-<li>Clique no texto do rótulo e digite <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">a</span> <span class="pre">layer</span></code>.</li>
+<li><p class="first">Clique no texto do rótulo e digite <code class="docutils literal"><span class="pre">Select</span> <span class="pre">a</span> <span class="pre">layer</span></code>.</p>
+</li>
 </ol>
 <img alt="../_images/1411.png" class="align-center" src="../_images/1411.png" />
 <ol class="arabic simple" start="15">
-<li>Salve este arquivo, vá para  <span class="menuselection">File ‣ Save save_attributes_dialog_base.ui</span>. Observe que o nome do objeto da caixa de combinação é <code class="docutils literal notranslate"><span class="pre">comboBox</span></code>. Para interagir com este objeto usando o código python, teremos que se referir a ele por este nome.</li>
+<li><p class="first">Salve este arquivo, vá para  <span class="menuselection">File ‣ Save save_attributes_dialog_base.ui</span>. Observe que o nome do objeto da caixa de combinação é <code class="docutils literal"><span class="pre">comboBox</span></code>. Para interagir com este objeto usando o código python, teremos que se referir a ele por este nome.</p>
+</li>
 </ol>
 <img alt="../_images/1510.png" class="align-center" src="../_images/1510.png" />
 <ol class="arabic simple" start="16">
-<li>Vamos recarregar nosso complemento para que possamos ver as mudanças na janela de diálogo. vá para <span class="menuselection">Plugin ‣ Plugin Reloader ‣ Choose a plugin to be reloaded</span>.</li>
+<li><p class="first">Vamos recarregar nosso complemento para que possamos ver as mudanças na janela de diálogo. vá para <span class="menuselection">Plugin ‣ Plugin Reloader ‣ Choose a plugin to be reloaded</span>.</p>
+</li>
 </ol>
 <img alt="../_images/169.png" class="align-center" src="../_images/169.png" />
 <ol class="arabic simple" start="17">
-<li>Selecione <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> no`diálogo  <span class="guilabel">Configure Plugin reloader</span>.</li>
+<li><p class="first">Selecione <code class="docutils literal"><span class="pre">SaveAttributes</span></code> no`diálogo  <span class="guilabel">Configure Plugin reloader</span>.</p>
+</li>
 </ol>
 <img alt="../_images/179.png" class="align-center" src="../_images/179.png" />
 <ol class="arabic simple" start="18">
-<li>Agora clique no botão <span class="guilabel">Save Attributes as CSV</span>. Você verá a caixa de diálogo recém-projetada.</li>
+<li><p class="first">Agora clique no botão <span class="guilabel">Save Attributes as CSV</span>. Você verá a caixa de diálogo recém-projetada.</p>
+</li>
 </ol>
 <img alt="../_images/1810.png" class="align-center" src="../_images/1810.png" />
 <ol class="arabic simple" start="19">
-<li>Vamos adicionar alguma lógica para o complemento que irá preencher a caixa de combinação com as camadas carregadas no QGIS. Vá para o diretório do complemento e carregue o arquivo <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> em um editor de texto. Role para baixo e encontre ométodo <code class="docutils literal notranslate"><span class="pre">run(self)</span></code>. Este método será chamado quando você clica no botão da barra de ferramentas ou seleciona o item de menu do complemento. Adicione o seguinte código no início do método. Este código obtém as camadas carregadas no QGIS e as adiciona para o objeto <code class="docutils literal notranslate"><span class="pre">comboBox</span></code> a partir do diálogo plugin.</li>
+<li><p class="first">Vamos adicionar alguma lógica para o complemento que irá preencher a caixa de combinação com as camadas carregadas no QGIS. Vá para o diretório do complemento e carregue o arquivo <code class="docutils literal"><span class="pre">save_attributes.py</span></code> em um editor de texto. Role para baixo e encontre ométodo <code class="docutils literal"><span class="pre">run(self)</span></code>. Este método será chamado quando você clica no botão da barra de ferramentas ou seleciona o item de menu do complemento. Adicione o seguinte código no início do método. Este código obtém as camadas carregadas no QGIS e as adiciona para o objeto <code class="docutils literal"><span class="pre">comboBox</span></code> a partir do diálogo plugin.</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">legendInterface</span><span class="p">()</span><span class="o">.</span><span class="n">layers</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">layers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">legendInterface</span><span class="p">()</span><span class="o">.</span><span class="n">layers</span><span class="p">()</span>
 <span class="n">layer_list</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="p">:</span>
      <span class="n">layer_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
@@ -371,47 +401,55 @@
 </div>
 <img alt="../_images/197.png" class="align-center" src="../_images/197.png" />
 <ol class="arabic simple" start="20">
-<li>Volte na janela principal do QGIS, recarregue o complemento, vá para  <span class="menuselection">Plugins ‣ Plugin Reloader ‣ Reload plugin: SaveAttributes</span>. Alternativamente, você pode pressionar <kbd class="kbd docutils literal notranslate">F5</kbd>. Para testar essa nova funcionalidade, é preciso carregar algumas camadas no QGIS. Depois de carregar alguns dados, inicie o plugin, vá para <span class="menuselection">Vector ‣ Save Attributes ‣ Save Attributes as CSV</span>.</li>
+<li><p class="first">Volte na janela principal do QGIS, recarregue o complemento, vá para  <span class="menuselection">Plugins ‣ Plugin Reloader ‣ Reload plugin: SaveAttributes</span>. Alternativamente, você pode pressionar <code class="kbd docutils literal"><span class="pre">F5</span></code>. Para testar essa nova funcionalidade, é preciso carregar algumas camadas no QGIS. Depois de carregar alguns dados, inicie o plugin, vá para <span class="menuselection">Vector ‣ Save Attributes ‣ Save Attributes as CSV</span>.</p>
+</li>
 </ol>
 <img alt="../_images/206.png" class="align-center" src="../_images/206.png" />
 <ol class="arabic simple" start="21">
-<li>Você vai ver que a nossa caixa de combinação é agora preenchida com os nomes das camadas que estão carregadas no QGIS.</li>
+<li><p class="first">Você vai ver que a nossa caixa de combinação é agora preenchida com os nomes das camadas que estão carregadas no QGIS.</p>
+</li>
 </ol>
 <img alt="../_images/2112.png" class="align-center" src="../_images/2112.png" />
 <ol class="arabic simple" start="22">
-<li>Vamos adicionar outros elementos de interface de usuário restantes. Alterne de volta para o <code class="docutils literal notranslate"><span class="pre">Qt</span> <span class="pre">Creator</span></code> e carregue o arquivo <code class="docutils literal notranslate"><span class="pre">save_attributes_dialog_base.ui</span></code>. Adicione um <code class="docutils literal notranslate"><span class="pre">Label</span></code> <span class="guilabel">Display Widget</span> e altere o texto para <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">output</span> <span class="pre">file</span></code>. Adicionar um <code class="docutils literal notranslate"><span class="pre">LineEdit</span></code> tipo <span class="guilabel">Input Widget</span> que irá mostrar o caminho do arquivo de saída que o usuário escolheu. Em seguida, adicione um <code class="docutils literal notranslate"><span class="pre">Push</span> <span class="pre">Button</span></code> tipo <span class="guilabel">Button</span>  e mude o rótulo do botão para <code class="docutils literal notranslate"><span class="pre">...</span></code>. Observe os nomes de objeto dos widgets que teremos de usar para interagir com eles. Salve o arquivo.</li>
+<li><p class="first">Vamos adicionar outros elementos de interface de usuário restantes. Alterne de volta para o <code class="docutils literal"><span class="pre">Qt</span> <span class="pre">Creator</span></code> e carregue o arquivo <code class="docutils literal"><span class="pre">save_attributes_dialog_base.ui</span></code>. Adicione um <code class="docutils literal"><span class="pre">Label</span></code> <span class="guilabel">Display Widget</span> e altere o texto para <code class="docutils literal"><span class="pre">Select</span> <span class="pre">output</span> <span class="pre">file</span></code>. Adicionar um <code class="docutils literal"><span class="pre">LineEdit</span></code> tipo <span class="guilabel">Input Widget</span> que irá mostrar o caminho do arquivo de saída que o usuário escolheu. Em seguida, adicione um <code class="docutils literal"><span class="pre">Push</span> <span class="pre">Button</span></code> tipo <span class="guilabel">Button</span>  e mude o rótulo do botão para <code class="docutils literal"><span class="pre">...</span></code>. Observe os nomes de objeto dos widgets que teremos de usar para interagir com eles. Salve o arquivo.</p>
+</li>
 </ol>
 <img alt="../_images/2210.png" class="align-center" src="../_images/2210.png" />
 <ol class="arabic simple" start="23">
-<li>Vamos agora adicionar o código python para abrir um navegador de arquivos quando o usuário clicar no botão <code class="docutils literal notranslate"><span class="pre">...</span></code> e mostrar o caminho selecionado no widget. Abra o arquivo <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> em um editor de texto. Adicione <code class="docutils literal notranslate"><span class="pre">QFileDialog</span></code> à nossa lista de importações no topo do arquivo.</li>
+<li><p class="first">Vamos agora adicionar o código python para abrir um navegador de arquivos quando o usuário clicar no botão <code class="docutils literal"><span class="pre">...</span></code> e mostrar o caminho selecionado no widget. Abra o arquivo <code class="docutils literal"><span class="pre">save_attributes.py</span></code> em um editor de texto. Adicione <code class="docutils literal"><span class="pre">QFileDialog</span></code> à nossa lista de importações no topo do arquivo.</p>
+</li>
 </ol>
 <img alt="../_images/235.png" class="align-center" src="../_images/235.png" />
 <ol class="arabic simple" start="24">
-<li>Adicione um novo método chamado <code class="docutils literal notranslate"><span class="pre">select_output_file</span></code> com o seguinte código. Este código irá abrir um navegador de arquivos e preencher a linha de edição com o caminho do arquivo que o usuário escolher.</li>
+<li><p class="first">Adicione um novo método chamado <code class="docutils literal"><span class="pre">select_output_file</span></code> com o seguinte código. Este código irá abrir um navegador de arquivos e preencher a linha de edição com o caminho do arquivo que o usuário escolher.</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">select_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="p">,</span> <span class="s2">&quot;Select output file &quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s1">&#39;*.txt&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">select_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="p">,</span> <span class="s">&quot;Select output file &quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&#39;*.txt&#39;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/246.png" class="align-center" src="../_images/246.png" />
 <ol class="arabic simple" start="25">
-<li>Agora precisamos adicionar o código para que quando o botão <cite>…</cite> for clicado, o método <code class="docutils literal notranslate"><span class="pre">select_output_file</span></code> seja chamado. Role até o método <code class="docutils literal notranslate"><span class="pre">__init__</span></code> e adicione as seguintes linhas na parte inferior. Este código irá limpar o texto carregado anteriormente (se houver) na linha de edição e também conectar o método <code class="docutils literal notranslate"><span class="pre">select_output_file</span></code> ao sinal <code class="docutils literal notranslate"><span class="pre">clicked</span></code> do widget de botão.</li>
+<li><p class="first">Agora precisamos adicionar o código para que quando o botão <cite>...</cite> for clicado, o método <code class="docutils literal"><span class="pre">select_output_file</span></code> seja chamado. Role até o método <code class="docutils literal"><span class="pre">__init__</span></code> e adicione as seguintes linhas na parte inferior. Este código irá limpar o texto carregado anteriormente (se houver) na linha de edição e também conectar o método <code class="docutils literal"><span class="pre">select_output_file</span></code> ao sinal <code class="docutils literal"><span class="pre">clicked</span></code> do widget de botão.</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">pushButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select_output_file</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/256.png" class="align-center" src="../_images/256.png" />
 <ol class="arabic simple" start="26">
-<li>Volte no QGIS, recarregue o plugin e abra odiálogo <span class="guilabel">Save Attributes`</span>. Se tudo correu bem, você será capaz de clicar no botão <code class="docutils literal notranslate"><span class="pre">...</span></code> e selecionar um arquivo de texto de saída do seu disco.</li>
+<li><p class="first">Volte no QGIS, recarregue o plugin e abra odiálogo <span class="guilabel">Save Attributes`</span>. Se tudo correu bem, você será capaz de clicar no botão <code class="docutils literal"><span class="pre">...</span></code> e selecionar um arquivo de texto de saída do seu disco.</p>
+</li>
 </ol>
 <img alt="../_images/266.png" class="align-center" src="../_images/266.png" />
 <ol class="arabic simple" start="27">
-<li>Quando você clica em <span class="guilabel">OK</span> no diálogo do complemento, nada acontece. Isso é porque nós não adicionamos a lógica para puxar informações de atributos da camada e escrevê-lo para o arquivo de texto. Temos agora todas as peças no lugar para fazer exatamente isso. Encontre o lugar no método <code class="docutils literal notranslate"><span class="pre">run</span></code> onde se diz <code class="docutils literal notranslate"><span class="pre">pass</span></code>. Substitua-o com o código abaixo. A explicação para este código pode ser encontrada em <a class="reference internal" href="getting_started_with_pyqgis.html"><span class="doc">Começando a Programar com o Phyton</span></a>.</li>
+<li><p class="first">Quando você clica em <span class="guilabel">OK</span> no diálogo do complemento, nada acontece. Isso é porque nós não adicionamos a lógica para puxar informações de atributos da camada e escrevê-lo para o arquivo de texto. Temos agora todas as peças no lugar para fazer exatamente isso. Encontre o lugar no método <code class="docutils literal"><span class="pre">run</span></code> onde se diz <code class="docutils literal"><span class="pre">pass</span></code>. Substitua-o com o código abaixo. A explicação para este código pode ser encontrada em <a class="reference internal" href="getting_started_with_pyqgis.html"><em>Começando a Programar com o Phyton</em></a>.</p>
+</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-<span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+<span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
 
 <span class="n">selectedLayerIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">comboBox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
 <span class="n">selectedLayer</span> <span class="o">=</span> <span class="n">layers</span><span class="p">[</span><span class="n">selectedLayerIndex</span><span class="p">]</span>
@@ -419,22 +457,23 @@
 <span class="n">fieldnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">selectedLayer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
-    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">unicode</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fieldnames</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="n">unicode_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">unicode</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fieldnames</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+    <span class="n">unicode_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
     <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">unicode_line</span><span class="p">)</span>
 <span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../_images/276.png" class="align-center" src="../_images/276.png" />
 <ol class="arabic simple" start="28">
-<li>Agora nosso complementoestá pronto. Recarregue o complemenbto e experimente-lo. Você vai descobrir que o arquivo de texto de saída que você escolheu terão os atributos da camada vetorial. Você pode fechar o diretório do complemento e compartilhá-lo com seus usuários. Eles podem descompactar o conteúdo do seu complemento e experimentar o seu complemento. Se este foi um verdadeiro complemento, você iria enviá-lo para o <a class="reference external" href="https://plugins.qgis.org/">QGIS Plugin Repository</a> de modo que todos os usuários do QGIS serão capazes de encontrar e fazer o download do plugin.</li>
+<li><p class="first">Agora nosso complementoestá pronto. Recarregue o complemenbto e experimente-lo. Você vai descobrir que o arquivo de texto de saída que você escolheu terão os atributos da camada vetorial. Você pode fechar o diretório do complemento e compartilhá-lo com seus usuários. Eles podem descompactar o conteúdo do seu complemento e experimentar o seu complemento. Se este foi um verdadeiro complemento, você iria enviá-lo para o <a class="reference external" href="https://plugins.qgis.org/">QGIS Plugin Repository</a> de modo que todos os usuários do QGIS serão capazes de encontrar e fazer o download do plugin.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
 <p class="last">Este complemento é apenas para demonstração. Não publique este complemento ou envie-o para o repositório QGIS.</p>
 </div>
-<p>Abaixo está o arquivo <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> para tê-lo como uma referência.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<p>Abaixo está o arquivo <code class="docutils literal"><span class="pre">save_attributes.py</span></code> para tê-lo como uma referência.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">/***************************************************************************</span>
 <span class="sd"> SaveAttributes</span>
@@ -456,12 +495,12 @@
 <span class="sd"> *                                                                         *</span>
 <span class="sd"> ***************************************************************************/</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="k">import</span> <span class="n">QSettings</span><span class="p">,</span> <span class="n">QTranslator</span><span class="p">,</span> <span class="n">qVersion</span><span class="p">,</span> <span class="n">QCoreApplication</span>
-<span class="kn">from</span> <span class="nn">PyQt4.QtGui</span> <span class="k">import</span> <span class="n">QAction</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">,</span> <span class="n">QFileDialog</span>
-<span class="c1"># Initialize Qt resources from file resources.py</span>
+<span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="n">QSettings</span><span class="p">,</span> <span class="n">QTranslator</span><span class="p">,</span> <span class="n">qVersion</span><span class="p">,</span> <span class="n">QCoreApplication</span>
+<span class="kn">from</span> <span class="nn">PyQt4.QtGui</span> <span class="kn">import</span> <span class="n">QAction</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">,</span> <span class="n">QFileDialog</span>
+<span class="c"># Initialize Qt resources from file resources.py</span>
 <span class="kn">import</span> <span class="nn">resources_rc</span>
-<span class="c1"># Import the code for the dialog</span>
-<span class="kn">from</span> <span class="nn">save_attributes_dialog</span> <span class="k">import</span> <span class="n">SaveAttributesDialog</span>
+<span class="c"># Import the code for the dialog</span>
+<span class="kn">from</span> <span class="nn">save_attributes_dialog</span> <span class="kn">import</span> <span class="n">SaveAttributesDialog</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 
 
@@ -476,39 +515,39 @@
 <span class="sd">            application at run time.</span>
 <span class="sd">        :type iface: QgsInterface</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Save reference to the QGIS interface</span>
+        <span class="c"># Save reference to the QGIS interface</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iface</span> <span class="o">=</span> <span class="n">iface</span>
-        <span class="c1"># initialize plugin directory</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plugin_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
-        <span class="c1"># initialize locale</span>
-        <span class="n">locale</span> <span class="o">=</span> <span class="n">QSettings</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39;locale/userLocale&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="c"># initialize plugin directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plugin_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+        <span class="c"># initialize locale</span>
+        <span class="n">locale</span> <span class="o">=</span> <span class="n">QSettings</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s">&#39;locale/userLocale&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">locale_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">plugin_dir</span><span class="p">,</span>
-            <span class="s1">&#39;i18n&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;SaveAttributes_</span><span class="si">{}</span><span class="s1">.qm&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locale</span><span class="p">))</span>
+            <span class="s">&#39;i18n&#39;</span><span class="p">,</span>
+            <span class="s">&#39;SaveAttributes_{}.qm&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locale</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">locale_path</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">translator</span> <span class="o">=</span> <span class="n">QTranslator</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">translator</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">locale_path</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">qVersion</span><span class="p">()</span> <span class="o">&gt;</span> <span class="s1">&#39;4.3.3&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">qVersion</span><span class="p">()</span> <span class="o">&gt;</span> <span class="s">&#39;4.3.3&#39;</span><span class="p">:</span>
                 <span class="n">QCoreApplication</span><span class="o">.</span><span class="n">installTranslator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">translator</span><span class="p">)</span>
 
-        <span class="c1"># Create the dialog (after translation) and keep reference</span>
+        <span class="c"># Create the dialog (after translation) and keep reference</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span> <span class="o">=</span> <span class="n">SaveAttributesDialog</span><span class="p">()</span>
 
-        <span class="c1"># Declare instance attributes</span>
+        <span class="c"># Declare instance attributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&amp;Save Attributes&#39;</span><span class="p">)</span>
-        <span class="c1"># TODO: We are going to let the user set this up in a future iteration</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">addToolBar</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;SaveAttributes&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;SaveAttributes&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s">u&#39;&amp;Save Attributes&#39;</span><span class="p">)</span>
+        <span class="c"># TODO: We are going to let the user set this up in a future iteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">addToolBar</span><span class="p">(</span><span class="s">u&#39;SaveAttributes&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s">u&#39;SaveAttributes&#39;</span><span class="p">)</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">pushButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select_output_file</span><span class="p">)</span>
         
 
-    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+    <span class="c"># noinspection PyMethodMayBeStatic</span>
     <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the translation for a string using Qt translation API.</span>
 
@@ -520,8 +559,8 @@
 <span class="sd">        :returns: Translated version of message.</span>
 <span class="sd">        :rtype: QString</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># noinspection PyTypeChecker,PyArgumentList,PyCallByClass</span>
-        <span class="k">return</span> <span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s1">&#39;SaveAttributes&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+        <span class="c"># noinspection PyTypeChecker,PyArgumentList,PyCallByClass</span>
+        <span class="k">return</span> <span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s">&#39;SaveAttributes&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">add_action</span><span class="p">(</span>
@@ -529,12 +568,12 @@
         <span class="n">icon_path</span><span class="p">,</span>
         <span class="n">text</span><span class="p">,</span>
         <span class="n">callback</span><span class="p">,</span>
-        <span class="n">enabled_flag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">add_to_menu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">add_to_toolbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">status_tip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">whats_this</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">enabled_flag</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">add_to_menu</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">add_to_toolbar</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">status_tip</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">whats_this</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a toolbar icon to the toolbar.</span>
 
 <span class="sd">        :param icon_path: Path to the icon for this action. Can be a resource</span>
@@ -579,10 +618,10 @@
         <span class="n">action</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="n">action</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">enabled_flag</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">status_tip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">status_tip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">action</span><span class="o">.</span><span class="n">setStatusTip</span><span class="p">(</span><span class="n">status_tip</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">whats_this</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">whats_this</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">action</span><span class="o">.</span><span class="n">setWhatsThis</span><span class="p">(</span><span class="n">whats_this</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">add_to_toolbar</span><span class="p">:</span>
@@ -600,10 +639,10 @@
     <span class="k">def</span> <span class="nf">initGui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create the menu entries and toolbar icons inside the QGIS GUI.&quot;&quot;&quot;</span>
 
-        <span class="n">icon_path</span> <span class="o">=</span> <span class="s1">&#39;:/plugins/SaveAttributes/icon.png&#39;</span>
+        <span class="n">icon_path</span> <span class="o">=</span> <span class="s">&#39;:/plugins/SaveAttributes/icon.png&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span>
             <span class="n">icon_path</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Save Attributes as CSV&#39;</span><span class="p">),</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s">u&#39;Save Attributes as CSV&#39;</span><span class="p">),</span>
             <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">,</span>
             <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">mainWindow</span><span class="p">())</span>
 
@@ -612,14 +651,14 @@
         <span class="sd">&quot;&quot;&quot;Removes the plugin menu item and icon from QGIS GUI.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">removePluginVectorMenu</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&amp;Save Attributes&#39;</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s">u&#39;&amp;Save Attributes&#39;</span><span class="p">),</span>
                 <span class="n">action</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">removeToolBarIcon</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-        <span class="c1"># remove the toolbar</span>
+        <span class="c"># remove the toolbar</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span>
 
     <span class="k">def</span> <span class="nf">select_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="p">,</span> <span class="s2">&quot;Select output file &quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s1">&#39;*.txt&#39;</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="p">,</span> <span class="s">&quot;Select output file &quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&#39;*.txt&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -631,16 +670,16 @@
             
         <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">comboBox</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">comboBox</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="n">layer_list</span><span class="p">)</span>
-        <span class="c1"># show the dialog</span>
+        <span class="c"># show the dialog</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-        <span class="c1"># Run the dialog event loop</span>
+        <span class="c"># Run the dialog event loop</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
-        <span class="c1"># See if OK was pressed</span>
+        <span class="c"># See if OK was pressed</span>
         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-            <span class="c1"># Do something useful here - delete the line containing pass and</span>
-            <span class="c1"># substitute with your code.</span>
+            <span class="c"># Do something useful here - delete the line containing pass and</span>
+            <span class="c"># substitute with your code.</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-            <span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+            <span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
            
             <span class="n">selectedLayerIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">comboBox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
             <span class="n">selectedLayer</span> <span class="o">=</span> <span class="n">layers</span><span class="p">[</span><span class="n">selectedLayerIndex</span><span class="p">]</span>
@@ -648,8 +687,8 @@
             <span class="n">fieldnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">]</span>
             
             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">selectedLayer</span><span class="o">.</span><span class="n">getFeatures</span><span class="p">():</span>
-                <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fieldnames</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-                <span class="n">unicode_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">unicode</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fieldnames</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+                <span class="n">unicode_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
                 <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">unicode_line</span><span class="p">)</span>
             <span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
@@ -679,8 +718,8 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Última atualização em abr 04, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+      Última atualização em Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

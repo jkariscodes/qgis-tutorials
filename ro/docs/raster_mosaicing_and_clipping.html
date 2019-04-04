@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ro">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Mozaicarea și Tăierea Rasterelor &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>Mozaicarea și Tăierea Rasterelor &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="Căutare" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="Lucrul cu date despre teren" href="working_with_terrain.html" />
     <link rel="prev" title="Noțiuni de Bază despre Analiza și Stilizarea Rasterelor" href="raster_styling_and_analysis.html" />
 
@@ -41,7 +50,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -79,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Noțiuni de bază despre stilizarea vectorilor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Determinarea Lungimii Liniilor și a Statisticilor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Noțiuni de Bază despre Analiza și Stilizarea Rasterelor</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Mozaicarea și Tăierea Rasterelor</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Mozaicarea și Tăierea Rasterelor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Lucrul cu date despre teren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Lucrul cu Date WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Lucrul cu Proiecții</a></li>
@@ -121,11 +131,11 @@
               
                 
   <li>
-    <a href="raster_styling_and_analysis.html" title="Previous Chapter: Noțiuni de Bază despre Analiza și Stilizarea Rasterelor"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Noțiuni de Ba...</span>
+    <a href="raster_styling_and_analysis.html" title="Previous Chapter: Noțiuni de Bază despre Analiza și Stilizarea Rasterelor"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Noțiuni de Bază ...</span>
     </a>
   </li>
   <li>
-    <a href="working_with_terrain.html" title="Next Chapter: Lucrul cu date despre teren"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Lucrul cu dat... &raquo;</span>
+    <a href="working_with_terrain.html" title="Next Chapter: Lucrul cu date despre teren"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Lucrul cu date d... &raquo;</span>
     </a>
   </li>
               
@@ -220,34 +230,39 @@
       
 
   <div class="section" id="raster-mosaicing-and-clipping">
-<h1>Mozaicarea și Tăierea Rasterelor<a class="headerlink" href="#raster-mosaicing-and-clipping" title="Link permanent la acest titlu">¶</a></h1>
+<h1>Mozaicarea și Tăierea Rasterelor<a class="headerlink" href="#raster-mosaicing-and-clipping" title="Permalink to this headline">¶</a></h1>
 <p>Acest tutorial explorează unele operațiuni de bază ale QGIS care se aplică rasterelor, cum ar fi vizualizarea, mozaicarea și crearea de subseturi.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
 <p>Vom descărca câteva date raster, din domeniul public, ale Braziliei, și le vom vizualiza în QGIS. Apoi, le vom uni într-un singur mozaic, pe care îl vom tăia folosind limita administrativă a țării, pentru a obține un singur set de date pentru întreaga țară.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Alte competențe pe care le veți dobândi<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanent la acest titlu">¶</a></h3>
+<h3>Alte competențe pe care le veți dobândi<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Căutarea și descărcarea imaginilor din satelit, recente, aflate în domeniul public.</li>
-<li>Selectarea unei singure entități dintr-un strat vectorial, și salvarea sa într-un nou fișier shape.</li>
+<li><p class="first">Căutarea și descărcarea imaginilor din satelit, recente, aflate în domeniul public.</p>
+</li>
+<li><p class="first">Selectarea unei singure entități dintr-un strat vectorial, și salvarea sa într-un nou fișier shape.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Pentru a tăia rasterul, este necesară frontiera Braziliei. Puteți obține fișierul shape <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Countries</a> de la Natural Earth.</p>
 <p><a class="reference external" href="https://earthdata.nasa.gov/data/near-real-time-data/rapid-response/modis-subsets">NASA/GSFC, Rapid Response site</a> dispune de o bună colecție de imagini din satelit, efectuate aproape în timp real. Un bun produs regional este subsetul <a class="reference external" href="http://lance-modis.eosdis.nasa.gov/imagery/subsets/?project=fas">USDA Foreign Agricultural Service (FAS).</a>. În acest tutorial vom folosi  subseturile FAS la rezoluție 2 km, ale Braziliei.</p>
 <p>Iată cum să căutați și să descărcați datele revelante.</p>
 <ol class="arabic simple">
-<li>Deschideți <a class="reference external" href="http://lance-modis.eosdis.nasa.gov/imagery/subsets/?area=sa">South America region subsets</a>. Găsiți subseturile Braziliene indicate, în secțiunea <span class="guilabel">FAS Subsets</span>. Faceți clic pe oricare dintre ele.</li>
+<li><p class="first">Deschideți <a class="reference external" href="http://lance-modis.eosdis.nasa.gov/imagery/subsets/?area=sa">South America region subsets</a>. Găsiți subseturile Braziliene indicate, în secțiunea <span class="guilabel">FAS Subsets</span>. Faceți clic pe oricare dintre ele.</p>
+</li>
 </ol>
 <img alt="../_images/1143.png" class="align-center" src="../_images/1143.png" />
 <ol class="arabic simple" start="2">
-<li>În pagina de detalii, faceți clic pe link-ul <span class="guilabel">2km</span>. Apoi, descărcați produsul <span class="guilabel">NDVI</span>. <a class="reference external" href="http://en.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index">Aflați mai multe despre NDVI</a>.</li>
+<li><p class="first">În pagina de detalii, faceți clic pe link-ul <span class="guilabel">2km</span>. Apoi, descărcați produsul <span class="guilabel">NDVI</span>. <a class="reference external" href="http://en.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index">Aflați mai multe despre NDVI</a>.</p>
+</li>
 </ol>
 <img alt="../_images/2105.png" class="align-center" src="../_images/2105.png" />
 <ol class="arabic simple" start="3">
-<li>Clic pe link-ul <span class="guilabel">Download GeoTIFF file</span>.</li>
+<li><p class="first">Clic pe link-ul <span class="guilabel">Download GeoTIFF file</span>.</p>
+</li>
 </ol>
 <img alt="../_images/363.png" class="align-center" src="../_images/363.png" />
 <p>Repetați procesul pentru toate cele 7 subseturi FAS ale Braziliei.</p>
@@ -263,77 +278,94 @@
 <p>Surse de date: <a class="reference internal" href="credits.html#lance" id="id1">[LANCE]</a> <a class="reference internal" href="credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedura<a class="headerlink" href="#procedure" title="Link permanent la acest titlu">¶</a></h2>
+<h2>Procedura<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple" start="4">
-<li>Deschideți QGIS și mergeți la <span class="menuselection">Layer ‣ Add Raster Layer..</span>.</li>
+<li><p class="first">Deschideți QGIS și mergeți la <span class="menuselection">Layer ‣ Add Raster Layer..</span>.</p>
+</li>
 </ol>
 <img alt="../_images/435.png" class="align-center" src="../_images/435.png" />
 <ol class="arabic simple" start="5">
-<li>Navigați la directorul cu imagini individuale. Țineți apăsată tasta <kbd class="kbd docutils literal notranslate">Ctrl</kbd> și efectuați clic pe fișierele imagine pentru a realiza o selecție multiplă. Clic pe <span class="guilabel">Open</span>.</li>
+<li><p class="first">Navigați la directorul cu imagini individuale. Țineți apăsată tasta <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> și efectuați clic pe fișierele imagine pentru a realiza o selecție multiplă. Clic pe <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/536.png" class="align-center" src="../_images/536.png" />
 <ol class="arabic simple" start="6">
-<li>Veți vedea imaginile încărcate în interiorul panoului din stânga. Acum, haideți să creăm o singură imagine de tip <cite>Mozaic</cite> din toate aceste imagini individuale. Faceți clic pe <span class="menuselection">Raster ‣ Miscellaneous ‣ Merge</span>.</li>
+<li><p class="first">Veți vedea imaginile încărcate în interiorul panoului din stânga. Acum, haideți să creăm o singură imagine de tip <cite>Mozaic</cite> din toate aceste imagini individuale. Faceți clic pe <span class="menuselection">Raster ‣ Miscellaneous ‣ Merge</span>.</p>
+</li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Notă</p>
-<p class="last">Meniul <span class="guilabel">Raster</span> din QGIS provine de la un plugin numit <span class="guilabel">GdalTools</span>. Dacă nu vedeți meniul <span class="guilabel">Raster</span>, activați plugin-ul <span class="guilabel">GdalTools</span> din menuselection:<cite>Plugins –&gt; Manage and install plugins –&gt; Installed</cite>. Parcurgeți <a class="reference internal" href="using_plugins.html"><span class="doc">Utilizarea Plugin-urilor</span></a> pentru detalii suplimentare.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Meniul <span class="guilabel">Raster</span> din QGIS provine de la un plugin numit <span class="guilabel">GdalTools</span>. Dacă nu vedeți meniul <span class="guilabel">Raster</span>, activați plugin-ul <span class="guilabel">GdalTools</span> din menuselection:<cite>Plugins &#8211;&gt; Manage and install plugins &#8211;&gt; Installed</cite>. Parcurgeți <a class="reference internal" href="using_plugins.html"><em>Utilizarea Plugin-urilor</em></a> pentru detalii suplimentare.</p>
 </div>
 <img alt="../_images/633.png" class="align-center" src="../_images/633.png" />
 <ol class="arabic simple" start="7">
-<li>În fereastra de dialog <span class="guilabel">Merge</span>, apăsați pe <span class="guilabel">Select…</span> din dreptul <span class="guilabel">Input files</span> și navigați la directorul care conține toate geotiff-urile individuale. Mențineți tasta <kbd class="kbd docutils literal notranslate">Ctrl</kbd> apăsată și selectați toate subseturile. Apoi apăsați pe <span class="guilabel">Select…</span> din dreptul <span class="guilabel">Output file</span> și introduceți denumiea <code class="docutils literal notranslate"><span class="pre">Brazil_mosaic.tif</span></code>. În partea de jos, bifați caseta de lângă <span class="guilabel">Load into canvas when finished</span>. Clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">În fereastra de dialog <span class="guilabel">Merge</span>, apăsați pe <span class="guilabel">Select...</span> din dreptul <span class="guilabel">Input files</span> și navigați la directorul care conține toate geotiff-urile individuale. Mențineți tasta <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> apăsată și selectați toate subseturile. Apoi apăsați pe <span class="guilabel">Select...</span> din dreptul <span class="guilabel">Output file</span> și introduceți denumiea <code class="docutils literal"><span class="pre">Brazil_mosaic.tif</span></code>. În partea de jos, bifați caseta de lângă <span class="guilabel">Load into canvas when finished</span>. Clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/732.png" class="align-center" src="../_images/732.png" />
 <ol class="arabic simple" start="8">
-<li>Veți primi un mesaj de tip pop-up care anunță <cite>Procesarea Completă</cite>, o dată ce mozaicul este creat și încărcat în suportul de hartă al QGIS. Veți vedea că imaginile individuale sunt combinate și mozaicate într-un singur strat. Puteți elimina straturile individuale prin debifarea casetei de lângă numele acestora.</li>
+<li><p class="first">Veți primi un mesaj de tip pop-up care anunță <cite>Procesarea Completă</cite>, o dată ce mozaicul este creat și încărcat în suportul de hartă al QGIS. Veți vedea că imaginile individuale sunt combinate și mozaicate într-un singur strat. Puteți elimina straturile individuale prin debifarea casetei de lângă numele acestora.</p>
+</li>
 </ol>
 <img alt="../_images/830.png" class="align-center" src="../_images/830.png" />
 <ol class="arabic simple" start="9">
-<li>O altă operație asupra unui raster este de a subseta sau de a <cite>decupa</cite> o imagine. Putem folosi un poligon dintr-un strat vectorial, pentru a decupa rasterul la forma exactă. Haideți să încărcăm fișierele shape de tip poligon ale țării, pe care le-am descărcat de la Natural Earth. Mergeți la <span class="menuselection">Layer ‣ Add Vector Layer</span>.</li>
+<li><p class="first">O altă operație asupra unui raster este de a subseta sau de a <cite>decupa</cite> o imagine. Putem folosi un poligon dintr-un strat vectorial, pentru a decupa rasterul la forma exactă. Haideți să încărcăm fișierele shape de tip poligon ale țării, pe care le-am descărcat de la Natural Earth. Mergeți la <span class="menuselection">Layer ‣ Add Vector Layer</span>.</p>
+</li>
 </ol>
 <img alt="../_images/929.png" class="align-center" src="../_images/929.png" />
 <ol class="arabic simple" start="10">
-<li>Selectați fișierul <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.zip</span></code> și efectuați clic pe <span class="guilabel">Open</span>. Când vi se solicită să alegeți stratul dintr-un fișier zip, selectați <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.shp</span></code>.</li>
+<li><p class="first">Selectați fișierul <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries.zip</span></code> și efectuați clic pe <span class="guilabel">Open</span>. Când vi se solicită să alegeți stratul dintr-un fișier zip, selectați <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries.shp</span></code>.</p>
+</li>
 </ol>
 <img alt="../_images/1029.png" class="align-center" src="../_images/1029.png" />
 <ol class="arabic simple" start="11">
-<li>După ce stratul vectorial este încărcat, ne dorim să selectăm și să extragem poligonul pentru Brazilia. Selectați instrumentul <span class="guilabel">Select Single Feature</span> din bara de instrumente.</li>
+<li><p class="first">După ce stratul vectorial este încărcat, ne dorim să selectăm și să extragem poligonul pentru Brazilia. Selectați instrumentul <span class="guilabel">Select Single Feature</span> din bara de instrumente.</p>
+</li>
 </ol>
 <img alt="../_images/1144.png" class="align-center" src="../_images/1144.png" />
 <ol class="arabic simple" start="12">
-<li>Faceți clic oriunde, pe poligonul Braziliei, pentru a-l selecta.</li>
+<li><p class="first">Faceți clic oriunde, pe poligonul Braziliei, pentru a-l selecta.</p>
+</li>
 </ol>
 <img alt="../_images/1230.png" class="align-center" src="../_images/1230.png" />
 <ol class="arabic simple" start="13">
-<li>Faceți clic dreapta pe stratul <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> și selectați <span class="guilabel">Save Selection As…</span>.</li>
+<li><p class="first">Faceți clic dreapta pe stratul <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> și selectați <span class="guilabel">Save Selection As...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1328.png" class="align-center" src="../_images/1328.png" />
 <ol class="arabic simple" start="14">
-<li>Denumiți fișierul de ieșire <code class="docutils literal notranslate"><span class="pre">brazil_boundary.shp</span></code> și asigurați-vă că ați bifat <span class="guilabel">Add saved file to map</span>. Clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">Denumiți fișierul de ieșire <code class="docutils literal"><span class="pre">brazil_boundary.shp</span></code> și asigurați-vă că ați bifat <span class="guilabel">Add saved file to map</span>. Clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1427.png" class="align-center" src="../_images/1427.png" />
 <ol class="arabic simple" start="15">
-<li>Veți vedea granița poligonală a Braziliei, încărcată acum în QGIS.</li>
+<li><p class="first">Veți vedea granița poligonală a Braziliei, încărcată acum în QGIS.</p>
+</li>
 </ol>
 <img alt="../_images/1525.png" class="align-center" src="../_images/1525.png" />
 <ol class="arabic simple" start="16">
-<li>Acum, mergeți la <span class="menuselection">Raster ‣ Extraction ‣ Clipper</span>.</li>
+<li><p class="first">Acum, mergeți la <span class="menuselection">Raster ‣ Extraction ‣ Clipper</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1623.png" class="align-center" src="../_images/1623.png" />
 <ol class="arabic simple" start="17">
-<li>Selectați <code class="docutils literal notranslate"><span class="pre">Brazil_mosaic</span></code> în câmpul <span class="guilabel">input file (raster)</span>. Introduceți <span class="guilabel">Output file</span> în câmpul <code class="docutils literal notranslate"><span class="pre">Brazil_mosaic_clipped</span></code>. În secțiunea <span class="guilabel">Clipping mode</span>, alegeți <span class="guilabel">Mask layer</span>. Selectați stratul mască <code class="docutils literal notranslate"><span class="pre">brazil_boundary</span></code>. Bifați caseta de lângă <span class="guilabel">Load into canvas when finished</span>. Clic pe <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selectați <code class="docutils literal"><span class="pre">Brazil_mosaic</span></code> în câmpul <span class="guilabel">input file (raster)</span>. Introduceți <span class="guilabel">Output file</span> în câmpul <code class="docutils literal"><span class="pre">Brazil_mosaic_clipped</span></code>. În secțiunea <span class="guilabel">Clipping mode</span>, alegeți <span class="guilabel">Mask layer</span>. Selectați stratul mască <code class="docutils literal"><span class="pre">brazil_boundary</span></code>. Bifați caseta de lângă <span class="guilabel">Load into canvas when finished</span>. Clic pe <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1722.png" class="align-center" src="../_images/1722.png" />
 <ol class="arabic simple" start="18">
-<li>Noul strat decupat va fi încărcat în QGIS. Observați pixelii negri din jurul mozaicul actual. Haideți să-i eliminăm. Faceți clic dreapta pe stratul <code class="docutils literal notranslate"><span class="pre">Brazil_mosaic_clipped</span></code> și selectați <span class="guilabel">Properties</span>.</li>
+<li><p class="first">Noul strat decupat va fi încărcat în QGIS. Observați pixelii negri din jurul mozaicul actual. Haideți să-i eliminăm. Faceți clic dreapta pe stratul <code class="docutils literal"><span class="pre">Brazil_mosaic_clipped</span></code> și selectați <span class="guilabel">Properties</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1823.png" class="align-center" src="../_images/1823.png" />
 <ol class="arabic simple" start="19">
-<li>Mergeți la fila <span class="guilabel">Transparency</span> și adăugați <cite>0</cite> ca <span class="guilabel">Additional no data value</span>.</li>
+<li><p class="first">Mergeți la fila <span class="guilabel">Transparency</span> și adăugați <cite>0</cite> ca <span class="guilabel">Additional no data value</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1920.png" class="align-center" src="../_images/1920.png" />
 <ol class="arabic simple" start="20">
-<li>Acum aveți un mozaic frumos, decupat după granițele țării, pe care îl puteți utiliza în proiectul dvs ca strat de fundal, sau pe care să faceți ulterior o analiză.</li>
+<li><p class="first">Acum aveți un mozaic frumos, decupat după granițele țării, pe care îl puteți utiliza în proiectul dvs ca strat de fundal, sau pe care să faceți ulterior o analiză.</p>
+</li>
 </ol>
 <img alt="../_images/2017.png" class="align-center" src="../_images/2017.png" />
 </div>
@@ -361,8 +393,8 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Ultima actualizare la apr. 04, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+      Last updated on Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="vi">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Lấy mẫu dữ liệu raster bằng điểm hoặc vùng - Points or Polygons &#8212; QGIS Tutorials and Tips</title>
+    
+    <title>Lấy mẫu dữ liệu raster bằng điểm hoặc vùng - Points or Polygons &mdash; QGIS Tutorials and Tips</title>
+    
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="search" title="Tìm Kiếm" href="../search.html" />
+    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="Nội suy dữ liệu dạng điểm" href="interpolating_point_data.html" />
     <link rel="prev" title="Phân tích người láng giềng gần nhất" href="nearest_neighbor_analysis.html" />
 
@@ -41,7 +51,8 @@
 </script>
 
 
-  </head><body>
+  </head>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -92,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Thiết lập bản đồ sử dụng thang màu biến đổi liên tục</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Thực hiện các truy vấn theo không gian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Phân tích người láng giềng gần nhất</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Lấy mẫu dữ liệu raster bằng điểm hoặc vùng - Points or Polygons</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Lấy mẫu dữ liệu raster bằng điểm hoặc vùng - Points or Polygons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Nội suy dữ liệu dạng điểm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
@@ -121,11 +132,11 @@
               
                 
   <li>
-    <a href="nearest_neighbor_analysis.html" title="Previous Chapter: Phân tích người láng giềng gần nhất"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Phân tích ngư...</span>
+    <a href="nearest_neighbor_analysis.html" title="Previous Chapter: Phân tích người láng giềng gần nhất"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Phân tích người ...</span>
     </a>
   </li>
   <li>
-    <a href="interpolating_point_data.html" title="Next Chapter: Nội suy dữ liệu dạng điểm"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Nội suy dữ li... &raquo;</span>
+    <a href="interpolating_point_data.html" title="Next Chapter: Nội suy dữ liệu dạng điểm"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Nội suy dữ liệu ... &raquo;</span>
     </a>
   </li>
               
@@ -221,15 +232,17 @@
 
   <div class="section" id="sampling-raster-data-using-points-or-polygons">
 <h1>Lấy mẫu dữ liệu raster bằng điểm hoặc vùng - Points or Polygons<a class="headerlink" href="#sampling-raster-data-using-points-or-polygons" title="Permalink to this headline">¶</a></h1>
-<p>Có rất nhiều tập dữ liệu khoa học và môi trường ở định dạng các ô lưới raster. Dữ liệu độ cao (DEM) cũng có dạng raster. Trong các file raster này, một tham số đang được thể hiện cần nhập code là giá trị của từng pixel trong raster. Thông thường, người ta cần xuất giá trị pixel ở một địa điểm cụ thể hoặc gộp chúng vào theo từng khu vực. Chức năng này có trong QGIS với 2 plugin là <code class="docutils literal notranslate"><span class="pre">Point</span> <span class="pre">Sampling</span> <span class="pre">Tool</span></code> và``Zonal Statistics plugin``.</p>
+<p>Có rất nhiều tập dữ liệu khoa học và môi trường ở định dạng các ô lưới raster. Dữ liệu độ cao (DEM) cũng có dạng raster. Trong các file raster này, một tham số đang được thể hiện cần nhập code là giá trị của từng pixel trong raster. Thông thường, người ta cần xuất giá trị pixel ở một địa điểm cụ thể hoặc gộp chúng vào theo từng khu vực. Chức năng này có trong QGIS với 2 plugin là <code class="docutils literal"><span class="pre">Point</span> <span class="pre">Sampling</span> <span class="pre">Tool</span></code> và``Zonal Statistics plugin``.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Tổng quan về nhiệm vụ<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
 <p>Với một lớp dữ liệu raster về nhiệt độ tối cao ở nước Mỹ, ta cần xuất các giá trị nhiệt độ tại tất cả các vùng đô thị và đồng thời tính toán nhiệt độ trung bình của từng hạt trong nước Mỹ.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Các kỹ năng bạn sẽ học được<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Thay đổi lưới chiếu của dữ liệu vector.</li>
-<li>Lựa chọn và bỏ nhiều lớp từ danh sách lớp trong QGIS - QGIS Table of Contents.</li>
+<li><p class="first">Thay đổi lưới chiếu của dữ liệu vector.</p>
+</li>
+<li><p class="first">Lựa chọn và bỏ nhiều lớp từ danh sách lớp trong QGIS - QGIS Table of Contents.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -252,7 +265,7 @@ links below:</p>
 <h2>Các bước thực hiện<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>Go to <span class="menuselection">Layer ‣ Add Raster Layer</span> and browse to the
-downloaded <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float.tif</span></code> file and click
+downloaded <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float.tif</span></code> file and click
 <span class="guilabel">Open</span>.</li>
 </ol>
 <img alt="../_images/1149.png" class="align-center" src="../_images/1149.png" />
@@ -263,14 +276,14 @@ value or Band 1 at that location.</li>
 </ol>
 <img alt="../_images/2108.png" class="align-center" src="../_images/2108.png" />
 <ol class="arabic simple" start="3">
-<li>Now unzip the downloaded <code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national.zip</span></code> file and extract the
-<code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national.txt</span></code> file on your disk. Go to <span class="menuselection">Layer
+<li>Now unzip the downloaded <code class="docutils literal"><span class="pre">2013_Gaz_ua_national.zip</span></code> file and extract the
+<code class="docutils literal"><span class="pre">2013_Gaz_ua_national.txt</span></code> file on your disk. Go to <span class="menuselection">Layer
 ‣ Add Delimited Text Layer</span>.</li>
 </ol>
 <img alt="../_images/366.png" class="align-center" src="../_images/366.png" />
 <ol class="arabic simple" start="4">
 <li>In the <span class="guilabel">Create a Layer from Delimited Text File</span> dialog, click
-<span class="guilabel">Browse</span> and open <code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national.txt</span></code>. Choose
+<span class="guilabel">Browse</span> and open <code class="docutils literal"><span class="pre">2013_Gaz_ua_national.txt</span></code>. Choose
 <span class="guilabel">Tab</span> under <span class="guilabel">Custom delimiters</span>. The point coordinates
 are in Latitude and Longitude, so select <span class="guilabel">INTPTLONG</span> as
 <span class="guilabel">X field</span> and <span class="guilabel">INTPTLAT</span> as <span class="guilabel">Y field</span>. Check
@@ -279,7 +292,7 @@ the <span class="guilabel">Use spatial index</span> box and click <span class="g
 <img alt="../_images/438.png" class="align-center" src="../_images/438.png" />
 <ol class="arabic simple" start="5">
 <li>Now we are ready to extract the temperature values from the raster layer.
-Install the <code class="docutils literal notranslate"><span class="pre">Point</span> <span class="pre">Sampling</span> <span class="pre">Tool</span></code> plugin. See <a class="reference internal" href="using_plugins.html"><span class="doc">Using Plugins</span></a> for
+Install the <code class="docutils literal"><span class="pre">Point</span> <span class="pre">Sampling</span> <span class="pre">Tool</span></code> plugin. See <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a> for
 details on how to install plugins.</li>
 </ol>
 <img alt="../_images/539.png" class="align-center" src="../_images/539.png" />
@@ -290,64 +303,65 @@ sampling tool</span>.</li>
 <img alt="../_images/636.png" class="align-center" src="../_images/636.png" />
 <ol class="arabic simple" start="7">
 <li>In the <span class="guilabel">Point Sampling Tool</span> dialog, select
-<code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national</span></code> as the <span class="guilabel">Layer containing sampling
+<code class="docutils literal"><span class="pre">2013_Gaz_ua_national</span></code> as the <span class="guilabel">Layer containing sampling
 points</span>. We must explicitely pick the fields from the input layer that we
-want in the output layer.  Choose <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> and <code class="docutils literal notranslate"><span class="pre">NAME</span></code> fields from the
-<code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national</span></code> layer. We can sample values from multiple raster
+want in the output layer.  Choose <code class="docutils literal"><span class="pre">GEOID</span></code> and <code class="docutils literal"><span class="pre">NAME</span></code> fields from the
+<code class="docutils literal"><span class="pre">2013_Gaz_ua_national</span></code> layer. We can sample values from multiple raster
 band at once, but since our raster has only 1 band, choose the
-<code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float:</span> <span class="pre">Band</span> <span class="pre">1</span></code>. Name the output vector layer
-as <code class="docutils literal notranslate"><span class="pre">max_temparature_at_urban_locations.shp</span></code>. Click the <span class="guilabel">OK</span> to
+<code class="docutils literal"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float:</span> <span class="pre">Band</span> <span class="pre">1</span></code>. Name the output vector layer
+as <code class="docutils literal"><span class="pre">max_temparature_at_urban_locations.shp</span></code>. Click the <span class="guilabel">OK</span> to
 start the sampling process. Click <span class="guilabel">Close</span> once the process
 finishes.</li>
 </ol>
 <img alt="../_images/735.png" class="align-center" src="../_images/735.png" />
 <ol class="arabic simple" start="8">
-<li>You will see a new layer <code class="docutils literal notranslate"><span class="pre">max_temparature_at_urban_locations</span></code> loaded in
+<li>You will see a new layer <code class="docutils literal"><span class="pre">max_temparature_at_urban_locations</span></code> loaded in
 QGIS. Use the <span class="guilabel">Identify</span> tool to click on any point to see the
-attributes. You will see the <code class="docutils literal notranslate"><span class="pre">us.tmax_no</span></code> field - which contains the
+attributes. You will see the <code class="docutils literal"><span class="pre">us.tmax_no</span></code> field - which contains the
 raster pixel value at the location of the point.</li>
 </ol>
 <img alt="../_images/833.png" class="align-center" src="../_images/833.png" />
 <ol class="arabic simple" start="9">
-<li>First part of our analysis is over. Let's remove the unnecessary layers. Hold
-the <kbd class="kbd docutils literal notranslate">Shift</kbd> key and select <code class="docutils literal notranslate"><span class="pre">max_temparature_at_urban_locations</span></code> and
-<code class="docutils literal notranslate"><span class="pre">2013_Gaz_ua_national</span></code> layers. Right-click and select <span class="guilabel">Remove</span>
+<li>First part of our analysis is over. Let&#8217;s remove the unnecessary layers. Hold
+the <code class="kbd docutils literal"><span class="pre">Shift</span></code> key and select <code class="docutils literal"><span class="pre">max_temparature_at_urban_locations</span></code> and
+<code class="docutils literal"><span class="pre">2013_Gaz_ua_national</span></code> layers. Right-click and select <span class="guilabel">Remove</span>
 to remove them from QGIS TOC.</li>
 </ol>
 <img alt="../_images/932.png" class="align-center" src="../_images/932.png" />
 <ol class="arabic simple" start="10">
 <li>Go to <span class="menuselection">Layer ‣ Add Vector Layer</span>. Browse to the downloaded
-<code class="docutils literal notranslate"><span class="pre">tl_2013_us_county.zip</span></code> file and click <span class="guilabel">Open</span>. Select the
-<code class="docutils literal notranslate"><span class="pre">tl_2013_us_county.shp</span></code> as the layer and click <span class="guilabel">OK</span>.</li>
+<code class="docutils literal"><span class="pre">tl_2013_us_county.zip</span></code> file and click <span class="guilabel">Open</span>. Select the
+<code class="docutils literal"><span class="pre">tl_2013_us_county.shp</span></code> as the layer and click <span class="guilabel">OK</span>.</li>
 </ol>
 <img alt="../_images/1032.png" class="align-center" src="../_images/1032.png" />
 <ol class="arabic simple" start="11">
-<li>The <code class="docutils literal notranslate"><span class="pre">tl_2013_us_county</span></code> will be added to QGIS. This layer is in
-<code class="docutils literal notranslate"><span class="pre">EPSG:4269</span> <span class="pre">NAD83</span></code> projection. This doesn't match the projection of the
-raster layer. We will re-project this layer to <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code>
+<li>The <code class="docutils literal"><span class="pre">tl_2013_us_county</span></code> will be added to QGIS. This layer is in
+<code class="docutils literal"><span class="pre">EPSG:4269</span> <span class="pre">NAD83</span></code> projection. This doesn&#8217;t match the projection of the
+raster layer. We will re-project this layer to <code class="docutils literal"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code>
 projection.</li>
 </ol>
 <img alt="../_images/1150.png" class="align-center" src="../_images/1150.png" />
 <ol class="arabic simple" start="12">
-<li>Right-click the <code class="docutils literal notranslate"><span class="pre">tl_2013_us_county</span></code> layer and select <span class="guilabel">Save
+<li>Right-click the <code class="docutils literal"><span class="pre">tl_2013_us_county</span></code> layer and select <span class="guilabel">Save
 As..</span>.</li>
 </ol>
 <img alt="../_images/1233.png" class="align-center" src="../_images/1233.png" />
 <ol class="arabic simple" start="13">
 <li>In the <span class="guilabel">Save Vector layer as..</span> dialog, click <span class="guilabel">Browse</span>
-and name the output file as <code class="docutils literal notranslate"><span class="pre">counties.shp</span></code>. Choose <span class="guilabel">Selected
+and name the output file as <code class="docutils literal"><span class="pre">counties.shp</span></code>. Choose <span class="guilabel">Selected
 CRS</span> from the <span class="guilabel">CRS</span> dropdown menu. Click <span class="guilabel">Browse</span> and
-select <code class="docutils literal notranslate"><span class="pre">WGS</span> <span class="pre">84</span></code> as the CRS. Check the <span class="guilabel">Add saved file to map</span>
+select <code class="docutils literal"><span class="pre">WGS</span> <span class="pre">84</span></code> as the CRS. Check the <span class="guilabel">Add saved file to map</span>
 and click <span class="guilabel">OK</span>.</li>
 </ol>
 <img alt="../_images/1331.png" class="align-center" src="../_images/1331.png" />
 <ol class="arabic simple" start="14">
-<li>Một lớp dữ liệu mới có tên <code class="docutils literal notranslate"><span class="pre">counties</span></code> sẽ được nhập vào trong QGIS.</li>
+<li><p class="first">Một lớp dữ liệu mới có tên <code class="docutils literal"><span class="pre">counties</span></code> sẽ được nhập vào trong QGIS.</p>
+</li>
 </ol>
 <img alt="../_images/1430.png" class="align-center" src="../_images/1430.png" />
 <ol class="arabic simple" start="15">
-<li>Enable the <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span> <span class="pre">Plugins</span></code>. This is a core plugin so it is
-already installed. See <a class="reference internal" href="using_plugins.html"><span class="doc">Using Plugins</span></a> to know to how enable core
+<li>Enable the <code class="docutils literal"><span class="pre">Zonal</span> <span class="pre">Statistics</span> <span class="pre">Plugins</span></code>. This is a core plugin so it is
+already installed. See <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a> to know to how enable core
 plugins.</li>
 </ol>
 <img alt="../_images/1528.png" class="align-center" src="../_images/1528.png" />
@@ -356,9 +370,9 @@ plugins.</li>
 </ol>
 <img alt="../_images/1626.png" class="align-center" src="../_images/1626.png" />
 <ol class="arabic simple" start="17">
-<li>Select <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float</span></code> as the <span class="guilabel">Raster
-layer</span> and <code class="docutils literal notranslate"><span class="pre">counties</span></code> as the <span class="guilabel">Polygon layer containing the
-zones</span>. Enter <code class="docutils literal notranslate"><span class="pre">ZS_</span></code> as the <span class="guilabel">Output column prefix</span>. Click
+<li>Select <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float</span></code> as the <span class="guilabel">Raster
+layer</span> and <code class="docutils literal"><span class="pre">counties</span></code> as the <span class="guilabel">Polygon layer containing the
+zones</span>. Enter <code class="docutils literal"><span class="pre">ZS_</span></code> as the <span class="guilabel">Output column prefix</span>. Click
 <span class="guilabel">OK</span>.</li>
 </ol>
 <img alt="../_images/1725.png" class="align-center" src="../_images/1725.png" />
@@ -367,25 +381,25 @@ zones</span>. Enter <code class="docutils literal notranslate"><span class="pre"
 </ol>
 <img alt="../_images/1826.png" class="align-center" src="../_images/1826.png" />
 <ol class="arabic simple" start="19">
-<li>Once the processing finishes, select the <code class="docutils literal notranslate"><span class="pre">counties</span></code> layer. Use the
+<li>Once the processing finishes, select the <code class="docutils literal"><span class="pre">counties</span></code> layer. Use the
 <span class="guilabel">Identify</span> tool and click on any county polygon. You will see
-three new attributes added to the layer: <code class="docutils literal notranslate"><span class="pre">ZS_count</span></code>, <code class="docutils literal notranslate"><span class="pre">ZS_mean</span></code> and
-<code class="docutils literal notranslate"><span class="pre">ZS_sum</span></code>. These attributes contain the count of raster pixels, mean of
+three new attributes added to the layer: <code class="docutils literal"><span class="pre">ZS_count</span></code>, <code class="docutils literal"><span class="pre">ZS_mean</span></code> and
+<code class="docutils literal"><span class="pre">ZS_sum</span></code>. These attributes contain the count of raster pixels, mean of
 raster pixel values and sum of raster pixel values respectively. Since we
-are interested in average temperature, the <code class="docutils literal notranslate"><span class="pre">ZS_mean</span></code> field will be the
+are interested in average temperature, the <code class="docutils literal"><span class="pre">ZS_mean</span></code> field will be the
 one to use.</li>
 </ol>
 <img alt="../_images/1923.png" class="align-center" src="../_images/1923.png" />
 <ol class="arabic simple" start="20">
-<li>Let's style this layer to create a temperature map. Right-click the
-<code class="docutils literal notranslate"><span class="pre">counties</span></code> layer and select <span class="guilabel">Properties</span>.</li>
+<li>Let&#8217;s style this layer to create a temperature map. Right-click the
+<code class="docutils literal"><span class="pre">counties</span></code> layer and select <span class="guilabel">Properties</span>.</li>
 </ol>
 <img alt="../_images/2020.png" class="align-center" src="../_images/2020.png" />
 <ol class="arabic simple" start="21">
 <li>Switch to the <span class="guilabel">Style</span> tab. Choose <span class="guilabel">Graduated</span> style and
-select <code class="docutils literal notranslate"><span class="pre">ZS_mean</span></code> as the <span class="guilabel">Column</span>. Choose a <span class="guilabel">Color
+select <code class="docutils literal"><span class="pre">ZS_mean</span></code> as the <span class="guilabel">Column</span>. Choose a <span class="guilabel">Color
 Ramp</span> and <span class="guilabel">Mode</span> of your chose. Click <span class="guilabel">Classify</span> to
-create the classes. Click <span class="guilabel">OK</span>. (See <a class="reference internal" href="basic_vector_styling.html"><span class="doc">Trình bày vector cơ bản</span></a>
+create the classes. Click <span class="guilabel">OK</span>. (See <a class="reference internal" href="basic_vector_styling.html"><em>Trình bày vector cơ bản</em></a>
 for more details on styling.)</li>
 </ol>
 <img alt="../_images/2123.png" class="align-center" src="../_images/2123.png" />
@@ -418,9 +432,9 @@ extracted from the raster grid.</li>
       
     </p>
     <p>
-        &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Cập nhật mới nhất vào thg 4 04, 2019.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.<br/>
+        &copy; Bản quyền thuộc 2016, Ujaval Gandhi.<br/>
+      Cập nhật mới nhất vào Apr 04, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>
