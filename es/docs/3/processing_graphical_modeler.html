@@ -94,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Trabajar con datos de terreno</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Trabajando con datos WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Trabajando con proyecciones</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../georeferencing_basics.html">Georeferenciación de hojas topografícas y mapas escaneados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../advanced_georeferencing.html">Georeferenciación de imágenes aéreas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitizing Map Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins.html">Realización de uniones de tabla</a></li>
@@ -254,39 +254,39 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <ol class="arabic simple">
 <li>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal"><span class="pre">ne_10m_land.zip</span></code> and select the <code class="docutils literal"><span class="pre">ne_10m_land.shp</span></code> layer. Drag the layer to the canvas. Next, locate the <code class="docutils literal"><span class="pre">ASAM_shp.zip</span></code> file. Expand it and select the <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18.shp</span></code> layer and drag it on to the canvas.</li>
 </ol>
-<img alt="../../_images/120.png" class="align-center" src="../../_images/120.png" />
+<img alt="../../_images/126.png" class="align-center" src="../../_images/126.png" />
 <ol class="arabic simple" start="2">
 <li>The <code class="docutils literal"><span class="pre">ASAM</span> <span class="pre">11</span> <span class="pre">OCT</span> <span class="pre">18.shp</span></code> layer does not have projection information associated with it, so you will be prompted to select a CRS in the <span class="guilabel">Coordinate Reference System Selector</span>. Here, the points are in the Latitude and Longitude coordinates, so select the <code class="docutils literal"><span class="pre">WGS</span> <span class="pre">84</span></code> CRS and click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../../_images/219.png" class="align-center" src="../../_images/219.png" />
+<img alt="../../_images/220.png" class="align-center" src="../../_images/220.png" />
 <ol class="arabic simple" start="3">
 <li>Once the layer is loaded, you can see the individual points representing incidents of piracy locations. Let&#8217;s start building our Processing model to process these layers. Go to <span class="menuselection">Processing ‣ Graphical Modeler...</span>.</li>
 </ol>
-<img alt="../../_images/318.png" class="align-center" src="../../_images/318.png" />
+<img alt="../../_images/319.png" class="align-center" src="../../_images/319.png" />
 <ol class="arabic simple" start="4">
 <li>In the <span class="guilabel">Processing Modeler</span> dialog, locate the <span class="guilabel">Model Properties</span> panel. Enter <code class="docutils literal"><span class="pre">piracy</span> <span class="pre">hexbin</span></code> as the <span class="guilabel">Name</span> of the model and <code class="docutils literal"><span class="pre">projects</span></code> as the <span class="guilabel">Groups</span>. Click the <span class="guilabel">Save</span> button.</li>
 </ol>
-<img alt="../../_images/46.png" class="align-center" src="../../_images/46.png" />
+<img alt="../../_images/47.png" class="align-center" src="../../_images/47.png" />
 <ol class="arabic simple" start="5">
 <li>Save the model as <code class="docutils literal"><span class="pre">piracy_hexbin</span></code>.</li>
 </ol>
-<img alt="../../_images/56.png" class="align-center" src="../../_images/56.png" />
+<img alt="../../_images/57.png" class="align-center" src="../../_images/57.png" />
 <ol class="arabic simple" start="6">
 <li>Now we can start building a graphical model of our processing pipeline.  The <span class="guilabel">Processing modeler</span> dialog contains a left-hand panel and a main canvas. On he left-hand panel, locate the <span class="guilabel">Inputs</span> panel listing various types of input data types. Scroll down and select the <span class="guilabel">+ Vector Layer</span> input. Drag it to the canvas.</li>
 </ol>
-<img alt="../../_images/66.png" class="align-center" src="../../_images/66.png" />
+<img alt="../../_images/67.png" class="align-center" src="../../_images/67.png" />
 <ol class="arabic simple" start="7">
 <li>Enter <code class="docutils literal"><span class="pre">Input</span> <span class="pre">Points</span></code> as the <span class="guilabel">Parameter name</span> and <code class="docutils literal"><span class="pre">Point</span></code> as the <span class="guilabel">Geometry type</span>. This input represents the piracy incidents point layer.</li>
 </ol>
-<img alt="../../_images/75.png" class="align-center" src="../../_images/75.png" />
+<img alt="../../_images/76.png" class="align-center" src="../../_images/76.png" />
 <ol class="arabic simple" start="8">
 <li>Next, drag another <span class="guilabel">+ Vector Layer</span> input to the canvas. Enter <code class="docutils literal"><span class="pre">Base</span> <span class="pre">Layer</span></code> as the <span class="guilabel">Parameter name</span> and <code class="docutils literal"><span class="pre">Polygon</span></code> as the <span class="guilabel">Geometry type</span>. This input represents the natural earth global land layer.</li>
 </ol>
-<img alt="../../_images/85.png" class="align-center" src="../../_images/85.png" />
+<img alt="../../_images/86.png" class="align-center" src="../../_images/86.png" />
 <ol class="arabic simple" start="9">
 <li>As we are generating a global hexagonal grid, we can ask the user to supply us the grid size as an input instead of hard-coding it as part of our model. This way, the user can quickly experiment with different grid sizes without changing the model at all. select a <span class="guilabel">+ Number</span> input and drag it to the canvas. Enter <code class="docutils literal"><span class="pre">Grid</span> <span class="pre">Size</span></code> as the <span class="guilabel">Parameter name</span> and click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../../_images/95.png" class="align-center" src="../../_images/95.png" />
+<img alt="../../_images/96.png" class="align-center" src="../../_images/96.png" />
 <ol class="arabic simple" start="10">
 <li>Now that we have our user inputs defined, we are ready to add processing steps. All of the processing algorithms are available to you under the <span class="guilabel">Algorithms</span> tab. The first step in our pipeline will be to reproject the base layer to the Project CRS.  Search for <code class="docutils literal"><span class="pre">Reproject</span> <span class="pre">layer</span></code> algorithm and drag it to the canvas.</li>
 </ol>
@@ -294,27 +294,27 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <p class="first admonition-title">Nota</p>
 <p class="last">The necessity of this reprojection step will become clear shortly. The grid generation algorithm requires us to specify the extent of the grid in the unit of the Project CRS. We can supply this reprojected layer to compute this extent.</p>
 </div>
-<img alt="../../_images/105.png" class="align-center" src="../../_images/105.png" />
+<img alt="../../_images/106.png" class="align-center" src="../../_images/106.png" />
 <ol class="arabic simple" start="11">
 <li>In the <span class="guilabel">Reproject layer</span> dialog, select <code class="docutils literal"><span class="pre">Base</span> <span class="pre">Layer</span></code> as the <span class="guilabel">Input layer</span>. Check the <span class="guilabel">Use project CRS</span> as the <span class="guilabel">Target CRS</span>. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../../_images/1110.png" class="align-center" src="../../_images/1110.png" />
+<img alt="../../_images/1111.png" class="align-center" src="../../_images/1111.png" />
 <ol class="arabic simple" start="12">
 <li>In the <span class="guilabel">Processing Modeler</span> canvas, you will notice a connection appear between the <span class="guilabel">+ Base Layer</span> input and the <span class="guilabel">Reproject layer</span> algorithm. This connection indicates the flow of our processing pipeline. Next step is to create a hexagonal grid. Search for the <code class="docutils literal"><span class="pre">Create</span> <span class="pre">grid</span></code> algorithm and drag it to the canvas.</li>
 </ol>
-<img alt="../../_images/125.png" class="align-center" src="../../_images/125.png" />
+<img alt="../../_images/127.png" class="align-center" src="../../_images/127.png" />
 <ol class="arabic simple" start="13">
 <li>In the <span class="guilabel">Generate grid</span> dialog, choose <code class="docutils literal"><span class="pre">Hexagon</span> <span class="pre">(polygon)</span></code> as the <span class="guilabel">Grid type</span>. Select <code class="docutils literal"><span class="pre">Extent</span> <span class="pre">of</span> <span class="pre">'Reprojected'</span> <span class="pre">from</span> <span class="pre">algorithm</span> <span class="pre">'Reproject</span> <span class="pre">Layer'</span></code> as the <span class="guilabel">Grid extent</span>. Click the <span class="guilabel">123</span> button under the <span class="guilabel">Horizonal spacing</span> label and choose <span class="guilabel">Model input</span>.</li>
 </ol>
-<img alt="../../_images/136.png" class="align-center" src="../../_images/136.png" />
+<img alt="../../_images/137.png" class="align-center" src="../../_images/137.png" />
 <ol class="arabic simple" start="14">
 <li>Select <code class="docutils literal"><span class="pre">Grid</span> <span class="pre">Size</span></code> input for <span class="guilabel">Using model input</span>. Repeat the same process for <span class="guilabel">Vertical Spacing</span>. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../../_images/144.png" class="align-center" src="../../_images/144.png" />
+<img alt="../../_images/145.png" class="align-center" src="../../_images/145.png" />
 <ol class="arabic simple" start="15">
 <li>At this point, we have a global hexagonal grid. The grid spans the full extent of the base layer, including land areas and places where there are no points. Let&#8217;s filter out those grid polygons where there are no input points. Search for <code class="docutils literal"><span class="pre">Extract</span> <span class="pre">by</span> <span class="pre">location</span></code> algorithm and drag it to the canvas.</li>
 </ol>
-<img alt="../../_images/154.png" class="align-center" src="../../_images/154.png" />
+<img alt="../../_images/155.png" class="align-center" src="../../_images/155.png" />
 <ol class="arabic simple" start="16">
 <li>For <span class="guilabel">Extract features from</span>, select <code class="docutils literal"><span class="pre">'Grid'</span> <span class="pre">from</span> <span class="pre">algorithm</span> <span class="pre">'Generate</span> <span class="pre">Grid'</span></code>, <span class="guilabel">Where the features (geometric predicate)</span> as <code class="docutils literal"><span class="pre">Intersect</span></code> and <span class="guilabel">By compating to the features from</span> as <code class="docutils literal"><span class="pre">Input</span> <span class="pre">points</span></code>. Click <span class="guilabel">OK</span>.</li>
 </ol>
@@ -401,7 +401,7 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Apr 04, 2019.<br/>
+      Actualizado por última vez en Apr 11, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

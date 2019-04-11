@@ -30,8 +30,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="為空照圖進行空間對位" href="advanced_georeferencing.html" />
-    <link rel="prev" title="投影的操作" href="working_with_projections.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -80,7 +78,7 @@
      href="../index.html">Tutorials List <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">簡介</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">屬性的操作</a></li>
@@ -94,7 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">地形資料的操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">WMS 資料的操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">投影的操作</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">為紙本地圖進行空間對位</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">為空照圖進行空間對位</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">把地圖數位化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">資料表連接</a></li>
@@ -131,14 +129,6 @@
             
               
                 
-  <li>
-    <a href="working_with_projections.html" title="Previous Chapter: 投影的操作"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; 投影的操作</span>
-    </a>
-  </li>
-  <li>
-    <a href="advanced_georeferencing.html" title="Next Chapter: 為空照圖進行空間對位"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">為空照圖進行空間對位 &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -227,6 +217,10 @@
 
   <div class="section" id="georeferencing-topo-sheets-and-scanned-maps">
 <h1>為紙本地圖進行空間對位<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/georeferencing_basics.html"><em>Georeferencing Topo Sheets and Scanned Maps (QGIS3)</em></a></p>
+</div>
 <p>大部分的 GIS 專案都會需要對某些影像進行「 <em>空間對位 （Georeferencing）</em> 」，也就是說要為影像的每個像素指定它在世界上的地理空間座標。在許多的情況下，這些座標是透過野外調查收集而來，例如說用 GPS 裝置定位那些易於辨識的地標。但有的時候，例如說如果你要使用的是某地圖的數位化掃描檔，你也可以藉由地圖上的一些標記來蒐集空間座標。一旦我們有了這些採樣的座標點或地面控制點 (Ground Control Points)，這些影像就可以用給定的座標系統來投影繪製。在本章節中，我們會討論相關的概念、作法與 QGIS 提供的工具，以達成高準確度空間對位的目標。</p>
 <div class="section" id="overview-of-the-task">
 <h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
@@ -264,67 +258,67 @@ work with plugins.</p>
 <li><p class="first">此附加元件視窗有上下 2 個部分，上半部是影像顯示區，下半部則會以表格方式呈現所有的地面控制點。</p>
 </li>
 </ol>
-<img alt="../_images/340.png" class="align-center" src="../_images/340.png" />
+<img alt="../_images/344.png" class="align-center" src="../_images/344.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">現在就來開啟我們的 JPG 影像。選擇 <span class="menuselection">檔案 ‣ Open Raster</span>，然後找到剛才下載的地圖掃描檔，按下 <span class="guilabel">開啟舊檔</span>。</p>
 </li>
 </ol>
-<img alt="../_images/421.png" class="align-center" src="../_images/421.png" />
+<img alt="../_images/422.png" class="align-center" src="../_images/422.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">接下來，程式會要你選擇參考座標系統 (CRS)，以指定控制點的投影法和大地座標系統。如果你的控制點是透過 GPS 收集的，可以選 WGS84 座標系統；而在本例的情況下，控制點要直接在地圖掃描檔上取得，所以我們要先看一下地圖的文字敘述。本地圖的座標是經緯度，不過並沒有標示任何的大地座標系統資訊，所以我們得自己假設一個才行。因為此地圖是年代久遠的印度地圖，我們可以猜測它是使用 Everest 1830 大地座標系統，這應該會有不錯的結果。</p>
 </li>
 </ol>
-<img alt="../_images/521.png" class="align-center" src="../_images/521.png" />
+<img alt="../_images/522.png" class="align-center" src="../_images/522.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">現在影像已經被載到螢幕上半部了。</p>
 </li>
 </ol>
-<img alt="../_images/619.png" class="align-center" src="../_images/619.png" />
+<img alt="../_images/620.png" class="align-center" src="../_images/620.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">可以使用工具列的放大/平移功能觀察一下地圖的細節。</p>
 </li>
 </ol>
-<img alt="../_images/719.png" class="align-center" src="../_images/719.png" />
+<img alt="../_images/720.png" class="align-center" src="../_images/720.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">現在我們要為圖上的某些點指定座標了。仔細觀察後，可以發現本地圖具有標示經緯度的格線，所以我們可以確定在格線交叉點的 X 和 Y 座標。接著按下工具列上的 <span class="guilabel">Add Point</span> 鈕。</p>
 </li>
 </ol>
-<img alt="../_images/818.png" class="align-center" src="../_images/818.png" />
+<img alt="../_images/819.png" class="align-center" src="../_images/819.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">在跳出的視窗中輸入此點的座標，記得 X 是經度，Y 是緯度。完成後按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/918.png" class="align-center" src="../_images/918.png" />
+<img alt="../_images/919.png" class="align-center" src="../_images/919.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">這下子，下半部的地面控制點表格會新增一欄你剛剛選的地面控制點。</p>
 </li>
 </ol>
-<img alt="../_images/1017.png" class="align-center" src="../_images/1017.png" />
+<img alt="../_images/1018.png" class="align-center" src="../_images/1018.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">使用相同的操作方法，為整張圖加入至少 4 個地面控制點。控制點越多，影像可以越精確的對齊地理空間座標。</p>
 </li>
 </ol>
-<img alt="../_images/1122.png" class="align-center" src="../_images/1122.png" />
+<img alt="../_images/1123.png" class="align-center" src="../_images/1123.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">當你收集到足夠多的點後，按下 <span class="menuselection">設定 -&gt; Transformation settings</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1219.png" class="align-center" src="../_images/1219.png" />
+<img alt="../_images/1220.png" class="align-center" src="../_images/1220.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">在 <span class="guilabel">影像轉換設定</span> 視窗中，<span class="guilabel">Transformation type</span> 選擇 <span class="guilabel">薄板曲線法（Thin plate spline）</span>。輸出影像命名為 <span class="guilabel">1870_southern_india_modified.tif</span> 。Target SRS 可選擇 <span class="guilabel">EPSG:4326</span> ，這樣一來產生的影像就會投影在此廣泛使用的大地座標系統上。確認 <span class="guilabel">處理完畢後載入QGIS中</span> 是否以勾選，最後按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1318.png" class="align-center" src="../_images/1318.png" />
+<img alt="../_images/1319.png" class="align-center" src="../_images/1319.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">回到 <span class="guilabel">空間對位</span> 的視窗中，點選 <span class="menuselection">檔案 ‣ Start georeferencing</span>，程式就會開始使用控制點轉換影像，投影到新的座標系統上。</p>
 </li>
 </ol>
-<img alt="../_images/1417.png" class="align-center" src="../_images/1417.png" />
+<img alt="../_images/1418.png" class="align-center" src="../_images/1418.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">處理程式結束後，已經過空間對位修正的圖層會被載入到 QGIS 中。</p>
 </li>
 </ol>
-<img alt="../_images/1516.png" class="align-center" src="../_images/1516.png" />
+<img alt="../_images/1517.png" class="align-center" src="../_images/1517.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">空間對位的操作到此完成。如同以往，讓我們好好檢查一下本操作是否準確。請試著從可信的來源（例如 Natural Earth 資料庫）尋找並讀取含有國家邊界的 shapefile，然後跟我們的結果比對一下。你可以看到，他們基本上對應得相當良好，不過仍然有一點小誤差。如要減少這些誤差，可以增加更多控制點、修改空間對位的參數，或是換另一個猜測的大地座標系統來試試。</p>
 </li>
@@ -355,7 +349,7 @@ work with plugins.</p>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      最後更新日期是 Apr 04, 2019.<br/>
+      最後更新日期是 Apr 11, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

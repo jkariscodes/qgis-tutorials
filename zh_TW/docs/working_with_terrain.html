@@ -94,7 +94,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="">地形資料的操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">WMS 資料的操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">投影的操作</a></li>
-<li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">為紙本地圖進行空間對位</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">為空照圖進行空間對位</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">把地圖數位化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">資料表連接</a></li>
@@ -249,7 +249,7 @@
 <li><p class="first">前往 <a class="reference external" href="http://earthexplorer.usgs.gov/">USGS Earthexplorer</a>，然後在 <span class="guilabel">Search Criteria</span> 的分頁中，直接輸入 <cite>Mt. Everest</cite> 然後按 <span class="guilabel">Show</span> 搜尋，接著選擇底下的結果進行定位。</p>
 </li>
 </ol>
-<img alt="../_images/1162.png" class="align-center" src="../_images/1162.png" />
+<img alt="../_images/1163.png" class="align-center" src="../_images/1163.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">在 <span class="guilabel">Data Sets</span> 分頁中，打開 <span class="guilabel">Digital Elevation</span> 子集，勾選 <span class="guilabel">GMTED2010</span>。</p>
 </li>
@@ -264,7 +264,7 @@
 <li><p class="first">選擇 <span class="guilabel">30 ARC SEC</span> 的選項，然後按 <span class="guilabel">Select Download Option</span>。（譯註：目前 USGS 網站已有小改版，不過流程大致相同。）</p>
 </li>
 </ol>
-<img alt="../_images/445.png" class="align-center" src="../_images/445.png" />
+<img alt="../_images/446.png" class="align-center" src="../_images/446.png" />
 <p>接著你應該會得到一個叫 <cite>GMTED2010N10E060_300.zip</cite> 的檔案。基本上地形資料會使用許多不同的影像格式發佈，像是 ASC、BIL、GeoTiff 格式等等。QGIS 目前透過 GDAL 函式庫，可以支援<a href="#id3"><span class="problematic" id="id4">`多種格式的資料&lt;http://www.gdal.org/formats_list.html&gt;`_</span></a>。這裡的 GMTED 資料是屬於 GeoTiff 格式，不過它目前是以被壓縮的 zip 檔儲存。</p>
 <p>為了方便起見，你也可以直接用下面的連結下載：</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/GMTED2010N10E060_300.zip">GMTED2010N10E060_300.zip</a></p>
@@ -276,22 +276,22 @@
 <li><p class="first">打開 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入影像圖層</span>，然後選擇剛才下載的 zip 檔。</p>
 </li>
 </ol>
-<img alt="../_images/546.png" class="align-center" src="../_images/546.png" />
+<img alt="../_images/547.png" class="align-center" src="../_images/547.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">zip 檔中有許多經由不同的演算法建立的不同檔案。本教學使用的是這個 <cite>10n060e_20101117_gmted_mea300.tif</cite>。</p>
 </li>
 </ol>
-<img alt="../_images/643.png" class="align-center" src="../_images/643.png" />
+<img alt="../_images/644.png" class="align-center" src="../_images/644.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">接著 QGIS 畫布上就會出現地形的資料。在地形的網格式影像中，每個像素的值代表的是這個像素的位置的高度，單位是公尺。黑色的像素代表海拔比較低，而白色像素則是位在高海拔區。</p>
 </li>
 </ol>
-<img alt="../_images/742.png" class="align-center" src="../_images/742.png" />
+<img alt="../_images/743.png" class="align-center" src="../_images/743.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">來找一下要我們看的區域吧。從<a class="reference external" href="http://en.wikipedia.org/wiki/Mount_Everest">維基百科</a>中，可以知道聖母峰的經緯度座標是 27.9881° N 與 86.9253° E，記得 QGIS 的座標使用 (X, Y) 格式，所以經緯度座標要表示成 (緯度, 經度) 才行。因此，把 <cite>86.9253,27.9881</cite> 複製貼上到 QGIS 底部的 <span class="guilabel">坐標</span> 欄位後按下 Enter 鍵，就會看到上方的畫布中心移動到這個坐標了。在 <span class="guilabel">比例</span> 的地方輸入 <cite>1:1000000</cite> 後再次按下 Enter 鍵，就可以把畫布範圍縮到喜馬拉雅山脈周邊地區。</p>
 </li>
 </ol>
-<img alt="../_images/840.png" class="align-center" src="../_images/840.png" />
+<img alt="../_images/841.png" class="align-center" src="../_images/841.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">現在要來把我們的目標區域的影像給剪下來，選擇 <span class="menuselection">影像 ‣ 取出 ‣ 裁剪...</span>。</p>
 </li>
@@ -300,37 +300,37 @@
 <p class="first admonition-title">註解</p>
 <p class="last">QGIS 中的 <span class="guilabel">影像</span> 選單其實是一個叫做 <span class="guilabel">GdalTools</span> 的附加元件。如果你找不到 <span class="guilabel">影像</span> 選單的話，請去 <span class="menuselection">附加元件 ‣ 管理與安裝附加元件 ‣ 已安裝</span> 分頁下把 <span class="guilabel">GdalTools</span> 啟用。詳情請參閱 <a class="reference internal" href="using_plugins.html"><em>使用附加元件</em></a>。</p>
 </div>
-<img alt="../_images/939.png" class="align-center" src="../_images/939.png" />
+<img alt="../_images/940.png" class="align-center" src="../_images/940.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">在 <span class="guilabel">裁剪</span> 視窗中，把輸出檔案命名為 <cite>everest_gmted30.tif</cite>，然後選擇 <span class="guilabel">裁剪模式</span> 為 <span class="guilabel">範圍</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1039.png" class="align-center" src="../_images/1039.png" />
+<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">讓 <span class="guilabel">裁剪</span> 視窗保持開啟狀態，回到 QGIS 主畫面中，用滑鼠左鍵拖曳出一個可以覆蓋整張畫布的矩形。</p>
 </li>
 </ol>
-<img alt="../_images/1163.png" class="align-center" src="../_images/1163.png" />
+<img alt="../_images/1164.png" class="align-center" src="../_images/1164.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">回到 <span class="guilabel">裁剪</span> 視窗，就會發現坐標的範圍已經根據選取範圍自動填上了。把底下的 <span class="guilabel">處理完成後載入QGIS地圖中</span> 打勾，按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1239.png" class="align-center" src="../_images/1239.png" />
+<img alt="../_images/1240.png" class="align-center" src="../_images/1240.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">操作完成後，QGIS 會出現新圖層，這個新圖層只覆蓋了聖母峰的周圍地區。馬上就來開始製作等高線圖：選擇 <span class="menuselection">影像 ‣ 取出 ‣ 等高線...</span>，</p>
 </li>
 </ol>
-<img alt="../_images/1337.png" class="align-center" src="../_images/1337.png" />
+<img alt="../_images/1338.png" class="align-center" src="../_images/1338.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">在 <span class="guilabel">等高線</span> 視窗中，選 <cite>everest_gmted30</cite> 作為<span class="guilabel">輸入檔</span>，<span class="guilabel">輸出檔`則命名為 `everest_countours.shp</span>。在 <span class="guilabel">等高線之間隔</span> 中輸入 100，就可以製作以 100 公尺為區間的等高線圖。順便把 <span class="guilabel">屬性名稱</span> 給打開，這樣的話每條等高線的高度就會記錄在 shapefile 中的每等高線屬性內。最後按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1436.png" class="align-center" src="../_images/1436.png" />
+<img alt="../_images/1437.png" class="align-center" src="../_images/1437.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">操作完成後，等高線就會出現在畫布上，每條線都都代表著一個特定的高度，也就是說所有在同一條等高線上的像素，應該都具有相同的高度。等高線密度越大，就代表這個地方越陡峭。我們再稍微深入看一下：在等高線的圖層上按右鍵，進入 <span class="guilabel">開啟屬性表格</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1533.png" class="align-center" src="../_images/1533.png" />
+<img alt="../_images/1534.png" class="align-center" src="../_images/1534.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">可以看到每個線圖徵都有叫做 <span class="guilabel">ELEV</span> 的屬性，這就是每條等高線的海拔高度，以公尺為單位。按幾下 ELEV 的標籤，把屬性表依照這個欄位由高至低排列，就可以看到有一條等高線表示資料中最高的地方，也就是聖母峰。</p>
 </li>
@@ -350,7 +350,7 @@
 <li><p class="first">接下來來弄個陰影圖。選擇 <span class="menuselection">影像 ‣ 分析 ‣ DEM (地形模型)...</span>，</p>
 </li>
 </ol>
-<img alt="../_images/1927.png" class="align-center" src="../_images/1927.png" />
+<img alt="../_images/1928.png" class="align-center" src="../_images/1928.png" />
 <ol class="arabic simple" start="20">
 <li><p class="first">在 <span class="guilabel">數值高程模型 (DEM)</span> 的視窗中，<span class="guilabel">輸入檔案</span> 選 <cite>everest_gmted30</cite>，<span class="guilabel">輸出檔案</span> 命名為 <cite>everest_hillshade.tif</cite>，然後 <span class="guilabel">模式</span> 選 <span class="guilabel">日照陰影</span>，其他選項使用預設參數即可。勾選 <span class="guilabel">處理完成後載入QGIS地圖中</span>，最後按 <span class="guilabel">確定</span>。</p>
 </li>
@@ -375,7 +375,7 @@
 <li><p class="first">在 <span class="guilabel">格式</span> 欄位中選 <span class="guilabel">Keyhole標記語言[KML]</span>，然後輸出檔命名為 <cite>contours.kml</cite>，按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/2420.png" class="align-center" src="../_images/2420.png" />
+<img alt="../_images/2421.png" class="align-center" src="../_images/2421.png" />
 <ol class="arabic simple" start="25">
 <li><p class="first">如果你電腦有裝 Google Earth 的話，在資料夾中點兩下這個新檔案就可以開啟了。</p>
 </li>
@@ -406,7 +406,7 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      最後更新日期是 Apr 04, 2019.<br/>
+      最後更新日期是 Apr 11, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

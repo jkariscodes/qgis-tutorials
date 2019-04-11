@@ -30,8 +30,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Georeferensi Citra Udara" href="advanced_georeferencing.html" />
-    <link rel="prev" title="Working with Projections" href="working_with_projections.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -80,7 +78,7 @@
      href="../index.html">Tutorials List <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Pengantar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Bekerja dengan Attribut</a></li>
@@ -94,7 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Bekerja dengan Data Permukaan Medan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Bekerja dengan data WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Working with Projections</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Georeferensi Lembaran Topo dan Peta hasil Scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferensi Citra Udara</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalisasi Data Peta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Melakukan Join Tabel</a></li>
@@ -131,14 +129,6 @@
             
               
                 
-  <li>
-    <a href="working_with_projections.html" title="Previous Chapter: Working with Projections"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Working with ...</span>
-    </a>
-  </li>
-  <li>
-    <a href="advanced_georeferencing.html" title="Next Chapter: Georeferensi Citra Udara"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Georeferensi ... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -227,6 +217,10 @@
 
   <div class="section" id="georeferencing-topo-sheets-and-scanned-maps">
 <h1>Georeferensi Lembaran Topo dan Peta hasil Scan<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps" title="Link permanen untuk headline ini">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Peringatan</p>
+<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/georeferencing_basics.html"><em>Georeferencing Topo Sheets and Scanned Maps (QGIS3)</em></a></p>
+</div>
 <p>Kebanyakkan proyek GIS membutuhkan georeferensi pada sejumlah data raster. <em>Georeferencing</em> adalah proses untuk menetapkan koordinat dunia nyata untuk setiap pixel pada layer. Sering koordinat-koordinat ini didapatkan dengan melakukan survey lapangan - mengumpulkan koordinat dengan alat GPS untuk  mengidentifikasi fitur pada sebuah gambar atau peta. Pada sejumlah kasus, dimana anda mencoba untuk mendigitalisasi peta scan, anda bisa memperoleh koordinat dari tanda pada peta itu sendiri. Menggunakan koordinat sampel atau GCP (Ground Control Points), gambar semacam dibengkokkan untuk penyesuaian dengan sistem koordinat yang sudah dipilih. Di tutorial ini saya akan mendiskusikan komsep, strategi dan alat-alat yang ada di QGIS untuk menggapai Georeferensi dengan akurasi tingkat tinggi.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Tinjauan Tugas<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
@@ -260,67 +254,67 @@ below:</p>
 <li><p class="first">Jendela Plugin terbagi menjadi 2 bagian . Bagian atas dimana raster akan ditampilkan dan bagian bawah dimana sebuah tabel yang menunjukkan Ground Control Point (GCP) akan muncul.</p>
 </li>
 </ol>
-<img alt="../_images/340.png" class="align-center" src="../_images/340.png" />
+<img alt="../_images/344.png" class="align-center" src="../_images/344.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Sekarang kita akan membuka gambar JPG kita. Akses :<cite>File &#8211;&gt; Open Raster</cite> . Jelajagi gambar hasil unduhan yang berupa peta scan dan klik <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/421.png" class="align-center" src="../_images/421.png" />
+<img alt="../_images/422.png" class="align-center" src="../_images/422.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Pada layar setelahnya, anda akan ditanya untuk memilih CRS. Ini untuk mengatur proyeksi dan datum dari poin kontrol anda. Jika anda sudah mengumpulkan ground control point memakai alat GPS, anda akan memiliki CRS WGS84. Jika anda mengeoreferensikan peta seperti ini,anda akan mendapat informasi CRS dari peta itu sendiri. melihat gambar peta kita, koordinatnya berbentuk lintang/bujur. Tidak ada informasi datum yang diberikan, jadi kita harus membuat asumsi yang cocok. karena ini adalah India dan petanya lumayan tua, kita bisa memperkirakan bahwa datum Everest 1830 akan memberikan hasil yang baik.</p>
 </li>
 </ol>
-<img alt="../_images/521.png" class="align-center" src="../_images/521.png" />
+<img alt="../_images/522.png" class="align-center" src="../_images/522.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Anda akan melihat gambar akan dibuka pada bagian atas.</p>
 </li>
 </ol>
-<img alt="../_images/619.png" class="align-center" src="../_images/619.png" />
+<img alt="../_images/620.png" class="align-center" src="../_images/620.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Anda bisa menggunakan kontrol zoom/pan di toolbar untuk mempelajari lebih jauh peta tersebut.</p>
 </li>
 </ol>
-<img alt="../_images/719.png" class="align-center" src="../_images/719.png" />
+<img alt="../_images/720.png" class="align-center" src="../_images/720.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Sekarang kita ingin menetapkan koordinat untuk sejumlah titik pada peta ini. jika anda lihat dekat-dekat, anda akan melihat grid koordinat dengan tanda. Memakai grid ini, anda bisa menentukan koordinat X dan Y dari point dimana grid tadi berpotongan. Klik <span class="guilabel">Add Point</span> pada toolbar.</p>
 </li>
 </ol>
-<img alt="../_images/818.png" class="align-center" src="../_images/818.png" />
+<img alt="../_images/819.png" class="align-center" src="../_images/819.png" />
 <ol class="arabic simple" start="9">
 <li>In the pop-up window, enter the coordinates. Remember that X=longitude and
 Y=latitude.  Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/918.png" class="align-center" src="../_images/918.png" />
+<img alt="../_images/919.png" class="align-center" src="../_images/919.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Anda akan melihat tabel GCP sekarang memiliki sebuah baris dengan detail dari GCP pertama anda.</p>
 </li>
 </ol>
-<img alt="../_images/1017.png" class="align-center" src="../_images/1017.png" />
+<img alt="../_images/1018.png" class="align-center" src="../_images/1018.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Dengan cara yang sama, tambahkan sedikitnya 4 GCP yang menlingkupi seluruh gambar. Semakin banyak poin yang kamu punya, semakin akurat pula gambarmu terdaftar pada koordinat target.</p>
 </li>
 </ol>
-<img alt="../_images/1122.png" class="align-center" src="../_images/1122.png" />
+<img alt="../_images/1123.png" class="align-center" src="../_images/1123.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Ketika anda sudah memilik poin yang cukup, akses <span class="menuselection">Settings -&gt; Transformation settings</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1219.png" class="align-center" src="../_images/1219.png" />
+<img alt="../_images/1220.png" class="align-center" src="../_images/1220.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Pada dialog <span class="guilabel">Transformation settings</span> , pilih guilabel:<cite>Transformation type</cite>  dengan <span class="guilabel">Thin Plate Spline</span> . Beri nama raster output dengan <span class="guilabel">1870_southern_india_modified.tif</span> . Pilih <span class="guilabel">EPSG:4326</span> sebagai Spatial Reference System atau SRS target sehingga hasil gambar berada di datum yang sangat sesuai. Pastikan <span class="guilabel">Load in QGIS when done</span> diberi tanda cek. Klik <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1318.png" class="align-center" src="../_images/1318.png" />
+<img alt="../_images/1319.png" class="align-center" src="../_images/1319.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Kembali ke jendela xxx, akses xxx . Ini akan memulai proses pengadaptasian atau pelengkungan gambar menggunakan GCP dan membuat raster target.</p>
 </li>
 </ol>
-<img alt="../_images/1417.png" class="align-center" src="../_images/1417.png" />
+<img alt="../_images/1418.png" class="align-center" src="../_images/1418.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Ketika proses selesai, anda akan melihat layer yang telah tergeoreferensi dibuka di QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/1516.png" class="align-center" src="../_images/1516.png" />
+<img alt="../_images/1517.png" class="align-center" src="../_images/1517.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Georeferensi sekarang sudah lengkap . Tetapi sepert sebelumnya, adalah latihan yang baik untuk memverifikasi hasil kerja anda. bagaimana kita memeriksa bahwa hasil georeferensi kita sudah akurat ? Dalam kasus ini , buka shapefile batas negara dari sumber yang terpercaya seperti dataset Natural Earth kemudian bandingkan. Anda akan melihat apabila mereka cukup bersesuaian. Ada sejumlah error dan ini dapat ditingkatkan lebih jauh dengan cara membuat lebih banyak GCP, mengubah transformasi parameter dan mencoba datum yang berbeda.</p>
 </li>
@@ -351,7 +345,7 @@ Y=latitude.  Click <span class="guilabel">OK</span>.</li>
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Apr 04, 2019.<br/>
+      Terakhir diperbarui pada Apr 11, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
