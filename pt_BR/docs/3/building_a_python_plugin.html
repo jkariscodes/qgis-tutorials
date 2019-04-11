@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building a Python Plugin (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Construindo um complemento em Python (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -112,7 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../counting_vertices.html">Contando o número de vértices em uma camada</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Building a Python Plugin (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Construindo um complemento em Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Escrever Scripts de Python para o Framework do Processing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
@@ -226,27 +226,25 @@
       
 
   <div class="section" id="building-a-python-plugin-qgis3">
-<h1>Building a Python Plugin (QGIS3)<a class="headerlink" href="#building-a-python-plugin-qgis3" title="Link permanente para este título">¶</a></h1>
-<p>Plugins are a great way to extend the functionality of QGIS. You can write plugins using Python that can range from adding a simple button to sohpisticated toolkits. This tutorial will outline the process involved in setting up your development environment, designing the user interface for a plugin and writing code to interact with QGIS. Please review the <a class="reference internal" href="getting_started_with_pyqgis.html"><em>Getting Started With Python Programming (QGIS3)</em></a> tutorial to get familiar with the basics.</p>
+<h1>Construindo um complemento em Python (QGIS3)<a class="headerlink" href="#building-a-python-plugin-qgis3" title="Link permanente para este título">¶</a></h1>
+<p>Os complementos são uma grande forma de estender a funcionalidade do QGIS. Você pode escrever complementos usando Python que podem desde adicionar um simples botão até um sofisticado kit de ferramentas. Esse tutorial esboça o processo envolvido na configuração do ambiente de desenvolvimento, projeto da interface de usuário para o complemento e escrito de código para interação com o QGIS. Por favor, revise o tutorial <a class="reference internal" href="getting_started_with_pyqgis.html"><em>Getting Started With Python Programming (QGIS3)</em></a>&nbsp; para se familiarizar com a base ncessária.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the Task<a class="headerlink" href="#overview-of-the-task" title="Link permanente para este título">¶</a></h2>
-<p>We will develop a simple plugin called <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span></code> that will allow users to pick a vector layer and write its attributes to a CSV file.</p>
+<h2>Visão Geral da Tarefa<a class="headerlink" href="#overview-of-the-task" title="Link permanente para este título">¶</a></h2>
+<p>Nós iremos desenvolver um simples complemento chamado <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span></code> que irá permitir aos usuários escolher uma camada vetoriaç e escrever os seus atributos para um arquivo CSV.</p>
 </div>
 <div class="section" id="get-the-tools">
-<h2>Get the Tools<a class="headerlink" href="#get-the-tools" title="Link permanente para este título">¶</a></h2>
+<h2>Obtenha as Ferramentas<a class="headerlink" href="#get-the-tools" title="Link permanente para este título">¶</a></h2>
 <div class="section" id="qt-creator">
 <h3>Qt Creator<a class="headerlink" href="#qt-creator" title="Link permanente para este título">¶</a></h3>
-<p><a class="reference external" href="http://www.qt.io/">Qt</a> is a software development framework that is used to develop applications that run on Windows, Mac, Linux as well as various mobile operating systems. QGIS itself is written using the Qt framework. For plugin development, we will use an application called <a class="reference external" href="https://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Designer</a> to design the interface for our plugin.</p>
-<p>Download and install the Qt Creator installer from <a class="reference external" href="https://www.qt.io/offline-installers">Qt Offline Installers</a>. Make sure you select <strong>Qt Creator</strong> on the download page. Note that you will have to create a free Qt account to install the package.</p>
+<p><a class="reference external" href="http://www.qt.io/">Qt</a> é uma estrutura integrada para desenvolvimento de sotfware (framewok) que roda no Windows, Mac, Linux, bem como em sistemas operacionais móveis. O próprio QGIS é escrito usando o framework Qt. Para o desenvolvimento do complemento, nós usaremos uma aplicação chamada <a class="reference external" href="https://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Designer</a> para projetar a interface para o nosso complemento.</p>
+<p>Baixe e instale o instalador do Qt Creator do <a class="reference external" href="https://www.qt.io/offline-installers">Qt Offline Installers</a>.&nbsp;Certifique-se que você selecionou <strong>Qt Creator</strong> na página de download. Observe que você terá de criar uma conta Qt gratuita para instalar o pacote.</p>
 <img alt="../../_images/setup1.png" class="align-center" src="../../_images/setup1.png" />
 </div>
 <div class="section" id="python-bindings-for-qt">
-<h3>Python Bindings for Qt<a class="headerlink" href="#python-bindings-for-qt" title="Link permanente para este título">¶</a></h3>
-<p>Since we are developing the plugin in Python, we need to install the python
-bindings for Qt. The method for installing these will depend on the platform
-you are using. For building plugins we need the <code class="docutils literal"><span class="pre">pyrcc5</span></code> command-line tool.</p>
+<h3>Bindings em Python para o Qt<a class="headerlink" href="#python-bindings-for-qt" title="Link permanente para este título">¶</a></h3>
+<p>Como estamos desenvolvendo um complemento em Python, nós precisamos instalar os bindings Python para o Qt. O método para instalar estes dependerá da plataformo que você está usando. Para construir complementos, no precisaremos da ferramenta de linha de comando <code class="docutils literal"><span class="pre">pyrcc5</span></code>.</p>
 <p><strong>Windows</strong></p>
-<p>Relevant pyhon bindings are included in the QGIS install on Windows. But to use them from the plugin folder, we need to indicate the path to the QGIS install.</p>
+<p>Anexos relevantes para python são incluídos na instalação do QGIS no Windows. Entretanto, para usá-los da pasta de complementos, nós precisamos indicar o caminho (path) de instalação do QGIS.</p>
 <p>Create a Windows Batch file (.bat extension) with the following content and save it on your computer as <code class="docutils literal"><span class="pre">compile.bat</span></code>. We will later copy this file to the plugin folder. If you installed QGIS at a different path, replace the <code class="docutils literal"><span class="pre">C:\OSGeo4W64\bin\</span></code> with your path.</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>@echo off
 call &quot;C:\OSGeo4W64\bin\o4w_env.bat&quot;

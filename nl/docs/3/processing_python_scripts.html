@@ -112,7 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../counting_vertices.html">Aantal punten in een laag tellen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Een plug-in in Python bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Python-scripts schrijven voor framework Processing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Taken voor QGIS uitvoeren en in schema zetten</a></li>
@@ -230,7 +230,7 @@
 <p>Men kan zelfstandige scripts in Pyqgis schrijven die kunnen worden uitgevoerd in de Python Console in QGIS. Met een aantal aanpassingen kunt u uw scripts voor Pyqgis ook uitvoeren via het framework Processing. Dat heeft een aantal voordelen. Ten eerste is het invoeren van invoer door de gebruiker en het schrijven van uitvoerbestanden veel eenvoudiger omdat het framework Processing hier een gestandaardiseerde gebruikersinterface voor biedt. Ten tweede, door uw script te hebben in de Processing Toolbox kan het ook deel uitmaken van elk Model voor Processing of worden uitgevoerd als een Batch-taak met meerdere invoer. Deze handleiding zal laten zien hoe een aangepast script voor Python te schrijven dat deel kan uitmaken van het framework Processing in QGIS.</p>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">The Processing API was completely overhauled in QGIS3. Please refer to <a class="reference external" href="https://raw.githubusercontent.com/qgis/QGIS/master/doc/porting_processing.dox">this guide</a> for best practices and tips.</p>
+<p class="last">De API voor Processing werd compleet vernieuwd in QGIS3. Bekijk <a class="reference external" href="https://raw.githubusercontent.com/qgis/QGIS/master/doc/porting_processing.dox">deze gids</a> voor beste manieren en tips.</p>
 </div>
 <div class="section" id="overview-of-the-task">
 <h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
@@ -262,7 +262,8 @@
 </ol>
 <img alt="../../_images/320.png" class="align-center" src="../../_images/320.png" />
 <ol class="arabic simple" start="4">
-<li>As you scroll down, you will see methods that assign name, group, description etc. to the script. Change the return values for <em>name</em> method to be <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code>, <em>displayName</em> method to <code class="docutils literal"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">Sum</span></code>, <em>group</em> method and <em>groupId</em> method to  <code class="docutils literal"><span class="pre">scripts</span></code>. Change the return value of <em>shortHelpString</em> method to a description that will appear to the user. Click the <span class="guilabel">Save</span> button.</li>
+<li><p class="first">Als u naar beneden scrollt, zult u methoden zien die een naam, groep, beschrijving etc. toewijzen aan het script. Wijzig de terugkeerwaarden voor de methode <em>name</em> naar <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code>, methode <em>displayName</em> naar <code class="docutils literal"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">Sum</span></code>, methode <em>group</em> en methode <em>groupId</em> naar <code class="docutils literal"><span class="pre">scripts</span></code>. Wijzig de terugkeerwaarde van de methode <em>shortHelpString</em> naar een beschrijving die voor de gebruiker zal verschijnen. Klik op de knop <span class="guilabel">Opslaan</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/48.png" class="align-center" src="../../_images/48.png" />
 <ol class="arabic simple" start="5">
@@ -299,7 +300,8 @@
 </ol>
 <img alt="../../_images/77.png" class="align-center" src="../../_images/77.png" />
 <ol class="arabic simple" start="8">
-<li>Now we define our custom logic for processing data in the <code class="docutils literal"><span class="pre">processAlgorithm</span></code> method. This method gets passed a dictionary called <code class="docutils literal"><span class="pre">parameters</span></code>. It contains the inputs that the user has selected. There are helper methods that allow you to take these inputs and create appropriate objects. We first get our inputs using <code class="docutils literal"><span class="pre">parameterAsSource</span></code> and <code class="docutils literal"><span class="pre">parameterAsString</span></code> methods. Next we want to create a feature sink where we will write the output. QGIS3 has a new class called <code class="docutils literal"><span class="pre">QgsFeatureSink</span></code> which is the preferred way to create objects that can accept new features. The output needs only 2 fields - one for the value of dissolved field and another for the sum of the selected field.</li>
+<li><p class="first">Nu definiëren we onze aangepaste logica voor het verwerken van gegevens in de methode <code class="docutils literal"><span class="pre">processAlgorithm</span></code>. Deze methode wordt doorgegeven aan een woordenboek, genaamd <code class="docutils literal"><span class="pre">parameters</span></code>. Het bevat de invoer die de gebruiker heeft geselecteerd. Er zijn hulpmethoden die u in staat stellen deze invoeren te nemen en er toepasselijke objecten van te maken. We halen eerst onze invoer op met behulp van de methoden <code class="docutils literal"><span class="pre">parameterAsSource</span></code> en <code class="docutils literal"><span class="pre">parameterAsStrong</span></code>. Vervolgens willen we een afvoer voor het object maken waar we de uitvoer naartoe zullen schrijven. QGIS3 heeft een nieuwe klasse, genaamd <code class="docutils literal"><span class="pre">classQgsFeatureSink</span></code> wat de voorkeursmanier is om objecten te maken die nieuwe objecten kunnen accepteren. De uitvoer heeft slechts 2 velden - één voor de waarde van het opgeloste veld en een ander voor de som van het geselecteerde veld.</p>
+</li>
 </ol>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="n">QVariant</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="n">QgsField</span><span class="p">,</span> <span class="n">QgsFields</span>
@@ -400,7 +402,8 @@
 </ol>
 <img alt="../../_images/138.png" class="align-center" src="../../_images/138.png" />
 <ol class="arabic simple" start="14">
-<li>One another advantage of writing processing script is that the methods within the Processing Framework are aware of layer selection and automatically filter your inputs to use only the selected features. This happens because we are defining our input as a <code class="docutils literal"><span class="pre">QgsProcessingParameterFeatureSource</span></code>. A feature source allows use of ANY object which contains vector features, not just a vector layer, so when there are selected features in your layer and ask Processing to use selected features, the input is passed on to your script as a <code class="docutils literal"><span class="pre">QgsProcessingFeatureSource</span></code> object containing selected features and not the full vector layer. Here&#8217;s a quick demonstration of this functionality. Let&#8217;s say we want to dissolve only certain continents. Let&#8217;s create a selection using <span class="guilabel">Select feature by Expression</span> tool.</li>
+<li><p class="first">Een ander voordeel van het schrijvren van scripts voor Processing is dat de methoden binnen het Framewerk Processing zich bewust zijn van de keuze van lagen en automatisch uw invoer filteren om alleen de geselecteerde objecten te gebruiken. Dit gebeurt omdat we onze invoer definiëren als een <code class="docutils literal"><span class="pre">QgsProcessingParameterFeatureSource</span></code>. Een objectbron staat het gebruiken toe van ELK object dat vectorobjecten bevat, niet alleen een vectorlaag, als er dus geselecteerde objecten op uw laag staan en u vraagt Processing om de geselecteerde objecten te gebruiken, wordt de invoer doorgegeven aan uw script als een object <code class="docutils literal"><span class="pre">QgsProcessingFeatureSource</span></code> dat de geselecteerde objecten bevat en niet de volledige vectorlaag. Hier is een snelle demonstratie van deze functionaliteit. Laten we zeggen dat we alleen bepaalde continenten willen oplossen. Laten we een selectie maken met behulp van het gereedschap <span class="guilabel">Objecten selecteren met een expressie</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/146.png" class="align-center" src="../../_images/146.png" />
 <ol class="arabic simple" start="15">
