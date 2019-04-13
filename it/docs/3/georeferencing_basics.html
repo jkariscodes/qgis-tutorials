@@ -228,6 +228,7 @@
   <div class="section" id="georeferencing-topo-sheets-and-scanned-maps-qgis3">
 <h1>Georeferencing Topo Sheets and Scanned Maps (QGIS3)<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps-qgis3" title="Link a questa intestazione">¶</a></h1>
 <p>Most GIS projects require georeferencing some raster data. <em>Georeferencing</em> is the process of assigning real-world coordinates to each pixel of the raster. Many times these coordinates are obtained by doing field surveys - collecting coordinates with a GPS device for few easily identifiable features in the image or map. In some cases, where you are looking to digitize scanned maps, you can obtain the coordinates from the markings on the map image itself. Using these sample coordinates or GCPs ( Ground Control Points ), the image is warped and made to fit within the chosen coordinate system. In this tutorial I will discuss the concepts, strategies and tools within QGIS to achieve a high accuracy georeferencing.</p>
+<p>This tutorial is to geo-reference an image which has coordinates information available on the map image itself (i.e. grids with labels). If your source image does not have such information, you can use the method outlined in <a class="reference internal" href="../advanced_georeferencing.html"><em>Georeferenziare immagini aeree</em></a></p>
 <div class="section" id="overview-of-the-task">
 <h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
 <p>We will use a scanned map of southern India from 1870 and geo-reference it using QGIS.</p>
@@ -270,10 +271,40 @@
 <div><img alt="../../_images/43.png" class="align-center" src="../../_images/43.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>In the next screen, you will asked to choose the raster’s coordinate reference system (CRS). This is to specify the projection and datum of your control points. If you have collected the ground control points using a GPS device, you would have the WGS84 CRS. If you are geo-referencing a scanned map like this, you can obtain the CRS information from the map itself. Looking at our map image, the coordinates are in Latitude/Longitude. There is no datum information given, so we have to assume an appropriate one. Since it is India and the map is quite old, we can bet the Everest 1830 datum would give us good results.</li>
+<li>In the next screen, you will asked to choose the raster’s coordinate reference system (CRS). Our source image is a plain JPEG file and doesn&#8217;t have any coordinate reference system atached to it, so you can click <span class="guilabel">Cancel</span>.</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/54.png" class="align-center" src="../../_images/54.png" />
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li>You will see the image will be loaded on the top section. You can use the zoom/pan controls in the toolbar to learn more about the map.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/64.png" class="align-center" src="../../_images/64.png" />
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li>Now we need to assign coordinates to some points on this map. If you look closely, you will see coordinate grid with markings. These are Latitude and Longitude  grid lines.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/74.png" class="align-center" src="../../_images/74.png" />
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li>Before we start adding Ground Control Points (GCP), we need to define the Transformation Settings. Go to <span class="menuselection">Settings ‣ Transformation settings</span>.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/84.png" class="align-center" src="../../_images/84.png" />
+</div></blockquote>
+<ol class="arabic simple" start="9">
+<li>In the <span class="guilabel">Transformation settings</span> dialog, choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> to learn about different transofrmation types and their uses. Click <span class="guilabel">Select CRS</span> button next to <span class="guilabel">Target SRS</span>.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/94.png" class="align-center" src="../../_images/94.png" />
+</div></blockquote>
+<ol class="arabic simple" start="10">
+<li>If you are geo-referencing a scanned map like this, you can obtain the CRS information from the map itself. Looking at our map image, the coordinates are in Latitude/Longitude. There is no datum information given, so we have to assume an appropriate one. Since it is India and the map is quite old, we can bet the Everest 1830 datum would give us good results. Search for <code class="docutils literal"><span class="pre">everest</span></code> and select the CRS with oldest definition of the Everest datum (EPSG:4042). Click <span class="guilabel">OK</span>.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/104.png" class="align-center" src="../../_images/104.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
@@ -282,74 +313,64 @@
 </pre></div>
 </div>
 </div>
-<ol class="arabic simple" start="6">
-<li>You will see the image will be loaded on the top section.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/64.png" class="align-center" src="../../_images/64.png" />
-</div></blockquote>
-<ol class="arabic simple" start="7">
-<li>You can use the zoom/pan controls in the toolbar to learn more about the map.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/74.png" class="align-center" src="../../_images/74.png" />
-</div></blockquote>
-<ol class="arabic simple" start="8">
-<li>Now we need to assign coordinates to some points on this map. If you look closely, you will see coordinate grid with markings. Using this grid, you can determine the X and Y coordinates of the points where the grids intersect. Click on <span class="guilabel">Add Point</span> in the toolbar.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/84.png" class="align-center" src="../../_images/84.png" />
-</div></blockquote>
-<ol class="arabic simple" start="9">
-<li>In the pop-up window, enter the coordinates. Remember that X=longitude and Y=latitude. Click <span class="guilabel">OK</span>.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/94.png" class="align-center" src="../../_images/94.png" />
-</div></blockquote>
-<ol class="arabic simple" start="10">
-<li>You will notice the GCP table now has a row with details of your first GCP.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/104.png" class="align-center" src="../../_images/104.png" />
-</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Most maps are created using a Projected CRS. If the map you are trying to georeference uses a projected CRS that you know of, but the graticules labels are in a Geographic CRS (latitude/longitude), you may use an alternate workflow to minimize distortion. Instead of using a Geographic CRS like we are using here, you can create a vector grid in QGIS and transform it to the projected CRS to be used as a reference for accurate coordinate capture. See <a class="reference external" href="https://raisedbeaches.net/2018/02/01/georeferencing-in-qgis/">this page</a> for more details.</p>
+</div>
 <ol class="arabic simple" start="11">
-<li>Similarly, add at least 4 GCPs covering the entire image. The more points you have, the more accurate your image is registered to the target coordinates.</li>
+<li>Name your output raster as  <code class="docutils literal"><span class="pre">1870_southern_india_modified.tif</span></code>. Choose <code class="docutils literal"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. CLick <span class="guilabel">OK</span>.</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/117.png" class="align-center" src="../../_images/117.png" />
-</div></blockquote>
-<ol class="arabic simple" start="12">
-<li>Once you have enough points, go to <span class="menuselection">Settings ‣ Transformation settings</span>.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/124.png" class="align-center" src="../../_images/124.png" />
-</div></blockquote>
-<ol class="arabic simple" start="13">
-<li>In the <span class="guilabel">Transformation settings</span> dialog, choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal"><span class="pre">Thin</span> <span class="pre">Plate</span> <span class="pre">Spline</span></code>. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> to learn about different transofrmation types and their uses. Name your output raster as  <code class="docutils literal"><span class="pre">1870_southern_india_modified.tif</span></code>. Choose <code class="docutils literal"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Choose <code class="docutils literal"><span class="pre">EPSG:4326</span></code> as the <span class="guilabel">Target SRS</span> so the resulting image is in a widely compatible datum. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. CLick <span class="guilabel">OK</span>.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/134.png" class="align-center" src="../../_images/134.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
 <p class="last">Uncompressed GeoTIFF files can be very large in size. So compressing them is always a good idea. You can learn more about different TIFF compression options (LZW, PACKBITS or DEFLATE) in <a class="reference external" href="https://www.accusoft.com/faqs/differences-compressions-used-tiff-files/">this article</a>.</p>
 </div>
+<ol class="arabic simple" start="12">
+<li>Now we can start adding the Ground Control Points (GCP). The intersections of the grid lines will serve as the <em>ground-truth</em> in our case. As the grid lines are labeled, we can determine the X and Y coordinates of the points using them. Click <span class="guilabel">Add Point</span>.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/124.png" class="align-center" src="../../_images/124.png" />
+</div></blockquote>
+<p>13 . In the pop-up window, enter the coordinates. Remember that X=longitude and Y=latitude. Click <span class="guilabel">OK</span>.</p>
+<blockquote>
+<div><img alt="../../_images/134.png" class="align-center" src="../../_images/134.png" />
+</div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Back in the <span class="guilabel">Georeferencer</span> window, you will notice that the GCPs now have a non-zero <code class="docutils literal"><span class="pre">dX</span></code>, <code class="docutils literal"><span class="pre">dY</span></code> and <code class="docutils literal"><span class="pre">Residual</span></code> error values. <code class="docutils literal"><span class="pre">Thin</span> <span class="pre">Plate</span> <span class="pre">Splite</span></code> will deform the image to exactly match the GCPs, so you will not see large error values when using this transform. One tip to check the accuracy of your work is to temporarily change the trasofrmation settings in <span class="menuselection">Settings ‣ Transformation Settings</span> to <code class="docutils literal"><span class="pre">Linear</span></code> or <code class="docutils literal"><span class="pre">Polynomial</span></code> and see how these error values change. If a particular GCP has unusually high error values, that usually means a human-error in entering the coordinate values. So you can delete that GCP and capture it again. You can also edit the coordinate values in the <span class="guilabel">GCP Table</span> by clicking the cell in either <span class="guilabel">Dest. X</span> or <span class="guilabel">Dest. Y</span> columns. Once you are satisfied with the GCPs, switch back to the <code class="docutils literal"><span class="pre">Thin</span> <span class="pre">Plate</span> <span class="pre">Spline</span></code> transformation type and go to <span class="menuselection">File ‣ Start georeferencing</span>. This will start the process of warping the image using the GCPs and creating the target raster.</li>
+<li>You will notice the GCP table now has a row with details of your first GCP.</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/143.png" class="align-center" src="../../_images/143.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Once the process finishes, you will see the georeferenced layer loaded in QGIS. The georeferencing is now complete. But as always, it&#8217;s a good practice to     verify your work. How do we check if our georeferencing is accurate? In this case, load the boundary shapefile from a trusted source like the Natural Earth dataset and compare them. You will notice they match up pretty nicely. There is some error and it can be further improved by taking more control points, changing transformation parameters and trying a different datum.</li>
+<li>Similarly, add at least more GCPs covering the entire image. The more points you have, the more accurate your image is registered to the target coordinates. The <code class="docutils literal"><span class="pre">Polynomial</span> <span class="pre">2</span></code> transform requires at least 6 GCPs.</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/153.png" class="align-center" src="../../_images/153.png" />
+</div></blockquote>
+<ol class="arabic simple" start="16">
+<li>Once you have added the minimum number of points required for the transform, you will notice that the GCPs now have a non-zero <code class="docutils literal"><span class="pre">dX</span></code>, <code class="docutils literal"><span class="pre">dY</span></code> and <code class="docutils literal"><span class="pre">Residual</span></code> error values. If a particular GCP has unusually high error values, that usually means a human-error in entering the coordinate values. So you can delete that GCP and capture it again. You can also edit the coordinate values in the <span class="guilabel">GCP Table</span> by clicking the cell in either <span class="guilabel">Dest. X</span> or <span class="guilabel">Dest. Y</span> columns. Once you are satisfied with the GCPs, go to <span class="menuselection">File ‣ Start georeferencing</span>. This will start the process of warping the image using the GCPs and creating the target raster.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/162.png" class="align-center" src="../../_images/162.png" />
+</div></blockquote>
+<ol class="arabic simple" start="17">
+<li>Once the process finishes, you will see the georeferenced layer loaded in QGIS. The georeferencing is now complete.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/173.png" class="align-center" src="../../_images/173.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
 <p class="last">The GCPs will also be displayed in the main QGIS Canvas. If you wish to remove them, you can switch to the <span class="guilabel">Georeferencer</span> window, and choose <span class="menuselection">File ‣ Reset Georeferencer</span>.</p>
 </div>
+<ol class="arabic simple" start="18">
+<li>It is a good practice to verify your work. How do we check if our georeferencing is accurate? In this case, you can load the boundary shapefile from a trusted source like the Natural Earth dataset and compare them. You will notice they match up pretty nicely. There is some error and it can be further improved by taking more control points, changing transformation parameters and trying a different datum.</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/183.png" class="align-center" src="../../_images/183.png" />
+</div></blockquote>
 </div>
 </div>
 
@@ -375,7 +396,7 @@
     </p>
     <p>
         &copy; Copyright 2016, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento Apr 11, 2019.<br/>
+      Ultimo aggiornamento Apr 13, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
