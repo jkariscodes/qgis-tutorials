@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
     <link rel="next" title="Установление связей между таблицами" href="performing_table_joins.html" />
-    <link rel="prev" title="Привязка аэрофотоснимков" href="advanced_georeferencing.html" />
+    <link rel="prev" title="Georeferencing Aerial Imagery (QGIS3)" href="3/advanced_georeferencing.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -95,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Работа с данными WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Привязка аэрофотоснимков</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Оцифровка картографических данных</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Установление связей между таблицами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Выполнение пространственных присоединений</a></li>
@@ -132,7 +132,7 @@
               
                 
   <li>
-    <a href="advanced_georeferencing.html" title="Previous Chapter: Привязка аэрофотоснимков"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Привязка аэро...</span>
+    <a href="3/advanced_georeferencing.html" title="Previous Chapter: Georeferencing Aerial Imagery (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Georeferencin...</span>
     </a>
   </li>
   <li>
@@ -253,7 +253,7 @@ link below:</p>
 <li><p class="first">Выберите пункт <span class="menuselection">Layer ‣ Add Raster Layer</span>. Найдите загруженный файл <code class="docutils literal"><span class="pre">BX24_GeoTifv1-02.tif</span></code> и нажмите кнопку <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1101.png" class="align-center" src="../_images/1101.png" />
+<img alt="../_images/1103.png" class="align-center" src="../_images/1103.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Это большой растровый файл, и можно заметить, что при масштабировании или сдвиге отрисовка карты занимает некоторое время. QGIS предлагает простое решение для существенного ускорения загрузки растров, используя <strong>пирамиды изображений</strong>. QGIS создает предобработанные фрагменты изображения в разных разрешениях, и они используются вместо полного растра. Благодаря этому навигация по карте становится быстрой и отзывчивой. Щелкните правой кнопкой мыши на слое <code class="docutils literal"><span class="pre">BX24_GeoTifv1-02</span></code> и выберите пункт <span class="guilabel">Properties</span>.</p>
 </li>
@@ -263,42 +263,42 @@ link below:</p>
 <li><p class="first">Выберите вкладку <span class="guilabel">Pyramids</span>. Удерживая клавишу <code class="kbd docutils literal"><span class="pre">Ctrl</span></code>, выберите все разрешения, предложенные на панели <span class="guilabel">Resolutions</span>. Оставьте остальные опции без изменения и нажмите <span class="guilabel">Build pyramids</span>. Когда процесс будет завершен, нажмите <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/337.png" class="align-center" src="../_images/337.png" />
+<img alt="../_images/338.png" class="align-center" src="../_images/338.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Вернувшись в главное окно QGIS, используйте инструмент <span class="guilabel">Zoom</span>, чтобы найти район <em>Хэгли-парк</em> в городе Крайстчерч. Это парк, который мы будем оцифровывать.</p>
 </li>
 </ol>
-<img alt="../_images/419.png" class="align-center" src="../_images/419.png" />
+<img alt="../_images/420.png" class="align-center" src="../_images/420.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Перед началом работы нам нужно установить <strong>настройки оцифровки</strong>. Перейдите к пункту <span class="menuselection">Settings ‣ Options...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/519.png" class="align-center" src="../_images/519.png" />
+<img alt="../_images/520.png" class="align-center" src="../_images/520.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Выберите вкладку <span class="guilabel">Digitizing</span> в диалоговом окне <span class="guilabel">Options</span>. Установите для режима прилипания <span class="guilabel">Default snap mode</span> значение <span class="guilabel">To vertex and segment</span>. Это позволит прилипать к ближайшей вершине или сегменту. Я также предпочитаю устанавливать порог прилипания <span class="guilabel">Default snapping tolerance</span> и радиус поиска для редактирования вершин <span class="guilabel">Search radius for vertex edits</span> в пикселях, а не в единицах карты. Это гарантирует, что расстояние прилипания не будет зависеть от масштаба. В зависимости от разрешения вашего монитора, вы можете указать подходящее значение. Нажмите <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/617.png" class="align-center" src="../_images/617.png" />
+<img alt="../_images/618.png" class="align-center" src="../_images/618.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Теперь мы готовы приступить к оцифровке. Сначала мы создадим слой дорог и оцифруем дороги вокруг парковой зоны. Выберите <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer...</span>. Вместо этого вы можете выбрать для создания <span class="guilabel">New Shapefile Layer...</span>, если вы предпочитаете этот формат. Spatialite - это открытый формат базы данных, аналогичный базе геоданных ESRI. База данных Spatialite хранится в одном файле на вашем жестком диске и может содержать разные типы пространственных (точечных, линейных, полигональных) слоев, а также не-пространственные слои. Это позволяет гораздо проще перемещать данные, по сравнению с кучей shape-файлов. В этом руководстве мы создадим пару полигональных слоев и линейный слой, так что база данных Spatialite подойдет лучше. Вы всегда можете загрузить слой Spatialite и сохранить его как shape-файл или в любом другом желаемом формате.</p>
 </li>
 </ol>
-<img alt="../_images/717.png" class="align-center" src="../_images/717.png" />
+<img alt="../_images/718.png" class="align-center" src="../_images/718.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">В диалоговом окне <span class="guilabel">New Spatialite Layer</span> нажмите кнопку <span class="guilabel">...</span> и сохраните новую базу данных Spatialite под названием <code class="docutils literal"><span class="pre">nztopo.sqlite</span></code>. Укажите <span class="guilabel">Layer name</span> <code class="docutils literal"><span class="pre">Roads</span></code> и выберите  <code class="docutils literal"><span class="pre">Line</span></code> как <span class="guilabel">Type</span>. Базовая топографическая карта находится в системе координат <code class="docutils literal"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>, так что мы должны выбрать ту же СК для нашего слоя с дорогами. Поставьте галочку в поле <span class="guilabel">Create an autoincrementing primary key</span>. Это создаст поле под названием <strong>pkuid</strong> в таблице атрибутов и присвоит уникальный числовой идентификатор автоматически каждому объекту. При создании ГИС-слоя вы должны определиться с атрибутами, которые будет иметь каждый объект. Поскольку это слой дорог, у нас будет два базовых атрибута: название и класс. Введите  <code class="docutils literal"><span class="pre">Name</span></code> в поле <span class="guilabel">Name</span> атрибута в секции <span class="guilabel">New attribute</span> и нажмите <span class="guilabel">Add to attribute list.</span></p>
 </li>
 </ol>
-<img alt="../_images/816.png" class="align-center" src="../_images/816.png" />
+<img alt="../_images/817.png" class="align-center" src="../_images/817.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Аналогично, создайте новый атрибут &#8220;Class&#8221; типа <span class="guilabel">Text data</span>. Нажмите <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/917.png" class="align-center" src="../_images/917.png" />
+<img alt="../_images/918.png" class="align-center" src="../_images/918.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">После того, как слой загрузится, нажмите на кнопку <span class="guilabel">Toggle Editing</span> чтобы перевести слой в режим редактирования.</p>
 </li>
 </ol>
-<img alt="../_images/1016.png" class="align-center" src="../_images/1016.png" />
+<img alt="../_images/1017.png" class="align-center" src="../_images/1017.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Нажмите кнопку <span class="guilabel">Add feature</span>. Щелкните на карте для добавления новой вершины. Добавляйте новые вершины вдоль участков дорог. Завершив оцифровку участка дороги, щелкните правой кнопкой мыши для завершения объекта.</p>
 </li>
@@ -312,37 +312,37 @@ link below:</p>
 <li><p class="first">После того, как вы нажмете правую кнопку мыши для завершения объекта, возникнет всплывающее диалоговое окно <span class="guilabel">Attributes</span>. В нем вы можете ввести атрибуты только что созданного объекта. Так как поле <strong>pkuid</strong>  является автоматически возрастающим, вам не удастся ввести его значение вручную. Оставьте его пустым и введите название дороги так, как оно отображается на топографической карте. Вы также можете ввести значение класса дороги. Нажмите <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1218.png" class="align-center" src="../_images/1218.png" />
+<img alt="../_images/1219.png" class="align-center" src="../_images/1219.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Стиль по умолчанию для нового линейного слоя - тонкая линия. Давайте изменим его для того, чтобы мы могли лучше видеть оцифрованные объекты на карте. Щелкните правой кнопкой мыши на слое с дорогами и выберите <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1317.png" class="align-center" src="../_images/1317.png" />
+<img alt="../_images/1318.png" class="align-center" src="../_images/1318.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Выберите вкладку <span class="guilabel">Style</span> в диалоговом окне <span class="guilabel">Layer Properties</span>. Выберите стиль с более толстыми линиями, такой как <span class="guilabel">Primary</span> из предопределенных стилей. Нажмите <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1416.png" class="align-center" src="../_images/1416.png" />
+<img alt="../_images/1417.png" class="align-center" src="../_images/1417.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Теперь вы явно увидите оцифрованный участок дороги. Нажмите <span class="guilabel">Save Layer Edits</span> чтобы сохранить новый объект на диск.</p>
 </li>
 </ol>
-<img alt="../_images/1515.png" class="align-center" src="../_images/1515.png" />
+<img alt="../_images/1516.png" class="align-center" src="../_images/1516.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Перед тем как мы будем оцифровывать оставшиеся дороги, важно обновить некоторые другие настройки, которые важны для создания слоя без ошибок. Перейдите в меню <span class="menuselection">Settings ‣ Snapping Options...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1613.png" class="align-center" src="../_images/1613.png" />
+<img alt="../_images/1614.png" class="align-center" src="../_images/1614.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">В диалоговом окне <span class="guilabel">Snapping Options</span> включите опцию <span class="guilabel">Enable topological editing</span>. Эта опция гарантирует, что общие границы в полигональных слоях будут сохранены корректно. Также отметьте пункт <span class="guilabel">Enable snapping on intersection</span>, который позволяет вам примыкать к пересечениям фонового слоя.</p>
 </li>
 </ol>
-<img alt="../_images/1713.png" class="align-center" src="../_images/1713.png" />
+<img alt="../_images/1714.png" class="align-center" src="../_images/1714.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Теперь вы можете нажать кнопку <span class="guilabel">Add feature</span> и оцифровать остальные дороги вокруг парка. Не забудьте нажать кнопку <span class="guilabel">Save Edits</span> после добавления нового объекта чтобы сохранить вашу работу. Полезным инструментом, который поможет вам с оцифровкой, является <strong>Node Tool</strong>. Нажмите кнопку <span class="guilabel">Node Tool</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1814.png" class="align-center" src="../_images/1814.png" />
+<img alt="../_images/1815.png" class="align-center" src="../_images/1815.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">После того, как инструмент узлов активируется, нажмите на любом объекте, чтобы показать его вершины. Нажмите на любой вершине, чтобы выбрать ее. Выбранная вершина изменит цвет. Теперь вы можете перетащить мышь, чтобы переместить вершину. Это бывает полезно, когда вы хотите внести корректировку после создания объекта. Вы также можете удалить выбранную вершину, нажав клавишу <code class="kbd docutils literal"><span class="pre">Delete</span></code>. (<code class="kbd docutils literal"><span class="pre">Option+Delete</span></code> на Mac)</p>
 </li>
@@ -357,7 +357,7 @@ link below:</p>
 <li><p class="first">Теперь мы создадим полигональный слой, отображающий границы парка. Перейдите к <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer...</span>. Выберите базу данных <code class="docutils literal"><span class="pre">nztopo.sqlite</span></code> из выпадающего списка. Назовите новый слой <code class="docutils literal"><span class="pre">Parks</span></code>. Выберите <code class="docutils literal"><span class="pre">Polygon</span></code> как <span class="guilabel">Type</span>. Создайте новый атрибут под названием <code class="docutils literal"><span class="pre">Name</span></code>. Нажмите <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2114.png" class="align-center" src="../_images/2114.png" />
+<img alt="../_images/2115.png" class="align-center" src="../_images/2115.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">Нажмите кнопку <span class="guilabel">Add feature</span> и щелкните по карте, чтобы добавить вершины полигона. Оцифруйте полигон, изображающий парк. Убедитесь, что оцифрованные вершины примыкают к узлам дорог, так что нет пробелов между полигонами парка и линиями дорожной сети. Щелкните правой кнопкой мыши, чтобы завершить полигон.</p>
 </li>
@@ -417,7 +417,7 @@ link below:</p>
 <li><p class="first">Мы должны повернуть этот прямоугольник, чтобы он соответствовал изображению на топографической карте. Инструмент вращения доступен на панели инструментов <strong>Расширенная оцифровка</strong>. Щелкните правой кнопкой мыши на пустом месте на панели инструментов и включите панель <span class="guilabel">Advanced Digitizing</span>.</p>
 </li>
 </ol>
-<img alt="../_images/338.png" class="align-center" src="../_images/338.png" />
+<img alt="../_images/339.png" class="align-center" src="../_images/339.png" />
 <ol class="arabic simple" start="34">
 <li><p class="first">Нажмите кнопку <span class="guilabel">Rotate Feature(s)</span>.</p>
 </li>
@@ -463,7 +463,7 @@ link below:</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Обновлено: Apr 13, 2019.<br/>
+      Обновлено: Apr 14, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

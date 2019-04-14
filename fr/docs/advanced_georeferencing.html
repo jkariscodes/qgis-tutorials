@@ -30,8 +30,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Digitizing Map Data" href="digitizing_basics.html" />
-    <link rel="prev" title="Georeferencing Topo Sheets and Scanned Maps (QGIS3)" href="3/georeferencing_basics.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -80,7 +78,7 @@
      href="../index.html">Tutorials List <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Travailler avec les attributs</a></li>
@@ -95,7 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Working with WMS Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Image aérienne géoréférencée</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Les Jointures de tables (JOIN)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Effectuer des jointures spatiales</a></li>
@@ -131,14 +129,6 @@
             
               
                 
-  <li>
-    <a href="3/georeferencing_basics.html" title="Previous Chapter: Georeferencing Topo Sheets and Scanned Maps (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Georeferencin...</span>
-    </a>
-  </li>
-  <li>
-    <a href="digitizing_basics.html" title="Next Chapter: Digitizing Map Data"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Digitizing Map Data &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -224,6 +214,10 @@
 
   <div class="section" id="georeferencing-aerial-imagery">
 <h1>Image aérienne géoréférencée<a class="headerlink" href="#georeferencing-aerial-imagery" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/advanced_georeferencing.html"><em>Georeferencing Aerial Imagery (QGIS3)</em></a></p>
+</div>
 <p>Dans le tutorial :doc:&#8217;georeferencing_basics&#8217; nous avons aborde les principes de base du georeferencement dans QGIS. Cette méthode consiste a lire les coordonnées inscrites sur la carte scannée et a les reporter manuellement dans le logiciel. Cependant, dans beaucoup de cas les cartes utilisées ne contiennent pas de coordonnées spatiales. Dans ce cas, il faudra utiliser une autre source de données pour le georeferencement. Ce tutorial vous apprend comment utiliser les sources open data existantes pour mener a bien ce procédé de georeferencement.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Description de l&#8217;exercice<a class="headerlink" href="#overview-of-the-task" title="Lien permanent vers ce titre">¶</a></h2>
@@ -257,7 +251,7 @@
 <li><p class="first">Pour ce tutorial pour nous allons utiliser le calque OpenStreetMap en tant que calque de reference. Installez le plugin OpenLayers depuis <span class="menuselection">Plugins ‣ Manage and install plugins ‣ Get more</span>. Voir <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a> pour plus d&#8217;informations sur l&#8217;utilisation des plgins QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/130.png" class="align-center" src="../_images/130.png" />
+<img alt="../_images/140.png" class="align-center" src="../_images/140.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Une fois le plugin installe, aller a <a href="#id1"><span class="problematic" id="id2">:menuselection:`Plugins &#8211;&gt; OpenLayers plugin &#8211;&gt; Add OpenStreetMap layer&#8217;. Cela va ajouter un calque généré a partir de `OpenStreetMap data &lt;http://www.openstreetmap.org/&gt;`_</span></a>.</p>
 </li>
@@ -267,13 +261,13 @@
 <li><p class="first">Le calque OpenStreetMap est désormais charge sur QGIS. Remarquez le système de coordonnées de reference pour cette couche (SCR) : EPSG 3857 Pseudo Mercator. Il est important de le noter, en effet les coordonnées que nous allons déduire de ce calque seront exprimées dans le même système de coordonnées.</p>
 </li>
 </ol>
-<img alt="../_images/324.png" class="align-center" src="../_images/324.png" />
+<img alt="../_images/325.png" class="align-center" src="../_images/325.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">La prochaine étape sera de déterminer la position de la zone que nous essayons de géolocaliser. Vous pouvez vous servir des outils Pan et Zoom pour localiser la zone sur le calque OpenStreetMap.
 Voici une autre méthode qui pourra vous etre utile : l&#8217;image téléchargée représente Washington Square Park a New-York, nous connaissons donc sa position. Il suffit de charger la page Wikipedia de cet endroit : les coordonnées géographiques y sont mentionnées.</p>
 </li>
 </ol>
-<img alt="../_images/49.png" class="align-center" src="../_images/49.png" />
+<img alt="../_images/410.png" class="align-center" src="../_images/410.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Vous pouvez remarquer que les coordonnées sont exprimées en Degrés/Minutes/Secondes et Latitude/Longitude. Nous devons transformer ces unités pour obtenir des chiffres compatibles avec la projection Mercator.
 Pour ce faire vous pourrez utiliser l&#8217;outil <strong>cs2cs</strong>. Cet outil est déjà installe dans votre système si vous avez installe QGIS avec OSGeo4W, ou bien si le logiciel tourne sous Linux ou Mac.
@@ -284,7 +278,7 @@ Si vous êtes sous Windows, ouvrez une fenêtre de commandes et tapez &#8220;cs2
 <p class="first admonition-title">Note</p>
 <p class="last">MacOS users can locate the cs2cs tool at /Library/Frameworks/PROJ.Framework/Programs/cs2cs</p>
 </div>
-<img alt="../_images/59.png" class="align-center" src="../_images/59.png" />
+<img alt="../_images/510.png" class="align-center" src="../_images/510.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Maintenant que vous avez vérifie la présence de l&#8217;outil cs2cs dans votre système, il est temps de transformer ces chiffres en coordonnées Mercator. Afin d&#8217;utiliser l&#8217;outil cs2cs vous devrez spécifier un <span class="guilabel">source</span> et une <span class="guilabel">destination</span> SCR. La définition du SCR peut être un <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 string</a>  ou un <a class="reference external" href="http://www.epsg-registry.org/">EPSG code</a>. Nous allons nous appuyer ici sur le code ESPG que nous connaissons grâce aux données d&#8217;entree/sortie du SRC. Le moyen le plus simple est d&#8217;inscrire les coordonnes directement dans la ligne de commande. Les coordonnées doivent être inscrites selon l&#8217;ordre &#8216;X Y&#8217;, soit &#8216;Longitude Latitude&#8217;. Entrez la commande suivante dans la fenêtre puis appuyez sur Entrée. Il est possible de remplacer les guillemets (&#8221;) par un double (\). Après avoir valide avec Entrée, vous verrez apparaitre les coordonnes X Y en ESPG 3857 SRC.</p>
 </li>
@@ -298,28 +292,28 @@ Si vous êtes sous Windows, ouvrez une fenêtre de commandes et tapez &#8220;cs2
 <div class="highlight-none"><div class="highlight"><pre><span></span>echo -73d59&#39;51 40d43&#39;51 | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 </pre></div>
 </div>
-<img alt="../_images/68.png" class="align-center" src="../_images/68.png" />
+<img alt="../_images/69.png" class="align-center" src="../_images/69.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Copiez alors les coordonnées obtenues et revenez dans QGIS. Tout en bas de la fenêtre QGIS repérez le champ  Coordonnées. Entrez-y les coordonnes au format X,Y et validez avec Entrée. Vous verrez alors la carte se déformer un peu. Pour zoomer, sélectionnez alors l’échelle 1:2500 dans la commande située juste a cote du champ de Coordonnées et validez avec Entrée.</p>
 </li>
 </ol>
-<img alt="../_images/78.png" class="align-center" src="../_images/78.png" />
+<img alt="../_images/79.png" class="align-center" src="../_images/79.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Voila! Vous arrivez maintenant a visualiser Washington Square Park sur votre écran. Il faut maintenant géolocaliser l&#8217;image.
 Lancer le <strong>Georeferencer</strong> depuis <span class="menuselection">Raster ‣ Georeferencer ‣ Georeferencer</span>. Si vous ne voyez pas cette commande vous devrez l&#8217;activer en faisant <span class="guilabel">Georeferencer GDAL</span> plugin from <span class="menuselection">Plugins ‣ Manage and install Plugins ‣ Installed</span>.</p>
 </li>
 </ol>
-<img alt="../_images/87.png" class="align-center" src="../_images/87.png" />
+<img alt="../_images/88.png" class="align-center" src="../_images/88.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Dans le menu <span class="guilabel">Georeferencer</span> window, go to <span class="menuselection">File ‣ Open raster</span>. Retrouvez le fichier JPG enregistre et cliquez sur</p>
 </li>
 </ol>
-<img alt="../_images/98.png" class="align-center" src="../_images/98.png" />
+<img alt="../_images/99.png" class="align-center" src="../_images/99.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Dans le  <span class="guilabel">Coordinate Reference System Selector</span>, sélectionnez  <span class="guilabel">EPSG:3857 Pseudo Mercator</span></p>
 </li>
 </ol>
-<img alt="../_images/107.png" class="align-center" src="../_images/107.png" />
+<img alt="../_images/108.png" class="align-center" src="../_images/108.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Maintenant cliquez sur <span class="guilabel">Add Point</span> dans la barre d&#8217;outils et choisissez un endroit de l&#8217;image facilement identifiable. Les coins, les intersections et les points sont a privilégier et constituent des bons points de contrôle.</p>
 </li>
@@ -329,43 +323,43 @@ Lancer le <strong>Georeferencer</strong> depuis <span class="menuselection">Rast
 <li><p class="first">Après avoir clique sur un point de l&#8217;image, vous verrez apparaitre une fenêtre vous demandant d’insérer les coordonnes de la carte. Appuyez alors sur <span class="guilabel">From map canvas</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1210.png" class="align-center" src="../_images/1210.png" />
+<img alt="../_images/1211.png" class="align-center" src="../_images/1211.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Repérez le même endroit sur la couche OpenStreetMap et cliquez dessus. Les coordonnées sont alors generees automatiquement. Procédez de la même façon pour 4 autres points de l&#8217;image en ajoutant leurs coordonnées depuis le calque de reference.</p>
 </li>
 </ol>
-<img alt="../_images/139.png" class="align-center" src="../_images/139.png" />
+<img alt="../_images/1310.png" class="align-center" src="../_images/1310.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Allez maintenant dans <span class="menuselection">Settings ‣ Transformation settings.</span></p>
 </li>
 </ol>
-<img alt="../_images/147.png" class="align-center" src="../_images/147.png" />
+<img alt="../_images/148.png" class="align-center" src="../_images/148.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Choissisez les options comme suit. Vérifiez que le bouton <span class="guilabel">Load in QGIS when done</span> est bien sélectionne. Cliquez sur OK. Retournez alors dans la fenêtre <span class="guilabel">Georeferencer</span> puis allez a <span class="menuselection">File ‣ Start georeferencing</span>. Cela va enclencher le processus de redressement de l&#8217;image et créer un nouveau raster.</p>
 </li>
 </ol>
-<img alt="../_images/157.png" class="align-center" src="../_images/157.png" />
+<img alt="../_images/158.png" class="align-center" src="../_images/158.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Une fois le processus termine, vous verrez apparaitre dans QGIS la nouvelle couche géolocalisee. Si tout a bien fonctionne, la couche devrait se superposer parfaitement au calque OpenStreetMap.</p>
 </li>
 </ol>
-<img alt="../_images/166.png" class="align-center" src="../_images/166.png" />
+<img alt="../_images/167.png" class="align-center" src="../_images/167.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Pour ameliorer le rendu, vous pouvez enlever les valeurs no-data en noir et blanc. Clique-droit sur le calque de l&#8217;image puis <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/177.png" class="align-center" src="../_images/177.png" />
+<img alt="../_images/178.png" class="align-center" src="../_images/178.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Allez a l&#8217;onglet <span class="guilabel">Transparency</span>. Nous voulons faire en sorte que tous les pixels noirs et blancs de l&#8217;image deviennent transparents.
 Entrez 0 dans <span class="guilabel">No data value</span>. Aussi, dans <span class="guilabel">Custom transparency options</span>,  cliquez sur le bouton <span class="guilabel">+</span> et ajoutez 255 aux pixels transparents pour chaque couche, ensuite indiquez 100 dans <span class="guilabel">Percent transparent</span>. Validez avec <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/187.png" class="align-center" src="../_images/187.png" />
+<img alt="../_images/188.png" class="align-center" src="../_images/188.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Votre image est maintenant parfaitement superposée a la couche de base.</p>
 </li>
 </ol>
-<img alt="../_images/195.png" class="align-center" src="../_images/195.png" />
+<img alt="../_images/196.png" class="align-center" src="../_images/196.png" />
 </div>
 </div>
 
@@ -391,7 +385,7 @@ Entrez 0 dans <span class="guilabel">No data value</span>. Aussi, dans <span cla
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Mis à jour le Apr 13, 2019.<br/>
+      Mis à jour le Apr 14, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

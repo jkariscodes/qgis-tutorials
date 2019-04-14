@@ -92,7 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Χρήση WMS Δεδομένων</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Γεω-αναφορά Αεροφωτογραφιών</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Ψηφιοποίηση Δεδομένων Χάρτη</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Εκτελώντας συγχωνεύσεις πινάκων</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Εκτέλεση xωρικών ενώσεων</a></li>
@@ -215,7 +215,7 @@
 <h1>Γεω-αναφορά Τοπογραφικών Φύλλων και Σαρωμένων Χαρτών<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/georeferencing_basics.html"><em>Georeferencing Topo Sheets and Scanned Maps (QGIS3)</em></a></p>
+<p class="last">This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/georeferencing_basics.html"><em>Georeferencing Topo Sheets and Scanned Maps (QGIS3)</em></a></p>
 </div>
 <p>Τα περισσότερα GIS έργα απαιτούν γεω-αναφορά ορισμένων δεδομένων πλέγματος. Το <em>Georeferencing</em> είναι η διαδικασία της ανάθεσης πραγματικών συντεταγμένων σε κάθε pixel του πλέγματος. Πολλές φορές, αυτές οι συντεταγμένες αποκτούνται μέσω ερευνών πεδίου - η συλλογή συντεταγμένων με μια συσκευή GPS, για λίγα ευκόλως αναγνωρίσιμα χαρακτηριστικά, στην εικόνα ή στον χάρτη. Σε ορισμένες περιπτώσεις, όπου θέλετε να ψηφιοποιήσετε σαρωμένους χάρτες, μπορείτε να αποκτήσετε τις συντεταγμένες από τα σημάδια στην ίδια την εικόνα του χάρτη. Χρησιμοποιώντας αυτά τα δείγματα συντεταγμένων ή τα GCPs ( Ground Control Points ), η εικόνα έχει διπλωθεί και έχει χωρέσει στο επιλεγμένο σύστημα συντεταγμένων. Σε αυτό το tutorial, θα συζητήσουμε τις έννοιες, τις στρατηγικές και τα εργαλεία στο QGIS, για να επιτύχουμε υψηλή ακρίβεια γεω-αναφοράς.</p>
 <div class="section" id="overview-of-the-task">
@@ -245,7 +245,7 @@ need to enable it. Go to <span class="menuselection">Plugins ‣ Manage and Inst
 Plugins</span> and enable the <span class="guilabel">Georeferencer GDAL</span> plugin in the
 <span class="guilabel">Installed</span> tab. See <a class="reference internal" href="using_plugins.html"><em>Χρησιμοποιώντας Πρόσθετες Λειτουργίες</em></a> for more details on how to
 work with plugins.</p>
-<img alt="../_images/1104.png" class="align-center" src="../_images/1104.png" />
+<img alt="../_images/1106.png" class="align-center" src="../_images/1106.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Το πρόσθετο είναι εγκατεστημένο Raster μενού. Πατήστε το <span class="menuselection">Raster ‣ Georeferencer ‣ Georeferencer</span> για να ανοίξετε το πρόσθετο.</p>
 </li>
@@ -255,42 +255,42 @@ work with plugins.</p>
 <li><p class="first">Το παράθυρο του πρόσθετου είναι χωρισμένο σε 2 περιοχές. Η πάνω περιοχή, είναι εκεί που θα εμφανίζονται τα πλέγματα και η κάτω, είναι εκεί που θα προβάλλεται ένας πίνακας, ο οποίος θα δείχνει τα GCPs.</p>
 </li>
 </ol>
-<img alt="../_images/344.png" class="align-center" src="../_images/344.png" />
+<img alt="../_images/345.png" class="align-center" src="../_images/345.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Τώρα θα ανοίξουμε την JPG εικόνα μας. Πηγαίνετε στο <span class="menuselection">File ‣ Open Raster</span>. Αναζητήστε την εικόνα του σαρωμένου χάρτη που κατεβάσαμε και πατήστε <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/422.png" class="align-center" src="../_images/422.png" />
+<img alt="../_images/423.png" class="align-center" src="../_images/423.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Στην επόμενη οθόνη, θα σας ζητηθεί να επιλέξετε το σύστημα αναφοράς συντεταγμένων (CRS) των πλεγμάτων. Αυτό είναι για να διευκρινίσετε την προβολή και τα δεδομένα των σημείων ελέγχου.  Εάν έχετε συλλέξει τα σημεία ελέγχου εδάφους χρησιμοποιώντας μια GPS συσκευή, θα έχετε το WGS84 CRS. Εάν κάνετε γεω-αναφορά ενός σαρωμένου χάρτη όπως τώρα, μπορείτε να αποκτήσετε την CRS πληροφορία απευθείας από τον χάρτη. Βλέποντας την εικόνα του χάρτη μας, οι συντεταγμένες είναι σε Γεωγραφικό Πλάτος/Μήκος. Δε μας δίνεται καμία πληροφορία δεδομένων, οπότε πρέπει να υποθέσουμε μια κατάλληλη. Εφόσον είναι η Ινδία και ο χάρτης είναι αρκετά παλιός, μπορούμε να υποθέσουμε ότι τα δεδομένα Everest 1830 θα μας δώσουν καλά αποτελέσματα.</p>
 </li>
 </ol>
-<img alt="../_images/522.png" class="align-center" src="../_images/522.png" />
+<img alt="../_images/523.png" class="align-center" src="../_images/523.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Θα δείτε ότι η εικόνα θα έχει φορτωθεί στην πάνω περιοχή.</p>
 </li>
 </ol>
-<img alt="../_images/620.png" class="align-center" src="../_images/620.png" />
+<img alt="../_images/621.png" class="align-center" src="../_images/621.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Μπορείτε να χρησιμοποιήσετε τα εργαλεία μεγέθυνση/μετακίνηση στη γραμμή εργαλείων, για να μάθετε περισσότερα για τον χάρτη.</p>
 </li>
 </ol>
-<img alt="../_images/720.png" class="align-center" src="../_images/720.png" />
+<img alt="../_images/721.png" class="align-center" src="../_images/721.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Τώρα πρέπει να αναθέσουμε συντεταγμένες σε μερικά σημεία στον χάρτη. Αν κοιτάξετε πιο προσεκτικά, θα δείτε ένα πλέγμα συντεταγμένων με μαρκαρίσματα. Χρησιμοποιώντας αυτό το πλέγμα, μπορείτε να προσδιορίσετε τις συντεταγμένες Χ και Υ των σημείων, εκεί όπου τα πλέγματα διασταυρώνονται. Πατήστε το <span class="guilabel">Add Point</span> στη γραμμή εργαλείων.</p>
 </li>
 </ol>
-<img alt="../_images/819.png" class="align-center" src="../_images/819.png" />
+<img alt="../_images/820.png" class="align-center" src="../_images/820.png" />
 <ol class="arabic simple" start="9">
 <li>In the pop-up window, enter the coordinates. Remember that X=longitude and
 Y=latitude.  Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/919.png" class="align-center" src="../_images/919.png" />
+<img alt="../_images/920.png" class="align-center" src="../_images/920.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Θα παρατηρήσετε, ότι ο πίνακας GCP τώρα έχει μια γραμμή με λεπτομέρειες του πρώτου σας GCP.</p>
 </li>
 </ol>
-<img alt="../_images/1018.png" class="align-center" src="../_images/1018.png" />
+<img alt="../_images/1019.png" class="align-center" src="../_images/1019.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Παρομοίως, προσθέστε τουλάχιστον 4 GCPs που θα καλύπτουν ολόκληρη την εικόνα. Όσο πιο πολλά σημεία έχετε, τόσο πιο ακριβής θα είναι η καταχώρηση της εικόνας σας στις συντεταγμένες στόχου.</p>
 </li>
@@ -300,27 +300,27 @@ Y=latitude.  Click <span class="guilabel">OK</span>.</li>
 <li><p class="first">Μόλις έχετε αρκετά σημεία, πηγαίνετε στο <span class="menuselection">Settings -&gt; Transformation settings</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1220.png" class="align-center" src="../_images/1220.png" />
+<img alt="../_images/1221.png" class="align-center" src="../_images/1221.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Στο παράθυρο διαλόγου:guilabel:<cite>Transformation settings</cite>, επιλέξτε <span class="guilabel">Transformation type</span> ως <span class="guilabel">Thin Plate Spline</span>. Ονομάστε το αρχείο πλέγματος που θα αποθηκευτεί ως <span class="guilabel">1870_southern_india_modified.tif</span>. Επιλέξτε <span class="guilabel">EPSG:4326</span> ως το Target SRS, έτσι ώστε η εικόνα που θα έχουμε ως αποτέλεσμα να είναι σε ευρέως συμβατά δεδομένα. Σιγουρευτείτε ότι το κουτάκι <span class="guilabel">Load in QGIS when done</span> είναι τσεκαρισμένο. Πατήστε <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1319.png" class="align-center" src="../_images/1319.png" />
+<img alt="../_images/1320.png" class="align-center" src="../_images/1320.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Πίσω στο παράθυρο <span class="guilabel">Georeferencer</span>, πηγαίνετε στο <span class="menuselection">File ‣ Start georeferencing</span>. Αυτό θα ξεκινήσει τη διαδικασία της αναδίπλωσης της εικόνας με τη χρήση των GCPs και τη δημιουργία του πλέγματος - στόχου.</p>
 </li>
 </ol>
-<img alt="../_images/1418.png" class="align-center" src="../_images/1418.png" />
+<img alt="../_images/1419.png" class="align-center" src="../_images/1419.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Μόλις τελειώσει η διαδικασία, θα δείτε στο QGIS το επίπεδο στο οποίο έγινε η γεω-αναφορά.</p>
 </li>
 </ol>
-<img alt="../_images/1517.png" class="align-center" src="../_images/1517.png" />
+<img alt="../_images/1518.png" class="align-center" src="../_images/1518.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Η γεω-αναφορά έχει τώρα ολοκληρωθεί. Άλλα όπως πάντα, είναι καλή πρακτική να επαληθεύετε την εργασίας σας. Πως θα ελέγξουμε αν η γεω-αναφορά μας είναι ακριβής; Σε αυτήν την περίπτωση, φορτώστε το αρχείο shapefile με τα σύνορα από μια πηγή που εμπιστεύεστε, όπως το σύνολο δεδομένων Natural Earth και συγκρίνετε τα. Θα παρατηρήσετε ότι ταιριάζουν πολύ ωραία. Υπάρχει ένα λάθος και μπορεί να βελτιωθεί περαιτέρω, παίρνοντας περισσότερα σημεία ελέγχου, αλλάζοντας τις παραμέτρους μετασχηματισμού και δοκιμάζοντας διαφορετικά δεδομένα.</p>
 </li>
 </ol>
-<img alt="../_images/1615.png" class="align-center" src="../_images/1615.png" />
+<img alt="../_images/1616.png" class="align-center" src="../_images/1616.png" />
 </div>
 </div>
 
@@ -346,7 +346,7 @@ Y=latitude.  Click <span class="guilabel">OK</span>.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Apr 13, 2019.<br/>
+      Last updated on Apr 14, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
