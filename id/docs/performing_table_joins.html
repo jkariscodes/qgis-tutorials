@@ -30,8 +30,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Melakukan Join Spasial" href="performing_spatial_joins.html" />
-    <link rel="prev" title="Digitalisasi Data Peta" href="digitizing_basics.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -80,7 +78,7 @@
      href="../index.html">Tutorials List <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Pengantar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Bekerja dengan Attribut</a></li>
@@ -97,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalisasi Data Peta</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Melakukan Join Tabel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Melakukan Join Spasial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="points_in_polygon.html">Poin di Analisis Poligon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Membuat Heatmap</a></li>
@@ -131,14 +129,6 @@
             
               
                 
-  <li>
-    <a href="digitizing_basics.html" title="Previous Chapter: Digitalisasi Data Peta"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Digitalisasi ...</span>
-    </a>
-  </li>
-  <li>
-    <a href="performing_spatial_joins.html" title="Next Chapter: Melakukan Join Spasial"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Melakukan Joi... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -224,6 +214,10 @@
 
   <div class="section" id="performing-table-joins">
 <h1>Melakukan Join Tabel<a class="headerlink" href="#performing-table-joins" title="Link permanen untuk headline ini">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Peringatan</p>
+<p class="last">This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/performing_table_joins.html"><em>Performing Table Joins (QGIS3)</em></a></p>
+</div>
 <p>Tidak setiap dataset yang anda ingin gunakan sudah berupa shapefile atau sudah dalam format spasial. Seringkali data berupa tabel atau sebuah spreadsheet dan anda ingin menghubungkannya dengan data spasial yang sudah ada untuk anda gunakan dalam analisis. Operasi ini dikenal dengan <cite>Table Join</cite> dan tutorial ini akan menlingkupi bagaimana memperoleh join tabel di QGIS</p>
 <div class="section" id="overview-of-the-task">
 <h2>Tinjauan Tugas<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
@@ -257,12 +251,12 @@ links below:</p>
 <li><p class="first">Pertama-tama kita akan membuka shapefile census tract. Akses <span class="menuselection">Layer ‣ Add Vector Layer</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1137.png" class="align-center" src="../_images/1137.png" />
+<img alt="../_images/1139.png" class="align-center" src="../_images/1139.png" />
 <ol class="arabic simple" start="2">
 <li>Browse to the downloaded zip file <code class="docutils literal"><span class="pre">tl_2013_06_tract.zip</span></code> and select it. QGIS
 can open zip files directly so no need to uncompress it first.</li>
 </ol>
-<img alt="../_images/2100.png" class="align-center" src="../_images/2100.png" />
+<img alt="../_images/2101.png" class="align-center" src="../_images/2101.png" />
 <ol class="arabic simple" start="3">
 <li>Select the <code class="docutils literal"><span class="pre">tl_2013_06_tract.shp</span></code> layer and click <span class="guilabel">OK</span>.</li>
 </ol>
@@ -271,21 +265,21 @@ can open zip files directly so no need to uncompress it first.</li>
 <li><p class="first">Anda akan melihat daerah sensus terbuka di QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/432.png" class="align-center" src="../_images/432.png" />
+<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">klik kanan pada layer dan pilih <span class="guilabel">Open Attribute Table</span>.</p>
 </li>
 </ol>
-<img alt="../_images/533.png" class="align-center" src="../_images/533.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Periksa attribut dari shapefile tracts. Untuk menggabungkan sebuah tabel dan shapefile ini, kita membutuhkan sebuah attribut unik dan sama untuk setiap fitur, field <strong>GEOID</strong> merupakan pengidentifikasi unik untuk setiap tract dan dapat digunakan untuk <cite>link</cite> shapefile ini dengan tabel lain yang memiliki ID yang sama.</p>
 </li>
 </ol>
-<img alt="../_images/631.png" class="align-center" src="../_images/631.png" />
+<img alt="../_images/632.png" class="align-center" src="../_images/632.png" />
 <ol class="arabic simple" start="7">
 <li>Open the CSV file <code class="docutils literal"><span class="pre">ca_tracts_pop.csv</span></code> in a text editor. You will notice that each row of the file contains information about a tract along with the unique identifier we saw in the previous step. Note that this field is called <strong>GEO.id2</strong> in the CSV. You will also note that the <strong>D001</strong> column has population value for each of the census tract.</li>
 </ol>
-<img alt="../_images/730.png" class="align-center" src="../_images/730.png" />
+<img alt="../_images/731.png" class="align-center" src="../_images/731.png" />
 <ol class="arabic simple" start="8">
 <li>We could import this csv file without any further action and it would be
 imported. But, the default type of each column would be a <em>String</em> (text).
@@ -297,32 +291,32 @@ file will have only 1 row specifying data types for each column. Save this
 file as <code class="docutils literal"><span class="pre">ca_tracts_pop.csvt</span></code> in the same directory as the original <cite>.csv</cite>
 file. You can also <a class="reference external" href="../../downloads/ca_tracts_pop.csvt">download the csvt file from here.</a></li>
 </ol>
-<img alt="../_images/828.png" class="align-center" src="../_images/828.png" />
+<img alt="../_images/829.png" class="align-center" src="../_images/829.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Sekarang kita siap mengimpor file CSV ke QGIS. AKses <span class="menuselection">Layer ‣ Add Delimited Text Layer</span>.</p>
 </li>
 </ol>
-<img alt="../_images/927.png" class="align-center" src="../_images/927.png" />
+<img alt="../_images/928.png" class="align-center" src="../_images/928.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Jelajahi folder yang berisi file CSV dan pilih. Pastikan anda telah memilih <span class="guilabel">File format</span> dengan <span class="guilabel">CSV (comma separated values)</span> . Karena kita sedang mengimpor ini sebagai tabel, kita harus merinci bahwa file kita tidak berisi geometri. Pilih opsi <span class="guilabel">No geometry (attribute only table)</span> . Klik <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1027.png" class="align-center" src="../_images/1027.png" />
+<img alt="../_images/1028.png" class="align-center" src="../_images/1028.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">File CSV sekarang terimpor sebagai tabel ke QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/1138.png" class="align-center" src="../_images/1138.png" />
+<img alt="../_images/1140.png" class="align-center" src="../_images/1140.png" />
 <ol class="arabic simple" start="12">
 <li>Select the <code class="docutils literal"><span class="pre">tl_2013_06_tract</span></code> layer. Right-click on it and select
 <span class="guilabel">Properties</span>.</li>
 </ol>
-<img alt="../_images/1229.png" class="align-center" src="../_images/1229.png" />
+<img alt="../_images/1230.png" class="align-center" src="../_images/1230.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Pada dialog <span class="guilabel">Layer Properties</span> , pillih tab <span class="guilabel">Joins</span> . Klik tombol <cite>+</cite> pada bagian bawah untuk membuat sebuah join tabel yang baru.</p>
 </li>
 </ol>
-<img alt="../_images/1327.png" class="align-center" src="../_images/1327.png" />
+<img alt="../_images/1328.png" class="align-center" src="../_images/1328.png" />
 <ol class="arabic simple" start="14">
 <li>In the <span class="guilabel">Add vector join</span> dialog, select <code class="docutils literal"><span class="pre">ca_tracts_pop</span></code> as the
 <span class="guilabel">Join layer</span>. Next we have to select the field with unique ids in
@@ -330,38 +324,38 @@ both the shapefile and the CSV. Select <cite>GEO.id2</cite> and <cite>GEOID</cit
 <span class="guilabel">Join field</span> and <span class="guilabel">Target field</span> respectively. Click
 <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1426.png" class="align-center" src="../_images/1426.png" />
+<img alt="../_images/1427.png" class="align-center" src="../_images/1427.png" />
 <ol class="arabic simple" start="15">
 <li>Close the <span class="guilabel">Layer Properties</span> dialog and return to the main QGIS
 window. At this point, the fields from the CSV file are joined with the
 shapefile. Right-click on the <code class="docutils literal"><span class="pre">tl_2013_06_tract</span></code> layer and select
 <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
-<img alt="../_images/1524.png" class="align-center" src="../_images/1524.png" />
+<img alt="../_images/1525.png" class="align-center" src="../_images/1525.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Sekarang anda dapat melihat sebuat set field yang baru, termasuk field <span class="guilabel">ca_tracts_pop_D001</span> yang ditambahkan pada tiap fitur. Sekarang anda memiliki akses untuk angka populasi untuk setiap tract dari file CSV. Tutup tabel attrtibut dan kembali ke jendela utama QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/1622.png" class="align-center" src="../_images/1622.png" />
+<img alt="../_images/1623.png" class="align-center" src="../_images/1623.png" />
 <ol class="arabic simple" start="17">
 <li>Right-click the <code class="docutils literal"><span class="pre">tl_2013_06_tract</span></code> layer and select <span class="guilabel">Properties</span>.</li>
 </ol>
-<img alt="../_images/1721.png" class="align-center" src="../_images/1721.png" />
+<img alt="../_images/1722.png" class="align-center" src="../_images/1722.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Pilih tab <span class="guilabel">Style</span> . Pilih <span class="guilabel">Graduated</span> dari menu drop-down. Karena kita mencoba untuk membuat sebuah peta populasi, kita ingin mentapkan warna yang berbeda pada tiap daerah sensus. berdarkan perhitungan populasi. Pilih <span class="guilabel">ca_tracts_pop_D001</span> sebagai <span class="guilabel">Column</span> . Pilih sebuah daftar warna yang anda suka dari drop-down <span class="guilabel">Color ramp</span> . Pada <span class="guilabel">Mode</span> , pilih <span class="guilabel">Quantile (Equal Count)</span> . Berikutnya klik <span class="guilabel">Classify</span> . Anda akan melihat sebuah warna yang berbeda sudah ditetapkan dengan interval populasi tertentu. Klik <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1822.png" class="align-center" src="../_images/1822.png" />
+<img alt="../_images/1823.png" class="align-center" src="../_images/1823.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Sekarang anda akan melihat visualisasi dari daerah sensus yang telah melalui perubhan style menggunakan angka populasi. Gunakan tool <span class="guilabel">Zoom in</span>  untuk memilih area yang lebih kecil pada layer.</p>
 </li>
 </ol>
-<img alt="../_images/1918.png" class="align-center" src="../_images/1918.png" />
+<img alt="../_images/1919.png" class="align-center" src="../_images/1919.png" />
 <ol class="arabic simple" start="20">
 <li><p class="first">Anda mempunyai Peta Populasi California yang detail dan akurat. Anda juga bisa menggunakan teknik yang sama untuk membuat peta berdasarkan variasi data sensus.</p>
 </li>
 </ol>
-<img alt="../_images/2014.png" class="align-center" src="../_images/2014.png" />
+<img alt="../_images/2015.png" class="align-center" src="../_images/2015.png" />
 </div>
 </div>
 
@@ -387,7 +381,7 @@ shapefile. Right-click on the <code class="docutils literal"><span class="pre">t
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Apr 14, 2019.<br/>
+      Terakhir diperbarui pada Apr 19, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
