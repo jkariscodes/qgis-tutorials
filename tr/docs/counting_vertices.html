@@ -30,8 +30,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Open BIL, BIP or BSQ files in QGIS" href="open_bil_bip_bsq_files.html" />
-    <link rel="prev" title="Using the QGIS Browser" href="using_qgis_browser.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -80,7 +78,7 @@
      href="../index.html">Tutorials List <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Giriş</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Nitelikler ile Çalışma</a></li>
@@ -109,9 +107,9 @@
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Using the QGIS Browser</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Counting Number of Vertices in a Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
@@ -131,14 +129,6 @@
             
               
                 
-  <li>
-    <a href="using_qgis_browser.html" title="Previous Chapter: Using the QGIS Browser"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Using the QGI...</span>
-    </a>
-  </li>
-  <li>
-    <a href="open_bil_bip_bsq_files.html" title="Next Chapter: Open BIL, BIP or BSQ files in QGIS"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Open BIL, BIP... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -224,6 +214,10 @@
 
   <div class="section" id="counting-number-of-vertices-in-a-layer">
 <h1>Counting Number of Vertices in a Layer<a class="headerlink" href="#counting-number-of-vertices-in-a-layer" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Uyarı</p>
+<p class="last">For QGIS3, there is much simple solution using the expression num_points($geometry). See <a class="reference external" href="https://gis.stackexchange.com/a/292003/5160">this answer</a> for details.</p>
+</div>
 <p>QGIS doesn’t have a built-in function to calculate number of vertices for each
 feature in a layer. But a very handy plugin called <strong>Vertices Counter</strong> fills
 this gap and adds a few handy features as well.</p>
@@ -233,12 +227,12 @@ this gap and adds a few handy features as well.</p>
 <li>Find and install the <strong>Vertices Counter</strong> plugin. See <a class="reference internal" href="using_plugins.html"><em>Eklentileri Kullanma</em></a>
 for details on installing plugins in QGIS.</li>
 </ol>
-<img alt="../_images/1102.png" class="align-center" src="../_images/1102.png" />
+<img alt="../_images/1103.png" class="align-center" src="../_images/1103.png" />
 <ol class="arabic simple" start="2">
 <li>Load any polygon or line layer in QGIS. Go to <span class="menuselection">Vector ‣
 Vertices Counter ‣ Vertices Counter</span>.</li>
 </ol>
-<img alt="../_images/249.png" class="align-center" src="../_images/249.png" />
+<img alt="../_images/250.png" class="align-center" src="../_images/250.png" />
 <ol class="arabic simple" start="3">
 <li>By default, the active layer will be selected under the <span class="guilabel">Layer
 Selection</span>. You may select any other loaded layers or open layer directly
@@ -255,14 +249,14 @@ side.</li>
 <li>Back in the main QGIS window, let&#8217;s verify if a new column was added to our
 layer. Right-click the layer and select <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
-<img alt="../_images/419.png" class="align-center" src="../_images/419.png" />
+<img alt="../_images/420.png" class="align-center" src="../_images/420.png" />
 <ol class="arabic simple" start="5">
 <li>As you will notice, a column named <em>Vertices</em> will be added at the end with
 values representing the vertex count for each feature. This column can come
 in handy if you want to do a query such as <em>Select all features with Vertices
 &gt; X</em>.</li>
 </ol>
-<img alt="../_images/519.png" class="align-center" src="../_images/519.png" />
+<img alt="../_images/520.png" class="align-center" src="../_images/520.png" />
 </div>
 </div>
 
@@ -288,7 +282,7 @@ in handy if you want to do a query such as <em>Select all features with Vertices
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Son güncelleme: May 10, 2019.<br/>
+      Son güncelleme: May 23, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

@@ -106,9 +106,9 @@
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Використання QGIS Browser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="counting_vertices.html">Підрахунок кількості вершин у шарі</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Відкривання файлів BIL, BIP або BSQ у QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
@@ -250,22 +250,22 @@
 <li><p class="first">Для цього уроку, ми використаємо шар із OpenStreetMap в якості шару для посилання. Встановіть плагін OpenLayers із меню <span class="menuselection">Plugins ‣ Manage and install plugins ‣ Get more</span>. Дивіться <a class="reference internal" href="using_plugins.html"><em>Використання додатків</em></a> для більш детальної інформації про те як використовувати плагіни в QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/160.png" class="align-center" src="../_images/160.png" />
+<img alt="../_images/170.png" class="align-center" src="../_images/170.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Після встановлення, перейдіть у меню <span class="menuselection">Plugins ‣ OpenLayers plugin ‣ Add OpenStreetMap layer</span>. Ця дія додасть новий шар із попередньо візуалізованими плитками створеними з <a class="reference external" href="http://www.openstreetmap.org/">даних OpenStreetMap</a>.</p>
 </li>
 </ol>
-<img alt="../_images/235.png" class="align-center" src="../_images/235.png" />
+<img alt="../_images/236.png" class="align-center" src="../_images/236.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Тепер у вас є шар OpenStreetMap завантажений в QGIS. Вкажіть систему координат  (СК) для вашого шару. Вибрана EPSG 3857 Pseudo Mercator. Це важливо вибрати, оскільки координати, які ми беремо з цього шару, будуть в цій СК.</p>
 </li>
 </ol>
-<img alt="../_images/327.png" class="align-center" src="../_images/327.png" />
+<img alt="../_images/328.png" class="align-center" src="../_images/328.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Тепер задачею є знайти загальні околиці області, яку ми збираємося геоприв&#8217;язувати. Ви можете користуватися лише прокруткою і збільшенням аби знайти цю місцевість на  шарі OpenStreetMap. Але ми можемо скористатися цією можливістю аби продемонструвати інший інструмент, який може допомогти в майбутньому. Ми знаємо, що зображення які ми завантажили є парком Вашингтон-сквер в Нью Йорку. Якщо ви пошукаєте це місце, ви зможете знайти сторінку вікіпедії про нього. Координати парку вказані там.</p>
 </li>
 </ol>
-<img alt="../_images/413.png" class="align-center" src="../_images/413.png" />
+<img alt="../_images/414.png" class="align-center" src="../_images/414.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Ви помітите, що ті координати вказані Градусах/Хвилинах/Секундах і є широтою і довготою. Але оскільки наш шар створений в проекції Меркатор, нам потрібні координати Меркатора, щоб знайти парк. Ось де інструмент командної строки, що називається <strong>cs2cs</strong> буде корисним. Якщо ви встановили  QGIS за допомогою інсталятору OSGeo4W, ви вже маєте його встановленим у вашій системі. У системах Linux і Mac також, він попередньо встановлений разом з QGIS. Запустіть вікно терміналу і наберіть <code class="docutils literal"><span class="pre">cs2cs</span></code>, щоб перевірити його наявність. Користувачі Windows можуть знайти термінал в меню <span class="menuselection">Start ‣ OSGeo4W ‣ MSYS</span>.</p>
 </li>
@@ -274,7 +274,7 @@
 <p class="first admonition-title">Примітка</p>
 <p class="last">MacOS users can locate the cs2cs tool at /Library/Frameworks/PROJ.Framework/Programs/cs2cs</p>
 </div>
-<img alt="../_images/513.png" class="align-center" src="../_images/513.png" />
+<img alt="../_images/514.png" class="align-center" src="../_images/514.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Після того, як ви переконалися, що інструмент cs2cs існує у вашій системі, час перетворити відомі нам Широту і Довготу в координати Меркатора. Відповідно до того, як працює цей інструмент вам необхідно вказати <span class="guilabel">source</span> і <span class="guilabel">destination</span> СК. Визначення СК може бути <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">рядок формату PROJ4</a> або <a class="reference external" href="http://www.epsg-registry.org/">код EPSG</a>. Оскільки ми вже знаємо код EPSG для початкової і вихідної СК, ми використаємо їх. Найпростішим способом використання цього інструменту це задати вхідні координати в командний рядок самостійно. Зверніть увагу, що інструмент приймає координати в порядку <cite>X Y</cite>, тому нам потрібно ввести <cite>Довготу Широту</cite>. ведіть наступну команду в термінал і натисніть Enter. Зверніть увагу, що ми повинні перед лапками (&#8221;) вказати зворотній слеш (\). Коли ви натиснете Enter, ви побачите як оброблюються ваші координати і виводяться на екран вихідні X Y координати в EPSG 3857 СК.</p>
 </li>
@@ -288,7 +288,7 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>echo -73d59&#39;51 40d43&#39;51 | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 </pre></div>
 </div>
-<img alt="../_images/612.png" class="align-center" src="../_images/612.png" />
+<img alt="../_images/613.png" class="align-center" src="../_images/613.png" />
 <ol class="arabic simple" start="7">
 <li>Copy these coordinates and switch to QGIS. At the bottom of the QGIS window,
 you will see a textbox labeled Coordinates. Enter the coordinates there in
@@ -296,7 +296,7 @@ X,Y form. Press Enter.  You will see the map shift a bit, but not zoom. To
 zoom to the area, select 1:2500 scale from the Scale drop-down next to the
 Coordinate box and press Enter.</li>
 </ol>
-<img alt="../_images/712.png" class="align-center" src="../_images/712.png" />
+<img alt="../_images/713.png" class="align-center" src="../_images/713.png" />
 <ol class="arabic simple" start="8">
 <li>Voila! you now see Washington Square Park area on your canvas. Now it is
 time to start georeferencing. Launch the <strong>Georeferencer</strong> from
@@ -305,23 +305,23 @@ see that menu item, you will need to enable the <span class="guilabel">Georefere
 GDAL</span> plugin from <span class="menuselection">Plugins ‣ Manage and install Plugins ‣
 Installed</span>.</li>
 </ol>
-<img alt="../_images/811.png" class="align-center" src="../_images/811.png" />
+<img alt="../_images/812.png" class="align-center" src="../_images/812.png" />
 <ol class="arabic simple" start="9">
 <li>In the <span class="guilabel">Georeferencer</span> window, go to <span class="menuselection">File ‣ Open
 raster</span>. Navigate to the downloaded JPG file and click <span class="guilabel">Open</span>.</li>
 </ol>
-<img alt="../_images/912.png" class="align-center" src="../_images/912.png" />
+<img alt="../_images/913.png" class="align-center" src="../_images/913.png" />
 <ol class="arabic simple" start="10">
 <li>In the <span class="guilabel">Coordinate Reference System Selector</span>,
 choose <span class="guilabel">EPSG:3857 Pseudo Mercator</span></li>
 </ol>
-<img alt="../_images/1011.png" class="align-center" src="../_images/1011.png" />
+<img alt="../_images/1012.png" class="align-center" src="../_images/1012.png" />
 <ol class="arabic simple" start="11">
 <li>Now click on the <span class="guilabel">Add Point</span> button on the toolbar and select an easily
 identifiable location on the image. Corners, intersections, poles etc. make
 good control points.</li>
 </ol>
-<img alt="../_images/1116.png" class="align-center" src="../_images/1116.png" />
+<img alt="../_images/1117.png" class="align-center" src="../_images/1117.png" />
 <ol class="arabic simple" start="12">
 <li>Once you click on the image at a control point location, you will see a
 pop-up asking you to enter map coordinates. Click the button
@@ -339,7 +339,7 @@ image and add their coordinates from the reference layer.</li>
 <li><p class="first">Тепер перейдіть у меню <span class="menuselection">Settings ‣ Transformation settings.</span></p>
 </li>
 </ol>
-<img alt="../_images/1412.png" class="align-center" src="../_images/1412.png" />
+<img alt="../_images/1413.png" class="align-center" src="../_images/1413.png" />
 <ol class="arabic simple" start="15">
 <li>Choose the settings as shown below. Make sure you the <span class="guilabel">Load in
 QGIS when done</span> button is checked. Click OK. Back in the
@@ -347,7 +347,7 @@ QGIS when done</span> button is checked. Click OK. Back in the
 Start georeferencing</span>. This will start the process of warping the image
 using the GCPs and creating the target raster.</li>
 </ol>
-<img alt="../_images/1511.png" class="align-center" src="../_images/1511.png" />
+<img alt="../_images/1512.png" class="align-center" src="../_images/1512.png" />
 <ol class="arabic simple" start="16">
 <li>Once the process finishes, you will see the georeferenced layer loaded in
 QGIS. If all went well, you will see it nicely overlay the OpenStreetMap
@@ -398,7 +398,7 @@ add 255 as the transparent pixels for each band and enter 100 as the
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Востаннє оновлено May 10, 2019.<br/>
+      Востаннє оновлено May 23, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

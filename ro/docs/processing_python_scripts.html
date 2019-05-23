@@ -106,9 +106,9 @@
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automatizarea Fluxurilor de Lucru Complexe utilizând Modelatorul de Procese (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automatizarea Creării Hărților cu ajutorul Atlasului (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Utilizarea QGIS Browser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="counting_vertices.html">Aflarea numărului de noduri dintr-un strat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Fișierele Open BIL, BIP sau BSQ în QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Noțiuni de Bază Despre Programarea în Python (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Construirea unui Plugin Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Utilizarea Funcțiilor în Expresiile Python Personalizate (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Scriptare în Python pentru Cadrul de Procesare (QGIS3)</a></li>
@@ -240,12 +240,12 @@
 <li><p class="first">În QGIS, mergeți la <span class="menuselection">Layers ‣ Add Vector ‣ Add Vector Layer</span>. Navigați la fișierul descărcat <code class="docutils literal"><span class="pre">ne_10_admin_0_countries.zip</span></code> și încărcați stratul <code class="docutils literal"><span class="pre">ne_10_admin_0_countries</span></code>. Mergeți la <span class="menuselection">Processing ‣ Toolbox</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1150.png" class="align-center" src="../_images/1150.png" />
+<img alt="../_images/1152.png" class="align-center" src="../_images/1152.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Extinteți grupul <span class="guilabel">Scripts</span> din <span class="guilabel">Processing Toolbox</span> și selectați <span class="guilabel">Create a new script</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2105.png" class="align-center" src="../_images/2105.png" />
+<img alt="../_images/2106.png" class="align-center" src="../_images/2106.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Pentru ca un script Python să fie recunoscut ca un script de Procesare, la începutul script-ului trebuie să se afle specificațiile de intrare și de ieșire. Acestea vor fi utilizate la construirea interfeței cu utilizatorul, pentru a rula script-ul. Puteți afla mai multe despre formatul acestor linii, din <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/scripts.html">Documentația Processing din QGIS</a>. Introduceți următoarele linii în <span class="guilabel">Script editor</span>. Aici avem 3 intrări ale utilizatorului: <code class="docutils literal"><span class="pre">dissolve_layer</span></code>, <code class="docutils literal"><span class="pre">dissolve_field</span></code> și <code class="docutils literal"><span class="pre">sum_field</span></code>. Rețineți că <code class="docutils literal"><span class="pre">dissolve_layer</span></code> se adaugă după definițiile ambelor câmpuri de intrare. Acest lucru înseamnă că intrările vor fi pre-populate prin alegerea câmpurilor din <code class="docutils literal"><span class="pre">dissolve_layer</span></code>. De asemenea, specificați <code class="docutils literal"><span class="pre">output_layer</span></code> ca și strat vectorial de ieșire. Faceți clic pe butonul <span class="guilabel">Save</span>.</p>
 </li>
@@ -261,17 +261,17 @@
 <li><p class="first">Denumiți script-ul <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> și salvați-l în locația implicită din folderul <span class="menuselection">.qgis2 ‣ processing ‣ scripts</span>.</p>
 </li>
 </ol>
-<img alt="../_images/439.png" class="align-center" src="../_images/439.png" />
+<img alt="../_images/440.png" class="align-center" src="../_images/440.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Înapoi, în <span class="guilabel">Script editor</span>, faceți clic pe butonul <span class="guilabel">Run algorithm</span>, pentru a previzualiza interfața utilizatorului.</p>
 </li>
 </ol>
-<img alt="../_images/540.png" class="align-center" src="../_images/540.png" />
+<img alt="../_images/541.png" class="align-center" src="../_images/541.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Puteți vedea că doar prin adăugarea a câtorva rânduri, avem o interfață frumoasă, pe care utilizatorul va preciza intrările. De asemenea, este în concordanță cu toți ceilalți algoritmi de procesare, astfel încât nu există nici o curbă de învățare implicată în folosirea algoritmului personalizat.</p>
 </li>
 </ol>
-<img alt="../_images/637.png" class="align-center" src="../_images/637.png" />
+<img alt="../_images/638.png" class="align-center" src="../_images/638.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">În: guilabel: <cite>Script editor</cite>, introduceți următorul cod. Veți observa că apelăm unele metode speciale, cum ar fi <code class="docutils literal"><span class="pre">processing.getObject()</span></code> și <code class="docutils literal"><span class="pre">processing.features()</span></code>. Acestea sunt ambalate confortabil, pentru a ușura lucrul cu datele. Puteți afla mai multe despre acestea din secțiunea <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/console.html#additional-functions-for-handling-data">Funcțiilor suplimentare de manipulare a datelor</a> a Documentației de Procesare QGIS. Clic pe <span class="guilabel">Save</span> pentru a salva codul nou introdus, și apoi pe butonul <span class="guilabel">X</span> pentru a închide editorul.</p>
 </li>
@@ -294,27 +294,27 @@
 <span class="k">print</span> <span class="n">unique_values</span>
 </pre></div>
 </div>
-<img alt="../_images/736.png" class="align-center" src="../_images/736.png" />
+<img alt="../_images/737.png" class="align-center" src="../_images/737.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">În timp ce se scrie codul, este important să fiți în măsură să vedeți erorile și să depanați codul. Script-urile de Procesare pot fi depanate cu ușurință prin intermediul consolei Python încorporate. În fereastra principală a QGIS, mergeți la <span class="menuselection">Plugins ‣ Python Console</span>. O dată ce consola este deschisă, găsiți script-ul în <span class="guilabel">Instrumentarul Processing</span> și faceți dublu clic pe el pentru a-l lansa.</p>
 </li>
 </ol>
-<img alt="../_images/834.png" class="align-center" src="../_images/834.png" />
+<img alt="../_images/835.png" class="align-center" src="../_images/835.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Selectați <code class="docutils literal"><span class="pre">SUBREGIUNE</span></code> ca și <span class="guilabel">câmp de dizolvare</span>. Puteți alege orice câmp și ca <span class="guilabel">câmp de însumare</span> atât timp cât scriptul nu are nici un cod pentru a interacționa cu acesta. Clic <span class="guilabel">Run</span>.</p>
 </li>
 </ol>
-<img alt="../_images/933.png" class="align-center" src="../_images/933.png" />
+<img alt="../_images/934.png" class="align-center" src="../_images/934.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Veți vedea un dialog de eroare. Acest lucru este de așteptat, deoarece script-ul este incomplet și nu generează nici o ieșire încă.</p>
 </li>
 </ol>
-<img alt="../_images/1033.png" class="align-center" src="../_images/1033.png" />
+<img alt="../_images/1034.png" class="align-center" src="../_images/1034.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">În principalele ferestrele QGIS, veți vedea ieșirea de depanare a script-ului afișat în consolă. Acest lucru este un mod util de a adăuga instrucțiuni de imprimare și de a vedea valorile variabile intermediare.</p>
 </li>
 </ol>
-<img alt="../_images/1151.png" class="align-center" src="../_images/1151.png" />
+<img alt="../_images/1153.png" class="align-center" src="../_images/1153.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Să ne întoarcem la editarea script-ului printr-un clic dreapta pe script, apoi selectați <span class="guilabel">Edit script</span>.</p>
 </li>
@@ -359,12 +359,12 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Algoritmul de procesare poate dura până la 10 minute pentru a termina, în funcție de sistemul dumneavoastră.</p>
 </div>
-<img alt="../_images/1431.png" class="align-center" src="../_images/1431.png" />
+<img alt="../_images/1432.png" class="align-center" src="../_images/1432.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">După ce prelucrarea se încheie, puteți folosi instrumentul de <span class="guilabel">Identificare</span>, pentru a efectua clic pe orice poligon. Veți vedea adăugat noul câmp, <code class="docutils literal"><span class="pre">SUM</span></code>, cu valorile <code class="docutils literal"><span class="pre">POP_EST</span></code> adăugate din toate poligoanele originale.</p>
 </li>
 </ol>
-<img alt="../_images/1529.png" class="align-center" src="../_images/1529.png" />
+<img alt="../_images/1530.png" class="align-center" src="../_images/1530.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Veți observa că toate celelalte câmpuri ale rezultatului sunt încă prezente. Când se dizolvă mai multe entități pentru a crea o singură entitate, nu are sens să se păstreze câmpurile originale în rezultat. Mergeți înapoi la: guilabel: <cite>Script editor</cite> și adăugați următorul cod pentru a șterge toate domeniile, cu excepția câmpului <code class="docutils literal"><span class="pre">SUM</span></code> și a câmpului care a fost folosit pentru a dizolva stratul original. Faceți clic pe butonul <span class="guilabel">Save</span> și închideți fereastra.</p>
 </li>
@@ -492,7 +492,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on May 10, 2019.<br/>
+      Last updated on May 23, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

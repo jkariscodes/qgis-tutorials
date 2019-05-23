@@ -108,9 +108,9 @@
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automatizarea Fluxurilor de Lucru Complexe utilizând Modelatorul de Procese (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automatizarea Creării Hărților cu ajutorul Atlasului (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Utilizarea QGIS Browser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="counting_vertices.html">Aflarea numărului de noduri dintr-un strat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Fișierele Open BIL, BIP sau BSQ în QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Noțiuni de Bază Despre Programarea în Python (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Construirea unui Plugin Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Utilizarea Funcțiilor în Expresiile Python Personalizate (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Scriptare în Python pentru Cadrul de Procesare (QGIS3)</a></li>
@@ -251,12 +251,12 @@
 <li><p class="first">Vom trece mai întâi prin procesul manual de curățare a fișierului shape, pentru a nota comenzile pe care le vom folosi în scriptul python. Lansați QGIS și mergeți la <span class="menuselection">Strat ‣ Adăugare Strat ‣ Adăugare Strat Vectorial</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1156.png" class="align-center" src="../_images/1156.png" />
+<img alt="../_images/1158.png" class="align-center" src="../_images/1158.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Navigați la folderul care conține fișierele shape dezarhivate, apoi selectați fișierul <code class="docutils literal"><span class="pre">roads.shp</span></code> și faceți clic pe <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2108.png" class="align-center" src="../_images/2108.png" />
+<img alt="../_images/2109.png" class="align-center" src="../_images/2109.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">În primul rând trebuie să reproiectăm stratul drumurilor, folosind un CRS Proiectat. Aceasta ne va permite să folosim ca unități <em>metrii</em> în locul gradelor, atunci când se va efectua o analiză. Deschideți <span class="menuselection">Procesare ‣ Instrumentar</span>.</p>
 </li>
@@ -266,42 +266,42 @@
 <li><p class="first">Căutați instrumentul <span class="guilabel">Reproiectare strat</span>. Faceți dublu clic pe el pentru a lansa dialogul.</p>
 </li>
 </ol>
-<img alt="../_images/442.png" class="align-center" src="../_images/442.png" />
+<img alt="../_images/443.png" class="align-center" src="../_images/443.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">În dialogul <span class="guilabel">Reproiectare strat</span>, folosiți stratul <code class="docutils literal"><span class="pre">roads</span></code> ca <span class="guilabel">Strat de intrare</span>. Vom folosi CRS-ul <code class="docutils literal"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> ca <span class="guilabel">CRS Destinație</span>. Clic pe <span class="guilabel">Rulează</span>.</p>
 </li>
 </ol>
-<img alt="../_images/543.png" class="align-center" src="../_images/543.png" />
+<img alt="../_images/544.png" class="align-center" src="../_images/544.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">O dată ce procesul s-a încheiat, stratul reproiectat se va încărca în QGIS. Mergeți la <span class="menuselection">Procesare ‣ Istoric și Jurnal..</span>.</p>
 </li>
 </ol>
-<img alt="../_images/640.png" class="align-center" src="../_images/640.png" />
+<img alt="../_images/641.png" class="align-center" src="../_images/641.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">În dialogul <span class="guilabel">Istoric și Jurnal</span>, expandați folderul <span class="guilabel">Algoritm</span> și selectați ultima intrare. Veți vedea comanda completă de procesare afișată în panoul de jos. Notați această comandă, pentru a o utiliza în script-ul nostru.</p>
 </li>
 </ol>
-<img alt="../_images/739.png" class="align-center" src="../_images/739.png" />
+<img alt="../_images/740.png" class="align-center" src="../_images/740.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Înapoi în fereastra principală a QGIS, faceți clic pe butonul <span class="guilabel">CRS</span> din colțul din dreapta-jos.</p>
 </li>
 </ol>
-<img alt="../_images/837.png" class="align-center" src="../_images/837.png" />
+<img alt="../_images/838.png" class="align-center" src="../_images/838.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">În dialogul <span class="guilabel">Proprietățile Proiectului | CRS</span>, bifați <span class="guilabel">Activează transformarea din zbor a CRS-ului</span>, apoi selectați <code class="docutils literal"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> ca CRS. Acest lucru vă asigură că straturile noastre originale și cele reproiectate se vor alinia corect.</p>
 </li>
 </ol>
-<img alt="../_images/936.png" class="align-center" src="../_images/936.png" />
+<img alt="../_images/937.png" class="align-center" src="../_images/937.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Acum, vom rula operația de curățare. GRASS având un set foarte puternic de instrumente de curățare topologică. Acestea sunt disponibile în QGIS prin algoritmul <code class="docutils literal"><span class="pre">v.clean</span></code>. Căutați acest algoritm în <span class="guilabel">Instrumentarul de Procesare</span>, apoi faceți dublu clic pe el pentru a lansa dialogul.</p>
 </li>
 </ol>
-<img alt="../_images/1036.png" class="align-center" src="../_images/1036.png" />
+<img alt="../_images/1037.png" class="align-center" src="../_images/1037.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Puteți citi despre mai multe instrumente diferite și despre opțiunile acestora în fila <span class="guilabel">Ajutor</span>. Pentru acest tutorial, vom folosi instrumentul <code class="docutils literal"><span class="pre">snap</span></code> pentru a elimina vertexurile duplicate, care se află cel mult la 1 metru unul față de celălalt. Selectați <code class="docutils literal"><span class="pre">Stratul</span> <span class="pre">reproiectat</span></code> ca <span class="guilabel">Stratul de curățat</span>. Alegeți <code class="docutils literal"><span class="pre">snap</span></code> ca <span class="guilabel">Instrument de curățare</span>. Introduceți <code class="docutils literal"><span class="pre">1.00</span></code> ca <span class="guilabel">Prag</span>. Lăsați celelalte câmpuri goale și faceți clic pe <span class="guilabel">Rulează</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1157.png" class="align-center" src="../_images/1157.png" />
+<img alt="../_images/1159.png" class="align-center" src="../_images/1159.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">După ce termină prelucrarea, veți vedea 2 straturi noi adăugate în QGIS. <code class="docutils literal"><span class="pre">Stratul</span> <span class="pre">vectorial</span> <span class="pre">curățat</span></code> este stratul cu erori topologice corectate. Veți avea, de asemenea, un <code class="docutils literal"><span class="pre">Strat</span> <span class="pre">cu</span> <span class="pre">erori</span></code> care va evidenția entitățile care au fost reparate. Puteți utiliza stratul erorilor ca un ghid și să-l măriți, pentru a vedea vertexurile care au fost eliminate.</p>
 </li>
@@ -337,7 +337,7 @@ python c:\Users\Ujaval\Desktop\download_and_clean.py
 pause
 </pre></div>
 </div>
-<img alt="../_images/1434.png" class="align-center" src="../_images/1434.png" />
+<img alt="../_images/1435.png" class="align-center" src="../_images/1435.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Creați un nou fișier python și introduceți următorul cod. Denumiți fișierul ca <code class="docutils literal"><span class="pre">download_and_clean.py</span></code>, apoi salvați-l pe desktop.</p>
 </li>
@@ -346,7 +346,7 @@ pause
 <span class="k">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1532.png" class="align-center" src="../_images/1532.png" />
+<img alt="../_images/1533.png" class="align-center" src="../_images/1533.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Comutați la Desktop-ul dvs. și localizați pictograma <code class="docutils literal"><span class="pre">launch.bat</span></code>. Faceți dublu clic pe el pentru a lansa o nouă fereastră de comandă și rulați scriptul. Dacă vedeți <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code> afișat în fereastra de comandă, instalarea și configurarea au fost corecte. Dacă vedeți erori sau nu vedeți textul, verificați fișierul <code class="docutils literal"><span class="pre">launch.bat</span></code> și asigurați-vă că toate căile se potrivesc cu locațiile de pe sistemul dumneavoastră.</p>
 </li>
@@ -565,7 +565,7 @@ pause
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on May 10, 2019.<br/>
+      Last updated on May 23, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

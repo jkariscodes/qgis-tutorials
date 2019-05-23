@@ -30,8 +30,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Membuka file BIL, BIP atau BSQ di QGIS" href="open_bil_bip_bsq_files.html" />
-    <link rel="prev" title="Menggunakan QGIS Browser" href="using_qgis_browser.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -80,7 +78,7 @@
      href="../index.html">Tutorials List <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Pengantar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Bekerja dengan Attribut</a></li>
@@ -109,9 +107,9 @@
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Menggunakan QGIS Browser</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Menghitung jumlah vertices pada sebuah Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Membuka file BIL, BIP atau BSQ di QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
@@ -131,14 +129,6 @@
             
               
                 
-  <li>
-    <a href="using_qgis_browser.html" title="Previous Chapter: Menggunakan QGIS Browser"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Menggunakan Q...</span>
-    </a>
-  </li>
-  <li>
-    <a href="open_bil_bip_bsq_files.html" title="Next Chapter: Membuka file BIL, BIP atau BSQ di QGIS"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Membuka file ... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -224,6 +214,10 @@
 
   <div class="section" id="counting-number-of-vertices-in-a-layer">
 <h1>Menghitung jumlah vertices pada sebuah Layer<a class="headerlink" href="#counting-number-of-vertices-in-a-layer" title="Link permanen untuk headline ini">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Peringatan</p>
+<p class="last">For QGIS3, there is much simple solution using the expression num_points($geometry). See <a class="reference external" href="https://gis.stackexchange.com/a/292003/5160">this answer</a> for details.</p>
+</div>
 <p>QGIS tidak mempunyai fungsi built-in untuk menghitung jumlah vertices untuk setiap fitur pada sebuah layer. Tetapi sebuah plugin berguna yang bernama <strong>Vertices Counter</strong> mengisi kekosongan ini dan menambahkan beberapa fitur yang berguna pula.</p>
 <div class="section" id="procedure">
 <h2>Prosedur<a class="headerlink" href="#procedure" title="Link permanen untuk headline ini">¶</a></h2>
@@ -231,12 +225,12 @@
 <li><p class="first">Cari dan Install plugin <strong>Vertices Counter</strong> . lihat <code class="xref doc docutils literal"><span class="pre">docs/using_plugins</span></code> utnuk lebih detail dalam menginstall plugins di QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/1102.png" class="align-center" src="../_images/1102.png" />
+<img alt="../_images/1103.png" class="align-center" src="../_images/1103.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Buka layer poligon atau garis mana saja di QGIS. Kemudian akses <span class="menuselection">Vector ‣ Vertices Counter ‣ Vertices Counter</span>.</p>
 </li>
 </ol>
-<img alt="../_images/249.png" class="align-center" src="../_images/249.png" />
+<img alt="../_images/250.png" class="align-center" src="../_images/250.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Di settingan awal, layer yang aktif akan terpilih dari <span class="guilabel">Layer Selection</span> . Anda mungkin memilih layer yang sudah dibuka lainnya atau membuka layer langsung dari disk. Plugin ini mempunyai opsi bernama <span class="guilabel">Create new column</span> yang dapat menambah angka jumlah vertices sebagai attribut untuk setiap fitur. Ini berguna untuk banyak kasus, jadi kita dapat memilih opsi tersebut. Sekarang klik tombol <span class="guilabel">Count Vertices</span> dan bagian  <span class="guilabel">Results</span> akan terkumpul dengan jumlah sudut untuk setiap fitur. Anda bahkan dapat melihat <span class="guilabel">Total Vertices</span>  yang terlampir di samping</p>
 </li>
@@ -246,12 +240,12 @@
 <li><p class="first">Kembali ke jendela utama QGIS, mari kita verifikasi jika sebuah kolom baru ditambahkan ke layer kita, Klik kanan pada layer dan pilih <span class="guilabel">Open Attribute Table</span>.</p>
 </li>
 </ol>
-<img alt="../_images/419.png" class="align-center" src="../_images/419.png" />
+<img alt="../_images/420.png" class="align-center" src="../_images/420.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Seperti yang anda lihat, sebuah kolom bernama <em>Vertices</em> akan ditambahkan di akhhir nilai merepresentasikan jumlah verteks untuk setiap fitur. Kolom ini dapat berguna jika anda ingin melakukan sebuah query seperti <em>Select all features with Vertices &gt; X</em>.</p>
 </li>
 </ol>
-<img alt="../_images/519.png" class="align-center" src="../_images/519.png" />
+<img alt="../_images/520.png" class="align-center" src="../_images/520.png" />
 </div>
 </div>
 
@@ -277,7 +271,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada May 10, 2019.<br/>
+      Terakhir diperbarui pada May 23, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
