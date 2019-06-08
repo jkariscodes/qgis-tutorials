@@ -99,7 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">空間連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">近鄰分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">點資料內插法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">使用處理框架進行批次處理 (QGIS3)</a></li>
@@ -240,7 +240,7 @@
 <li><p class="first">解壓縮並取出 .bsq 檔：如使用 Windows，可以使用 <a class="reference external" href="http://www.7-zip.org/">7-Zip</a> 讀取和解壓縮 .gz 檔。你會看到壓縮檔中只有一個叫做 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 的 .bsq 檔，沒有 hdr 檔。</p>
 </li>
 </ol>
-<img alt="../_images/1145.png" class="align-center" src="../_images/1145.png" />
+<img alt="../_images/1148.png" class="align-center" src="../_images/1148.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">如果你嘗試在 QGIS 中開啟 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 的話，會有錯誤訊息顯示。</p>
 </li>
@@ -250,7 +250,7 @@
 <li><p class="first">如要克服此錯誤，我們得自己創造一個副檔名為 <code class="docutils literal"><span class="pre">.hdr</span></code> 的檔案。hdr 意味著檔頭（header），內含著資料集的結構以及各種資訊。這些資訊通常可以在資料集的詮釋資料（Metadata）中找到，如果你連詮釋資料都沒有，找看看資料來源的網站或文件說明有沒有提供。有些資訊就算你不知道，也可以用猜的。在本例中，資料的下載頁面有提供連結至<a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.glcf">詮釋資料</a>，把它下載下來然後開啟它。</p>
 </li>
 </ol>
-<img alt="../_images/359.png" class="align-center" src="../_images/359.png" />
+<img alt="../_images/360.png" class="align-center" src="../_images/360.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">.hdr 檔必須要是純文字檔案，並且編排為以下的格式才行。我們已經找到某些參數了，但其他的還需要花點心力。<a class="reference external" href="http://www.gdal.org/frmt_various.html">格式的細節請參考這裡</a>。</p>
 </li>
@@ -270,17 +270,17 @@ byteorder &lt;byte order in which image pixel values are stored, msb or lsb&gt;
 <li><p class="first">打開文字編輯器，然後依照前一個步驟的註明的格式輸入，再把檔案另存為 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.hdr</span></code>。務必確認你的檔名結尾不是 <code class="docutils literal"><span class="pre">.txt</span></code>。在文字檔中的某些值很容易理解：<strong>ncols</strong> 和 <strong>nrows</strong> 是影像的行數和每行的像素數目，可以從詮釋資料找到；<strong>cellsize</strong> 是像素解析度，詮釋資料中為 1。左下角的 X 與 Y 座標（<strong>xllcorner</strong> 和 <strong>yllcorner</strong>）要靠我們決定，由於影像覆蓋全球，又使用經緯度編排，<strong>xllcorner</strong> 和 <strong>yllcorner</strong> 可以分別設為 -180 和 -90。無資料值（nodata_value）的資訊也找不到，用猜的話 -9999 是個較保險的數值。從詮釋資料中，我們還可找到像素格式（Pixel Format）是 Byte，所以 <strong>nbits</strong> 要填上 8，然後 <strong>pixeltype</strong> 則為 <a href="#id1"><span class="problematic" id="id2">**</span></a>byte_unsigned**（無號位元組）。我們也沒有位元組順序（byteorder）的資訊，所以來試試看 msbfirst（最高有效位）。你也可以從<a class="reference external" href="../../downloads/gl-latlong-1deg-landcover.hdr">這裡</a>下載正確格式的 hdr 檔。</p>
 </li>
 </ol>
-<img alt="../_images/537.png" class="align-center" src="../_images/537.png" />
+<img alt="../_images/538.png" class="align-center" src="../_images/538.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">現在我們有檔頭檔案了，把它移到與 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 相同的目錄下，然後再 QGIS 中選擇 <span class="menuselection">圖層 ‣ 加入影像圖層</span>，選擇 <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> 作為輸入檔案然後按下 <span class="guilabel">開啟</span>。</p>
 </li>
 </ol>
-<img alt="../_images/635.png" class="align-center" src="../_images/635.png" />
+<img alt="../_images/636.png" class="align-center" src="../_images/636.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">接下來的視窗會要你選擇 CRS。由於檔案是以經緯度編排，這邊的 CRS 要選 <strong>WGS84 EPSG:4326</strong>。最後，你就可以看到 QGIS 已經載入本資料了。</p>
 </li>
 </ol>
-<img alt="../_images/734.png" class="align-center" src="../_images/734.png" />
+<img alt="../_images/735.png" class="align-center" src="../_images/735.png" />
 </div>
 </div>
 
@@ -306,7 +306,7 @@ byteorder &lt;byte order in which image pixel values are stored, msb or lsb&gt;
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 May 31, 2019.<br/>
+      最後更新日期是 Jun 08, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
