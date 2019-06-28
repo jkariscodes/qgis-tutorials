@@ -86,7 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Working with Terrain Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Working with WMS Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Projeksiyonlarla Çalışma</a></li>
@@ -249,22 +249,22 @@
 <li><p class="first">Bu derste kullanacağımız kaynak katman OpenStreetMap olacak. OpenStreetMap eklentisini <span class="menuselection">Plugins ‣ Manage and install plugins ‣ Get more</span>. See <a class="reference internal" href="using_plugins.html"><em>Eklentileri Kullanma</em></a> adımlarını takip ederek indirin. QGIS eklentileri hakkında daha fazlası için burayı takip edin: <a class="reference internal" href="using_plugins.html"><em>Eklentileri Kullanma</em></a></p>
 </li>
 </ol>
-<img alt="../_images/1105.png" class="align-center" src="../_images/1105.png" />
+<img alt="../_images/1106.png" class="align-center" src="../_images/1106.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">İndirme tamamlanınca <span class="menuselection">Plugins ‣ OpenLayers plugin ‣ Add OpenStreetMap layer</span> adımlarını uygulayın. Böylece <a class="reference external" href="http://www.openstreetmap.org/">OpenStreetMap</a> tarafından sağlanan katman eklenmiş olacaktır.</p>
 </li>
 </ol>
-<img alt="../_images/257.png" class="align-center" src="../_images/257.png" />
+<img alt="../_images/258.png" class="align-center" src="../_images/258.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Artık OpenStreetMap katmanı QGIS&#8217;e eklenmiş oldu. Katmanın Koordinat Referans Sistemine (CRS) dikkat edin, EPSG 3857 Pseudo Mercator olarak ayarlanmış durumda. Bu çok önemli çünkü bu katmandan elde edeceğimiz koordinatlar bu sistemde olacak.</p>
 </li>
 </ol>
-<img alt="../_images/337.png" class="align-center" src="../_images/337.png" />
+<img alt="../_images/338.png" class="align-center" src="../_images/338.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Şimdiki adımda coğrafi referanslama yapacağım alanı tespit etmemiz gerekiyor. Bunu yakınlaştırma ve kaydırma araçlarıyla yapabiliriz ama yeri gelmişken ileride size yardımcı olabilecek başka bir araç kullanacağız. İndirdiğimiz görüntünün New York&#8217;ta bulunan Washington Square Park&#8217;a ait olduğunu biliyoruz. Eğer wikipedia sitesinde bu parkı aratırsanız koordinatları oradan elde edebilirsiniz.</p>
 </li>
 </ol>
-<img alt="../_images/422.png" class="align-center" src="../_images/422.png" />
+<img alt="../_images/423.png" class="align-center" src="../_images/423.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Dikkat ederseniz listelenen koordinatlar Derece/Dakika/saniye cinsinden Enlem ve Boylam değerleri. Fakat katmanımız Mercator projeksiyonunda olduğundan parkın Mercator koordinatlarına ihtiyacımız olacak. Burada <strong>cs2cs</strong> komut satırı aracı devreye giriyor. Eğer QGIS&#8217;i OSGeo4W yükleyicisi ile indirdiyseniz, araç sisteminizde zaten yüklüdür. Linux ve Mac sürümlerinde de yüklü olarak gelmekte. Bir terminal penceresi açıp <code class="docutils literal"><span class="pre">cs2cs</span></code> yazarak yüklü olup olmadığını kontrol edebilirsiniz. Windows kullanıcıları  <span class="menuselection">Start ‣ OSGeo4W ‣ MSYS</span> ile terminal penceresi açabilirler.</p>
 </li>
@@ -273,7 +273,7 @@
 <p class="first admonition-title">Not</p>
 <p class="last">MacOS users can locate the cs2cs tool at /Library/Frameworks/PROJ.Framework/Programs/cs2cs</p>
 </div>
-<img alt="../_images/522.png" class="align-center" src="../_images/522.png" />
+<img alt="../_images/523.png" class="align-center" src="../_images/523.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">cs2cs aracının yüklendiğinden emin olduktan sonra enlem ve boylamlarımızı Mercator koordinatlarına dönüştürebiliriz. Aracı çalıştırmak için bir <span class="guilabel">kaynak</span>  ve bir <span class="guilabel">hedef</span> CRS sağlamamız gerekiyor. CRS tanımını <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 ifadesi</a> veya <a class="reference external" href="http://www.epsg-registry.org/">EPSG kodu</a> olarak verebiliriz. EPSG kodlarını zaten bildiğimiz için bunları kullanacağız. Aracın koordinatları <cite>X Y</cite> sırasıyla aldığını dikkate alarak &#8216;Boylam Enlem&#8217; olarak giriş yapacağız. Aşağıdaki komutu terminale yazarak enter tuşuna basın. Dikkat ederseniz tırnak işaretlerini (&#8221;) ters taksim işareti ile giriş yapıyoruz. Enter tuşuna basınca aracın koordinatları işleyerek EPSG 3857 koordinat referans sisteminde X Y değerlerini ekrana getirdiğini göreceksiniz.</p>
 </li>
@@ -287,52 +287,52 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>echo -73d59&#39;51 40d43&#39;51 | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 </pre></div>
 </div>
-<img alt="../_images/621.png" class="align-center" src="../_images/621.png" />
+<img alt="../_images/622.png" class="align-center" src="../_images/622.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Üretilen koordinatları kopyalayarak QGIS&#8217;e geçiş yapın. QGIS penceresinin alt kısmında Koordinatlar yazan bir metin kutusu göreceksiniz. Buraya koordinatları girip &#8216;Enter&#8217; yapın. Haritanın biraz kaydığını ama yaklaşma olmadığını göreceksiniz. Parka yaklaşmak için hemen koordinatları girdiğiniz alanın hemen yanından 1:2500 ölçeğini seçip &#8216;Enter&#8217; yapın.</p>
 </li>
 </ol>
-<img alt="../_images/721.png" class="align-center" src="../_images/721.png" />
+<img alt="../_images/722.png" class="align-center" src="../_images/722.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Ve işte! Washington Square Park artık ekranınızda. <strong>Georeferencer</strong> eklentisini <cite>Raster &#8211;&gt; Georeferencer &#8211;&gt; Georeferencer</cite> adımlarını takip ederek başlatın. Eğer eklentiyi göremiyorsanız <span class="guilabel">Georeferencer GDAL</span> etkinleştirmesi yapmanız gerekli. Onu da buradan yapabilirsiniz <span class="menuselection">Plugins ‣ Manage and install Plugins ‣ Installed</span>.</p>
 </li>
 </ol>
-<img alt="../_images/820.png" class="align-center" src="../_images/820.png" />
+<img alt="../_images/821.png" class="align-center" src="../_images/821.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first"><span class="guilabel">Georeferencer</span> penceresinden <span class="menuselection">File ‣ Open raster</span> menüsüne gidin. İndirdiğiniz JPG görüntüsünğ seçip <span class="guilabel">Open</span> tıklayın.</p>
 </li>
 </ol>
-<img alt="../_images/921.png" class="align-center" src="../_images/921.png" />
+<img alt="../_images/922.png" class="align-center" src="../_images/922.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first"><span class="guilabel">Coordinate Reference System Selector</span> kısmından <span class="guilabel">EPSG:3857 Pseudo Mercator</span> seçin.</p>
 </li>
 </ol>
-<img alt="../_images/1019.png" class="align-center" src="../_images/1019.png" />
+<img alt="../_images/1020.png" class="align-center" src="../_images/1020.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Şimdi <span class="guilabel">Add Point</span> butonuna tıklayın ve görüntü üzerinde kolayca belirlenebilecek bir nokta seçin. Köşeler, kesişim noktaları, direkler, bv. iyi yersel kontrol noktaları olabilir.</p>
 </li>
 </ol>
-<img alt="../_images/1124.png" class="align-center" src="../_images/1124.png" />
+<img alt="../_images/1125.png" class="align-center" src="../_images/1125.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Görüntü üzerinde yer kontrol noktası işaretlemek için tıkladığınızda açılan pencede sizden koordinat girmenizi isteyecek. <span class="guilabel">From map canvas</span> butonunu tıklayın.</p>
 </li>
 </ol>
-<img alt="../_images/1221.png" class="align-center" src="../_images/1221.png" />
+<img alt="../_images/1222.png" class="align-center" src="../_images/1222.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Aynı noktayı referans katmanınızda bulun: OpenStreetMap katmanında aynı yeri tıklayın. Koordinatlar tıkladığınız yer esas alınarak otomatik olarak üretilecek. Tamam (OK) butonuna tıklayın. Benzer şekilde görüntü üzerinde en az 4  farklı yer kontrol noktası için aynı işlemi tekrarlayın.</p>
 </li>
 </ol>
-<img alt="../_images/1321.png" class="align-center" src="../_images/1321.png" />
+<img alt="../_images/1322.png" class="align-center" src="../_images/1322.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Şimdi <span class="menuselection">Settings ‣ Transformation settings.</span> menüsünü seçin.</p>
 </li>
 </ol>
-<img alt="../_images/1421.png" class="align-center" src="../_images/1421.png" />
+<img alt="../_images/1422.png" class="align-center" src="../_images/1422.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Ayarları aşağıda gösterildiği şekilde yapın. <span class="guilabel">Load in QGIS when done</span> seçeneğini işaretlemeyi unutmayın. Tamam (OK) tıklayın. <span class="guilabel">Georeferencer</span> pencerine geri dönüp <span class="menuselection">File ‣ Start georeferencing</span> seçin. Yer kontrol noktalarını kullanarak resmin ayarlanması başlayacak ve hedef raster yaratılacaktır.</p>
 </li>
 </ol>
-<img alt="../_images/1519.png" class="align-center" src="../_images/1519.png" />
+<img alt="../_images/1520.png" class="align-center" src="../_images/1520.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">İşlem bittiğinde coğrafi referanslaması tamamlanmış görüntünün QGIS&#8217;e eklendiğini göreceksiniz. Herşey yolunda gittiyse görüntünüz OpenStreetMap katmanı üzerinde tam olması gereken yerde görünecektir.</p>
 </li>
@@ -378,7 +378,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Son güncelleme: Jun 27, 2019.<br/>
+      Son güncelleme: Jun 28, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
