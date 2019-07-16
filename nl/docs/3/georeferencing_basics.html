@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Topobladen en gescande kaarten voorzien van geoverwijzingen (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <link rel="next" title="Geo-verwijzingen voor satellietbeelden (QGIS3)" href="advanced_georeferencing.html" />
+    <link rel="prev" title="Werken met projecties" href="../working_with_projections.html" />
+
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-690672-13', 'qgistutorials.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+</script>
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+          QGIS Tutorials and Tips</a>
+        <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Tutorials List <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introductie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Een kaart maken (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Werken met attributen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Werkbladen of CSV-bestanden importeren (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Basis opmaken van vectoren (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Lengten van lijnen en statistieken berekenen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basis opmaken en analyses van rasters (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Werken met gegevens over het terrein</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Werken met gegevens van WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Werken met projecties</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Topobladen en gescande kaarten voorzien van geoverwijzingen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Geo-verwijzingen voor satellietbeelden (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Kaartgegevens digitaliseren</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Samenvoegen van tabellen uitvoeren (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Ruimtelijke samenvoegingen uitvoeren (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Ruimtelijke query&#8217;s uitvoeren (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Maken van kaarten automatiseren met Atlas van afdruklay-out (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Beginnen met programmeren in Python (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Algoritmes van Processing uitvoeren via Python (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Een plug-in in Python bouwen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Aangepaste Python expressie-functies gebruiken (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Python-scripts schrijven voor framework Processing (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Taken voor QGIS uitvoeren en in schema zetten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Samenvoegen van tabellen uitvoeren (PyQGIS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_mapping_with_qgis2web.html">In kaart brengen op het web met QGIS2Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../creating_basemaps_with_qtiles.html">Basiskaarten maken met QTiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_plugins.html">Plug-ins gebruiken</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downloading_osm_data.html">Zoeken en downloaden van gegevens van OpenStreetMap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../learning_resources.html">QGIS bronnen om te leren</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Gebruik van gegevens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS2)</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../working_with_projections.html" title="Previous Chapter: Werken met projecties"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Werken met projecties</span>
+    </a>
+  </li>
+  <li>
+    <a href="advanced_georeferencing.html" title="Next Chapter: Geo-verwijzingen voor satellietbeelden (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Geo-verwijzin... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+
+            
+
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><h4>Author</h4>
+<p>Ujaval Gandhi</p>
+<a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<h4>Subscribe to my mailing list</h4>
+<p>Get occasional emails when I post new material or announce training events.</p>
+<form action="https://spatialthoughts.us20.list-manage.com/subscribe/post?u=59d493847a7c7c2dbf12b21e6&amp;id=8fb09ab55c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_59d493847a7c7c2dbf12b21e6_8fb09ab55c" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<h4>Change Language</h4>
+<form role="form" class="sidebar-form sidebar-left">
+<select id="languages" class="form-control select-mini">
+  <option value="en">English</option>
+  <option value="zh_TW">Chinese (Taiwan)</option>
+  <option value="nl">Dutch</option>
+  <option value="fi_FI">Finnish</option>
+  <option value="fr">French</option>
+  <option value="de">German</option>
+  <option value="el">Greek</option>
+  <option value="id">Indonesian</option>
+  <option value="it">Italian</option>
+  <option value="ko">Korean</option>
+  <option value="pt_BR">Portuguese</option>
+  <option value="ro">Romanian</option>
+  <option value="ru">Russian</option>
+  <option value="sl">Slovenian</option>
+  <option value="es">Spanish</option>
+  <option value="th">Thai</option>
+  <option value="tr">Turkish</option>
+  <option value="uk">Ukrainian</option>
+  <option value="vi">Vietnamese</option>
+</select>
+</form>
+        </div>
+      </div>
+    <div class="col-md-9">
+      
+
+  <div class="section" id="georeferencing-topo-sheets-and-scanned-maps-qgis3">
+<h1>Topobladen en gescande kaarten voorzien van geoverwijzingen (QGIS3)<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>De meeste GIS-projecten vereisen het voorzien van geoverwijzingen van rastergegevens. <em>Voorzien van geoverwijzingen</em> is het proces van het toewijzen van coördinaten uit de echte wereld aan elke pixel van het raster. Deze coördinaten worden veelal verkregen door veldonderzoek te doen - verzamelen van coördinaten met een GPS-apparaat voor een aantal eenvoudig te identificeren objecten op de afbeelding of de kaart. In sommige gevallen, waar u op zoek bent naar het digitaliseren van gescande kaarten, kunt u de coördinaten verkrijgen vanuit markeringen op de afbeelding van de kaart zelf. met behulp van die monster-coördinaten of GCP&#8217;s ( Grond ControlePunten ), wordt de afbeelding opnieuw geprojecteerd en passend gemaakt binnen het gekozen coördinatensysteem. In deze handleiding zal ik de concepten, strategieën en gereedschappen binnen QGIS bespreken om een zeer nauwkeurig geoverwijzing te bereiken.</p>
+<p>Deze handleiding is om een afbeelding die informatie over coördinaten beschikbaar heeft op de kaartafbeelding zelf (d.i. rasters met labels) te voorzien van geoverwijzingen. Als uw bronafbeelding dergelijke informatie niet heeft kunt u de methode gebruiken die is besproken in <a class="reference internal" href="advanced_georeferencing.html"><em>Geo-verwijzingen voor satellietbeelden (QGIS3)</em></a></p>
+<div class="section" id="overview-of-the-task">
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen een gescande kaart van zuidelijk India van 1870 gebruiken en die voorzien van geoverwijzingen met behulp van QGIS.</p>
+<div class="section" id="other-skills-you-will-learn">
+<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<ul class="simple">
+<li><p class="first">Hoe datum- en coördinatensysteem voor oude kaarten te bepalen.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="get-the-data">
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p><a class="reference external" href="http://www.hipkiss.org/data/maps.html">Hipkiss’s Scanned Old Maps</a> website heeft een uitstekende verzameling gescande kaarten zonder auteursrechten die men voor onderzoek kan gebruiken.</p>
+<p>Download de kaart <a class="reference external" href="http://www.hipkiss.org/data/maps/william-mackenzie_gallery-of-geography_1870_southern-india_3975_3071_600.jpg">1870 map of southern India</a> en sla die als een JPG-afbeelding op op uw harde schijf.</p>
+<p>Voor het gemak kunt u direct een kopie van de gegevensset downloaden vanaf de link hieronder:</p>
+<p><a class="reference external" href="http://www.qgistutorials.com/downloads/1870_southern-india.jpg">1870_southern_india.jpg</a></p>
+</div>
+<div class="section" id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
+<p>1.Georeferencing in QGIS is done via the <strong>Georeferencer GDAL</strong> plugin. This is a core plugin - meaning it is already part of your QGIS installation. You just need to enable it. Go to <span class="menuselection">Plugins ‣ Manage and Install Plugins</span> and enable the <span class="guilabel">Georeferencer GDAL</span> plugin in the <span class="guilabel">Installed</span> tab. See <a class="reference internal" href="../using_plugins.html"><em>Plug-ins gebruiken</em></a> for more details on how to work with plugins.</p>
+<blockquote>
+<div><img alt="../../_images/130.png" class="align-center" src="../../_images/130.png" />
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p class="first">De plug-in is geïnstalleerd in het menu Raster. Klik op <span class="menuselection">Raster ‣ Georeferencer</span> om de plug-in te openen.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/227.png" class="align-center" src="../../_images/227.png" />
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p class="first">Het venster van de plug-in is opgedeeld in 2 gedeelten. Het bovenste gedeelte is waar de afbeelding zal worden weergegeven en in het onderste gedeelte zal een tabel verschijnen die uw GCP&#8217;s zal weergeven.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/319.png" class="align-center" src="../../_images/319.png" />
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p class="first">Nu zullen we onze JPG-afbeelding openen. Ga naar <span class="menuselection">Bestand ‣ Raster openen</span>. Blader naar de gedownloade afbeelding van de gescande kaart en klik op <span class="guilabel">Openen</span>.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/48.png" class="align-center" src="../../_images/48.png" />
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p class="first">In het volgende scherm zult u worden gevraagd om het coördinaten referentiesysteem (CRS) van het raster te kiezen. Onze bronafbeelding is een gewoon JPEG-bestand en heeft geen coördinaten referentiesysteem aan zich verbonden, dus u kunt klikken op <span class="guilabel">Cancel</span>.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/59.png" class="align-center" src="../../_images/59.png" />
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p class="first">U zult zien dat de afbeelding wordt geladen in het bovenste gedeelte. U kunt de knoppen voor Zoomen/Verschuiven in de werkbalk gebruiken om meer over de kaart te weten te komen.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/69.png" class="align-center" src="../../_images/69.png" />
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p class="first">Nu moeten we enkele coördinaten toewijzen aan enkele punten op deze kaart. Als u goed kijkt, zult u een coördinatenraster zien met markeringen. Dit zijn de rasterlijnen voor breedte- en lengtegraad.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/79.png" class="align-center" src="../../_images/79.png" />
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p class="first">Vóór we beginnen met het toevoegen van Grond Controle Punten (GCP), moeten we de instellingen voor de Transformatie definiëren. Ga naar <span class="menuselection">Extra ‣ Instellingen voor transformatie</span>.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/89.png" class="align-center" src="../../_images/89.png" />
+</div></blockquote>
+<ol class="arabic simple" start="9">
+<li><p class="first">Kies, in het dialoogvenster <span class="guilabel">Transformatie instellingen</span>, het <span class="guilabel">Transformatie type</span> als <code class="docutils literal"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. Bekijk <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> om meer te leren over de verschillende types voor transformatie en hun gebruik. Klik op de knop <span class="guilabel">CRS selecteren</span> naast <span class="guilabel">Doel SRS</span>.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/99.png" class="align-center" src="../../_images/99.png" />
+</div></blockquote>
+<ol class="arabic simple" start="10">
+<li><p class="first">Als u een gescande kaart zoals deze gaat voorzien van geoverwijzingen, kunt u de informatie voor het CRS uit de kaart zelf halen. Kijkend naar onze afbeelding van de kaart, staan de coördinaten in Latitude/Longitude. Er wordt geen informatie voor de datum gegeven, dus moeten we uitgaan van een toepasselijke. Omdat het India is en de kaart al vrij oud is, kunnen we er op wedden dat de datum Everest 1830 ons goede resultaten zal geven. Zoek naar <code class="docutils literal"><span class="pre">everest</span></code> en selecteer het CRS met de oudste definitie van de datum Everest (EPSG:4042). Klik op <span class="guilabel">OK</span>.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/109.png" class="align-center" src="../../_images/109.png" />
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Notitie</p>
+<p>Survey of India Topo Sheets gemaakt tussen 1960 en 2000 gebruiken de datum Everest 1956 spheroid and India_nepal. Als u SOI Topo Sheets voorziet van geoverwijzingen, kunt u een aangepast CRS in QGIS definiëren met de volgende parameters en dat in deze stap gebruiken. Deze definitie is inclusief parameters delta_x, delta_y en delta_z voor het transformeren van deze datum naar WGS84. Bekijk deze pagina voor meer informatie over <a class="reference external" href="https://deeppradhan.heliohost.org/gis/indian-grid/">Indian Grid System</a>.</p>
+<div class="last highlight-none"><div class="highlight"><pre><span></span>+proj=longlat +a=6377301.243 +b=6356100.2284 +towgs84=295,736,257,0,0,0,0 +no_defs
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Notitie</p>
+<p class="last">De meeste kaarten worden gemaakt met een Geprojecteerd CRS. Als de kaart die u probeert te voorzien van geoverwijzingen een geprojecteerd CRS gebruikt dat u kent, maar de labels van het rasterwerk staan in een geografisch CRS (latitude/longitude), zou u een alternatieve werkstroom kunnen gebruiken om vervorming te minimaliseren. In plaats van een geografisch CRS zoals we hier gebruiken, kunt u een vectorraster in QGIS maken en dat transformeren naar het geprojecteerde CRS om het te gebruiken als een verwijzing voor nauwkeurig vaststellen van coördinaten. Bekijk <a class="reference external" href="https://raisedbeaches.net/2018/02/01/georeferencing-in-qgis/">deze pagina</a> voor meer details.</p>
+</div>
+<ol class="arabic simple" start="11">
+<li><p class="first">Noem uw uitvoerraster  <code class="docutils literal"><span class="pre">1870_southern_india_modified.tif</span></code>. Kies <code class="docutils literal"><span class="pre">LZW</span></code> als de <span class="guilabel">Compressie</span>. Zorg er voor dat de optie <span class="guilabel">Na afloop in QGIS laden</span> is geselecteerd. Klik op <span class="guilabel">OK</span>.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/1113.png" class="align-center" src="../../_images/1113.png" />
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Notitie</p>
+<p class="last">Niet gecomprimeerde bestanden van GeoTIFF kunnen zeer groot in grootte zijn. Ze comprimeren is dus altijd een goed idee. U kunt meer te weten komen over de verschillende opties voor comprimeren van TIFF (LZW, PACKBITS of DEFLATE) in <a class="reference external" href="https://www.accusoft.com/faqs/differences-compressions-used-tiff-files/">dit artikel</a>.</p>
+</div>
+<ol class="arabic simple" start="12">
+<li><p class="first">Nu kunnen we beginnen met het toevoegen van de Grond Controle Punten (GCP). De kruisingen van de rasterlijnen zullen in ons geval dienen als <em>ground-truth</em>. Doordat de rasterlijnen zijn gelabeld, kunnen we de X- en Y-coördinaten van de punten daarmee bepalen. Klik op <span class="guilabel">Punt toevoegen</span>.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/1210.png" class="align-center" src="../../_images/1210.png" />
+</div></blockquote>
+<p>13 . In the pop-up window, enter the coordinates. Remember that X=longitude and Y=latitude. Click <span class="guilabel">OK</span>.</p>
+<blockquote>
+<div><img alt="../../_images/139.png" class="align-center" src="../../_images/139.png" />
+</div></blockquote>
+<ol class="arabic simple" start="14">
+<li><p class="first">U zult merken dat de GCP-tabel nu een rij heeft met details van uw eerste GCP.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/147.png" class="align-center" src="../../_images/147.png" />
+</div></blockquote>
+<ol class="arabic simple" start="15">
+<li><p class="first">Voeg op dezelfde wijze nog ten minste meer GCP&#8217;s toe, die de gehele kaart bedekken. Hoe meer punten u heeft, hoe meer nauwkeurig uw afbeelding wordt geregistreerd voor de doelcoördinaten. De transformatie <code class="docutils literal"><span class="pre">Polynomial</span> <span class="pre">2</span></code> vereist ten minste 6 GCP&#8217;s.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/157.png" class="align-center" src="../../_images/157.png" />
+</div></blockquote>
+<ol class="arabic simple" start="16">
+<li><p class="first">Als u eenmaal het minimaal vereiste aantal punten hebt toegevoegd voor de transformatie, zult u zien dat de GCP&#8217;s nu een een niet-nul <code class="docutils literal"><span class="pre">dX</span></code>, <code class="docutils literal"><span class="pre">dY</span></code> en <code class="docutils literal"><span class="pre">Residual</span></code> foutwaarden hebben. Als een bepaald GCP ongewoonlijk veel hoge foutwaarden heeft betekent dat meestal een menselijke fout bij het invoeren van de waarden voor de coördinaten. U kunt die GCP dus verwijderen en opnieuw vastleggen. U kunt ook de waarden van de coördinaten bewerken in de <span class="guilabel">GCP-tabel</span> door te klikken op de cel in ofwel de kolom <span class="guilabel">Doel X</span> of <span class="guilabel">Doel Y</span>. Wanneer u tevreden bent met de GCP&#8217;s, ga naar <span class="menuselection">Bestand ‣ Geoverwijzingen beginnen</span>. Dat zal het proces voor het opnieuw projecteren van de afbeelding met de GCP&#8217;s starten en het doelraster maken.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/166.png" class="align-center" src="../../_images/166.png" />
+</div></blockquote>
+<ol class="arabic simple" start="17">
+<li><p class="first">Als het proces eenmaal is voltooid, zult u de laag met geoverwijzingen zien geladen in QGIS. Het maken van geoverwijzingen is nu voltooid.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/177.png" class="align-center" src="../../_images/177.png" />
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Notitie</p>
+<p class="last">De GCP&#8217;s zullen ook worden weergegeven in het hoofdvenster van QGIS. Als u ze wilt verwijderen, kunt u schakelen naar het venster <span class="guilabel">Georeferencer</span>, en kiezen voor <span class="menuselection">Bestand ‣ Georeferencer herstellen</span>.</p>
+</div>
+<ol class="arabic simple" start="18">
+<li><p class="first">Het is altijd een goede gewoonte om uw werk te verifiëren. Hoe controleren we of onze geoverwijzingen nauwkeurig zijn? In dit geval: laad de shapefile met grenzen van het land vanaf een vertrouwde bron, zoals de gegevensset Natural Earth, en vergelijk ze. U zult zien dat ze aardig over elkaar zullen vallen. Er zijn enkele fouten en het kan verder worden verbeterd door meer controlepunten te nemen, de parameters voor de transformatie te wijzigen en een andere datum te proberen.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/187.png" class="align-center" src="../../_images/187.png" />
+</div></blockquote>
+</div>
+</div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Ujaval Gandhi.<br/>
+      Laatste aanpassing op Jul 16, 2019.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+    </p>
+  </div>
+</footer>
+<div class="container">
+  <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+<!-- Twitter Button -->
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Disqus comments widget -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'qgistutorials'; // required: replace example with your forum shortname
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  }());
+</script>
+
+<script type="text/javascript">
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<!-- Script fpr language switching. Largely adapted from https://github.com/pcav/faunalia-website -->
+<script>
+    var currentPage = 'docs/3/georeferencing_basics.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    $(document).ready(function(){
+
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is a index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave 
+
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('You hit an error, please report back to us.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+
+  </body>
+</html>
