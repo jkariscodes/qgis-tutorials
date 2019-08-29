@@ -93,7 +93,6 @@
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georreferenciamento de imagens aéreas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/downloading_osm_data.html">Searching and Downloading OpenStreetMap Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
@@ -104,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Usando o Navegador QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
@@ -116,6 +116,7 @@
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Criando Mapas Base utilizando QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Using Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Searching and Downloading OpenStreetMap Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS Learning Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Créditos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
@@ -243,7 +244,7 @@ outcome, and stop and search data in simple CSV format.</p>
 <li><p class="first">Inicie importando o arquivo CSV para o QGIS.  (visualize o procedimento em:doc:<cite>importing_spreadsheets_csv</cite>. for more details). O Caminho para realizar isso é: Camada &#8211;&gt;  Adicionar Texto Delimitado.</p>
 </li>
 </ol>
-<img alt="../_images/1135.png" class="align-center" src="../_images/1135.png" />
+<img alt="../_images/1137.png" class="align-center" src="../_images/1137.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Procure o arquivo <code class="docutils literal"><span class="pre">2015-08-surrey-street.csv</span></code> no seu computador e abrá-o. (Esse nome pode ser diferente se você baixou um arquivo mais atual). Selecione guilabel:<cite>CSV (separado por virgula)</cite> como o formato do arquivo. Você verá &#8220;Longitude&#8221; e &#8220;Latitude&#8221; e automaticamente os campos X  e Y serão escolhidos respectivamente, como coordenadas. Esteja certo que você selecionou a opção:guilabel:<cite>Adicione índice espacial</cite>. Isso irá melhorar a performace do manuseio da camada. Aperte <span class="guilabel">OK</span>.</p>
 </li>
@@ -253,7 +254,7 @@ outcome, and stop and search data in simple CSV format.</p>
 <li><p class="first">Você pode ver alguns erros. Pode ignorá-los para os fins do presente tutorial. Click <span class="guilabel">Fechar</span>.</p>
 </li>
 </ol>
-<img alt="../_images/348.png" class="align-center" src="../_images/348.png" />
+<img alt="../_images/349.png" class="align-center" src="../_images/349.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Após carregar o arquivo no QGIS será aberta uma janela para que você informe qual o datum da camada a ser criada:guilabel:<cite>Se o CRS ficar indefinida: por padrão aplicar-se-á o CRS EPSG:4326 - WGS84</cite> se o seu dado estiver em Coordenada Geográfica. Caso esteja com coordenadas planas, será necessário definir o datum para a camada através da janela de diálogo. Como nosso dado esta em EPSG:4326 podesse ignorar a menssagem de alerta.</p>
 </li>
@@ -262,57 +263,57 @@ outcome, and stop and search data in simple CSV format.</p>
 <p class="first admonition-title">Nota</p>
 <p class="last">Se for necessário modificar o datum da camada é possível redefinir o sistema de referência espacial:  <span class="menuselection">Vector ‣ Data Management Tols ‣ Define Current Projection...</span>.</p>
 </div>
-<img alt="../_images/431.png" class="align-center" src="../_images/431.png" />
+<img alt="../_images/432.png" class="align-center" src="../_images/432.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Aproxime um pouco mais para obter uma melhor visualização dos dados. Você vai notar que há uma grande densidade de dados e é difícil ter uma ideia de onde há uma grande concentração de pontos. É nessas situações que o mapa de calor vai ser muito útil.</p>
 </li>
 </ol>
-<img alt="../_images/531.png" class="align-center" src="../_images/531.png" />
+<img alt="../_images/532.png" class="align-center" src="../_images/532.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Se for necessário criar um analise de zonas quentes simplesmente para visualização, é possível construir isso através da simbologia da camada <span class="guilabel">Heatmap</span>. Vamos tentar isso. Click com o botão direito do mouse na camada carregada <code class="docutils literal"><span class="pre">2015-08-surrey-street</span></code>  e selecione <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/629.png" class="align-center" src="../_images/629.png" />
+<img alt="../_images/630.png" class="align-center" src="../_images/630.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">No <span class="guilabel">Properties</span> acesse a aba <span class="guilabel">Style</span>. Selecione <span class="guilabel">Heatmap</span>. Terá várias possibilidades paletas de cores para que possa escolher. Experimente aquela que trará melhor representação para os seus dados. Escolha &#8220;Orange&#8221; na paleta de cores. Deixe os parametros como padrão e click em: <cite>OK</cite>.</p>
 </li>
 </ol>
-<img alt="../_images/729.png" class="align-center" src="../_images/729.png" />
+<img alt="../_images/730.png" class="align-center" src="../_images/730.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Como resultado você vera um elegante mapa de zonas quentes onde regiões com maior consentração de ocorrência de crimes é mais frequente (maior número de pontos) e que será sobresaltada na camara gerada. Existe algumas opções disponíveis para apresentar uma visualização apriopriada do ser conjuto de dados. Se você desejar, somente, uma mapa de zonas quentes para visualização somente, então esta feito. Mas você poderá explorar seu mapa de zonas quentes e o resultado obtido para suas análises também</p>
 </li>
 </ol>
-<img alt="../_images/828.png" class="align-center" src="../_images/828.png" />
+<img alt="../_images/829.png" class="align-center" src="../_images/829.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Para a segunda possibilidade de tratar seu dado nas suas análises, abilite o plugin chamado de <code class="docutils literal"><span class="pre">Heatmap</span></code>. See <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a>. Uma vez habilitado o plugin vá para:menuselection:<cite>Raster &#8211;&gt; Heatmap &#8211;&gt; Heatmap</cite>.</p>
 </li>
 </ol>
-<img alt="../_images/929.png" class="align-center" src="../_images/929.png" />
+<img alt="../_images/930.png" class="align-center" src="../_images/930.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Em <span class="guilabel">Heatmap Plugin</span> escolha <code class="docutils literal"><span class="pre">crime_heatmap``como</span> <span class="pre">o</span> <span class="pre">nome</span> <span class="pre">do</span> <span class="pre">output</span> <span class="pre">da</span> <span class="pre">camada</span> <span class="pre">a</span> <span class="pre">ser</span> <span class="pre">gerada.</span> <span class="pre">Defina</span> <span class="pre">isso</span> <span class="pre">em:guilabel:`Output</span> <span class="pre">raster`.</span> <span class="pre">Entre</span> <span class="pre">com</span> <span class="pre">1000`</span> <span class="pre">metros</span> <span class="pre">em</span> <span class="pre">:guilabel:`Radius`.</span> <span class="pre">Raio</span> <span class="pre">é</span> <span class="pre">a</span> <span class="pre">area</span> <span class="pre">ao</span> <span class="pre">redor</span> <span class="pre">do</span> <span class="pre">qual</span> <span class="pre">será</span> <span class="pre">calculado</span> <span class="pre">o</span> <span class="pre">pixel</span> <span class="pre">de</span> <span class="pre">interesse.</span> <span class="pre">Confira</span> <span class="pre">:guilabel:`Advanced`</span> <span class="pre">onde</span> <span class="pre">você</span> <span class="pre">pode</span> <span class="pre">definir</span> <span class="pre">o</span> <span class="pre">tamanho</span> <span class="pre">do</span> <span class="pre">pixel</span> <span class="pre">do</span> <span class="pre">raster</span> <span class="pre">produzido.</span> <span class="pre">Entre</span> <span class="pre">com</span> <span class="pre">``2000</span></code> . em <span class="guilabel">Rows</span> para o número de linhas do raster. O campo  <span class="guilabel">Columns</span> será preenchido automaticamente. Click em <span class="guilabel">OK</span> para iniciar o processamento do mapa zonas quentes.</p>
 </li>
 </ol>
-<img alt="../_images/1027.png" class="align-center" src="../_images/1027.png" />
+<img alt="../_images/1028.png" class="align-center" src="../_images/1028.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Um vez o processamento finalizado, você verá uma imagens em tons de cinzas nomeada como <code class="docutils literal"><span class="pre">crime_heatmap</span></code> e adicionada ao canvas do projeto. Desative a camada <code class="docutils literal"><span class="pre">2015-08-surrey-street</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1136.png" class="align-center" src="../_images/1136.png" />
+<img alt="../_images/1138.png" class="align-center" src="../_images/1138.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Vamos tornar o mapa de zonas de calor mais atraentes e representado de maneira mais proxima com o que fizemos anteriormente. Click no botão direito do mouse e acesse <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1228.png" class="align-center" src="../_images/1228.png" />
+<img alt="../_images/1229.png" class="align-center" src="../_images/1229.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Na guia <span class="guilabel">Style</span> selecione <span class="guilabel">Singleband pseudocolor</span>, em <span class="guilabel">Render type</span>. Posteriormente, defina <span class="guilabel">Load min/max values</span>, selecione <span class="guilabel">Estimate (faster)</span>,  <span class="guilabel">Accuracy</span> e aperte em <span class="guilabel">Load</span>. Isso verificará o mapa de zonas de calor para encontrar os valores máximos e mínimos  dos pixels. Estes valores serão utilizados para produzir um paleta de cores mais apropriada. Na seção  <span class="guilabel">Generate new color map</span> selecione <span class="guilabel">YlOrRd</span> (Yellow-Orange-Red)  como a paleta de cores, click em  <span class="guilabel">Classify</span>. Click em:guilabel:<cite>OK</cite>.</p>
 </li>
 </ol>
-<img alt="../_images/1328.png" class="align-center" src="../_images/1328.png" />
+<img alt="../_images/1329.png" class="align-center" src="../_images/1329.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Agora você vera com maior detalhes o mapa de zonas quentes representado uma camada. Você podera utilizar o <span class="guilabel">Identify</span> para acessar os valores estimados pelo kernel. Verá os valores como em pop-ups. Estes valores de pixels esta dizendo quantos pontos houveram na fonte de dados (pontos) no raio definido na análise (no nosso casso 1000 metros) ao redor do pixel medido.</p>
 </li>
 </ol>
-<img alt="../_images/1428.png" class="align-center" src="../_images/1428.png" />
+<img alt="../_images/1429.png" class="align-center" src="../_images/1429.png" />
 <ol class="arabic simple" start="15">
 <li>Now you have your heatmap layer that can be saved for future use. Many
 times, you want to identify the hotspots where there is
@@ -407,7 +408,7 @@ action.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Última atualização em Aug 19, 2019.<br/>
+      Última atualização em Aug 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

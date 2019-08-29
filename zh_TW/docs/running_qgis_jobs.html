@@ -95,7 +95,6 @@
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">為紙本地圖進行空間對位 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">為空照圖進行空間對位 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">把地圖數位化</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/downloading_osm_data.html">Searching and Downloading OpenStreetMap Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">資料表連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">空間連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
@@ -106,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">使用處理框架進行批次處理 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">利用處理建模自動執行複雜的工作流程 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">使用 QGIS 瀏覽器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">在 QGIS 中開啟 BIL、BIP 或 BSQ 格式檔案</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Python 程式設計的初步上手 (QGIS3)</a></li>
@@ -118,6 +118,7 @@
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">使用 QGIS2Web 線上製圖</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">用 QTiles 製作底圖</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">使用附加元件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">搜尋和下載開放街圖資料</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS 學習資源</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">資料來源</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">使用處理框架進行批次處理 (QGIS2)</a></li>
@@ -250,7 +251,7 @@
 <li><p class="first">首先我們來手動清理此 shapefile，熟悉一下我們等一下要在 Python 腳本中加入的指令。打開 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入圖層 ‣ 加入向量圖層</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1175.png" class="align-center" src="../_images/1175.png" />
+<img alt="../_images/1177.png" class="align-center" src="../_images/1177.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">選擇下載後解壓縮的內容中的 <code class="docutils literal"><span class="pre">roads.shp</span></code> 並按下 <span class="guilabel">確定</span>。</p>
 </li>
@@ -260,57 +261,57 @@
 <li><p class="first">第一件事是重投影道路圖層到專案的 CRS，這樣一來我們就可以使用 <em>公尺</em> 而不是角度來當作等下分析使用的單位。選擇 <span class="menuselection">地理運算 ‣ 工具箱</span>。</p>
 </li>
 </ol>
-<img alt="../_images/374.png" class="align-center" src="../_images/374.png" />
+<img alt="../_images/375.png" class="align-center" src="../_images/375.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">尋找 <span class="guilabel">Reproject layer</span> 工具，點兩下開啟對話窗。</p>
 </li>
 </ol>
-<img alt="../_images/452.png" class="align-center" src="../_images/452.png" />
+<img alt="../_images/453.png" class="align-center" src="../_images/453.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">在 <span class="guilabel">Reproject layer</span> 視窗中，<span class="guilabel">輸入圖層</span> 選擇 <code class="docutils literal"><span class="pre">roads</span></code>，<span class="guilabel">目標 CRS</span> 選擇 <code class="docutils literal"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code>，按下 <span class="guilabel">Run</span>。</p>
 </li>
 </ol>
-<img alt="../_images/553.png" class="align-center" src="../_images/553.png" />
+<img alt="../_images/554.png" class="align-center" src="../_images/554.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">處理完成後可以看到重投影的圖層已載入到 QGIS 中。選擇 <span class="menuselection">地理運算 ‣ 歷程與日誌</span>。</p>
 </li>
 </ol>
-<img alt="../_images/650.png" class="align-center" src="../_images/650.png" />
+<img alt="../_images/651.png" class="align-center" src="../_images/651.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">在 <span class="guilabel">歷程與日誌</span> 視窗中，展開 <span class="guilabel">Algorithm</span> 資料夾然後選擇最新一筆的紀錄，就會看到完整的處理指令顯示在下方面板中。這就是我們等下要使用在腳本內的指令。</p>
 </li>
 </ol>
-<img alt="../_images/749.png" class="align-center" src="../_images/749.png" />
+<img alt="../_images/750.png" class="align-center" src="../_images/750.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">回到 QGIS 視窗，按下右下角的 <span class="guilabel">CRS</span> 按鈕。</p>
 </li>
 </ol>
-<img alt="../_images/847.png" class="align-center" src="../_images/847.png" />
+<img alt="../_images/848.png" class="align-center" src="../_images/848.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">在 <span class="guilabel">專案屬性 | CRS</span> 視窗中，勾選 <span class="guilabel">開啟即時 CRS 轉換</span>，然後選擇 <code class="docutils literal"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> 為專案 CRS，這樣就能確保原本的圖層和重投影過的圖層都會正確顯示。</p>
 </li>
 </ol>
-<img alt="../_images/946.png" class="align-center" src="../_images/946.png" />
+<img alt="../_images/947.png" class="align-center" src="../_images/947.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">現在我們要來執行清理操作了。GRASS 具有強大的拓樸清理工具，在 QGIS 中可透過 <code class="docutils literal"><span class="pre">v.clean</span></code> 運算法存取。在 <span class="guilabel">地理運算工具箱</span> 中尋找此演算法，然後點兩下開啟視窗。</p>
 </li>
 </ol>
-<img alt="../_images/1045.png" class="align-center" src="../_images/1045.png" />
+<img alt="../_images/1046.png" class="align-center" src="../_images/1046.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">有關此工具的更多說明，可以在 <span class="guilabel">Help</span> 分頁中找到，而在此教學中，我們要使用 <code class="docutils literal"><span class="pre">snap</span></code> 工具來清除任何在 1 公尺之內多餘的線條頂點。在 <span class="guilabel">Layer to clean</span> 中選擇 <code class="docutils literal"><span class="pre">Reprojected</span> <span class="pre">layer</span></code>，然後在 <span class="guilabel">Cleaning tool</span> 中選擇 <code class="docutils literal"><span class="pre">snap</span></code>，在 <span class="guilabel">Threshold</span> 中輸入 <code class="docutils literal"><span class="pre">1.00</span></code>，其他欄位留白，按下 <span class="guilabel">Run</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1176.png" class="align-center" src="../_images/1176.png" />
+<img alt="../_images/1178.png" class="align-center" src="../_images/1178.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">處理完成後，會有 2 個新圖層加入 QGIS 中。<code class="docutils literal"><span class="pre">Cleaned</span></code> 是經過拓樸誤差修正後的圖層，而 <code class="docutils literal"><span class="pre">Errors</span></code> 則顯示了有修改過的圖徵，因此你可以參考 Errors 圖層，縮放地圖以查看被移除的頂點們。</p>
 </li>
 </ol>
-<img alt="../_images/1245.png" class="align-center" src="../_images/1245.png" />
+<img alt="../_images/1246.png" class="align-center" src="../_images/1246.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">選擇 <span class="menuselection">地理運算 ‣ 歷程與日誌</span>，然後查看我們等一下要使用的命令列指令。</p>
 </li>
 </ol>
-<img alt="../_images/1344.png" class="align-center" src="../_images/1344.png" />
+<img alt="../_images/1345.png" class="align-center" src="../_images/1345.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">現在我們已經做好寫程式碼的準備了！如果你需要設定文字編輯器或 IDE，請參考在 <a class="reference internal" href="building_a_python_plugin.html"><em>以 Python 製作附加元件</em></a> 一章中的 <strong>編輯器或 Python IDE</strong> 的說明。為了要在獨立的 Python 腳本中使用 QGIS，我們必須要先設定好系統配置才行。有個方便的方法是透過 <code class="docutils literal"><span class="pre">.bat</span></code> 檔案來執行，此檔案會先設定好正確的配置選項，然後再呼叫 Python 腳本。因此，請建立稱為 <code class="docutils literal"><span class="pre">launch.bat</span></code> 的新檔案然後輸入以下文字，記得根據你的 QGIS 配置改動其中的一些參數值，也別忘記把存取 Python 檔案的路徑中的使用者名稱替換成你自己的。如果你是透過 <code class="docutils literal"><span class="pre">OSGeo4W</span> <span class="pre">Installer</span></code> 安裝 QGIS 的話，在此檔案中的路徑會與你的系統路徑相同。最後存檔到你的桌面。</p>
 </li>
@@ -336,7 +337,7 @@ python c:\Users\Ujaval\Desktop\download_and_clean.py
 pause
 </pre></div>
 </div>
-<img alt="../_images/1444.png" class="align-center" src="../_images/1444.png" />
+<img alt="../_images/1445.png" class="align-center" src="../_images/1445.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">建立新的 Python 檔然後輸入以下程式碼，檔名取為 <code class="docutils literal"><span class="pre">download_and_clean.py</span></code> 然後儲存至桌面。</p>
 </li>
@@ -462,7 +463,7 @@ pause
 <li><p class="first">選擇你喜歡的時段然後按 <span class="guilabel">下一步</span>。</p>
 </li>
 </ol>
-<img alt="../_images/2616.png" class="align-center" src="../_images/2616.png" />
+<img alt="../_images/2617.png" class="align-center" src="../_images/2617.png" />
 <ol class="arabic simple" start="27">
 <li><p class="first">在 <span class="guilabel">執行</span> 設定中選擇 <span class="guilabel">啟動程式</span>，按 <span class="guilabel">下一步</span>。</p>
 </li>
@@ -564,7 +565,7 @@ pause
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Aug 19, 2019.<br/>
+      最後更新日期是 Aug 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

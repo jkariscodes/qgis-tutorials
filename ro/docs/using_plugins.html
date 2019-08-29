@@ -29,7 +29,7 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Resurse de învățare QGIS" href="learning_resources.html" />
+    <link rel="next" title="Căutarea și descărcarea datelor OpenStreetMap" href="downloading_osm_data.html" />
     <link rel="prev" title="Crearea hărților de bază folosind QTiles" href="creating_basemaps_with_qtiles.html" />
 
 <meta charset='utf-8'>
@@ -94,7 +94,6 @@
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferențierea Foilor Topografice și a Hărților Scanate (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferențierea Imaginilor Aeriene (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizarea datelor provenite din hărți</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/downloading_osm_data.html">Căutarea și descărcarea datelor OpenStreetMap (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Efectuarea Joncțiunilor Tabelare (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Realizarea Joncțiunilor Tabelare (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Crearea Hărților Calorice (QGIS3)</a></li>
@@ -105,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Procesarea În Serie, folosind Cadrul de Procesare (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automatizarea Fluxurilor de Lucru Complexe utilizând Modelatorul de Procese (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automatizarea Creării Hărților cu ajutorul Atlasului (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Utilizarea QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Fișierele Open BIL, BIP sau BSQ în QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Noțiuni de Bază Despre Programarea în Python (QGIS3)</a></li>
@@ -117,6 +117,7 @@
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Maparea Web cu ajutorul QGIS2Web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Crearea hărților de bază folosind QTiles</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Utilizarea Plugin-urilor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Căutarea și descărcarea datelor OpenStreetMap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Resurse de învățare QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Creditare date</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Procesarea în serie, folosind Cadrul de Procesare (QGIS2)</a></li>
@@ -133,7 +134,7 @@
     </a>
   </li>
   <li>
-    <a href="learning_resources.html" title="Next Chapter: Resurse de învățare QGIS"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Resurse de în... &raquo;</span>
+    <a href="downloading_osm_data.html" title="Next Chapter: Căutarea și descărcarea datelor OpenStreetMap"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Căutarea și d... &raquo;</span>
     </a>
   </li>
               
@@ -235,7 +236,7 @@
 <li><p class="first">Deschideți QGIS. Faceți clic pe <span class="menuselection">Plugins ‣ Manage and Install Plugins...</span>, pentru a deschide fereastra de dialog <span class="guilabel">Plugin Manager</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1181.png" class="align-center" src="../_images/1181.png" />
+<img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Chiar dacă aceasta este prima dată când folosiți QGIS, veți vedea o mulțime de plugin-uri enumerate în tab-ul <span class="guilabel">Installed</span>. Acest lucru se datorează faptului că ele sunt <em>Plugin-uri de bază</em>, fiind instalate o dată cu aplicația QGIS.</p>
 </li>
@@ -245,12 +246,12 @@
 <li><p class="first">Haideți să activăm unul dintre plugin-uri. Bifați caseta de lângă <span class="guilabel">Spatial Query Plugin</span>. Acest lucru va activa plugin-ul, după care îl veți putea folosiți. Este de remarcat faptul că plugin-urile au capacitatea de a introduce elemente de meniu în diferite locații, pentru a se crea noi panouri și bare de instrumente. Uneori este dificilă găsirea instrumentelor nou activate. Un prim indiciu ar fi să vă uitați la descrierea plugin-ului. În cazul nostru descrierea spune <em>Category: Vector</em>. Aceasta indică faptul că plugin-ul ar putea fi găsit în meniul  <span class="guilabel">Vector</span>, o dată ce a fost activat. Clic pe <span class="guilabel">Close</span>.</p>
 </li>
 </ol>
-<img alt="../_images/377.png" class="align-center" src="../_images/377.png" />
+<img alt="../_images/378.png" class="align-center" src="../_images/378.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Atât timp cât  <span class="guilabel">Spatial Query Plugin</span> este activat, puteți merge la <span class="menuselection">Vector ‣ Spatial Query</span> pentru a beneficia de funcționalitatea adăugată de către plugin.</p>
 </li>
 </ol>
-<img alt="../_images/455.png" class="align-center" src="../_images/455.png" />
+<img alt="../_images/456.png" class="align-center" src="../_images/456.png" />
 </div>
 <div class="section" id="external-plugins">
 <h3>Plugin-uri externe<a class="headerlink" href="#external-plugins" title="Permalink to this headline">¶</a></h3>
@@ -259,27 +260,27 @@
 <li><p class="first">Deschideți QGIS. Faceți clic pe <span class="menuselection">Plugins ‣ Manage and Install Plugins...</span>, pentru a deschide fereastra de dialog <span class="guilabel">Plugin Manager</span>.</p>
 </li>
 </ol>
-<img alt="../_images/556.png" class="align-center" src="../_images/556.png" />
+<img alt="../_images/557.png" class="align-center" src="../_images/557.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Faceți clic pe tab-ul <span class="guilabel">Get more</span>. Veți vedea o listă a plugin-urilor.</p>
 </li>
 </ol>
-<img alt="../_images/653.png" class="align-center" src="../_images/653.png" />
+<img alt="../_images/654.png" class="align-center" src="../_images/654.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Pentru acest tutorial, trebuie să găsiți și să instalați un plugin numit &#8216;QuickQKT&#8217;. Pe măsură ce începeți să tastați <em>qui</em> în câmpul <span class="guilabel">Search</span>, veți observa dedesubt rezultatele căutării. Apăsați pe <span class="guilabel">QuickWKT</span>. Apoi, efectuați clic pe butonul <span class="guilabel">Install plugin</span>, pentru a-l instala.</p>
 </li>
 </ol>
-<img alt="../_images/752.png" class="align-center" src="../_images/752.png" />
+<img alt="../_images/753.png" class="align-center" src="../_images/753.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">O dată ce plugin-ul este descărcat și instalat, veți vedea o fereastră de confirmare.</p>
 </li>
 </ol>
-<img alt="../_images/850.png" class="align-center" src="../_images/850.png" />
+<img alt="../_images/851.png" class="align-center" src="../_images/851.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Dacă ați observat, nu a existat nici o menționare a categoriei plugin-ului în descriere. Acest lucru îngreunează determinarea modului în care se poate apela noul plugin. Cele mai multe plugin-uri externe sunt instalate chiar sub meniul <span class="guilabel">Plugins</span> din QGIS. Faceți clic pe <span class="menuselection">Plugins ‣ QuickWKT</span> și veți vedea plugin-ul nou instalat. De obicei, plugin-urile externe instalează și un buton în bara de instrumente <span class="guilabel">Plugins</span>. Folosirea acelui buton reprezintă o altă modalitate de a accesa plugin-ul.</p>
 </li>
 </ol>
-<img alt="../_images/949.png" class="align-center" src="../_images/949.png" />
+<img alt="../_images/950.png" class="align-center" src="../_images/950.png" />
 </div>
 <div class="section" id="experimental-plugins">
 <h3>Plugin-uri Experimentale<a class="headerlink" href="#experimental-plugins" title="Permalink to this headline">¶</a></h3>
@@ -288,7 +289,7 @@
 <li><p class="first">Deschideți <span class="guilabel">Plugin Manager</span> din <span class="menuselection">Plugins ‣ Manage and Install Plugins...</span>. Efectuați clic pe tab-ul <span class="guilabel">Settings</span>. Veți vedea o opțiune numită <span class="guilabel">Show also experimental plugins</span>. Faceți clic pe caseta de selectare de lângă ea, pentru a o activa.</p>
 </li>
 </ol>
-<img alt="../_images/1048.png" class="align-center" src="../_images/1048.png" />
+<img alt="../_images/1049.png" class="align-center" src="../_images/1049.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Va apărea o nouă filă numită <span class="guilabel">New</span>. Plugin-urile experimentale nou activate vor fi afișate aici.</p>
 </li>
@@ -297,22 +298,22 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Tab-ul <span class="guilabel">New</span> va apărea numai temporar, după ce activați plugin-urile experimentale. Data viitoare când deschideți <span class="guilabel">Plugin Manager</span>, plugin-urile experimentale se vor afișa alături de plugin-urile obișnuite, în tab-ul <span class="guilabel">Get more</span>.</p>
 </div>
-<img alt="../_images/1182.png" class="align-center" src="../_images/1182.png" />
+<img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Haideți să instalăm un plugin numit <span class="guilabel">TimeManager</span>. Faceți clic pe numele plugin-ului și apoi pe <span class="guilabel">Install</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1248.png" class="align-center" src="../_images/1248.png" />
+<img alt="../_images/1249.png" class="align-center" src="../_images/1249.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Când vă veți întoarce la fereastra principală QGIS, veți vedea un nou <em>Panou</em> în partea de jos a suportului de hartă. Acest panou este creat de către plugin-ul TimeManager. Acesta este un alt mod în care plugin-urile adaugă funcționalități utile în interfața cu utilizatorul.</p>
 </li>
 </ol>
-<img alt="../_images/1347.png" class="align-center" src="../_images/1347.png" />
+<img alt="../_images/1348.png" class="align-center" src="../_images/1348.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Puteți activa/dezactiva acest panou din <span class="menuselection">View ‣ Panels ‣ Time Manager</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1447.png" class="align-center" src="../_images/1447.png" />
+<img alt="../_images/1448.png" class="align-center" src="../_images/1448.png" />
 </div>
 </div>
 </div>
@@ -339,7 +340,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Aug 19, 2019.<br/>
+      Last updated on Aug 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

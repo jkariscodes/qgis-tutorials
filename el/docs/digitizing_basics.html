@@ -29,7 +29,7 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
-    <link rel="next" title="Searching and Downloading OpenStreetMap Data (QGIS3)" href="3/downloading_osm_data.html" />
+    <link rel="next" title="Performing Table Joins (QGIS3)" href="3/performing_table_joins.html" />
     <link rel="prev" title="Georeferencing Aerial Imagery (QGIS3)" href="3/advanced_georeferencing.html" />
 
 <meta charset='utf-8'>
@@ -94,7 +94,6 @@
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Ψηφιοποίηση Δεδομένων Χάρτη</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/downloading_osm_data.html">Searching and Downloading OpenStreetMap Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
@@ -105,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Χρησιμοποιώντας το QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Ανοίγοντας BIL,BIP ή BSQ αρχεία στο QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
@@ -117,6 +117,7 @@
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Χρησιμοποιώντας Πρόσθετες Λειτουργίες</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Αναζήτηση και Λήψη OpenStreetMap Δεδομένων</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS Μαθησιακοί πόροι</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Συντελεστές δεδομένων</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
@@ -133,7 +134,7 @@
     </a>
   </li>
   <li>
-    <a href="3/downloading_osm_data.html" title="Next Chapter: Searching and Downloading OpenStreetMap Data (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Searching and... &raquo;</span>
+    <a href="3/performing_table_joins.html" title="Next Chapter: Performing Table Joins (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Performing Ta... &raquo;</span>
     </a>
   </li>
               
@@ -250,7 +251,7 @@ link below:</p>
 <li><p class="first">Πηγαίνετε στο <span class="menuselection">Layer ‣ Add Raster Layer</span>. Εντοπίστε το αρχείο που κατεβάσατε <code class="docutils literal"><span class="pre">BX24_GeoTifv1-02.tif</span></code> και πατήστε <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1139.png" class="align-center" src="../_images/1139.png" />
+<img alt="../_images/1141.png" class="align-center" src="../_images/1141.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Αυτό είναι ένα μεγάλο αρχείο δεδομένων πλέγματος και μπορεί να παρατηρήσετε ότι όταν κάνετε μεγένθυνση ή μετακινείστε γύρω στο χάρτη, ο χάρτης θέλει λίγο χρόνο για να επεξεργαστεί την εικόνα.</p>
 </li>
@@ -260,42 +261,42 @@ link below:</p>
 <li><p class="first">Επιλέξτε την καρτέλα <span class="guilabel">Pyramids</span>. Κρατήστε πατημένο το <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> και επιλέξτε όλες τις αναλύσεις που υπάρχουν στον πίνακα <span class="guilabel">Resolutions</span>. Αφήστε τις υπόλοιπες επιλογές όπως είναι και πατήστε <span class="guilabel">Build pyramids</span>. Μόλις τελείωσει η διαδικασία πατήστε <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/350.png" class="align-center" src="../_images/350.png" />
+<img alt="../_images/352.png" class="align-center" src="../_images/352.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Πίσω στο κύριο παράθυρο του QGIS, χρησιμοποιήστε το εργαλείο <span class="guilabel">Zoom</span> για να εντοπίσετε  την περιοχή <em>Hagley Park</em> στο Christchurch. Αυτό είναι το πάρκο που θα ψηφιοποιήσουμε.</p>
 </li>
 </ol>
-<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
+<img alt="../_images/434.png" class="align-center" src="../_images/434.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Πριν ξεκινήσουμε, πρέπει να θέσουμε προεπιλογή <strong>Digitizing Options</strong>. Πηγαίνετε <span class="menuselection">Settings ‣ Options...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/533.png" class="align-center" src="../_images/533.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Επιλέξτε την καρτέλα <span class="guilabel">Digitizing</span> στο παράθυρο διαλόγου <span class="guilabel">Options</span>. Ορίστε το <span class="guilabel">Default snap mode</span> σε <span class="guilabel">To vertex and segment</span>.  Αυτό σας επιτρέπει να κάνετε εναλλαγές στη πλησιέστερη κορυφή ή ευθύγραμμο τμήμα. Επίσης προτιμώ να θέτω το <span class="guilabel">Default snapping tolerance</span> και το <span class="guilabel">Search radius for vertex edits</span> σε pixels αντί για μονάδες χάρτη. Αυτό θα εξασφαλίσει ότι η απόσταση εναλλαγής παραμένει σταθερή ανεξαρτήτως του επιπέδου μεγέθυνσης. Αναλόγως την ανάλυσης της οθόνης του υπολογιστή σας , μπορείτε να χρησιμοποιήσετε μια πιο κατάλληλη τιμή. Πατήστε <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/631.png" class="align-center" src="../_images/631.png" />
+<img alt="../_images/632.png" class="align-center" src="../_images/632.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Τώρα είμαστε έτοιμοι να ξεκινήσουμε τη ψηφιοποίηση. Πρώτα θα δημιουργήσουμε ένα επίπεδο δρόμων και θα ψηφιοποιήσουμε τους δρόμους γύρω από την περιοχή του πάρκου. Επιλέξτε <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer...</span>. Εναλλακτικά μπορείτε να επιλέξετε να δημιουργήσετε <span class="guilabel">New Shapefile Layer...</span>. Το Spatialite είναι ένα αρχείο τύπου ανοικτής βάσης δεδομένων, παρόμοιο με αυτό της γεω-βάσης δεδομένων της ESRI. Η Spatialite βάση δεδομένων  περιέχεται σε ένα μόνο αρχείο που βρίσκεται στο σκληρό δίσκο και μπορεί να περιλαμβάνει διάφορους χωρικούς τύπους (σημείο, γραμμή, πολύγωνο) καθώς εξίσου και μη χωρικά επίπεδα. Η μετακίνηση γύρω στο χάρτη είναι πιο εύκολη, από ότι θα ήταν εάν είχαμε πολλά αρχεία shapefile. Σε αυτό το tutorial, δημιουργούμε ένα ζευγάρι πολυγωνικών επιπέδων και ένα επίπεδο γραμμής, έτσι ώστε μια βάση δεδομένων Spatialite να ταιριάζει καλύτερα. Μπορείτε ανά πάσα στιγμή να φορτώσετε ένα spatialite επίπεδο και να το αποθηκεύσετε ως shapefile ή με οποιονδήποτε τύπο αρχείου επιθυμείτε.</p>
 </li>
 </ol>
-<img alt="../_images/731.png" class="align-center" src="../_images/731.png" />
+<img alt="../_images/732.png" class="align-center" src="../_images/732.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Στο παράθυρο διαλόγου <span class="guilabel">New Spatialite Layer</span>, πατήστε το κουμπί <span class="guilabel">...</span> και αποθηκεύστε μια νέα spatialite βάση δεδομένων με όνομα <code class="docutils literal"><span class="pre">nztopo.sqlite</span></code>. Επιλέξτε το <span class="guilabel">Layer name</span> ως <code class="docutils literal"><span class="pre">Roads</span></code> και επιλέξτε <code class="docutils literal"><span class="pre">Line</span></code> ως <span class="guilabel">Type</span>. Ο τοπογραφικός χάρτης που θα χρησιμοποιήσουμε ως βάση είναι ο <code class="docutils literal"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code> CRS, οπότε μπορούμε να επιλέξουμε το ίδιο και για το επίπεδο δρόμων μας. Τσεκάρετε το <span class="guilabel">Create an autoincrementing primary key</span>. Αυτό θα δημιουργήσει ένα πεδίο με όνομα <strong>pkuid</strong> στον πίνακα χαρακτηριστικών και θα αναθέσει ένα μοναδικό αριθμητικό κλειδί αυτόματα για κάθε χαρακτηριστικό. Κατά τη δημιουργία ενός επιπέδου GIS, πρέπει να αποφασίσετε για τα χαρακτηριστικά που θα έχει κάθε γνώρισμα. Εφόσον αυτό είναι ένα επίπεδο δρόμων, θα έχουμε 2 βασικά χαρακτηριστικά - Όνομα και Κλάση. Πληκτρολογήστε <code class="docutils literal"><span class="pre">Name</span></code> ως  <span class="guilabel">Name</span> του χαρακτηριστικού στη περιοχή <span class="guilabel">New attribute</span> και πατήστε <span class="guilabel">Add to attribute list.</span></p>
 </li>
 </ol>
-<img alt="../_images/830.png" class="align-center" src="../_images/830.png" />
+<img alt="../_images/831.png" class="align-center" src="../_images/831.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Παρομοίως δημιουργήστε μια νέα κλάση χαρακτηριστικών <code class="docutils literal"><span class="pre">Class</span></code> του τύπου <span class="guilabel">Text data</span>. Πατήστε <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/931.png" class="align-center" src="../_images/931.png" />
+<img alt="../_images/932.png" class="align-center" src="../_images/932.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Μόλις φορτώσει το επίπεδο, πατήστε το κουμπί <span class="guilabel">Toggle Editing</span> για να τεθεί το επίπεδο σε κατάσταση επεξεργασίας.</p>
 </li>
 </ol>
-<img alt="../_images/1029.png" class="align-center" src="../_images/1029.png" />
+<img alt="../_images/1030.png" class="align-center" src="../_images/1030.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Πατήστε το κουμπί <span class="guilabel">Add feature</span>. Κάντε κλικ στον καμβά του χάρτη για να προσθέστε μια νέα κορυφή. Προσθέστε νέες κορυφές κατά μήκος του δρόμου. Μόλις έχετε ψηφιοποιήσει ένα τμήμα του δρόμου, κάντε δεξί κλικ για να τελειώσετε.</p>
 </li>
@@ -304,22 +305,22 @@ link below:</p>
 <p class="first admonition-title">Note</p>
 <p class="last">Μπορείτε να χρησιμοποιήσετε τη ρόδα του ποντικιού για μεγέθυνση ή σμίκρυνση κατά τη διάρκεια της ψηφιοποίησης. Μπορείτε επίσης να έχετε πατημένο το κουμπί κύλισης και να κουνάτε το ποντίκι για να μετακινείστε γύρω.</p>
 </div>
-<img alt="../_images/1140.png" class="align-center" src="../_images/1140.png" />
+<img alt="../_images/1142.png" class="align-center" src="../_images/1142.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Αφού κάνετε δεξί κλικ για να τελειώσετε, θα εμφανιστεί ένα αναδυόμενο παράθυρο διαλόγου που ονομάζεται <span class="guilabel">Attributes</span>. Εδώ μπορείτε να συμπληρώσετε τα χαρακτηριστικά των γνωρισμάτων που δημιουργήθηκαν πρόσφατα. Μιας και το <strong>pkuid</strong> είναι ένα πεδίο που προσαυξάνεται αυτόματα, δε θα έχετε τη δυνατότητα να εισάγετε τη τιμή χειροκίνητα. Αφήστε το κενό και εισάγετε το όνομα του δρόμου όπως εμφανίζεται στον τοπογραφικό χάρτη. Προαιρετικά, αναθέστε και μια τιμή για την Κλάση του Δρόμου. Πατήστε <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1230.png" class="align-center" src="../_images/1230.png" />
+<img alt="../_images/1231.png" class="align-center" src="../_images/1231.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Το προεπιλεγμένο στυλ του νέου επιπέδου γραμμής είναι μια λεπτή γραμμή. Ας το αλλάξουμε έτσι ώστε να δούμε καλύτερα τα ψηφιοποιημένα χαρακτηριστικά στον καμβά. Κάντε δεξί κλικ στο επίπεδο <code class="docutils literal"><span class="pre">Roads</span></code> και επιλέξτε <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1330.png" class="align-center" src="../_images/1330.png" />
+<img alt="../_images/1331.png" class="align-center" src="../_images/1331.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Επιλέξτε την καρτέλα <span class="guilabel">Style</span> στο παράθυρο διαλόγου <span class="guilabel">Layer Properties</span>. Επιλέξτε ένα στυλ πιο παχιάς γραμμής, όπως το <span class="guilabel">Primary</span> από τα προκαθορισμένα στυλ. Πατήστε <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1430.png" class="align-center" src="../_images/1430.png" />
+<img alt="../_images/1431.png" class="align-center" src="../_images/1431.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Τώρα βλέπετε τα ψηφιοποιημένα χαρακτηριστικά του δρόμου ξεκάθαρα. Πατήστε <span class="guilabel">Save Layer Edits</span> για να αποθηκεύσετε τα νέα χαρακτηριστικά στο δίσκο.</p>
 </li>
@@ -379,7 +380,7 @@ link below:</p>
 <li><p class="first">Κάντε δεξί κλικ για να τελειώσετε το πολύγωνο και να εισάγετε τα χαρακτηριστικά. Ως δια μαγείας το νέο πολύγωνο έχει συρρικνωθεί και διαμορφωθεί ακριβώς με τα σύνορα των γειτονικών πολυγώνων! Αυτό είναι πολύ χρήσιμο όταν ψηφιοποιείτε πολύπλοκα σύνορα όπου χρειάζεται να είστε πολύ ακριβής και ακόμα να έχετε ένα τοπολογικά σωστό πολύγωνο. Πατήστε  <span class="guilabel">Toggle Editing</span> για να τελειώσετε την επεξεργασία του επιπέδου <code class="docutils literal"><span class="pre">Parks</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/2610.png" class="align-center" src="../_images/2610.png" />
+<img alt="../_images/2611.png" class="align-center" src="../_images/2611.png" />
 <ol class="arabic simple" start="27">
 <li><p class="first">Τώρα ήρθε η στιγμή να ψηφιοποιήσουμε ένα επίπεδο κτιρίων. Δημιουργήστε ένα νέο πολύγωνο που θα ονομάσετε <code class="docutils literal"><span class="pre">Buildings</span></code> πηγαίνοντας στο <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer</span>.</p>
 </li>
@@ -389,7 +390,7 @@ link below:</p>
 <li><p class="first">Μόλις προστεθεί το επίπεδο <code class="docutils literal"><span class="pre">Buildings</span></code>, απενεργοποιήστε τα επίπεδα <code class="docutils literal"><span class="pre">Parks</span></code> και <code class="docutils literal"><span class="pre">Roads</span></code> έτσι ώστε η τοπογραφική βάση του χάρτη να είναι ορατή. Επιλέξτε το επίπεδο <code class="docutils literal"><span class="pre">Buildings</span></code> και πατήστε το <span class="guilabel">Toggle Editing</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2610.png" class="align-center" src="../_images/2610.png" />
+<img alt="../_images/2611.png" class="align-center" src="../_images/2611.png" />
 <ol class="arabic simple" start="29">
 <li><p class="first">Η ψηφιοποίηση κτιρίων μπορεί να είναι μα δύσκολη εργασία. Εξίσου δύσκολο είναι να προσθέτεις κορυφές χειροκίνητα έτσι ώστε οι άκρες να είναι κάθετες και να σχηματίζουν ένα ορθογώνιο. Θα χρησιμοποιήσουμε ένα πρόσθετο που ονομάζεται <strong>Rectangles Ovals Digitizing</strong> για να μας βοηθήσει με αυτήν την εργασία. Δείτε <a class="reference internal" href="using_plugins.html"><em>Χρησιμοποιώντας Πρόσθετες Λειτουργίες</em></a> για να μάθετε πως να κάνετε αναζήτηση και εγκατάσταση πρόσθετων. Μόλις εγκατασταθεί το πρόσθετο <strong>Rectangles Ovals Digitizing</strong>, θα δείτε μια νέα γραμμή εργαλείων να εμφανίζεται πάνω από τον καμβά.</p>
 </li>
@@ -424,7 +425,7 @@ link below:</p>
 <li><p class="first">Χρησιμοποιήστε το εργαλείο <span class="guilabel">Select Single feature</span> για να επιλέξετε το πολύγωνο που θέλετε να περιστρέψετε. Μόλις ενεργοποιηθεί το εργαλείο <span class="guilabel">Rotate Feature(s)</span>, θα δείτε ένα στόχαστρο στο κέντρο του πολυγώνου. Κάντε κλικ ακριβώς πάνω σε αυτό το στόχαστρο και σύρετε το ποντίκι, καθώς έχετε πατημένο το αριστερό κουμπί του ποντικιού. Θα εμφανιστεί μια προεπισκόπηση του χαρακτηριστικού που περιστράφηκε. Όταν το πολύγωνο ευθυγραμμιστεί με το αποτύπωμα του κτιρίου, αφήστε ελεύθερο το κουμπί του ποντικιού.</p>
 </li>
 </ol>
-<img alt="../_images/352.png" class="align-center" src="../_images/352.png" />
+<img alt="../_images/353.png" class="align-center" src="../_images/353.png" />
 <ol class="arabic simple" start="36">
 <li><p class="first">Μόλις τελειώσετε τη ψηφιοποίηση όλων των κτιρίων, αποθηκεύστε τις επεξεργασίες που κάνατε στα επίπεδα και κάντε κλικ στο <span class="guilabel">Toggle Editing</span>. Μπορείτε να σύρετε τα επίπεδα για να αλλάξετε τη σειρά εμφάνισης τους.</p>
 </li>
@@ -460,7 +461,7 @@ link below:</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Aug 19, 2019.<br/>
+      Last updated on Aug 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
