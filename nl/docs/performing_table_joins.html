@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Maken van kaarten automatiseren met Atlas van afdruklay-out (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
@@ -246,7 +247,7 @@
 <li><p class="first">We zullen eerst het census tracts shapefile laden. Ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Vectorlaag toevoegen...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1164.png" class="align-center" src="../_images/1164.png" />
+<img alt="../_images/1166.png" class="align-center" src="../_images/1166.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Blader naar het gedownloade zipbestand <cite>tl_2013_06_tract.zip</cite> en selecteer dat. QGIS kan zipbestanden direct openen dus het hoeft niet eerst uitgepakt te worden.</p>
 </li>
@@ -256,57 +257,57 @@
 <li><p class="first">Selecteer de laag <cite>tl_2013_06_tract.shp</cite> en klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/367.png" class="align-center" src="../_images/367.png" />
+<img alt="../_images/368.png" class="align-center" src="../_images/368.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">U zult de census tracts worden geladen in QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/446.png" class="align-center" src="../_images/446.png" />
+<img alt="../_images/447.png" class="align-center" src="../_images/447.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Klik met rechts op de laag en selecteer <span class="guilabel">Open attributentabel</span>.</p>
 </li>
 </ol>
-<img alt="../_images/547.png" class="align-center" src="../_images/547.png" />
+<img alt="../_images/548.png" class="align-center" src="../_images/548.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Bekijk de attributen van het tracts-shapefile. We hebben een uniek en algemeen attribuut voor elk object nodig om aan tabel met dit shapefile te koppelen. In dit geval is het veld <strong>GEOID</strong> een unieke identificatie voor elke tract en kan worden gebruikt om  dit shapefile`te koppelen` aan elke andere tabel die dezelfde ID bevat.</p>
 </li>
 </ol>
-<img alt="../_images/645.png" class="align-center" src="../_images/645.png" />
+<img alt="../_images/646.png" class="align-center" src="../_images/646.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Open het CSV-bestand <cite>ca_tracts_pop.csv</cite> in een tekstbewerker. Het zal u opvallen dat elke rij van het bestand bestaat uit informatie over een tract naast de unieke identificatie die we in de vorige stap al zagen. Onthoud dat dit veld is genaamd <strong>GEO.id2</strong> in het CSV. Het zal u ook opvallen dat de kolom <strong>D001</strong>  de waarde bevat voor de bevolking voor elk van de census tract.</p>
 </li>
 </ol>
-<img alt="../_images/744.png" class="align-center" src="../_images/744.png" />
+<img alt="../_images/745.png" class="align-center" src="../_images/745.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">We zouden dit csv-bestand zonder verdere actie kunnen importeren en het zou geïmporteerd worden. maar het standaard type van elke kolom zou een <em>String</em> (tekst) zijn. Dat is OK, behalve voor het veld <cite>D001</cite> dat de aantallen voor de bevolking bevat. Door deze als tekst te importeren zouden we niet in staat zijn rekenkundige bewerkingen op die kolom uit te voeren. Om QGIS te vertellen om het veld als een getal te importeren, moeten we een <cite>hulp</cite>-bestand maken met een extensie <cite>.csvt</cite>. Dat bestand zal slechts 1 rij hebben die de gegevenstypes specificeert voor elke kolom. Sla dat bestand op als <cite>ca_tracts_pop.csvt</cite> in dezelfde map als het originele <cite>.csv</cite>-bestand. U kunt ook <a href="#id1"><span class="problematic" id="id2">:download:`het csvt-bestand vanaf hier downloaden. &lt;../../downloads/ca_tracts_pop.csvt&gt;`_</span></a></p>
 </li>
 </ol>
-<img alt="../_images/842.png" class="align-center" src="../_images/842.png" />
+<img alt="../_images/843.png" class="align-center" src="../_images/843.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Nu zijn we gereed om het CSV-bestand in QGIS te importeren. Ga naar <span class="menuselection">Kaartlagen &#8211; Laag toevoegen Layer ‣ Tekstgescheiden kaartlaag toevoegen...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/941.png" class="align-center" src="../_images/941.png" />
+<img alt="../_images/942.png" class="align-center" src="../_images/942.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Blader naar de map die het CSV-bestand bevat en selecteer dat. Zorg er voor dat u <span class="guilabel">Bestandsformaat</span> heeft geselecteerd als <span class="guilabel">CSV (komma gescheiden waarden)</span>. Omdat we dit als een tabel importeren, moeten we specificeren dat ons bestand geen geometrie bevat. Selecteer de optie <span class="guilabel">Geen geometrieën (alleen attributentabel)</span>. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
+<img alt="../_images/1041.png" class="align-center" src="../_images/1041.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">De CSV zal nu als een tabel worden geïmporteerd in QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/1165.png" class="align-center" src="../_images/1165.png" />
+<img alt="../_images/1167.png" class="align-center" src="../_images/1167.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Selecteer de laag <cite>tl_2013_06_tract</cite>. Klik er met rechts op en selecteer <span class="guilabel">Eigenschappen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1241.png" class="align-center" src="../_images/1241.png" />
+<img alt="../_images/1242.png" class="align-center" src="../_images/1242.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">Laag-eigenschappen</span>, de tab <span class="guilabel">Koppelingen</span>. Klik op de knop <cite>+</cite> onderin om een nieuwe tabelsamenvoeging te maken.</p>
 </li>
 </ol>
-<img alt="../_images/1340.png" class="align-center" src="../_images/1340.png" />
+<img alt="../_images/1341.png" class="align-center" src="../_images/1341.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">Vectorkoppeling toevoegen</span>, <cite>ca_tracts_pop</cite> als de <span class="guilabel">Koppellaag</span>. Vervolgens moeten we het veld met de unieke ID&#8217;s in zowel het shapefile als de CSV selecteren. Selecteer <cite>GEO.id2</cite> en <cite>GEOID</cite> als respectievelijk <span class="guilabel">Koppelveld</span> en <span class="guilabel">Doelveld</span>. Klik op <span class="guilabel">OK</span>.</p>
 </li>
@@ -316,17 +317,17 @@
 <li><p class="first">Sluit het dialoogvenster <span class="guilabel">Laag-eigenschappen</span> en ga terug naar het hoofdvenster van QGIS. Op dit punt zijn de velden uit het CSV-bestand gekoppeld aan het shapefile. Klik met rechts op de laag <cite>tl_2013_06_tract</cite> en selecteer <span class="guilabel">Open attributentabel</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1536.png" class="align-center" src="../_images/1536.png" />
+<img alt="../_images/1538.png" class="align-center" src="../_images/1538.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">U kunt nu een nieuwe set velden zien, inclusief het veld <span class="guilabel">ca_tracts_pop_D001</span> die zijn toegevoegd aan elk object. Nu heeft u toegang tot de waarde voor de bevolking voor elke tract uit het CSV-bestand. Sluit de attributentabel en ga terug naar het hoofdvenster van QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/1632.png" class="align-center" src="../_images/1632.png" />
+<img alt="../_images/1633.png" class="align-center" src="../_images/1633.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Klik met rechts op de laag <cite>tl_2013_06_tract</cite> en selecteer <span class="guilabel">Eigenschappen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1729.png" class="align-center" src="../_images/1729.png" />
+<img alt="../_images/1730.png" class="align-center" src="../_images/1730.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Selecteer de tab <span class="guilabel">Stijl</span>. Selecteer <span class="guilabel">Gradueel</span> uit het keuzemenu. Omdat we een kaart willen maken met de gegevens van de bevolking, willen we verschillende kleuren toewijzen aan elk object census tract, gebaseerd on de telling van de bevolking. Selecteer <span class="guilabel">ca_tracts_pop_D001</span> als de <span class="guilabel">Kolom</span>. Selecteer een kleurverloop naar wens uit het keuzemenu <span class="guilabel">Kleurverloop</span>. In de <span class="guilabel">Modus</span>, selecteer <span class="guilabel">kwantiel (Gelijke telling)</span>. Klik vervolgens op <span class="guilabel">Classificeren</span>. U zult een andere kleur zien toegwezen aan bepaalde bereiken van bevolking. Klik op <span class="guilabel">OK</span>.</p>
 </li>
@@ -367,7 +368,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Aug 29, 2019.<br/>
+      Laatste aanpassing op Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

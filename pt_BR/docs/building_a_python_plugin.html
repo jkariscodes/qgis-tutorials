@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Usando o Navegador QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
@@ -275,7 +276,7 @@
 <li><p class="first">Abra o QGIS. Vá até <span class="menuselection">Complementos‣ Plugin Builder ‣ Plugin Builder</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1131.png" class="align-center" src="../_images/1131.png" />
+<img alt="../_images/1133.png" class="align-center" src="../_images/1133.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Você vai ver o  <span class="guilabel">QGIS Plugin Builder</span>  com um formulário. Você pode preencher o formulário com detalhes relativos ao nosso complemento. A <span class="guilabel">Class name</span>  será o nome da classe Python contendo a lógica do plugin. Esta será também o nome da pasta que contém todos os arquivos do plugin. Digite <code class="docutils literal"><span class="pre">SaveAttributes</span></code> como o nome da classe. A <span class="guilabel">Plugin name</span> é o nome sob o qual o seu plugin será exibido no <span class="guilabel">Gerenciador de complementos</span>. Digite o nome como <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span></code>. Adicione uma descrição no campo  <span class="guilabel">Description</span>. O <span class="guilabel">Module name</span> será o nome do arquivo python principal para o plugin. Inseri-lo como <code class="docutils literal"><span class="pre">save_attributes</span></code>. Deixe os números de versão como estão. A <span class="guilabel">Text for menu item</span>  de menu será como os usuários vão encontrar o seu plugin no menu do QGIS. Inseri-lo como <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code>. Digite seu nome e endereço de e-mail nos campos apropriados. O campo <span class="guilabel">Menu</span>  vai decidir onde seu complemento será adicionado no QGIS. O nosso complemento é para dados vetoriais, selecione <code class="docutils literal"><span class="pre">Vector</span></code>. Verifique a caixa <span class="guilabel">Flag the plugin as experimental</span> na parte inferior. Clique em <span class="guilabel">OK`</span>.</p>
 </li>
@@ -297,17 +298,17 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>/home/username/.qgis2/python/plugins
 </pre></div>
 </div>
-<img alt="../_images/345.png" class="align-center" src="../_images/345.png" />
+<img alt="../_images/346.png" class="align-center" src="../_images/346.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Você verá um diálogo de confirmação uma vez que seu modelo de complemento for criado. Observe o caminho para a pasta do complemento.</p>
 </li>
 </ol>
-<img alt="../_images/428.png" class="align-center" src="../_images/428.png" />
+<img alt="../_images/429.png" class="align-center" src="../_images/429.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Antes de podermos usar o complemento recém-criado, é preciso compilar o arquivo <code class="docutils literal"><span class="pre">resources.qrc</span></code> que foi criado pelo Plugin Builder. Inicie o :guilabel: <cite>OSGeo4W Shell</cite> em janelas ou em um terminal no Mac ou Linux.</p>
 </li>
 </ol>
-<img alt="../_images/528.png" class="align-center" src="../_images/528.png" />
+<img alt="../_images/529.png" class="align-center" src="../_images/529.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Navegue até a pasta de complementos em que a saída do <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> foi criada. Você pode usar o comando <code class="docutils literal"><span class="pre">cd</span></code> seguido do caminho para o diretório.</p>
 </li>
@@ -315,7 +316,7 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>cd c:\Users\username\.qgis2\python\plugins\SaveAttributes
 </pre></div>
 </div>
-<img alt="../_images/627.png" class="align-center" src="../_images/627.png" />
+<img alt="../_images/628.png" class="align-center" src="../_images/628.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Uma vez que você está no diretório, tipo `` make``. Isto irá executar o comando `` pyrcc4`` que tínhamos instalado como parte de ligações Qt para Python.</p>
 </li>
@@ -323,37 +324,37 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>make
 </pre></div>
 </div>
-<img alt="../_images/727.png" class="align-center" src="../_images/727.png" />
+<img alt="../_images/728.png" class="align-center" src="../_images/728.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Agora estamos prontos para ter um primeiro olhar para o novo complemento que criamos. Feche o QGIS e abra-o novamente. vá para <span class="menuselection">Plugins ‣ Gerenciar e instalar complementos</span> e permita que o complemento <code class="docutils literal"><span class="pre">Salvar</span> <span class="pre">Attributes</span></code> no <span class="guilabel">guia Installed</span>. Você vai notar que há um novo ícone na barra de ferramentas e uma nova entrada de menu em <span class="menuselection">Vector ‣ Save Atributos -&gt; Save Atributos como CSV`</span>. Selecione-o para iniciar o diálogo do complemento.</p>
 </li>
 </ol>
-<img alt="../_images/826.png" class="align-center" src="../_images/826.png" />
+<img alt="../_images/827.png" class="align-center" src="../_images/827.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Você vai notar uma nova caixa de diálogo em branco chamada <span class="guilabel">Save Attributes</span>. Feche este diálogo.</p>
 </li>
 </ol>
-<img alt="../_images/927.png" class="align-center" src="../_images/927.png" />
+<img alt="../_images/928.png" class="align-center" src="../_images/928.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Agora vamos projetar sua caixa de diálogo e adicionar alguns elementos da interface do usuário para ele. Abra o programa <code class="docutils literal"><span class="pre">Qt</span> <span class="pre">Creator</span></code> e  <span class="guilabel">File &#8211;&gt; Open File or Project...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1025.png" class="align-center" src="../_images/1025.png" />
+<img alt="../_images/1026.png" class="align-center" src="../_images/1026.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Navegue até o diretório do complemento e selecione o arquivo <code class="docutils literal"><span class="pre">save_attributes_dialog_base.ui</span></code>. Clique em <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1132.png" class="align-center" src="../_images/1132.png" />
+<img alt="../_images/1134.png" class="align-center" src="../_images/1134.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Você verá a caixa de diálogo em branco do plugin. Você pode arrastar e soltar elementos do painel do lado esquerdo da caixa de diálogo. Nós vamos adicionar um  <span class="guilabel">Combo Box</span> do tipo <span class="guilabel">Input Widget</span>. Arraste-o para a janela do complemento.</p>
 </li>
 </ol>
-<img alt="../_images/1227.png" class="align-center" src="../_images/1227.png" />
+<img alt="../_images/1228.png" class="align-center" src="../_images/1228.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Redimensionar a caixa de combinação e ajuste seu tamanho. Agora arraste <span class="guilabel">Display Widget</span> no diálogo.</p>
 </li>
 </ol>
-<img alt="../_images/1327.png" class="align-center" src="../_images/1327.png" />
+<img alt="../_images/1328.png" class="align-center" src="../_images/1328.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Clique no texto do rótulo e digite <code class="docutils literal"><span class="pre">Select</span> <span class="pre">a</span> <span class="pre">layer</span></code>.</p>
 </li>
@@ -363,17 +364,17 @@
 <li><p class="first">Salve este arquivo, vá para  <span class="menuselection">File ‣ Save save_attributes_dialog_base.ui</span>. Observe que o nome do objeto da caixa de combinação é <code class="docutils literal"><span class="pre">comboBox</span></code>. Para interagir com este objeto usando o código python, teremos que se referir a ele por este nome.</p>
 </li>
 </ol>
-<img alt="../_images/1524.png" class="align-center" src="../_images/1524.png" />
+<img alt="../_images/1526.png" class="align-center" src="../_images/1526.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Vamos recarregar nosso complemento para que possamos ver as mudanças na janela de diálogo. vá para <span class="menuselection">Plugin ‣ Plugin Reloader ‣ Choose a plugin to be reloaded</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1621.png" class="align-center" src="../_images/1621.png" />
+<img alt="../_images/1622.png" class="align-center" src="../_images/1622.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Selecione <code class="docutils literal"><span class="pre">SaveAttributes</span></code> no`diálogo  <span class="guilabel">Configure Plugin reloader</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1719.png" class="align-center" src="../_images/1719.png" />
+<img alt="../_images/1720.png" class="align-center" src="../_images/1720.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Agora clique no botão <span class="guilabel">Save Attributes as CSV</span>. Você verá a caixa de diálogo recém-projetada.</p>
 </li>
@@ -400,7 +401,7 @@
 <li><p class="first">Você vai ver que a nossa caixa de combinação é agora preenchida com os nomes das camadas que estão carregadas no QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/2115.png" class="align-center" src="../_images/2115.png" />
+<img alt="../_images/2116.png" class="align-center" src="../_images/2116.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">Vamos adicionar outros elementos de interface de usuário restantes. Alterne de volta para o <code class="docutils literal"><span class="pre">Qt</span> <span class="pre">Creator</span></code> e carregue o arquivo <code class="docutils literal"><span class="pre">save_attributes_dialog_base.ui</span></code>. Adicione um <code class="docutils literal"><span class="pre">Label</span></code> <span class="guilabel">Display Widget</span> e altere o texto para <code class="docutils literal"><span class="pre">Select</span> <span class="pre">output</span> <span class="pre">file</span></code>. Adicionar um <code class="docutils literal"><span class="pre">LineEdit</span></code> tipo <span class="guilabel">Input Widget</span> que irá mostrar o caminho do arquivo de saída que o usuário escolheu. Em seguida, adicione um <code class="docutils literal"><span class="pre">Push</span> <span class="pre">Button</span></code> tipo <span class="guilabel">Button</span>  e mude o rótulo do botão para <code class="docutils literal"><span class="pre">...</span></code>. Observe os nomes de objeto dos widgets que teremos de usar para interagir com eles. Salve o arquivo.</p>
 </li>
@@ -709,7 +710,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Última atualização em Aug 29, 2019.<br/>
+      Última atualização em Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

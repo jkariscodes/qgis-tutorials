@@ -105,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Maken van kaarten automatiseren met Atlas van afdruklay-out (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
@@ -246,7 +247,7 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/120.png" class="align-center" src="../../_images/120.png" />
+<div><img alt="../../_images/128.png" class="align-center" src="../../_images/128.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p class="first">Ga naar <span class="menuselection">Bewerken ‣ Selecteren ‣ Objecten selecteren met een expressie…</span> of klik op de knop <span class="guilabel">Objecten selecteren met een expressie</span> op de <span class="guilabel">werkbalk Attributen</span>.</p>
@@ -260,7 +261,7 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/317.png" class="align-center" src="../../_images/317.png" />
+<div><img alt="../../_images/318.png" class="align-center" src="../../_images/318.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p class="first">We zullen een aangepaste functie maken, genaamd <code class="docutils literal"><span class="pre">GetUtmZone</span></code> dat het getal van de UTM-zone zal berekenen voor elk object. Omdat aangepaste functies in QGIS werken op het niveau van objecten. We zullen het zwaartepunt van de geometrie van het object gebruiken en de UTM-zone berekenen uit de latitude en longitude van de geometrie van het zwaartepunt. We zullen ook een bestemming &#8216;N&#8217; of &#8216;S&#8217; toevoegen aan de zone om aan te geven of de zone zich bevindt in de noordelijke of zuidelijke hemisfeer. Druk op de knop <span class="guilabel">+</span> in de linker benedenhoek van het scherm en typ <code class="docutils literal"><span class="pre">utm_zones.py</span></code> als de bestandsnaam. U kunt op het label <span class="guilabel">Help</span> in het onderste paneel klikken om het te sluiten en het paneel voor de code te vergroten.</p>
@@ -292,7 +293,7 @@
     <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/57.png" class="align-center" src="../../_images/57.png" />
+<img alt="../../_images/58.png" class="align-center" src="../../_images/58.png" />
 </div></blockquote>
 </li>
 </ol>
@@ -306,7 +307,7 @@
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>GetUtmZone() = &#39;33N&#39;
 </pre></div>
 </div>
-<img alt="../../_images/67.png" class="align-center" src="../../_images/67.png" />
+<img alt="../../_images/68.png" class="align-center" src="../../_images/68.png" />
 </div></blockquote>
 </li>
 </ol>
@@ -317,29 +318,29 @@
 <ol class="arabic" start="7">
 <li><p class="first">Terug in het hoofdvenster van QGIS zou u enkele punten zien die geel zijn geaccentueerd. Dit zijn de punten die vallen in de UTM Zone die we hebben gespecificeerd in de expressie.</p>
 <blockquote>
-<div><img alt="../../_images/77.png" class="align-center" src="../../_images/77.png" />
+<div><img alt="../../_images/78.png" class="align-center" src="../../_images/78.png" />
 </div></blockquote>
 </li>
 <li><p class="first">U zag hoe we een aangepaste functie om objecten met een expressie te selecteren hebben gedefinieerd en gebruikt. We zullen du dezelfde functie in een andere context gebruiken. Eén van de verborgen juwelen in QGIS is het gereedschap <strong>Kaarttips</strong>. Dit gereedschap geeft gebruiker-gedefinieerde tekst weer indien u over een object gaat. Klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> en selecteer Eigenschappen.</p>
-<img alt="../../_images/87.png" class="align-center" src="../../_images/87.png" />
+<img alt="../../_images/88.png" class="align-center" src="../../_images/88.png" />
 </li>
 <li><p class="first">Schakel over naar de tab Tonen. Hier kunt u elke tekst invullen die zal worden weergegeven als u over de objecten van de laag gaat. Beter nog, u kunt veldwaarden van de laag gebruiken en ook expressies om veel betere nuttige berichten weer te geven. Klik op de knop <span class="guilabel">Ɛ</span>.</p>
-<img alt="../../_images/97.png" class="align-center" src="../../_images/97.png" />
+<img alt="../../_images/98.png" class="align-center" src="../../_images/98.png" />
 </li>
 <li><p class="first">U zult opnieuw de bekende expressiebewerker zien. We zullen de functie <code class="docutils literal"><span class="pre">concat</span></code> gebruiken om de waarde van het veld <code class="docutils literal"><span class="pre">name</span></code> samen te voegen met het resultaat van onze aangepaste functie <code class="docutils literal"><span class="pre">GetUtmZone</span></code>. Voer de volgende expressie in en klik op <span class="guilabel">OK</span>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">concat</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s1">&#39; | UTM Zone: &#39;</span><span class="p">,</span> <span class="n">GetUtmZone</span><span class="p">())</span>
 </pre></div>
 </div>
-<img alt="../../_images/107.png" class="align-center" src="../../_images/107.png" />
+<img alt="../../_images/108.png" class="align-center" src="../../_images/108.png" />
 </li>
 <li><p class="first">U zult de expressie zien ingevoerd als de waarde van de tekst in Tonen. Klik op <span class="guilabel">Toevoegen</span> om het toe te voegen aan het vak HTML en druk dan op <span class="guilabel">OK</span>.</p>
-<img alt="../../_images/1111.png" class="align-center" src="../../_images/1111.png" />
+<img alt="../../_images/1112.png" class="align-center" src="../../_images/1112.png" />
 </li>
 <li><p class="first">Laten we, vóórdat we doorgaan, de objecten die werden geselecteerd in de vorige stap deselecteren. Ga naar <span class="menuselection">Beeld ‣ Selecteren ‣ Objecten uit alle lagen deselecteren</span> of klik op de knop <span class="guilabel">Objecten uit alle lagen deselecteren</span> op de <span class="guilabel">werkbalk Attributen</span>.</p>
-<img alt="../../_images/127.png" class="align-center" src="../../_images/127.png" />
+<img alt="../../_images/129.png" class="align-center" src="../../_images/129.png" />
 </li>
 <li><p class="first">Activeer het gereedschap <code class="docutils literal"><span class="pre">Kaarttips</span></code> door te gaan naar <span class="menuselection">Beeld ‣ Kaarttips</span> of door te klikken op de knop <span class="guilabel">Kaarttips weergeven</span> op de <span class="guilabel">werkbalk Attributen</span>.</p>
-<img alt="../../_images/137.png" class="align-center" src="../../_images/137.png" />
+<img alt="../../_images/138.png" class="align-center" src="../../_images/138.png" />
 </li>
 <li><p class="first">Zoom in op een willekeurig gebied van de kaart en plaats uw muiscursor boven een object. U zult de naam van de stad en de corresponderende UTM-zone weergegeven zien worden als een kaarttip.</p>
 <img alt="../../_images/14.gif" class="align-center" src="../../_images/14.gif" />
@@ -370,7 +371,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Aug 29, 2019.<br/>
+      Laatste aanpassing op Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

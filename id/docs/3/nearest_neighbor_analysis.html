@@ -105,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Menggunakan QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Membuka file BIL, BIP atau BSQ di QGIS</a></li>
@@ -250,7 +251,7 @@ below:</p>
 <li>Locate the downloaded <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code> file in the <span class="guilabel">Browser</span> panel and expand it. Drag the <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.shp</span></code> file to the canvas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/150.png" class="align-center" src="../../_images/150.png" />
+<div><img alt="../../_images/160.png" class="align-center" src="../../_images/160.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li>You will see a new layer <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> loaded in the <span class="guilabel">Layers</span> panel. This layer contains the points representing populated places. Now we will load the earthquakes layer. This layer comes as a <em>Tab Serepated Values (TSV)</em> text file. To load this file, click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You can also use <code class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">L</span></code> keyboard shortcut.</li>
@@ -262,37 +263,37 @@ below:</p>
 <li>Click the <span class="guilabel">...</span> button next to <span class="guilabel">File name</span> and browse to the downloaded <code class="docutils literal"><span class="pre">signif.txt</span></code> file. Once loaded, the <span class="guilabel">File Format</span> and <span class="guilabel">Geometry Definition</span> fields should be auto-populated with correct values. Click <span class="guilabel">Add</span> followed by <span class="guilabel">Close</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/326.png" class="align-center" src="../../_images/326.png" />
+<div><img alt="../../_images/327.png" class="align-center" src="../../_images/327.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li>Zoom around and explore both the datasets. Each yellow point represents the location of a significant earthquake and each red point represents the location of a populated place. Our goal is to find out the nearest point from the populated places layer for each of the points in the earthquake layer.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/412.png" class="align-center" src="../../_images/412.png" />
+<div><img alt="../../_images/413.png" class="align-center" src="../../_images/413.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li>Before we do the analysis, we need to clean up our inputs. The <code class="docutils literal"><span class="pre">signif</span></code> layer contains many records without a valid geometry. These records were imported with a <strong>NULL</strong> geometry. So let&#8217;s remove these records first. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/512.png" class="align-center" src="../../_images/512.png" />
+<div><img alt="../../_images/513.png" class="align-center" src="../../_images/513.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li>Search for and locate the <span class="menuselection">Vector geometry ‣ Remove null geometries</span> tool. Double-click to launch it.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/612.png" class="align-center" src="../../_images/612.png" />
+<div><img alt="../../_images/613.png" class="align-center" src="../../_images/613.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li>Select <code class="docutils literal"><span class="pre">signif</span></code> as the <span class="guilabel">Input layer</span> and click <span class="guilabel">Run</span>. Once the processing finishes, click <span class="guilabel">Close</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/711.png" class="align-center" src="../../_images/711.png" />
+<div><img alt="../../_images/712.png" class="align-center" src="../../_images/712.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li>You will see a new layer caled <code class="docutils literal"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> loaded into the <span class="guilabel">Layers</span> panel. We will use this layer instead of the original <code class="docutils literal"><span class="pre">signif</span></code> layer in further analysis. Un-check the <code class="docutils literal"><span class="pre">signif</span></code> layer in the <span class="guilabel">Layers</span> panel to hide it. Now it is time to perform the nearest neighbor analysis. Search and locate the <span class="menuselection">Vector analysis ‣ Distance to nearest hub (line to hub)</span> tool. Double-click to launch it.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/811.png" class="align-center" src="../../_images/811.png" />
+<div><img alt="../../_images/812.png" class="align-center" src="../../_images/812.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Catatan</p>
@@ -302,31 +303,31 @@ below:</p>
 <li>In the <span class="guilabel">Distance to Nearest Hub (Line to Hub)</span> dialog, select <code class="docutils literal"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> as the <span class="guilabel">Source points layer</span>. Select <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> as the <span class="guilabel">Distination hubs layer</span>. Select <code class="docutils literal"><span class="pre">name</span></code> as the <span class="guilabel">Hub layer name attribute</span>. The tool will also compute straight-line distance between the populated place and the nearest earthquake. Set <code class="docutils literal"><span class="pre">Kilometers</span></code> as the <span class="guilabel">Measurement unit</span>. Click <span class="guilabel">Run</span>. Once the processing finishes, click <span class="guilabel">Close</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/911.png" class="align-center" src="../../_images/911.png" />
+<div><img alt="../../_images/912.png" class="align-center" src="../../_images/912.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li>Back in the main QGIS window, you will see a new line layer called <code class="docutils literal"><span class="pre">Hub</span> <span class="pre">distance</span></code> loaded in the <span class="guilabel">Layers</span> panel. This layer has line features connecting each earthquake point to the nearest populated place. Right-click the <code class="docutils literal"><span class="pre">Hub</span> <span class="pre">distance</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1011.png" class="align-center" src="../../_images/1011.png" />
+<div><img alt="../../_images/1012.png" class="align-center" src="../../_images/1012.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li>Scroll right to the last columns and you will see 2 new attributes called <strong>HubName</strong> and <strong>HubDist</strong> added to the original earthquake features. This is the name the distance to the nearest neighbor from the populated places layer.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1115.png" class="align-center" src="../../_images/1115.png" />
+<div><img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li>Our analysis is complete. We can now explore another tool that can also do a similar analysis. <strong>Distance Matrix</strong> is a powerful tool that allows you to not only compute distance to the nearest point, but to all the points from another layer. We can use this method as an alternative to the <em>Distance to nearest hub</em> tool. Un-check the <code class="docutils literal"><span class="pre">Hub</span> <span class="pre">distance</span></code> layer to hide it. Search and locate the <span class="menuselection">Vector analysis ‣ Distance matrix</span> tool.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1212.png" class="align-center" src="../../_images/1212.png" />
+<div><img alt="../../_images/1213.png" class="align-center" src="../../_images/1213.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li>In the <span class="guilabel">Distance matrix</span> dialog, set <code class="docutils literal"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> as the <span class="guilabel">Input point laeyer</span> and <code class="docutils literal"><span class="pre">I_D</span></code> as the <span class="guilabel">Input unique ID field</span>. Set <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> as the <span class="guilabel">Target point layer</span> and <code class="docutils literal"><span class="pre">name</span></code> as the <span class="guilabel">Target unique ID field</span>. Select <code class="docutils literal"><span class="pre">Linear</span> <span class="pre">(N*k</span> <span class="pre">x</span> <span class="pre">3)</span> <span class="pre">distance</span> <span class="pre">matrix</span></code> as the <span class="guilabel">Output matrix type</span>. The key here is to set the <span class="guilabel">Use only the nearest (k) target points</span> parameter to <code class="docutils literal"><span class="pre">1</span></code> - which will give you only the nearest neighbor in the output. Click <span class="guilabel">Run</span> to start the matrix calculation. Once the processing finishes, click <span class="guilabel">Close</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1312.png" class="align-center" src="../../_images/1312.png" />
+<div><img alt="../../_images/1313.png" class="align-center" src="../../_images/1313.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li>Once the processing finishes, a new layer called <code class="docutils literal"><span class="pre">Distance</span> <span class="pre">matrix</span></code> will be loaded. Note that the output of this tool is a layer containin <em>MultiPoint</em> geometries. Each feature contains 2 points - source and target. Open the <span class="guilabel">Attribute Table</span> for the layer. You will see that each feature has attributes mapping the earthquake to its nearest populated place. Note that the distance here is in the layer&#8217;s CRS units (degrees).</li>
@@ -338,13 +339,13 @@ below:</p>
 <li>At this point, you can save your results in the format of your choice by right-clicking the layer and selecting <span class="menuselection">Export ‣ Save Features As</span>. If you want to visualize the results better, we can easily create a hub-spoke rendering from the feature&#8217;s geometry. Right-click the <code class="docutils literal"><span class="pre">Distance</span> <span class="pre">matrix</span></code> layer and select <span class="guilabel">Properties</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/159.png" class="align-center" src="../../_images/159.png" />
+<div><img alt="../../_images/1511.png" class="align-center" src="../../_images/1511.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li>In the <span class="guilabel">Properties</span> dialog, switch to the <span class="guilabel">Symbology</span> tab. Click on the <code class="docutils literal"><span class="pre">Simple</span> <span class="pre">marker</span></code> sub-renderer and select <code class="docutils literal"><span class="pre">Geometry</span> <span class="pre">generator</span></code> as the <span class="guilabel">Symbol layer type</span>. Set <code class="docutils literal"><span class="pre">LineString</span> <span class="pre">/</span> <span class="pre">MultiLineString</span></code> as the <span class="guilabel">Geometry type</span>. Click the <span class="guilabel">Expression</span> button.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/168.png" class="align-center" src="../../_images/168.png" />
+<div><img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li>Here we can enter an expression to create a line geometry from the 2 points within each multi-point source geometry. Enter the following expression.</li>
@@ -353,7 +354,7 @@ below:</p>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>make_line(point_n( $geometry, 1), point_n( $geometry, 2))
 </pre></div>
 </div>
-<img alt="../../_images/179.png" class="align-center" src="../../_images/179.png" />
+<img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li>Back in the <span class="guilabel">Symbology</span> tab, set the style of the line as per your liking and click <span class="guilabel">OK</span>.</li>
@@ -392,7 +393,7 @@ below:</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Aug 29, 2019.<br/>
+      Terakhir diperbarui pada Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

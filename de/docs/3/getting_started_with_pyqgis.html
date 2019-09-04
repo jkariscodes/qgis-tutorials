@@ -105,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Stapelverarbeitung mit dem Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automatisierung der Kartenerstellung mit dem Drucklayout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Using the QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
@@ -239,7 +240,7 @@
 <li><p class="first">Suche die Datei <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code> im QGIS Browser und erweitere sie. Wähle die Datei <code class="docutils literal"><span class="pre">ne_10m_airports.shp</span></code> und ziehe sie in den Arbeitsbereich.</p>
 </li>
 </ol>
-<img alt="../../_images/140.png" class="align-center" src="../../_images/140.png" />
+<img alt="../../_images/149.png" class="align-center" src="../../_images/149.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Wir sehen, das die Datei <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> in QGIS geladen wurde.</p>
 </li>
@@ -249,12 +250,12 @@
 <li><p class="first">Wähle das <span class="guilabel">Abfrage</span> Tool und klicke auf einen der Punkte um die vorhandenen Attribute zu sehen. Man bemerkt, dass der Name des Flughafens im Attribut <code class="docutils literal"><span class="pre">name</span></code> und der 3-ziffrige Code im Attribut <code class="docutils literal"><span class="pre">iata_code</span></code> hinterlegt sind. Wir können das Fenster <span class="guilabel">Abfrageergebnisse</span> schließen.</p>
 </li>
 </ol>
-<img alt="../../_images/320.png" class="align-center" src="../../_images/320.png" />
+<img alt="../../_images/323.png" class="align-center" src="../../_images/323.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">QGIS beinhaltet eine Konsole, in der man Python Kommandos eingeben kann und das Resultat erhält. Die Konsole ist eine großartige Möglichkeit, um die Scripterstellung zu lernen oder auch zur schnellen Datenverarbeitung. Öffne die Python-Konsole unter <span class="menuselection">Plugins ‣ Python Console</span>.</p>
 </li>
 </ol>
-<img alt="../../_images/49.png" class="align-center" src="../../_images/49.png" />
+<img alt="../../_images/410.png" class="align-center" src="../../_images/410.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Wir sehen unter dem QGIS Arbeitsbereich ein neues Eingabefeld. Unten im Eingabefeld sehen wir das Eingabezeichen <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> wo wir Kommandos eingeben können. Um mit der QGIS Umgebung zu interagieren, müssen wir die Variable <code class="docutils literal"><span class="pre">iface</span></code> nutzen. Um auf den aktuell aktiven Layer in QGIS zuzugreifen, geben wir das folgende Kommando gefolgt von <code class="kbd docutils literal"><span class="pre">Enter</span></code> ein. Dieses Kommando stellt einen Bezug zum aktuell geladenen Layer her und speichert ihn in der Variable <code class="docutils literal"><span class="pre">layer</span></code>.</p>
 </li>
@@ -262,7 +263,7 @@
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/510.png" class="align-center" src="../../_images/510.png" />
+<img alt="../../_images/511.png" class="align-center" src="../../_images/511.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Es gibt eine praktische Funktion in Python, genannt <code class="docutils literal"><span class="pre">dir()</span></code>, die alle verfügbaren Methoden für ein Objekt auflistet. Das ist nützlich, wenn man sich nicht sicher ist, welche Funktionen für ein Objekt verfügbar sind. Gebe das folgende Kommando ein, um zu sehen, welche Operationen mit der <code class="docutils literal"><span class="pre">layer</span></code> Variable möglich sind.</p>
 </li>
@@ -270,7 +271,7 @@
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/610.png" class="align-center" src="../../_images/610.png" />
+<img alt="../../_images/611.png" class="align-center" src="../../_images/611.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Man sieht nun eine lange Liste der verfügbaren Funktionen. Zuerst werden eine Funktion genannt <code class="docutils literal"><span class="pre">getFeatures()</span></code> nutzen,  die einen Bezug auf alle Features in einem Layer herstellt. In unserem Fall ist ein Feature ein Punkt, der einen Flughafen repräsentiert. Wir können das folgende Kommandeo eingeben, um alle Features des aktuellen Layers aufzulisten.</p>
 </li>
@@ -344,7 +345,7 @@
 <li><p class="first">Wir können nun zu dem gewählten Dateipfad gehen und die Text-Datei öffnen. Wir sehen die Daten aller Flughafen, die wir aus der shape-Datei der Flughäfen mit Hilfe von Python-scripting extrahiert haben.</p>
 </li>
 </ol>
-<img alt="../../_images/1310.png" class="align-center" src="../../_images/1310.png" />
+<img alt="../../_images/1311.png" class="align-center" src="../../_images/1311.png" />
 </div>
 </div>
 
@@ -370,7 +371,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Aug 29, 2019.<br/>
+      Zuletzt aktualisiert am Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

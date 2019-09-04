@@ -105,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Maken van kaarten automatiseren met Atlas van afdruklay-out (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
@@ -251,7 +252,7 @@
 <li><p class="first">Ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Rasterlaag toevoegen</span>. Zoek het gedownloade <code class="docutils literal"><span class="pre">BX24_GeoTifv1-03.tif</span></code> op en klik op <span class="guilabel">Openen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1141.png" class="align-center" src="../_images/1141.png" />
+<img alt="../_images/1143.png" class="align-center" src="../_images/1143.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Dit is een groot rasterbestand en het zou u kunnen opvallen dat wanneer u op de kaart inzoomt of die verschuift, dat het enige tijd vergt voor de afbeelding is gerenderd. QGIS biedt een eenvoudige oplossing om rasters veel sneller te laden door <strong>Afbeeldingspiramiden</strong> te gebruiken. QGIS maakt vooraf gerenderde tegels in verschillende resoluties en deze worden aan u gepresenteerd in plaats van het volledige raster. Dat maakt het navigeren over de kaart snel en responsief. Klik met rechts op de laag <code class="docutils literal"><span class="pre">BX24_GeoTifv1-03</span></code> en kies <span class="guilabel">Eigenschappen</span>.</p>
 </li>
@@ -261,42 +262,42 @@
 <li><p class="first">Kies de tab <span class="guilabel">Piramiden</span>. Houdt de <code class="kbd docutils literal"><span class="pre">Ctrl</span></code>-toets ingedrukt en selecteer alle aangeboden resoluties in het paneel <span class="guilabel">Resoluties</span>. Laat de andere opties op hun standaarden staan en klik op <span class="guilabel">Piramiden bouwen</span>. Als het proces voltooid is, klik dan op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/352.png" class="align-center" src="../_images/352.png" />
+<img alt="../_images/353.png" class="align-center" src="../_images/353.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Gebruik, terug in het hoofdvenster van QGIS, het gereedschap <span class="guilabel">Zoomen</span> om het gebied van <em>Hagley Park</em> in Christchurch te lokaliseren. Dat is het park dat we zullen digitaliseren.</p>
 </li>
 </ol>
-<img alt="../_images/434.png" class="align-center" src="../_images/434.png" />
+<img alt="../_images/435.png" class="align-center" src="../_images/435.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Voor we beginnen moeten we de standaard opties voor <strong>Digitaliseren</strong> instellen. Ga naar <span class="menuselection">Extra ‣ Opties...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
+<img alt="../_images/535.png" class="align-center" src="../_images/535.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Selecteer de tab <span class="guilabel">Digitaliseren</span> in het dialoogvenster <span class="guilabel">Opties</span>. Stel de <span class="guilabel">Default snap mode</span> in op <span class="guilabel">Naar hoekpunt en segment</span>. Dit stelt u in staat te snappen aan het dichtstbijzijnde hoekpunt of lijnsegment. Ik heb zelf de voorkeur om de <span class="guilabel">Standaard &#8216;snapping&#8217;-tolerantie</span> en <span class="guilabel">Zoekradius voor hoekpuntaanpassingen</span> in te stellen op pixels in plaats van op kaarteenheden. Dat zal er voor zorgen dat de afstand voor snappen hetzelfde blijft, ongeacht het zoomniveau. Afhankelijk van de resolutie van uw computerscherm, kunt u een toepasselijke waarde kiezen. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/632.png" class="align-center" src="../_images/632.png" />
+<img alt="../_images/633.png" class="align-center" src="../_images/633.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Nu zijn we klaar om te beginnen met digitaliseren. We zullen eerst een wegenlaag maken en de wegen rondom het gebied van het park digitaliseren. Selecteer <span class="menuselection">KaartLagen ‣ Laag maken ‣ Nieuwe Spatialite-laag...</span>. Als u dat liever doet kunt u in plaats daarvan ook kiezen voor <span class="guilabel">Nieuwe Shapefile-laag...</span>. Spatialite is een open database-indeling, soortgelijk aan de indeling van ESRI&#8217;s geodatabase. Spatialite-database is opgenomen in één bestand op uw harde schijf en kan verschillende ruimtelijke typen (punt, lijn, polygoon) als ook niet-ruimtelijke lagen bevatten. Dat maakt het veel eenvoudiger om te verplaatsen dan een stapel shapefiles. In deze handleiding maken we een aantal polygoonlagen en een lijnlaag, dus is een Spatialite-database meer geschikt. U kunt altijd nog een Spatialite-laag laden en die opslaan als een shapefile of enige andere indeling die u wilt.</p>
 </li>
 </ol>
-<img alt="../_images/732.png" class="align-center" src="../_images/732.png" />
+<img alt="../_images/733.png" class="align-center" src="../_images/733.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Klik, in het dialoogvenster <span class="guilabel">Nieuwe SpatiaLite-laag</span>, op de knop <span class="guilabel">...</span> en sla een nieuwe database voor SpatiaLite, genaamd <code class="docutils literal"><span class="pre">nztopo.sqlite</span></code>, op. Kies als <span class="guilabel">Laagnaam</span> <code class="docutils literal"><span class="pre">Roads</span></code> en selecteer <code class="docutils literal"><span class="pre">Lijn</span></code> als het <span class="guilabel">Type</span>. De basis topografische kaart is in het CRS <code class="docutils literal"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>, dus kunnen we dezelfde voor onze laag &#8220;Roads&#8221; selecteren. Selecteer het vak <span class="guilabel">Maak een automatisch ophogend primair sleutelveld aan</span>. Dit zal een veld <strong>pkuid</strong> in de attributentabel maken en automatisch een uniek numeriek ID toewijzen aan elk object. Bij het maken van een GIS-laag moet u beslissen welke attributen elk object zal moeten hebben. Omdat dit een laag met wegen is, zullen we 2 basisattributen hebben - Naam en Klasse. Voer <code class="docutils literal"><span class="pre">Naam</span></code> in als de <span class="guilabel">Naam</span> van het attribuut in het gedeelte <span class="guilabel">Nieuw attribuut</span> en klik op <span class="guilabel">Toevoegen aan attributenlijst.</span></p>
 </li>
 </ol>
-<img alt="../_images/831.png" class="align-center" src="../_images/831.png" />
+<img alt="../_images/832.png" class="align-center" src="../_images/832.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Maak op soortgelijke wijze een nieuw attribuut <code class="docutils literal"><span class="pre">Klasse</span></code> van het type <span class="guilabel">Text data</span>. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/932.png" class="align-center" src="../_images/932.png" />
+<img alt="../_images/933.png" class="align-center" src="../_images/933.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Klik, als de laag eenmaal is geladen, op de knop <span class="guilabel">Bewerken aan-/uitzetten</span> om de laag in de modus Berwerken te zetten.</p>
 </li>
 </ol>
-<img alt="../_images/1030.png" class="align-center" src="../_images/1030.png" />
+<img alt="../_images/1031.png" class="align-center" src="../_images/1031.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Klik op de knop <span class="guilabel">Object toevoegen</span>. Klik op het kaartvenster om een nieuw punt toe te voegen. Voeg nieuwe punten toe langs het wegobject. Als u eenmaal een segment van de weg hebt gedigitaliseerd, klik met rechts om het object te beëindigen.</p>
 </li>
@@ -305,17 +306,17 @@
 <p class="first admonition-title">Notitie</p>
 <p class="last">U kunt het wieltje van de muis gebruiken om in- of uit te zoomen tijdens het digitaliseren. U kunt ook het muiswiel ingedrukt houden en de muis verplaatsen om te verschuiven.</p>
 </div>
-<img alt="../_images/1142.png" class="align-center" src="../_images/1142.png" />
+<img alt="../_images/1144.png" class="align-center" src="../_images/1144.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Nadat u met rechts heeft geklikt om het object te beëindigen, zult u een pop-up dialoogvenster krijgen, genaamd <span class="guilabel">Attributen</span>. Hier kunt u attributen invoeren voor het nieuw gemaakte object. Omdat <strong>pkuid</strong> een automatisch ophogend veld is, zult u niet in staat zijn daar handmatig een waarde in te geven. Laat het leeg en voer de naam van de weg in zoals die verschijnt op de topografische kaart. Wijs ook, optioneel, een waarde voor Klasse toe. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1231.png" class="align-center" src="../_images/1231.png" />
+<img alt="../_images/1232.png" class="align-center" src="../_images/1232.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">De standaard stijl voor de nieuwe lijnlaag is een dunne lijn. Laten we die wijzigen zodat we de gedigitaliseerde objecten in het kaartvenster beter kunnen zien. Klik met rechts op de laag <code class="docutils literal"><span class="pre">Roads</span></code> en selecteer <span class="guilabel">Eigenschappen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1331.png" class="align-center" src="../_images/1331.png" />
+<img alt="../_images/1332.png" class="align-center" src="../_images/1332.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Selecteer de tab <span class="guilabel">Stijl</span> in het dialoogvenster <span class="guilabel">Laag-eigenschappen</span>. Kies een dikkere lijnstijl zoals <span class="guilabel">Primary</span> uit de vooraf gedefinieerde stijlen. Klik op <span class="guilabel">OK</span>.</p>
 </li>
@@ -325,17 +326,17 @@
 <li><p class="first">Nu zult u het gedigitaliseerde wegobject duidelijk zien. Klik op <span class="guilabel">Opslaan voor geselecteerde laag/lagen</span> om het nieuwe object op schijf te bewaren.</p>
 </li>
 </ol>
-<img alt="../_images/1528.png" class="align-center" src="../_images/1528.png" />
+<img alt="../_images/1530.png" class="align-center" src="../_images/1530.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Voor we de resterende wegen gaan digitaliseren, is het belangrijk om enkele andere instellingen bij te werken die belangrijk zijn om een foutenvrije laag te maken. Ga naar <span class="menuselection">Extra ‣ Opties voor Snappen...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1624.png" class="align-center" src="../_images/1624.png" />
+<img alt="../_images/1625.png" class="align-center" src="../_images/1625.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">Snapping-opties</span>, <span class="guilabel">&#8216;Topologie bewerken&#8217; aanzetten</span>. Deze optie zorgt er voor dat de algemene grenzen juist worden behouden in polygoonlagen. Selecteer ook <span class="guilabel">Snappen op snijpunten aanzetten</span> wat u in staat stelt te snappen op een kruising van een achtergrondlaag.</p>
 </li>
 </ol>
-<img alt="../_images/1722.png" class="align-center" src="../_images/1722.png" />
+<img alt="../_images/1723.png" class="align-center" src="../_images/1723.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Nu kunt u op de knop <span class="guilabel">Object toevoegen</span> klikken en andere wegen rondom het park digitaliseren. Zorg er voor om op <span class="guilabel">Wijzgingen laag opslaan</span> nadat u een nieuw object heeft toegevoegd om uw werk op te slaan. Een handig gereedschap om u te helpen met digitaliseren is het <strong>Knooppunt-gereedschap</strong>. Klik op de knop <span class="guilabel">Knooppunt-gereedschap</span>.</p>
 </li>
@@ -355,7 +356,7 @@
 <li><p class="first">Nu zullen we een polygoonlaag maken die de grenzen van het park weergeeft. Ga naar <span class="menuselection">Kaartlagen ‣ Laag maken ‣ Nieuwe Spatialite-laag...</span>. Selecteer de database <code class="docutils literal"><span class="pre">nztopo.sqlite</span></code> uit de keuzelijst. Noem de nieuwe laag <code class="docutils literal"><span class="pre">Parks</span></code>. Selecteer <code class="docutils literal"><span class="pre">Polygoon</span></code> als het <span class="guilabel">Type</span>. Maak een nieuw attribuut, genaamd <code class="docutils literal"><span class="pre">Naam</span></code>. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2117.png" class="align-center" src="../_images/2117.png" />
+<img alt="../_images/2118.png" class="align-center" src="../_images/2118.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">Klik op de knop <span class="guilabel">Object toevoegen</span> en klik op het kaartvenster om een polygoonpunt toe te voegen. Digitaliseer de polygoon die het park weergeeft. Zorg er voor dat u aan de punten van de wegen snapt, zodat er geen gaten tussen de polygonen van het park en de lijnen van de wegen zijn. Klik met rechts om de polygoon te voltooien.</p>
 </li>
@@ -425,7 +426,7 @@
 <li><p class="first">Gebruik het gereedschap <span class="guilabel">Object(en) selecteren</span> om de polygoon te selecteren die u wilt draaien. Als het gereedschap <span class="guilabel">Object(en) draaien</span> eenmaal is geactiveerd, zult u een kruisdraad in het midden van de polygoon zijn. Klik exact op die kruisdraad en sleep met de muis terwijl u de linker muisknop ingedrukt houdt. Een voorbeeld van het gedraaide object zal verschijnen. Laat de muisknop los als de polygoon is uitgelijnd met de omtrek van het gebouw.</p>
 </li>
 </ol>
-<img alt="../_images/353.png" class="align-center" src="../_images/353.png" />
+<img alt="../_images/354.png" class="align-center" src="../_images/354.png" />
 <ol class="arabic simple" start="36">
 <li><p class="first">Sla de bewerkingen op de laag op en klik op <span class="guilabel">Bewerken aan/uitzetten</span> als u gered bent met het digitaliseren van alle gebouwen. U kunt de lagen verslepen om hun volgorde van weergave te wijzigen.</p>
 </li>
@@ -461,7 +462,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Aug 29, 2019.<br/>
+      Laatste aanpassing op Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

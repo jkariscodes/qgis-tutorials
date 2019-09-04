@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Usare il browser di QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Aprire file in formato BIL, BIP o BSQ in QGIS.</a></li>
@@ -252,7 +253,7 @@
 <li><p class="first">Dopo che avete scaricato i dati, aprite QGIS. Andate su <span class="menuselection">Layer ‣ Aggiungi Vettore...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1162.png" class="align-center" src="../_images/1162.png" />
+<img alt="../_images/1164.png" class="align-center" src="../_images/1164.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Fate Click su <span class="guilabel">Sfoglia</span> e portatevi nella cartella dove avete scaricato i file .zip.</p>
 </li>
@@ -262,32 +263,32 @@
 <li><p class="first">Trovate i file .zip scaricati. Tenete premuto il tasto <code class="kbd docutils literal"><span class="pre">Shift</span></code> e fate click su entrambi i file zip per selezionarli. Click su <span class="guilabel">Apri</span>.</p>
 </li>
 </ol>
-<img alt="../_images/366.png" class="align-center" src="../_images/366.png" />
+<img alt="../_images/367.png" class="align-center" src="../_images/367.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Apparirà una finestra di dialogo che vi chiederà di selezionare il layer da aprire tra i file zip. Selezionate <code class="docutils literal"><span class="pre">ne_10m_rivers_lake_centerlines.shp</span></code> e fate click su  <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/445.png" class="align-center" src="../_images/445.png" />
+<img alt="../_images/446.png" class="align-center" src="../_images/446.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Visto che avete operato una selezione multipla, ripetete l&#8217;operazione per il file successivo. Selezionate  10m_populated_places_simple.shp  e fate click su <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/546.png" class="align-center" src="../_images/546.png" />
+<img alt="../_images/547.png" class="align-center" src="../_images/547.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Potrete vedere ora entrambi gli shapefile caricati in QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/644.png" class="align-center" src="../_images/644.png" />
+<img alt="../_images/645.png" class="align-center" src="../_images/645.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Genereremo dei buffer sia nel  layer puntuale che in quello lineare. Lo strumento di geoprecessing per il <cite>Buffer</cite> in QGIS usa la numerazione metrico decimale ordinaria per calcolare la misura del buffer. Ma i layer con cui stiamo lavorando sono in un <cite>Sistema di Riferimento (SR) basato su Coordinate Geografiche</cite> che, com&#8217;è noto, vengono calcolate in  <cite>gradi</cite>. . Questo non soddisfa le esigenze delle nostre analisi che prevedono invece l&#8217;uso di unità di misura come i <cite>metri</cite> o i <cite>chilometri</cite>.  Per risolvere questo problema dobbiamo allora ri-proiettare i nostri layer su un <cite>Sistema di Coordinate Proiettare (SR)</cite>. Click sul tasto destro del mouse sul layer  <code class="docutils literal"><span class="pre">10m_populated_places_simple</span> <span class="pre">layer</span></code>  e quindi scegliete  <span class="guilabel">Salva con Nome</span>.</p>
 </li>
 </ol>
-<img alt="../_images/743.png" class="align-center" src="../_images/743.png" />
+<img alt="../_images/744.png" class="align-center" src="../_images/744.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Nella finestra di dialogo <span class="guilabel">Salva i vettori come...</span> scegliete il tasto <span class="guilabel">Sfoglia</span> accanto alla voce <span class="guilabel">Salva con Nome</span> e assegnate al nuovo file il nome di <code class="docutils literal"><span class="pre">populated_places_reprojected.shp</span></code> . Ora fate click sul successivo tasto <span class="guilabel">Sfoglia</span> vicino alla voce  <span class="guilabel">Sist Rif</span>.</p>
 </li>
 </ol>
-<img alt="../_images/841.png" class="align-center" src="../_images/841.png" />
+<img alt="../_images/842.png" class="align-center" src="../_images/842.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Ora dobbiamo scegliere un Sistema di Riferimento (SR) che sia adeguato ai nostri scopi. Per creare dei buffer una proiezione Azimutale Equidistante dovrebbe essere la scelta migliore. Nel nostro caso, considerato che il dataset è globale, sceglieremo una proiezione planetaria. Nella finestra di dialogo <span class="guilabel">Selettore di sistema di riferimento</span> avviate la ricerca digitando  <cite>world az..</cite> e vedrete comparire immediatamente il risultato.
 Selezionate <cite>World_Azimuthal_Equidistant</cite>  e fate click su <span class="guilabel">OK</span>.</p>
@@ -297,27 +298,27 @@ Selezionate <cite>World_Azimuthal_Equidistant</cite>  e fate click su <span clas
 <p class="first admonition-title">Nota</p>
 <p class="last">La Proiezione Mondiale Equdistante Azimutale misura 90 gradi dall&#8217;origine. Qui, essendo l&#8217;origine a 0 gradi di longitudine, saranno convertiti soltanto i valori compresi tra +/- 90 gradi di longitudine.</p>
 </div>
-<img alt="../_images/940.png" class="align-center" src="../_images/940.png" />
+<img alt="../_images/941.png" class="align-center" src="../_images/941.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Tornate nella finestra di dialogo <span class="guilabel">Salva i vettori come ...</span>  e spuntate la casella <span class="guilabel">Aggiungi il file salvato sulla mappa</span> quindi fate click su  <cite>OK</cite>.</p>
 </li>
 </ol>
-<img alt="../_images/1039.png" class="align-center" src="../_images/1039.png" />
+<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Adesso ripetete l&#8217;operazione di ri-proiezione per il file <code class="docutils literal"><span class="pre">ne_10m_rivers_lake_centerlines</span></code>  e salvate il nuovo layer di laghi e fiumi con il nome di <code class="docutils literal"><span class="pre">rivers_lake_reprojected.shp</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1163.png" class="align-center" src="../_images/1163.png" />
+<img alt="../_images/1165.png" class="align-center" src="../_images/1165.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Adesso avete 4 layer nel vostro:guilabel:<cite>Pannello dei Layer</cite>. Deselezionate i layer originali per vedere soltanto i layer sui quali sono state effettuate le riproiezioni. I layer riproiettati sono ancora rappresentati nei CRS di tipo Geografico per via delle impostazioni di default. Vediamo di annullarle. Facciamo click sul tasto <span class="guilabel">Stato del SR</span>  in basso a destra. Questa finestra può essere raggiunta anche da menu <span class="menuselection">Progetto ‣ Proprietà del Progetto</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1240.png" class="align-center" src="../_images/1240.png" />
+<img alt="../_images/1241.png" class="align-center" src="../_images/1241.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Nella scheda Sistema di Riferimento (SR) della finestra di dialogo <span class="guilabel">Proprietà del progetto</span>  disattivate la casella <span class="guilabel">Abilita la riproiezione al volo</span>. Click su <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1339.png" class="align-center" src="../_images/1339.png" />
+<img alt="../_images/1340.png" class="align-center" src="../_images/1340.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Torniamo adesso nella finestra principale di QGIS, click su uno dei layer riproiettati e click su &#8221; <span class="guilabel">Zoom all&#8217;estensione del Layer</span>.</p>
 </li>
@@ -327,17 +328,17 @@ Selezionate <cite>World_Azimuthal_Equidistant</cite>  e fate click su <span clas
 <li><p class="first">Adesso vedremo finalmente  nostri dati nel Sistema di Riferimento che abbiamo scelto per i nostri layer. Adesso dobbiamo creare dei buffer per entrambi i dataset. Click su <span class="menuselection">Vettore ‣ Strumenti di Geoprocessing ‣ Buffer</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1535.png" class="align-center" src="../_images/1535.png" />
+<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Nello strumento Buffer scegliete come file di input <code class="docutils literal"><span class="pre">populated_places_reprojected</span></code> . Inserite una distanza di buffer pari a <cite>10000</cite>. Notate che vogliamo un buffer di 10 chilometri e, considerato che le unità del sistema di riferimento sono i metri, dobbiamo inserire 10.000. Inserite come nome del file in uscita <code class="docutils literal"><span class="pre">populated_places_buffer.shp</span></code>. E fate click su <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1631.png" class="align-center" src="../_images/1631.png" />
+<img alt="../_images/1632.png" class="align-center" src="../_images/1632.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Una volta che il processo di buffering è finito, fate click su  <span class="guilabel">Yes</span> quando vi verrà chiesto se volete aggiungere il nuovo vettore alla TOC.</p>
 </li>
 </ol>
-<img alt="../_images/1728.png" class="align-center" src="../_images/1728.png" />
+<img alt="../_images/1729.png" class="align-center" src="../_images/1729.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Ripetete lo stesso processo di buffer per il file <code class="docutils literal"><span class="pre">rivers_lake_reprojected</span></code>  e create un file di output che chiameremo <code class="docutils literal"><span class="pre">rivers_lake_buffer.shp</span></code>.</p>
 </li>
@@ -357,7 +358,7 @@ Selezionate <cite>World_Azimuthal_Equidistant</cite>  e fate click su <span clas
 <li><p class="first">Inserite l&#8217;espressione  <cite>&#8220;featurecla&#8221; = &#8220;River&#8221;</cite>  fate click su <span class="guilabel">Seleziona</span>  e infine click su <span class="guilabel">Chiudi</span> per tornare alla finestra principale di QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/2121.png" class="align-center" src="../_images/2121.png" />
+<img alt="../_images/2122.png" class="align-center" src="../_images/2122.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">Ora siamo pronti per realizzare l&#8217;interrogazione spaziale. Dovete aver attivato il Plugin <cite>Interrogazione spaziale</cite> per utilizzare queste funzionalità. Vedetevi <code class="xref doc docutils literal"><span class="pre">Usare</span> <span class="pre">i</span> <span class="pre">plugin</span></code> per maggiori dettagli. Quando il plugin è attivo fate click su <span class="menuselection">Vettore ‣ Interrogazione Spaziale ‣ Interrogazione Spaziale</span>.</p>
 </li>
@@ -418,7 +419,7 @@ Selezionate <cite>World_Azimuthal_Equidistant</cite>  e fate click su <span clas
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento Aug 29, 2019.<br/>
+      Ultimo aggiornamento Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

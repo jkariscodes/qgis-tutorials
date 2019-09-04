@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Maken van kaarten automatiseren met Atlas van afdruklay-out (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
@@ -275,7 +276,7 @@
 <li><p class="first">Open QGIS. Ga naar <span class="menuselection">Plug-ins ‣ Plugin Builder ‣ Plugin Builder</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1131.png" class="align-center" src="../_images/1131.png" />
+<img alt="../_images/1133.png" class="align-center" src="../_images/1133.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">U zult het dialoogvenster zien van <span class="guilabel">QGIS Plugin Builder</span> met een formulier. U kunt het formulier vullen met details met betrekking tot onze plug-in. De <span class="guilabel">Class name</span> zal de naam zijn van de Python Class die de logica van de plug-in bevat. Dit al ook de naam zijn van de map die alle bestanden van de plug-in bevat. Voer <code class="docutils literal"><span class="pre">SaveAttributes</span></code> in als de naam van de klasse. De <span class="guilabel">Plugin name</span> is de naam waarmee uw plug-in zal verschijnen in <span class="guilabel">Plug-ins beheren en installeren</span>. Voer de naam in als <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span></code>. Voeg een beschrijving toe in het veld <span class="guilabel">Description</span>. De <span class="guilabel">Module name</span> zal de naam zijn van het belangrijkste Python-bestand voor de plug-in. Voer die in als <code class="docutils literal"><span class="pre">save_attributes</span></code>. Laat de versienummers zoals zij zijn. De waarde <span class="guilabel">Text for menu item</span> zal zijn hoe de gebruikers uw plug-in zullen vinden in het menu van QGIS. Voer het in als <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span> <span class="pre">als</span> <span class="pre">CSV</span></code>. Voer uw naam en e-mailadres in in de toepasselijke velden. Het veld <span class="guilabel">Menu</span>  bepaalt waar het item voor uw plug-in wordt toegevoegd in QGIS. Selecteer, omdat onze plug-in bestemd is voor vectorgegevens, <code class="docutils literal"><span class="pre">Vector</span></code>. Selecteer het vak <span class="guilabel">Flag the plugin as experimental</span> onderin. Klik op <span class="guilabel">OK</span>.</p>
 </li>
@@ -297,17 +298,17 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>/home/username/.qgis2/python/plugins
 </pre></div>
 </div>
-<img alt="../_images/345.png" class="align-center" src="../_images/345.png" />
+<img alt="../_images/346.png" class="align-center" src="../_images/346.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">U zult een dialoogvenster ter bevestiging zien als de sjabloon voor uw plug-in eenmaal is gemaakt. Onthoud het pad naar de map voor de plug-in.</p>
 </li>
 </ol>
-<img alt="../_images/428.png" class="align-center" src="../_images/428.png" />
+<img alt="../_images/429.png" class="align-center" src="../_images/429.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Vóór we onze nieuw gemaakte plug-in kunnen gebruiken, moeten we het bestand <code class="docutils literal"><span class="pre">resources.qrc</span></code> , dat werd gemaakt door de Plugin Builder, compileren. Start de <span class="guilabel">OSGeo4W Shell</span> op Windows of een terminal op Mac of Linux.</p>
 </li>
 </ol>
-<img alt="../_images/528.png" class="align-center" src="../_images/528.png" />
+<img alt="../_images/529.png" class="align-center" src="../_images/529.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Blader naar de map voor de plug-in waar de uitvoer van de <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> werd gemaakt. U kunt de opdracht <code class="docutils literal"><span class="pre">cd</span></code>, gevolgd door het pad naar de map, gebruiken.</p>
 </li>
@@ -315,7 +316,7 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>cd c:\Users\username\.qgis2\python\plugins\SaveAttributes
 </pre></div>
 </div>
-<img alt="../_images/627.png" class="align-center" src="../_images/627.png" />
+<img alt="../_images/628.png" class="align-center" src="../_images/628.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Als u eenmaal in de map bent, typ <code class="docutils literal"><span class="pre">make</span></code>. Dat zal de opdracht <code class="docutils literal"><span class="pre">pyrcc4</span></code> uitvoeren die we hadden geïnstalleerd als deel van de Qt bindings voor Python.</p>
 </li>
@@ -323,38 +324,38 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>make
 </pre></div>
 </div>
-<img alt="../_images/727.png" class="align-center" src="../_images/727.png" />
+<img alt="../_images/728.png" class="align-center" src="../_images/728.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Nu zijn we klaar om een eerste blik te werpen op de brandnieuwe plug-in die we hebben gemaakt. Sluit QGIS en start het opnieuw. Ga naar <span class="menuselection">Plug-ins ‣ Plug-ins beheren en installeren</span> en schakel de plug-in <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span></code> in op de tab <span class="guilabel">Geïnstalleerd</span>. U zult zien dat er een nieuw pictogram op de werkbalk staat en een nieuw menuitem onder <span class="menuselection">Vector ‣ Attributen opslaan ‣ Attributen opslaan als CSV`</span>. Selecteer die om het dialoogvenster voor de plug-in te starten.</p>
 </li>
 </ol>
-<img alt="../_images/826.png" class="align-center" src="../_images/826.png" />
+<img alt="../_images/827.png" class="align-center" src="../_images/827.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">U zult een nieuw blanco dialoogvenster zien, genaamd <span class="guilabel">Attributen opslaan</span>. Sluit dit dialoogvenster.</p>
 </li>
 </ol>
-<img alt="../_images/927.png" class="align-center" src="../_images/927.png" />
+<img alt="../_images/928.png" class="align-center" src="../_images/928.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">We zullen nu ons nieuw dialoogvenster ontwerpen en enkele elementen voor de gebruikersinterface er aan toevoegen. Open het programma <code class="docutils literal"><span class="pre">Qt</span> <span class="pre">Creator</span></code> en ga naar <span class="guilabel">File &#8211;&gt; Open File or Project...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1025.png" class="align-center" src="../_images/1025.png" />
+<img alt="../_images/1026.png" class="align-center" src="../_images/1026.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Blader naar de map met de plug-in en selecteer het bestand <code class="docutils literal"><span class="pre">save_attributes_dialog_base.ui</span></code> file. Klik op <span class="guilabel">Openen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1132.png" class="align-center" src="../_images/1132.png" />
+<img alt="../_images/1134.png" class="align-center" src="../_images/1134.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">U zult een blanco dialoogvenster uit de plug-in zien. U kunt met slepen en neerzetten elementen verplaatsen vanuit het paneel aan de linkerkant naar het dialoogvenster. We zullen een type <span class="guilabel">Combo Box</span> van <span class="guilabel">Input Widget</span> toevoegen. Sleep het naar het dialoogvenster van de plug-in.</p>
 </li>
 </ol>
-<img alt="../_images/1227.png" class="align-center" src="../_images/1227.png" />
+<img alt="../_images/1228.png" class="align-center" src="../_images/1228.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Maak het combinatievak op maat en pas de grootte aan. Sleep nu een type <span class="guilabel">Label</span> van
 <span class="guilabel">Display Widget</span> in het dialoogvenster.</p>
 </li>
 </ol>
-<img alt="../_images/1327.png" class="align-center" src="../_images/1327.png" />
+<img alt="../_images/1328.png" class="align-center" src="../_images/1328.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Klik op de labeltekst en voer in <code class="docutils literal"><span class="pre">Selecteer</span> <span class="pre">een</span> <span class="pre">laag</span></code>.</p>
 </li>
@@ -364,17 +365,17 @@
 <li><p class="first">Sla dit bestand op door te gaan naar <span class="menuselection">File ‣ Save save_attributes_dialog_base.ui</span>. Onthoud dat de naam van het object combinatievak <code class="docutils literal"><span class="pre">comboBox</span></code> is. We zullen er met die naam naar moeten verwijzen om interacties uit te kunnen voeren met behulp van code voor Python.</p>
 </li>
 </ol>
-<img alt="../_images/1524.png" class="align-center" src="../_images/1524.png" />
+<img alt="../_images/1526.png" class="align-center" src="../_images/1526.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Laten we onze plug-in opnieuw laden zodat we de wijzigingen in het venster van het dialoogvenster kunnen zien. Ga naar <span class="menuselection">Plug-ins ‣ Plugin Reloader ‣ Choose a plugin to be reloaded</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1621.png" class="align-center" src="../_images/1621.png" />
+<img alt="../_images/1622.png" class="align-center" src="../_images/1622.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Selecteer <code class="docutils literal"><span class="pre">AttributenOpslaan</span></code> in het dialoogvenster <span class="guilabel">Configure Plugin reloader</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1719.png" class="align-center" src="../_images/1719.png" />
+<img alt="../_images/1720.png" class="align-center" src="../_images/1720.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Klik nu op de knop <span class="guilabel">Attributen opslaan als CSV</span>. U zult het nieuw ontworpen dialoogvenster zien.</p>
 </li>
@@ -401,7 +402,7 @@
 <li><p class="first">U zult zien dat ons combinatievak nu is geladen met de namen van de lagen die zijn geladen in QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/2115.png" class="align-center" src="../_images/2115.png" />
+<img alt="../_images/2116.png" class="align-center" src="../_images/2116.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">Laten we nog wat andere elementen van de gebruikersinterface toevoegen. Schakel terug naar <code class="docutils literal"><span class="pre">Qt</span> <span class="pre">Creator</span></code> en laadt het bestand <code class="docutils literal"><span class="pre">save_attributes_dialog_base.ui</span></code>. Voeg een <code class="docutils literal"><span class="pre">Label</span></code> <span class="guilabel">Display Widget</span> toe en wijzig de tekst naar <code class="docutils literal"><span class="pre">Uitvoerbestand</span> <span class="pre">selecteren</span></code>. Voeg een type <code class="docutils literal"><span class="pre">LineEdit</span></code> van <span class="guilabel">Input Widget</span> toe dat het pad naar het uitvoerbestand laat zien dat de gebruiker heeft gekozen. Voeg vervolgens een type <code class="docutils literal"><span class="pre">Push</span> <span class="pre">Button</span></code> van <span class="guilabel">Button</span> toe en wijzig het label van de knop naar <code class="docutils literal"><span class="pre">...</span></code>. Onthoud de objectnamen van de widgets die we moeten gebruiken om er interacties mee uit te kunnen voeren. Sla het bestand op.</p>
 </li>
@@ -710,7 +711,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Aug 29, 2019.<br/>
+      Laatste aanpassing op Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

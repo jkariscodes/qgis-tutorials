@@ -102,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Procesarea În Serie, folosind Cadrul de Procesare (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automatizarea Fluxurilor de Lucru Complexe utilizând Modelatorul de Procese (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automatizarea Creării Hărților cu ajutorul Atlasului (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Utilizarea QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Fișierele Open BIL, BIP sau BSQ în QGIS</a></li>
@@ -240,7 +241,7 @@
 <li><p class="first">Lansați QGIS și mergeți la <span class="menuselection">Strat ‣ Adăugare Strat ‣ Adăugare Strat Vectorial</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1139.png" class="align-center" src="../_images/1139.png" />
+<img alt="../_images/1141.png" class="align-center" src="../_images/1141.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Navigați la fișierul descărcat, <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code>, apoi faceți clic pe <span class="guilabel">Open</span>.</p>
 </li>
@@ -250,12 +251,12 @@
 <li><p class="first">Mergeți la <span class="menuselection">Vizualizare ‣ Selectare ‣ Selectare După Expresie...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/350.png" class="align-center" src="../_images/350.png" />
+<img alt="../_images/352.png" class="align-center" src="../_images/352.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Comutați pe fila <span class="guilabel">Editorul de Funcții</span>. Aici puteți scrie orice cod PyQGIS, care va fi executat de către motorul de expresii.</p>
 </li>
 </ol>
-<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
+<img alt="../_images/434.png" class="align-center" src="../_images/434.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Vom defini o funcție particularizată, denumită <code class="docutils literal"><span class="pre">GetUtmZone</span></code>, care va calcula numărul zonei UTM pentru fiecare entitate. Deoarece funcțiile personalizate din QGIS lucrează la nivel de entitate. Vom folosi centrul de greutate al geometriei entității și vom calcula Zona UTM din latitudinea și longitudinea geometriei centroidului. Vom adăuga, de asemenea, denumirea &#8216;N&#8217; sau &#8216;S&#8217;, pentru a indica dacă zona este în emisfera nordică sau sudică. Introduceți codul de mai jos în editor, denumiți fișierul ca <code class="docutils literal"><span class="pre">utm_zones.py</span></code>, apoi faceți clic pe <span class="guilabel">Salvare fișier</span>.</p>
 </li>
@@ -283,12 +284,12 @@
     <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/533.png" class="align-center" src="../_images/533.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Faceți clic pe <span class="guilabel">Rulare Script</span>. Aceasta va executa codul python și va înregistra funcția <code class="docutils literal"><span class="pre">GetUtmZone</span></code> în motorul de expresii. Rețineți că acest lucru este necesar să aibă loc o singură dată. O dată ce funcția este înregistrată, ea va fi întotdeauna la dispoziția motorului de expresii.</p>
 </li>
 </ol>
-<img alt="../_images/631.png" class="align-center" src="../_images/631.png" />
+<img alt="../_images/632.png" class="align-center" src="../_images/632.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Comutați în fila <span class="guilabel">Expresiilor</span> a dialogului <span class="guilabel">Selectare după expresie</span>. Găsiți și extindeți grupul <span class="guilabel">Personalizate</span> din secțiunea <span class="guilabel">Funcțiilor</span>. Veți observa o nouă funcție personalizată, <code class="docutils literal"><span class="pre">$GetUtmZone</span></code>, în listă. Putem folosi de acum această funcție în cadrul expresiilor, la fel ca oricare altă funcție. Tastați următoarea expresie în editor. Această expresie va selecta toate punctele care se încadrează în Zona UTM <code class="docutils literal"><span class="pre">40N</span></code>. Faceți clic pe <span class="guilabel">Selectare</span>.</p>
 </li>
@@ -296,22 +297,22 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>$GetUtmZone = &#39;40N&#39;
 </pre></div>
 </div>
-<img alt="../_images/731.png" class="align-center" src="../_images/731.png" />
+<img alt="../_images/732.png" class="align-center" src="../_images/732.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">În fereastra principală a QGIS, veți observa unele entități evidențiate în galben. Acestea sunt punctele care se încadrează în zona UTM specificată în expresie.</p>
 </li>
 </ol>
-<img alt="../_images/830.png" class="align-center" src="../_images/830.png" />
+<img alt="../_images/831.png" class="align-center" src="../_images/831.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Ați văzut cum am definit și folosit o funcție personalizată, pentru a selecta entitățile duiupă o expresie. Vom folosi acum aceeași funcție într-un alt context. Una dintre bijuteriile ascunse în QGIS este instrumentul <code class="docutils literal"><span class="pre">Indiciile</span> <span class="pre">Hărții</span></code>. Acest instrument arată textul definit de utilizator atunci când treceți peste un element. Faceți clic dreapta pe stratul <cite>ne_10m_populated_places_simple`</cite>, apoi selectați <span class="guilabel">Proprietăți</span>.</p>
 </li>
 </ol>
-<img alt="../_images/931.png" class="align-center" src="../_images/931.png" />
+<img alt="../_images/932.png" class="align-center" src="../_images/932.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Comutați la fila <span class="guilabel">Afișare</span>, apoi selectați <span class="guilabel">HTML</span>. Aici puteți introduce un text oarecare, care va fi afișat atunci când treceți peste entitățile stratului. Mai mult, puteți folosi valori și expresii din câmpurile stratului pentru a defini un mesaj mult mai util. Faceți clic pe butonul <span class="guilabel">Introduceți expresie...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1029.png" class="align-center" src="../_images/1029.png" />
+<img alt="../_images/1030.png" class="align-center" src="../_images/1030.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Veți vedea din nou editorul de expresii familiar. Vom folosi funcția <code class="docutils literal"><span class="pre">concat</span></code> pentru a alătura valoarea câmpului <code class="docutils literal"><span class="pre">name</span></code> rezultatului funcției noastre personalizate, $GetUtmZone. Introduceți următoarea expresie, apoi faceți clic pe <span class="guilabel">OK</span>.</p>
 </li>
@@ -319,17 +320,17 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
 </pre></div>
 </div>
-<img alt="../_images/1140.png" class="align-center" src="../_images/1140.png" />
+<img alt="../_images/1142.png" class="align-center" src="../_images/1142.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Veți vedea expresia introdusă ca valoare a textului <span class="guilabel">Display</span>. Faceți clic pe <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1230.png" class="align-center" src="../_images/1230.png" />
+<img alt="../_images/1231.png" class="align-center" src="../_images/1231.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Înainte de a continua, haideți să de-selectăm funcțiile alese în pasul anterior. Mergeți la <span class="menuselection">Vizualizare ‣ Selectare ‣ Deselectează Entitățile din Toate Straturile</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1330.png" class="align-center" src="../_images/1330.png" />
+<img alt="../_images/1331.png" class="align-center" src="../_images/1331.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Activați instrumentul <code class="docutils literal"><span class="pre">Indiciile</span> <span class="pre">Hărții</span></code> mergând la <span class="menuselection">Vizualizare ‣ Indiciile Hărții</span>.</p>
 </li>
@@ -339,7 +340,7 @@
 <li><p class="first">Măriți oricare zonă a hărții și deplasați cursorul mouse-ului peste o entitate oarecare. Veți vedea numele orașului și zona UTM corespunzătoare, afișate ca indiciu în hartă.</p>
 </li>
 </ol>
-<img alt="../_images/1527.png" class="align-center" src="../_images/1527.png" />
+<img alt="../_images/1529.png" class="align-center" src="../_images/1529.png" />
 </div>
 </div>
 
@@ -365,7 +366,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Aug 29, 2019.<br/>
+      Last updated on Sep 04, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
