@@ -106,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Usare il browser di QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Aprire file in formato BIL, BIP o BSQ in QGIS.</a></li>
@@ -251,7 +252,7 @@
 <li>Unzip the <code class="docutils literal"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil.zip</span></code> file. Locate the <code class="docutils literal"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil</span></code> folder in the QGIS Browser and expand it. The folder contains 12 individual layers for each month. Hold the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and select the <code class="docutils literal"><span class="pre">.bil</span></code> files for all 12 months. Once selected, drag them to the canvas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1100.png" class="align-center" src="../../_images/1100.png" />
+<div><img alt="../../_images/1101.png" class="align-center" src="../../_images/1101.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
@@ -261,61 +262,61 @@
 <li>Next, unzip the <code class="docutils literal"><span class="pre">Zip_Codes.zip</span></code> file and extract the shapefile to a folder. Locate the <code class="docutils literal"><span class="pre">Zip_Codes</span></code> folder and expand it. Drag the <code class="docutils literal"><span class="pre">Zip_Codes.shp</span></code> file to the canvas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/240.png" class="align-center" src="../../_images/240.png" />
+<div><img alt="../../_images/248.png" class="align-center" src="../../_images/248.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li>Right-click the <code class="docutils literal"><span class="pre">Zip_Codes</span></code> layer and select <span class="guilabel">Zoom to Layer</span>. You will see the zip code polygons for the city of seattle and neighboring areas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/332.png" class="align-center" src="../../_images/332.png" />
+<div><img alt="../../_images/333.png" class="align-center" src="../../_images/333.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li>Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/417.png" class="align-center" src="../../_images/417.png" />
+<div><img alt="../../_images/418.png" class="align-center" src="../../_images/418.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li>The algorithm to sample a raster layer using vector polygons is known as <code class="docutils literal"><span class="pre">Zonal</span> <span class="pre">statistics</span></code>. Search for the algorithm in the <span class="guilabel">Processing Toolbox</span>. Select the algorithm and hover your mouse over it. You will see a tooltip with the text <em>Algorithm ID: &#8216;qgis:zonalstatistics&#8217;</em>. Note this id which will be needed  to call this algorithm via the Python API. Double-click the <code class="docutils literal"><span class="pre">Zonal</span> <span class="pre">Statistics</span></code> algorithm to launch it.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/517.png" class="align-center" src="../../_images/517.png" />
+<div><img alt="../../_images/518.png" class="align-center" src="../../_images/518.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li>We will do a manual test run of the algorithm for a single layer. This is a useful way to check if the algorithm behaves as expected and also an easy way to find out how to pass on relevant parameters to the algorithm when using it via Python. In the <span class="guilabel">Zonal Statistics</span> dialog, select <code class="docutils literal"><span class="pre">PRISM_ppt_stable_4kmM3_201701_bil</span></code> as the <span class="guilabel">Raster Layer</span> and <code class="docutils literal"><span class="pre">Zip_Codes</span></code> as the <span class="guilabel">Vector layer containing zones</span>. Leave other paramters to default. Click the <span class="guilabel">...</span> button next to <span class="guilabel">Statistics to calculate</span> and select only <code class="docutils literal"><span class="pre">Mean</span></code>. Click <span class="guilabel">Run</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/617.png" class="align-center" src="../../_images/617.png" />
+<div><img alt="../../_images/618.png" class="align-center" src="../../_images/618.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li>Once the algorithm finishes, switch to the <span class="guilabel">Log</span> tab. Make a note of the <span class="guilabel">Input Parameters</span> that were passed to the algorithm. Click <span class="guilabel">Close</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/716.png" class="align-center" src="../../_images/716.png" />
+<div><img alt="../../_images/717.png" class="align-center" src="../../_images/717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li>Let&#8217;s check the results of the test run. In the main QGIS window, right-click the <code class="docutils literal"><span class="pre">Zip_Codes</span></code> layer and select <span class="guilabel">Open Attribute Table</span>. This particular algorithm modifies the input zone layer in-place and adds a new column for every statistic that was selected. As we had selected only <code class="docutils literal"><span class="pre">Mean</span></code> value, a new column named <code class="docutils literal"><span class="pre">_mean</span></code> is added to the table. The <code class="docutils literal"><span class="pre">_</span></code> was the default prefix. When we run the algorithm for layers of each month, it will be useful to specify a custom prefix with the month number so we can easily identify the mean values for each month (i.e. 01_mean, 02_mean etc.). Specifying this custom prefix is not possible in the Batch Processing interface of QGIS and if we ran this command using that interface, we would have to manually enter the custom prefix for each layer. If you are working with a large number of layers, this can be very cumbersome. Hence, we can add this custom logic using the Python API and run the algorithm in a for-loop for each layer.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/816.png" class="align-center" src="../../_images/816.png" />
+<div><img alt="../../_images/817.png" class="align-center" src="../../_images/817.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li>Before we proceed, let&#8217;s delete the <code class="docutils literal"><span class="pre">_mean</span></code> column that was created during our test run. Click the <span class="guilabel">Toggle Editing mode</span> button, followed by <span class="guilabel">Delete field</span> button. Select the <code class="docutils literal"><span class="pre">_mean</span></code> field and click <span class="guilabel">OK</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/916.png" class="align-center" src="../../_images/916.png" />
+<div><img alt="../../_images/917.png" class="align-center" src="../../_images/917.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li>Click the <span class="guilabel">Toggle Editing mode</span> button again and <span class="guilabel">Save</span> the changes.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1016.png" class="align-center" src="../../_images/1016.png" />
+<div><img alt="../../_images/1017.png" class="align-center" src="../../_images/1017.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li>Back in the main QGIS window, go to <span class="menuselection">Plugins ‣ Python Console</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1120.png" class="align-center" src="../../_images/1120.png" />
+<div><img alt="../../_images/1121.png" class="align-center" src="../../_images/1121.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li>To run the processing algorithm via Python, we need to access names of all the layers. Enter the following code in the <span class="guilabel">Python Console</span> and hit <code class="kbd docutils literal"><span class="pre">Enter</span></code>. You will see the names of all layers printed in the console.</li>
@@ -346,13 +347,13 @@
 <li>Once the processing finishes, right-click on the <code class="docutils literal"><span class="pre">Zip_Codes</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1415.png" class="align-center" src="../../_images/1415.png" />
+<div><img alt="../../_images/1416.png" class="align-center" src="../../_images/1416.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li>You will see 12 new columns added to the table with custom prefixes and mean precipitation values extracted from the raster layers.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1515.png" class="align-center" src="../../_images/1515.png" />
+<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
 </div></blockquote>
 </div>
 </div>
@@ -379,7 +380,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento Sep 04, 2019.<br/>
+      Ultimo aggiornamento Sep 05, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Using the QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
@@ -249,17 +250,17 @@ zip file from the portal.</p>
 <ol class="arabic simple">
 <li>Go to <span class="menuselection">Layer ‣ Add Vector Layer</span>.</li>
 </ol>
-<img alt="../_images/1135.png" class="align-center" src="../_images/1135.png" />
+<img alt="../_images/1137.png" class="align-center" src="../_images/1137.png" />
 <ol class="arabic simple" start="2">
 <li>Browse to the <code class="docutils literal"><span class="pre">ne_10m_railroads_north_america.zip</span></code> file and click
 <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/270.png" class="align-center" src="../_images/270.png" />
+<img alt="../_images/280.png" class="align-center" src="../_images/280.png" />
 <ol class="arabic simple" start="3">
 <li>In the <span class="guilabel">Select layers to add...</span> dialog, choose
 <code class="docutils literal"><span class="pre">ne_10m_railroads_north_america.shp</span></code> layer.</li>
 </ol>
-<img alt="../_images/347.png" class="align-center" src="../_images/347.png" />
+<img alt="../_images/348.png" class="align-center" src="../_images/348.png" />
 <ol class="arabic simple" start="4">
 <li>Once the layer is loaded, you will notice that the layer has lines
 representing railroads for all of North America. Since we want to calculate
@@ -267,18 +268,18 @@ line lengths only for United States railroads, we need to select the lines
 that fall in the United States. Right-click on the layer and select
 <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
-<img alt="../_images/430.png" class="align-center" src="../_images/430.png" />
+<img alt="../_images/431.png" class="align-center" src="../_images/431.png" />
 <ol class="arabic simple" start="5">
 <li>The layer has an attribute called <span class="guilabel">sov_a3</span>. This is the 3 letter
 code for the country that a particular feature falls in. We can use the
 value of this attribute to select features that are in USA.</li>
 </ol>
-<img alt="../_images/530.png" class="align-center" src="../_images/530.png" />
+<img alt="../_images/531.png" class="align-center" src="../_images/531.png" />
 <ol class="arabic simple" start="6">
 <li>In the <span class="guilabel">Attribute Table</span> window, click the <span class="guilabel">Select
 features using an expression</span> button.</li>
 </ol>
-<img alt="../_images/629.png" class="align-center" src="../_images/629.png" />
+<img alt="../_images/630.png" class="align-center" src="../_images/630.png" />
 <ol class="arabic simple" start="7">
 <li>A new dialog <span class="guilabel">Select By Expression</span> will open. Find the attribute
 <span class="guilabel">sov_a3</span> under <span class="guilabel">Fields and Values</span> in the
@@ -287,18 +288,18 @@ features using an expression</span> button.</li>
 <code class="docutils literal"><span class="pre">&quot;sov_a3&quot;</span> <span class="pre">=</span> <span class="pre">'USA'</span></code>. Click <span class="guilabel">Select</span> followed by
 <span class="guilabel">Close</span>.</li>
 </ol>
-<img alt="../_images/729.png" class="align-center" src="../_images/729.png" />
+<img alt="../_images/730.png" class="align-center" src="../_images/730.png" />
 <ol class="arabic simple" start="8">
 <li>Back in the main QGIS window, you will see that all lines that fall in USA
 are selected and appear in yellow.</li>
 </ol>
-<img alt="../_images/828.png" class="align-center" src="../_images/828.png" />
+<img alt="../_images/829.png" class="align-center" src="../_images/829.png" />
 <ol class="arabic simple" start="9">
 <li>Now let&#8217;s save our selection to a new shapefile. Right-click on the
 <code class="docutils literal"><span class="pre">ne_10m_railroads_north_america</span></code> layer and select <span class="guilabel">Save
 Selection As...</span>.</li>
 </ol>
-<img alt="../_images/929.png" class="align-center" src="../_images/929.png" />
+<img alt="../_images/930.png" class="align-center" src="../_images/930.png" />
 <ol class="arabic simple" start="10">
 <li>Click <span class="guilabel">Browse</span> and name the output file as <code class="docutils literal"><span class="pre">usa_railroads.shp</span></code>.
 We also want to change the CRS of the layer. Click on <span class="guilabel">Browse</span>
@@ -313,7 +314,7 @@ would be in <strong>degrees</strong> and area in <strong>square degrees</strong>
 meaningless. You need to use a Projected Coordinate Reference System with
 units of <strong>meters</strong> or <strong>feet</strong> to perform such calculations.</p>
 </div>
-<img alt="../_images/1027.png" class="align-center" src="../_images/1027.png" />
+<img alt="../_images/1028.png" class="align-center" src="../_images/1028.png" />
 <ol class="arabic simple" start="11">
 <li>Since we are interested in calculating length, let’s select an equidistance
 projection. Type <span class="guilabel">north america equ</span> in the <span class="guilabel">Filter</span>
@@ -321,30 +322,30 @@ search box. In the results pane below, select
 <span class="guilabel">North_America_Equidistant_Conic EPSG:102010</span> as the CRS. Click
 <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1136.png" class="align-center" src="../_images/1136.png" />
+<img alt="../_images/1138.png" class="align-center" src="../_images/1138.png" />
 <ol class="arabic simple" start="12">
 <li>In the <span class="guilabel">Save vector layer as...</span> dialog, check the <span class="guilabel">Add
 saved file to map</span> and click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1229.png" class="align-center" src="../_images/1229.png" />
+<img alt="../_images/1230.png" class="align-center" src="../_images/1230.png" />
 <ol class="arabic simple" start="13">
 <li>Once the export process finishes, you will see a new layer <code class="docutils literal"><span class="pre">usa_railroads</span></code>
 loaded in QGIS. You can uncheck the box next to
 <code class="docutils literal"><span class="pre">ne_10m_railroads_north_america</span></code> layer to turn it off as we don&#8217;t need it
 anymore.</li>
 </ol>
-<img alt="../_images/1329.png" class="align-center" src="../_images/1329.png" />
+<img alt="../_images/1330.png" class="align-center" src="../_images/1330.png" />
 <ol class="arabic simple" start="14">
 <li>Right-click on the <code class="docutils literal"><span class="pre">usa_railroads</span></code> layer and select
 <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
-<img alt="../_images/1428.png" class="align-center" src="../_images/1428.png" />
+<img alt="../_images/1429.png" class="align-center" src="../_images/1429.png" />
 <ol class="arabic simple" start="15">
 <li>Now it is time to add a column with length of each feature. Put the layer
 in editing mode by clicking on the <span class="guilabel">Toggle editing</span> button. Once
 in editing mode, click the <span class="guilabel">Open field calculator</span> button.</li>
 </ol>
-<img alt="../_images/1527.png" class="align-center" src="../_images/1527.png" />
+<img alt="../_images/1528.png" class="align-center" src="../_images/1528.png" />
 <ol class="arabic simple" start="16">
 <li>In the <span class="guilabel">Field Calculator</span>, check <span class="guilabel">Create a new
 field</span>. Enter <strong>length_km</strong> as the <span class="guilabel">Output field name</span>. Choose
@@ -355,19 +356,19 @@ Double-click it to add it to the <span class="guilabel">Expression</span>. Compl
 expression as <code class="docutils literal"><span class="pre">$length</span> <span class="pre">/</span> <span class="pre">1000</span></code> because our layer CRS is in <strong>meters</strong>
 unit and we want the output in <strong>km</strong>. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1623.png" class="align-center" src="../_images/1623.png" />
+<img alt="../_images/1624.png" class="align-center" src="../_images/1624.png" />
 <ol class="arabic simple" start="17">
 <li>Back in <span class="guilabel">Attribute Table</span>, you will see a new column
 <span class="guilabel">length_km</span> appear. Click the <span class="guilabel">Toggle editing</span> button
 to save the changes to the attribute table.</li>
 </ol>
-<img alt="../_images/1721.png" class="align-center" src="../_images/1721.png" />
+<img alt="../_images/1722.png" class="align-center" src="../_images/1722.png" />
 <ol class="arabic simple" start="18">
 <li>Now that we have length of each individual line in our layer, we can easily
 add it all up and find the <strong>Total</strong> length. Go to <span class="menuselection">Vector
 ‣ Analysis Tools ‣ Basic Statistics</span>.</li>
 </ol>
-<img alt="../_images/1821.png" class="align-center" src="../_images/1821.png" />
+<img alt="../_images/1822.png" class="align-center" src="../_images/1822.png" />
 <ol class="arabic simple" start="19">
 <li>Select the <span class="guilabel">Input Vector layer</span> as <code class="docutils literal"><span class="pre">usa_railroads</span></code>. Choose the
 <span class="guilabel">Target field</span> as <code class="docutils literal"><span class="pre">length_km</span></code> and click <span class="guilabel">OK</span>. You
@@ -381,7 +382,7 @@ practice, line lengths for roads and other linear features are measured on
 the ground and provided as attributes to the dataset. This method works in
 absence of such attribute and as an approximation of actual line lengths.</p>
 </div>
-<img alt="../_images/1916.png" class="align-center" src="../_images/1916.png" />
+<img alt="../_images/1917.png" class="align-center" src="../_images/1917.png" />
 </div>
 </div>
 
@@ -407,7 +408,7 @@ absence of such attribute and as an approximation of actual line lengths.</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Sep 04, 2019.<br/>
+      Last updated on Sep 05, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

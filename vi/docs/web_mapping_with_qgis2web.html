@@ -106,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Sử dụng QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Mở file BIL, BIP hay BSQ trong QGIS</a></li>
@@ -260,7 +261,7 @@ dataset from Natural Earth.</p>
 <span class="menuselection">Layer ‣ Add Vector Layer</span>. Browse to the location of the
 downloaded file and select <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code>. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1188.png" class="align-center" src="../_images/1188.png" />
+<img alt="../_images/1190.png" class="align-center" src="../_images/1190.png" />
 <ol class="arabic simple" start="2">
 <li>We will now create a map in QGIS that looks and behaves just like we would
 like in the web map. The plugin <code class="docutils literal"><span class="pre">qgis2web</span></code> will use replicate the QGIS
@@ -271,7 +272,7 @@ is already present in the attribute table of the <code class="docutils literal">
 Right-click on the <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> layer and select
 <span class="guilabel">Properties</span>.</li>
 </ol>
-<img alt="../_images/2138.png" class="align-center" src="../_images/2138.png" />
+<img alt="../_images/2144.png" class="align-center" src="../_images/2144.png" />
 <ol class="arabic simple" start="3">
 <li>Switch to the <span class="guilabel">Fields</span> tab. You will notice the different
 attributes present in the layer. Some of these aren&#8217;t relevant to the users
@@ -280,38 +281,38 @@ of our web map, so we can choose to hide these. We will keep <code class="docuti
 on <span class="guilabel">Text Edit</span> button under the <span class="guilabel">Edit widget</span> column
 for <code class="docutils literal"><span class="pre">`scalerank</span></code> field.</li>
 </ol>
-<img alt="../_images/381.png" class="align-center" src="../_images/381.png" />
+<img alt="../_images/382.png" class="align-center" src="../_images/382.png" />
 <ol class="arabic simple" start="4">
 <li>In the <span class="guilabel">Edit Widget Properties</span> dialog, choose <code class="docutils literal"><span class="pre">Hidden</span></code> as the
 type. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/459.png" class="align-center" src="../_images/459.png" />
+<img alt="../_images/460.png" class="align-center" src="../_images/460.png" />
 <ol class="arabic simple" start="5">
 <li>Similarly set other fields to Hidden type. As you may have notices, there
 are other field types available that allow us to set how the fields appear
 to the users of our map. Click <span class="guilabel">Edit Widget</span> for <code class="docutils literal"><span class="pre">wikipedia</span></code>
 field.</li>
 </ol>
-<img alt="../_images/560.png" class="align-center" src="../_images/560.png" />
+<img alt="../_images/561.png" class="align-center" src="../_images/561.png" />
 <ol class="arabic simple" start="6">
 <li>Select <code class="docutils literal"><span class="pre">Web</span> <span class="pre">View</span></code> as the field type. This type indicates that the value
 contained in this field is a URL.</li>
 </ol>
-<img alt="../_images/657.png" class="align-center" src="../_images/657.png" />
+<img alt="../_images/658.png" class="align-center" src="../_images/658.png" />
 <ol class="arabic simple" start="7">
 <li>We can also use the <span class="guilabel">Alias</span> column to indicate an alternate name
 for the fields without actually changing the underlying data table. This is
 useful to give more user-friendly field names to the users of our map. Add
 aliases as per your choices and click <span class="guilabel">Ok</span>.</li>
 </ol>
-<img alt="../_images/756.png" class="align-center" src="../_images/756.png" />
+<img alt="../_images/757.png" class="align-center" src="../_images/757.png" />
 <ol class="arabic simple" start="8">
 <li>Back in the main QGIS window, choose the <span class="guilabel">Identify</span> tool and click
 on any point. The <span class="guilabel">Identify Results</span> panel will display the
 nicely formallted attributes with the newly added aliases. You will notice
 that the hidden fields do not appear in the results.</li>
 </ol>
-<img alt="../_images/854.png" class="align-center" src="../_images/854.png" />
+<img alt="../_images/855.png" class="align-center" src="../_images/855.png" />
 <ol class="arabic simple" start="9">
 <li>While this method is useful, there is one limitation. We are not able to
 change the order of the fields. One way to overcome this limitation is to
@@ -322,7 +323,7 @@ also use an expression to better format the type values. Right-click the
 <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> layer and choose <span class="guilabel">Properties</span>. Go to the
 <span class="guilabel">Fields</span> tab and click <span class="guilabel">Field Calculator</span>.</li>
 </ol>
-<img alt="../_images/953.png" class="align-center" src="../_images/953.png" />
+<img alt="../_images/954.png" class="align-center" src="../_images/954.png" />
 <ol class="arabic simple" start="10">
 <li>As the field names need to be unique, use <code class="docutils literal"><span class="pre">Type</span></code> as the new field name.
 Set the field type to <code class="docutils literal"><span class="pre">Text</span> <span class="pre">(String)</span></code> with a length of <code class="docutils literal"><span class="pre">25</span></code> characters.
@@ -335,17 +336,17 @@ following expression in the <span class="guilabel">Expression</span> box and cli
 <div class="highlight-none"><div class="highlight"><pre><span></span>concat( title(&quot;type&quot;), &#39; Airport&#39;)
 </pre></div>
 </div>
-<img alt="../_images/1052.png" class="align-center" src="../_images/1052.png" />
+<img alt="../_images/1053.png" class="align-center" src="../_images/1053.png" />
 <ol class="arabic simple" start="11">
 <li>Now that we have a much better looking <code class="docutils literal"><span class="pre">Type</span></code> field, you can go ahead and
 set the <span class="guilabel">Edit Widget</span> for <code class="docutils literal"><span class="pre">type</span></code> field to <code class="docutils literal"><span class="pre">Hidden</span></code>.</li>
 </ol>
-<img alt="../_images/1189.png" class="align-center" src="../_images/1189.png" />
+<img alt="../_images/1191.png" class="align-center" src="../_images/1191.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Sử dụng công cụ <span class="guilabel">Identify</span> để kiểm tra các thuộc tính có đúng hay không.</p>
 </li>
 </ol>
-<img alt="../_images/1251.png" class="align-center" src="../_images/1251.png" />
+<img alt="../_images/1252.png" class="align-center" src="../_images/1252.png" />
 <ol class="arabic simple" start="13">
 <li>Now let&#8217;s style our layer to be more visually appealing and informative.
 Right-click the <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> layer and select
@@ -353,31 +354,31 @@ Right-click the <code class="docutils literal"><span class="pre">ne_10m_airports
 <code class="docutils literal"><span class="pre">Categorized</span></code> style and our virtual field <code class="docutils literal"><span class="pre">Type</span></code> as the
 <span class="guilabel">Column</span>. Click <span class="guilabel">Classify</span>.</li>
 </ol>
-<img alt="../_images/1350.png" class="align-center" src="../_images/1350.png" />
+<img alt="../_images/1351.png" class="align-center" src="../_images/1351.png" />
 <ol class="arabic simple" start="14">
 <li>You will see a different colored circle gets assigned to a differnt type of
 airport. For the purpose of this tutorial, we will restrict the map to
 civilian airports. Hold the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and select all categories for
 military airports. Once selected, click <span class="guilabel">Delete</span>.</li>
 </ol>
-<img alt="../_images/1449.png" class="align-center" src="../_images/1449.png" />
+<img alt="../_images/1450.png" class="align-center" src="../_images/1450.png" />
 <ol class="arabic simple" start="15">
 <li>Apart from assigning a different color to the category, we can change the
 size of the symbol to visually help our users distinguish different type
 of airports. Right-click on a category and select <span class="guilabel">Change
 size</span>.</li>
 </ol>
-<img alt="../_images/1546.png" class="align-center" src="../_images/1546.png" />
+<img alt="../_images/1547.png" class="align-center" src="../_images/1547.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Đặt giá trị <span class="guilabel">Size</span> bằng <code class="docutils literal"><span class="pre">3</span></code> cho lớp <code class="docutils literal"><span class="pre">Large</span> <span class="pre">Airport</span></code> .</p>
 </li>
 </ol>
-<img alt="../_images/1641.png" class="align-center" src="../_images/1641.png" />
+<img alt="../_images/1642.png" class="align-center" src="../_images/1642.png" />
 <ol class="arabic simple" start="17">
 <li>Similarly, set the <span class="guilabel">Size</span> to <code class="docutils literal"><span class="pre">2</span></code> for <code class="docutils literal"><span class="pre">Mid</span> <span class="pre">Airport</span></code> and <code class="docutils literal"><span class="pre">1</span></code>
 for <code class="docutils literal"><span class="pre">Small</span> <span class="pre">Airport</span></code>.</li>
 </ol>
-<img alt="../_images/1738.png" class="align-center" src="../_images/1738.png" />
+<img alt="../_images/1739.png" class="align-center" src="../_images/1739.png" />
 <ol class="arabic simple" start="18">
 <li>For a complete map, we also need to label each airport. Switch to the
 <span class="guilabel">Labels</span> tab in the <span class="guilabel">Properties</span> dialog. Select <code class="docutils literal"><span class="pre">Show</span>
@@ -389,7 +390,7 @@ that the labels only appear when the user is sufficiently zoomed in. Check
 scale. This setting will render the labels only after the user has zoomed
 in more than <code class="docutils literal"><span class="pre">1:10000000</span></code> scale and will be visible till <code class="docutils literal"><span class="pre">1:1</span></code> scale.</li>
 </ol>
-<img alt="../_images/1838.png" class="align-center" src="../_images/1838.png" />
+<img alt="../_images/1839.png" class="align-center" src="../_images/1839.png" />
 <ol class="arabic simple" start="19">
 <li>As we are using circles to depict the airports, we need to ensure that the
 labels don&#8217;t overlap with the circles. Go to the <span class="guilabel">Placement</span> tab
@@ -397,13 +398,13 @@ in the <span class="guilabel">Labels</span> dialog and set the <span class="guil
 <code class="docutils literal"><span class="pre">Cartographic</span></code>. Select <code class="docutils literal"><span class="pre">From</span> <span class="pre">symbol</span> <span class="pre">bounds</span></code> as <span class="guilabel">Distance
 offset from</span>. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1933.png" class="align-center" src="../_images/1933.png" />
+<img alt="../_images/1934.png" class="align-center" src="../_images/1934.png" />
 <ol class="arabic simple" start="20">
 <li>Our map is now ready. This is a good time to save our work. Go to
 <span class="menuselection">Project ‣ Save</span>. Enter <code class="docutils literal"><span class="pre">Airports</span></code> as the name of the
 project.</li>
 </ol>
-<img alt="../_images/2026.png" class="align-center" src="../_images/2026.png" />
+<img alt="../_images/2027.png" class="align-center" src="../_images/2027.png" />
 <ol class="arabic simple" start="21">
 <li>Now we are ready to export our project to a web map. Install the
 <code class="docutils literal"><span class="pre">qgis2web</span></code> plugin by going to <span class="menuselection">Plugins ‣ Manage and
@@ -411,7 +412,7 @@ Install Plugin</span> (See <a class="reference internal" href="using_plugins.htm
 plugins in QGIS). Once the plugin is installed, go to <span class="menuselection">Web ‣ qgis2web ‣
 Create a web map</span>.</li>
 </ol>
-<img alt="../_images/2139.png" class="align-center" src="../_images/2139.png" />
+<img alt="../_images/2145.png" class="align-center" src="../_images/2145.png" />
 <ol class="arabic simple" start="22">
 <li>In the <span class="guilabel">Export to web map</span> dialog, check <span class="guilabel">Add layers
 list</span> in the bottom panel under the <span class="guilabel">Appearance</span> section. Also
@@ -427,7 +428,7 @@ exported map will look like. Before we do the actual export, we need to set
 the <span class="guilabel">Export folder</span>. You can select a folder of your choice and
 click <span class="guilabel">Export</span>.</li>
 </ol>
-<img alt="../_images/2227.png" class="align-center" src="../_images/2227.png" />
+<img alt="../_images/2228.png" class="align-center" src="../_images/2228.png" />
 <ol class="arabic simple" start="23">
 <li>Once the export is complete, the default browser for your computer will
 open and show the interactive web map.</li>
@@ -436,7 +437,7 @@ open and show the interactive web map.</li>
 <ol class="arabic simple" start="24">
 <li>Your web map is now ready for publishing.</li>
 </ol>
-<img alt="../_images/2422.png" class="align-center" src="../_images/2422.png" />
+<img alt="../_images/2423.png" class="align-center" src="../_images/2423.png" />
 <ol class="arabic simple" start="25">
 <li>The <code class="docutils literal"><span class="pre">qgis2web</span></code> plugin has many limitations and it cannot do everything
 that the powerful web mapping libraries <code class="docutils literal"><span class="pre">OpenLayers</span></code> and <code class="docutils literal"><span class="pre">Leaflet</span></code> can
@@ -459,14 +460,14 @@ the <code class="docutils literal"><span class="pre">qgis2web.js</span></code> f
 <div class="highlight-none"><div class="highlight"><pre><span></span>map.getView().setCenter(ol.proj.fromLonLat([2.35, 48.85]))
 </pre></div>
 </div>
-<img alt="../_images/2619.png" class="align-center" src="../_images/2619.png" />
+<img alt="../_images/2620.png" class="align-center" src="../_images/2620.png" />
 <ol class="arabic simple" start="27">
 <li>Refresh your browser and see that the web map will load with Paris at the
 center.  This is a trivial example, but you can see how you can use any
 function available in the <code class="docutils literal"><span class="pre">OpenLayers</span></code> or <code class="docutils literal"><span class="pre">Leaflet</span></code> libraries to
 customize the web map.</li>
 </ol>
-<img alt="../_images/2718.png" class="align-center" src="../_images/2718.png" />
+<img alt="../_images/2719.png" class="align-center" src="../_images/2719.png" />
 <ol class="arabic simple" start="28">
 <li>The exported map resides on your computer. While you can see it in action,
 it is not very useful since you cannot share it anyone. For others to be
@@ -517,7 +518,7 @@ folder to public. The resulting map can be viewed at
     </p>
     <p>
         &copy; Bản quyền thuộc 2019, Ujaval Gandhi.<br/>
-      Cập nhật mới nhất vào Sep 04, 2019.<br/>
+      Cập nhật mới nhất vào Sep 05, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
