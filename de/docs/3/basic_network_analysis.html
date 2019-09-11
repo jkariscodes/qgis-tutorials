@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basic Network Visualization and Routing (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Einfache Netzwerkvisualisierung und Routing (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -99,13 +99,13 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Räumliche Verbindungen erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Räumliche Abfragen ausführen (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nächster Nachbar Analyse (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpolating Point Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Stapelverarbeitung mit dem Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Komplexe Arbeitsabläufe mit Hilfe der Verarbeitungsmodellierung (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automatisierung der Kartenerstellung mit dem Drucklayout Atlas (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Basic Network Visualization and Routing (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Einfache Netzwerkvisualisierung und Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Using the QGIS Browser</a></li>
@@ -114,7 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Verarbeitungsroutinen mit Python ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Ein Python Plugin erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Angepasste Python Funktionsausdrücke verwenden (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Pythonscripts für die Verarbeitungswerkzeuge schreiben (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
@@ -224,68 +224,75 @@
       
 
   <div class="section" id="basic-network-visualization-and-routing-qgis3">
-<h1>Basic Network Visualization and Routing (QGIS3)<a class="headerlink" href="#basic-network-visualization-and-routing-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Creating, visualizing, and managing networks is an important part of GIS. Many types of physical infrastructure such as roads, railways, utilities can be modeled as networks with lines and nodes - with properties attached to them. In this tutorial, we will learn how road networks are commonly modeled and apply some styling techniques to visualize the routing properties. We will also use QGIS3&#8217;s built-in tools for network analysis that to find shortest path between 2 points along the network.</p>
+<h1>Einfache Netzwerkvisualisierung und Routing (QGIS3)<a class="headerlink" href="#basic-network-visualization-and-routing-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
+<p>Die Erstellung, Visualisierung und das Managen von Netzwerken ist ein wichtiger Teil eines GIS. Viele Typen der in der Realität vorhandenen Infrastruktur wie z.B. Straßen, Eisenbahnlinien und Versorgungsleitungen können als Netzwerk aus Linien und Knoten mit jeweils zugewiesenen Eigenschaften modelliert werden. In diesem Tutorial lernen wir, wie Straßennetzwerke in der Regel modelliert werden. Wir werden einige Gestaltungstechniken anwenden, um die Eigenschaften des Routings zu visualisieren. Wir werden außerdem die in QGIS enthaltenen Hilfsmittel zur Netzwerkanalyse nutzen, um die kürzeste Verbindung zwischen 2 Punkten im Netzwerk zu finden.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
-<p>We will take a layer of road centerlines for Washington DC, visualize the connectivity and build a network to find shortest path between any 2 points in the city.</p>
+<h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Wie werden einen Layer mit den Mittellinien der Straßen Washington DC&#8217;s verwenden, die Verbindungen visualisieren und ein Netzwerk erstellen. Mit Hilfe des Netzwerkes können wir den kürzesten Weg zwischen 2 beliebigen Punkten in der Stadt ermitteln.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
+<h3>Weitere Fähigkeiten, die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
-<li>How to use data defined overrides to align an arrow symbol based on line direction.</li>
+<li><p class="first">Wie man vom Dateninhalt abhängige Vorgaben für die Symbolisierung der Linienrichtung mit einem Pfeil vorgibt.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
-<p>District of Columbia government freely shares hundreds of datasets on the <a class="reference external" href="https://opendata.dc.gov/">Open Data Catalog</a>.</p>
-<p>Download the <a class="reference external" href="https://opendata.dc.gov/datasets/street-centerlines">Street Centerlines</a> shared by DCGISopendata data as a shapefile.</p>
+<h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Die Regierung des Distrikts Columbia stellt hunderte Datensätze frei zur Verfügung: <a class="reference external" href="https://opendata.dc.gov/">Open Data Catalog</a>.</p>
+<p>Wir laden folgende Daten der DCGISopendata als shape-Datei herunter: <a class="reference external" href="https://opendata.dc.gov/datasets/street-centerlines">Street Centerlines</a>.</p>
 <img alt="../../_images/data1.png" class="align-center" src="../../_images/data1.png" />
-<p>For convenience, you may directly download a copy of the datasets from the
-links below:</p>
+<p>Der Einfachheit halber können wir eine Kopie der Datensätze unter folgenden links herunterladen:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Street_Centerlines.zip">Street_Centerlines.zip</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#dcopendata" id="id1">[DCOPENDATA]</a></p>
+<p>Datenquelle: <a class="reference internal" href="../credits.html#dcopendata" id="id1">[DCOPENDATA]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
+<h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li>Locate the downloaded <code class="docutils literal"><span class="pre">Street_Centerlines.zip</span></code> file in the <span class="guilabel">Browser</span> panel. Expand it and drag the <code class="docutils literal"><span class="pre">Street_Centerlines.shp</span></code> file to the canvas.</li>
+<li><p class="first">Suche die heruntergeladene Datei <code class="docutils literal"><span class="pre">Street_Centerlines.zip</span></code> im <span class="guilabel">Browser</span> Bereich. Erweitere die Datei und ziehe die Datei <code class="docutils literal"><span class="pre">Street_Centerlines.shp</span></code> in den Arbeitsbereich.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/110.png" class="align-center" src="../../_images/110.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>You will see a new line layer called <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> added to the <span class="guilabel">Layers</span> panel. This layer represents each road in Washington DC. Select the <span class="guilabel">Identify</span> tool in the <span class="guilabel">Attributes Toolbar</span>. Click on any road segment to see what attributes are attached to it. There are standard attributes like road name, type etc. there is an attribute called <code class="docutils literal"><span class="pre">DIRECTIONA</span></code>. This is an import attribute for routing as it specifies whether the segment is two-way or one-way. It contains 4 different values. <code class="docutils literal"><span class="pre">Two</span> <span class="pre">Way</span></code> for two-way streets. <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> for one-way streets where the traffic is allowed in the direction of the line (start-point to end-point) and <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> for one-way streets where the traffic flows in the opposite direction of the line. There is also <code class="docutils literal"><span class="pre">Unknown</span></code> value where we will assume two-way traffic. We will now use the information in that attribute to display an arrow on streets that are one-way.</li>
+<li><p class="first">Wir sehen einen neuen Layer <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> im <span class="guilabel">Layer</span> Bereich. Dieser Layer stellt alle Straßen in Washington DC dar. Wähle das Tool <span class="guilabel">Objekte abfragen</span> in der <span class="guilabel">Attributwerkzeugleiste</span>. Klicke auf einen beliebigen Straßenabschnitt, um die enthaltenen Attribute zu ermitteln. Man sieht Standardattribute wie den Straßennamen oder Straßentyp aber es gibt auch ein Attribut <code class="docutils literal"><span class="pre">DIRECTIONA</span></code>. Dieses Attribut ist für das Routing wichtig, es bestimmt in welcher Richtung der Verkehr erfolgt. Das Attribut enthält 4 verschiedene Werte. <code class="docutils literal"><span class="pre">Two</span> <span class="pre">Way</span></code> steht für Straßenabschnitte mit Gegenverkehr. <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> steht für Einbahnstraßen, auf denen der Verkehr nur in der Richtung der Linie erfolgen darf (vom Startpunkt zum Endpunkt) und <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> für Einbahnstraßen, auf denen der Verkehr nur entgegengesetzt der Linienrichtung erfolgen darf. Für den Wert <code class="docutils literal"><span class="pre">Unknown</span></code>, also unbekannt nehmen wir eine Straße mit Gegenverkehr an. Wir verwenden die hinterlegt Information jetzt, um einen Pfeil für Einbahnstraßen zu erzeugen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/210.png" class="align-center" src="../../_images/210.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Click the <span class="guilabel">Open the layer Styling Panel</span> button in the <span class="guilabel">Layers</span> panel. Select the <code class="docutils literal"><span class="pre">Rule-based</span></code> renderer from the drop-down menu.</li>
+<li><p class="first">Klicke auf den Knopf <span class="guilabel">Layergestaltungsfenster öffnen</span> im Bereich <span class="guilabel">Layer</span>. Wähle <code class="docutils literal"><span class="pre">Regelbasierend</span></code> als Darstellung aus dem drop-down Menü aus.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/310.png" class="align-center" src="../../_images/310.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>We will create a new style with a filter for only the one-way roads. Click the <span class="guilabel">Add rule +</span> button.</li>
+<li><p class="first">Wir werden einen neuen Layerstil mit Hilfe eines Filters für Einbahnstraßen erstellen. Klicke auf den Knopf <span class="guilabel">Regel hinzufügen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/42.png" class="align-center" src="../../_images/42.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>In the <span class="guilabel">Edit rule</span> dialog, click the <span class="guilabel">Expression</span> button.</li>
+<li><p class="first">Im Dialog <span class="guilabel">Regel bearbeiten</span> klicken wir auf den Knopf <span class="guilabel">Ausdruck</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/52.png" class="align-center" src="../../_images/52.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>In the <span class="guilabel">Expression string builder</span> dialog, expand the <span class="guilabel">Fields and Values</span> section in the middle-panel. Select <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> attribute and click <span class="guilabel">All Unique</span> in the right-hand panel. The 4 values that we discussed earlier will appear. Having these values here as a reference helps when building the expression. Also, you can double-click on any value to add them to the expression.</li>
+<li><p class="first">Im <span class="guilabel">Ausdruckseditor</span> erweitern wir <span class="guilabel">Felder und Werte</span> in der mittleren Spalte. Wir wählen das Attribut <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> und klicken in der rechten Spalte auf <span class="guilabel">Alle eindeutigen</span>. Es werden die 4 oben beschriebenen Werte angezeigt. Wir können später auf jeden der Werte doppelt klicken, um ihn in den Ausdruck einzufügen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/62.png" class="align-center" src="../../_images/62.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>The goal is to create an expression that selects all one-way streets. Enter the following expression and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Unser Ziel ist es, einen Ausdruck zu erzeugen, der alle Einbahnstraßen selektiert. Wir geben den folgenden Ausdruck ein und klicken auf <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&quot;DIRECTIONA&quot; = &#39;One way (Against digitizing direction)&#39; OR  &quot;DIRECTIONA&quot; =&#39;One Way (Digitizing direction)&#39;
@@ -386,7 +393,7 @@ END
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Sep 05, 2019.<br/>
+      Zuletzt aktualisiert am Sep 11, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

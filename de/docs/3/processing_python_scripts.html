@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Writing Python Scripts for Processing Framework (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Pythonscripts für die Verarbeitungswerkzeuge schreiben (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -99,13 +99,13 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Räumliche Verbindungen erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Räumliche Abfragen ausführen (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nächster Nachbar Analyse (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpolating Point Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Stapelverarbeitung mit dem Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Komplexe Arbeitsabläufe mit Hilfe der Verarbeitungsmodellierung (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automatisierung der Kartenerstellung mit dem Drucklayout Atlas (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Einfache Netzwerkvisualisierung und Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Using the QGIS Browser</a></li>
@@ -114,7 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Verarbeitungsroutinen mit Python ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Ein Python Plugin erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Angepasste Python Funktionsausdrücke verwenden (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Pythonscripts für die Verarbeitungswerkzeuge schreiben (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
@@ -224,50 +224,54 @@
       
 
   <div class="section" id="writing-python-scripts-for-processing-framework-qgis3">
-<h1>Writing Python Scripts for Processing Framework (QGIS3)<a class="headerlink" href="#writing-python-scripts-for-processing-framework-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>One can write standalone pyqgis scripts that can be run via the Python Console in QGIS. With a few tweaks, you can make your standalone scripts run via the Processing Framework. This has several advantages. First, taking user input and writing output files is far easier because Processing Framework offers standardized user interface for these. Second, having your script in the Processing Toolbox also allows it to be part of any Processing Model or be run as a Batch job with multiple inputs. This tutorial will show how to write a custom python script that can be part of the Processing Framework in QGIS.</p>
+<h1>Pythonscripts für die Verarbeitungswerkzeuge schreiben (QGIS3)<a class="headerlink" href="#writing-python-scripts-for-processing-framework-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
+<p>Man kann eigenständige pygis Skripts schreiben und sie mit der Python Konsole in QGIS ausführen. Mit etwas Anpassung kann man diese Skripts auch innerhalb der Verarbeitungswerkzeuge verwenden. Das hat einige Vorteile. Die Benutzereingabe und die Ausgabe von Ergebnissen ist viel einfacher, da die Verarbeitungswerkzeuge eine Benutzerschnittstelle dafür vorsehen. Skripte in den Verarbeitungswerkzeugen können außerdem von jedem anderen Verarbeitungswerkzeug verwendet werden und sie können mit der Stapelverarbeitung mehrere Eingabedateien verarbeiten. Diese Anleitung zeigt, wie man ein Pythonskript schreibt, das dann Teil der Verarbeitungswerkzeuge wird.</p>
 <div class="admonition note">
 <p class="first admonition-title">Bemerkung</p>
-<p class="last">The Processing API was completely overhauled in QGIS3. Please refer to <a class="reference external" href="https://raw.githubusercontent.com/qgis/QGIS/master/doc/porting_processing.dox">this guide</a> for best practices and tips.</p>
+<p class="last">Die Schnittstelle der Verarbeitungswerkzeuge wurde mit QGIS3 komplett überholt. Unter <a class="reference external" href="https://raw.githubusercontent.com/qgis/QGIS/master/doc/porting_processing.dox">this guide</a> findet man Tips und Hinweise dazu.</p>
 </div>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
-<p>Our script will perform a dissolve operation based on a field chosen by the user. It will also sum up values of another field for the dissolved features. In the example, we will dissolve a world shapefile based on a <code class="docutils literal"><span class="pre">CONTINENT</span></code> attribute and sum up <code class="docutils literal"><span class="pre">POP_EST</span></code> field to calculate total population in the dissolved region.</p>
+<h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Unser Skript wird eine dissolve-Operation basierend auf einem vom Benutzer vorgegebenen Feld ausführen. Es wird außerdem die Werte eines anderen Feldes die zusammengefassten Features aufsummieren. Bei diesem Beispiel werden wir eine shape-Datei der Welt basierend auf dem Attribut <code class="docutils literal"><span class="pre">CONTINENT</span></code> zusammenfassen und die Werte im Attribut <code class="docutils literal"><span class="pre">POP_EST</span></code> aufsummieren, um die Gesamtbevölkerung in der zusammengefassten Region zu bestimmen.</p>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Countries</a>
-dataset from Natural Earth.</p>
-<p>Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - countries shapefile.</a>.</p>
+<h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Wir verwenden folgenden Datensatz von Natural Earth: <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Countries</a>.</p>
+<p>Wir laden folgende shape-Datei herunter: <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - countries</a>.</p>
 <p>Data Source <a class="reference internal" href="../credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
-<p>For convenience, you may directly download a geopackage containing the above layer from below:</p>
+<p>Der Einfachheit halber kannst du den Layer in einem Geopackage direkt unter folgendem link herunterladen:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_global.gpkg">ne_global.gpkg</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
+<h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal"><span class="pre">zip</span></code> or the <code class="docutils literal"><span class="pre">gpkg</span></code>  entry and select the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer. Drag the layer to the canvas.</li>
+<li><p class="first">Gehe im QGIS Browser Bereich zum Verzeichnis in dem die heruntergeladenen Daten abgelegt sind. Erweitere die <code class="docutils literal"><span class="pre">zip</span></code> oder die <code class="docutils literal"><span class="pre">gpkg</span></code> Datei und wähle den Layer <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code>. Ziehe den Layer in den Arbeitsbereich.</p>
+</li>
 </ol>
 <img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
 <ol class="arabic simple" start="2">
-<li>Go to <span class="menuselection">Processing ‣ Toolbox</span>. Click the <span class="guilabel">Scripts</span> button in the toolbar and select <span class="guilabel">Create New Script from Template</span>.</li>
+<li><p class="first">Gehe im Menü zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>. Klicke auf den Knopf <span class="guilabel">Skripte</span> in der Toolbar und wähle <span class="guilabel">Neues Skript aus Vorlage erzeugen</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/250.png" class="align-center" src="../../_images/250.png" />
 <ol class="arabic simple" start="3">
-<li>The template contains all the boilerplate code that is required for the Processing Framework to recognize it as a Processing script, and manage inputs/outputs. Let&#8217;s start customizing the example template to our needs. First change the class name from <code class="docutils literal"><span class="pre">ExampleProcessingAlgorithm</span></code> to <code class="docutils literal"><span class="pre">DissolveProcessingAlgorithm</span></code>. This name also needs to be updated in the <code class="docutils literal"><span class="pre">createInstance</span></code> method. Add a docstring to the class that explains what the algorithm does.</li>
+<li><p class="first">Die Vorlage enthält die Textbausteine, die für das Prozessierungsframework erforderlich sind, um das Skript als Prozessierungsskript zu erkennen und die Ein- und Ausgabe zu verwalten. Wir werden die Vorlage nun an unsere Anforderungen anpassen. Zuerst ändern wir den Klassennamen von <code class="docutils literal"><span class="pre">ExampleProcessingAlgorithm</span></code> zu <code class="docutils literal"><span class="pre">DissolveProcessingAlgorithm</span></code>. Dieser Name muss auch unter der <code class="docutils literal"><span class="pre">createInstance</span></code> Methode geändert werden. Wir fügen außerdem eine Erläuterung mit einer Beschreibung des Algorithmus ein.</p>
+</li>
 </ol>
 <img alt="../../_images/335.png" class="align-center" src="../../_images/335.png" />
 <ol class="arabic simple" start="4">
-<li>As you scroll down, you will see methods that assign name, group, description etc. to the script. Change the return values for <em>name</em> method to be <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code>, <em>displayName</em> method to <code class="docutils literal"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">Sum</span></code>, <em>group</em> method and <em>groupId</em> method to  <code class="docutils literal"><span class="pre">scripts</span></code>. Change the return value of <em>shortHelpString</em> method to a description that will appear to the user. Click the <span class="guilabel">Save</span> button.</li>
+<li><p class="first">Beim Herunterscrollen sehen wir Methoden, die Namen, Gruppe, Beschreibung usw. im script zuweisen. wir ändern die Rückgabewerte für die <em>name</em> Methode zu <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code>, für die <em>displayName</em> Methode zu <code class="docutils literal"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">Sum</span></code>, für die <em>group</em> Methode und die <em>groupId</em> Methode zu <code class="docutils literal"><span class="pre">scripts</span></code>. Wir ändern den Rückgabewert der <em>shortHelpString</em> Methode zu einer Beschreibung, die dem Nutzer erscheinen wird. Klicke auf den <span class="guilabel">Speichern</span> Knopf.</p>
+</li>
 </ol>
 <img alt="../../_images/420.png" class="align-center" src="../../_images/420.png" />
 <ol class="arabic simple" start="5">
-<li>Name the script <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> and save it at the default location
-under <span class="menuselection">profiles ‣ default ‣ processing ‣ scripts</span> folder.</li>
+<li><p class="first">Wir nennen das Skript <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> und speichern es im vorgegebenen Verzeichnis <span class="menuselection">profiles ‣ default ‣ processing ‣ scripts</span>.</p>
+</li>
 </ol>
 <img alt="../../_images/520.png" class="align-center" src="../../_images/520.png" />
 <ol class="arabic simple" start="6">
-<li>Now we will define the inputs for the script. The template already contains a definition of an <code class="docutils literal"><span class="pre">INPUT</span></code> Vector Layer and a <code class="docutils literal"><span class="pre">OUTPUT</span></code> layer. We will add 2 new inputs which allows the user to select a <code class="docutils literal"><span class="pre">DISSOLVE_FIELD</span></code> and a <code class="docutils literal"><span class="pre">SUM_FIELD</span></code>. Add a new import at the top and the following code in the <code class="docutils literal"><span class="pre">initAlgorithm</span></code> method. Click the <span class="guilabel">Run</span> button to preview the changes.</li>
+<li><p class="first">Wir werden jetzt die Eingaben für das Skript festlegen. Die Vorlage enthält die Definition eines <code class="docutils literal"><span class="pre">INPUT</span></code> Vektorlayers und eines <code class="docutils literal"><span class="pre">OUTPUT</span></code> Layers. Wir werden 2 weitere Eingaben hinzufügen, die es dem Benutzer erlauben, ein <code class="docutils literal"><span class="pre">DISSOLVE_FIELD</span></code> und ein <code class="docutils literal"><span class="pre">SUM_FIELD</span></code> auszuwählen. Wir fügen zu Beginn des Skripts einen weiteren Import hinzu und fügen den folgenden Programmiercode in der <code class="docutils literal"><span class="pre">initAlgorithm</span></code> Methode ein. Klicke auf den Knopf <span class="guilabel">Skript ausführen</span>, um eine Vorschau der Änderungen zu sehen.</p>
+</li>
 </ol>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="n">QgsProcessingParameterField</span>
 
@@ -289,11 +293,13 @@ under <span class="menuselection">profiles ‣ default ‣ processing ‣ script
 <img alt="../../_images/6a.png" class="align-center" src="../../_images/6a.png" />
 <img alt="../../_images/6b.png" class="align-center" src="../../_images/6b.png" />
 <ol class="arabic simple" start="7">
-<li>You will see a <span class="guilabel">Dissolve with Sum</span> dialog with our newly defined inputs. Select the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer as <span class="guilabel">Input layer`</span>. As both <span class="guilabel">Dissolve Field</span> and <span class="guilabel">Sum Fields</span> are filtered based on the input layer, they will be pre-populated with existing fields from the input layer. Click the <span class="guilabel">Close</span> button.</li>
+<li><p class="first">Wir sehen das Dialogfenster <span class="guilabel">Dissolve with Sum</span> mit unseren neu definierten Eingabefeldern. Wähle den Layer <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> als <span class="guilabel">Input layer`</span>. Da die Felder <span class="guilabel">Dissolve Field</span> und <span class="guilabel">Sum Fields</span> auf dem Eingabelayer basieren, werden in den Auswahlfeldern nur die Attribute angezeigt, die im Eingabelayer enthalten sind Klicke auf den <span class="guilabel">Schließen</span> Knopf.</p>
+</li>
 </ol>
 <img alt="../../_images/719.png" class="align-center" src="../../_images/719.png" />
 <ol class="arabic simple" start="8">
-<li>Now we define our custom logic for processing data in the <code class="docutils literal"><span class="pre">processAlgorithm</span></code> method. This method gets passed a dictionary called <code class="docutils literal"><span class="pre">parameters</span></code>. It contains the inputs that the user has selected. There are helper methods that allow you to take these inputs and create appropriate objects. We first get our inputs using <code class="docutils literal"><span class="pre">parameterAsSource</span></code> and <code class="docutils literal"><span class="pre">parameterAsString</span></code> methods. Next we want to create a feature sink where we will write the output. QGIS3 has a new class called <code class="docutils literal"><span class="pre">QgsFeatureSink</span></code> which is the preferred way to create objects that can accept new features. The output needs only 2 fields - one for the value of dissolved field and another for the sum of the selected field.</li>
+<li><p class="first">Wir erstellen nun unseren angepassten Programmkode, um die Daten mit der <code class="docutils literal"><span class="pre">processAlgorithm</span></code> Methode zu verarbeiten. An diese Methode wird ein <code class="docutils literal"><span class="pre">parameters</span></code> genanntes Wörterbuch weitergeleitet. Es enthält die Eingaben, die der Benutzer gewählt hat. Es gibt Hilfsmethoden, die es erlauben diese Eingaben zur Erstellung passender Objekte zu verwenden.</p>
+</li>
 </ol>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="n">QVariant</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="n">QgsField</span><span class="p">,</span> <span class="n">QgsFields</span>
@@ -629,7 +635,7 @@ under <span class="menuselection">profiles ‣ default ‣ processing ‣ script
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Sep 05, 2019.<br/>
+      Zuletzt aktualisiert am Sep 11, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

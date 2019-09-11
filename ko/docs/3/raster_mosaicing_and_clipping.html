@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Raster Mosaicing and Clipping (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>래스터 붙이기 및 자르기 (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -82,18 +82,18 @@
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">들어가는 말</a></li>
-<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Making a Map (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">지도 만들기 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">속성 작업 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">스프레드시트 및 CSV 파일 불러오기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">선의 길이계산과 통계(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Raster Mosaicing and Clipping (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">래스터 붙이기 및 자르기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">지형데이터 작업</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">WMS 데이터 작업</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">항공사진 지오레퍼런싱 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">디지타이징 맵 데이터</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
@@ -224,25 +224,27 @@
       
 
   <div class="section" id="raster-mosaicing-and-clipping-qgis3">
-<h1>Raster Mosaicing and Clipping (QGIS3)<a class="headerlink" href="#raster-mosaicing-and-clipping-qgis3" title="제목 주소">¶</a></h1>
-<p>This tutorial explores basic techniques for working with rasters in QGIS such as mosaicing and subsetting.</p>
+<h1>래스터 붙이기 및 자르기 (QGIS3)<a class="headerlink" href="#raster-mosaicing-and-clipping-qgis3" title="제목 주소">¶</a></h1>
+<p>이 예제에서는 QGIS에서 다루는 자르기와 부속세팅과 같은 기본적인 기능에 대해서 알아봅니다.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
-<p>We will download elevation data for Sri Lanka in form of SRTM tiles, merge them and clip the resulting mosaic to the country boundary.</p>
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<p>SRTM 형태로 제공하는 Sri Lanka의 고도 데이터를 내려받은 후,
+각각의 데이터를 &#8216;merge&#8217;,합치고,&#8217;clip&#8217;, 자르기를 통해 국가행정경계 모자이크를 만드는 과정을 배울 것입니다.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<h3>이 예제에서 필요한 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
 <ul class="simple">
-<li>Using the Hillshade renderer to visualize elevation data.</li>
+<li><p class="first">고도데이터를 시각화하는 &#8220;Hillshade renderer&#8221;의 사용</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
-<p>Land Processes Distributed Active Archive Center (LP DAAC) provides <a class="reference external" href="https://lpdaac.usgs.gov/products/srtmgl1v003/">NASA Shuttle Radar Topography Mission (SRTM) Global 1 arc second</a> dataset as elevation tiles.</p>
-<p>An easy interface to download tiles for a given area is the <a class="reference external" href="https://dwtkns.com/srtm30m/">30-Meter SRTM Tile Downloader</a> by By Derek Watkins. Download the individual SRTM tiles covering Sri Lanka. Note that you will need a free <a class="reference external" href="https://urs.earthdata.nasa.gov/home">Earth Data account</a> to download the data.</p>
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+<p>Land Processes Distribyted Active Archive Center(LP DAAC)는 <a class="reference external" href="https://lpdaac.usgs.gov/products/srtmgl1v003/">NASA Shuttle Radar Topography Mission (SRTM) Global 1 arc second</a> dataset as elevation tiles 데이터를 제공합니다.</p>
+<p>예제파일은 Derek Watkins의 <a class="reference external" href="https://urs.earthdata.nasa.gov/home">30-Meter SRTM Tile Downloader &lt;https://dwtkns.com/srtm30m/&gt;`_에서 내려받을 수 있습니다. Sri Lanka의 SRTM 파일을 내려받으세요.  내려받을 시 `Earth Data account</a> 가 필요합니다.</p>
 <img alt="../../_images/data15.png" class="align-center" src="../../_images/data15.png" />
-<p>We will also need the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Countries</a> shapefile from  Natural Earth.</p>
-<p>For convenience, you may directly download a copy of the datasets from the links below:</p>
+<p>Natural Earth에서 제공되는 <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Countries</a> 파일도 필요합니다.</p>
+<p>아래 링크에서 이번예제에 사용되는 샘플파일을 쉽게 내려받을 수 있습니다:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/N05E080.SRTMGL1.hgt.zip">N05E080.SRTMGL1.hgt.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/N06E079.SRTMGL1.hgt.zip">N06E079.SRTMGL1.hgt.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/N06E080.SRTMGL1.hgt.zip">N06E080.SRTMGL1.hgt.zip</a></p>
@@ -255,30 +257,35 @@
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/N08E081.SRTMGL1.hgt.zip">N08E081.SRTMGL1.hgt.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/N09E080.SRTMGL1.hgt.zip">N09E080.SRTMGL1.hgt.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">ne_10m_admin_0_countries.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#srtm" id="id1">[SRTM]</a> , <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
+<p>출처: <a class="reference internal" href="../credits.html#srtm" id="id1">[SRTM]</a> , <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
 <ol class="arabic simple">
-<li>Open QGIS and locate the downloaded files in the <span class="guilabel">Browser</span> panel. Expand individual zip files to show the <code class="docutils literal"><span class="pre">.hgt</span></code> files. Hold the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and select all individual files. Once selected, drag them to the canvas.</li>
+<li><p class="first">QGIS를 열고, <span class="guilabel">Browser</span> panel에 내려받은 파일을 불러옵니다. 압축되어있는 .hgt 개별파일들을 엽니다. &#8216;Ctrl&#8217;를 누른 상태로 모든 파일을 선택하여 &#8216;canvas&#8217;로 드래그하여 불러옵니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1104.png" class="align-center" src="../../_images/1104.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>You will see 11 individual layers loaded in the <span class="guilabel">Layers</span> panel and displayed in the canvas. We will merge these individual tiles into a single mosaic. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">11개의 개별 레이어가 Layers 패널에 들어가고, &#8216;canvas&#8217;창에 보여집니다. 이제 우리는 개별 조각들을 하나의 모자이크로 합병할 것입니다. 메뉴선택창에서 &#8216;공간처리&#8217; &#8211;&gt; 툴박스를 클릭합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Search and locate the <span class="menuselection">GDAL ‣ Raster miscellaneous ‣ Merge</span> tool. Double-click to launch it.</li>
+<li><p class="first">공간처리툴박스 검색창에 &#8216;merge&#8217;를 입력한 후 검색결과 중 &#8216;GDAL &#8212;&gt; 레스터 기타 &#8211;&gt; 병합&#8217; 을 찾은 후 더블클릭합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/336.png" class="align-center" src="../../_images/336.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>In the <span class="guilabel">Merge</span> dialog, click the <span class="guilabel">...</span> button next to <span class="guilabel">Input layers</span>. Click <span class="guilabel">Select All</span> to select all individual layers.</li>
+<li><p class="first">&#8216;Merge&#8217;창에서 &#8216;...&#8217;버튼을 클릭합니다.
+11개의 레이어를 모두 선택하기 위해 &#8216;select all&#8217; 버튼을 누른 후 확인버튼을 클릭합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/421.png" class="align-center" src="../../_images/421.png" />
@@ -290,7 +297,8 @@
 <div><img alt="../../_images/521.png" class="align-center" src="../../_images/521.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Once the processing finishes, the a new layer <code class="docutils literal"><span class="pre">OUTPUT</span></code> will be added to the <span class="guilabel">Layers</span> panel. In case the layer is not at the top of the stack, select it and drag it to the top of the <span class="guilabel">Layers</span> panel.</li>
+<li><p class="first">작업이 끝났다면, &#8220;결과물&#8221;의 새 레이어가 레이어창에 생성됩니다. 이번 예제에서는 이 레이어가 레이어들 사이에 위치해있으니, 레이어를 마우스로 드래그하여 레이어창 제일 위로 끌어올려주세요.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/620.png" class="align-center" src="../../_images/620.png" />
@@ -374,7 +382,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      최종 업데이트: Sep 05, 2019<br/>
+      최종 업데이트: Sep 11, 2019<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

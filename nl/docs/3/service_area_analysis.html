@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Service Area Analysis using Openrouteservice (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Analyse Servicegebied met Openrouteservice (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
     <link rel="next" title="De QGIS Browser gebruiken" href="../using_qgis_browser.html" />
-    <link rel="prev" title="Locating Nearest Facility with Origin-Destination Matrix (QGIS3)" href="origin_destination_matrix.html" />
+    <link rel="prev" title="Dichtstbijzijnde faciliteit zoeken met Origin-Destination Matrix (QGIS3)" href="origin_destination_matrix.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -105,9 +105,9 @@
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Maken van kaarten automatiseren met Atlas van afdruklay-out (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basis netwerk visualisatie en routeren (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Dichtstbijzijnde faciliteit zoeken met Origin-Destination Matrix (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Analyse Servicegebied met Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Beginnen met programmeren in Python (QGIS3)</a></li>
@@ -133,7 +133,7 @@
               
                 
   <li>
-    <a href="origin_destination_matrix.html" title="Previous Chapter: Locating Nearest Facility with Origin-Destination Matrix (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Locating Near...</span>
+    <a href="origin_destination_matrix.html" title="Previous Chapter: Dichtstbijzijnde faciliteit zoeken met Origin-Destination Matrix (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Dichtstbijzij...</span>
     </a>
   </li>
   <li>
@@ -224,56 +224,62 @@
       
 
   <div class="section" id="service-area-analysis-using-openrouteservice-qgis3">
-<h1>Service Area Analysis using Openrouteservice (QGIS3)<a class="headerlink" href="#service-area-analysis-using-openrouteservice-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Service area analysis is useful in evaluating accessibility of locations. Given locations of fire stations, hospitals, public transit stations etc. you can use such analysis to identify what areas can be served from these locations by either amount of distance traveled or by time taken. Till recently, such analysis was difficult using open-source tools and data. But now we have access to a global street network using OpenStreetMap (OSM) and free web-services such as Openrouteservice (ORS) that can perform complex routing tasks using OpenStreetMap (OSM) data. In this tutorial, we will use the <strong>ORS Tools Plugin</strong> to perform service area analysis in QGIS.</p>
+<h1>Analyse Servicegebied met Openrouteservice (QGIS3)<a class="headerlink" href="#service-area-analysis-using-openrouteservice-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>Analyse voor Servicegebied is nuttig voor het evalueren van de toegankelijkheid van locaties. Bekende locaties van brandweerkazernes, ziekenhuizen, stations voor openbaar vervoer etc. kunt u gebruiken voor dergelijke analyses om te identificeren welke gebieden vanuit die locaties kunnen worden bediend, ofwel op basis van een gereisde afstand, of op basis van verstreken tijd. Tot recent waren dergelijke analyses moeilijk met behulp van gereedschappen voor open-bron en gegevens. Maar nu hebben we toegang tot een een globaal netwerk van straten met OpenStreetMap (OSM) en gratis web-services, zoals Openrouteservice (ORS) die complexe taken voor routering kunnen uitvoeren met gegevens van OpenStreetMap (OSM). In deze handleiding zullen we de <strong>Plug-in ORS Tools</strong> gebruiken om een analyse voor een servicegebied uit te voeren in QGIS.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will use metro rail station data for Kochi, India to determine areas that are within 15-minutes of walking distance.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen gegevens gebruiken van de metrostations voor Kochi, India om gebieden te bepalen die binnen een loopafstand van 15 minuten liggen.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
-<li>How to load General Transit Feed Specification (GTFS) transit feed data in QGIS.</li>
-<li>How to convert sequential point data to line tracks using the <em>Points to Path</em> tool.</li>
+<li><p class="first">Hoe General Transit Feed Specification (GTFS) gegevens voor transport te laden in QGIS.</p>
+</li>
+<li><p class="first">Hoe puntgegevens van reeksen voor lijnen te laden met het gereedschap <em>Punten naar pad</em>.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p><a class="reference external" href="https://kochimetro.org">Kochi Metro Rail Limited (KMRL)</a> provides open data for the Kochi Metro Rail Project in <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">Global Transit Feed Specification (GTFS-static)</a> format. Request for data download by visiting the <a class="reference external" href="https://kochimetro.org/open-data/">Open Data</a> page.</p>
-<p>For convenience, you may directly download a copy of the datasets from the
-links below:</p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p><a class="reference external" href="https://kochimetro.org">Kochi Metro Rail Limited (KMRL)</a> verschaft open gegevens voor de indeling Kochi Metro Rail Project in <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">Global Transit Feed Specification (GTFS-static)</a>.  Bezoek de pagina <a class="reference external" href="https://kochimetro.org/open-data/">Open Data</a> voor het verzoeken van gegevens.</p>
+<p>Voor het gemak kunt u direct een kopie van de gegevensset downloaden vanaf de link hieronder:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/KMRL-Open-Data.zip">KMRL-Open-Data.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#kmrl" id="id1">[KMRL]</a></p>
+<p>Gegevensbron <a class="reference internal" href="../credits.html#kmrl" id="id1">[KMRL]</a></p>
 </div>
 <div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink naar deze titel">¶</a></h2>
-<p><a class="reference external" href="https://openrouteservice.org/">Openrouteservice API</a> provides routing algorithms that work on free geographic data from OpenStreetMap. It is a free web-based service that can be accessed via a QGIS plugin. While the service is free, it requires you to sign-up and get an API key. The API key is used to prevent abuse and enforce limits on usage.</p>
+<h2>Instellen<a class="headerlink" href="#setup" title="Permalink naar deze titel">¶</a></h2>
+<p><a class="reference external" href="https://openrouteservice.org/">Openrouteservice API</a> verschaft algoritmes voor routeren die werken met vrije geografische gegevens van OpenStreetMap. Het is een gratis web-gebaseerde service waartoe toegang kan worden verkregen via een plug-in van QGIS. Hoewel de service gratis is, moet u zich wel registreren en een API-sleutel ophalen. De API-sleutel wordt gebruikt om misbruik tegen te gaan en beperkingen voor het gebruik af te dwingen.</p>
 <ol class="arabic simple">
-<li>Visit <a class="reference external" href="https://openrouteservice.org/dev/#/signup">Openrouteservice Sign Up</a> page and create an account. Once your account is activated, visit your <a class="reference external" href="https://openrouteservice.org/dev/#/home">Dashboard</a> and request a token. Select <code class="docutils literal"><span class="pre">Free</span></code> as the <span class="guilabel">Token type</span> and enter <code class="docutils literal"><span class="pre">ORS</span> <span class="pre">Tools</span> <span class="pre">QGIS</span></code> as the <span class="guilabel">Token name</span>. Click <span class="guilabel">CREATE TOKEN</span>.</li>
+<li><p class="first">Bezoek de pagina <a class="reference external" href="https://openrouteservice.org/dev/#/signup">Openrouteservice Sign Up</a> en maak een account aan. Als uw account eenmaal is geactiveerd, bezoek dan uw <a class="reference external" href="https://openrouteservice.org/dev/#/home">Dashboard</a> en vraag een token aan. Selecteer <code class="docutils literal"><span class="pre">Free</span></code> als het <span class="guilabel">Token type</span> en voer <code class="docutils literal"><span class="pre">ORS</span> <span class="pre">Tools</span> <span class="pre">QGIS</span></code> in als de <span class="guilabel">Token name</span>. Klik op <span class="guilabel">CREATE TOKEN</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup12.png" class="align-center" src="../../_images/setup12.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Once created, copy the long string displayed under <code class="docutils literal"><span class="pre">Key</span></code>. This is a unique identifier linked with your account that will be used to authorize use of this service.</li>
+<li><p class="first">Eenmaal gemaakt, kopieer dan de lange tekenreeks die wordt weergegeven onder <code class="docutils literal"><span class="pre">Key</span></code>. Dit is een unieke identificatie die is gekoppeld aan uw account die het gebruiken van deze service zal autoriseren.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup21.png" class="align-center" src="../../_images/setup21.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Open QGIS. Visit <span class="menuselection">Plugins ‣ Manage and Install plugins</span>. Search for <strong>ORS Tools</strong> plugin and install it. Click <span class="guilabel">Close</span>.</li>
+<li><p class="first">Open QGIS. Ga naar <span class="menuselection">Plug-ins ‣ Plug-ins beheren en installeren</span>. Zoek naar de plug-in <strong>ORS Tools</strong> en installeer die. Klik op <span class="guilabel">Close</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup3.png" class="align-center" src="../../_images/setup3.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>In the main QGIS Window, go to <span class="menuselection">Web ‣ ORS Tools ‣ Provider Settings</span>.</li>
+<li><p class="first">Ga, in het hoofdvenster van QGIS, naar <span class="menuselection">Web ‣ ORS Tools ‣ Provider Settings</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup4.png" class="align-center" src="../../_images/setup4.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Expand the <span class="guilabel">openrouteservice</span> section and paste the <code class="docutils literal"><span class="pre">key</span></code> (copied in step 2) in the <span class="guilabel">API Key</span> text-box. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Vergroot het gedeelte <span class="guilabel">openrouteservice</span> en plak de <code class="docutils literal"><span class="pre">key</span></code> (gekopieerd in stap 2) in het tekstvak <span class="guilabel">API Key</span>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup5.png" class="align-center" src="../../_images/setup5.png" />
@@ -282,96 +288,110 @@ links below:</p>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li>Unzip the downloaded <code class="docutils literal"><span class="pre">KMRL-Open-Data.zip</span></code> file to a folder on your computer. You will notice that the unzipped directory contains many text files. Each file contains data for a different aspect of the transit system. The format of the files and their uses are described in <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">GTFS Reference</a>. Out of all the files, 2 files contains geospatial data and is of interest to us. The file <code class="docutils literal"><span class="pre">shapes.txt</span></code> contains points that describe a physical path that the vehicle takes, and the file <code class="docutils literal"><span class="pre">stops.txt</span></code> contains the location of each transit stop. Both of these are CSV files that can be imported into QGIS. Click the <span class="guilabel">Open Data Source Manager</span> button.</li>
+<li><p class="first">Pak het gedownloade bestand <code class="docutils literal"><span class="pre">KMRL-Open-Data.zip</span></code> uit in een map op uw computer. U zult zien dat de uitgepakte map veel tekstbestanden zal bevatten. Elk bestand bevat gegevens voor een verschillend aspect van het transportsysteem. De indeling van de bestanden en hun gebruik worden beschreven in <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">GTFS Reference</a>. Van alle bestanden zijn 2 bestanden die georuimtelijke gegevens bevatten voor ons van belang. Het bestand <code class="docutils literal"><span class="pre">shapes.txt</span></code> bevat punten die een fysiek pad beschrijven die de voertuigen nemen, en het bestand <code class="docutils literal"><span class="pre">stops.txt</span></code> bevat de locatie van elke halte voor het transport. Beide zijn CSV-bestanden die in QGIS kunnen worden geïmporteerd. Klik op de knop <span class="guilabel">Gegevensbronnen beheren openen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1107.png" class="align-center" src="../../_images/1107.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>In the <span class="guilabel">Data Source Manager</span> dialog, switch to the <span class="guilabel">Delimited Text</span> tab. Click the <span class="guilabel">...</span> button next to <span class="guilabel">File name</span> and browse to the <code class="docutils literal"><span class="pre">shapes.txt</span></code> file. Select <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">(comma</span> <span class="pre">separated</span> <span class="pre">values)</span></code> as the <span class="guilabel">File Format</span>. The <span class="guilabel">X field</span> and <span class="guilabel">Y field</span> should be auto populated. Click <span class="guilabel">Add</span>.</li>
+<li><p class="first">Schakel, in het dialoogvenster <span class="guilabel">Gegevensbronnen beheren</span>, naar de tab <span class="guilabel">Tekengescheiden tekst</span>. Klik op de knop <span class="guilabel">…</span> naast <span class="guilabel">Bestandsaam</span> en blader naar het bestand <code class="docutils literal"><span class="pre">shapes.txt</span></code>. Selecteer <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">(komma</span> <span class="pre">gescheiden</span> <span class="pre">waarden)</span></code> als de <span class="guilabel">Bestandsindeling</span>. De velden <span class="guilabel">X-veld</span> en <span class="guilabel">Y-veld</span> zouden automatisch moeten worden gevuld. Klik op <span class="guilabel">Toevoegen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/260.png" class="align-center" src="../../_images/260.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Similarly, click the <span class="guilabel">...</span> button again and select <code class="docutils literal"><span class="pre">stops.txt</span></code> file. Click <span class="guilabel">Add</span>. Click <span class="guilabel">Close</span>.</li>
+<li><p class="first">Soortgelijk, klik opnieuw op de knop <span class="guilabel">…</span> en selecteer het bestand <code class="docutils literal"><span class="pre">stops.txt</span></code>. Klik op <span class="guilabel">Toevoegen `. Klik dan op :guilabel:`Close</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/339.png" class="align-center" src="../../_images/339.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>You will see 2 new layers <code class="docutils literal"><span class="pre">stops</span></code> and <code class="docutils literal"><span class="pre">shapes</span></code> added to the <span class="guilabel">Layers</span> panel. Let&#8217;s convert the <code class="docutils literal"><span class="pre">shapes</span></code> point layer into a line layer representing the path of the metro line. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">U zult 2 nieuwe lagen <code class="docutils literal"><span class="pre">stops</span></code> and <code class="docutils literal"><span class="pre">shapes</span></code> zien toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Laten we de puntenlaag <code class="docutils literal"><span class="pre">shapes</span></code> converteren naar een lijnenlaag die het pad van de metrolijn weergeeft. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/424.png" class="align-center" src="../../_images/424.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Search and locate the <span class="menuselection">Vector creation ‣ Points to path</span> tool. Double-click to launch it.</li>
+<li><p class="first">Zoek en lokaliseer het algoritme <span class="menuselection">Vector maken ‣ Punten naar pad</span>. Dubbelklik om het te openen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/524.png" class="align-center" src="../../_images/524.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Select <code class="docutils literal"><span class="pre">shapes</span></code> as the <span class="guilabel">Input point layer</span>. As per GTFS specifications, each individual route has a unique <code class="docutils literal"><span class="pre">shape_id</span></code> so select that as the <span class="guilabel">Group field</span>. We can also specify the order of points that will form the line by selecting <code class="docutils literal"><span class="pre">shape_pt_sequence</span></code> as the <span class="guilabel">Order field</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Selecteer <code class="docutils literal"><span class="pre">shapes</span></code> als de <span class="guilabel">Invoer puntenlaag</span>. Zoals blijkt uit de specificaties van GTFS heeft elke individuele route een unieke <code class="docutils literal"><span class="pre">shape_id</span></code>, dus selecteer die als het <span class="guilabel">Groeperingsveld</span>. We kunnen ook de volgorde van punten specificeren die de lijn zullen vormen door <code class="docutils literal"><span class="pre">shape_pt_sequence</span></code> te selecteren als het <span class="guilabel">Veld voor volgorde</span>. Klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/623.png" class="align-center" src="../../_images/623.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>A new layer <code class="docutils literal"><span class="pre">Paths</span></code> will be added to the <span class="guilabel">Layers</span> panel. You can turn off the visibility of the <code class="docutils literal"><span class="pre">shapes</span></code> layer to see the newly added line layer.</li>
+<li><p class="first">Een nieuwe laag <code class="docutils literal"><span class="pre">Paden</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. U kunt nu de zichtbaarheid van de laag <code class="docutils literal"><span class="pre">shapes</span></code> uitschakelen om de nieuw toegevoegde lijnenlaag te zien.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/723.png" class="align-center" src="../../_images/723.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Now that we have the metro stations and line data added, we are ready to start the network analysis. In the <span class="guilabel">Processing Toolbox</span>, search for and locate the <span class="menuselection">ORS Tools ‣ Isochrones ‣ Isochrones From Layer</span> tool. Double-click to launch it.</li>
+<li><p class="first">Nu we de metrostations en gegevens voor de lijn hebben toegevoegd, zijn we bijna klaar om de netwerkanalyse te beginnen. Zoek, in de <span class="guilabel">Toolbox van Processing</span>, naar en lokaliseer het gereedschap <span class="menuselection">ORS Tools ‣ Isochrones ‣ Isochrones From Layer</span>. Dubbelklik om het te openen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/822.png" class="align-center" src="../../_images/822.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Select <code class="docutils literal"><span class="pre">openrouteservice</span></code> as the <span class="guilabel">Provider</span>. We will be computing a 15-min walking distance polygon from each metro station. Select <code class="docutils literal"><span class="pre">stops</span></code> as <span class="guilabel">Input Point Layer</span>. Select <code class="docutils literal"><span class="pre">stop_id</span></code> as the <span class="guilabel">Input Layer ID Field</span>. From the <span class="guilabel">Travel mode</span> drop-down, select <code class="docutils literal"><span class="pre">foot-walking</span></code>. As we are interested in time-based area, select <code class="docutils literal"><span class="pre">time</span></code> as the <span class="guilabel">Dimension</span>. Finally enter <code class="docutils literal"><span class="pre">15</span></code> minutes as the <span class="guilabel">ranges</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Selecteer <code class="docutils literal"><span class="pre">openrouteservice</span></code> als de <span class="guilabel">Provider</span>. We zullen een polygoon vanuit elk metrostation berekenen voor een loopafstand van 15 minuten. Selecteer <code class="docutils literal"><span class="pre">stops</span></code> als <span class="guilabel">Invoer puntenlaag</span>. Selecteer <code class="docutils literal"><span class="pre">stop_id</span></code> als het <span class="guilabel">Input Layer ID Field</span>. Selecteer, in de keuzelijst <span class="guilabel">Travel mode</span>, <code class="docutils literal"><span class="pre">foot-walking</span></code>. Selecteer, omdat we zijn geïnteresseerd in een op tijd gebaseerd gebied, <code class="docutils literal"><span class="pre">time</span></code> als de <span class="guilabel">Dimension</span>. Voer tenslotte <code class="docutils literal"><span class="pre">15</span></code> minuten in als de <span class="guilabel">ranges</span>. Klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/923.png" class="align-center" src="../../_images/923.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">Note that the Openrouteservice API has a limit of 20 requests per minute for Isochrones. So if your layer has more than 20 points, you may see errors indicating that the rate limit exceeded. You can keep the tool running and it will continue processing 20 points / min.</p>
+<p class="last">Onthoud dat de API van Openrouteservice een beperking heeft van 20 verzoeken per minuut voor Isochronen. Als uw laag dus meer dan 20 punten heeft zou u fouten kunnen zien die aangeven dat de grens van de beperking is overschreden. U kunt het gereedschap gewoon laten uitvoeren en het zal doorgaan met de verwerking van 20 punten / min.</p>
 </div>
 <ol class="arabic simple" start="10">
-<li>Once the tool finishes, you will see a new layer <code class="docutils literal"><span class="pre">Isochrones</span></code> loaded in the <span class="guilabel">Layers</span> panel. Each point has an associated polygon representing the area that is accessible within 15 minutes by walk. To see this in the context the data that was used to generate them, we can add the OpenStreetMap basemap. Scroll down the <span class="guilabel">Browser</span> panel and locate <span class="menuselection">XYZ Tiles ‣ OpenStreetMap</span>. Drag it to the canvas.</li>
+<li><p class="first">Als het gereedschap eenmaal is voltooid zult u een nieuwe laag <code class="docutils literal"><span class="pre">Isochrones</span></code> zien geladen in het paneel <span class="guilabel">Lagen</span>. Elk punt heeft een geassocieerd polygoon die het gebied weergeeft dat wandelend binnen 15 minuten toegankelijk is. We kunnen de OpenStreetMap basiskaart toevoegen om dit in de context te zien van de gegevens die werden gebruikt om het te maken. Scroll naar beneden in het paneel <span class="guilabel">Browser</span> en lokaliseer <span class="menuselection">XYZ Tiles ‣ OpenStreetMap</span>. Sleep dat naar het kaartvenster.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1021.png" class="align-center" src="../../_images/1021.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>A new layer <code class="docutils literal"><span class="pre">OpenStreetMap</span></code> will be added to the <span class="guilabel">Layers</span> panel. Drag it down to change the layer order and keep it at the bottom of the layer stack. Zoom and pan to see if the results match the road network. You will see that the polygons are not circular, because the travel time is computed along roads, so the regions that have no roads will have lesser area covered.</li>
+<li><p class="first">Een nieuwe laag <code class="docutils literal"><span class="pre">OpenStreetMap</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Sleep het naar beneden om de volgorde van de lagen te wijzigen en plaats het op de onderste plaats in de stapel met lagen. Zoom en verschuif om te zien of de resultaten overeenkomen met het wegennetwerk. U zult zien dat de polygonen geen cirkels zijn omdat de reistijd wordt berekend langs de wegen, zodat de regio&#8217;s die geen wegen hebben minder gebied bedekt zullen hebben.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1126.png" class="align-center" src="../../_images/1126.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>To compute the service area, we need to complete one last task. We can merge individual isochrone polygons to form a single polygon representing the areas that are accessible. Search for and locate <span class="menuselection">Vector geometry ‣ Dissolve</span>.</li>
+<li><p class="first">We moeten nog een laatste taak voltooien om het servicegebied te berekenen. We kunnen individuele isochrone polygonen samenvoegen om één enkele polygoon te vormen die de gebieden weergeeft die toegankelijk zijn. Zoek en lokaliseer <span class="menuselection">Vector geometrie ‣ Samensmelten</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1223.png" class="align-center" src="../../_images/1223.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>Select <code class="docutils literal"><span class="pre">Isochrones</span></code> as the <span class="guilabel">Input layer</span> and click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Selecteer <code class="docutils literal"><span class="pre">Isochrones</span></code> als de <span class="guilabel">Invoerlaag</span> en klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1323.png" class="align-center" src="../../_images/1323.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Once the processing finishes, a new layer <code class="docutils literal"><span class="pre">Dissolved</span></code> will be added to the <span class="guilabel">Layers</span> panel. This polygons represents the full region that is accessible from the metro system within 15-minutes of walk.</li>
+<li><p class="first">Als de verwerking eenmaal is voltooid zult u een nieuwe laag <code class="docutils literal"><span class="pre">Samengevoegd</span></code> zien toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Deze polygonen geven de volledige regio weer die in het metrosysteem bereikbaar is binnen een loopafstand van 15 minuten.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1422.png" class="align-center" src="../../_images/1422.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">This is a simple example of how a service area analysis for a public transportation project can be done in QGIS. A more comprehensive service-area analysis for the metro system would include other modes of transport. We could include feeder buses, nearby bus stops and routes serving those bus stops to expand the analysis. We may also include travel by other modes such as car and taxi.</p>
+<p class="last">Dit is een eenvoudig voorbeeld van hoe een analyse voor servicegebieden voor een project van openbaar vervoer kan worden uitgevoerd in QGIS. Een meer uitgebreide analyse voor servicegebieden voor het metrosysteem zou andere modellen voor transport bevatten. We zouden bussen voor de aanvoer opnemen, nabijgelegen bushaltes en routes die die bushaltes bedienen om de analyse uit te breiden. We zouden ook het reizen op andere wijzen, zoals auto en taxi, kunnen opnemen.</p>
 </div>
 </div>
 </div>
@@ -398,7 +418,7 @@ links below:</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Sep 05, 2019.<br/>
+      Laatste aanpassing op Sep 11, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

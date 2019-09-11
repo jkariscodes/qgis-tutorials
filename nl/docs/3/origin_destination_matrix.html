@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Locating Nearest Facility with Origin-Destination Matrix (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Dichtstbijzijnde faciliteit zoeken met Origin-Destination Matrix (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,8 +30,8 @@
     <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
-    <link rel="next" title="Service Area Analysis using Openrouteservice (QGIS3)" href="service_area_analysis.html" />
-    <link rel="prev" title="Basic Network Visualization and Routing (QGIS3)" href="basic_network_analysis.html" />
+    <link rel="next" title="Analyse Servicegebied met Openrouteservice (QGIS3)" href="service_area_analysis.html" />
+    <link rel="prev" title="Basis netwerk visualisatie en routeren (QGIS3)" href="basic_network_analysis.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -105,9 +105,9 @@
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Complexe werkstromen automatiseren met behulp van Grafische modellen bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Maken van kaarten automatiseren met Atlas van afdruklay-out (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basis netwerk visualisatie en routeren (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Dichtstbijzijnde faciliteit zoeken met Origin-Destination Matrix (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Analyse Servicegebied met Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">De QGIS Browser gebruiken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">BIL-, BIP- of BSQ-bestanden openen in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Beginnen met programmeren in Python (QGIS3)</a></li>
@@ -133,11 +133,11 @@
               
                 
   <li>
-    <a href="basic_network_analysis.html" title="Previous Chapter: Basic Network Visualization and Routing (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Basic Network...</span>
+    <a href="basic_network_analysis.html" title="Previous Chapter: Basis netwerk visualisatie en routeren (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Basis netwerk...</span>
     </a>
   </li>
   <li>
-    <a href="service_area_analysis.html" title="Next Chapter: Service Area Analysis using Openrouteservice (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Service Area ... &raquo;</span>
+    <a href="service_area_analysis.html" title="Next Chapter: Analyse Servicegebied met Openrouteservice (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Analyse Servi... &raquo;</span>
     </a>
   </li>
               
@@ -224,127 +224,143 @@
       
 
   <div class="section" id="locating-nearest-facility-with-origin-destination-matrix-qgis3">
-<h1>Locating Nearest Facility with Origin-Destination Matrix (QGIS3)<a class="headerlink" href="#locating-nearest-facility-with-origin-destination-matrix-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>In the previous tutorial, <a class="reference internal" href="basic_network_analysis.html"><em>Basic Network Visualization and Routing (QGIS3)</em></a>, we learnt how to build a network and calculate the shortest path between 2 points. We can apply that technique for many different types of network-based analysis. One such application is to compute <strong>Origin-Destination Matrix</strong> or <strong>OD Matrix</strong>. Given a set of origin points and another set of destination points, we can calculate shortest path between each origin-destination pairs and find out the travel distance/time between them. Such analysis is useful to locate the closest facility to any given point. For example, a logistics company may use this analysis to find the closest warehouse to their customers to optimize delivery routes. Here we use Distance Matrix algorithm from <strong>QGIS Network Analysis Toolbox (QNEAT3)</strong> plugin to find the nearest health facility to each address in the city.</p>
+<h1>Dichtstbijzijnde faciliteit zoeken met Origin-Destination Matrix (QGIS3)<a class="headerlink" href="#locating-nearest-facility-with-origin-destination-matrix-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>In de vorige handleiding, <a class="reference internal" href="basic_network_analysis.html"><em>Basis netwerk visualisatie en routeren (QGIS3)</em></a>, leerden we hoe een netwerk te bouwen en het kortste pad tussen 2 punten te berekenen. We kunnen die techniek ook toepassen voor verschillende typen op netwerken gebaseerde analyses. Een van die toepassingen is om de <strong>Origin-Destination Matrix</strong> of <strong>OD Matrix</strong> te berekenen. Gegeven een set van punten van origine en een andere set voor bestemmingspunten kunnen we het kortste pad berekenen tussen elke paar van origine-bestemming en de reisafstand/tijd daartussen berekenen. Een dergelijke analyse is nuttig om de dichtstbijzijnde faciliteit tot een bepaald punt te lokaliseren. Een logistiek bedrijf zou, bijvoorbeeld, deze analyse kunnen gebruiken om de dichtstbijzijnde opslagplaats voor hun klanten te zoeken om bestelroutes te optimaliseren. Hier gebruiken we het algoritme Distance Matrix uit de plug-in <strong>QGIS Network Analysis Toolbox (QNEAT3)</strong> om de dichtstbijzijnde gezondheidsfaciliteit voor elk adres in de stad te zoeken.</p>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">This tutorial shows how to use your own network data to compute an origin-destination matrix. If you do not have your own network data, you can use <strong>ORS Tools Plugin</strong> and algorithm <span class="menuselection">ORS Tools ‣ Matrix ‣  Matrix from Layers</span> to do the similar analysis using OpenStreetMap data. See <a class="reference internal" href="service_area_analysis.html"><em>Service Area Analysis using Openrouteservice (QGIS3)</em></a> to learn how to use ORS Tools plugin.</p>
+<p class="last">Deze handleiding laat zien hoe uw eigen gegevens voor een netwerk te gebruiken om een origin-destination matrix te berekenen. Als u geen gegevens heeft voor een eigen netwerk kunt u de <strong>ORS Tools Plugin</strong> en het algoritme <span class="menuselection">ORS Tools ‣ Matrix ‣  Matrix from Layers</span> gebruiken om een soortgelijke analyse uit te voeren met behulp van gegevens van OpenStreetMap. Bekijk <a class="reference internal" href="service_area_analysis.html"><em>Analyse Servicegebied met Openrouteservice (QGIS3)</em></a> om te leren hoe de plug-in ORS Tools te gebruiken.</p>
 </div>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will take 2 layers for Washington DC - one with points representing addresses and another with points representing mental health facilities - and find out the facility with the least travel distance from each address.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen 2 lagen nemen voor Washington DC - een met punten die adressen weergeven en een andere met punten die faciliteiten voor geestelijke gezondheid weergeven - en de faciliteit zoeken met de minste reisafstand vanaf elk adres.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
-<li>Extract a stratified random sample from a point layer.</li>
-<li>Use Virtual Layers to run SQL query on a QGIS layer.</li>
-<li>Use Python Console Editor to run a pyqgis script.</li>
+<li><p class="first">Een laagsgewijze willekeurig monster uit een puntenlaag uitnemen.</p>
+</li>
+<li><p class="first">Virtuele lagen gebruiken om een query van SQL uit te voeren op een laag van QGIS.</p>
+</li>
+<li><p class="first">De Python Console Editor gebruiken om een script voor PyQGIS uit te voeren.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p>District of Columbia government freely shares hundreds of datasets on the <a class="reference external" href="https://opendata.dc.gov/">Open Data Catalog</a>.</p>
-<p>Download the following data layers as shapefiles.</p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p>De overheid van het district of Columbia deelt gratis honderden gegevenssets in de <a class="reference external" href="https://opendata.dc.gov/">Open Data Catalog</a>.</p>
+<p>Download de volgende gegevenslagen als Shapefiles.</p>
 <ul class="simple">
 <li><a class="reference external" href="https://opendata.dc.gov/datasets/street-centerlines">Street Centerlines</a></li>
 <li><a class="reference external" href="https://opendata.dc.gov/datasets/address-points">Address Points</a></li>
 <li><a class="reference external" href="https://opendata.dc.gov/datasets/adult-mental-health-providers">Adult Mental Health Providers</a></li>
 </ul>
-<p>For convenience, you may directly download a copy of the datasets from the
-links below:</p>
+<p>Voor het gemak kunt u direct een kopie van de gegevensset downloaden vanaf de links hieronder:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Street_Centerlines.zip">Street_Centerlines.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Address_Points.zip">Address_Points.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Adult_Mental_Health_Providers.zip">Adult_Mental_Health_Providers.zip</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#dcopendata" id="id1">[DCOPENDATA]</a></p>
+<p>Gegevensbron: <a class="reference internal" href="../credits.html#dcopendata" id="id1">[DCOPENDATA]</a></p>
 </div>
 <div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink naar deze titel">¶</a></h2>
-<p>Visit <span class="menuselection">Plugins ‣ Manage and Install plugins</span>. Search for <strong>QNEAT3</strong> plugin and install it. Click <span class="guilabel">Close</span>.</p>
+<h2>Instellen<a class="headerlink" href="#setup" title="Permalink naar deze titel">¶</a></h2>
+<p>Ga naar <span class="menuselection">Plug-ins ‣ Plug-ins beheren en installeren</span>. Zoek naar de plug-in <strong>QNEAT3</strong> en installeer die. Klik op <span class="guilabel">Close</span>.</p>
 <img alt="../../_images/setup11.png" class="align-center" src="../../_images/setup11.png" />
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li>Locate the downloaded <code class="docutils literal"><span class="pre">Street_Centerlines.zip</span></code> file in the <span class="guilabel">Browser</span> panel. Expand it and drag the <code class="docutils literal"><span class="pre">Street_Centerlines.shp</span></code> file to the canvas. Similarly, locate the <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers.zip</span></code> file, expand it and add <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers.shp</span></code> to the canvas.</li>
+<li><p class="first">Zoek in  het paneel <span class="guilabel">Browser</span> naar het bestand <code class="docutils literal"><span class="pre">Street_Centerlines.zip</span></code>. Vergroot het en sleep het bestand <code class="docutils literal"><span class="pre">Street_Centerlines.shp</span></code> naar het kaartvenster. Zoek op dezelfde wijze naar het bestand <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers.zip</span></code>, vergroot het en voeg <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers.shp</span></code> toe aan het kaartvenster.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/170.png" class="align-center" src="../../_images/170.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Next, locate the <code class="docutils literal"><span class="pre">Address_Points.zip</span></code> file, expand it and add the <code class="docutils literal"><span class="pre">Address_Points.shp</span></code>. You will see a lot of points around the city. Each point represents a valid address. We will not randomly select 1 point in each ward to use as the origin points. This technique is called stratified sampling. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">Zoek vervolgens naar het bestand <code class="docutils literal"><span class="pre">Address_Points.zip</span></code>, vergroot het en voeg het bestand <code class="docutils literal"><span class="pre">Address_Points.shp</span></code> toe. U zult heel veel punten zien in de stad. Elke punt geeft een geldig adres weer. We zullen nu willekeurig 1 punt in elke wijk selecteren om als punt van origine te gebruiken. Deze techniek wordt stratified sampling (laagsgewijze monsterneming) genoemd. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Search for and locate the <span class="menuselection">Vector Selection ‣ Random extract within subsets</span> algorithm.</li>
+<li><p class="first">Zoek en lokaliseer het algoritme <span class="menuselection">Vector selectie ‣ Willekeurige selectie binnen subsets</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/328.png" class="align-center" src="../../_images/328.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Select <code class="docutils literal"><span class="pre">Address_Points</span></code> as the <span class="guilabel">Input layer</span>. Each address point contains an attribute called <code class="docutils literal"><span class="pre">WARD_2012</span></code> which has the ward number associated with the address. As we want only 1 point per ward, we use that attribute as the <span class="guilabel">ID field</span>. Set <span class="guilabel">Number/percentage of selected features</span> as <code class="docutils literal"><span class="pre">1</span></code>.</li>
+<li><p class="first">Selecteer <code class="docutils literal"><span class="pre">Address_Points</span></code> als de <span class="guilabel">Invoerlaag</span>. Elk punt voor een adres bevat een attribuut genaamd <code class="docutils literal"><span class="pre">WARD_2012</span></code> waarin het nummer voor de wijk is gekoppeld aan het adres. We gebruiken dat attribuut als het <span class="guilabel">Veld ID</span> omdat we slechts 1 punt per wijk willen. Stel <span class="guilabel">Aantal/percentage geselecteerde objecten</span> in op <code class="docutils literal"><span class="pre">1</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/414.png" class="align-center" src="../../_images/414.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>A new layer <code class="docutils literal"><span class="pre">Extracted</span> <span class="pre">(random</span> <span class="pre">stratified)</span></code> will be added to the <span class="guilabel">Layers</span> panel.</li>
+<li><p class="first">Een nieuwe laag <code class="docutils literal"><span class="pre">Uitgenomen</span> <span class="pre">(willekeurig</span> <span class="pre">gestratificeerd)</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/514.png" class="align-center" src="../../_images/514.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Turn-off the visibility for the <code class="docutils literal"><span class="pre">Address_Points</span></code> layer. Right-click on the <code class="docutils literal"><span class="pre">Extracted</span> <span class="pre">(random</span> <span class="pre">stratified)</span></code> layer and select <span class="guilabel">Rename layer</span>.</li>
+<li><p class="first">Schakel de zichtbaarheid van de laag <code class="docutils literal"><span class="pre">Address_Points</span></code> uit. Klik met rechts op de laag <code class="docutils literal"><span class="pre">Uitgenomen</span> <span class="pre">(willekeurig</span> <span class="pre">gestratificeerd)</span></code> en selecteer <span class="guilabel">Laag hernoemen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/614.png" class="align-center" src="../../_images/614.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>Let&#8217;s rename this layer as <code class="docutils literal"><span class="pre">origin_points</span></code>. Similarly rename the <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers</span></code> layers representing the health facilities as <code class="docutils literal"><span class="pre">destination_points</span></code>. Naming the layers this way makes it easy to identify them in subsequent processing. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">Laten we deze laag hernoemen naar <code class="docutils literal"><span class="pre">origin_points</span></code>. Hernoem op soortgelijke wijze de laag <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers</span></code> die de faciliteiten voor geestelijke gezondheid weergeeft als <code class="docutils literal"><span class="pre">destination_points</span></code>. Het op deze manier hernoemen van de lagen maakt het eenvoudiger om ze te identificeren in de aansluitende verwerking. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/713.png" class="align-center" src="../../_images/713.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Locate the <span class="menuselection">QNEAT3 ‣ Distance matrices ‣ OD Matrix from Layers as Table (m:n)</span> algorithm. If you do not see this algorithm in the toolbox, make sure you have installed the <strong>QNEAT3</strong> plugin.</li>
+<li><p class="first">Zoek naar het algoritme <span class="menuselection">QNEAT3 ‣ Distance matrices ‣ OD Matrix from Layers as Table (m:n)</span>. Als u dit algoritme niet ziet in de Toolbox, overtuig u er dan van dat u de plug-in <strong>QNEAT3</strong> hebt geïnstalleerd.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/813.png" class="align-center" src="../../_images/813.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>This algorithm helps find the distances along the network between selected origin and destination layers. Select <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> as the <span class="guilabel">Network layer</span>. Select <code class="docutils literal"><span class="pre">origin_points</span></code> as the <span class="guilabel">From-Points layer</span> and <code class="docutils literal"><span class="pre">OBJECTID</span></code> as the <span class="guilabel">Unique Point ID field</span>. Similarly, set <code class="docutils literal"><span class="pre">destination_points</span></code> as the <span class="guilabel">To-Points Layer</span> and <code class="docutils literal"><span class="pre">OBJECTID</span></code> as  the <span class="guilabel">Unique Point ID field</span>. Set the <span class="guilabel">Optimization Criterion</span> as <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span></code>.</li>
+<li><p class="first">Dit algoritme helpt bij het zoeken naar de afstanden langs het netwerk tussen geselecteerde lagen voor origine en bestemming. Selecteer <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> als de <span class="guilabel">Network layer</span>. Selecteer <code class="docutils literal"><span class="pre">origin_points</span></code> als de <span class="guilabel">From-Points layer</span> en <code class="docutils literal"><span class="pre">OBJECTID</span></code> als de <span class="guilabel">Unique Point ID field</span>. Stel op soortgelijke wijze <code class="docutils literal"><span class="pre">destination_points</span></code> in als de <span class="guilabel">To-Points Layer</span> en <code class="docutils literal"><span class="pre">OBJECTID</span></code> als het <span class="guilabel">Unique Point ID field</span>. Stel <span class="guilabel">Optimization Criterion</span> in op <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/913.png" class="align-center" src="../../_images/913.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>As many streets in the network are one-way, we need to set the <span class="guilabel">Advanced parameters</span> to specify the direction. See <a class="reference internal" href="basic_network_analysis.html"><em>Basic Network Visualization and Routing (QGIS3)</em></a> for more details on how these attributes are structured. Choose <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> as the <span class="guilabel">Direction field</span>. Enter <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for forward direction</span> and <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for backward direction</span>. Keep other options to their default values and click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Omdat veel straten in het netwerk een-richting zijn, moeten we de <span class="guilabel">Advanced parameters</span> instellen om de richting te specificeren. Bekijk <a class="reference internal" href="basic_network_analysis.html"><em>Basis netwerk visualisatie en routeren (QGIS3)</em></a> voor meer details over hoe deze attributen zijn gestructureerd. Kies <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> als het <span class="guilabel">Direction field</span>. Voer <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> als de waarde voor <span class="guilabel">Value for forward direction</span> en <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> als die voor <span class="guilabel">Value for backward direction</span>. Laat de andere waarden op hun standaard waarde staan en klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1013.png" class="align-center" src="../../_images/1013.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>A new table layer called <code class="docutils literal"><span class="pre">Output</span> <span class="pre">OD</span> <span class="pre">Matrix</span></code> will be added to the <span class="guilabel">Layers</span> panel. Right-click and select <span class="guilabel">Open Attributes Table</span>. You will see that the table contains <em>117</em> rows. We had 9 origin points and 13 destination points - so the output contains <em>9x13 = 117</em> pairs of origins and destination. The <code class="docutils literal"><span class="pre">total_cost</span></code> column contains distance in meters between each origin point to every destination point.</li>
+<li><p class="first">Een nieuwe tabellaag, genaamd <code class="docutils literal"><span class="pre">Output</span> <span class="pre">OD</span> <span class="pre">Matrix</span></code>, zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Klik met rechts en selecteer <span class="guilabel">Attributentabel openen</span>. U zult zien dat de tabel <em>117</em> rijen bevat. We hadden 9 punten van origine en 13 bestemmingspunten - dus de uitvoer bevat <em>9x13 = 117</em> paren voor origine en bestemming. De kolom <code class="docutils literal"><span class="pre">total_cost</span></code> bevat de afstand in meters tussen elk punt van origine tot elke bestemmingspunt.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1117.png" class="align-center" src="../../_images/1117.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>For this tutorial, we are interested in only the destination point with the shortest distance. We can create a SQL query to pick the destination with the least <code class="docutils literal"><span class="pre">total_cost</span></code> among all destinations. Go to <span class="menuselection">Database ‣ DB Manager..</span></li>
+<li><p class="first">Voor deze handleiding zijn we alleen geïnteresseerd in het bestemmingspunt met de kortste afstand. We kunnen een query voor SQL maken om de bestemming met de minste <code class="docutils literal"><span class="pre">total_cost</span></code> uit alle bestemmingen te kiezen. Ga naar <span class="menuselection">Database ‣ DB Manager..</span></p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1214.png" class="align-center" src="../../_images/1214.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>In the <span class="guilabel">DB Manager</span> dialog, select the <span class="menuselection">Virtual Layers ‣ Project layers ‣ Output OD Matrix</span> from the left-hand panel. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/virtual_layers.html">Virtual layers</a> documentation to learn more. Click the <span class="guilabel">SQL Window</span> button.</li>
+<li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">DB Manager</span>, de optie <span class="menuselection">Virtuele lagen ‣ Project-lagen ‣ Output OD Matrix</span> uit het paneel aan de linkerkant. Bekijk de documentatie <a class="reference external" href="https://docs.qgis.org/testing/nl/docs/user_manual/working_with_vector/virtual_layers.html">Virtuele lagen</a> om meer te leren. Klik op de knop <span class="guilabel">SQL-venster</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1314.png" class="align-center" src="../../_images/1314.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Enter the following query and click <span class="guilabel">Execute</span>. The results will be displayed in the panel below. As expected, we have 9 rows in the result - the shortest path destination for each origin point. Check and select <span class="guilabel">Column with unique values</span> as <code class="docutils literal"><span class="pre">origin_id</span></code>. Enter <code class="docutils literal"><span class="pre">nearest_destinations</span></code> as the <span class="guilabel">Layer name (prefix)</span>. Click <span class="guilabel">Load</span>.</li>
+<li><p class="first">Voer de volgende query in en klik op <span class="guilabel">Uitvoeren</span>. De resultaten zullen worden weergegeven in het paneel eronder. Zoals verwacht hebben we nu 9 rijen in het resultaat - de bestemming via het kortste pad naar elk punt van origine. Selecteer <span class="guilabel">Als nieuwe laag laden</span> en selecteer <code class="docutils literal"><span class="pre">origin_id</span></code> als <span class="guilabel">Kolom met unieke waarden</span>. Voer``nearest_destinations`` in als de <span class="guilabel">Laagnaam (prefix)</span>. Klik op <span class="guilabel">Laden</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>select origin_id, destination_id, min(total_cost) as shortest_distance
@@ -354,73 +370,85 @@ from &#39;Output OD Matrix&#39; group by origin_id
 <img alt="../../_images/1412.png" class="align-center" src="../../_images/1412.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>A new virtual layer <code class="docutils literal"><span class="pre">nearest_destinations</span></code> will be added to the <span class="guilabel">Layers</span> panel. This table has the result of our analysis. Nearest mental health center for each of the 9 origin points. Let&#8217;s try a few different ways to visualize and validate these results. Go to <span class="menuselection">Processing ‣ Toolbox</span>. Search for and locate the <span class="menuselection">Join attributes by field value</span> algorithm. Double-click to launch it.</li>
+<li><p class="first">Een nieuwe virtuele laag <code class="docutils literal"><span class="pre">nearest_destinations</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Deze tabel bevat de resultaten van onze analyse. Het dichtstbijzijnde centrum voor geestelijke gezondheid voor elk van de 9 punten van origine. Laten we eens een paar verschillende manieren proberen om deze resultaten te visualiseren en te valideren. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>. Zoek en lokaliseer het algoritme <span class="menuselection">Attributen koppelen op veldwaarde</span>. Dubbelklik erop om het te openen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1512.png" class="align-center" src="../../_images/1512.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>Select <code class="docutils literal"><span class="pre">origin_points</span></code> as the <span class="guilabel">Input layer</span> and <code class="docutils literal"><span class="pre">OBJECTID</span></code> as the <span class="guilabel">Table field</span>. Set <code class="docutils literal"><span class="pre">nearest_destinations</span></code> as the <span class="guilabel">Input layer 2</span> and <code class="docutils literal"><span class="pre">origin_id</span></code> as the <span class="guilabel">Table field 2</span>. Click the <span class="guilabel">...</span> button next to <span class="guilabel">Layer 2 fields to copy</span> and select <code class="docutils literal"><span class="pre">destination_id</span></code> and <code class="docutils literal"><span class="pre">shortest_distance</span></code>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Selecteer <code class="docutils literal"><span class="pre">origin_points</span></code> als de <span class="guilabel">Invoerlaag</span> en <code class="docutils literal"><span class="pre">OBJECTID</span></code> als het <span class="guilabel">Tabelveld</span>. Stel <code class="docutils literal"><span class="pre">nearest_destinations</span></code> in als de <span class="guilabel">Invoerlaag 2</span> en <code class="docutils literal"><span class="pre">origin_id</span></code> als het <span class="guilabel">Tabelveld 2</span>. Klik op de knop <span class="guilabel">…</span> naast <span class="guilabel">Velden van laag 2 om te kopiëren</span> en selecteer <code class="docutils literal"><span class="pre">destination_id</span></code> en <code class="docutils literal"><span class="pre">shortest_distance</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1610.png" class="align-center" src="../../_images/1610.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>A new <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer</span></code> will be added to the <span class="guilabel">Layers</span> panel. This layer has the nearest destination id attribute for each origin point. We can now create a hub-spoke visualization using this layer. Search for <span class="menuselection">Vector analysis ‣ Join by lines (hub lines)</span> algorithm. Right-click to launch it.</li>
+<li><p class="first">Een nieuwe <code class="docutils literal"><span class="pre">Samengevoegde</span> <span class="pre">laag</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Deze laag heeft het attribuut ID van de nearest destination voor elk punt van origine. We kunnen nu een naaf-spaak visualisatie met deze laag maken. Zoek naar het algoritme <span class="menuselection">Vector analyse ‣ Samenvoegen op lijnen (naaflijnen)</span>. Klik er met rechts op om het te openen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1711.png" class="align-center" src="../../_images/1711.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Select <code class="docutils literal"><span class="pre">destination_points</span></code> as the <span class="guilabel">Hub layer</span> and <code class="docutils literal"><span class="pre">OBJECTID</span></code> as the <span class="guilabel">Hub ID field</span>. Select <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer`</span> <span class="pre">as</span> <span class="pre">the</span> <span class="pre">:guilabel:`Spoke</span> <span class="pre">layer`</span> <span class="pre">and</span> <span class="pre">``destination_id</span></code> as the <span class="guilabel">Spoke ID field</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Selecteer <code class="docutils literal"><span class="pre">destination_points</span></code> als de <span class="guilabel">Naaf puntlaag</span> en <code class="docutils literal"><span class="pre">OBJECTID</span></code> als het <span class="guilabel">Naaf ID-veld</span>. Selecteer <code class="docutils literal"><span class="pre">Samengevoegde</span> <span class="pre">laag`</span> <span class="pre">als</span> <span class="pre">de</span> <span class="pre">:guilabel:`Spaak</span> <span class="pre">puntlaag`</span> <span class="pre">en</span> <span class="pre">``destination_id</span></code> als het <span class="guilabel">Spaak ID-veld</span>. Klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1810.png" class="align-center" src="../../_images/1810.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>Once the processing finishes, a new layer <code class="docutils literal"><span class="pre">Hub</span> <span class="pre">lines</span></code> will be added to the <span class="guilabel">Layers</span> panel. This layer shows the lines connecting each origin with the nearest destination.</li>
+<li><p class="first">Als de verwerking eenmaal is voltooid zal een nieuwe laag <code class="docutils literal"><span class="pre">Naaflijnen</span></code> worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Deze laag geeft de lijnen weer die elk punt van origine verbinden met de dichtstbijzijnde bestemming.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/199.png" class="align-center" src="../../_images/199.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li>Note that even though the lines connecting the origin and destination is a straight-line, the destination was found using the distance along the network. It will be much useful visualization to show the actual shortest-path between each origin-destination. As of now, there is no easy way to generate the shortest-path between multiple origin-destination pairs the way we generated the distance matrix. But I will demonstrate a way to use some python scripting to generate this visualization. Firs, let&#8217;s run the shortest path algorithm on 1 pair. Locate the <span class="menuselection">QNEAT3 ‣ Routing ‣ Shortest path (point to point)</span> algorithm and launch it.</li>
+<li><p class="first">Onthoud dat hoewel de lijnen het punt van origine en de bestemming verbinden met een rechte lijn, de bestemming werd gevonden met de afstand langs het netwerk. Het zal veel nuttiger zijn als de visualisatie het feitelijke kortste pad weergeeft tussen elk punt van origine en bestemming. Vanaf hier is er geen eenvoudige manier om het kortste pad te maken tussen meerdere paren origine-bestemming op de manier waarop we de afstandsmatrix hebben gemaakt. Maar ik zal een manier demonstreren om wat scripten voor Python te gebruiken om deze visualisatie te maken. Laten we eerst het algoritme voor het kortste pad uitvoeren op 1 paar. Zoek naar het algoritme <span class="menuselection">QNEAT3 ‣ Routing ‣ Shortest path (point to point)</span> en start het.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/207.png" class="align-center" src="../../_images/207.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li>In the <span class="guilabel">Shortest Path (Point to Point)</span> dialog, select <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> as the <span class="guilabel">Vector layer representing network</span>.  Keep the <span class="guilabel">Path type to calculate</span> as <code class="docutils literal"><span class="pre">Shortest</span></code>. Next we need to pick a start and end point. You can click the <span class="guilabel">...</span> button next to <span class="guilabel">Start point</span> and click on the origin point in the canvas. Similarly select the destination point as the <span class="guilabel">End point</span>. Expand the <span class="guilabel">Advanced parameter</span> section. Choose <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> as the <span class="guilabel">Direction field</span>. Enter <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for forward direction</span> and <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for backward direction</span>. Keep other options to their default values and click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Selecteer, in het dialoogvenster <span class="guilabel">Kortste pad (punt naar punt)</span>, <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> als de <span class="guilabel">Vectorlaag die netwerk weergeeft</span>. Behoud het <span class="guilabel">Te berekenen type pad</span> als <code class="docutils literal"><span class="pre">Kortste</span></code>. Vervolgens dienen we een begin- en eindpunt te kiezen. U kunt op de knop <span class="guilabel">…</span> klikken en op een willekeurig punt in het kaartvenster klikken. Vergroot het gedeelte <span class="guilabel">Gevorderde parameters</span>. Kies <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> als het <span class="guilabel">Richtingsveld</span>. Voer <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> in als de <span class="guilabel">Waarde voor voorwaartse richting</span> en <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> als de <span class="guilabel">Waarde voor achterwaartse richting</span>. Laat de andere waarden op hun standaard waarden staan en klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2113.png" class="align-center" src="../../_images/2113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li>A new layer <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> wll be added to the <span class="guilabel">Layers</span> panel. You will see that this path follows the network rather than connecting the origin and destination with a straight line. The reason we ran the algorithm on 1 pair is to easily identify the parameter values that we can use in our script. Select both <code class="docutils literal"><span class="pre">Hub</span> <span class="pre">lines</span></code> and <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>, right-click and select <span class="guilabel">Remove Layer</span>. Click the <span class="guilabel">History</span> button in the <span class="guilabel">Processing Toolbox</span>.</li>
+<li><p class="first">Een nieuwe laag <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. U zult zien dat dit pad het netwerk volgt in plaats van het punt van origine en bestemming te verbinden met een rechte lijn. De reden dat we het algoritme uitvoerden op 1 paar is om eenvoudig de waarden voor de parameters te identificeren die we in ons script kunnen gebruiken. Selecteer zowel <code class="docutils literal"><span class="pre">Naaflijnen</span></code> als <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>, klik met rechts en selecteer <span class="guilabel">Laag verwijderen</span>. Klik op de knop <span class="guilabel">Geschiedenis</span> in de <span class="guilabel">Toolbox van Processing</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2211.png" class="align-center" src="../../_images/2211.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
-<li>Pick the top-most algorithm and you will see the full command displayed in the panel below. Copy the command and click <span class="guilabel">Close</span>.</li>
+<li><p class="first">Kies het bovenste algoritme en u zult de volledige opdracht zien weergegeven in het paneel eronder. Kopieer de opdracht en klik op <span class="guilabel">Close</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/238.png" class="align-center" src="../../_images/238.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li>Go to <span class="menuselection">Plugins ‣ Python Console</span>.</li>
+<li><p class="first">Ga naar <span class="menuselection">Plug-ins ‣ Python Console</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/246.png" class="align-center" src="../../_images/246.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
-<li>Click the <span class="guilabel">Show Editor</span> button in the <span class="guilabel">Python Console</span>.</li>
+<li><p class="first">Klik op de knop <span class="guilabel">Editor tonen</span> in de <span class="guilabel">Python Console</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/255.png" class="align-center" src="../../_images/255.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
-<li>In the editor window, copy/paste the following script. This script uses the parameter values from the processing history that we saw earlier. Click <span class="guilabel">Run Script</span> button to start execution.</li>
+<li><p class="first">Kopieer/plak het volgende script in het venster van de bewerker. Dit script gebruikt de waarden van de parameters uit de geschiedenis van Processing die we eerder zagen. Klik op de knop <span class="guilabel">Script uitvoeren</span> om de uitvoering te starten.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/265.png" class="align-center" src="../../_images/265.png" />
@@ -458,19 +486,22 @@ from &#39;Output OD Matrix&#39; group by origin_id
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="27">
-<li>The script will take a few minutes to run. Once finished, you will see 9 new layers named <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>. Let&#8217;s merge these paths to a single layer. Find the <span class="menuselection">Vector general ‣ Merge vector layers</span> algorithm and launch it.</li>
+<li><p class="first">Het script zal enkele minuten duren om te worden uitgevoerd. Als het eenmaal is voltooid zult u 9 nieuwe lagen zien, genaamd <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>. Laten we deze paden samenvoegen tot één enkele laag. Zoek naar het algoritme <span class="menuselection">Vector algemeen ‣ Vectorlagen samenvoegen</span> en start het.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/275.png" class="align-center" src="../../_images/275.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
-<li>Select all 9 <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code> as the <span class="guilabel">Input layers</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Selecteer alle 9 <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code> als de <span class="guilabel">Invoerlagen</span>. Klik op <span class="guilabel">Uitvoeren</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/285.png" class="align-center" src="../../_images/285.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
-<li>A new <code class="docutils literal"><span class="pre">Merged</span></code> layer will be created which will contain shortest path between our origins and destinations.</li>
+<li><p class="first">Een nieuwe laag <code class="docutils literal"><span class="pre">Samengevoegd</span></code> zal worden gemaakt die de kortste paden zal bevatten tussen onze punten van origine en bestemming.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/294.png" class="align-center" src="../../_images/294.png" />
@@ -500,7 +531,7 @@ from &#39;Output OD Matrix&#39; group by origin_id
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Sep 05, 2019.<br/>
+      Laatste aanpassing op Sep 11, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
