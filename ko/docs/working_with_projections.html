@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Working with Projections &mdash; QGIS Tutorials and Tips</title>
+    <title>투영 작업 &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -85,13 +85,13 @@
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">지도 만들기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">속성 작업 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">스프레드시트 및 CSV 파일 불러오기 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/basic_vector_styling.html">기본 벡터 스타일링 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_line_lengths.html">선의 길이계산과 통계(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_mosaicing_and_clipping.html">래스터 붙이기 및 자르기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">지형데이터 작업</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">WMS 데이터 작업</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Working with Projections</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">투영 작업</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">항공사진 지오레퍼런싱 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">디지타이징 맵 데이터</a></li>
@@ -102,8 +102,8 @@
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">점 데이터 보간법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">프로세싱 프레임을 이용한 일괄처리과정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">프로세싱 모델러를 사용하여 복잡한 작업흐름 자동화하기(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
@@ -224,24 +224,20 @@
       
 
   <div class="section" id="working-with-projections">
-<h1>Working with Projections<a class="headerlink" href="#working-with-projections" title="제목 주소">¶</a></h1>
-<p>Map projections - or Coordinate Reference System (CRS) - often cause a lot of
-frustration when working with GIS data.  But proper understanding of the
-concepts and access to the right tools will make it much easier to deal with
-projections. In this tutorial, we will explore how projections work in QGIS and
-learn about tools available for vector and rasters - particularly re-projecting
-vector and raster data, enabling on-the-fly re-projection and assigning
-projection to data without projection.</p>
+<h1>투영 작업<a class="headerlink" href="#working-with-projections" title="제목 주소">¶</a></h1>
+<p>지도 투영법 또는 좌표 참조 시스템 (CRS)- GIS 데이터로 작업 할 때 문제가 많이 발생하다. 하지만 개념에 대한 충분히 이해하고 올바른 도구를 활용하면 쉽게 투영 작업을 할 수 있다. 이번 예제에서는 QGIS에서 투영 작업을 하는 방식을 살펴보고 벡터 및 래스터에 사용할 수 있는 도구, 특히 벡터 및 래스터 데이터를 다시 투영하여 즉시 재투영을 수행하고 투영없이 데이터에 투영을 할당하는 방법에 대해 알아 봅니다.</p>
 <div class="section" id="overview-of-the-task">
 <h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
-<p>The task is to re-project and overlay data layers of difference projections
-together in QGIS.</p>
+<p>이 작업은 QGIS에서 투영 할 데이터에 다른 레이어를 함께 다시 투영하여 오버레이하는 것입니다.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>기타 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
 <ul class="simple">
-<li>Use <code class="docutils literal"><span class="pre">.tfw</span></code> files to georeference to rasters.</li>
-<li>How to save selected features from a layer to a new layer.</li>
-<li>How to view metadata information for layers in QGIS.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">``</span></a>.tfw &#8216;&#8217;파일을 사용하여 래스터를 지리 참조하십시오.</p>
+</li>
+<li><p class="first">선택한 피처를 레이어에서 새 레이어로 저장하는 방법.</p>
+</li>
+<li><p class="first">QGIS에서 레이어의 메타 데이터 정보를 보는 방법.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -249,20 +245,16 @@ together in QGIS.</p>
 <h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
 <p>Natural Earth는 <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/">Admin 0 - Countries</a> 데이터셋을 가지고 있습니다. <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/">countries &lt;http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip&gt;`_를 다운로드 합니다.
 Natural Earth has `Admin 0 - Countries</a> dataset. Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">countries</a></p>
-<p><a class="reference external" href="https://www.ordnancesurvey.co.uk/">UK&#8217;s Ordnance Survey</a> provides open data
-for download. Download the <a class="reference external" href="https://www.ordnancesurvey.co.uk/opendatadownload/products.html">MiniScale raster product</a> for Great
-Britain and extract it to a folder on your computer.</p>
+<p>영국의 Ordnance Survey  &lt;<a class="reference external" href="https://www.ordnancesurvey.co.uk/">https://www.ordnancesurvey.co.uk/</a>&gt;에서는 공개 데이터를 다운로드 할 수 있습니다. &lt;<a class="reference external" href="https://www.ordnancesurvey.co.uk/opendatadownload/products.html">https://www.ordnancesurvey.co.uk/opendatadownload/products.html</a>&gt;에서 영국용 MiniScale 래스터 제품을 다운로드하여 컴퓨터의 폴더에 압축을 푸십시오.</p>
 <div class="admonition note">
 <p class="first admonition-title">주석</p>
-<p class="last">You will need to enter your personal details to be able to download the
-Ordnance Survey dataset.</p>
+<p class="last">데이터 세트를 다운로드 하려면 개인 정보를 입력해야 합니다.</p>
 </div>
-<p>For convenience, you may directly download a copy of the dataset from the link
-below:</p>
-<p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">ne_10m_admin_0_countries.zip</a></p>
+<p>손쉽게 데이터셋을 아래 링크로에서 바로 다운로드하실 수 있습니다.</p>
+<p>&lt;<a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip</a>&gt;에서 <a href="#id1"><span class="problematic" id="id2">`</span></a>ne_10m_admin_0_countries.zip &#8216;을 다운받으십시오.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/minisc_gb.zip">minisc_gb.zip</a> (Contains only the files
 required for this tutorial)</p>
-<p>Data Sources: <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a> <a class="reference internal" href="credits.html#osopendata" id="id2">[OSOPENDATA]</a></p>
+<p>데이터소스: <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a> <a class="reference internal" href="credits.html#osopendata" id="id2">[OSOPENDATA]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
@@ -482,7 +474,7 @@ as the other layer.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      최종 업데이트: Sep 11, 2019<br/>
+      최종 업데이트: Sep 17, 2019<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

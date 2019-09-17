@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basic Vector Styling (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>기본 벡터 스타일링 (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -85,13 +85,13 @@
 <li class="toctree-l1"><a class="reference internal" href="making_a_map.html">지도 만들기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">속성 작업 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">스프레드시트 및 CSV 파일 불러오기 (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Basic Vector Styling (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">기본 벡터 스타일링 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">선의 길이계산과 통계(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">래스터 붙이기 및 자르기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">지형데이터 작업</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">WMS 데이터 작업</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">투영 작업</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">항공사진 지오레퍼런싱 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">디지타이징 맵 데이터</a></li>
@@ -102,8 +102,8 @@
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">점 데이터 보간법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">프로세싱 프레임을 이용한 일괄처리과정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">프로세싱 모델러를 사용하여 복잡한 작업흐름 자동화하기(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
@@ -224,74 +224,82 @@
       
 
   <div class="section" id="basic-vector-styling-qgis3">
-<h1>Basic Vector Styling (QGIS3)<a class="headerlink" href="#basic-vector-styling-qgis3" title="제목 주소">¶</a></h1>
-<p>To create a map, one has to style the GIS data and present it in a form that is visually informative. There are a large number of options available in QGIS to apply different types of symbology to the underlying data. In this tutorial, we will take a text file and apply different data visualization techniques to highlight spatial patterns in the data.</p>
+<h1>기본 벡터 스타일링 (QGIS3)<a class="headerlink" href="#basic-vector-styling-qgis3" title="제목 주소">¶</a></h1>
+<p>지도를 만들기 위해서는 GIS 데이터에 대해 형식을 갖추고 시각적 정보의 형태로 보여주어야 합니다. QGIS에는 원 데이터를 다양한 형태의 기호로 바꿀 수 있는 많은 옵션이 포함되어 있습니다. 여기서는 기초적인 스타일링에 대해 알아볼 것입니다.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
-<p>We will take a CSV file containing the location of all power plants in the world and create a visualization showing distribution of renewable and non-renewable fuels used in these power plants.</p>
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<p>우리는 전 세계 모든 발전소의 위치를 담은 CSV 파일을 가지고 이들 발전소에서 사용되는 재생 가능 연료와 비재생 가능 연료의 분포를 시각화할 것이다.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<h3>기타 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
 <ul class="simple">
-<li>Use expressions to group multiple attribute values into a single category</li>
+<li><p class="first">식을 사용하여 여러 속성 값을 단일 범주로 그룹화하세요.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
-<p><a class="reference external" href="https://www.wri.org">World Resources Institute</a> has compiled a comprehensive, open source database of power plants around the world covering over 30000 plants. Download the <a class="reference external" href="http://datasets.wri.org/dataset/globalpowerplantdatabase">The Global Power Plant Database</a> from the WRI Open Data Portal.</p>
-<p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> has several global vector
-layers. Download the <a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip">10m Physical Vectors - Land</a> containing Land polygons.</p>
-<p>For convenience, you may directly download a copy of the above layers from below:</p>
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+<p>세계 자원 연구소&lt;<a class="reference external" href="https://www.wri.org">https://www.wri.org</a>&gt;`_는 전 세계 30000 개 이상의 발전소를 망라한 종합 오픈 소스 데이터베이스를 작성했다. WRI Open Data Porta&lt;<a class="reference external" href="http://datasets.wri.org/dataset/globalpowerplantdatabase">http://datasets.wri.org/dataset/globalpowerplantdatabase</a>&gt;`에서 글로벌 발전소 데이터베이스 Database를</p>
+<p>&#8216;Natural Earth&lt;<a class="reference external" href="http://naturalearthdata.com">http://naturalearthdata.com</a>&gt;` 에는 몇개의 글로벌 벡터레이어를 가지고 있다. Land polygon이 포함된 10m Physical Vectors를 다운받으세요. &lt;<a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip">https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip</a>&gt;`</p>
+<p>편의성을 위해 아래에서 레이어를 바로 다운받으실 수 있다.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/globalpowerplantdatabasev120">ASAM_shp.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_land.zip">ne_10m_land.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#wri" id="id1">[WRI]</a> <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
+<p>출처 :  <a class="reference internal" href="../credits.html#wri" id="id1">[WRI]</a> <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
 <ol class="arabic simple">
-<li>Unzip both the datasets to a folder on your computer. In the QGIS Browser Panel, locate the directory where you extracted the data. Expand the <code class="docutils literal"><span class="pre">ne_10m_land</span></code> folder and select the <code class="docutils literal"><span class="pre">ne_10m_land.shp</span></code> layer. Drag the layer to the canvas.</li>
+<li><p class="first">두 데이터 세트를 모두 컴퓨터의 폴더에 압축 해제하십시오. QGIS 브라우저 패널에서 데이터를 추출한 디렉터리를 찾으십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>ne_10m_land&#8221; 폴더를 확장하고 <a href="#id3"><span class="problematic" id="id4">``</span></a>ne_10m_land&#8221;를 선택하십시오.&#8221;shp&#8221; 층 레이어를 캔버스로 끌어다 놓으십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/113.png" class="align-center" src="../../_images/113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>You will a new layer <code class="docutils literal"><span class="pre">ne_10m_land</span></code> added to the <span class="guilabel">Layers</span> panel. The global power plant database comes as a CSV file, so we will need to import it. Click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You can also use <code class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">L</span></code> keyboard shortcut.</li>
+<li><p class="first">당신은 &#8220;ne_10m_land&#8221;를 추가할 것이다.레이어스 패널. 글로벌 발전소 데이터베이스는 CSV 파일로 제공되므로, 우리는 그것을 도입해야 할 것이다. 데이터 원본 도구 모음에서 데이터 원본 관리자 열기 버튼을 누르십시오. Ctrl + L 단축키를 사용할 수도 있다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/212.png" class="align-center" src="../../_images/212.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">Data Source Manager</span> window, switch to the <span class="guilabel">Delimited Text</span> tab. Click the <span class="guilabel">...</span> button next to <span class="guilabel">File name</span> and browse to the directory where you extracted the <code class="docutils literal"><span class="pre">globalpowerplantdatabasev120.zip</span></code> file. Select the <code class="docutils literal"><span class="pre">global_power_plant_database.csv</span></code>. QGIS will auto detect the delimiter and geometry fields. Leave the <span class="guilabel">Geometry CRS</span> to the default value of <code class="docutils literal"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS84</span></code>. Click <span class="guilabel">Add</span> followed by <span class="guilabel">Close</span>.</li>
+<li><p class="first">데이터 원본 관리자 창에서 구분된 텍스트 탭으로 전환하십시오. 파일 이름 옆의&#8217; ...&#8217; 버튼을 누르고 globalpowerplantdatabasev120.zip 파일을 추출한 디렉터리를 찾아보십시오. global_power_plant_database.csv를 선택하십시오. QGIS는 구분자와 지오메트리 필드를 자동으로 탐지한다. Geometry CRS를 EPSG:4326 - WGS84의 기본값으로 유지하십시오. 추가를 누른 후 닫기를 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/312.png" class="align-center" src="../../_images/312.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>A new layer <code class="docutils literal"><span class="pre">global_power_plant_database</span></code> will be added to the <span class="guilabel">Layers</span> panel and you will see the points representing the power plants in the canvas. Now we are ready to style both these layers. Click the <span class="guilabel">Open the Layer Styling panel</span> button at the top of the <span class="guilabel">Layers</span> panel.</li>
+<li><p class="first">새 레이어 global_power_plant_database가 레이어 패널에 추가되고, 당신은 캔버스에서 발전소를 나타내는 점을 보게 될 것이다. 이제 우리는 이 두 층을 모두 스타일링할 준비가 되었다. 레이어 패널 상단에 있는 레이어 스타일링 패널 열기 버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/43.png" class="align-center" src="../../_images/43.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>The <span class="guilabel">Layer Styling</span> panel will open on the right. Select the <code class="docutils literal"><span class="pre">ne_10m_land</span></code> layer first. This will be our base layer so we can keep the styling minimalistic so it is not distracting. Click <code class="docutils literal"><span class="pre">Simple</span> <span class="pre">fill</span></code> and scroll down. Select a <span class="guilabel">Fill color</span> as per your liking. Click the drop-down next to <span class="guilabel">Stroke color</span> and select <code class="docutils literal"><span class="pre">Transparent</span> <span class="pre">Stroke</span></code>. This will set the outlines of the land polygons to be transparent. You will see the result of your selection applied immediately to the layer.</li>
+<li><p class="first">오른쪽에서 레이어 스타일링 패널이 열릴 것이다. ne_10m_land 계층을 먼저 선택하십시오. 이는 기본 계층이 될 것이고 그래서 우리는 그것이 산만하지 않도록 최소한의 스타일링을 유지할 수 있을 것이다. 단순 채우기를 누르고 아래로 스크롤하십시오. 원하는 대로 채우기 색을 선택하십시오. 스트로크 색 옆의 드롭다운을 누르고 투명 스트로크를 선택하십시오. 이렇게 되면 육지 폴리곤의 윤곽이 투명해질 것이다. 선택 결과가 계층에 즉시 적용되는 것을 볼 수 있을 것이다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/53.png" class="align-center" src="../../_images/53.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Next select the <code class="docutils literal"><span class="pre">global_power_plant_database</span></code> layer. Click on <code class="docutils literal"><span class="pre">Simple</span> <span class="pre">marker</span></code> and scroll down. Pick a triangle marker.</li>
+<li><p class="first">그런 다음 global_power_plant_database 계층을 선택하십시오. 단순 마커를 클릭하고 아래로 스크롤하십시오. 삼각형 마커를 선택하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/63.png" class="align-center" src="../../_images/63.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>Scroll up and select a <span class="guilabel">Fill color</span> of your liking. A useful cartographic technique is to choose a slightly darker version of the fill-color as the <span class="guilabel">Stroke color</span>. Rather than trying to pick that manually, QGIS provides an expression to control this more precisely. Click the <span class="guilabel">Data defined override</span> button and choose <span class="guilabel">Edit</span>.</li>
+<li><p class="first">위로 스크롤하여 원하는 채우기 색상을 선택하십시오. 유용한 카트로그래픽 기법은 채우기 색상의 약간 어두운 버전을 스트로크 색상으로 선택하는 것이다. QGIS는 이를 수동으로 선택하기 보다는 이를 보다 정확하게 제어하기 위한 표현을 제공한다. Data defined override 버튼을 클릭하고 Edit(편집)을 선택하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/73.png" class="align-center" src="../../_images/73.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Enter the following expression to set the color to be 30% darker shade than the fill color and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">다음 식을 입력하여 채우기 색보다 색이 30% 더 어두운 음영으로 설정하고 확인을 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>darker(@symbol_color, 130)
@@ -301,40 +309,46 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">주석</p>
-<p class="last">Note that this expression is independent of the fill color you have chosen. You will see that this is immensely useful in the following steps where it automatically sets the border color based on the fill color provided.</p>
+<p class="last">이 표현식은 선택한 채우기 색상과 무관하다는 점에 유의하십시오. 제공된 채우기 색상에 따라 테두리 색상을 자동으로 설정하는 다음 단계에서 매우 유용하다는 것을 알게 될 것이다.</p>
 </div>
 <ol class="arabic simple" start="9">
-<li>You will notice that the <span class="guilabel">Data defined override</span> button next to <span class="guilabel">Stroke color</span> has turned yellow - indicating than this property is controlled by an override. A single symbol rendering of the power plants layer is not very useful. It doesn&#8217;t convey much information except the locations of the power plants. Let&#8217;s use a different renderer to make it more useful. Click the <span class="guilabel">Symbology</span> drop-down and select <code class="docutils literal"><span class="pre">Categorized</span></code> renderer.</li>
+<li><p class="first">스트로크 색 옆에 있는 데이터 정의 오버라이드 버튼이 노란색으로 바뀌었다는 것을 알 수 있을 것이다. 이 속성이 오버라이드에 의해 제어되는 것보다 표시된다. 발전소 층의 단일 기호 렌더링은 그다지 유용하지 않다. 발전소의 위치를 제외하고는 많은 정보를 전달하지 않는다. 다른 렌더러로 좀 더 유용하게 쓰자. 심볼로지 드롭다운을 누르고 범주화된 렌더러를 선택하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/93.png" class="align-center" src="../../_images/93.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>The <code class="docutils literal"><span class="pre">global_power_plant_database</span></code> layer contains an attribute indicating the primary fuel used in each power plant. We can create a style where each unique fuel type is shown in a different color. Select <code class="docutils literal"><span class="pre">primary_fuel</span></code> as the <span class="guilabel">Column</span>. Click <span class="guilabel">Classify</span>. You will multiple categories appear and the map rendering change accordingly.</li>
+<li><p class="first">global_power_plant_database 레이어에는 각 발전소에서 사용되는 1차 연료를 나타내는 속성이 포함되어 있다. 우리는 각각의 독특한 연료 유형을 다른 색으로 보여주는 스타일을 만들 수 있다. Primary_Fuel을 Column으로 선택하십시오. 분류를 누르십시오. 여러 범주가 나타나고 그에 따라 지도 렌더링이 변경될 것입니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/103.png" class="align-center" src="../../_images/103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>While a Categorized view is useful, this layer contains too-many categories for one to meaningfully interpret the map. A better approach would be to group certain type of fuel categories and reduce the number of classes. Let&#8217;s try to create 3 categories - <strong>Renewable fuel</strong>, <strong>Non-renewable fuel</strong> and <strong>Other</strong>. Select <code class="docutils literal"><span class="pre">Rule-based</span></code> renderer. Select all but one rules by holding the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and clicking on each row. Once selected, click the <span class="guilabel">Remove selected rules</span> button to delete them.</li>
+<li><p class="first">범주화된 보기는 유용하지만, 이 레이어층은 지도를 의미 있게 해석하기에는 너무 많은 범주를 포함하고 있다. 더 나은 접근법은 특정 유형의 연료 범주를 분류하고 등급의 수를 줄이는 것이다. 3 가지 범주를 만들어보자. - 재생 가능한 연료, 비 재생 가능한 연료 및 기타. 규칙 기반 렌더러를 선택하십시오. Ctrl 키를 누른 채 각 행을 클릭하여 규칙을 하나만 모두 선택하십시오. 선택한 후 선택한 규칙 제거 버튼을 클릭하여 삭제하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/114.png" class="align-center" src="../../_images/114.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>Select the remaining rule and click <span class="guilabel">Edit current rule</span>.</li>
+<li><p class="first">나머지 규칙을 선택하고 현재 규칙 편집을 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/123.png" class="align-center" src="../../_images/123.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>Enter <code class="docutils literal"><span class="pre">Renewable</span> <span class="pre">fuel</span></code> as the <span class="guilabel">Label</span>. Click the <span class="guilabel">Expression</span> button next to <span class="guilabel">Filter</span>.</li>
+<li><p class="first">재생 가능한 연료를 라벨로 입력하십시오. 필터 옆에 있는 식 단추를 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/133.png" class="align-center" src="../../_images/133.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>In the <span class="guilabel">Expression String Builder</span> dialog, enter the following expression and click <span class="guilabel">OK</span>. Here we are grouping multiple renewable energy categories into a single category.</li>
+<li><p class="first">표현식 문자열 작성기 대화 상자에서 다음 식을 입력하고 확인을 누르십시오. 여기서는 복수의 재생 에너지 범주를 단일 범주로 분류하고 있다.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&quot;primary_fuel&quot; IN (&#39;Biomass&#39;, &#39;Geothermal&#39;, &#39;Hydro&#39;, &#39;Solar&#39;, &#39;Wind&#39;, &#39;Storage&#39;, &#39;Wave and Tidal&#39;)
@@ -344,34 +358,39 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">주석</p>
-<p class="last">The types of fuel chosen for renewable vs. non-renewable categories is based on <a class="reference external" href="https://en.wikipedia.org/wiki/Renewable_energy">Wikipedia</a>. There are alternate definitions and classifications that may not match what is chosen here.</p>
+<p class="last">재생 가능 대 비갱신 범주를 위해 선택된 연료의 유형은 &#8216;위키피디아&lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Renewable_energy">https://en.wikipedia.org/wiki/Renewable_energy</a>&gt;&#8217;_. 에 기초한다. 여기서 선택한 것과 일치하지 않을 수 있는 대체 정의와 분류가 있다</p>
 </div>
 <ol class="arabic simple" start="15">
-<li>Scroll down and click <span class="guilabel">Simple marker</span>. Choose an appropriate <span class="guilabel">Fill color</span>. Once done, click the <span class="guilabel">Back</span> button.</li>
+<li><p class="first">아래로 스크롤하여 단순 마커를 누르십시오. 적절한 채우기 색상을 선택하십시오. 완료되면 뒤로 버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/153.png" class="align-center" src="../../_images/153.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>You will see a single rule being applied to the layer for the <span class="guilabel">Renewable fuel</span> category. Right-click the row and choose <span class="guilabel">Copy</span>. Right-click again and choose <span class="guilabel">Paste</span>.</li>
+<li><p class="first">재생가능한 연료 범주에 대한 단일 규칙이 적용되는 것을 볼 수 있다. 행을 마우스 오른쪽 버튼으로 누르고 복사를 선택하십시오. 다시 마우스 오른쪽 버튼을 클릭하고 Paste(붙여넣기)를 선택하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/163.png" class="align-center" src="../../_images/163.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>A copy of the existing rule will be added. Select the newly added row and click <span class="guilabel">Edit current rule</span>.</li>
+<li><p class="first">기존 규칙의 사본이 추가될 것이다. 새로 추가된 행을 선택하고 현재 규칙 편집을 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/173.png" class="align-center" src="../../_images/173.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Enter <code class="docutils literal"><span class="pre">Non-renewable</span> <span class="pre">fuel</span></code> as the <span class="guilabel">Label</span>. Click the <span class="guilabel">Expression</span> button next to <span class="guilabel">Filter</span>.</li>
+<li><p class="first">재생 불가능한 연료를 라벨로 입력하십시오. 필터 옆에 있는 식 단추를 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/182.png" class="align-center" src="../../_images/182.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>In the <span class="guilabel">Expression String Builder</span> dialog, enter the following expression and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">표현식 문자열 작성기 대화 상자에서 다음 식을 입력하고 확인을 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><blockquote>
@@ -382,37 +401,43 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <img alt="../../_images/192.png" class="align-center" src="../../_images/192.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li>Scroll down and click <span class="guilabel">Simple marker</span>. Choose an appropriate <span class="guilabel">Fill color</span>. Once done, click the <span class="guilabel">Back</span> button.</li>
+<li><p class="first">아래로 스크롤하여 단순 마커를 누르십시오. 적절한 채우기 색상을 선택하십시오. 완료되면 뒤로 버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/201.png" class="align-center" src="../../_images/201.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li>Repeat the Copy/Paste process to add a third rule. Select it and click <span class="guilabel">Edit current rule</span>.</li>
+<li><p class="first">복사/붙여넣기 프로세스를 반복하여 세 번째 규칙을 추가하십시오. 이 옵션을 선택하고 현재 규칙 편집을 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/213.png" class="align-center" src="../../_images/213.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li>Enter <code class="docutils literal"><span class="pre">Other</span></code> as the <span class="guilabel">Label</span>. Choose <span class="guilabel">Else - Catch all for other features</span> instead of a <span class="guilabel">Filter</span>. This will ensure that any category missed in the previous 2 rules, will be styled by this rule.  Scroll down and click <span class="guilabel">Simple marker</span>. Choose an appropriate <span class="guilabel">Fill color</span>. Once done, click the <span class="guilabel">Back</span> button.</li>
+<li><p class="first">나머지들을 레이블로 입력하십시오. 필터 대신 다른 형상에 대해 모두 캡처 - 를 선택하십시오. 이는 이전 2개 규칙에서 누락된 범주가 이 규칙에 의해 스타일링됨을 보장한다. 아래로 스크롤하여 단순 마커를 누르십시오. 적절한 채우기 색상을 선택하십시오. 완료되면 뒤로 버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/221.png" class="align-center" src="../../_images/221.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
-<li>The re-categorization is complete now. You will see a much cleaner view that shows the distribution of renewable vs. non-renewable fuel sources used by power plants and their distribution across countries. This however doesn&#8217;t give a complete picture. We can add another variable to the styling. Rather than displaying all markers with uniform size, we can show the sizes proportional to the power generation capacity of each plant. This cartography technique is called <em>Multivariate mapping</em>. Right-click the <code class="docutils literal"><span class="pre">Renewable</span> <span class="pre">fuel</span></code> rule and select <span class="guilabel">Change Size</span>.</li>
+<li><p class="first">재분류는 완료되었다. 발전소에서 사용하는 재생 가능 대 비 재생 가능 연료 공급원의 분포와 그 공급원의 국가 간 분포를 보여주는 훨씬 더 깨끗한 광경을 보게 될 것이다. 그러나 이것은 완전한 그림을 보여주지 못한다. 스타일링에 다른 변수를 추가할 수 있다. 크기가 균일한 모든 마커를 표시하기보다는 각 발전소의 발전 용량에 비례하는 크기를 표시할 수 있다. 이 지도 제작 기법은 다변량 지도법이라고 불린다. 재생 가능한 연료 규칙을 마우스 오른쪽 버튼으로 누르고 크기 변경을 선택하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/231.png" class="align-center" src="../../_images/231.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li>Click the <span class="guilabel">Data defined override</span> button next to <span class="guilabel">Size</span>. Select <span class="guilabel">Edit</span>.</li>
+<li><p class="first">Size(크기) 옆에 있는 Data defined override(데이터 정의 재정의) 버튼을 클릭하십시오. 편집을 선택하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/241.png" class="align-center" src="../../_images/241.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
-<li>As the power generation capacity varies a lot among our dataset, an effective way to get a a small range for size is using the <code class="docutils literal"><span class="pre">log10</span></code> function. You can experiment with different expressions to arrive at what works best for your preferred visualization. Enter the following expression and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">데이터셋마다 발전 용량이 많이 다르기 때문에 크기에 따라 작은 범위를 얻는 효과적인 방법은 log10 기능을 사용하는 것이다. 원하는 시각화에 가장 적합한 것을 얻기 위해 다양한 표현으로 실험할 수 있다. 다음 식을 입력하고 확인을 누르십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>log10(&quot;capacity_mw&quot;) + 1
@@ -421,19 +446,22 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <img alt="../../_images/251.png" class="align-center" src="../../_images/251.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
-<li>Repeat the same process for other rules.</li>
+<li><p class="first">다른 규칙에 대해 동일한 프로세스를 반복하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/261.png" class="align-center" src="../../_images/261.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
-<li>Once satisfied, you can close the <span class="guilabel">Layer Styling panel</span>.</li>
+<li><p class="first">일단 만족하면, 레이어 스타일링 패널을 닫으셔도 됩니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/271.png" class="align-center" src="../../_images/271.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
-<li>Looking at our final visualization, you can immediately see the patterns in the dataset. For example, over Europe there are more power plants that use renewable energy source, but they are lower capacity than the plants that use non-renewable energy source.</li>
+<li><p class="first">최종 시각화를 보면 데이터 세트의 패턴을 즉시 볼 수 있다. 예를 들어, 유럽에는 재생 에너지원을 사용하는 발전소가 더 많지만, 비재생 에너지원을 사용하는 발전소에 비해 용량이 낮다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/281.png" class="align-center" src="../../_images/281.png" />
@@ -463,7 +491,7 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      최종 업데이트: Sep 11, 2019<br/>
+      최종 업데이트: Sep 17, 2019<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

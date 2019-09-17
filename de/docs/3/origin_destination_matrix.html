@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Locating Nearest Facility with Origin-Destination Matrix (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Lokalisierung der am nächsten gelegenen Einrichtung mit einer Quelle-Ziel-Matrix (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Komplexe Arbeitsabläufe mit Hilfe der Verarbeitungsmodellierung (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automatisierung der Kartenerstellung mit dem Drucklayout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Einfache Netzwerkvisualisierung und Routing (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Lokalisierung der am nächsten gelegenen Einrichtung mit einer Quelle-Ziel-Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Using the QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
@@ -224,14 +224,14 @@
       
 
   <div class="section" id="locating-nearest-facility-with-origin-destination-matrix-qgis3">
-<h1>Locating Nearest Facility with Origin-Destination Matrix (QGIS3)<a class="headerlink" href="#locating-nearest-facility-with-origin-destination-matrix-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>In the previous tutorial, <a class="reference internal" href="basic_network_analysis.html"><em>Einfache Netzwerkvisualisierung und Routing (QGIS3)</em></a>, we learnt how to build a network and calculate the shortest path between 2 points. We can apply that technique for many different types of network-based analysis. One such application is to compute <strong>Origin-Destination Matrix</strong> or <strong>OD Matrix</strong>. Given a set of origin points and another set of destination points, we can calculate shortest path between each origin-destination pairs and find out the travel distance/time between them. Such analysis is useful to locate the closest facility to any given point. For example, a logistics company may use this analysis to find the closest warehouse to their customers to optimize delivery routes. Here we use Distance Matrix algorithm from <strong>QGIS Network Analysis Toolbox (QNEAT3)</strong> plugin to find the nearest health facility to each address in the city.</p>
+<h1>Lokalisierung der am nächsten gelegenen Einrichtung mit einer Quelle-Ziel-Matrix (QGIS3)<a class="headerlink" href="#locating-nearest-facility-with-origin-destination-matrix-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
+<p>Im vorhergehenden Tutorial <a class="reference internal" href="basic_network_analysis.html"><em>Einfache Netzwerkvisualisierung und Routing (QGIS3)</em></a> lernten wir, wie man ein Netzwerk erstellt und die kürzeste Verbindung zwischen 2 Punkten bestimmt. Wir können diese Technik auf viele verschiedene Arten netzwerkbasierter Analysen anwenden. Eine Anwendung ist die Berechnung einer <strong>Quelle-Ziel-Matrix</strong> oder <strong>QZ Matrix</strong>. Angenommen wir haben eine Menge an Quell-Punkten und eine Menge an Ziel-Punkten, dann können wir für jedes Quelle-Ziel Paar die kürzeste oder schnellste Verbindung ermitteln. So eine Analyse ist sinnvoll, um die nächstgelegene Einrichtung zu jedem gegeben Punkt zu finden. Eine Logistikfirma kann diese Analyse z.B. nutzen, um das am nächsten gelegende Lager zu ihren Kunden zu bestimmen und so die Lieferrouten optimieren. Wir verenden hier den Distanzmatrix Algorithmus aus dem <strong>QGIS Network Analysis Toolbox (QNEAT3)</strong> plugin um die am nächsten liegende Gesundheitseinrichtung zu jeder Adresse in der Stadt zu bestimmen.</p>
 <div class="admonition note">
 <p class="first admonition-title">Bemerkung</p>
-<p class="last">This tutorial shows how to use your own network data to compute an origin-destination matrix. If you do not have your own network data, you can use <strong>ORS Tools Plugin</strong> and algorithm <span class="menuselection">ORS Tools ‣ Matrix ‣  Matrix from Layers</span> to do the similar analysis using OpenStreetMap data. See <a class="reference internal" href="service_area_analysis.html"><em>Service Area Analysis using Openrouteservice (QGIS3)</em></a> to learn how to use ORS Tools plugin.</p>
+<p class="last">Dieses Tutorial zeigt, wie man eigene Netzwerkdaten zur Erstellung einer Quelle-Ziel-Matrix verwenden kann. Wenn man keine eigene Netzwerkdaten hat, kann das <strong>ORS Tools Plugin</strong> verwenden. Die Analyse erfolgt dann mit Daten von OpenStreetMap <span class="menuselection">ORS Tools ‣ Matrix ‣  Matrix from Layers</span>. Unter <a class="reference internal" href="service_area_analysis.html"><em>Service Area Analysis using Openrouteservice (QGIS3)</em></a> findet man weitere Informationen zur Verwendung des ORS Tools plugin.</p>
 </div>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
+<h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
 <p>We will take 2 layers for Washington DC - one with points representing addresses and another with points representing mental health facilities - and find out the facility with the least travel distance from each address.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
@@ -500,7 +500,7 @@ from &#39;Output OD Matrix&#39; group by origin_id
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Sep 11, 2019.<br/>
+      Zuletzt aktualisiert am Sep 17, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
