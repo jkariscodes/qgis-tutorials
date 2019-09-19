@@ -112,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Noțiuni de Bază Despre Programarea în Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Construirea unui Plugin Python (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Utilizarea Funcțiilor în Expresiile Python Personalizate (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Scriptare în Python pentru Cadrul de Procesare (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Rularea și programarea Activităților de Prelucrare QGIS</a></li>
@@ -254,47 +255,47 @@
 <li><p class="first">Deschideți QGIS și mergeți la <span class="menuselection">Straturi ‣ Adăugare Strat Vectorial</span>. Navigați în locația unde s-au extras fișierele, apoi selectați <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code>. Clic pe <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1190.png" class="align-center" src="../_images/1190.png" />
+<img alt="../_images/1192.png" class="align-center" src="../_images/1192.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Vom crea acum o hartă în QGIS care arată și se comportă în harta web exact așa cum ne-ar plăcea. Pluginul <code class="docutils literal"><span class="pre">qgis2web</span></code> va folosi replicarea setărilor QGIS și va crea automat harta web, fără să avem habar despre bibliotecile de mapare web. Când un utilizator dă clic pe marcajul unui aeroport, dorim ca o fereastră informativă să afișeze informații utile despre locația respectivă. Această informație este deja prezentă în tabela de atribute a straturilor <code class="docutils literal"><span class="pre">ne_10m_airports</span></code>. Faceți clic dreapta pe stratul <code class="docutils literal"><span class="pre">ne_10m_airports</span></code>, apoi selectați: guilabel:<cite>Properties</cite>.</p>
 </li>
 </ol>
-<img alt="../_images/2144.png" class="align-center" src="../_images/2144.png" />
+<img alt="../_images/2147.png" class="align-center" src="../_images/2147.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Mergeți la fila: guilabel:<cite>Câmpurilor</cite>. Observați diferitele atribute existente în strat. Unele dintre acestea nu sunt relevante pentru utilizatorii hărții noastre web, de aceea vom alege să le ascundem. Vom păstra câmpurile <code class="docutils literal"><span class="pre">type</span></code>, <code class="docutils literal"><span class="pre">name</span></code>, <code class="docutils literal"><span class="pre">iata_code</span></code>, <code class="docutils literal"><span class="pre">wikipedia</span></code> și le vom ascunde pe celelalte. Faceți clic pe butonul de <span class="guilabel">Editare text</span> din coloana de <span class="guilabel">Editare control grafic</span> a câmpului <code class="docutils literal"><span class="pre">`scalerank</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/382.png" class="align-center" src="../_images/382.png" />
+<img alt="../_images/383.png" class="align-center" src="../_images/383.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">În dialogul de <span class="guilabel">Editare a Proprietăților Controlului Grafic</span>, alegeți <code class="docutils literal"><span class="pre">Ascuns</span></code> pentru tip. Faceți clic pe <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/460.png" class="align-center" src="../_images/460.png" />
+<img alt="../_images/461.png" class="align-center" src="../_images/461.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">În mod similar, setați tipul Ascuns și pentru alte câmpuri. Așa cum poate ați observat, există și alte tipuri de câmpuri disponibile care ne permit să setăm modul în care arată câmpurile pentru utilizatorii hărții noastre. Faceți clic pe <span class="guilabel">Editare Control Grafic</span> pentru câmpul <code class="docutils literal"><span class="pre">wikipedia</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/561.png" class="align-center" src="../_images/561.png" />
+<img alt="../_images/562.png" class="align-center" src="../_images/562.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Selectați <code class="docutils literal"><span class="pre">Web</span> <span class="pre">View</span></code> pentru tipul câmpului. Acest tip indică faptul că valoarea câmpului reprezintă o adresă URL.</p>
 </li>
 </ol>
-<img alt="../_images/658.png" class="align-center" src="../_images/658.png" />
+<img alt="../_images/659.png" class="align-center" src="../_images/659.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">De asemenea, putem folosi coloana guilabel:<cite>Alias</cite> pentru a indica un nume alternativ pentru câmpuri, fără a schimba tabelul de date care stă la bază. Acest lucru este util în a oferi utilizatorilor hărții nume pentru câmpuri ușor de utilizat. Adăugați aliasurile dorite, apoi faceți clic pe <span class="guilabel">Ok</span>.</p>
 </li>
 </ol>
-<img alt="../_images/757.png" class="align-center" src="../_images/757.png" />
+<img alt="../_images/758.png" class="align-center" src="../_images/758.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Înapoi în fereastra principală QGIS, alegeți instrumentul de <span class="guilabel">Identificare</span>, apoi faceți clic pe oricare punct. Panoul de guilabel:<cite>Identificare rezultate</cite> va afișa atributele formatate frumos, având adăugate noile pseudonime. Veți observa că în rezultate nu apar câmpurile ascunse.</p>
 </li>
 </ol>
-<img alt="../_images/855.png" class="align-center" src="../_images/855.png" />
+<img alt="../_images/856.png" class="align-center" src="../_images/856.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Deși această metodă este utilă, există o limitare. Nu putem schimba ordinea câmpurilor. O modalitate de a depăși această limitare o constituie crearea unui <code class="docutils literal"><span class="pre">Câmp</span> <span class="pre">Virtual</span></code>. În cazul nostru, dacă vrem ca la sfârșitul ferestrei info să apară câmpul <code class="docutils literal"><span class="pre">type</span></code>, putem adăuga un nou câmp virtual și să ascundem câmpul <code class="docutils literal"><span class="pre">type</span></code> original. Totodată, putem folosi și o expresie pentru a formata mai bine valorile tipului. Faceți clic dreapta pe stratul <code class="docutils literal"><span class="pre">ne_10m_airports</span></code>, apoi alegeți <span class="guilabel">Proprietăți</span>. Accesați fila <span class="guilabel">Câmpurilor</span> și faceți clic pe <span class="guilabel">Calculatorul de câmpuri</span>.</p>
 </li>
 </ol>
-<img alt="../_images/954.png" class="align-center" src="../_images/954.png" />
+<img alt="../_images/955.png" class="align-center" src="../_images/955.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Dat fiind că numele câmpurilor trebuie să fie unice, folosiți <code class="docutils literal"><span class="pre">Type</span></code> ca nume pentru noul câmp. Alegeți <code class="docutils literal"><span class="pre">Text</span> <span class="pre">(Șir)</span></code> pentru tipului câmpului, și o lungime de <code class="docutils literal"><span class="pre">25</span></code> de caractere. Câmpul <code class="docutils literal"><span class="pre">tip</span></code> conține valorile <code class="docutils literal"><span class="pre">mic</span></code>, <code class="docutils literal"><span class="pre">mijlociu</span></code>, <code class="docutils literal"><span class="pre">mare</span></code> etc. Putem adăuga o expresie care va schimba capitalizarea cuvintelor din cadrul frazelor și va adăuga cuvântul <em>aeroport</em> pentru o mai bună lizibilitate. Introduceți următoarea expresie în casetă: guilabel: <cite>Expresie</cite> și faceți clic pe <span class="guilabel">OK</span>.</p>
 </li>
@@ -302,22 +303,22 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>concat( title(&quot;type&quot;), &#39; Airport&#39;)
 </pre></div>
 </div>
-<img alt="../_images/1053.png" class="align-center" src="../_images/1053.png" />
+<img alt="../_images/1054.png" class="align-center" src="../_images/1054.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Acum că avem o imagine mult mai bună asupra câmpului <code class="docutils literal"><span class="pre">Type</span></code>, putem stabili valoarea <code class="docutils literal"><span class="pre">Hidden</span></code> pentru coloana guilabel:<cite>Edit Widget</cite> a câmpului <code class="docutils literal"><span class="pre">type</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1191.png" class="align-center" src="../_images/1191.png" />
+<img alt="../_images/1193.png" class="align-center" src="../_images/1193.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Utilizați instrumentul de <span class="guilabel">Identificare</span> pentru a verifica dacă atributele arată conform așteptărilor.</p>
 </li>
 </ol>
-<img alt="../_images/1252.png" class="align-center" src="../_images/1252.png" />
+<img alt="../_images/1253.png" class="align-center" src="../_images/1253.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Haideți să stilizăm stratul pentru a-l face mai atractiv și mai informativ din punct de vedere vizual. Faceți clic dreapta pe stratul <code class="docutils literal"><span class="pre">ne_10m_airports</span></code>, apoi selectați fila <span class="guilabel">Proprietăți</span>. Accesați fila <span class="guilabel">Stilului</span>. Alegeți stilul de organizare pe <code class="docutils literal"><span class="pre">Categorii</span></code>, în funcție de guilabel:<cite>Coloana</cite> <code class="docutils literal"><span class="pre">Type</span></code>. Faceți clic pe <span class="guilabel">Clasificare</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1351.png" class="align-center" src="../_images/1351.png" />
+<img alt="../_images/1352.png" class="align-center" src="../_images/1352.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Veți vedea că pentru fiecare tip de aeroport se va asigna câte un cerculeț, diferit colorat. Având în vedere scopul acestui tutorial, vom restrânge harta la aeroporturile civile. Țineți apăsată tasta <code class="kbd docutils literal"><span class="pre">Ctrl</span></code>, apoi selectați toate categoriile de aeroporturi militare. O dată încheiată selecția, faceți clic pe: guilabel:<cite>Ștergere</cite>.</p>
 </li>
@@ -327,42 +328,42 @@
 <li><p class="first">În afară de atribuirea unor culori diferite categoriei, putem schimba mărimea simbolului, pentru a ajuta utilizatorii să distingă între diferitele tipuri de aeroporturi. Faceți clic dreapta pe o categorie, apoi selectați <span class="guilabel">Modificare dimensiune</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1547.png" class="align-center" src="../_images/1547.png" />
+<img alt="../_images/1548.png" class="align-center" src="../_images/1548.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Setați valoarea guilabel:<cite>Dimensiunii</cite> la <code class="docutils literal"><span class="pre">3</span></code> pentru categoria <code class="docutils literal"><span class="pre">Large</span> <span class="pre">Airport</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1642.png" class="align-center" src="../_images/1642.png" />
+<img alt="../_images/1643.png" class="align-center" src="../_images/1643.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">În mod similar, setați valoarea guilabel:<cite>Dimensiunii</cite> la <code class="docutils literal"><span class="pre">2</span></code> pentru <code class="docutils literal"><span class="pre">Mid</span> <span class="pre">Airport</span></code> și la <code class="docutils literal"><span class="pre">1</span></code> pentru <code class="docutils literal"><span class="pre">Small</span> <span class="pre">Airport</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1739.png" class="align-center" src="../_images/1739.png" />
+<img alt="../_images/1740.png" class="align-center" src="../_images/1740.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Pentru o hartă completă, trebuie să etichetați fiecare aeroport. Accesați fila <span class="guilabel">Etichetelor</span> din dialogul <span class="guilabel">Proprietăți</span>. Selectați <code class="docutils literal"><span class="pre">Arată</span> <span class="pre">etichetele</span> <span class="pre">pentru</span> <span class="pre">acest</span> <span class="pre">strat</span></code>, apoi alegeți valoarea <code class="docutils literal"><span class="pre">iata_code</span></code> pentru <span class="guilabel">Etichetare cu</span>. De asemenea, vom seta opțiunea de <span class="guilabel">Randare</span>, în așa fel încât etichetele să apară doar atunci când utilizatorul  efectuează o mărire suficientă. Bifați <span class="guilabel">Vizibilitate în funcție de scară&#8217; în cadrul :guilabel:`Opțiunilor de etichetare&#8217;. Introduceți ``1`</span> ca scară <span class="guilabel">Minimă</span> și <code class="docutils literal"><span class="pre">10000000</span></code> ca scară maximă. Această setare va afișa etichetele numai după ce utilizatorul a mărit mai mult de scara <code class="docutils literal"><span class="pre">1:10000000</span></code> și va fi vizibil până la scara <code class="docutils literal"><span class="pre">1:1</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1839.png" class="align-center" src="../_images/1839.png" />
+<img alt="../_images/1840.png" class="align-center" src="../_images/1840.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Întrucât, pentru a descrie aeroporturile, folosim cerculețe, trebuie să ne asigurăm că etichetele nu se suprapun peste ele. Accesați fila de <span class="guilabel">Poziționare</span> din dialogul <span class="guilabel">Etichetelor</span>, apoi setați <span class="guilabel">Poziționarea</span> pe <code class="docutils literal"><span class="pre">Cartografică</span></code>. Alegeți pentru <span class="guilabel">Distanța decalajului</span> valoarea <code class="docutils literal"><span class="pre">Din</span> <span class="pre">limitele</span> <span class="pre">simbolui</span></code>. Faceți clic pe <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1934.png" class="align-center" src="../_images/1934.png" />
+<img alt="../_images/1935.png" class="align-center" src="../_images/1935.png" />
 <ol class="arabic simple" start="20">
 <li><p class="first">Harta noastră este gata acum. Este un moment bun pentru a ne salva munca. Mergeți la <span class="menuselection">Proiect ‣ Salvare</span>.  Introduceți <code class="docutils literal"><span class="pre">Aeroporturi</span></code> la denumirea proiectului.</p>
 </li>
 </ol>
-<img alt="../_images/2027.png" class="align-center" src="../_images/2027.png" />
+<img alt="../_images/2028.png" class="align-center" src="../_images/2028.png" />
 <ol class="arabic simple" start="21">
 <li><p class="first">Acum suntem gata să exportăm proiectul sub forma unei hărți web. Instalați plugin-ul <code class="docutils literal"><span class="pre">qgis2web</span></code> mergând la <span class="menuselection">Plugin-uri ‣ Gestionare și Instalare Plugin</span> (Parcurgeți <a class="reference internal" href="using_plugins.html"><em>Utilizarea Plugin-urilor</em></a> pentru mai multe detalii despre instalarea plugin-urilor în QGIS). O dată ce plugin-ul este instalat, mergeți la <span class="menuselection">Web ‣ qgis2web ‣ Creează o hartă web</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2145.png" class="align-center" src="../_images/2145.png" />
+<img alt="../_images/2148.png" class="align-center" src="../_images/2148.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">În fereastra dialogului de <span class="guilabel">Exportare într-o hartă web</span>, bifați opțiunea de <span class="guilabel">Adăugare a listei de straturi</span> din panoul de sub secțiunea <span class="guilabel">Aspectului</span>. De asemenea, selectați <code class="docutils literal"><span class="pre">ne_10m_airports:iata_code</span></code> ca și câmp de <span class="guilabel">Căutare a etichetei</span>. Bifați <span class="guilabel">Afișarea unui pop-up la momentul trecerii pe deasupra</span> pentru a permite afișarea ferestrelor informative. Putem de asemenea să setăm o hartă de bază, în așa fel încât utilizatorii să aibă mai multe informații contextuale la momentul inspectării stratului aeroporturilor. Selectați <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">B&amp;W</span></code> pentru a utiliza o hartă de bază tematică, în alb și negru, cu ajutorul datelor OpenStreetMap. De asemenea, puteți alege între bibliotecile de cartografiere web <code class="docutils literal"><span class="pre">OpenLayers</span></code> și <code class="docutils literal"><span class="pre">Leaflet</span></code>. Pentru acest tutorial vom folosi <code class="docutils literal"><span class="pre">OpenLayers</span></code>. Faceți clic pe <span class="guilabel">Actualizarea vederii`</span>, pentru a înțelege cum va arăta harta exportată. Înainte de a face exportul real, trebuie să stabilim <span class="guilabel">Folderul de exportare</span>. Puteți selecta un dosar după dorință, apoi acționați butonul <span class="guilabel">Export</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2228.png" class="align-center" src="../_images/2228.png" />
+<img alt="../_images/2229.png" class="align-center" src="../_images/2229.png" />
 <ol class="arabic simple" start="23">
 <li><p class="first">Odată ce exportul este finalizat, se va deschide navigatorul implicit al calculatorului dvs., în care se va afișa harta interactivă.</p>
 </li>
@@ -372,7 +373,7 @@
 <li><p class="first">De acum, harta dvs. web este gata pentru publicare.</p>
 </li>
 </ol>
-<img alt="../_images/2423.png" class="align-center" src="../_images/2423.png" />
+<img alt="../_images/2424.png" class="align-center" src="../_images/2424.png" />
 <ol class="arabic simple" start="25">
 <li><p class="first">Pluginul <code class="docutils literal"><span class="pre">qgis2web</span></code> are multe limitări, comparativ cu puternicele biblioteci de mapare web <code class="docutils literal"><span class="pre">OpenLayers</span></code> și <code class="docutils literal"><span class="pre">Leaflet</span></code>. Acest procedeu constituie un punct de plecare în procesul de mapare web, care va economisi timp prețios prin realizarea unui șablon personalizabil de hartă web. Pentru a evidenția faptul că rezultatul acestui proces poate fi ușor modificat pentru a se potrivi cerințelor dvs. - vom face o simplă modificare a hărții web, introducând efectul de zoom  către un anumit aeroport, la momentul încărcării inițiale a hărții. Pe calculatorul dvs., accesați directorul în care a fost exportată harta web. Localizați folderul <code class="docutils literal"><span class="pre">resources</span></code>, apoi deschideți fișierul <code class="docutils literal"><span class="pre">qgis2web.js</span></code> într-un editor de text.</p>
 </li>
@@ -400,7 +401,7 @@
 <li><p class="first">În mod similar, Google oferă, de asemenea, un serviciu de stocare în cloud denumit &#8216;Google Cloud Storage&#8217; &lt;<a class="reference external" href="https://cloud.google.com/storage/">https://cloud.google.com/storage/</a>&gt; &#8216;_. După ce ați creat un cont și ați activat facturarea, puteți să creați o unitate de stocare / bucket în care să încărcați obiectele. În unitatea de stocare creați un sub-folder cu acces public, similar cu Amazon. Harta rezultată poate fi vizualizată la <a class="reference external" href="https://storage.googleapis.com/qgis-tutorials/qgis2web/index.html">https://storage.googleapis.com/qgis-tutorials/qgis2web/index.html</a></p>
 </li>
 </ol>
-<img alt="../_images/2915.png" class="align-center" src="../_images/2915.png" />
+<img alt="../_images/2916.png" class="align-center" src="../_images/2916.png" />
 </div>
 </div>
 
@@ -426,7 +427,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Sep 17, 2019.<br/>
+      Last updated on Sep 19, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

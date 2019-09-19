@@ -111,6 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Beginnen met programmeren in Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Algoritmes van Processing uitvoeren via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Een plug-in in Python bouwen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Aangepaste Python expressie-functies gebruiken (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Python-scripts schrijven voor framework Processing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Taken voor QGIS uitvoeren en in schema zetten</a></li>
@@ -248,42 +249,42 @@
 <li><p class="first">Open QGIS als u de gegevens eenmaal hebt gedownload. Ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Vectorlaag toevoegen...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1192.png" class="align-center" src="../_images/1192.png" />
+<img alt="../_images/1194.png" class="align-center" src="../_images/1194.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Klik op <span class="guilabel">Bladeren</span> en navigeer naar de map waar u de gegevens heeft opgeslagen.</p>
 </li>
 </ol>
-<img alt="../_images/2146.png" class="align-center" src="../_images/2146.png" />
+<img alt="../_images/2149.png" class="align-center" src="../_images/2149.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Zoek het gedownloade zip-bestand <cite>ne_10m_populated_places_simple.zip</cite>. U hoeft het bestand niet uit te pakken. QGIS heeft de mogelijkheid om zip-bestanden direct in te lezen. Selecteer het bestand en klik op <span class="guilabel">Openen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/383.png" class="align-center" src="../_images/383.png" />
+<img alt="../_images/384.png" class="align-center" src="../_images/384.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">De geselecteerde laag zal nu worden geladen in QGIS en u zult vele punten zien die de bewoonde plaatsen in de wereld weergeven.</p>
 </li>
 </ol>
-<img alt="../_images/461.png" class="align-center" src="../_images/461.png" />
+<img alt="../_images/462.png" class="align-center" src="../_images/462.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Klik met rechts op de laag en selecteer <span class="guilabel">Open attributentabel</span>.</p>
 </li>
 </ol>
-<img alt="../_images/562.png" class="align-center" src="../_images/562.png" />
+<img alt="../_images/563.png" class="align-center" src="../_images/563.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Verken de verschillende attributen en hun waarden.</p>
 </li>
 </ol>
-<img alt="../_images/659.png" class="align-center" src="../_images/659.png" />
+<img alt="../_images/660.png" class="align-center" src="../_images/660.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">We zijn geïnteresseerd in de populatie van elk object, dus <cite>pop_max</cite> is het veld waar we naar zoeken. U kunt tweemaal op de kolomkop klikken om de kolom in aflopende volgorde te sorteren.</p>
 </li>
 </ol>
-<img alt="../_images/758.png" class="align-center" src="../_images/758.png" />
+<img alt="../_images/759.png" class="align-center" src="../_images/759.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Nu zijn we klaar om onze query op deze attributen uit te voeren. QGIS gebruikt SQL-achtige expressies om query&#8217;s uit te voeren. Klik op <span class="guilabel">Selecteer objecten m.b.v. reguliere expressie</span>.</p>
 </li>
 </ol>
-<img alt="../_images/856.png" class="align-center" src="../_images/856.png" />
+<img alt="../_images/857.png" class="align-center" src="../_images/857.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Vergroot, in het venster <span class="guilabel">Select By Expression</span>, het gedeelte <span class="guilabel">Velden en waarden</span> en dubbelklik op het label <code class="docutils literal"><span class="pre">pop_max</span></code>.  U zult zien dat het wordt toegevoegd aan het gedeelte van de expressie onder in het venster.  Als u niet zeker bent van de waarden in het veld, kunt u klikken op <span class="guilabel">alle unieke</span> om te zien wat de huidige aanwezige waarden in de gegevensset zijn. Voor deze oefening zoeken we naar alle objecten die een inwoneraantal hebben van groter dan <code class="docutils literal"><span class="pre">1.000.000</span></code>. Voltooi dus de expressie zoals hieronder en klik op <span class="guilabel">Selecteren</span>.</p>
 </li>
@@ -291,12 +292,12 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>&quot;pop_max&quot; &gt; 1000000
 </pre></div>
 </div>
-<img alt="../_images/955.png" class="align-center" src="../_images/955.png" />
+<img alt="../_images/956.png" class="align-center" src="../_images/956.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Klik op <span class="guilabel">Sluiten</span> en ga terug naar het hoofdvenster van QGIS. U zult zien dat een subverzameling van de punten nu in geel wordt weergegeven. Dit is het resultaat van onze query en u ziet alle plaatsen uit de gegevensset waarvan de waarde van het attribuut <code class="docutils literal"><span class="pre">pop_max</span></code> groter is dan <code class="docutils literal"><span class="pre">1.000.000</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1054.png" class="align-center" src="../_images/1054.png" />
+<img alt="../_images/1055.png" class="align-center" src="../_images/1055.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Het doel voor deze oefening is om de plaatsen te zoeken die hoofdsteden van landen zijn. Het veld dat deze gegevens bevat is <cite>adm0cap</cite>. De waarde <code class="docutils literal"><span class="pre">1</span></code> geeft aan dat de plaats een hoofdstad is. We kunnen dit criterium toevoegen aan onze eerdere expressie met behulp van de operator <code class="docutils literal"><span class="pre">AND</span></code>. Laten we onze query verfijnen om allen die plaatsen te selecteren die hoofdsteden zijn. Klik op de knop <span class="guilabel">Objecten selecteren m.b.v. reguliere expressie</span> in de attributentabel en voer de expressie in zoals hieronder en klik op <span class="guilabel">Selecteren</span> en dan <span class="guilabel">Sluiten</span>.</p>
 </li>
@@ -304,17 +305,17 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>&quot;pop_max&quot; &gt; 1000000 and &quot;adm0cap&quot; = 1
 </pre></div>
 </div>
-<img alt="../_images/1193.png" class="align-center" src="../_images/1193.png" />
+<img alt="../_images/1195.png" class="align-center" src="../_images/1195.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Ga terug naar het hoofdvenster van QGIS. Nu zult u een kleinere subverzameling van punten zien geselecteerd. Dit is het resultaat van de tweede query en geeft alle plaatsen in de wereld weer die hoofdsteden van landen zijn en ook een inwoneraantal hebben dat groter is dan 1.000.000. Als we nog wat meer analyses zouden willen uitvoeren op deze subverzameling, zouden we deze selectie kunnen vastzetten. Klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> en selecteer <span class="guilabel">Eigenschappen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1253.png" class="align-center" src="../_images/1253.png" />
+<img alt="../_images/1254.png" class="align-center" src="../_images/1254.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Scroll, op de tab <span class="guilabel">Algemeen</span>, naar beneden naar het gedeelte <span class="guilabel">Deelverzameling objecten</span>. Klik op <span class="guilabel">Querybouwer</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1352.png" class="align-center" src="../_images/1352.png" />
+<img alt="../_images/1353.png" class="align-center" src="../_images/1353.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Voer dezelfde expressie in als die welke u eerder invoerde en klik op <span class="guilabel">OK</span>.</p>
 </li>
@@ -327,12 +328,12 @@
 <li><p class="first">Terug in het hoofdvenster van QGIS zult u zien dat de rest van de punten verdwijnt. U zou nu een andere analyse op de deze laag kunnen uitvoeren en dan zullen alleen de objecten die voldoen aan onze expressie worden gebruikt. Het zal u opvallen dat de punten nog steeds geel worden weergegeven. Dit is omdat zij nog steeds geselecteerd zijn. Zoek de knop <span class="guilabel">Objecten uit alle lagen deselecteren</span> op de werkbalk <span class="guilabel">Attributen</span> en klik er op.</p>
 </li>
 </ol>
-<img alt="../_images/1548.png" class="align-center" src="../_images/1548.png" />
+<img alt="../_images/1549.png" class="align-center" src="../_images/1549.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">U zult zien dat de punten nu gedeselecteerd zijn en in hun originele kleur worden weergegeven.</p>
 </li>
 </ol>
-<img alt="../_images/1643.png" class="align-center" src="../_images/1643.png" />
+<img alt="../_images/1644.png" class="align-center" src="../_images/1644.png" />
 </div>
 </div>
 
@@ -358,7 +359,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Sep 17, 2019.<br/>
+      Laatste aanpassing op Sep 19, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

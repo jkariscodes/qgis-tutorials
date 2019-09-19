@@ -110,6 +110,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Запуск та планування обробки завдань QGIS</a></li>
@@ -242,22 +243,22 @@
 <li><p class="first">Завантажте та витягніть дані Natural Earth Quick Start Kit з архіву. Запустіть QGIS. Натисніть <span class="menuselection">Project ‣ Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1159.png" class="align-center" src="../_images/1159.png" />
+<img alt="../_images/1161.png" class="align-center" src="../_images/1161.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Перейдіть в директорію з витягнутими даними Natural Earth. Ви маєте побачити файл з назвою <code class="file docutils literal"><span class="pre">Natural_Earth_quick_start_for_QGIS.qgs</span></code>. Це файл проекту, що містить оформлені шари у форматі документів QGIS. Клацніть <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2107.png" class="align-center" src="../_images/2107.png" />
+<img alt="../_images/2109.png" class="align-center" src="../_images/2109.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Ви побачите перелік шарів у таблиці ліворуч, і оформлену мапу світу в робочому полі QGIS. Якщо ви бачите сповіщення про помилку у верхній частині поля, клацніть по хрестику, щоб прибрати його.</p>
 </li>
 </ol>
-<img alt="../_images/364.png" class="align-center" src="../_images/364.png" />
+<img alt="../_images/365.png" class="align-center" src="../_images/365.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">На цьому уроці ми оформимо мапу Японії. Натисніть кнопку <span class="guilabel">Zoom In</span>, та обведіть прямокутник довкола Японії, щоб збільшити цю ділянку.</p>
 </li>
 </ol>
-<img alt="../_images/444.png" class="align-center" src="../_images/444.png" />
+<img alt="../_images/445.png" class="align-center" src="../_images/445.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Ви можете вимкнути шари даних, що не будуть використовуватись у цій мапі. Для цього зніміть прапорці біля шарів <code class="docutils literal"><span class="pre">10m_geography_marine_polys</span></code> та <code class="docutils literal"><span class="pre">10m_admin_0_map_units</span></code>. Перед створенням придатної для друку мапи, необхідно визначитись із проекцією. Наш набір даних подано у Geographic Coordinate System (GCS), де одиницями виміру є градуси. Але це не підходить для мап, в яких для виміру відстаней потрібно користуватись кілометрами або милями. Ми маємо взяти координатну систему проекцій, яка зменшить спотворення потрібної нам області, і буде мати одиниці виміру у метрах. Universal Transverse Mercator (UTM) є гарним вибором для наших цілей. Вона є глобальною, і тому підійде у більшості випадків. Залишається вибрати відповідну зону UTM, яка містить потрібну нам ділянку — це необхідно зробити для зменшення викривлень (дисторсії). У нашому випадку ми виберемо зону UTM 54N. Натисніть кнопку <span class="guilabel">CRS Status</span> у правому нижньому куті вікна QGIS.</p>
 </li>
@@ -266,17 +267,17 @@
 <p class="first admonition-title">Примітка</p>
 <p class="last">Для Японії розроблено координатну систему Japan Plane Rectangular CS (частина системи CRS — coordinate reference system), яка дає найменше спотворень. Вона розділена на 18 ділянок, і якщо ви працюєте з маленькою зоною в Японії — ця CRS підходить якнайкраще.</p>
 </div>
-<img alt="../_images/544.png" class="align-center" src="../_images/544.png" />
+<img alt="../_images/545.png" class="align-center" src="../_images/545.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Поставте прапорець <span class="guilabel">Enable on-the-fly CRS Transformation</span>. У пошуковому рядку <span class="guilabel">Filter</span> введіть <code class="docutils literal"><span class="pre">Tokyo</span> <span class="pre">utm</span> <span class="pre">zone54n</span></code>. У знайденому виберіть <span class="guilabel">Tokyo / UTM Zone 54N - EPSG:3095</span>. Клацніть <span class="guilabel">Apply</span>.</p>
 </li>
 </ol>
-<img alt="../_images/642.png" class="align-center" src="../_images/642.png" />
+<img alt="../_images/643.png" class="align-center" src="../_images/643.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Тепер ми можемо розпочати збирання нашої мапи. Перейдіть до <span class="menuselection">Project ‣ New Print Composer</span> (Ctrl+P).</p>
 </li>
 </ol>
-<img alt="../_images/741.png" class="align-center" src="../_images/741.png" />
+<img alt="../_images/742.png" class="align-center" src="../_images/742.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Вам запропонують ввести назву нашої збірки. Можете залишити поле пустим і натиснути <span class="guilabel">Ok</span>.</p>
 </li>
@@ -285,27 +286,27 @@
 <p class="first admonition-title">Примітка</p>
 <p class="last">Якщо ви залишили поле назви пустим, буде вжито назву за умовчанням на кшталт <code class="docutils literal"><span class="pre">Composer</span> <span class="pre">1</span></code>.</p>
 </div>
-<img alt="../_images/840.png" class="align-center" src="../_images/840.png" />
+<img alt="../_images/841.png" class="align-center" src="../_images/841.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">У вікні Print Composer клацніть по <span class="guilabel">Zoom full</span> для відображення всієї збірки. Тепер ми маємо перенести вид мапи з робочого поля QGIS до вікна Print Composer. Перейдіть до <span class="menuselection">Layout ‣ Add Map</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1038.png" class="align-center" src="../_images/1038.png" />
+<img alt="../_images/1039.png" class="align-center" src="../_images/1039.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Після натиснення кнопки <span class="guilabel">Add Map</span>, затисніть ліву кнопку миші і намалюйте прямокутник там, де ви хочете вставити мапу.</p>
 </li>
 </ol>
-<img alt="../_images/1160.png" class="align-center" src="../_images/1160.png" />
+<img alt="../_images/1162.png" class="align-center" src="../_images/1162.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Ви побачите, що в прямокутнику відрисувалась мапа з робочого поля QGIS. Але вона не завжди відображає всю потрібну нам область. Виберіть <span class="menuselection">Layout ‣ Move content</span> (C) для переміщення мапи у вікні, або <span class="menuselection">Layout ‣ Move item</span> (V) для зміни меж вставки у вікні збірки.</p>
 </li>
 </ol>
-<img alt="../_images/1239.png" class="align-center" src="../_images/1239.png" />
+<img alt="../_images/1240.png" class="align-center" src="../_images/1240.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Давайте настроїмо рівень масштабування для нашої мапи. У закладці <span class="guilabel">Item Properties</span>, введіть значення <cite>7000000</cite> до <span class="guilabel">Scale</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1339.png" class="align-center" src="../_images/1339.png" />
+<img alt="../_images/1340.png" class="align-center" src="../_images/1340.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Тепер ми додамо вставну мапу, в якій покажемо Токіо у збільшеному масштабі. Перш ніж вносити будь-які зміни у шари в робочому полі QGIS, поставте прапорці <span class="guilabel">Lock layers for map item</span> та <span class="guilabel">Lock layer styles for map item</span>. Це забезпечить незмінність вигляду, навіть якщо ми вимкнемо деякі шари, або змінимо їх стилі.</p>
 </li>
@@ -315,42 +316,42 @@
 <li><p class="first">Перейдіть у головне вікно QGIS. Скористайтесь кнопкою <span class="guilabel">Zoom In</span> для наближення ділянки біля Токіо.</p>
 </li>
 </ol>
-<img alt="../_images/1536.png" class="align-center" src="../_images/1536.png" />
+<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">З’являться деякі дубльовані позначки з шару <code class="docutils literal"><span class="pre">ne_10m_populated_places</span></code>. Ви можете вимкнути цей шар для цього виду.</p>
 </li>
 </ol>
-<img alt="../_images/1631.png" class="align-center" src="../_images/1631.png" />
+<img alt="../_images/1632.png" class="align-center" src="../_images/1632.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Тепер ми готові додавати вставну мапу. Перейдіть у вікно <span class="guilabel">Print Composer</span>. Виберіть <span class="menuselection">Layout ‣ Add Map</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1728.png" class="align-center" src="../_images/1728.png" />
+<img alt="../_images/1729.png" class="align-center" src="../_images/1729.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Протягніть прямокутник там, де ви хочете додати вставну мапу. Тепер у вас дві мапи у вікні збірки. При внесенні змін переконайтесь, що вибрали потрібну мапу. Виберіть об’єкт <code class="docutils literal"><span class="pre">Map</span> <span class="pre">1</span></code>, який ми тільки що додали, у закладці <span class="guilabel">Items</span>. Перейдіть до закладки <span class="guilabel">Item properties</span>. Прокрутіть вниз до рядка <span class="guilabel">Frame</span>, і поставте прапорець біля нього. Ви можете змінювати колір та товщину обведення, для того щоб краще вирізнити вставну мапу на тлі основної.</p>
 </li>
 </ol>
-<img alt="../_images/1828.png" class="align-center" src="../_images/1828.png" />
+<img alt="../_images/1829.png" class="align-center" src="../_images/1829.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Зручною функцією вікна збірки є автоматичне підсвічування площі основної мапи, яка представлена у вашій вставці. Виберіть <code class="docutils literal"><span class="pre">Map</span> <span class="pre">0</span></code> у закладці <span class="guilabel">Items</span>. В закладці <span class="guilabel">Item properties</span> прокрутіть вниз до секції <span class="guilabel">Overviews</span>. Натисніть кнопку <span class="guilabel">Add a new overview</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1923.png" class="align-center" src="../_images/1923.png" />
+<img alt="../_images/1924.png" class="align-center" src="../_images/1924.png" />
 <ol class="arabic simple" start="20">
 <li><p class="first">Виберіть <code class="docutils literal"><span class="pre">Map</span> <span class="pre">1</span></code> у <span class="guilabel">Map Frame</span>. У вікні збірки на мапі <code class="docutils literal"><span class="pre">Map</span> <span class="pre">0</span></code> має підсвітитись площа вставної мапи``Map 1``.</p>
 </li>
 </ol>
-<img alt="../_images/2016.png" class="align-center" src="../_images/2016.png" />
+<img alt="../_images/2017.png" class="align-center" src="../_images/2017.png" />
 <ol class="arabic simple" start="21">
 <li><p class="first">Тепер, коли ми створили вставну мапу, додамо сітку та смугасту обводку до основної мапи. Виберіть об’єкт <code class="docutils literal"><span class="pre">Map</span> <span class="pre">0</span></code>  на закладці <span class="guilabel">Items</span>. У закладці <span class="guilabel">Item properties</span> прокрутіть вниз до секції <span class="guilabel">Grids</span>. Натисніть кнопку <span class="guilabel">Add a new grid</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2121.png" class="align-center" src="../_images/2121.png" />
+<img alt="../_images/2122.png" class="align-center" src="../_images/2122.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">За умовчанням, сітка використовує ті ж одиниці виміру, що й вибрана картографічна проекція. Та все ж, часто потрібно відобразити сітку у градусах. Ми можемо вибрати іншу CRS для сітки. Натисніть кнопку <span class="guilabel">change...</span> праворуч від <span class="guilabel">CRS</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2219.png" class="align-center" src="../_images/2219.png" />
+<img alt="../_images/2220.png" class="align-center" src="../_images/2220.png" />
 <ol class="arabic simple" start="23">
 <li><p class="first">В діалоговому вікні <span class="guilabel">Coordinate Reference System Selector</span> введіть у поле пошуку <code class="docutils literal"><span class="pre">4326</span></code>. В результатах виберіть <code class="docutils literal"><span class="pre">WGS</span> <span class="pre">84</span> <span class="pre">EPSG:4326</span></code> як потрібну CRS. Натисніть <span class="guilabel">OK</span>.</p>
 </li>
@@ -360,7 +361,7 @@
 <li><p class="first">Введіть 5 градусів як значення проміжків <span class="guilabel">Interval</span> в обох напрямках: <span class="guilabel">X</span> та <span class="guilabel">Y</span>. Також можна використовувати <span class="guilabel">Offset</span> для зміщення ліній сітки.</p>
 </li>
 </ol>
-<img alt="../_images/2416.png" class="align-center" src="../_images/2416.png" />
+<img alt="../_images/2417.png" class="align-center" src="../_images/2417.png" />
 <ol class="arabic simple" start="25">
 <li><p class="first">Прокрутіть вниз до розділу <span class="guilabel">Grid frame</span>, та виберіть вигляд рамки, який вам найбільше подобається. Також поставте прапорець біля <span class="guilabel">Draw coordinates</span>.</p>
 </li>
@@ -385,7 +386,7 @@
 <li><p class="first">Тепер ми додамо масштабну лінійку. Натисніть <span class="menuselection">Layout ‣ Add Scalebar</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2911.png" class="align-center" src="../_images/2911.png" />
+<img alt="../_images/2912.png" class="align-center" src="../_images/2912.png" />
 <ol class="arabic simple" start="30">
 <li><p class="first">Клацніть там, де ви хочете додати мірило. У закладці <span class="guilabel">Item Properties</span> переконайтесь, що ви вибрали правильний елемент мапи, для якої потрібно показати масштабну лінійку. У розділі <span class="guilabel">Segments</span> ви можете настроїти кількість сегментів та їх розмір.</p>
 </li>
@@ -446,7 +447,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Востаннє оновлено Sep 17, 2019.<br/>
+      Востаннє оновлено Sep 19, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

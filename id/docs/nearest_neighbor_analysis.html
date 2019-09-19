@@ -111,6 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Menjalankan dan Menjadwalkan Pekerjaan Pemrosesan QGIS</a></li>
@@ -250,7 +251,7 @@
 <li><p class="first">Buka <span class="menuselection">Layer ‣ Add Layer ‣ Add Delimited Text Layer</span> dan jelajahi file <code class="docutils literal"><span class="pre">signif.txt</span></code></p>
 </li>
 </ol>
-<img alt="../_images/1161.png" class="align-center" src="../_images/1161.png" />
+<img alt="../_images/1163.png" class="align-center" src="../_images/1163.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Karena ini adalah sebuah <em>tab-delimited file</em> , pilih <span class="guilabel">Tab</span> sebagai <span class="guilabel">File format</span> . <span class="guilabel">X field</span> dan <span class="guilabel">Y field</span> akan dikumpulkan secara otomatis. Klik <span class="guilabel">OK</span>.</p>
 </li>
@@ -259,27 +260,27 @@
 <p class="first admonition-title">Catatan</p>
 <p class="last">Anda mungkin melihat sejumlah error saat QGIS mencoba untuk mengimpor file. Ini adalah error yang valid dan sejumlah baris dari file tidak akan terimpor. Anda dapat mengacuhkan error untuk tujuan tutorial ini.</p>
 </div>
-<img alt="../_images/2108.png" class="align-center" src="../_images/2108.png" />
+<img alt="../_images/2123.png" class="align-center" src="../_images/2123.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Dengan dataset gempabumi dalam koordinat lintang/bujur, ini akan diimpor dengan CRS awal <code class="docutils literal"><span class="pre">EPSG:</span> <span class="pre">4326</span></code> . Verifikasi dengan melihat sudut bawah-kanan. Mari buka layer tempat berpopulasi. Akses <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector Layer</span>.</p>
 </li>
 </ol>
-<img alt="../_images/365.png" class="align-center" src="../_images/365.png" />
+<img alt="../_images/366.png" class="align-center" src="../_images/366.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Jelajahi file <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code> dan klik <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/445.png" class="align-center" src="../_images/445.png" />
+<img alt="../_images/446.png" class="align-center" src="../_images/446.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Zoom sekitaran dan eksplor kedua dataset. Tiap poin ungu merepresentasikan lokasi dari gempabumi signifikan dan setiap poin bitu merepresentasikan lokasi tempat berpopulasi. Kita memerlukan cara untuk mencari tahu titik terdekat dari layer tempat berpopulasi untuk sertiap poin pada layer gempabumi.</p>
 </li>
 </ol>
-<img alt="../_images/545.png" class="align-center" src="../_images/545.png" />
+<img alt="../_images/546.png" class="align-center" src="../_images/546.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Akses <span class="menuselection">Vector ‣ Analysis Tools ‣ Distance Matrix</span>.</p>
 </li>
 </ol>
-<img alt="../_images/643.png" class="align-center" src="../_images/643.png" />
+<img alt="../_images/644.png" class="align-center" src="../_images/644.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Disini pilih layer gempabumi <code class="docutils literal"><span class="pre">signif</span></code> sebagai layer poin input dan tempat berpopulasi <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> sebagai layer target. Anda juga perlu untuk memilih sebuah field unik dari setiap layer ini yang dimana bagaimana hasil anda akan diperlihatkan. Pada analisis ini, kita hanya mencari <code class="docutils literal"><span class="pre">1</span></code> poin terdekat, jadi beri tanda cek pada <span class="guilabel">Use only the nearest(k) target points</span> dan masukkan <span class="guilabel">1</span> . Beri nama file output <a href="#id1"><span class="problematic" id="id2">``</span></a>matrix.csv` , dan klik OK. Ketika proses selesai, klik <span class="guilabel">Close</span>.</p>
 </li>
@@ -288,22 +289,22 @@
 <p class="first admonition-title">Catatan</p>
 <p class="last">Sebuah hal berguna untuk diperhatikan adalah anda da[at melakukan analisis hanya dengan  1 layer. Pilih layer yang sama untuk input dan target. Hasilnya akan menjadi sebuah tertangga terdakat dari layer yang sama bukan dari sebuah layer berbeda seperti yang kita gunakan di sini.</p>
 </div>
-<img alt="../_images/742.png" class="align-center" src="../_images/742.png" />
+<img alt="../_images/743.png" class="align-center" src="../_images/743.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Ketika proses selesai, klik tombol <span class="guilabel">Close</span> pada dialog <span class="guilabel">Distance Matrix</span> . Anda dapat memperlihatkan file <span class="guilabel">Distance Matrix</span> di Notepad atau teks editor lain. QGIS dapat mengimpor file CSV juga, jadi kita akan menambahkannya ke QGIS dan melihatnya di sana. Akses <span class="menuselection">Layer ‣ Add Layer ‣ Add Delimited Text Layer...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/841.png" class="align-center" src="../_images/841.png" />
+<img alt="../_images/842.png" class="align-center" src="../_images/842.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Jelajahi file yang baru terbuat <code class="docutils literal"><span class="pre">matrix.csv</span></code> . Karena file ini hanya berupa kolom teks, pilih <span class="guilabel">No geometry (attribute only table)</span> sebagai <span class="guilabel">Geometry definition</span> . Klik <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/940.png" class="align-center" src="../_images/940.png" />
+<img alt="../_images/941.png" class="align-center" src="../_images/941.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Anda akan melihat file CSV terbuka sebagai sebuah tabel. Klik kanan pada layer tabel dan pilih <span class="guilabel">Open Attribute Table</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1039.png" class="align-center" src="../_images/1039.png" />
+<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Sekarang anda akan mampu untuk melihat isi dari hasil kita. Field <span class="guilabel">InputID</span> berisi field nama dari layer gempabumi. Field <span class="guilabel">TargetID</span> berisi nama fitur dari tempat berpopulasi yang paling dekat dengan titik gempabumi. Field <span class="guilabel">Distance</span> adalah jarak antara 2 poin.</p>
 </li>
@@ -312,12 +313,12 @@
 <p class="first admonition-title">Catatan</p>
 <p class="last">Ingat bahwa kalkulasi <em>distance</em> akan dilaksanakan menggunakan CRS layer. Disini jarak berupa unit <em>decimal degrees</em> karena koordinat layer sumber kita dalam derajat. Jika anda ingin jarak dalam meterm reproyeksi layer sebelum menjalankan tool.</p>
 </div>
-<img alt="../_images/1162.png" class="align-center" src="../_images/1162.png" />
+<img alt="../_images/1164.png" class="align-center" src="../_images/1164.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Ini sangat dekat pada hasil  yang kita cari. Untuk sejumlah user, tabel ini cukup. Akan tetapi, kita juga dapat mengintegrasikan hasil ini dalam layer gempabumi original kita dengan menggunakan sebuah <strong>Table Join</strong> . Klik kanan layer gempabumi, dan pilih <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1240.png" class="align-center" src="../_images/1240.png" />
+<img alt="../_images/1241.png" class="align-center" src="../_images/1241.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Akses tab <span class="guilabel">Joins</span> dan klik tombol <span class="guilabel">+</span></p>
 </li>
@@ -332,37 +333,37 @@
 <li><p class="first">Anda akan melihat join muncul pada tab guilabel:<cite>Joins</cite> . Klik <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
+<img alt="../_images/1538.png" class="align-center" src="../_images/1538.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Sekarang buka tabel attribut dari layer <code class="docutils literal"><span class="pre">signif</span></code> dengan mengklik-kanan dan memilih <span class="guilabel">Open Attribute Table</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1632.png" class="align-center" src="../_images/1632.png" />
+<img alt="../_images/1633.png" class="align-center" src="../_images/1633.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Anda akan melihat bahwa untuk setiap fitur gempabumi, sekarang kita memiliki sebuah attribut yakni tetangga terdekat(tempat berpopulasi terdekat) dan jarak ke tetangga terdekat.</p>
 </li>
 </ol>
-<img alt="../_images/1729.png" class="align-center" src="../_images/1729.png" />
+<img alt="../_images/1730.png" class="align-center" src="../_images/1730.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Sekarang kita akan mengekslpor sebuah cara untuk memvisualisasikan hasil ini. Pertama, kita perlu untuk membuat join tabel permanen dengan menyimpannya ke layer baru. Klik kanam layer <code class="docutils literal"><span class="pre">signif</span></code> dan pilih <span class="guilabel">Save As...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1829.png" class="align-center" src="../_images/1829.png" />
+<img alt="../_images/1830.png" class="align-center" src="../_images/1830.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Klik tombol <span class="guilabel">Browse</span> disebelah label <span class="guilabel">Save as</span> dan beri nama layer output dengan <code class="docutils literal"><span class="pre">earthquake_with_places.shp</span></code> . Pastikan beri tanda cek pada <span class="guilabel">Add saved file to map</span> dan klik <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1924.png" class="align-center" src="../_images/1924.png" />
+<img alt="../_images/1925.png" class="align-center" src="../_images/1925.png" />
 <ol class="arabic simple" start="20">
 <li><p class="first">Ketika layer sudah terbuka, anda dapat menonaktifkan visibilitas layer <code class="docutils literal"><span class="pre">signif</span></code> . Karena dataset kita cukup besar, kita dapa menjalankan analisis visualisasi kita pada sebuah subset dari data. QGIS memiliki kegunaan yang rapih dimana anda dapat membuka sebuah subset dari sebuah layer tanpa harus mengekspornya ke sebuah layer baru. Klik kanan layer <code class="docutils literal"><span class="pre">earthquake_with_places</span></code> dan pilih <span class="guilabel">Properties</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2017.png" class="align-center" src="../_images/2017.png" />
+<img alt="../_images/2018.png" class="align-center" src="../_images/2018.png" />
 <ol class="arabic simple" start="21">
 <li><p class="first">Pada tab <span class="guilabel">General</span> , scroll ke bawah sampai bagian <span class="guilabel">Feature subset</span> . Klik <span class="guilabel">Query Builder</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2122.png" class="align-center" src="../_images/2122.png" />
+<img alt="../_images/2124.png" class="align-center" src="../_images/2124.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">Untuk tutorial ini, kita akan memvisualisasikan gempabumi dan tempat berpopulasi terdekat mereka yakni Mexico. Masukkan ekspresi berikut pada dialog <span class="guilabel">Query Builder</span>.</p>
 </li>
@@ -370,7 +371,7 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>&quot;COUNTRY&quot; = &#39;MEXICO&#39;
 </pre></div>
 </div>
-<img alt="../_images/2220.png" class="align-center" src="../_images/2220.png" />
+<img alt="../_images/2221.png" class="align-center" src="../_images/2221.png" />
 <ol class="arabic simple" start="23">
 <li><p class="first">Anda dapat melihat bahwa hanya poin-poin yang berada di Mexico yang visibel atau terlihat di Kanvas. Mari lakukan hal yang sama untuk layer tempat berpopulasi. Klik-kanan layer <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> dan pilih <span class="guilabel">Properties</span>.</p>
 </li>
@@ -383,7 +384,7 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>&quot;adm0name&quot; = &#39;Mexico&#39;
 </pre></div>
 </div>
-<img alt="../_images/2417.png" class="align-center" src="../_images/2417.png" />
+<img alt="../_images/2418.png" class="align-center" src="../_images/2418.png" />
 <ol class="arabic simple" start="25">
 <li><p class="first">Sekarang kita siap untuk membuat visualisasi kita. Kita ingin menggunakan sebuah plugin bernama <code class="docutils literal"><span class="pre">MMQGIS</span></code> .Temukan dan install plugin. Lihat <code class="xref doc docutils literal"><span class="pre">docs/using_plugins</span></code> untuk detail lebih bagaimana berkerja dengan plugin. Ketika anda memiliki plugin terinstall, akses <span class="menuselection">MMQGIS ‣ Create ‣ Hub Lines</span>.</p>
 </li>
@@ -429,7 +430,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Sep 17, 2019.<br/>
+      Terakhir diperbarui pada Sep 19, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

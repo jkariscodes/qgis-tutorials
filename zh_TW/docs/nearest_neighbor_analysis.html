@@ -111,6 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Python 程式設計的初步上手 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">以 Python 製作附加元件 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">使用自訂的 Python 表達式函數 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">撰寫 Python 腳本並在處理框架下執行（QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">執行 QGIS 工作排程</a></li>
@@ -250,7 +251,7 @@
 <li><p class="first">打開 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入分隔文字圖層</span>，然後選擇剛下載的 <code class="docutils literal"><span class="pre">signif.txt</span></code>。</p>
 </li>
 </ol>
-<img alt="../_images/1161.png" class="align-center" src="../_images/1161.png" />
+<img alt="../_images/1163.png" class="align-center" src="../_images/1163.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">這個檔案是 <em>Tab 分隔檔</em>，所以我們可以在 <span class="guilabel">檔案格式</span> 欄位選擇 <span class="guilabel">定位鍵</span>。程式會自動選擇 <span class="guilabel">X</span> 和 <span class="guilabel">Y</span> 欄位，所以按下 <span class="guilabel">確定</span> 即可。</p>
 </li>
@@ -259,27 +260,27 @@
 <p class="first admonition-title">註解</p>
 <p class="last">可能你會看到 QGIS 顯示讀取檔案的時候出現了一些錯誤，這是由於檔案中的某些值異常所引起的，這些異常的資料不會被讀取。在本教學中，我們就先忽略這些錯誤沒關係。</p>
 </div>
-<img alt="../_images/2108.png" class="align-center" src="../_images/2108.png" />
+<img alt="../_images/2123.png" class="align-center" src="../_images/2123.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">由於地震資料採用經緯度座標，輸入的 CRS 應該會採用 <code class="docutils literal"><span class="pre">EPSG:</span> <span class="pre">4326</span></code>，可在視窗右下角檢查是否正確。接下來來開啟人口聚居地圖層，選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>。</p>
 </li>
 </ol>
-<img alt="../_images/365.png" class="align-center" src="../_images/365.png" />
+<img alt="../_images/366.png" class="align-center" src="../_images/366.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">選擇剛下載的 <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code> 並按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/445.png" class="align-center" src="../_images/445.png" />
+<img alt="../_images/446.png" class="align-center" src="../_images/446.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">稍微縮放一下瀏覽這兩個資料庫。每個紫色的點都是一個重要地震，而每個藍色的點都是一個人口聚居地（譯按：你的點顏色可能會不同，請對照圖層各自的名字）。我們要做的是為每個地震點找出最接近的人口聚居地。</p>
 </li>
 </ol>
-<img alt="../_images/545.png" class="align-center" src="../_images/545.png" />
+<img alt="../_images/546.png" class="align-center" src="../_images/546.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">選擇 <span class="menuselection">向量 ‣ 分析工具 ‣ 距離矩陣</span>。</p>
 </li>
 </ol>
-<img alt="../_images/643.png" class="align-center" src="../_images/643.png" />
+<img alt="../_images/644.png" class="align-center" src="../_images/644.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">在開啟的視窗中，「輸入點圖層」選擇 <code class="docutils literal"><span class="pre">signif</span></code>，「目標點圖層」選擇 <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code>。此外，我們還要為這兩個圖層選擇一個「唯一ID欄位」（每個點的此欄位值都不相同），輸出檔將會依照此欄位顯示。在此例中，我們只要尋找最接近的 <code class="docutils literal"><span class="pre">1</span></code> 個點，所以要勾選 <span class="guilabel">僅使用最鄰近(k)目標點</span>，然後輸入 <span class="guilabel">1</span>。把輸出檔命名為 <code class="docutils literal"><span class="pre">matrix.csv</span></code>，然後按下確定。程式執行完畢後，點選 <span class="guilabel">關閉</span>。</p>
 </li>
@@ -288,22 +289,22 @@
 <p class="first admonition-title">註解</p>
 <p class="last">有件事值得一提：你可以只針對單一圖層執行近鄰分析，只需要把輸入點圖層和目標點圖層都設為相同圖層即可。輸入就會是在 1 個圖層中的點的近鄰結果。</p>
 </div>
-<img alt="../_images/742.png" class="align-center" src="../_images/742.png" />
+<img alt="../_images/743.png" class="align-center" src="../_images/743.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">程式執行完畢後，在 <span class="guilabel">距離矩陣</span> 視窗點選 <span class="guilabel">關閉</span>。現在你可以使用 Notepad 或任何的文字編輯器瀏覽 <code class="docutils literal"><span class="pre">matrix.csv</span></code>。QGIS 也可以把此檔案匯入，這樣就可以把結果加到 QGIS 中瀏覽了。選擇 <span class="menuselection">圖層 ‣ 加入分隔文字圖層</span>。</p>
 </li>
 </ol>
-<img alt="../_images/841.png" class="align-center" src="../_images/841.png" />
+<img alt="../_images/842.png" class="align-center" src="../_images/842.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">選擇剛剛產生的新檔案 <code class="docutils literal"><span class="pre">matrix.csv</span></code>，因為它只包含了文字的欄位，所以要在 <span class="guilabel">幾何欄位定義</span> 選項中勾選 <span class="guilabel">無幾何欄位 (僅產生屬性表格)</span>。按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/940.png" class="align-center" src="../_images/940.png" />
+<img alt="../_images/941.png" class="align-center" src="../_images/941.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">現在此 CSV 檔案已以表格的形式匯入 QGIS 中。在這個表格上按右鍵，選擇 <span class="guilabel">開啟屬性表格</span>，</p>
 </li>
 </ol>
-<img alt="../_images/1039.png" class="align-center" src="../_images/1039.png" />
+<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">現在就可以看到近鄰分析的結果了。<span class="guilabel">InputID</span> 欄位是從地震的圖層過來的，<span class="guilabel">TargetID</span> 則是從人口聚居地的圖層過來的，代表距離地震最近的人口聚居點。<span class="guilabel">Distance</span> 則是 2 個點的距離。</p>
 </li>
@@ -312,12 +313,12 @@
 <p class="first admonition-title">註解</p>
 <p class="last">這裡距離的計算是使用圖層的 CRS，也就是說因為我們的來源圖層是經緯度座標，輸入距離的單位也會是<em>角度</em>。如果你想要把距離用公尺呈現，在執行近鄰分析之前，要先重投影輸入的圖層。</p>
 </div>
-<img alt="../_images/1162.png" class="align-center" src="../_images/1162.png" />
+<img alt="../_images/1164.png" class="align-center" src="../_images/1164.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">本結果已相當接近我們想要的樣子。對某些使用者來說，得到一張表格已顯足夠；然而，我們可以把結果進一步<strong>連接</strong>到原本的地震圖層屬性表格上。以右鍵點選地震圖層，選擇 <span class="guilabel">屬性</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1240.png" class="align-center" src="../_images/1240.png" />
+<img alt="../_images/1241.png" class="align-center" src="../_images/1241.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">前往 <span class="guilabel">連結（Joins）</span>的分頁，按下 <span class="guilabel">+</span> 按鈕。</p>
 </li>
@@ -332,37 +333,37 @@
 <li><p class="first">在 <span class="guilabel">連結（Joins）</span>的分頁中，就出現了一筆連接資訊。按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
+<img alt="../_images/1538.png" class="align-center" src="../_images/1538.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">現在在 <code class="docutils literal"><span class="pre">signif</span></code> 圖層上按右鍵選 <span class="guilabel">開啟屬性表格</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1632.png" class="align-center" src="../_images/1632.png" />
+<img alt="../_images/1633.png" class="align-center" src="../_images/1633.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">現在每個地震的圖徵，都多了新屬性顯示最近的 (人口聚居地) 點圖徵，以及其距離。</p>
 </li>
 </ol>
-<img alt="../_images/1729.png" class="align-center" src="../_images/1729.png" />
+<img alt="../_images/1730.png" class="align-center" src="../_images/1730.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">接下來我們要來看看怎麼視覺畫這些結果。首先，我們要另存新圖層，把資料表連接的結果永久保存下來。以右鍵點選 <code class="docutils literal"><span class="pre">signif</span></code> 然後選擇 <span class="guilabel">存檔為...</span>，</p>
 </li>
 </ol>
-<img alt="../_images/1829.png" class="align-center" src="../_images/1829.png" />
+<img alt="../_images/1830.png" class="align-center" src="../_images/1830.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">點選在 <span class="guilabel">另存為</span> 欄位側邊的 <span class="guilabel">瀏覽</span> 鈕，把新檔案命名為 <code class="docutils literal"><span class="pre">earthquake_with_places.shp</span></code>，確認一下 <span class="guilabel">加入儲存檔案至地圖中</span> 有開啟，最後按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1924.png" class="align-center" src="../_images/1924.png" />
+<img alt="../_images/1925.png" class="align-center" src="../_images/1925.png" />
 <ol class="arabic simple" start="20">
 <li><p class="first">新圖層載入後，就可以把 <code class="docutils literal"><span class="pre">signif</span></code> 圖層取消勾選以隱藏起來。由於本資料集相當大，所以我們可以先對資料集的一部分進行視覺化試試看。QGIS 可以讓你不用另存新檔或匯入新圖層，就載入某個圖層的子集。在 <code class="docutils literal"><span class="pre">earthquake_with_places</span></code> 上以右鍵點選進入 <span class="guilabel">屬性</span>。</p>
 </li>
 </ol>
-<img alt="../_images/2017.png" class="align-center" src="../_images/2017.png" />
+<img alt="../_images/2018.png" class="align-center" src="../_images/2018.png" />
 <ol class="arabic simple" start="21">
 <li><p class="first">在「<span class="guilabel">一般</span>」分頁中，找到 <span class="guilabel">Feature subset</span> （或 Provider feature filter）的欄位，選擇 <span class="guilabel">查詢建構器</span>。</p>
 </li>
 </ol>
-<img alt="../_images/2122.png" class="align-center" src="../_images/2122.png" />
+<img alt="../_images/2124.png" class="align-center" src="../_images/2124.png" />
 <ol class="arabic simple" start="22">
 <li><p class="first">本教學中，我們要把焦點放在墨西哥附近的地震和人口聚居地。因此，請在 <span class="guilabel">查詢建構器</span> 中輸入以下的表達式。</p>
 </li>
@@ -370,7 +371,7 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>&quot;COUNTRY&quot; = &#39;MEXICO&#39;
 </pre></div>
 </div>
-<img alt="../_images/2220.png" class="align-center" src="../_images/2220.png" />
+<img alt="../_images/2221.png" class="align-center" src="../_images/2221.png" />
 <ol class="arabic simple" start="23">
 <li><p class="first">可以看到在 QGIS 視窗中，只剩下落在墨西哥境內的地震會顯示。接下來對人口聚居地的層進行相同操作，在 <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> 上以右鍵點選進入 <span class="guilabel">屬性</span>。</p>
 </li>
@@ -383,7 +384,7 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>&quot;adm0name&quot; = &#39;Mexico&#39;
 </pre></div>
 </div>
-<img alt="../_images/2417.png" class="align-center" src="../_images/2417.png" />
+<img alt="../_images/2418.png" class="align-center" src="../_images/2418.png" />
 <ol class="arabic simple" start="25">
 <li><p class="first">資料呈現的準備已經完成。我們接下來要使用一個稱為 <code class="docutils literal"><span class="pre">MMQGIS</span></code> 的核心附加元件，可參考 <a class="reference internal" href="using_plugins.html"><em>使用附加元件</em></a> 進行搜尋及安裝等相關操作。安裝後，選擇 <span class="menuselection">MMQGIS ‣ Create ‣ Hub Lines</span>。</p>
 </li>
@@ -429,7 +430,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Sep 17, 2019.<br/>
+      最後更新日期是 Sep 19, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
