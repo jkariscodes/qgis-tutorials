@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basic Raster Styling and Analysis (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>기본 래스터 스타일링 및 분석(QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -87,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">스프레드시트 및 CSV 파일 불러오기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">기본 벡터 스타일링 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">선의 길이계산과 통계(QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Basic Raster Styling and Analysis (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">기본 래스터 스타일링 및 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">래스터 붙이기 및 자르기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">지형데이터 작업</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">WMS 데이터 작업</a></li>
@@ -225,98 +225,110 @@
       
 
   <div class="section" id="basic-raster-styling-and-analysis-qgis3">
-<h1>Basic Raster Styling and Analysis (QGIS3)<a class="headerlink" href="#basic-raster-styling-and-analysis-qgis3" title="제목 주소">¶</a></h1>
-<p>A lot of scientific observations and research produces raster datasets. Rasters are grids of pixels that have a specific value assigned to them. By doing mathematical operations on these values, one can do some interesting analysis. QGIS has some basic analysis capabilities built-in via <strong>Raster Calculator</strong>. In this tutorial, we will explore the options available for styling rasters and functionality provided by the raster calculator.</p>
+<h1>기본 래스터 스타일링 및 분석(QGIS3)<a class="headerlink" href="#basic-raster-styling-and-analysis-qgis3" title="제목 주소">¶</a></h1>
+<p>많은 과학적 관찰과 연구는 래스터 데이터셋을 생산합니다. 래스터는 특정 값을 할당하는 픽셀 그리드입니다. 이러한 값에 대해 수학적인 연산을 함으로써 우리는 흥미로운 분석을 할 수 있습니다. QGIS에는 래스터 계산기를 통해 할 수 있는 몇 가지 기본적인 분석 기능이 내장되어 있습니다. 이 지침에서는 래스터 계산기가 제공하는 스타일링 래스터 및 기능성에 사용할 수 있는 옵션에 대해 살펴보겠습니다.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
-<p>We will use population grid data to create a thematic map of the global population change between year 2000 and 2010.</p>
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<p>2000년과 2010년 사이 세계 인구 변화에 대한 지도를 만들기 위해 인구 그리드 데이터를 사용할 것입니다.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<h3>다른 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
 <ul class="simple">
-<li>How to copy/paste styles between layers</li>
+<li><p class="first">레이어들 간에 스타일을 복사/붙여 넣는 방법</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
-<p>We will use the <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/collection/gpw-v4">Gridded Population of the World (GPW) v4</a> dataset from Columbia University. Specifically, we need the <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download">Population Count</a> for the entire globe at 2.5 Degree Minute resolution in GeoTiFF format and for the year 2000 and 2010. You will need a free <a class="reference external" href="https://urs.earthdata.nasa.gov/home">Earth Data account</a> to download the data.</p>
+<h2>데이터 가져오기<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+<p>컬럼비아 대학의 GPW(Grided Population of the World) v4 &lt;<a class="reference external" href="https://sedac.ciesin.columbia.edu/data/collection/gpw-v4">https://sedac.ciesin.columbia.edu/data/collection/gpw-v4</a>&gt; 데이터셋을 사용할 것입니다. 구체적으로 GeoTiFF 형식 2.5도 속성(Degree Minute resolution)의 2000년과 2010년 사이 지구 전체 인구수 &lt;<a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download">https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download</a>&gt;가 필요합니다. 데이터를 다운로드하려면 무료 지구 데이터 계정&lt;<a class="reference external" href="https://urs.earthdata.nasa.gov/home">https://urs.earthdata.nasa.gov/home</a>&gt;이 필요합니다.</p>
 <img alt="../../_images/data16.png" class="align-center" src="../../_images/data16.png" />
-<p>For convenience, you may directly download a copy of the datasets from the
-links below:</p>
-<p><a class="reference external" href="http://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</a></p>
+<p>아래 링크에서 이번예제에 사용되는 샘플파일을 쉽게 내려받을 수 있습니다:</p>
+<p><cite>gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip &lt;http://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip&gt;</cite></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#gpw4" id="id1">[GPW4]</a></p>
+<p>데이터 출처 <a class="reference internal" href="../credits.html#gpw4" id="id1">[GPW4]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
 <ol class="arabic simple">
-<li>Open QGIS and locate the downloaded files in the <span class="guilabel">Browser</span> panel. Expand the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</span></code> file and drag the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min.tif</span></code> file to the canvas.</li>
+<li><p class="first">QGIS를 열고 브라우저 패널에서 다운로드한 파일을 찾으십시오. gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip 파일을 압축해제하십시오. gpw-v4-population-count-rev11_2000_2pt5_min.tif 파일을 캔버스로 끌어다 놓습니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1106.png" class="align-center" src="../../_images/1106.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>A new layer <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code> will be added to the <span class="guilabel">Layers</span> panel. Similarly, locate the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</span></code> file and drag the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min.tif</span></code> file to the canvas.</li>
+<li><p class="first">새 레이어 gpw-v4-population-count-rev11_2000_2pt5_min이 이 레이어 패널에 추가됩니다. 이와 같은 방식으로 gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip 파일을 찾으십시오. 압축해제 후 gpw-v4-population-count-rev11_2010_2pt5_min.tif 파일을 캔버스로 끌어다 놓습니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/260.png" class="align-center" src="../../_images/260.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Let&#8217;s explore these layers. Click the <span class="guilabel">Identify</span> button on the <span class="guilabel">Attributes Toolbar</span>. Once the tool is selected, click on any point on the canvas.</li>
+<li><p class="first">이 레이어들을 살펴봅시다. 속성 툴바에서 객체 식별 버튼을 클릭합니다. 도구를 선택한 후 캔버스에서 원하는 지점을 클릭하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/338.png" class="align-center" src="../../_images/338.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>The value associated with that pixel will be displayed in a new <span class="guilabel">Identify Results</span> panel. In the <span class="guilabel">Identify Results</span> panel, change the <span class="guilabel">Mode</span> to <code class="docutils literal"><span class="pre">Top</span> <span class="pre">down</span></code>. This will display pixel values of all rasters instead of just the topmost layer. Compare the values from both the layers. As the resolution of the rasters is approximately 5km x 5km, the pixel values represent the total population in the area (25 sq. km) represented by the pixel.</li>
+<li><p class="first">해당 픽셀과 관련된 값이 식별 결과 패널에 표시됩니다. 식별 결과 패널에서 모든 레이어 모드로 변경하십시오. 이 모드는 모든 래스터의 픽셀 값을 보여줍니다. 두 레이어의 값을 비교합니다. 래스터의 분해능은 약 5km x 5km이므로 픽셀 값은 픽셀로 대표되는 면적(25평방 킬로미터) 내의 총 인구를 나타냅니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/423.png" class="align-center" src="../../_images/423.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Close the <span class="guilabel">Identify Results</span> panel. Let&#8217;s create a better visualization of the layers. Click the <span class="guilabel">Open the layer Styling panel</span> button in the <span class="guilabel">Layers</span> panel.</li>
+<li><p class="first">식별 결과 패널을 닫으십시오. 레이어를 더 시각화해봅시다. 레이어 패널에서 Open the layer Styling panel 버튼을 엽니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/523.png" class="align-center" src="../../_images/523.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>In the <span class="guilabel">Layer Styling</span> panel, click the <span class="guilabel">Render type</span> dropdown and select <code class="docutils literal"><span class="pre">Singleband</span> <span class="pre">pseudocolor</span></code> renderer.</li>
+<li><p class="first">레이어 스타일 작업 패널에서 렌더링 유형을 확장하고 단일밴드 유사색상을 선택합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/622.png" class="align-center" src="../../_images/622.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>This renderer will style the layer using a color ramp. The default color ramp is white-red where the minimum value will be assigned the white color and the maximum value in the layer will be assigned the red color. The intermediate values will be assigned a shade of red linear interpolation. Expand the <span class="guilabel">Min / Max Value Settings</span> and choose <code class="docutils literal"><span class="pre">Cumulative</span> <span class="pre">count</span> <span class="pre">cut</span></code> option. You will see that the map visualization is much better now. The  The standard data range is set from 2% to 98% of the data values, meaning that the outliers will not be used to set the minimum and maximum values, resulting in a much more representative visualization.</li>
+<li><p class="first">이 렌더러는 색상 램프를 사용하여 레이어를 스타일링합니다. 기본 색상 램프는 흰색이며 여기서 최소값은 흰색, 최대값은 빨간색입니다. 중간 값에는 빨간색 선형 보간 음영이 할당됩니다. 기본 설정이 다를 경우 Cumulative count cut를 설정하고 보간은 선형으로 색상표는 Reds를 선택합니다. Min/Max Value Settings을 확장하고 범위를 벗어난 값 잘라내리 옵션을 체크합니다. 이제 지도의 시각화가 훨씬 더 나아졌다는 것을 알 수 있습니다. Cumulative count cut은 데이터 값의 2%에서 98%까지 설정되며 이는 최소값과 최대값 설정에 이상치가 사용되지 않는다는 것을 의미하므로 훨씬 더 대표적인 시각화를 얻을 수 있습니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/722.png" class="align-center" src="../../_images/722.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Close the <span class="guilabel">Layer Styling</span> panel. We can apply the similar styling to the other layer as well. But there is an easier way to transfer the styles from one layer to the other. Right-click the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min</span></code> layer and select <span class="menuselection">Styles ‣ Copy Style</span>.</li>
+<li><p class="first">레이어 스타일 작업 패널을 닫습니다. 다른 레이어에도 비슷한 스타일링을 적용할 수 있습니다. 그러나 스타일을 한 레이어에서 다른 레이어로 옮기는 더 쉬운 방법이 있습니다. gpw-v4-population-count-rev11_2010_2pt5_min 레이어를 우클릭하고 스타일 ‣ 스타일 복사를 선택합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/821.png" class="align-center" src="../../_images/821.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Now right-click the un-styled <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code> layer and select <span class="menuselection">Styles ‣ Paste Style</span>.</li>
+<li><p class="first">이제 스타일 지정되지 않은 gpw-v4-population-count-rev11_2000_2pt5_min 레이어를 우클릭하고 스타일 ‣ 스타일 붙여넣기를 선택하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/922.png" class="align-center" src="../../_images/922.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>The same styling parameters will be applied to the other layer. This feature is particularly useful when you want to compare different layers using the same categorization. As you toggle the visibility of the top layer, you can see the changes in population visually.</li>
+<li><p class="first">동일한 스타일링 매개변수가 다른 레이어에 적용됩니다. 이 기능은 동일한 범주화를 사용하여 다른 레이어를 비교할 때 특히 유용합니다. 상단 레이어의 가시성을 전환하면 모집단의 변화를 시각적으로 볼 수 있습니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/101.gif" class="align-center" src="../../_images/101.gif" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>Our task is to create a thematic map of the changes in population. Let&#8217;s compute the difference between the 2 layers and create another raster where each pixel represents the change in the population. Go to <span class="menuselection">Raster ‣ Raster calculator</span>.</li>
+<li><p class="first">우리의 과제는 인구 변화에 대한 지도를 만드는 것입니다. 두 레이어 간의 차이를 계산하고 각각의 픽셀이 모집단의 변화를 나타내는 또 다른 래스터를 생성해봅시다. 래스터 ‣ 래스터 계산기로 이동합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/101.gif" class="align-center" src="../../_images/101.gif" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>In the <span class="guilabel">Raster bands</span> section, you can select the layer by double-clicking on them. The bands are named after the raster name followed by <code class="docutils literal"><span class="pre">&#64;</span></code> and band number. Since each of our rasters have only 1 band, you will the names with <code class="docutils literal"><span class="pre">&#64;1</span></code> appended to the layer name. The raster calculator can apply mathematical     operations on the raster pixels. In this case we want to enter a simple formula to subtract the 2010 population from 2000. Enter the following expression. Next, click the <span class="guilabel">...</span> button next to <span class="guilabel">Output layer</span>.</li>
+<li><p class="first">Raster Bands 부분에서는 레이어를 두 번 클릭하여 선택할 수 있습니다. 밴드의 이름은 래스터 이름 다음에 &#64;와 밴드 번호가 붙습니다. 래스터들은 각각 1개의 밴드를 가지고 있기 때문에 그 계층 이름에 &#64;1의 이름을 붙이게 됩니다. 래스터 계산기는 래스터 픽셀에 수학 연산을 적용할 수 있습니다. 이번에는 2000년 인구에서 2010년 인구를 빼는 간단한 공식을 입력하고자 합니다. 다음 식을 입력합니다. 그런 다음 산출 레이어 옆의 ... 버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&quot;gpw-v4-population-count-rev11_2010_2pt5_min@1&quot; - &quot;gpw-v4-population-count-rev11_2000_2pt5_min@1&quot;
@@ -325,43 +337,50 @@ links below:</p>
 <img alt="../../_images/1222.png" class="align-center" src="../../_images/1222.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>Enter <code class="docutils literal"><span class="pre">population_change_2010_2000.tif</span></code> as the <span class="guilabel">Output file</span>. Click <span class="guilabel">OK</span> to start the computation.</li>
+<li><p class="first">population_change_2010_2000.tif를 산출 레이어로 입력합니다. 확인을 눌러 계산을 시작하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1322.png" class="align-center" src="../../_images/1322.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Once completed a new layer <code class="docutils literal"><span class="pre">population_change_2010_2000</span></code> will be added to the <span class="guilabel">Layers</span> panel. Let&#8217;s change the styling so that the negative and positive population changes are better visualized.  Click the <span class="guilabel">Open the layer Styling panel</span> button in the <span class="guilabel">Layers</span> panel.</li>
+<li><p class="first">완료되면 새로운 레이어 population_change_2010_2000이 레이어 패널에 추가됩니다. 인구의 감소/증가 변화가 더 잘 보이도록 스타일링을 바꿉니다. 레이어 패널에서 Open the layer Styling panel 버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1420.png" class="align-center" src="../../_images/1420.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>One option is to use the similar styling technique as earlier and choose a diverging color ramp. Click the <span class="guilabel">Color ramp</span> drop-down and select <code class="docutils literal"><span class="pre">Spectral</span></code> ramp. Click the dro-down again and choose <code class="docutils literal"><span class="pre">Invert</span> <span class="pre">Color</span> <span class="pre">Ramp</span></code> to assign blues to low values and reds to high values.</li>
+<li><p class="first">한 옵션은 이전과 유사한 스타일링 기법을 사용하고 다른 색상 램프를 선택하는 것입니다. 색상표를 확장하고 Spectral를 선택합니다. 색상표를 다시 클릭하고 색상 램프 반전를 선택하여 낮은 값에 파란색을 할당하고 높은 값에 빨간색을 적용합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1521.png" class="align-center" src="../../_images/1521.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>This is a good visualization, but not easy to interpret. Let&#8217;s create a better map with 4 discrete categories, <code class="docutils literal"><span class="pre">Decline</span></code>, <code class="docutils literal"><span class="pre">Neutral</span></code>, <code class="docutils literal"><span class="pre">Growth</span></code> and <code class="docutils literal"><span class="pre">High</span> <span class="pre">Growth</span></code>. Scroll down to the tables with classes. Hold the <code class="kbd docutils literal"><span class="pre">Shift</span></code> key and select all the rows. Click the <span class="guilabel">Remove selected row(s)</span> button.</li>
+<li><p class="first">이것은 좋은 시각화 방법이지만 해석하기 쉽지는 않습니다. &#8220;감소&#8221;, &#8220;유지&#8221;, &#8220;성장&#8221;, &#8220;고성장&#8221; 등 4가지 분류로 더 나은 지도를 만들어봅시다. 클래스가 있는 표로 스크롤하십시오. &#8216;Shift&#8217; 키를 누르고 (모든) 행을 선택합니다. &#8216;선택한 행 제거&#8217; 버튼을 클릭합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1617.png" class="align-center" src="../../_images/1617.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>Change the <span class="guilabel">Interpolation</span> mode to <code class="docutils literal"><span class="pre">Discrete</span></code>. We will now create a color map manually. Click the <span class="guilabel">Add values manually</span> button. Enter <code class="docutils literal"><span class="pre">-100</span></code> as the <span class="guilabel">Value</span> and <code class="docutils literal"><span class="pre">Decline</span></code> as the <span class="guilabel">Label</span>. Assign blue color to this category. The way color map works is that all values lower than the value entered will be given the color of that entry. You will notice the canvas will show only those areas with negative population change.</li>
+<li><p class="first">&#8216;보간&#8217;을 &#8220;불연속&#8221;으로 변경합니다. 이제 색 지도를 수동으로 만들 것입니다. &#8216;수동으로 값 추가&#8217; 버튼을 클릭합니다. 값을 두 번 클릭하여 &#8220;-100&#8221;으로 입력하고 &#8220;Decline&#8221;을 &#8216;라벨&#8217;로 입력합니다. 색상을 두 번 클릭하여 이 범주에는 파란색을 적용합니다. 색상 맵이 작동하여 입력된 값보다 낮은 모든 값에 해당 항목의 색상이 부여될 것입니다. 이제 캔버스는 감소하는 인구 변화를 가진 지역만 보여줄 것입니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1718.png" class="align-center" src="../../_images/1718.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Complete the color-map with suitable values. I chose <code class="docutils literal"><span class="pre">100</span></code>, <code class="docutils literal"><span class="pre">1000</span></code> and <code class="docutils literal"><span class="pre">100000</span></code> as the upper-bounds for the <code class="docutils literal"><span class="pre">Neutral</span></code>, <code class="docutils literal"><span class="pre">Growth</span></code> and <code class="docutils literal"><span class="pre">High</span> <span class="pre">Growth</span></code> categories respectively.</li>
+<li><p class="first">적절한 값으로 색상 맵을 완성합니다. 예시에서는 &#8220;유지&#8221;, &#8220;성장&#8221;, &#8220;고성장&#8221; 분야 상위권으로 각각 &#8220;100&#8221;, &#8220;1000&#8221;, &#8220;100000&#8221;을 적용시켰습니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1817.png" class="align-center" src="../../_images/1817.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>Once you are satisfied with the visualization, close the <span class="guilabel">Layer Styling</span> panel. You now have a global thematic map of population change.</li>
+<li><p class="first">시각화에 만족하면 레이어 스타일 작업 패널을 닫습니다. 이제 인구 변화에 대한 세계 주제 지도가 완성되었습니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1914.png" class="align-center" src="../../_images/1914.png" />
@@ -391,7 +410,7 @@ links below:</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      최종 업데이트: Sep 19, 2019<br/>
+      최종 업데이트: Sep 24, 2019<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
