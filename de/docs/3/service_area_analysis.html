@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Service Area Analysis using Openrouteservice (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Einzugsgebietsanalyse mit dem Openrouteservice (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -82,13 +82,13 @@
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Einleitung</a></li>
-<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Making a Map (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Erstellung einer Karte (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Arbeit mit Attributen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Import von Tabellenblättern oder CSV-Dateien (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Einfache Vektor Gestaltung (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Berechnung der Länge von Linien und Statistiken (QGSI3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Einfache Visualisierung und Analyse von Rasterdaten (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Erstellen und Zuschneiden eines Raster-Mosaiks (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Working with Terrain Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Working with WMS Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Working with Projections</a></li>
@@ -107,13 +107,13 @@
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automatisierung der Kartenerstellung mit dem Drucklayout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Einfache Netzwerkvisualisierung und Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Lokalisierung der am nächsten gelegenen Einrichtung mit einer Quelle-Ziel-Matrix (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Einzugsgebietsanalyse mit dem Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Using the QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Mit der Pythonprogrammierung loslegen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Verarbeitungsroutinen mit Python ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Ein Python Plugin erstellen (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_python_plugin.html">Ein Verarbeitungsplugin erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Angepasste Python Funktionsausdrücke verwenden (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Pythonscripts für die Verarbeitungswerkzeuge schreiben (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
@@ -225,154 +225,174 @@
       
 
   <div class="section" id="service-area-analysis-using-openrouteservice-qgis3">
-<h1>Service Area Analysis using Openrouteservice (QGIS3)<a class="headerlink" href="#service-area-analysis-using-openrouteservice-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Service area analysis is useful in evaluating accessibility of locations. Given locations of fire stations, hospitals, public transit stations etc. you can use such analysis to identify what areas can be served from these locations by either amount of distance traveled or by time taken. Till recently, such analysis was difficult using open-source tools and data. But now we have access to a global street network using OpenStreetMap (OSM) and free web-services such as Openrouteservice (ORS) that can perform complex routing tasks using OpenStreetMap (OSM) data. In this tutorial, we will use the <strong>ORS Tools Plugin</strong> to perform service area analysis in QGIS.</p>
+<h1>Einzugsgebietsanalyse mit dem Openrouteservice (QGIS3)<a class="headerlink" href="#service-area-analysis-using-openrouteservice-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
+<p>Die Einzugsgebietsanalyse ist hilfreich, um die Erreichbarkeit von Standorten auszuwerten. Mit einem gegeben Standort von Feuerwehren, Krankenhäusern, Stationen des öffentlichen Personenverkehrs usw. kann mit Hilfe der Analyse bestimmt werden, welche Gebiete in Abhängigkeit von der aufzuwendenden Zeit oder Strecke bedient werden können. Bis vor kurzem waren solche Analysen mit Hilfe von Open-Source-Tools und freien Daten schwierig. Doch jetzt haben wir durch OpenStreetMap (OSM) Zugriff auf ein globales Straßennetzwerk und freie Webdienste wie Openrouteservice (ORS), der komplexe Routingaufgaben unter Nutzung von OpenStreetMap (OSM) Daten ausführen kann. In diesem Tutorial nutzen wir das <strong>ORS Tools Plugin</strong>, um eine Einzugsgebietsanalyse mit QGIS durchzuführen.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
-<p>We will use metro rail station data for Kochi, India to determine areas that are within 15-minutes of walking distance.</p>
+<h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Wir nutzen die U-Bahn Stationen der Stadt Kochi (Indien), um das Gebiet zu bestimmen, von dem aus eine Station in 15 Minuten zu Fuß erreicht werden kann.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
+<h3>Weitere Fähigkeiten die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
-<li>How to load General Transit Feed Specification (GTFS) transit feed data in QGIS.</li>
-<li>How to convert sequential point data to line tracks using the <em>Points to Path</em> tool.</li>
+<li><p class="first">Wie man Daten im digitalen Austauschformat General Transit Feed Specification (GTFS) in QGIS lädt.</p>
+</li>
+<li><p class="first">Wie man eine Reihe von Punktdaten in Linien mit Hilfe des Tools <em>Points to Path</em> konvertiert.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
-<p><a class="reference external" href="https://kochimetro.org">Kochi Metro Rail Limited (KMRL)</a> provides open data for the Kochi Metro Rail Project in <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">Global Transit Feed Specification (GTFS-static)</a> format. Request for data download by visiting the <a class="reference external" href="https://kochimetro.org/open-data/">Open Data</a> page.</p>
-<p>For convenience, you may directly download a copy of the datasets from the
-links below:</p>
+<h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
+<p><a class="reference external" href="https://kochimetro.org">Kochi Metro Rail Limited (KMRL)</a> stellt frei verfügbare Daten für die U-Bahn in Kochi im Format <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">Global Transit Feed Specification (GTFS-static)</a> bereit. Die Daten können zum download auf der Seite <a class="reference external" href="https://kochimetro.org/open-data/">Open Data</a> abgefragt werden.</p>
+<p>Der Einfachheit halber können wir eine Kopie des Datensatzes unter folgendem Link herunterladen:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/KMRL-Open-Data.zip">KMRL-Open-Data.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#kmrl" id="id1">[KMRL]</a></p>
+<p>Datenquelle <a class="reference internal" href="../credits.html#kmrl" id="id1">[KMRL]</a></p>
 </div>
 <div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link zu dieser Überschrift">¶</a></h2>
-<p><a class="reference external" href="https://openrouteservice.org/">Openrouteservice API</a> provides routing algorithms that work on free geographic data from OpenStreetMap. It is a free web-based service that can be accessed via a QGIS plugin. While the service is free, it requires you to sign-up and get an API key. The API key is used to prevent abuse and enforce limits on usage.</p>
+<h2>Einrichtung<a class="headerlink" href="#setup" title="Link zu dieser Überschrift">¶</a></h2>
+<p><a class="reference external" href="https://openrouteservice.org/">Openrouteservice API</a> stellt Routingalgorithmen bereit, die mit freien geographischen Daten wie z.B. OpenStreetMap arbeiten. Es handelt sich um einen freien webbasierten Service, auf den mit einem QGIS Plugin zugegriffen werden kann. Obwohl der Service frei ist, ist eine Registrierung zum Erhalt eines API-Schlüssels erforderlich. Der API-Schlüssel dient dazu, Missbrauch zu verhindern und beschränkt die Nutzung.</p>
 <ol class="arabic simple">
-<li>Visit <a class="reference external" href="https://openrouteservice.org/dev/#/signup">Openrouteservice Sign Up</a> page and create an account. Once your account is activated, visit your <a class="reference external" href="https://openrouteservice.org/dev/#/home">Dashboard</a> and request a token. Select <code class="docutils literal"><span class="pre">Free</span></code> as the <span class="guilabel">Token type</span> and enter <code class="docutils literal"><span class="pre">ORS</span> <span class="pre">Tools</span> <span class="pre">QGIS</span></code> as the <span class="guilabel">Token name</span>. Click <span class="guilabel">CREATE TOKEN</span>.</li>
+<li><p class="first">Gehe zur Seite <a class="reference external" href="https://openrouteservice.org/dev/#/signup">Openrouteservice Sign Up</a> und erstelle einen Account. Nachdem der Account aktiviert wurde, besuche die Seite <a class="reference external" href="https://openrouteservice.org/dev/#/home">Dashboard</a> und fordere ein Token an. Wähle <code class="docutils literal"><span class="pre">Free</span></code> als the <span class="guilabel">Token type</span> und gebe <code class="docutils literal"><span class="pre">ORS</span> <span class="pre">Tools</span> <span class="pre">QGIS</span></code> als <span class="guilabel">Token name</span> ein. Klicke auf <span class="guilabel">CREATE TOKEN</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup12.png" class="align-center" src="../../_images/setup12.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Once created, copy the long string displayed under <code class="docutils literal"><span class="pre">Key</span></code>. This is a unique identifier linked with your account that will be used to authorize use of this service.</li>
+<li><p class="first">Nach der Erstellung kopieren wir die lange Zeichenkette unter <code class="docutils literal"><span class="pre">Key</span></code>. Das ist der eindeutige mit dem Account verbundene Identifikator der zur Autorisierung des Services verwendet wird.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup21.png" class="align-center" src="../../_images/setup21.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Open QGIS. Visit <span class="menuselection">Plugins ‣ Manage and Install plugins</span>. Search for <strong>ORS Tools</strong> plugin and install it. Click <span class="guilabel">Close</span>.</li>
+<li><p class="first">Öffne QGIS. Gehe zu <span class="menuselection">Erweiterungen ‣ Erweiterungen verwalten und installieren</span>. Suche nach dem Plugin <strong>ORS Tools</strong> und installiere es. Klicke auf <span class="guilabel">Schließen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup3.png" class="align-center" src="../../_images/setup3.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>In the main QGIS Window, go to <span class="menuselection">Web ‣ ORS Tools ‣ Provider Settings</span>.</li>
+<li><p class="first">Gehe im QGIS Hauptfenster zu <span class="menuselection">Web ‣ ORS Tools ‣ Provider Settings</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup4.png" class="align-center" src="../../_images/setup4.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Expand the <span class="guilabel">openrouteservice</span> section and paste the <code class="docutils literal"><span class="pre">key</span></code> (copied in step 2) in the <span class="guilabel">API Key</span> text-box. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Erweitere den Bereich <span class="guilabel">openrouteservice</span> und kopiere den <code class="docutils literal"><span class="pre">Schlüssel</span></code> (aus Schritt 2) in das Textfeld <span class="guilabel">API Key</span>. Klicke auf <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/setup5.png" class="align-center" src="../../_images/setup5.png" />
 </div></blockquote>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
+<h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li>Unzip the downloaded <code class="docutils literal"><span class="pre">KMRL-Open-Data.zip</span></code> file to a folder on your computer. You will notice that the unzipped directory contains many text files. Each file contains data for a different aspect of the transit system. The format of the files and their uses are described in <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">GTFS Reference</a>. Out of all the files, 2 files contains geospatial data and is of interest to us. The file <code class="docutils literal"><span class="pre">shapes.txt</span></code> contains points that describe a physical path that the vehicle takes, and the file <code class="docutils literal"><span class="pre">stops.txt</span></code> contains the location of each transit stop. Both of these are CSV files that can be imported into QGIS. Click the <span class="guilabel">Open Data Source Manager</span> button.</li>
+<li><p class="first">Entpacke die heruntergeladenen Daten <code class="docutils literal"><span class="pre">KMRL-Open-Data.zip</span></code> in ein lokales Verzeichnis. Jede Datei enthält Daten für verschiedene Teile des Verkehrssystems. Das Dateiformat und die Verwendung der einzelnen Dateien ist unter <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">GTFS Reference</a> beschrieben. Die für uns interessanten 2 Dateien enthalten räumliche Daten. Die Datei <code class="docutils literal"><span class="pre">shapes.txt</span></code> enthält Punkte die den Pfad eines Fahrzeuges beschreiben und die Datei <code class="docutils literal"><span class="pre">stops.txt</span></code> enthält den Standpunkt der Haltestellen. Beide CSV-Dateien können nach QGIS importiert werden. Klicke auf den Knopf <span class="guilabel">Datenquellenverwaltung öffnen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1108.png" class="align-center" src="../../_images/1108.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>In the <span class="guilabel">Data Source Manager</span> dialog, switch to the <span class="guilabel">Delimited Text</span> tab. Click the <span class="guilabel">...</span> button next to <span class="guilabel">File name</span> and browse to the <code class="docutils literal"><span class="pre">shapes.txt</span></code> file. Select <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">(comma</span> <span class="pre">separated</span> <span class="pre">values)</span></code> as the <span class="guilabel">File Format</span>. The <span class="guilabel">X field</span> and <span class="guilabel">Y field</span> should be auto populated. Click <span class="guilabel">Add</span>.</li>
+<li><p class="first">Im Dialogfenster <span class="guilabel">Data Source Manager</span> gehen wir zum Feld <span class="guilabel">Getrennte Texte</span>. Klicke auf den Knopf <span class="guilabel">...</span> neben <span class="guilabel">Dateiname</span> und öffne die Datei <code class="docutils literal"><span class="pre">shapes.txt</span></code>. Wähle <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">(comma</span> <span class="pre">separated</span> <span class="pre">values)</span></code> als <span class="guilabel">Dateiformat</span>. Das <span class="guilabel">X-Feld</span> und das <span class="guilabel">Y-Feld</span> sollten automatisch gefüllt sein. Klicke auf <span class="guilabel">Hinzufügen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/268.png" class="align-center" src="../../_images/268.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Similarly, click the <span class="guilabel">...</span> button again and select <code class="docutils literal"><span class="pre">stops.txt</span></code> file. Click <span class="guilabel">Add</span>. Click <span class="guilabel">Close</span>.</li>
+<li><p class="first">Klicke nocheinmal auf den Knopf <span class="guilabel">...</span> und wähle die Datei <code class="docutils literal"><span class="pre">stops.txt</span></code>. Klicke auf <span class="guilabel">Hinzufügen</span> und danach auf <span class="guilabel">Schließen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/340.png" class="align-center" src="../../_images/340.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>You will see 2 new layers <code class="docutils literal"><span class="pre">stops</span></code> and <code class="docutils literal"><span class="pre">shapes</span></code> added to the <span class="guilabel">Layers</span> panel. Let&#8217;s convert the <code class="docutils literal"><span class="pre">shapes</span></code> point layer into a line layer representing the path of the metro line. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">Wir sehen 2 neue Layer <code class="docutils literal"><span class="pre">stops</span></code> und <code class="docutils literal"><span class="pre">shapes</span></code>, die im <span class="guilabel">Layer</span> Bereich angezeigt werden. Wir werden jetzt den <code class="docutils literal"><span class="pre">shapes</span></code> Punktlayer in einen Linienlayer konvertieren. Er repräsentiert den Verlauf der U-Bahnlinie. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/425.png" class="align-center" src="../../_images/425.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Search and locate the <span class="menuselection">Vector creation ‣ Points to path</span> tool. Double-click to launch it.</li>
+<li><p class="first">Suche das Tool <span class="menuselection">Vektorerzeugung ‣ Punkte zu Weg</span> und klicke doppelt darauf, um es zu starten.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/525.png" class="align-center" src="../../_images/525.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Select <code class="docutils literal"><span class="pre">shapes</span></code> as the <span class="guilabel">Input point layer</span>. As per GTFS specifications, each individual route has a unique <code class="docutils literal"><span class="pre">shape_id</span></code> so select that as the <span class="guilabel">Group field</span>. We can also specify the order of points that will form the line by selecting <code class="docutils literal"><span class="pre">shape_pt_sequence</span></code> as the <span class="guilabel">Order field</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Wähle <code class="docutils literal"><span class="pre">shapes</span></code> als den <span class="guilabel">Eingabepunktlayer</span>. Entsprechend der GTFS Spezifikation hat jede Route eine eindeutige ID <code class="docutils literal"><span class="pre">shape_id</span></code>. Wähle diese ID für das <span class="guilabel">Gruppierungsfeld</span>. Wir können zusätzlich im Feld <span class="guilabel">Sortierungsfeld</span> die Sortierung der Punkte vorgeben, die die Linie bilden. Wir verwenden hier <code class="docutils literal"><span class="pre">shape_pt_sequence</span></code>. Klicke auf <span class="guilabel">Starte</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/624.png" class="align-center" src="../../_images/624.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>A new layer <code class="docutils literal"><span class="pre">Paths</span></code> will be added to the <span class="guilabel">Layers</span> panel. You can turn off the visibility of the <code class="docutils literal"><span class="pre">shapes</span></code> layer to see the newly added line layer.</li>
+<li><p class="first">Ein neuer Layer <code class="docutils literal"><span class="pre">Pfade</span></code> wird im Bereich <span class="guilabel">Layer</span> hinzugefügt. Wir können die Sichtbarkeit des Layers <code class="docutils literal"><span class="pre">shapes</span></code> abschalten, um den neu hinzugefügten Layer zu sehen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/724.png" class="align-center" src="../../_images/724.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Now that we have the metro stations and line data added, we are ready to start the network analysis. In the <span class="guilabel">Processing Toolbox</span>, search for and locate the <span class="menuselection">ORS Tools ‣ Isochrones ‣ Isochrones From Layer</span> tool. Double-click to launch it.</li>
+<li><p class="first">Jetzt wo wir die U-Bahnstationen und die Linie hinzugefügt haben, können wir mit der Netzwerkanalyse beginnen. Unter <span class="guilabel">Verarbeitungswerkzeuge</span> suchen wir das Tool <span class="menuselection">ORS Tools ‣ Isochrones ‣ Isochrones From Layer</span>. Klicke doppelt darauf, um es zu starten.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/823.png" class="align-center" src="../../_images/823.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Select <code class="docutils literal"><span class="pre">openrouteservice</span></code> as the <span class="guilabel">Provider</span>. We will be computing a 15-min walking distance polygon from each metro station. Select <code class="docutils literal"><span class="pre">stops</span></code> as <span class="guilabel">Input Point Layer</span>. Select <code class="docutils literal"><span class="pre">stop_id</span></code> as the <span class="guilabel">Input Layer ID Field</span>. From the <span class="guilabel">Travel mode</span> drop-down, select <code class="docutils literal"><span class="pre">foot-walking</span></code>. As we are interested in time-based area, select <code class="docutils literal"><span class="pre">time</span></code> as the <span class="guilabel">Dimension</span>. Finally enter <code class="docutils literal"><span class="pre">15</span></code> minutes as the <span class="guilabel">ranges</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Wir wählen <code class="docutils literal"><span class="pre">openrouteservice</span></code> als <span class="guilabel">Provider</span>. Wir werden das Gebiet in 15-minütiger fußläufiger Reichweite zu jeder U-Bahnstation ermitteln. Wähle <code class="docutils literal"><span class="pre">stops</span></code> als <span class="guilabel">Input Point Layer</span> und <code class="docutils literal"><span class="pre">stop_id</span></code> als <span class="guilabel">Input Layer ID Field</span>. Im Dropdown-Menü <span class="guilabel">Travel mode</span> wählen wir <code class="docutils literal"><span class="pre">foot-walking</span></code>. Da wir an der zeitbasierten Fläche interessiert sind, wähle <code class="docutils literal"><span class="pre">time</span></code> als <span class="guilabel">Dimension</span>. Zum Schluss geben wir <code class="docutils literal"><span class="pre">15</span></code> Minuten als <span class="guilabel">ranges</span> vor. Klicke auf <span class="guilabel">Starte</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/924.png" class="align-center" src="../../_images/924.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Bemerkung</p>
-<p class="last">Note that the Openrouteservice API has a limit of 20 requests per minute for Isochrones. So if your layer has more than 20 points, you may see errors indicating that the rate limit exceeded. You can keep the tool running and it will continue processing 20 points / min.</p>
+<p class="last">Beachte, dass die Openrouteservice API ein Limit von 20 Anfragen je Minute hat. Wenn ein Layer mehr als 20 Punkte hat, erscheinen unter Umständen Fehlermeldungen wegen Überschreitung des Limits. Man kann das Tool weiter laufen lassen, es setzt die Verarbeitung mit 20 Punkten je Minute fort.</p>
 </div>
 <ol class="arabic simple" start="10">
-<li>Once the tool finishes, you will see a new layer <code class="docutils literal"><span class="pre">Isochrones</span></code> loaded in the <span class="guilabel">Layers</span> panel. Each point has an associated polygon representing the area that is accessible within 15 minutes by walk. To see this in the context the data that was used to generate them, we can add the OpenStreetMap basemap. Scroll down the <span class="guilabel">Browser</span> panel and locate <span class="menuselection">XYZ Tiles ‣ OpenStreetMap</span>. Drag it to the canvas.</li>
+<li><p class="first">Nach Beendigung der Berechnung sehen wir einen neuen Layer <code class="docutils literal"><span class="pre">Isochrones</span></code>, der im <span class="guilabel">Layer</span> Bereich geladen wurde. Zu jedem Punkt wurde ein Polygon erzeugt, dass das Gebiet in 15-minütiger fussläufiger Reichweite darstellt. Um das Ergebnis im Kontext mit den zur Erstellung verwendeten Quelldaten zu sehen, fügen wir eine OpenStreetMap Basiskarte hinzu. Wir scrollen im <span class="guilabel">Browser</span> Bereich nach unten und ziehen <span class="menuselection">XYZ Tiles ‣ OpenStreetMap</span> in den Arbeitsbereich.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1022.png" class="align-center" src="../../_images/1022.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>A new layer <code class="docutils literal"><span class="pre">OpenStreetMap</span></code> will be added to the <span class="guilabel">Layers</span> panel. Drag it down to change the layer order and keep it at the bottom of the layer stack. Zoom and pan to see if the results match the road network. You will see that the polygons are not circular, because the travel time is computed along roads, so the regions that have no roads will have lesser area covered.</li>
+<li><p class="first">Ein neuer Layer <code class="docutils literal"><span class="pre">OpenStreetMap</span></code> wird im <span class="guilabel">Layer</span> Bereich angezeigt. Ziehe den Layer im Layerbereich ganz nach unten. Wir können hinein- und hinauszoomen, um zu sehen, ob das Ergebnis zum Straßennetzwerk passt. Wir sehen, dass die Polygone nicht kreisförmig sind, da die Reisezeit entlang der Straßen berechnet wird. In Regionen mit wenigen Straßen wird eine kleinere Fläche ausgewiesen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1127.png" class="align-center" src="../../_images/1127.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>To compute the service area, we need to complete one last task. We can merge individual isochrone polygons to form a single polygon representing the areas that are accessible. Search for and locate <span class="menuselection">Vector geometry ‣ Dissolve</span>.</li>
+<li><p class="first">Um das Einzugsgebiet zu berechnen, müssen wir eine letzte Arbeit ausführen. Wir fügen die einzelnen isochron-Polygone zu einem Polygon zusammen, das die erreichbare Fläche repräsentiert. Suche das Tool <span class="menuselection">Vektorgeometrie ‣ Auflösen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1224.png" class="align-center" src="../../_images/1224.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>Select <code class="docutils literal"><span class="pre">Isochrones</span></code> as the <span class="guilabel">Input layer</span> and click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Wähle <code class="docutils literal"><span class="pre">Isochrones</span></code> als <span class="guilabel">Eingabelayer</span> und klicke auf <span class="guilabel">Starte</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1324.png" class="align-center" src="../../_images/1324.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Once the processing finishes, a new layer <code class="docutils literal"><span class="pre">Dissolved</span></code> will be added to the <span class="guilabel">Layers</span> panel. This polygons represents the full region that is accessible from the metro system within 15-minutes of walk.</li>
+<li><p class="first">Nach Fertigstellen der Berechnung wird ein neuer Layer <code class="docutils literal"><span class="pre">Aufgelöst</span></code> im <span class="guilabel">Layer</span> Bereich angezeigt. Dieses Polygon repräsentiert die Fläche, die mit einem 15-minütigen Fußweg von der U-Bahn aus erreichbar ist.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1422.png" class="align-center" src="../../_images/1422.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Bemerkung</p>
-<p class="last">This is a simple example of how a service area analysis for a public transportation project can be done in QGIS. A more comprehensive service-area analysis for the metro system would include other modes of transport. We could include feeder buses, nearby bus stops and routes serving those bus stops to expand the analysis. We may also include travel by other modes such as car and taxi.</p>
+<p class="last">Das ist ein einfaches Beispiel für eine Einzugsgebietsanalyse eines öffentlichen Verkehrsmittels in QGIS. Eine umfassendere Einzugsgebietsanalyse der U-Bahn würde andere Verkehrsmittel einschließen. Wir könnten Zubringerbusse, nahe gelegene Bushaltestellen und Linien mit Anbindung an die Haltestellen berücksichtigen. Wir könnten auch andere Verkehrsmittel wie das Auto oder Taxi berücksichtigen.</p>
 </div>
 </div>
 </div>
@@ -399,7 +419,7 @@ links below:</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Sep 24, 2019.<br/>
+      Zuletzt aktualisiert am Oct 22, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

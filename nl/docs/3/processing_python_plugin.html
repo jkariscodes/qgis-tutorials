@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building a Processing Plugin (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Een plug-in voor Processing bouwen (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -113,7 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Beginnen met programmeren in Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Algoritmes van Processing uitvoeren via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Een plug-in in Python bouwen (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Building a Processing Plugin (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Een plug-in voor Processing bouwen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Aangepaste Python expressie-functies gebruiken (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Python-scripts schrijven voor framework Processing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Taken voor QGIS uitvoeren en in schema zetten</a></li>
@@ -225,125 +225,137 @@
       
 
   <div class="section" id="building-a-processing-plugin-qgis3">
-<h1>Building a Processing Plugin (QGIS3)<a class="headerlink" href="#building-a-processing-plugin-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>In the previous tutorial <a class="reference internal" href="building_a_python_plugin.html"><em>Een plug-in in Python bouwen (QGIS3)</em></a>, you learnt how to create a python plugin - including the user interface and custom logic for processing the data. While these type of plugins are useful, it puts the burden of designing the user interface on the plugin author. This results in each plugin having different ways to interact with it - which is confusing to the users. Also, regular plugins do not interact with another parts of QGIS. For example, you cannot use the plugin functionality from another algorithm. If the plugin that you want to write is primarily for analysis, and the user interaction that you want is limited to letting the user pick inputs and outputs, there is a much easier and preferred way to write plugins using the Processing Framework. It removes the need for you to design the user interface - simplifying the process. The built-in processing library creates a standard processing interface depending on your inputs that looks and behaves just like any other processing algorithm in QGIS. It also seamlessly integrates with rest of the Processing framework - so your plugin algorithms can be used in batch processing, graphical modeler, called from python console etc.</p>
+<h1>Een plug-in voor Processing bouwen (QGIS3)<a class="headerlink" href="#building-a-processing-plugin-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>In de vorige handleiding <a class="reference internal" href="building_a_python_plugin.html"><em>Een plug-in in Python bouwen (QGIS3)</em></a>, leerde u hoe een plug-in voor Python te maken - inclusief de gebruikersinterface en aangepaste logica voor het verwerken van de gegevens. Hoewel dit type plug-ins nuttig zijn, legt het de last van het ontwerpen van de gebruikersinterface bij de auteur van de plug-in. Dit heeft tot gevolg dat elke plug-in verschillende manieren heeft om er mee te werken - wat voor gebruikers verwarrend is. Ook werken gewone plug-ins niet samen met andere delen van QGIS. U kunt bijvoorbeeld niet de functionaliteit van een plug-in uit een ander algoritme gebruiken. Als de plug-in die u wilt schrijven primair is bedoeld voor analyses, en de interactie met de gebruiker die u wilt is beperkt tot de gebruiker de in- en uitvoer te laten kiezen, is er een veel eenvoudiger en aanbevolen manier om plug-ins te schrijven met het framewerk Processing. Het verwijdert de noodzaak voor u om de gebruikersinterface te ontwerpen - wat het proces vereenvoudigt. De ingebouwde bibliotheek voor Processing maakt een standaard interface voor Processing, afhankelijk van uw invoer, die eruit ziet en aanvoelt net als elk ander algoritme voor processing in QGIS. Het integreert ook naadloos met de rest van het framewerk Processing - dus uwplug-in voor algoritmes kan worden gebruikt voor het verwerken van massa, Grafische modellen bouwen, aangeroepen worden vanuit de console voor Python etc.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the Task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will re-implement a simple plugin from the tutorial  <a class="reference internal" href="building_a_python_plugin.html"><em>Een plug-in in Python bouwen (QGIS3)</em></a> as a processing plugin. It will result in a new processing provider called <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span></code> and an algorithm <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code> that will allow users to pick a vector layer and write its attributes to a CSV file.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen een eenvoudige plug-in opnieuw implementeren, vanuit de handleiding <a class="reference internal" href="building_a_python_plugin.html"><em>Een plug-in in Python bouwen (QGIS3)</em></a>, als een plug-in voor Processing. Het zal leiden tot een nieuwe provider voor Processing, genaamd <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span></code>, en een algoritme &#8220;Attributen opslaan als CSV&#8221; dat gebruikers in staat zal stellen een vectorlaag uit te zoeken en de attributen daarvan weg te schrijven naar een CSV-bestand.</p>
 </div>
 <div class="section" id="get-the-tools">
-<h2>Get the Tools<a class="headerlink" href="#get-the-tools" title="Permalink naar deze titel">¶</a></h2>
+<h2>De gereedschappen ophalen<a class="headerlink" href="#get-the-tools" title="Permalink naar deze titel">¶</a></h2>
 <div class="section" id="a-text-editor-or-a-python-ide">
-<h3>A Text Editor or a Python IDE<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Permalink naar deze titel">¶</a></h3>
-<p>Any kind of software development requires a good text editor. If you already have a favorite text editor or an IDE (Integrated Development Environment), you may use it for this tutorial. Otherwise, each platform offers a wide variety of free or paid options for text editors. Choose the one that fits your needs.</p>
-<p>This tutorial uses Notepad++ editor on Windows.</p>
+<h3>Een tekstbewerker of een Python IDE<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Permalink naar deze titel">¶</a></h3>
+<p>Elke soort softwareontwikkeling vereist een goede tekstbewerker. Als u al een favoriete tekstbewerker of een IDE (Integrated Development Environment) heeft, zou u die kunnen gebruiken voor deze handleiding. Anders biedt elk platform een grote variëteit van gratis of betaalde opties voor tekstbewerkers. Kies er een die aan uw wensen voldoet.</p>
+<p>Deze handleiding gebruikt de bewerker Notepad++ op Windows.</p>
 <p><strong>Windows</strong></p>
-<p><a class="reference external" href="http://notepad-plus-plus.org/">Notepad++</a> is a good free editor for windows.
-Download and install the <a class="reference external" href="https://notepad-plus-plus.org/download/">Notepad++ editor</a>.</p>
+<p><a class="reference external" href="https://notepad-plus-plus.org/">Notepad++</a> is een goede gratis tekstbewerker voor Windows. Download en installeer de <a class="reference external" href="https://notepad-plus-plus.org/download/">tekstbewerker Notepad++</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">If you are using Notepad++, makes sure to go to <span class="menuselection">Settings ‣ Preferences ‣ Tab Settings</span> and enable <span class="guilabel">Replace by space</span>. Python is very sensitive about whitespace and this setting will ensure tabs and spaces are treated properly.</p>
+<p class="last">Indien u Notepad++ gebruikt, zorg er dan voor dat u gaat naar <span class="menuselection">Instellingen ‣ Voorkeuren ‣ Tabs</span> en <span class="guilabel">Omzetten in spaties</span> inschakelt. Python is bijzonder gevoelig voor witruimte en deze instelling zal er voor zorgen dat tabs en spaties op de juiste manier worden behandeld.</p>
 </div>
 </div>
 <div class="section" id="plugin-builder-plugin">
-<h3>Plugin Builder plugin<a class="headerlink" href="#plugin-builder-plugin" title="Permalink naar deze titel">¶</a></h3>
-<p>There is a helpful QGIS plugin named <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> which creates all the necessary files and the boilerplate code for a plugin. Find and install the <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> plugin. See <a class="reference internal" href="../using_plugins.html"><em>Plug-ins gebruiken</em></a> for more details on how to install plugins.</p>
+<h3>plug-in Plugin Builder<a class="headerlink" href="#plugin-builder-plugin" title="Permalink naar deze titel">¶</a></h3>
+<p>Er is een nuttige plug-in voor QGIS, genaamd <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> die alle noodzakelijke bestanden en onderliggende code voor een plug-in maakt. Zoek en installeer de plug-in <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>. Bekijk <a class="reference internal" href="../using_plugins.html"><em>Plug-ins gebruiken</em></a> voor meer details over hoe plug-ins te installeren.</p>
 </div>
 <div class="section" id="plugins-reloader-plugin">
-<h3>Plugins Reloader plugin<a class="headerlink" href="#plugins-reloader-plugin" title="Permalink naar deze titel">¶</a></h3>
-<p>This is another helper plugin which allows iterative development of plugins. Using this plugin, you can change your plugin code and have it reflected in QGIS without having to restart QGIS every time. Find and install the <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Reloader</span></code> plugin. See <a class="reference internal" href="../using_plugins.html"><em>Plug-ins gebruiken</em></a> for more details on how to install plugins.</p>
+<h3>plug-in Plugins Reloader<a class="headerlink" href="#plugins-reloader-plugin" title="Permalink naar deze titel">¶</a></h3>
+<p>Dit is een andere nuttige hulpplug-in die het iteratief ontwikkelen van plug-ins mogelijk maakt. Met behulp van deze plug-in kunt u de code voor uw plug-in wijzigen en die hebben gereflecteerd in QGIS zonder dat u QGIS elke keer opnieuw moet starten. Zoek en installeer de plug-in <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Reloader</span></code>. Bekijk <a class="reference internal" href="../using_plugins.html"><em>Plug-ins gebruiken</em></a> voor meer details over hoe plug-ins te installeren.</p>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">Plugin Reloader is an experimental plugin. Make sure you have checked <span class="guilabel">Show also experimental plugins</span> in <span class="guilabel">Plugin Manager</span> settings if you cannot find it.</p>
+<p class="last">Plugin Reloader is een experimentele plug-in. Zorg er voor dat u ook <span class="guilabel">Ook de experimentele plugins tonen</span> in de instellingen van <span class="guilabel">Plug-ins installeren en beheren</span> selecteert, als u hem niet kunt vinden.</p>
 </div>
 </div>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li>Open QGIS. Go to <span class="menuselection">Plugins ‣ Plugin Builder ‣ Plugin Builder</span>.</li>
+<li><p class="first">Open QGIS. Ga naar <span class="menuselection">Plug-ins ‣ Plugin Builder ‣ Plugin Builder</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>You will see the <span class="guilabel">QGIS Plugin Builder</span> dialog with a form. You can fill the form with details relating to our plugin. The <span class="guilabel">Class name</span> will be the name of the Python Class containing the logic of the plugin. This will also be the name of the folder containing all the plugin files. Enter <code class="docutils literal"><span class="pre">SaveAttributes</span></code> as the class name. The <span class="guilabel">Plugin name</span> is the name under which your plugin will appear in the    <span class="guilabel">Plugin Manager</span>. Enter the name as <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">(Processing)</span></code>. Add a description in the <span class="guilabel">Description</span> field. The <span class="guilabel">Module name</span> will be the name of the main python file for the plugin. Enter it as <code class="docutils literal"><span class="pre">save_attributes_processing</span></code>. Leave the version numbers as they are and enter your name and email address in the appropriate fields. Click <span class="guilabel">Next</span>.</li>
+<li><p class="first">U zult het dialoogvenster zien van <span class="guilabel">QGIS Plugin Builder</span> met een formulier. U kunt het formulier vullen met details met betrekking tot onze plug-in. De <span class="guilabel">Class name</span> zal de naam zijn van de Python Class die de logica van de plug-in bevat. Dit zal ook de naam zijn van de map die alle bestanden van de plug-in bevat. Voer <code class="docutils literal"><span class="pre">SaveAttributes</span></code> in als de naam van de klasse. De <span class="guilabel">Plugin name</span> is de naam waarmee uw plug-in zal verschijnen in <span class="guilabel">Plug-ins beheren en installeren</span>. Voer de naam in als <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span> <span class="pre">(Processing)</span></code>. Voeg een beschrijving toe in het veld <span class="guilabel">Description</span>. De <span class="guilabel">Module name</span> zal de naam zijn van het belangrijkste Python-bestand voor de plug-in. Voer die in als <code class="docutils literal"><span class="pre">save_attributes_processing</span></code>. Laat de versienummers zoals zij zijn en voer uw naam en e-mailadres in in de toepasselijke velden. Klik op <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/250.png" class="align-center" src="../../_images/250.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Enter a brief description of the plugin for the <span class="guilabel">About</span> dialog and click <span class="guilabel">Next</span>.</li>
+<li><p class="first">Voer een korte beschrijving van de plug-in in voor het dialoogvenster <span class="guilabel">About</span> en klik op <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/335.png" class="align-center" src="../../_images/335.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Select the <code class="docutils literal"><span class="pre">Processing</span> <span class="pre">Provider</span></code> from the <span class="guilabel">Template</span> selector. The <span class="guilabel">Algorithm name</span> value will be how the users will find the processing algorithm in the Processing Toolox. Enter it as <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code>. Leave the <span class="guilabel">Algorithm group</span> blank. Enter the <span class="guilabel">Provider name</span> as <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span></code>. Enter a description in the <span class="guilabel">Provider description</span> field. Click <span class="guilabel">Next</span>.</li>
+<li><p class="first">Selecteer <code class="docutils literal"><span class="pre">Processing</span> <span class="pre">Provider</span></code> uit de keuze <span class="guilabel">Template</span>. De waarde <span class="guilabel">Algorithm name</span> is hoe gebruikers uw plug-in zullen zien in de Toolbox van Processing. Voer het in als <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span> <span class="pre">als</span> <span class="pre">CSV</span></code>. Laat <span class="guilabel">Algorithm group</span> leeg. Voer de <span class="guilabel">Provider name</span> in als <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span></code>. Voer een beschrijving in het veld <span class="guilabel">Provider description</span> in. Klik op <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/420.png" class="align-center" src="../../_images/420.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Plugin builder will prompt you for the type of files to generate. Keep the default selection and click <span class="guilabel">Next</span>.</li>
+<li><p class="first">Plugin builder zal u vragen naar het type van de te maken bestanden. Behoud de standaard selectie en klik op <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/520.png" class="align-center" src="../../_images/520.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>As we do not intend to publish the plugin, you may leave the <span class="guilabel">Bug tracker</span>, <span class="guilabel">Repository</span> and <span class="guilabel">Home page</span> values to default. Check the <span class="guilabel">Flag the plugin as experimental</span> box at the bottom and click <span class="guilabel">Next</span>.</li>
+<li><p class="first">U kunt, omdat we niet van plan zijn om onze plug-in te publiceren, de waarden van <span class="guilabel">Bug tracker</span>, <span class="guilabel">Repository</span> en <span class="guilabel">Home page</span> op de standaard laten staan. Selecteer het vak <span class="guilabel">Flag the plugin as experimental</span> aan de onderzijde en klik op <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/620.png" class="align-center" src="../../_images/620.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>You will be prompted to choose a directory for your plugin. For now, save it to a directory you can locate easily on your computer and click <span class="guilabel">Generate</span>.</li>
+<li><p class="first">U zult worden gevraagd een map op te geven voor uw plug-in. Sla die, voor nu, op in een map die u gemakkelijk kunt vinden op uw computer en klik op <span class="guilabel">Generate</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/719.png" class="align-center" src="../../_images/719.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Next, press the <span class="guilabel">generate</span> button. You will see a confirmation dialog once your plugin template is created.</li>
+<li><p class="first">Druk vervolgens op de knop <span class="guilabel">Generate</span>. U zult een dialoogvenster ter bevestiging zien als de sjabloon voor uw plug-in eenmaal is gemaakt.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/819.png" class="align-center" src="../../_images/819.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">You may get a prompt saying that pyrcc5 is not found in the path. You can ignore this message.</p>
+<p class="last">U zou een bericht kunnen krijgen dat zegt dat pyrcc5 niet in het pad is gevonden. U kunt dit bericht negeren.</p>
 </div>
 <ol class="arabic simple" start="9">
-<li>Plugins in QGIS are stored in a special folder. We must copy our plugin directory to that folder before it can be used. In QGIS, locate your current profile folder by going to <span class="menuselection">Settings ‣ User Profiles ‣ Open Active Profile Folder</span>.</li>
+<li><p class="first">Plug-ins worden in QGIS opgeslagen in een speciale map. We moeten onze map van onze plug-in naar die map kopiëren voor we die kunnen gebruiken. Zoek, in QGIS, de map voor uw huidige profiel door te gaan naar <span class="menuselection">Extra ‣ Gebruikersprofielen ‣ Actieve profielmap openen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/919.png" class="align-center" src="../../_images/919.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>In the profile folder, copy the plugin folder to <span class="menuselection">python ‣ plugins</span> subfolder.</li>
+<li><p class="first">Kopieer, in de profielmap, de map Plugin naar de submap <span class="menuselection">python ‣ plugins</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1019.png" class="align-center" src="../../_images/1019.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>Now we are ready to have a first look at the brand new plugin we created. Close QGIS and launch it again. Go to <span class="menuselection">Plugins ‣ Manage and Install plugins</span> and enable the <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">(Processing)</span></code> plugin in the <span class="guilabel">Installed</span> tab.</li>
+<li><p class="first">Nu zijn we klaar om een eerste blik te werpen op de nagelnieuwe plug-in die we hebben gemaakt. Sluit QGIS en start het opnieuw. Ga naar <span class="menuselection">Plug-ins ‣ Plug-ins beheren en installeren</span> en schakel de plug-in <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span> <span class="pre">(Processing)</span></code> in op de tab <span class="guilabel">Geïnstalleerd</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1123.png" class="align-center" src="../../_images/1123.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>Go to <span class="menuselection">Processing ‣ Toolbox</span>. You will notice that there is a new provider at the bottom called <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span></code>. Expand it to find an algorithm named <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code>. Double-click to launch it.</li>
+<li><p class="first">Ga naar <span class="menuselection">Processing ‣ Toolbox</span>. U zult zien dat er een nieuwe provider aan de onderzijde staat, genaamd <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span></code>. Vergroot het om een algoritme, genaamd <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span> <span class="pre">als</span> <span class="pre">CSV</span></code> te zoeken. Dubbelklik erop om het te starten.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1219.png" class="align-center" src="../../_images/1219.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>You will notice a familiar processing algorithm dialog with a dropdown for an input layer and a selector for an output layer. We will now customize this dialog to suit our needs. Close this dialog.</li>
+<li><p class="first">U zult een bekend dialoogvenster voor algoritmes van Processing zien, met een keuzelijst voor een invoerlaag en een selectievak voor een uitvoerlaag. We zullen nu dit dialoogvenster aanpassen zodat het aan onze behoeften voldoet. Sluit dit dialoogvenster.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1319.png" class="align-center" src="../../_images/1319.png" />
 </div></blockquote>
 <ol class="arabic" start="14">
-<li><p class="first">Go to the plugin directory and load the file <code class="docutils literal"><span class="pre">save_attributes_processing_algorithm.py</span></code> in a text editor. For our plugin, we take a vector layer as an input and write out a CSV file as output. So instead of importing <code class="docutils literal"><span class="pre">QgsProcessingParameterFeatureSink</span></code> as output - which is for vector layer - add <code class="docutils literal"><span class="pre">QgsProcessingParameterFileDestination</span></code> which is for a file.</p>
+<li><p class="first">Ga naar de map met de plug-in en laadt het bestand <code class="docutils literal"><span class="pre">save_attributes_processing_algorithm.py</span></code> in een tekstbewerker. Voor onze plug-in nemen we een vectorlaag als invoer en schrijven weg naar een bestand CSV als uitvoer. Dus in plaats van <code class="docutils literal"><span class="pre">QgsProcessingParameterFeatureSink</span></code> te importeren als uitvoer - wat bestemd is voor een vectorlaag - voeg <code class="docutils literal"><span class="pre">QgsProcessingParameterFileDestination</span></code> toe, wat bestemd is voor een bestand.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="p">(</span><span class="n">QgsProcessing</span><span class="p">,</span>
                  <span class="n">QgsFeatureSink</span><span class="p">,</span>
                  <span class="n">QgsProcessingAlgorithm</span><span class="p">,</span>
@@ -351,7 +363,7 @@ Download and install the <a class="reference external" href="https://notepad-plu
                  <span class="n">QgsProcessingParameterFileDestination</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Next, scroll down and define the output parameter under <code class="docutils literal"><span class="pre">initAlgorithm()</span></code> method with the following code.</p>
+<p>Scroll vervolgens naar beneden en definieer de parameter voor de uitvoer onder de methode <code class="docutils literal"><span class="pre">initAlgorithm()</span></code> met de volgende code.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">addParameter</span><span class="p">(</span>
       <span class="n">QgsProcessingParameterFileDestination</span><span class="p">(</span>
           <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUT</span><span class="p">,</span>
@@ -368,19 +380,21 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <img alt="../../_images/14b.png" class="align-center" src="../../_images/14b.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Let&#8217;s reload our plugin so we can see the changes in the dialog window. Go to <span class="menuselection">Plugin ‣ Plugin Reloader ‣ Choose a plugin to be reloaded</span>. Select <code class="docutils literal"><span class="pre">save_attributes_processing</span></code> in the <span class="guilabel">Configure Plugin reloader</span> dialog.</li>
+<li><p class="first">Laten we onze plug-in opnieuw laden zodat we de wijzigingen kunnen zien in het dialoogvenster. Ga naar <span class="menuselection">Plug-ins ‣ Plugin Reloader ‣ Configure</span>. Selecteer <code class="docutils literal"><span class="pre">save_attributes_processing</span></code> in het dialoogvenster <span class="guilabel">Configure Plugin reloader</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1518.png" class="align-center" src="../../_images/1518.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>Click the <span class="guilabel">Reload plugin</span> button to load the latest version of the plugin. To test this new functionality, we must load some layers in QGIS. After you have loaded some layers, launch the <span class="menuselection">Save Attributes ‣ Save Attributes as CSV</span> algorithm. You will see the output is changed to a file instead of a layer.</li>
+<li><p class="first">Klik op de knop <span class="guilabel">Reload plugin</span> om de laatste versie van de plug-in te laden. We moeten, om deze nieuw functionaliteit te testen, enkele lagen in QGIS laden. Start, nadat u enkele lagen hebt geladen, het algoritme <span class="menuselection">Attributen opslaan ‣  Attributen opslaan als CSV</span>. U zult zien dat de uitvoer is gewijzigd naar een bestand in plaats van naar een laag.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
 </div></blockquote>
 <ol class="arabic" start="17">
-<li><p class="first">Let&#8217;s add some logic to the algorithm that takes the selected vector layer and writes the attributes to a CSV file.  The explanation for this code can be found in <a class="reference internal" href="getting_started_with_pyqgis.html"><em>Beginnen met programmeren in Python (QGIS3)</em></a>. Notable difference here is the counter that helps show the progress of the processing. Add the following code to the <code class="docutils literal"><span class="pre">processAlgorithm</span></code> method and save the file.</p>
+<li><p class="first">Laten we enige logica toevoegen aan het algoritme dat de geselecteerde vectorlaag neemt en de attributen wegschrijft naar een CSV-bestand.  De uitleg voor deze code is te vinden in <a class="reference internal" href="getting_started_with_pyqgis.html"><em>Beginnen met programmeren in Python (QGIS3)</em></a>. Het opmerkelijke verschil hier is de teller die helpt om de voortgang van de verwerking weer te geven. Voeg de volgende code toe aan de methode <code class="docutils literal"><span class="pre">processAlgorithm</span></code> en sla het bestand op.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">processAlgorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">feedback</span><span class="p">):</span>
   <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Here is where the processing itself takes place.</span>
@@ -420,37 +434,42 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <div><img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Back in the main QGIS window, reload the plugin by clicking on the <span class="guilabel">Reload plugin</span> button. Launch the <span class="menuselection">Save Attributes ‣ Save Attributes as CSV</span> algorithm. Select a layer for the <span class="guilabel">Input layer</span>. Next, click the <span class="guilabel">...</span> button next to <span class="guilabel">Output file</span>.</li>
+<li><p class="first">Laadt, terug in het hoofdvenster van QGIS, de plug-in opnieuw door te klikken op de knop  <span class="guilabel">Reload plugin</span>. Start het algoritme <span class="menuselection">Attributen opslaan ‣ Attributen opslaan als CSV</span>. Selecteer een laag voor de <span class="guilabel">Input layer</span>. Klik vervolgens op de knop <span class="guilabel">…</span> naast <span class="guilabel">Output file</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>Name the output file <code class="docutils literal"><span class="pre">test.csv</span></code> and click <span class="guilabel">Run</span>. The algorithm will run and produce a CSV file at the chosen location.</li>
+<li><p class="first">Noem het uitvoerbestand <code class="docutils literal"><span class="pre">test.csv</span></code> en klik op <span class="guilabel">Uitvoeren</span>. Het algoritme zal worden uitgevoerd en een CSV-bestand produceren op de gekozen locatie.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li>As mentioned earlier, even though this algorithm comes from a plugin, it integrates very well with the built-in processing tools. To demonstrate this, let&#8217;s run this algorithm using the built-in batch processing interface. Right-click the algorithm and select <span class="guilabel">Execute as Batch Process..</span>.</li>
+<li><p class="first">Zoals al eerder vermeld, zelfs hoewel dit algoritme uit een plug-in komt, integreert het heel goed met de ingebouwde gereedschappen voor processing. Laten we, om dit te laten zien, dit algoritme uitvoeren met de ingebouwde interface voor Batch-verwerking. Klik met rechts op het algoritme en selecteer <span class="guilabel">Uitvoeren als batch-proces…</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2010.png" class="align-center" src="../../_images/2010.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li>You can select multiple inputs and run this algorithm in a batch to produce multiple CSV files in a single run. If you are not familiar with the batch processing interface, see <a class="reference internal" href="batch_processing.html"><em>Massa verwerken met behulp van Framework Processing (QGIS 3)</em></a> for step-by-step instructions.</li>
+<li><p class="first">U kunt meerdere invoer selecteren en dit algoritme als batch uitvoeren om meerdere CSV-bestanden in één uitvoering te maken. Als u niet bekend bent met de interface voor batch-verwerking, bekijk <a class="reference internal" href="batch_processing.html"><em>Massa verwerken met behulp van Framework Processing (QGIS 3)</em></a> voor stap-voor-stap instructies.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2116.png" class="align-center" src="../../_images/2116.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li>The plugin is ready and you can ship it in the current form. But we can improve the user experience by making the processing plugin behave like a regular plugin. Using the hybrid approach outlined below, you can add a menu item and a toolbar button. This way, you give the users an easier way to discover and launch the tools that are installed as part of the plugin. We will need an icon for the plugin. Download <a class="reference external" href="http://www.qgistutorials.com/downloads/logo.png">logo.png</a> and copy it to the plugin directory.</li>
+<li><p class="first">De plug-in is klaar en u kunt hem verzenden in zijn huidige vorm. Maar we kunnen de ervaringen voor de gebruiker nog verbeteren door de plug-in voor Processing zich te laten gedragen als een gewone plug-in. Met de hieronder uitgelegde hybride benadering, kunt u een menu-item en een knop voor een werkbalk toevoegen. Op die manier geeft u gebruikers een gemakkelijker manier om de als deel van de plug-in  geïnstalleerde gereedschappen te ontdekken en op te starten. We zullen een pictogram nodig hebben voor de plug-in. Download <a class="reference external" href="http://www.qgistutorials.com/downloads/logo.png">logo.png</a> en kopieer die naar de map van de plug-in.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2214.png" class="align-center" src="../../_images/2214.png" />
 </div></blockquote>
 <ol class="arabic" start="23">
-<li><p class="first">Open the file <code class="docutils literal"><span class="pre">save_attributes_processing.py</span></code>. Add the following imports at top of the file.</p>
+<li><p class="first">Open het bestand <code class="docutils literal"><span class="pre">save_attributes_processing.py</span></code>. Voeg de volgende imports toe aan het begin van het bestand.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.PyQt.QtWidgets</span> <span class="kn">import</span> <span class="n">QAction</span>
 <span class="kn">from</span> <span class="nn">qgis.PyQt.QtGui</span> <span class="kn">import</span> <span class="n">QIcon</span>
 
@@ -458,7 +477,7 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <span class="kn">import</span> <span class="nn">processing</span>
 </pre></div>
 </div>
-<p>Scroll down and locate the <code class="docutils literal"><span class="pre">initGui</span></code> method. It only contains the code to initialize the processing provider. We will add the code to add a toolbar button and a menu item. We will also need to add code to the <code class="docutils literal"><span class="pre">unload</span></code> method, to remove these elements when plugin is removed.</p>
+<p>Scroll naar beneden en zoek naar de methode <code class="docutils literal"><span class="pre">initGui</span></code>. Het bevat alleen de code om de provider voor Processing te initialiseren. We zullen de code toevoegen om een knop voor een en ook een menu-item. We zullen ook de code toevoegen voor de methode <code class="docutils literal"><span class="pre">unload</span></code>, om deze elementen te verwijderen als de plug-in wordt verwijderd.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initGui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
   <span class="bp">self</span><span class="o">.</span><span class="n">initProcessing</span><span class="p">()</span>
 
@@ -476,7 +495,7 @@ Download and install the <a class="reference external" href="https://notepad-plu
   <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">removeToolBarIcon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>We have connected the button and the menu item to trigger the <code class="docutils literal"><span class="pre">run</span></code> method when clicked. Add a new method at the bottom that uses the helper method <code class="docutils literal"><span class="pre">execAlgorithmDialog</span></code> to launch the processing algorithm.</p>
+<p>We hebben de knop en het menu-item verbonden om de methode <code class="docutils literal"><span class="pre">run</span></code> uit te voeren als er op geklikt wordt. Voeg een nieuwe methode toe aan de onderzijde dat de hulpmethode <code class="docutils literal"><span class="pre">execAlgorithmDialog</span></code> gebruikt om het algoritme voor Processing te starten.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
   <span class="n">processing</span><span class="o">.</span><span class="n">execAlgorithmDialog</span><span class="p">(</span><span class="s2">&quot;Save Attributes:Save Attributes as CSV&quot;</span><span class="p">)</span>
 </pre></div>
@@ -489,25 +508,27 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <img alt="../../_images/23c.png" class="align-center" src="../../_images/23c.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li>Next, we need a minor fix to the <code class="docutils literal"><span class="pre">__init__.py</span></code> file in the plugin directory. Open the file and add <code class="docutils literal"><span class="pre">iface</span></code> to the return statement, so the reference to the QGIS interface is passed on to the plugin.</li>
+<li><p class="first">Vervolgens moeten we een minimale reparatie uitvoeren aan het bestand <code class="docutils literal"><span class="pre">__init__.py</span></code> in de map van de plug-in. Open het bestand en voeg <code class="docutils literal"><span class="pre">iface</span></code> toe aan het ter te geven argument, zodat de verwijzing naar de interface van QGIS wordt doorgegeven aan de plug-in.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2411.png" class="align-center" src="../../_images/2411.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
-<li>Back in the main QGIS window, reload the plugin by clicking on the <span class="guilabel">Reload plugin</span> button. You will see a new toolbar icon and a menu item under <span class="menuselection">Plugins ‣ SaveAttributes ‣ Save Attributes as CSV</span>. You can click these to launch the <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code> algorithm. You will notice that the processing provider and the algorithm in the toolbar still have the default icons. Let&#8217;s fix that.</li>
+<li><p class="first">Laadt, terug in het hoofdvenster van QGIS, de plug-in opnieuw door te klikken op de knop <span class="guilabel">Reload plugin</span>. U zult een nieuwe werkbalk en een menu-item zien onder <span class="menuselection">Plug-ins ‣ Attributen opslaan ‣ Attributen opslaan als CSV</span>. U kunt daarop klikken om het algoritme <code class="docutils literal"><span class="pre">Attributen</span> <span class="pre">opslaan</span> <span class="pre">als</span> <span class="pre">CSV</span></code> te starten. U zult zien dat de provider voor Processing en het algoritme in de werkbalk nog steeds de standaard pictogrammen hebben. Laten we dat oplossen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
 </div></blockquote>
 <ol class="arabic" start="26">
-<li><p class="first">Open the <code class="docutils literal"><span class="pre">save_attributes_processing_provider.py</span></code> file from the plugin directory. Add the imports at the top as follows.</p>
+<li><p class="first">Open het bestand <code class="docutils literal"><span class="pre">save_attributes_processing_provider.py</span></code> in de map van de plug-in. Voeg de imports aan het begin van het bestand als volgt toe.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">from</span> <span class="nn">qgis.PyQt.QtGui</span> <span class="kn">import</span> <span class="n">QIcon</span>
 </pre></div>
 </div>
-<p>Modify the <code class="docutils literal"><span class="pre">icon</span></code> method as follows to add the custom icon.</p>
+<p>Pas de methode <code class="docutils literal"><span class="pre">icon</span></code> als volgt aan om het aangepaste pictogram toe te voegen.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">icon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
   <span class="n">cmd_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()))[</span><span class="mi">0</span><span class="p">]</span>
   <span class="n">icon</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd_folder</span><span class="p">,</span> <span class="s1">&#39;logo.png&#39;</span><span class="p">)))</span>
@@ -521,13 +542,13 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <img alt="../../_images/26b.png" class="align-center" src="../../_images/26b.png" />
 </div></blockquote>
 <ol class="arabic" start="27">
-<li><p class="first">Next, open the <code class="docutils literal"><span class="pre">save_attributes_processing_algorithm.py</span></code> file. Add the imports at the top as follows.</p>
+<li><p class="first">Open vervolgens het bestand <code class="docutils literal"><span class="pre">save_attributes_processing_algorithm.py</span></code>. Voeg de imports aan het begin van het bestand als volgt toe.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">from</span> <span class="nn">qgis.PyQt.QtGui</span> <span class="kn">import</span> <span class="n">QIcon</span>
 </pre></div>
 </div>
-<p>Add a new <code class="docutils literal"><span class="pre">icon</span></code> method with the following code.</p>
+<p>Voeg een nieuwe methode <code class="docutils literal"><span class="pre">icon</span></code> toe met de volgende code.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">icon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
   <span class="n">cmd_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()))[</span><span class="mi">0</span><span class="p">]</span>
   <span class="n">icon</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd_folder</span><span class="p">,</span> <span class="s1">&#39;logo.png&#39;</span><span class="p">)))</span>
@@ -541,20 +562,21 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <img alt="../../_images/27b.png" class="align-center" src="../../_images/27b.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
-<li>Reload the plugin and you will see the provider and algorithm both have our custom icon.</li>
+<li><p class="first">Laadt de plug-in opnieuw en u zult zien dat zowel de provider als het algoritme ons aangepaste pictogram hebben.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/287.png" class="align-center" src="../../_images/287.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
-<li>You can zip the plugin directory and share it with your users. They can unzip the contents to their plugin directory and try out your plugin. If this was a real plugin, you would upload it to the <a class="reference external" href="https://plugins.qgis.org/">QGIS Plugin Repository</a> so that all QGIS users will be able to find and download your plugin.</li>
+<li><p class="first">U kunt de map voor de plug-in zippen en delen met uw gebruikers. Zij kunnen de inhoud uitpakken naar hun eigen map voor de plug-in en uw plug-in uitproberen. Als dit een echte plug-in zou zijn zou u die uploaden naar de <a class="reference external" href="https://plugins.qgis.org/">QGIS Plugin Repository</a> zodat alle gebruikers van QGIS hem kunnen vinden en uw plug-in kunnen downloaden.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">This plugin is for demonstration purpose only. Do not publish this plugin or
-upload it to the QGIS plugin repository.</p>
+<p class="last">Deze plug-in is alleen ter demonstratie. Publiceer deze plug-in niet en upload hem ook niet naar de opslagplaats van plug-ins voor QGIS.</p>
 </div>
-<p>Below are the full source file as a reference.</p>
+<p>Hieronder staat het volledige bestand als verwijzing.</p>
 <p><code class="docutils literal"><span class="pre">__init__.py</span></code></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -976,7 +998,7 @@ upload it to the QGIS plugin repository.</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Sep 24, 2019.<br/>
+      Laatste aanpassing op Oct 22, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
