@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Efectuarea Joncțiunilor Tabelare (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizarea Joncțiunilor Tabelare (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crearea Hărților Calorice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Efectuarea Interogărilor Spațiale (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -171,7 +172,10 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><h4>Author</h4>
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
-
+<hr>
+<h4>Looking for QGIS training?</h4>
+<a href="https://spatialthoughts.com/training">See my offerings</a>
+<hr>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -252,7 +256,7 @@ links below:</p>
 <li>Locate the downloaded <code class="docutils literal"><span class="pre">Street_Centerlines.zip</span></code> file in the <span class="guilabel">Browser</span> panel. Expand it and drag the <code class="docutils literal"><span class="pre">Street_Centerlines.shp</span></code> file to the canvas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/110.png" class="align-center" src="../../_images/110.png" />
+<div><img alt="../../_images/112.png" class="align-center" src="../../_images/112.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li>You will see a new line layer called <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> added to the <span class="guilabel">Layers</span> panel. This layer represents each road in Washington DC. Select the <span class="guilabel">Identify</span> tool in the <span class="guilabel">Attributes Toolbar</span>. Click on any road segment to see what attributes are attached to it. There are standard attributes like road name, type etc. there is an attribute called <code class="docutils literal"><span class="pre">DIRECTIONA</span></code>. This is an import attribute for routing as it specifies whether the segment is two-way or one-way. It contains 4 different values. <code class="docutils literal"><span class="pre">Two</span> <span class="pre">Way</span></code> for two-way streets. <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> for one-way streets where the traffic is allowed in the direction of the line (start-point to end-point) and <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> for one-way streets where the traffic flows in the opposite direction of the line. There is also <code class="docutils literal"><span class="pre">Unknown</span></code> value where we will assume two-way traffic. We will now use the information in that attribute to display an arrow on streets that are one-way.</li>
@@ -270,19 +274,19 @@ links below:</p>
 <li>We will create a new style with a filter for only the one-way roads. Click the <span class="guilabel">Add rule +</span> button.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/42.png" class="align-center" src="../../_images/42.png" />
+<div><img alt="../../_images/43.png" class="align-center" src="../../_images/43.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li>In the <span class="guilabel">Edit rule</span> dialog, click the <span class="guilabel">Expression</span> button.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/52.png" class="align-center" src="../../_images/52.png" />
+<div><img alt="../../_images/53.png" class="align-center" src="../../_images/53.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li>In the <span class="guilabel">Expression string builder</span> dialog, expand the <span class="guilabel">Fields and Values</span> section in the middle-panel. Select <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> attribute and click <span class="guilabel">All Unique</span> in the right-hand panel. The 4 values that we discussed earlier will appear. Having these values here as a reference helps when building the expression. Also, you can double-click on any value to add them to the expression.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/62.png" class="align-center" src="../../_images/62.png" />
+<div><img alt="../../_images/63.png" class="align-center" src="../../_images/63.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li>The goal is to create an expression that selects all one-way streets. Enter the following expression and click <span class="guilabel">OK</span>.</li>
@@ -291,31 +295,31 @@ links below:</p>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&quot;DIRECTIONA&quot; = &#39;One way (Against digitizing direction)&#39; OR  &quot;DIRECTIONA&quot; =&#39;One Way (Digitizing direction)&#39;
 </pre></div>
 </div>
-<img alt="../../_images/72.png" class="align-center" src="../../_images/72.png" />
+<img alt="../../_images/73.png" class="align-center" src="../../_images/73.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li>Next, change the <span class="guilabel">Symbol layer type</span> to <code class="docutils literal"><span class="pre">Marker</span> <span class="pre">line</span></code>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/82.png" class="align-center" src="../../_images/82.png" />
+<div><img alt="../../_images/83.png" class="align-center" src="../../_images/83.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li>Select <code class="docutils literal"><span class="pre">on</span> <span class="pre">center</span> <span class="pre">point</span></code> under <span class="guilabel">Marker placement</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/92.png" class="align-center" src="../../_images/92.png" />
+<div><img alt="../../_images/93.png" class="align-center" src="../../_images/93.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li>Click on the <code class="docutils literal"><span class="pre">Simple</span> <span class="pre">marker</span></code> symbol. Scroll down and pick the <code class="docutils literal"><span class="pre">filled_arrowhead</span></code> marker. You will see that the arrow-like symbol now appears on the one-way streets. But all of them are pointing in a single direction, whereas we know that our filter contains roads in multiple directions. We can further refine the symbols with a data-defined override for the <span class="guilabel">Rotation</span> value.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/102.png" class="align-center" src="../../_images/102.png" />
+<div><img alt="../../_images/103.png" class="align-center" src="../../_images/103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li>Click the <span class="guilabel">Data defined override</span> button next to <span class="guilabel">Rotation</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/112.png" class="align-center" src="../../_images/112.png" />
+<div><img alt="../../_images/113.png" class="align-center" src="../../_images/113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li>We can put a conditional expression that returns different rotation value depending on the one-way direction. A simple 0 or 180 degree rotation works to account for the direction, but it works only for horizontal lines. To align the arrow-head perpendicular to all the lines - we need to account for the angle of the line in the expression as well. The <code class="docutils literal"><span class="pre">angle_at_vertex</span></code> function helps us find the angle and use it in the expression. Enter the following expression and click <span class="guilabel">OK</span>.</li>
@@ -329,37 +333,37 @@ links below:</p>
 END
 </pre></div>
 </div>
-<img alt="../../_images/122.png" class="align-center" src="../../_images/122.png" />
+<img alt="../../_images/123.png" class="align-center" src="../../_images/123.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li>Now you will see the arrow-heads aligned to the correct road direction and angle. To keep the style uncluttered, we are choosing to display arrows only on one-way streets. Unlabeled streets are assumed to be two-way. Now that we have the network styled correctly, we can do some analysis. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/132.png" class="align-center" src="../../_images/132.png" />
+<div><img alt="../../_images/133.png" class="align-center" src="../../_images/133.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li>Search for and locate the <span class="menuselection">Network analysis ‣ Shortest path (point to point)</span> algorithm. Double-click to launch it.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/142.png" class="align-center" src="../../_images/142.png" />
+<div><img alt="../../_images/143.png" class="align-center" src="../../_images/143.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li>In the <span class="guilabel">Shortest Path (Point to Point)</span> dialog, select <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> as the <span class="guilabel">Vector layer representing network</span>.  Keep the <span class="guilabel">Path type to calculate</span> as <code class="docutils literal"><span class="pre">Shortest</span></code>. Next we need to pick a start and end point. You can click the <span class="guilabel">...</span> button and click on any point on the network in the canvas. If you want to replicate the results in this tutorial, you can enter <code class="docutils literal"><span class="pre">-76.99730092166396,38.887624846748984</span></code> as the <span class="guilabel">Start point</span> and <code class="docutils literal"><span class="pre">-76.99154831062152,38.89151000569929</span></code> as the <span class="guilabel">End point</span>. Expand the <span class="guilabel">Advanced parameter</span> section. Choose <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> as the <span class="guilabel">Direction field</span>. You must be familiar with the one-way direction values for forward and backward traffic flow. Enter <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for forward direction</span> and <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for backward direction</span>. Keep other options to their default values and click <span class="guilabel">Run</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/152.png" class="align-center" src="../../_images/152.png" />
+<div><img alt="../../_images/153.png" class="align-center" src="../../_images/153.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li>The algorithm will use the geometry of the layer and provided parameters to build a network graph. This graph is then used to find the shortest path between the start and end points. Once the algorithm finishes, you will see a new layer <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">path</span></code> added to the <span class="guilabel">Layers</span> panel that shows the shortest path between start and end points.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/162.png" class="align-center" src="../../_images/162.png" />
+<div><img alt="../../_images/163.png" class="align-center" src="../../_images/163.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li>You will see that there are many possible paths between start and end points. But given the constraints of the network - such as one-ways, the result is the shortest possible path. It is always a good idea to validate your analysis and assumptions. One easy way to validate it is to use a third-party mapping service to see if their results match with the ones we derived. Here is the shortest path <a class="reference external" href="https://goo.gl/maps/XwTXTkvuaCuteocr8">suggested by Google Maps</a> between the same start and end points. As you can see the recommended shortest route matches exactly with our results - validating our analysis.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/172.png" class="align-center" src="../../_images/172.png" />
+<div><img alt="../../_images/173.png" class="align-center" src="../../_images/173.png" />
 </div></blockquote>
 </div>
 </div>
@@ -386,7 +390,7 @@ END
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Oct 22, 2019.<br/>
+      Last updated on Oct 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

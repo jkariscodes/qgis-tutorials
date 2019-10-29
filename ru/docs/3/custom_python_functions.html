@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -172,7 +173,10 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><h4>Author</h4>
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
-
+<hr>
+<h4>Looking for QGIS training?</h4>
+<a href="https://spatialthoughts.com/training">See my offerings</a>
+<hr>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -247,13 +251,13 @@
 <li>Locate the <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code> file in the QGIS Browser and expand it. Select the <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.shp</span></code> file and drag it to the canvas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/128.png" class="align-center" src="../../_images/128.png" />
+<div><img alt="../../_images/130.png" class="align-center" src="../../_images/130.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li>Go to <span class="menuselection">Edit ‣ Select ‣ Select Features By Expression...</span> or click the <span class="guilabel">Select features using an expression</span> button on the <span class="guilabel">Attributes Toolbar</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/220.png" class="align-center" src="../../_images/220.png" />
+<div><img alt="../../_images/226.png" class="align-center" src="../../_images/226.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li>In the <span class="guilabel">Select by Expression</span> dialog, switch to the <span class="guilabel">Function Editor</span> tab. Here you can write any PyQGIS code that will be executed by the expression engine.</li>
@@ -290,7 +294,7 @@
     <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/58.png" class="align-center" src="../../_images/58.png" />
+<img alt="../../_images/59.png" class="align-center" src="../../_images/59.png" />
 </div></blockquote>
 </li>
 </ol>
@@ -304,7 +308,7 @@
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>GetUtmZone() = &#39;33N&#39;
 </pre></div>
 </div>
-<img alt="../../_images/68.png" class="align-center" src="../../_images/68.png" />
+<img alt="../../_images/69.png" class="align-center" src="../../_images/69.png" />
 </div></blockquote>
 </li>
 </ol>
@@ -315,29 +319,29 @@
 <ol class="arabic" start="7">
 <li><p class="first">Back in the main QGIS window, you should see some points highlighted in yellow. These are the points falling in the UTM Zone we specified in the expression.</p>
 <blockquote>
-<div><img alt="../../_images/78.png" class="align-center" src="../../_images/78.png" />
+<div><img alt="../../_images/79.png" class="align-center" src="../../_images/79.png" />
 </div></blockquote>
 </li>
 <li><p class="first">You saw how we defined and used a custom function to select features by expression. We will now use the same function in another context. One of the hidden gems in QGIS is the <strong>Map Tip</strong> tool. This tool shows user-defined text when you hover over a feature. Right-click the <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> layer and select Properties.</p>
-<img alt="../../_images/88.png" class="align-center" src="../../_images/88.png" />
+<img alt="../../_images/89.png" class="align-center" src="../../_images/89.png" />
 </li>
 <li><p class="first">Switch to the Display tab. Here you can enter any text that will be displayed when you hover over the features of the layer. Even better, you can use layer field values and expressions to define a much more useful message. Click on the <span class="guilabel">Ɛ</span> button.</p>
-<img alt="../../_images/98.png" class="align-center" src="../../_images/98.png" />
+<img alt="../../_images/99.png" class="align-center" src="../../_images/99.png" />
 </li>
 <li><p class="first">You will see the familiar expression editor again. We will use the <code class="docutils literal"><span class="pre">concat</span></code> function to join the value of the field <code class="docutils literal"><span class="pre">name</span></code> and the result of our custom function <code class="docutils literal"><span class="pre">GetUtmZone</span></code>. Enter the following expression and click <span class="guilabel">OK</span>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">concat</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s1">&#39; | UTM Zone: &#39;</span><span class="p">,</span> <span class="n">GetUtmZone</span><span class="p">())</span>
 </pre></div>
 </div>
-<img alt="../../_images/108.png" class="align-center" src="../../_images/108.png" />
+<img alt="../../_images/109.png" class="align-center" src="../../_images/109.png" />
 </li>
 <li><p class="first">You will see the expression entered as the value of the Display text. Click <span class="guilabel">Insert</span> to add it to the HTML box and then press <span class="guilabel">OK</span>.</p>
 <img alt="../../_images/1112.png" class="align-center" src="../../_images/1112.png" />
 </li>
 <li><p class="first">Before we proceed, let us de-select the features that were selected in the previous step. Go to <span class="menuselection">Edit ‣ Select ‣ Deselect Features From All Layers</span> or click the <span class="guilabel">Deselect Features From All Layers</span> button on the <span class="guilabel">Attribute Toolbar</span>.</p>
-<img alt="../../_images/129.png" class="align-center" src="../../_images/129.png" />
+<img alt="../../_images/1210.png" class="align-center" src="../../_images/1210.png" />
 </li>
 <li><p class="first">Activate the <code class="docutils literal"><span class="pre">Map</span> <span class="pre">Tips</span></code> tool by going to <span class="menuselection">View ‣ Map Tips</span> or clicking the <span class="guilabel">Show Map Tips</span> button on the <span class="guilabel">Attributes Toolbar</span>.</p>
-<img alt="../../_images/138.png" class="align-center" src="../../_images/138.png" />
+<img alt="../../_images/139.png" class="align-center" src="../../_images/139.png" />
 </li>
 <li><p class="first">Zoom into any area of the map and put your mouse cursor over any feature. You will see the name of the city and corresponding UTM zone displayed as the map tip.</p>
 <img alt="../../_images/14.gif" class="align-center" src="../../_images/14.gif" />
@@ -368,7 +372,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Обновлено: Oct 22, 2019.<br/>
+      Обновлено: Oct 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

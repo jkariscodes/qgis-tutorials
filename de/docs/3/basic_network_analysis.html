@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Tabellen verbinden (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Räumliche Verbindungen erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps erstellen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Räumliche Abfragen ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nächster Nachbar Analyse (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Stichproben aus Rasterdaten mit Hilfe von Punkten und Polygonen (QGIS3)</a></li>
@@ -172,7 +173,10 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><h4>Author</h4>
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
-
+<hr>
+<h4>Looking for QGIS training?</h4>
+<a href="https://spatialthoughts.com/training">See my offerings</a>
+<hr>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -254,7 +258,7 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/110.png" class="align-center" src="../../_images/110.png" />
+<div><img alt="../../_images/112.png" class="align-center" src="../../_images/112.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p class="first">Wir sehen einen neuen Layer <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> im <span class="guilabel">Layer</span> Bereich. Dieser Layer stellt alle Straßen in Washington DC dar. Wähle das Tool <span class="guilabel">Objekte abfragen</span> in der <span class="guilabel">Attributwerkzeugleiste</span>. Klicke auf einen beliebigen Straßenabschnitt, um die enthaltenen Attribute zu ermitteln. Man sieht Standardattribute wie den Straßennamen oder Straßentyp aber es gibt auch ein Attribut <code class="docutils literal"><span class="pre">DIRECTIONA</span></code>. Dieses Attribut ist für das Routing wichtig, es bestimmt in welcher Richtung der Verkehr erfolgt. Das Attribut enthält 4 verschiedene Werte. <code class="docutils literal"><span class="pre">Two</span> <span class="pre">Way</span></code> steht für Straßenabschnitte mit Gegenverkehr. <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> steht für Einbahnstraßen, auf denen der Verkehr nur in der Richtung der Linie erfolgen darf (vom Startpunkt zum Endpunkt) und <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> für Einbahnstraßen, auf denen der Verkehr nur entgegengesetzt der Linienrichtung erfolgen darf. Für den Wert <code class="docutils literal"><span class="pre">Unknown</span></code>, also unbekannt nehmen wir eine Straße mit Gegenverkehr an. Wir verwenden die hinterlegt Information jetzt, um einen Pfeil für Einbahnstraßen zu erzeugen.</p>
@@ -275,21 +279,21 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/42.png" class="align-center" src="../../_images/42.png" />
+<div><img alt="../../_images/43.png" class="align-center" src="../../_images/43.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p class="first">Im Dialog <span class="guilabel">Regel bearbeiten</span> klicken wir auf den Knopf <span class="guilabel">Ausdruck</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/52.png" class="align-center" src="../../_images/52.png" />
+<div><img alt="../../_images/53.png" class="align-center" src="../../_images/53.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p class="first">Im <span class="guilabel">Ausdruckseditor</span> erweitern wir <span class="guilabel">Felder und Werte</span> in der mittleren Spalte. Wir wählen das Attribut <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> und klicken in der rechten Spalte auf <span class="guilabel">Alle eindeutigen</span>. Es werden die 4 oben beschriebenen Werte angezeigt. Wir können später auf jeden der Werte doppelt klicken, um ihn in den Ausdruck einzufügen.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/62.png" class="align-center" src="../../_images/62.png" />
+<div><img alt="../../_images/63.png" class="align-center" src="../../_images/63.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p class="first">Unser Ziel ist es, einen Ausdruck zu erzeugen, der alle Einbahnstraßen selektiert. Wir geben den folgenden Ausdruck ein und klicken auf <span class="guilabel">OK</span>.</p>
@@ -299,35 +303,35 @@
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&quot;DIRECTIONA&quot; = &#39;One way (Against digitizing direction)&#39; OR  &quot;DIRECTIONA&quot; =&#39;One Way (Digitizing direction)&#39;
 </pre></div>
 </div>
-<img alt="../../_images/72.png" class="align-center" src="../../_images/72.png" />
+<img alt="../../_images/73.png" class="align-center" src="../../_images/73.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p class="first">Als nächstes ändern wir den <span class="guilabel">Symbollayertyp</span> zu <code class="docutils literal"><span class="pre">Markierungslinie</span></code>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/82.png" class="align-center" src="../../_images/82.png" />
+<div><img alt="../../_images/83.png" class="align-center" src="../../_images/83.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p class="first">Wir wählen <code class="docutils literal"><span class="pre">auf</span> <span class="pre">Mittelpunkt</span></code> für die <span class="guilabel">Markierungsplatzierung</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/92.png" class="align-center" src="../../_images/92.png" />
+<div><img alt="../../_images/93.png" class="align-center" src="../../_images/93.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p class="first">Klicke auf das Symbol <code class="docutils literal"><span class="pre">Einfache</span> <span class="pre">Markierung</span></code>, scrolle nach unten und wähle den Marker <code class="docutils literal"><span class="pre">gefülltes</span> <span class="pre">Dreieck</span></code>. Wir sehen das das einem Pfeil ähnelnde Symbol nun für die Einbahnstraßen angezeigt wird. Allerdings ziegen alle Pfeile in dieselbe Richtung, obwohl für die Einbahnstraßen mehrere Richtungen hinterlegt sind. Wir können die Symbolik weiter verfeinern indem wir eine vom Datensatz abhängige Richtung des Symbols unter <span class="guilabel">Drehung</span> vorgeben.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/102.png" class="align-center" src="../../_images/102.png" />
+<div><img alt="../../_images/103.png" class="align-center" src="../../_images/103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p class="first">Klicke auf den Knopf <span class="guilabel">Datendefinierte Übersteuerung</span> neben <span class="guilabel">Drehung</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/112.png" class="align-center" src="../../_images/112.png" />
+<div><img alt="../../_images/113.png" class="align-center" src="../../_images/113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p class="first">Wir können für die Drehung einen bedingten Ausdruck in Abhängigkeit des Richtungsattributes verwenden. Ein einfacher Ansatz mit den Werten 0 und 180 Grad funktioniert aber nur bei horizontalen Linien. Um den Pfeil für alle Linien rechtwinklig auszurichten, müssen wir den Winkel der Linien mit in einbeziehen. Die Funktion <code class="docutils literal"><span class="pre">angle_at_vertex</span></code> hilft uns, den Winkel zu bestimmen und in den Ausdruck aufzunehmen. Wir verwenden den folgenden Ausdruck und klicken auf <span class="guilabel">OK</span>.</p>
@@ -342,42 +346,42 @@
 END
 </pre></div>
 </div>
-<img alt="../../_images/122.png" class="align-center" src="../../_images/122.png" />
+<img alt="../../_images/123.png" class="align-center" src="../../_images/123.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p class="first">Wir sehen, dass die Pfeilspitzen jetzt entsprechend der Richtung und des Winkels der Einbahnstraßen ausgerichtet sind. Zur besseren Übersichtlichkeit verwenden wir die Richtungspfeile nur bei Einbahnstraßen. Für Straßen ohne Richtungsangabe nehmen wir an, dass sie in beiden Richtungen befahrbar sind. Wir können nun einige Analysen vornehmen. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/132.png" class="align-center" src="../../_images/132.png" />
+<div><img alt="../../_images/133.png" class="align-center" src="../../_images/133.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p class="first">Wir suchen den Algorithmus <span class="menuselection">Netzwerkanalyse ‣ Kürzester Weg (Punkt zu Punkt)</span>. Starte ihn mit einem Doppelklick.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/142.png" class="align-center" src="../../_images/142.png" />
+<div><img alt="../../_images/143.png" class="align-center" src="../../_images/143.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p class="first">Im Dialogfenster <span class="guilabel">Kürzester Weg (Punkt zu Punkt)</span> wählen wir <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> als <span class="guilabel">Netzwerk-Vektorlayer</span>.  Den Eintrag bei <span class="guilabel">Zu berechnender Wegtyp</span> belassen wir bei <code class="docutils literal"><span class="pre">Kürzester</span></code>. Als nächstes müssen wir einen Start- und Endpunkt vorgeben. Wir klicken dazu auf den <span class="guilabel">...</span> Knopf und klicken dann auf einen beliebigen Punkt des Straßennetzes im Arbeitsbereich. Wenn man die Ergebnisse des Tutorials nachvollziehen möchte, verwendet man <code class="docutils literal"><span class="pre">-76.99730092166396,38.887624846748984</span></code> als <span class="guilabel">Startpunkt</span> und <code class="docutils literal"><span class="pre">-76.99154831062152,38.89151000569929</span></code> als <span class="guilabel">Endpunkt</span>. Erweitere den Bereich <span class="guilabel">Fortgeschrittene Parameter</span> und wähle <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> als <span class="guilabel">Richtungsfeld</span>. Wir sind mit den Attributwerten der Richtung vertraut und verwenden <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> als <span class="guilabel">Wert für Vorwärts</span> und <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> als <span class="guilabel">Wert für Rückrichtung</span>. Die anderen Werte belassen wir so und klicken auf <span class="guilabel">Starte</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/152.png" class="align-center" src="../../_images/152.png" />
+<div><img alt="../../_images/153.png" class="align-center" src="../../_images/153.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p class="first">Der Algorithmus nutzt die Geometrie des Layers und die zur Verfügung stehenden Parameter um einen Netzwerk Graph zu erstellen. Dieser Graph wird verwendet, um den kürzesten Weg zwischen Start- und Endpunkt zu ermitteln. Nach Abschluss der Berechnung durch den Algorithmus wird im <span class="guilabel">Layer</span> Bereich ein neuer Layer <code class="docutils literal"><span class="pre">Kürzester</span> <span class="pre">Weg</span></code> hinzugefügt. Er zeigt den kürzesten Weg zwischen Start- und Endpunkt.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/162.png" class="align-center" src="../../_images/162.png" />
+<div><img alt="../../_images/163.png" class="align-center" src="../../_images/163.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p class="first">Wir sehen, dass es viele mögliche Wege zwischen Start- und Endpunkt gibt. Durch die Einschränkungen im Netzwerk wie z.B. Einbahnstraßen, stellt das Ergebnis den unter diesen Bedingungen kürzesten Weg dar. Es ist immer gut, die Analyse und die getroffenen Annahmen zu überprüfen. Eine einfache Möglichkeit der Überprüfung ist die Verwendung eines anderen Kartendienstes. Hier ist der kürzeste Weg zwischen denselben Start- und Endpunkten nach <a class="reference external" href="https://goo.gl/maps/XwTXTkvuaCuteocr8">Google Maps</a>. Wir sehen dasselbe Ergebnis. Damit wird unsere Analyse bestätigt.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/172.png" class="align-center" src="../../_images/172.png" />
+<div><img alt="../../_images/173.png" class="align-center" src="../../_images/173.png" />
 </div></blockquote>
 </div>
 </div>
@@ -404,7 +408,7 @@ END
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Oct 22, 2019.<br/>
+      Zuletzt aktualisiert am Oct 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

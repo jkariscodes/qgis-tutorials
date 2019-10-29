@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -167,7 +168,10 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><h4>Author</h4>
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
-
+<hr>
+<h4>Looking for QGIS training?</h4>
+<a href="https://spatialthoughts.com/training">See my offerings</a>
+<hr>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -260,12 +264,12 @@ layers. Download the following layers</p>
 <ol class="arabic simple">
 <li>Go to <span class="menuselection">Layer ‣ Add Vector Layer</span>.</li>
 </ol>
-<img alt="../_images/1135.png" class="align-center" src="../_images/1135.png" />
+<img alt="../_images/1136.png" class="align-center" src="../_images/1136.png" />
 <ol class="arabic simple" start="2">
 <li>Browse to the downloaded Admin 0 Countries shapefile
 <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries.shp</span></code> and click <span class="guilabel">Open</span>.</li>
 </ol>
-<img alt="../_images/280.png" class="align-center" src="../_images/280.png" />
+<img alt="../_images/289.png" class="align-center" src="../_images/289.png" />
 <ol class="arabic simple" start="3">
 <li>As our task is to clip the global layers to the boundary of Africa, we need
 to first prepare a layer containg a polygon for the entire continent. The
@@ -273,12 +277,12 @@ countries layer has an attribute called <strong>CONTINENT</strong>. We can use a
 geoprocessing concept called <em>Dissolve</em> to merge all countries that have the
 same continent value and merge them to a single polygon.</li>
 </ol>
-<img alt="../_images/347.png" class="align-center" src="../_images/347.png" />
+<img alt="../_images/348.png" class="align-center" src="../_images/348.png" />
 <ol class="arabic simple" start="4">
 <li>Open the <span class="guilabel">Dissolve</span> tool from <span class="menuselection">Vector ‣
 Geoprocessing Tools ‣ Dissolve</span>.</li>
 </ol>
-<img alt="../_images/430.png" class="align-center" src="../_images/430.png" />
+<img alt="../_images/431.png" class="align-center" src="../_images/431.png" />
 <ol class="arabic simple" start="5">
 <li>Select <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> as the <span class="guilabel">Input vector layer</span>.
 The <span class="guilabel">Dissolve field</span> would be <code class="docutils literal"><span class="pre">CONTINENT</span></code>. Name the output file
@@ -292,57 +296,57 @@ can select <span class="guilabel">&#8211; Dissolve All &#8211;</span> as the <sp
 This will combine all polygons in the layer and give you a single aggregate
 polygon.</p>
 </div>
-<img alt="../_images/530.png" class="align-center" src="../_images/530.png" />
+<img alt="../_images/531.png" class="align-center" src="../_images/531.png" />
 <ol class="arabic simple" start="6">
 <li>The dissolve processing may take a while. Once the process finishes, you
 will see the new <code class="docutils literal"><span class="pre">continent</span></code> layer added to QGIS. Use the
 <span class="guilabel">Select Single Feature</span> tool from the toolbar and click on Africa
 to select the polygon representing the continent.</li>
 </ol>
-<img alt="../_images/629.png" class="align-center" src="../_images/629.png" />
+<img alt="../_images/630.png" class="align-center" src="../_images/630.png" />
 <ol class="arabic simple" start="7">
 <li>Right-click the <code class="docutils literal"><span class="pre">continents</span></code> layer and select <span class="guilabel">Save Selection
 As...</span>.</li>
 </ol>
-<img alt="../_images/729.png" class="align-center" src="../_images/729.png" />
+<img alt="../_images/730.png" class="align-center" src="../_images/730.png" />
 <ol class="arabic simple" start="8">
 <li>Name the output file as <code class="docutils literal"><span class="pre">africa.shp</span></code>. Since we are only interested in the
 shape of the continent and not any attributes, you may check the
 <span class="guilabel">Skip attribute creation</span>. Make sure the <span class="guilabel">Add saved file
 to map</span> box is checked and click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/828.png" class="align-center" src="../_images/828.png" />
+<img alt="../_images/829.png" class="align-center" src="../_images/829.png" />
 <ol class="arabic simple" start="9">
 <li>Now you will have the <code class="docutils literal"><span class="pre">africa</span></code> layer loaded in QGIS containing a single
 polygon for the entire continent. Now, it&#8217;s time to start our batch clip
 process. Open <span class="menuselection">Processing ‣ Toolbox</span>.</li>
 </ol>
-<img alt="../_images/929.png" class="align-center" src="../_images/929.png" />
+<img alt="../_images/930.png" class="align-center" src="../_images/930.png" />
 <ol class="arabic simple" start="10">
 <li>Browse all available algorithms and find the <span class="guilabel">Clip</span> tool from
 <span class="menuselection">QGIS geoalgorithms ‣ Vector overlay tools ‣ Clip</span>. You
 may also use the <span class="guilabel">Search</span> box to easily find the algorithm as
 well.</li>
 </ol>
-<img alt="../_images/1027.png" class="align-center" src="../_images/1027.png" />
+<img alt="../_images/1028.png" class="align-center" src="../_images/1028.png" />
 <ol class="arabic simple" start="11">
 <li>Right-click the <span class="guilabel">Clip</span> algorithm and select <span class="guilabel">Execure as
 batch process</span>.</li>
 </ol>
-<img alt="../_images/1136.png" class="align-center" src="../_images/1136.png" />
+<img alt="../_images/1137.png" class="align-center" src="../_images/1137.png" />
 <ol class="arabic simple" start="12">
 <li>In the <span class="guilabel">Batch Processing</span> dialog, the first tab is
 <span class="guilabel">Parameters</span> where we define out inputs. Click the
 <span class="guilabel">...</span> next to the first row in the <span class="guilabel">Input layer</span> column.</li>
 </ol>
-<img alt="../_images/1229.png" class="align-center" src="../_images/1229.png" />
+<img alt="../_images/1230.png" class="align-center" src="../_images/1230.png" />
 <ol class="arabic simple" start="13">
 <li>Browse to the directory containing the global transportation layers that
 you had downloaded. Hold the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and select all the layers that
 you want to clip. You may also use <code class="kbd docutils literal"><span class="pre">Shift</span></code> or <code class="kbd docutils literal"><span class="pre">Ctrl-A</span></code> to make
 multiple selection. Click <span class="guilabel">Open</span>.</li>
 </ol>
-<img alt="../_images/1329.png" class="align-center" src="../_images/1329.png" />
+<img alt="../_images/1330.png" class="align-center" src="../_images/1330.png" />
 <ol class="arabic simple" start="14">
 <li>You will notice that the <span class="guilabel">Input layer</span> columns will be
 auto-populated with all layers you had selected. You may use <span class="guilabel">Add
@@ -355,7 +359,7 @@ layer will be auto-filled for all the rows. Next, we need to define our
 outputs.  Click the <span class="guilabel">...</span> buton next to the first row in the
 <span class="guilabel">Clipped</span> column.</li>
 </ol>
-<img alt="../_images/1427.png" class="align-center" src="../_images/1427.png" />
+<img alt="../_images/1428.png" class="align-center" src="../_images/1428.png" />
 <ol class="arabic simple" start="15">
 <li>Browse the the directory where you want your output layers. Type the
 filename as <code class="docutils literal"><span class="pre">clipped_</span></code> and click <span class="guilabel">Save</span>.</li>
@@ -369,18 +373,18 @@ setting will add the input file name to the output along with the specified
 <code class="docutils literal"><span class="pre">output_</span></code> filename. This is important to ensure all the output files have
 unique names and they do not overwrite each other.</li>
 </ol>
-<img alt="../_images/1623.png" class="align-center" src="../_images/1623.png" />
+<img alt="../_images/1625.png" class="align-center" src="../_images/1625.png" />
 <ol class="arabic simple" start="17">
 <li>Now we are ready to start the batch procesing. Click <span class="guilabel">Run</span>.</li>
 </ol>
-<img alt="../_images/1721.png" class="align-center" src="../_images/1721.png" />
+<img alt="../_images/1722.png" class="align-center" src="../_images/1722.png" />
 <ol class="arabic simple" start="18">
 <li>The clip algorithm will run for each of the inputs and create output files
 are we have specified. Once the batch process finishes, you will see the
 layers added to QGIS canvas. As you will notice, all the global layers are
 properly clipped to the continent boundary that we had specified.</li>
 </ol>
-<img alt="../_images/1821.png" class="align-center" src="../_images/1821.png" />
+<img alt="../_images/1822.png" class="align-center" src="../_images/1822.png" />
 </div>
 </div>
 
@@ -406,7 +410,7 @@ properly clipped to the continent boundary that we had specified.</li>
     </p>
     <p>
         &copy; Vse pravice pridržane 2019, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno Oct 22, 2019.<br/>
+      Zadnjič posodobljeno Oct 29, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
