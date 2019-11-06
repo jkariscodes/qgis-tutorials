@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Animating Time Series Data (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Geanimeerde gegevens tijdreeks (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -98,7 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Samenvoegen van tabellen uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Ruimtelijke samenvoegingen uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Ruimtelijke query&#8217;s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
@@ -174,8 +174,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<h4>Looking for QGIS training?</h4>
-<a href="https://spatialthoughts.com/training">See my offerings</a>
+<p>Visit <a href="https://spatialthoughts.com">spatialthoughts.com</a> for more learning resources and QGIS training.</p>
 <hr>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
@@ -229,133 +228,149 @@
       
 
   <div class="section" id="animating-time-series-data-qgis3">
-<h1>Animating Time Series Data (QGIS3)<a class="headerlink" href="#animating-time-series-data-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Time is an important component of many spatial datasets. Along with location information, time providers another dimension for analysis and visualization of data. If you are working with dataset that contains timestamps or have observations recorded at multiple time-steps, you can easily visualize it using the <strong>TimeManager</strong> plugin in QGIS. TimeManager allows you to view and export
-&#8216;slices&#8217; of data between certain time intervals that can be combined into animations.</p>
+<h1>Geanimeerde gegevens tijdreeks (QGIS3)<a class="headerlink" href="#animating-time-series-data-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>Tijd is een belangrijke component van veel ruimtelijke gegevenssets. Naast informatie over de locatie verschaft tijd een andere dimensie voor analyseren en visualiseren van gegevens. Als u werkt met een gegevensset die tijdstempels bevat of waarnemingen hebt opgenomen in meerdere tijdstappen, kunt u die gemakkelijk visualiseren met de plug-in <strong>TimeManager</strong> in QGIS. TimeManager stelt u in staat  &#8216;stukjes&#8217; gegevens te bekijken en te exporteren tussen bepaalde tijdintervallen die kunnen worden gecombineerd in animaties.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will take a point layer of maritime piracy incidents, create a heatmap visualization and create an animation of how the piracy hot-spots have changed over past 2 decades.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen een puntenlaag gebruiken van maritieme incidenten met piraten, een visualisatie van een heatmap maken en een animatie maken over hoe de hotspots voor piraten zijn gewijzigd over de laatste 20 jaar.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
-<li>Using the Heatmap renderer for quick visualization of dense point data</li>
-<li>Creating and using custom map projections</li>
+<li><p class="first">De renderer Heatmap gebruiken om snel dichte puntgegevens te visualiseren</p>
+</li>
+<li><p class="first">Aangepaste kaartprojecties maken en gebruiken</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p>National Geospatial-Intelligence Agency&#8217;s <a class="reference external" href="https://msi.nga.mil/NGAPortal/MSI.portal">Maritime Safety Information portal</a> provides a shapefile of all incidencts of maritine piracy in the form on <a class="reference external" href="https://msi.nga.mil/Piracy">Anti-shipping Activity Messages</a>. Download the <a class="reference external" href="https://msi.nga.mil/api/publications/download?key=16920958/SFH00000/ASAM_shp.zip&amp;type=download">Arc Shape file</a> version of the database.</p>
-<p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> has several global vector
-layers. Download the <a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip">10m Physical Vectors - Land</a> containing Land polygons.</p>
-<p>For convenience, you may directly download a copy of the above layers from below:</p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p>National Geospatial-Intelligence Agency&#8217;s <a class="reference external" href="https://msi.nga.mil/NGAPortal/MSI.portal">Maritime Safety Information portal</a> verschaft een shapefile van alle incidenten van maritieme piraterij in de vorm van <a class="reference external" href="https://msi.nga.mil/Piracy">Anti-shipping Activity Messages</a>. Download de <a class="reference external" href="https://msi.nga.mil/api/publications/download?key=16920958/SFH00000/ASAM_shp.zip&amp;type=download">Arc Shapefile</a> versie van de database.</p>
+<p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> heeft verscheidene globale vectorlagen. Download de <a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip">10m Physical Vectors - Land</a> die polygonen voor landen bevat.</p>
+<p>Voor het gemak kunt u direct een kopie downloaden van bovenstaande lagen vanaf de links hieronder:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ASAM_shp.zip">ASAM_shp.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_land.zip">ne_10m_land.zip</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#nga-msi" id="id1">[NGA_MSI]</a> <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
+<p>Gegevensbron: <a class="reference internal" href="../credits.html#nga-msi" id="id1">[NGA_MSI]</a> <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink naar deze titel">¶</a></h2>
-<p>Go to <span class="menuselection">Plugins ‣ Manage and Install Plugins...</span>. Search for and install the <strong>TimeManager</strong> plugin.</p>
+<h2>Instellen<a class="headerlink" href="#setup" title="Permalink naar deze titel">¶</a></h2>
+<p>Ga naar <span class="menuselection">Plug-ins ‣ Plug-ins beheren en installeren…</span>. Zoek naar en installeer de plug-in <strong>TimeManager</strong>.</p>
 <img alt="../../_images/setup1.png" class="align-center" src="../../_images/setup1.png" />
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal"><span class="pre">ne_10m_land.zip</span></code> and select the <code class="docutils literal"><span class="pre">ne_10m_land.shp</span></code> layer. Drag the layer to the canvas. Next, locate the <code class="docutils literal"><span class="pre">ASAM_shp.zip</span></code> file. Expand it and select the <code class="docutils literal"><span class="pre">asam_data_download/ASAM_events.shp</span></code> layer and drag it on to the canvas.</li>
+<li><p class="first">Zoek, in het paneel QGIS Browser, de map waar u uw gegevens hebt gedownload. Vergroot het item <code class="docutils literal"><span class="pre">ne_10m_land.zip</span></code> en selecteer de laag <code class="docutils literal"><span class="pre">ne_10m_land.shp</span></code>. Sleep de laag naar het kaartvenster. Zoek vervolgens het bestand <code class="docutils literal"><span class="pre">ASAM_shp.zip</span></code> op. Vergroot het en selecteer de laag <code class="docutils literal"><span class="pre">asam_data_download/ASAM_events.shp</span></code> en sleep die naar het kaartvenster.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/19.png" class="align-center" src="../../_images/19.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Once the layer is loaded, you can see the individual points representing incidents of piracy locations. There are thousands of incidents and it is difficult to determine with more piracy. Rather than individual points, a better way to visualize this data is through a heatmap. Select the <code class="docutils literal"><span class="pre">ASAM_events</span></code> layers and click the <span class="guilabel">Open the layer Styling Panel</span> button in the <span class="guilabel">Layers</span> panel. Click the <code class="docutils literal"><span class="pre">Single</span> <span class="pre">symbol</span></code> drop-down.</li>
+<li><p class="first">Als de laag eenmaal is geladen  kunt u de individuele punten zien van de plaatsen van incidenten van piraterij. Er zijn duizenden incidenten en het is moeilijk te bepalen welke meer piraterij hebben. In plaats van de individuele punten is een betere manier om deze gegevens te visualiseren met een heatmap. Selecteer de laag <code class="docutils literal"><span class="pre">ASAM_events</span></code> en klik op de knop <span class="guilabel">Paneel Laag opmaken openen</span> in het paneel <span class="guilabel">Lagen</span>. Klik op de keuzelijst <code class="docutils literal"><span class="pre">Enkel</span> <span class="pre">symbool</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/21.png" class="align-center" src="../../_images/21.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>In the renderer selection drop-down, select <code class="docutils literal"><span class="pre">Heatmap</span></code> renderer. Next, select the <code class="docutils literal"><span class="pre">Viridis</span></code> color ramp from the <span class="guilabel">Color ramp</span> selector.</li>
+<li><p class="first">Selecteer, in de keuzelijst voor de selectie van de renderer, de renderer <code class="docutils literal"><span class="pre">Heatmap</span></code>. Selecteer vervolgens het kleurverloop <code class="docutils literal"><span class="pre">Viridis</span></code> uit de selectie voor <span class="guilabel">Kleurverloop</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/31.png" class="align-center" src="../../_images/31.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Adjust the <span class="guilabel">Radius</span> value to <code class="docutils literal"><span class="pre">5.0</span></code>. At the bottom, expand the <span class="guilabel">Layer Rendering</span> section and adjust the <span class="guilabel">Opacity</span> to <code class="docutils literal"><span class="pre">75.0%</span></code>. This gives a nice visual effect of the hotspots with the land layer below.</li>
+<li><p class="first">Pas de waarde <span class="guilabel">Straal</span> aan naar <code class="docutils literal"><span class="pre">5.0</span></code>. Vergroot, onderin, het gedeelte <span class="guilabel">Renderen van lagen</span> en pas de <span class="guilabel">Doorzichtbaarheid</span> aan naar <code class="docutils literal"><span class="pre">75.0%</span></code>. Dit geeft een net visueel effect van de hotspots met de laag met landen eronder.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/41.png" class="align-center" src="../../_images/41.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Now let&#8217;s animate this data to show the yearly map of piracy incidents. Go to <span class="menuselection">Plugins ‣ TimeManager ‣ Toggle visibility</span>.</li>
+<li><p class="first">Laten we nu deze gegevens animeren om een jaarlijkse kaart van incidenten met piraten weer te geven. Ga naar <span class="menuselection">Plug-ins ‣ TimeManager ‣ Toggle visibility</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/51.png" class="align-center" src="../../_images/51.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>In the <span class="guilabel">TimeManager</span> panel, click <span class="guilabel">Settings</span>.</li>
+<li><p class="first">Klik, in het paneel <span class="guilabel">TimeManager</span>, op <span class="guilabel">Settings</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/61.png" class="align-center" src="../../_images/61.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>In the <span class="guilabel">Time manager settings</span> window, click <span class="guilabel">Add layer</span> button.</li>
+<li><p class="first">Klik, in het venster <span class="guilabel">Time manager settings</span>, op de knop <span class="guilabel">Add layer</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/71.png" class="align-center" src="../../_images/71.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>The source data contains an attribute <code class="docutils literal"><span class="pre">dateofocc</span></code> - representing the date on which the incident took place. This is the field that will be used by the plugin to determine the points that are rendered for each time period. Select <code class="docutils literal"><span class="pre">ASAM_events</span></code> as the <span class="guilabel">Layer</span> and <code class="docutils literal"><span class="pre">dateofocc</span></code> as the <span class="guilabel">Start time</span>. The <span class="guilabel">End time</span> should be set to <code class="docutils literal"><span class="pre">Same</span> <span class="pre">as</span> <span class="pre">start</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">De brongegevens bevatten een attribuut <code class="docutils literal"><span class="pre">dateofocc</span></code> - wat de datum vertegenwoordigt waarop het incident plaatsvond. Dit is het veld dat door de plug-in zal worden gebruikt om de  punten te bepalen die voor elke periode zullen worden gerenderd. Selecteer <code class="docutils literal"><span class="pre">ASAM_events</span></code> als de <span class="guilabel">Layer</span> en <code class="docutils literal"><span class="pre">dateofocc</span></code> as de <span class="guilabel">Start time</span>. De <span class="guilabel">End time</span> zou moeten worden ingesteld op <code class="docutils literal"><span class="pre">Same</span> <span class="pre">as</span> <span class="pre">start</span></code>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/81.png" class="align-center" src="../../_images/81.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Back in the <span class="guilabel">Time manager settings</span> window, click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Klik, terug in het venster <span class="guilabel">Time manager settings</span>, op de knop <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/91.png" class="align-center" src="../../_images/91.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>Click the <span class="guilabel">Power</span> icon in the <span class="guilabel">TimeManager</span> panel to enable the plugin. Set the <span class="guilabel">Time frame size</span> to be <code class="docutils literal"><span class="pre">1</span> <span class="pre">years</span></code>. Once enabled, you will see a filter icon next to the <code class="docutils literal"><span class="pre">ASAM_events</span></code> layer. TimeManager works by applying a filter to the layer based on the selected field and specified time period.</li>
+<li><p class="first">Klik op het pictogram <span class="guilabel">Power</span> in het paneel <span class="guilabel">TimeManager</span> om de plug-in in te schakelen. Stel de <span class="guilabel">Time frame size</span> to be <code class="docutils literal"><span class="pre">1</span> <span class="pre">years</span></code>. Eenmaal ingeschakeld zult u een pictogram voor een filter zien naast de laag <code class="docutils literal"><span class="pre">ASAM_events</span></code>. TimeManager werkt door het toepassen van een filtert op de laag, gebaseerd op het geselecteerde veld en een gespecificeerde tijdperiode.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/101.png" class="align-center" src="../../_images/101.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
-<p class="last">As TimeManager works by applying a filter on the layer, it only works with layer types that support this feature. Most data source types do support it - with a notable exception being temporary memory layers. If you had done some processing earlier and have a temporary layer, right-click and select <span class="guilabel">Make Permanent</span> before using TimeManager on that layer.</p>
+<p class="last">Omdat TimeManager werkt door het toepassen van een filter op de laag, werkt het alleen met typen lagen die die mogelijkheid ondersteunen. De meeste typen gegevensbronnen ondersteunen het - met één belangrijke uitzondering: de tijdelijke geheugenlagen. Als u eerder enige verwerking had gedaan en een tijdelijke geheugenlaag hebt, klik dan met rechts en selecteer <span class="guilabel">Permanent maken…</span> vóórdat u TimeManager gebruikt op die laag.</p>
 </div>
 <ol class="arabic simple" start="11">
-<li>Now you are ready to see the animation. Click the <span class="guilabel">Play</span> button to see the yearly piracy hotspot animation.</li>
+<li><p class="first">Nu bent u klaar om de animatie te bekijken. Klik op de knop <span class="guilabel">Play</span> om de animatie van de jaarlijkse hotspots voor piraten te bekijken.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/11.gif" class="align-center" src="../../_images/11.gif" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>You will notice that for each frame of the animation, a date is displayed at the bottom-right. Instead of the full date and time, let&#8217;s change it to display the year that the map represents. Click <span class="guilabel">Settings</span> in the <span class="guilabel">Time Manager</span> panel. Click <span class="guilabel">Time display options</span> in the <span class="guilabel">Time manager settings</span> dialog.</li>
+<li><p class="first">U zult zien dat voor elk frame van de animatie een datum wordt weergegeven aan de rechter onderkant. Laten we, in plaats van de volledige datum en tijd, dit wijzigen om het jaar weer te geven dat de kaart weergeeft Klik op <span class="guilabel">Settings</span> in het paneel <span class="guilabel">Time Manager</span> . Klik op <span class="guilabel">Time display options</span> in het dialoogvenster <span class="guilabel">Time manager settings</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/121.png" class="align-center" src="../../_images/121.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>Adjust the <span class="guilabel">Font Size</span> to <code class="docutils literal"><span class="pre">25</span></code>. Change the <span class="guilabel">DateTime</span> format to <code class="docutils literal"><span class="pre">%Y</span></code>. The time format should be specified in the <a class="reference external" href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior">Python strftime</a> format. <code class="docutils literal"><span class="pre">%Y</span></code> is the short-code for a 4 digit year. Also you can change the <span class="guilabel">Placement direction</span> to <code class="docutils literal"><span class="pre">NW</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Pas <span class="guilabel">Font Size</span> aan naar <code class="docutils literal"><span class="pre">25</span></code>. Wijzig de indeling <span class="guilabel">DateTime</span> naar <code class="docutils literal"><span class="pre">%Y</span></code>. De indeling voor de tijd zou moeten worden gespecificeerd in de indeling <a class="reference external" href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior">Python strftime</a>. <code class="docutils literal"><span class="pre">%Y</span></code> is de afgekorte code voor een jaar met 4 cijfers. U kunt ook  de <span class="guilabel">Placement direction</span> wijzigen naar <code class="docutils literal"><span class="pre">NW</span></code>. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/131.png" class="align-center" src="../../_images/131.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Back in <span class="guilabel">Time manager settings</span> dialog, check the <span class="guilabel">Looping animation</span> checkbox. This helps when you are making changes to styling and adjusting styling to make the animation continue playing back from start. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Selecteer, terug in het dialoogvenster <span class="guilabel">Time manager settings</span>, het keuzevak <span class="guilabel">Looping animation</span> checkbox. Dit helpt wanneer u wijzigen maakt aan de opmaak en de opmaak zo aanpast dat de animatie doorlopend wordt afgespeeld vanaf start. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/141.png" class="align-center" src="../../_images/141.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Now if you replay the animation, you will see the label will show the year of the animation in the top-left corner. At this point, we can export the animation, but there is one more change that we can apply to make our map better. The default map projection is <code class="docutils literal"><span class="pre">EPSG:4326</span></code> which is ok for storing the source data, but not ideal for global visualization like this. I really like the <a class="reference external" href="http://equal-earth.com/equal-earth-projection.html">Equal Earth Projection</a> for a visually pleasing and more accurate representation of the world. It is a fairly new projection and not yet available as a predefined option in QGIS. But there is an easy way to use it in QGIS by defining a custom projection. Go to <span class="menuselection">Settings ‣ Custom Projections...</span>.</li>
+<li><p class="first">Als u nu de animatie opnieuw afspeelt zult u zien dat het label voor het jaar wordt weergegeven in de linker bovenhoek. We zouden op dit punt de animatie kunnen exporteren, maar er is één wijziging die we nog kunnen toepassen om onze kaart nog iets beter te maken. De standaard kaartprojectie is <code class="docutils literal"><span class="pre">EPSG:4326</span></code>, die OK is voor het opslaan van de brongegevens, maar niet ideaal is voor globale visualisatie zoals deze. Ik hou meer van de <a class="reference external" href="http://equal-earth.com/equal-earth-projection.html">Equal Earth Projection</a> voor een visueel aantrekkelijker en meer nauwkeurige weergave van de wereld. Het is een vrij nieuwe projectie en nog niet beschikbaar als een vooraf gedefinieerde optie in QGIS. Maar er is een gemakkelijke manier om het te gebruiken in QGIS, door een aangepaste projectie te definiëren. Ga naar <span class="menuselection">Extra ‣ Aangepaste projecties…</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/151.png" class="align-center" src="../../_images/151.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>In the <span class="guilabel">Custom Coordinate Reference System Definition</span> dialog, click the <span class="guilabel">+</span> button. Enter <code class="docutils literal"><span class="pre">Equal</span> <span class="pre">Earth</span></code> as the <span class="guilabel">name</span>. Enter the following definition in the <span class="guilabel">Parameters</span> box. The parameters need to be specified in the <a class="reference external" href="https://proj.org/operations/projections/eqearth.html">PROJ format</a>. After entering the parameters, click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Klik, in het dialoogvenster <span class="guilabel">Definitie aangepast Coördinaten ReferentieSysteem `, op de knop :guilabel:`+</span>. Voer <code class="docutils literal"><span class="pre">Equal</span> <span class="pre">Earth</span></code> in als de <span class="guilabel">name</span>. Voer de volgende definitie in het vak <span class="guilabel">Parameters</span> in. De parameters moeten worden gespecificeerd in de <a class="reference external" href="https://proj.org/operations/projections/eqearth.html">indeling PROJ</a>. Klik na het invoeren van de parameters op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>+proj=eqearth +datum=WGS84 +wktext
@@ -364,37 +379,43 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <img alt="../../_images/161.png" class="align-center" src="../../_images/161.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>In the main QGIS window, click the <span class="guilabel">Current CRS</span> display on the bottom-right corner.</li>
+<li><p class="first">Klik, in het hoofdvenster van QGIS, op de weergave <span class="guilabel">Huidig CRS</span> in de rechter benedenhoek.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/171.png" class="align-center" src="../../_images/171.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Search for <code class="docutils literal"><span class="pre">Equal</span> <span class="pre">Earth</span></code> to find and select the newly defined projection. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Zoek naar <code class="docutils literal"><span class="pre">Equal</span> <span class="pre">Earth</span></code> om de nieuw geselecteerde projectie te vinden en te selecteren. Klik op <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/181.png" class="align-center" src="../../_images/181.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>You will see the map transform to the Equal Earth projection. Now we are ready to export the animation. Before exporting, make sure to set the time-slider in the <span class="guilabel">Time Manager</span> panel to the start position. Export of the animation will start from the current position of the time slider. Click <span class="guilabel">Export Video</span> button in the <span class="guilabel">Time Manager</span> panel.</li>
+<li><p class="first">U zult de kaart zien transformeren naar de projectie Equal Earth. Nu zijn we klaar om de animatie te exporteren. Zorg er voor, vóór het exporteren, dat de schuifbalk voor de tijd in het paneel <span class="guilabel">Time Manager</span> is ingesteld op de startpositie. Exporteren van de animatie zal beginnen vanaf de huidige positie van de schuifbalk voor de tijd. Klik op de knop <span class="guilabel">Export Video</span> in het paneel <span class="guilabel">Time Manager</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/191.png" class="align-center" src="../../_images/191.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li>In the <span class="guilabel">Export Video dialog</span>, click <span class="guilabel">Select output folder</span> and select a directory on your computer. Select the <span class="guilabel">Frames only</span> option and click <span class="guilabel">OK</span> to start the export process.</li>
+<li><p class="first">Klik, in het <span class="guilabel">dialoogvenster Export Video</span>, op <span class="guilabel">Select output folder</span> en selecteer een map op uw computer. Selecteer de optie <span class="guilabel">Frames only</span> en klik op <span class="guilabel">OK</span> om het proces voor exporteren te beginnen.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/20.png" class="align-center" src="../../_images/20.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li>Once the export finishes, you will see PNG images for each year in the output directory. Now let&#8217;s create an animated GIF from these images. There are many options for creating animations from individual image frames. I like <a class="reference external" href="https://ezgif.com/maker">ezgif.com</a> for an easy and online tool. Visit the site and click <span class="guilabel">Choose Files</span> and select all the <code class="docutils literal"><span class="pre">.png</span></code> files. Note that the export folder will also have a <code class="docutils literal"><span class="pre">.pgw</span></code> file for each frame which contains the georeference information. You may want to sort the images by <code class="docutils literal"><span class="pre">Type</span></code> to allow easy bulk selection of only <code class="docutils literal"><span class="pre">.png</span></code> files. Once selected, click the <span class="guilabel">Upload and  make a GIF!</span> button.</li>
+<li><p class="first">Als het exporteren is voltooid, zult u PNG-afbeeldingen voor elk jaar in de uitvoermap zien staan. Laten we nu een geanimeerde GIF maken uit deze afbeeldingen. Er zijn veel opties voor het maken van animaties uit individuele frames van afbeeldingen. Ik hou van <a class="reference external" href="https://ezgif.com/maker">ezgif.com</a> als een gemakkelijk en online gereedschap. Bezoek de site en klik op <span class="guilabel">Choose Files</span> en selecteer alle <code class="docutils literal"><span class="pre">.png</span></code>-bestanden. Merk op dat de map van de export ook een bestand <code class="docutils literal"><span class="pre">.pgw</span></code> heeft voor elk frame dat de informatie voor de geoverwijzingen bevat. U wilt misschien de afbeeldingen sorteren op <code class="docutils literal"><span class="pre">Type</span></code>, om alleen de <code class="docutils literal"><span class="pre">.png</span></code>-bestanden gemakkelijker in bulk te selecteren. Klik, als alle bestanden zijn geselecteerd, op de knop <span class="guilabel">Upload and  make a GIF!</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/211.png" class="align-center" src="../../_images/211.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li>Once the process finishes, click the <span class="guilabel">Save</span> button to download the GIF to your computer.</li>
+<li><p class="first">Klik, als het proces eenmaal is voltooid, op de knop <span class="guilabel">Save</span> om de GIF naar uw computer te downloaden.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/animation.gif" class="align-center" src="../../_images/animation.gif" />
@@ -424,7 +445,7 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Oct 29, 2019.<br/>
+      Laatste aanpassing op Nov 06, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

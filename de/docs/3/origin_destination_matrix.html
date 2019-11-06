@@ -174,8 +174,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<h4>Looking for QGIS training?</h4>
-<a href="https://spatialthoughts.com/training">See my offerings</a>
+<p>Visit <a href="https://spatialthoughts.com">spatialthoughts.com</a> for more learning resources and QGIS training.</p>
 <hr>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
@@ -237,119 +236,135 @@
 </div>
 <div class="section" id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
-<p>We will take 2 layers for Washington DC - one with points representing addresses and another with points representing mental health facilities - and find out the facility with the least travel distance from each address.</p>
+<p>Wir werden 2 Layer für Washington DC verwenden - einen Layer mit Punkten für Adressen und einen anderen Layer mit Punkten für psychosoziale Einrichtungen. Wir werden dann die Einrichtung mit dem kürzesten Weg zu jeder Adresse ermitteln.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
+<h3>Weitere Fähigkeiten, die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
-<li>Extract a stratified random sample from a point layer.</li>
-<li>Use Virtual Layers to run SQL query on a QGIS layer.</li>
-<li>Use Python Console Editor to run a pyqgis script.</li>
+<li><p class="first">Gewinnung einer geschichteten Zufallsstichprobe aus einem Punktlayer</p>
+</li>
+<li><p class="first">Nutzung von virtuellen Layer, um eine SQL-Abfrage auf einem QGIS-Layer auszuführen</p>
+</li>
+<li><p class="first">Nutzung der Python-Konsole um ein pygis Skript auszuführen</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
-<p>District of Columbia government freely shares hundreds of datasets on the <a class="reference external" href="https://opendata.dc.gov/">Open Data Catalog</a>.</p>
-<p>Download the following data layers as shapefiles.</p>
+<h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Die Regierung des Distrikts Columbia stellt hunderte Datensätze frei zur Verfügung: <a class="reference external" href="https://opendata.dc.gov/">Open Data Catalog</a>.</p>
+<p>Wir laden die folgenden Datenlayer als shape-Dateien herunter.</p>
 <ul class="simple">
 <li><a class="reference external" href="https://opendata.dc.gov/datasets/street-centerlines">Street Centerlines</a></li>
 <li><a class="reference external" href="https://opendata.dc.gov/datasets/address-points">Address Points</a></li>
 <li><a class="reference external" href="https://opendata.dc.gov/datasets/adult-mental-health-providers">Adult Mental Health Providers</a></li>
 </ul>
-<p>For convenience, you may directly download a copy of the datasets from the
-links below:</p>
+<p>Der Einfachheit halber können wir eine Kopie der Datensätze unter folgenden links herunterladen:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Street_Centerlines.zip">Street_Centerlines.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Address_Points.zip">Address_Points.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Adult_Mental_Health_Providers.zip">Adult_Mental_Health_Providers.zip</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#dcopendata" id="id1">[DCOPENDATA]</a></p>
+<p>Datenquelle: <a class="reference internal" href="../credits.html#dcopendata" id="id1">[DCOPENDATA]</a></p>
 </div>
 <div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link zu dieser Überschrift">¶</a></h2>
-<p>Visit <span class="menuselection">Plugins ‣ Manage and Install plugins</span>. Search for <strong>QNEAT3</strong> plugin and install it. Click <span class="guilabel">Close</span>.</p>
+<h2>Einrichtung<a class="headerlink" href="#setup" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Wir gehen zu <span class="menuselection">Erweiterungen ‣ Erweiterungen verwalten und installieren</span>. Wir suchen nach der Erweiterung <strong>QNEAT3</strong>, installieren sie und klicken dann auf <span class="guilabel">Schließen</span>.</p>
 <img alt="../../_images/setup12.png" class="align-center" src="../../_images/setup12.png" />
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
+<h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li>Locate the downloaded <code class="docutils literal"><span class="pre">Street_Centerlines.zip</span></code> file in the <span class="guilabel">Browser</span> panel. Expand it and drag the <code class="docutils literal"><span class="pre">Street_Centerlines.shp</span></code> file to the canvas. Similarly, locate the <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers.zip</span></code> file, expand it and add <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers.shp</span></code> to the canvas.</li>
+<li><p class="first">Suche die heruntergeladene Datei <code class="docutils literal"><span class="pre">Street_Centerlines.zip</span></code> im <span class="guilabel">Browser</span> Bereich und erweitere sie. Ziehe die Datei <code class="docutils literal"><span class="pre">Street_Centerlines.shp</span></code> in den Arbeitsbereich. Füge genauso den Layer <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers.shp</span></code> aus der Datei <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers.zip</span></code> in den Arbeitsbereich ein.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/180.png" class="align-center" src="../../_images/180.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Next, locate the <code class="docutils literal"><span class="pre">Address_Points.zip</span></code> file, expand it and add the <code class="docutils literal"><span class="pre">Address_Points.shp</span></code>. You will see a lot of points around the city. Each point represents a valid address. We will not randomly select 1 point in each ward to use as the origin points. This technique is called stratified sampling. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">Als nächstes gehen wir zur Datei <code class="docutils literal"><span class="pre">Address_Points.zip</span></code>, erweitern sie und fügen den Layer <code class="docutils literal"><span class="pre">Address_Points.shp</span></code> hinzu. wir sehen eine große Menge an Punkten über die ganze Stadt verteilt. Jeder Punkt repräsentiert eine gültige Adresse. Wir werden zufällig 1 Punkt je Stadtviertel als Quellpunkt auswählen. Diese Technick wird geschichtete Zufallsstichprobe genannt. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/239.png" class="align-center" src="../../_images/239.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Search for and locate the <span class="menuselection">Vector Selection ‣ Random extract within subsets</span> algorithm.</li>
+<li><p class="first">Suche nach dem Algorithmus <span class="menuselection">Vektorauswahl ‣ Zufällige Auswahl in Untermengen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/329.png" class="align-center" src="../../_images/329.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Select <code class="docutils literal"><span class="pre">Address_Points</span></code> as the <span class="guilabel">Input layer</span>. Each address point contains an attribute called <code class="docutils literal"><span class="pre">WARD_2012</span></code> which has the ward number associated with the address. As we want only 1 point per ward, we use that attribute as the <span class="guilabel">ID field</span>. Set <span class="guilabel">Number/percentage of selected features</span> as <code class="docutils literal"><span class="pre">1</span></code>.</li>
+<li><p class="first">Wir wählen <code class="docutils literal"><span class="pre">Address_Points</span></code> als <span class="guilabel">Eingabelayer</span>. Jeder Adresspunkt enthält ein Attribut <code class="docutils literal"><span class="pre">WARD_2012</span></code>, in dem die Nummer des Stadtviertels hinterlegt ist zu dem die Adresse gehört. Wir möchten nur 1 Punkt je Stadtviertel verwenden. Wir verwenden daher <code class="docutils literal"><span class="pre">WARD_2012</span></code> im <span class="guilabel">Kennungsfeld</span> und setzen <span class="guilabel">Anzahl/Prozentsatz gewählter Objekte</span> auf <code class="docutils literal"><span class="pre">1</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/415.png" class="align-center" src="../../_images/415.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>A new layer <code class="docutils literal"><span class="pre">Extracted</span> <span class="pre">(random</span> <span class="pre">stratified)</span></code> will be added to the <span class="guilabel">Layers</span> panel.</li>
+<li><p class="first">Ein neuer Layer <code class="docutils literal"><span class="pre">Extrahiert</span> <span class="pre">(zufällig</span> <span class="pre">geschichtet)</span></code> wird im <span class="guilabel">Layer</span> Bereich angezeigt.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/515.png" class="align-center" src="../../_images/515.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Turn-off the visibility for the <code class="docutils literal"><span class="pre">Address_Points</span></code> layer. Right-click on the <code class="docutils literal"><span class="pre">Extracted</span> <span class="pre">(random</span> <span class="pre">stratified)</span></code> layer and select <span class="guilabel">Rename layer</span>.</li>
+<li><p class="first">Wir schalten die Sichtbarkeit des Layers <code class="docutils literal"><span class="pre">Address_Points</span></code> aus. Klicke mit der rechten Maustaste auf den Layer <code class="docutils literal"><span class="pre">Extracted</span> <span class="pre">(random</span> <span class="pre">stratified)</span></code> und wähle <span class="guilabel">Layer umbenennen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/615.png" class="align-center" src="../../_images/615.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>Let&#8217;s rename this layer as <code class="docutils literal"><span class="pre">origin_points</span></code>. Similarly rename the <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers</span></code> layers representing the health facilities as <code class="docutils literal"><span class="pre">destination_points</span></code>. Naming the layers this way makes it easy to identify them in subsequent processing. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">Wir nennen den Layer mit <code class="docutils literal"><span class="pre">origin_points</span></code>. Analog benennen wir den Layer <code class="docutils literal"><span class="pre">Adult_Mental_Health_Providers</span></code> mit den psychosozialen Einrichtungen als <code class="docutils literal"><span class="pre">destination_points</span></code>. Die Benennung macht die Identifizierung der Layer bei der folgenden Verarbeitung einfacher. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/714.png" class="align-center" src="../../_images/714.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Locate the <span class="menuselection">QNEAT3 ‣ Distance matrices ‣ OD Matrix from Layers as Table (m:n)</span> algorithm. If you do not see this algorithm in the toolbox, make sure you have installed the <strong>QNEAT3</strong> plugin.</li>
+<li><p class="first">Wir gehen zum Algorithmus <span class="menuselection">QNEAT3 ‣ Distance matrices ‣ OD Matrix from Layers as Table (m:n)</span>. Falls der Algoritmus nicht in den Verarbeitungswerkzeugen auftaucht, prüfen wir ob das <strong>QNEAT3</strong> Plugin installiert ist.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/814.png" class="align-center" src="../../_images/814.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>This algorithm helps find the distances along the network between selected origin and destination layers. Select <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> as the <span class="guilabel">Network layer</span>. Select <code class="docutils literal"><span class="pre">origin_points</span></code> as the <span class="guilabel">From-Points layer</span> and <code class="docutils literal"><span class="pre">OBJECTID</span></code> as the <span class="guilabel">Unique Point ID field</span>. Similarly, set <code class="docutils literal"><span class="pre">destination_points</span></code> as the <span class="guilabel">To-Points Layer</span> and <code class="docutils literal"><span class="pre">OBJECTID</span></code> as  the <span class="guilabel">Unique Point ID field</span>. Set the <span class="guilabel">Optimization Criterion</span> as <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span></code>.</li>
+<li><p class="first">Der Algorithmus ermittelt die Distanzen zwischen dem Quell- und dem Ziellayer entlang eines Netzwerkes. Wir wählen <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> als <span class="guilabel">Network layer</span>, <code class="docutils literal"><span class="pre">origin_points</span></code> als <span class="guilabel">From-Points layer</span> und <code class="docutils literal"><span class="pre">OBJECTID</span></code> als <span class="guilabel">Unique Point ID field</span>. Analog setzen wir <code class="docutils literal"><span class="pre">destination_points</span></code> als <span class="guilabel">To-Points Layer</span> und <code class="docutils literal"><span class="pre">OBJECTID</span></code> als <span class="guilabel">Unique Point ID field</span>. Wir stellen <span class="guilabel">Optimization Criterion</span> auf <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/914.png" class="align-center" src="../../_images/914.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>As many streets in the network are one-way, we need to set the <span class="guilabel">Advanced parameters</span> to specify the direction. See <a class="reference internal" href="basic_network_analysis.html"><em>Einfache Netzwerkvisualisierung und Routing (QGIS3)</em></a> for more details on how these attributes are structured. Choose <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> as the <span class="guilabel">Direction field</span>. Enter <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for forward direction</span> and <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for backward direction</span>. Keep other options to their default values and click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Da im Straßennetzwerk viele Einbahnstraßen enthalten sind, müssen wir die Fahrrichtung unter <span class="guilabel">Advanced parameters</span> vorgeben. Unter <a class="reference internal" href="basic_network_analysis.html"><em>Einfache Netzwerkvisualisierung und Routing (QGIS3)</em></a> findet man weitere Details zu den Attributen im Datensatz. Wir wählen <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> als <span class="guilabel">Direction field</span>. Gebe <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> als <span class="guilabel">Value for forward direction</span> und <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> als the <span class="guilabel">Value for backward direction</span> ein. Die anderen Werte lassen wir auf den Standardeinstellungen und klicken auf <span class="guilabel">Run</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1014.png" class="align-center" src="../../_images/1014.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>A new table layer called <code class="docutils literal"><span class="pre">Output</span> <span class="pre">OD</span> <span class="pre">Matrix</span></code> will be added to the <span class="guilabel">Layers</span> panel. Right-click and select <span class="guilabel">Open Attributes Table</span>. You will see that the table contains <em>117</em> rows. We had 9 origin points and 13 destination points - so the output contains <em>9x13 = 117</em> pairs of origins and destination. The <code class="docutils literal"><span class="pre">total_cost</span></code> column contains distance in meters between each origin point to every destination point.</li>
+<li><p class="first">Ein neue Tabelle <code class="docutils literal"><span class="pre">Output</span> <span class="pre">OD</span> <span class="pre">Matrix</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Klicke mit der rechten Maustaste darauf und wähle <span class="guilabel">Attributtabelle öffnen</span>. Die Tabelle enthält 117 Zeilen. Wir hatten 9 Startpunkte und 13 Zielpunkte, die Ausgabe enthält daher <em>9x13 = 117</em> Quelle-Ziel-Paare. Das Attribut <code class="docutils literal"><span class="pre">total_cost</span></code> enthält die Distanz in Meter von jedem Start- zu jedem Zielpunkt.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1117.png" class="align-center" src="../../_images/1117.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>For this tutorial, we are interested in only the destination point with the shortest distance. We can create a SQL query to pick the destination with the least <code class="docutils literal"><span class="pre">total_cost</span></code> among all destinations. Go to <span class="menuselection">Database ‣ DB Manager..</span></li>
+<li><p class="first">Im Rahmen dieses Tutorials interessiert uns nur der Zielpunkt mit der kürzesten Entfernung. Wir erstellen eine SQL-Abfrage zur Selektion des geringsten <code class="docutils literal"><span class="pre">total_cost</span></code> aller Ziele. Gehe zu <span class="menuselection">Datenbank ‣ DB-Verwaltung..</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1215.png" class="align-center" src="../../_images/1215.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>In the <span class="guilabel">DB Manager</span> dialog, select the <span class="menuselection">Virtual Layers ‣ Project layers ‣ Output OD Matrix</span> from the left-hand panel. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/virtual_layers.html">Virtual layers</a> documentation to learn more. Click the <span class="guilabel">SQL Window</span> button.</li>
+<li><p class="first">Im Dialogfenster <span class="guilabel">DB-Verwaltung</span> wählen wir <span class="menuselection">Virtuelle Layer ‣ Projektlayer ‣ Output OD Matrix</span> aus dem Verzeichnis auf der linken Seite. Unter <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/virtual_layers.html">Virtual layers</a> findet man weitere Informationen zu Virtuellen Layern. Klicke auf den Knopf <span class="guilabel">SQL Fenster</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1315.png" class="align-center" src="../../_images/1315.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Enter the following query and click <span class="guilabel">Execute</span>. The results will be displayed in the panel below. As expected, we have 9 rows in the result - the shortest path destination for each origin point. Check and select <span class="guilabel">Column with unique values</span> as <code class="docutils literal"><span class="pre">origin_id</span></code>. Enter <code class="docutils literal"><span class="pre">nearest_destinations</span></code> as the <span class="guilabel">Layer name (prefix)</span>. Click <span class="guilabel">Load</span>.</li>
+<li><p class="first">Wir geben die folgende Abfrage ein und klicken auf <span class="guilabel">Ausführen</span>. Das Resultat wird im Bereich unter der Abfrage angezeigt. Wie erwartet erhalten wir 9 Zeilen als Ergebnis, die kürzeste Verbindung für jeden Startpunkt. Setze den Haken bei <span class="guilabel">Spalte mit eindeutigen Werten</span> und wähle als Eintrag <code class="docutils literal"><span class="pre">origin_id</span></code>. Gebe <code class="docutils literal"><span class="pre">nearest_destinations</span></code> als <span class="guilabel">Layername (präfix)</span> ein. Klicke auf <span class="guilabel">Laden</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>select origin_id, destination_id, min(total_cost) as shortest_distance
@@ -359,73 +374,85 @@ from &#39;Output OD Matrix&#39; group by origin_id
 <img alt="../../_images/1413.png" class="align-center" src="../../_images/1413.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>A new virtual layer <code class="docutils literal"><span class="pre">nearest_destinations</span></code> will be added to the <span class="guilabel">Layers</span> panel. This table has the result of our analysis. Nearest mental health center for each of the 9 origin points. Let&#8217;s try a few different ways to visualize and validate these results. Go to <span class="menuselection">Processing ‣ Toolbox</span>. Search for and locate the <span class="menuselection">Join attributes by field value</span> algorithm. Double-click to launch it.</li>
+<li><p class="first">Der neue virtuelle Layer <code class="docutils literal"><span class="pre">nearest_destinations</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Die Tabelle enthält das Ergebnis unserer Analyse, die am nächsten gelegene psychosoziale Einrichtung zu jedem der 9 Startpunkte. Wir werden jetzt einige verschiedene Möglichkeiten der Visualisierung und Validierung der Ergebnisse durchgehen. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>. Suche den Algorithmus <span class="menuselection">Attribute nach Feldwert</span> und klicke doppelt darauf, um ihn zu starten.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1512.png" class="align-center" src="../../_images/1512.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>Select <code class="docutils literal"><span class="pre">origin_points</span></code> as the <span class="guilabel">Input layer</span> and <code class="docutils literal"><span class="pre">OBJECTID</span></code> as the <span class="guilabel">Table field</span>. Set <code class="docutils literal"><span class="pre">nearest_destinations</span></code> as the <span class="guilabel">Input layer 2</span> and <code class="docutils literal"><span class="pre">origin_id</span></code> as the <span class="guilabel">Table field 2</span>. Click the <span class="guilabel">...</span> button next to <span class="guilabel">Layer 2 fields to copy</span> and select <code class="docutils literal"><span class="pre">destination_id</span></code> and <code class="docutils literal"><span class="pre">shortest_distance</span></code>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Wir wählen <code class="docutils literal"><span class="pre">origin_points</span></code> als <span class="guilabel">Eingabelayer</span> und <code class="docutils literal"><span class="pre">OBJECTID</span></code> als <span class="guilabel">Tabellenspalte</span>. Als <span class="guilabel">Eingabelayer 2</span> wählen wir <code class="docutils literal"><span class="pre">nearest_destinations</span></code> und <code class="docutils literal"><span class="pre">origin_id</span></code> als <span class="guilabel">Tabellenfeld 2</span>. Klicke nun auf den Knopf <span class="guilabel">...</span> neben <span class="guilabel">Layer 2 zu kopierende Felder</span> und wähle <code class="docutils literal"><span class="pre">destination_id</span></code> und <code class="docutils literal"><span class="pre">shortest_distance</span></code>. Klicke auf <span class="guilabel">Starte</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1612.png" class="align-center" src="../../_images/1612.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>A new <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer</span></code> will be added to the <span class="guilabel">Layers</span> panel. This layer has the nearest destination id attribute for each origin point. We can now create a hub-spoke visualization using this layer. Search for <span class="menuselection">Vector analysis ‣ Join by lines (hub lines)</span> algorithm. Right-click to launch it.</li>
+<li><p class="first">Im <span class="guilabel">Layer</span> Bereich wird nun ein neuer <code class="docutils literal"><span class="pre">Zusammengefasster</span> <span class="pre">Layer</span></code> angezeigt. Dieser Layer enthält ein Attribut mit der ID des am nächsten gelegenen Ziels für jeden Startpunkt. Wir können nun eine Nabe-Speichen-Darstellung für diesen Layer erzeugen. Wir suchen den Algorithmus <span class="menuselection">Vektoranalysealysis ‣ Durch Linien verbinden (Verbindungslinien)</span> und starten ihn.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1712.png" class="align-center" src="../../_images/1712.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Select <code class="docutils literal"><span class="pre">destination_points</span></code> as the <span class="guilabel">Hub layer</span> and <code class="docutils literal"><span class="pre">OBJECTID</span></code> as the <span class="guilabel">Hub ID field</span>. Select <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer`</span> <span class="pre">as</span> <span class="pre">the</span> <span class="pre">:guilabel:`Spoke</span> <span class="pre">layer`</span> <span class="pre">and</span> <span class="pre">``destination_id</span></code> as the <span class="guilabel">Spoke ID field</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Wir wählen <code class="docutils literal"><span class="pre">destination_points</span></code> als <span class="guilabel">Nabenlayer</span> und <code class="docutils literal"><span class="pre">OBJECTID</span></code> als <span class="guilabel">Nabenerkennungsfeld</span>. Unter <span class="guilabel">Speichenlayer</span> tragen wir <code class="docutils literal"><span class="pre">Zusammengefasster</span> <span class="pre">Layer`</span> <span class="pre">ein</span> <span class="pre">und</span> <span class="pre">als</span> <span class="pre">:guilabel:`Speichenerkennungsfeld`</span> <span class="pre">verwenden</span> <span class="pre">wir</span> <span class="pre">``destination_id</span></code>. Klicke auf <span class="guilabel">Starte</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1811.png" class="align-center" src="../../_images/1811.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>Once the processing finishes, a new layer <code class="docutils literal"><span class="pre">Hub</span> <span class="pre">lines</span></code> will be added to the <span class="guilabel">Layers</span> panel. This layer shows the lines connecting each origin with the nearest destination.</li>
+<li><p class="first">Nach Fertigstellung der Berechnung wird ein neuer Layer <code class="docutils literal"><span class="pre">Knotenlinien</span></code> im <span class="guilabel">Layer</span> Bereich angezeigt. Dieser Layer stellt die Verbindung jedes Startpunktes mit dem am nächsten gelegenen Ziel dar.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1910.png" class="align-center" src="../../_images/1910.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li>Note that even though the lines connecting the origin and destination is a straight-line, the destination was found using the distance along the network. It will be much useful visualization to show the actual shortest-path between each origin-destination. As of now, there is no easy way to generate the shortest-path between multiple origin-destination pairs the way we generated the distance matrix. But I will demonstrate a way to use some python scripting to generate this visualization. Firs, let&#8217;s run the shortest path algorithm on 1 pair. Locate the <span class="menuselection">QNEAT3 ‣ Routing ‣ Shortest path (point to point)</span> algorithm and launch it.</li>
+<li><p class="first">Das zum Startpunkt gehörende Ziel wurde aufgrund der entlang des Straßennetzwerkes kürzesten Verbindung gefunden. Die verwendete Visualisierung stellt dagegen die Luftlinienverbindung zwischen den Punkten dar. Daher wäre es sinnvoller, den tatsächlichen Pfad zwischen jedem Start- und Zielpunkt zu visualisieren. Mit unserer aktuellen Distanzmatrix gibt es keinen einfachen Weg so eine Darstellung zu erzeugen. Statt dessen werden wir die Visualisierung mit Hilfe eines Pythonskripts erzeugen. Zuerst werden wir den Algorithmus Kürzester Weg für 1 Quelle-Ziel-Paar starten. Starte dazu den Algorithmus <span class="menuselection">QNEAT3 ‣ Routing ‣ Shortest path (point to point)</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li>In the <span class="guilabel">Shortest Path (Point to Point)</span> dialog, select <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> as the <span class="guilabel">Vector layer representing network</span>.  Keep the <span class="guilabel">Path type to calculate</span> as <code class="docutils literal"><span class="pre">Shortest</span></code>. Next we need to pick a start and end point. You can click the <span class="guilabel">...</span> button next to <span class="guilabel">Start point</span> and click on the origin point in the canvas. Similarly select the destination point as the <span class="guilabel">End point</span>. Expand the <span class="guilabel">Advanced parameter</span> section. Choose <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> as the <span class="guilabel">Direction field</span>. Enter <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for forward direction</span> and <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for backward direction</span>. Keep other options to their default values and click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Im Dialogfenster <span class="guilabel">Shortest Path (Point to Point)</span> wählen wir <code class="docutils literal"><span class="pre">Street_Centerlines</span></code> als <span class="guilabel">Network Layer</span>.  Wir lassen <span class="guilabel">Optimization Criterion</span> bei <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span></code>. Als nächstes lesen wir einen Start- und Zielpunkt aus. Dazu können wir auf den Knopf <span class="guilabel">...</span> neben <span class="guilabel">Start point</span> klicken und dann auf einen Startpunkt im Arbeitsbereich klicken. Analog wählen wir den dazu gehörenden Endpunkt für <span class="guilabel">End point</span>. Wir erweitern den Bereich <span class="guilabel">Fortgeschrittene Parameter</span> und wählen <code class="docutils literal"><span class="pre">DIRECTIONA</span></code> als <span class="guilabel">Direction field</span>. Wir geben <code class="docutils literal"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> als <span class="guilabel">Value for forward direction</span> und <code class="docutils literal"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> als <span class="guilabel">Value for backward direction</span> ein. Die anderen Einstellung belassen wir so und klicken auf <span class="guilabel">Starte</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2113.png" class="align-center" src="../../_images/2113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li>A new layer <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> wll be added to the <span class="guilabel">Layers</span> panel. You will see that this path follows the network rather than connecting the origin and destination with a straight line. The reason we ran the algorithm on 1 pair is to easily identify the parameter values that we can use in our script. Select both <code class="docutils literal"><span class="pre">Hub</span> <span class="pre">lines</span></code> and <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>, right-click and select <span class="guilabel">Remove Layer</span>. Click the <span class="guilabel">History</span> button in the <span class="guilabel">Processing Toolbox</span>.</li>
+<li><p class="first">Ein neuer Layer <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Wir sehen, dass die Verbindungslinien zwischen den Punkten keine gerade Linie ist sondern dem Straßennetzwerk folgt. Wir haben den Algorithmus für 1 Wertepaar gestartet, um die Parameter zu identifizieren, die wir im Skript nutzen werden. Wir wählen die beiden Layer <code class="docutils literal"><span class="pre">Knotenlinien</span></code> und <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>, klicken mit rechten Maustaste darauf und wählen <span class="guilabel">Layer löschen</span>. Klicke auf den Knopf <span class="guilabel">Historie</span> im Bereich <span class="guilabel">Verarbeitungswerkzeuge</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2211.png" class="align-center" src="../../_images/2211.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
-<li>Pick the top-most algorithm and you will see the full command displayed in the panel below. Copy the command and click <span class="guilabel">Close</span>.</li>
+<li><p class="first">Klicke auf den oben stehenden Algortihmus. Im unteren Bereich des Fensters sehen wir das vollständige Kommando. Wir kopieren das Kommando und klicken auf <span class="guilabel">Schließen</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2310.png" class="align-center" src="../../_images/2310.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li>Go to <span class="menuselection">Plugins ‣ Python Console</span>.</li>
+<li><p class="first">Gehe zu <span class="menuselection">Erweiterungen ‣ Python-Konsole</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/246.png" class="align-center" src="../../_images/246.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
-<li>Click the <span class="guilabel">Show Editor</span> button in the <span class="guilabel">Python Console</span>.</li>
+<li><p class="first">Klicke auf den Knopf <span class="guilabel">Editor anzeigen</span> in der <span class="guilabel">Python-Konsole</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/255.png" class="align-center" src="../../_images/255.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
-<li>In the editor window, copy/paste the following script. This script uses the parameter values from the processing history that we saw earlier. Click <span class="guilabel">Run Script</span> button to start execution.</li>
+<li><p class="first">Kopiere das folgende Skript in das Editor-Fenster. Das Skript nutzt die Parameter aus der Prozessierungshistorie, die wir uns vorher angesehen hatten. Klicke auf den Knopf <span class="guilabel">Skript ausführen</span>, um das Skript zu starten.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/265.png" class="align-center" src="../../_images/265.png" />
@@ -463,19 +490,22 @@ from &#39;Output OD Matrix&#39; group by origin_id
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="27">
-<li>The script will take a few minutes to run. Once finished, you will see 9 new layers named <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>. Let&#8217;s merge these paths to a single layer. Find the <span class="menuselection">Vector general ‣ Merge vector layers</span> algorithm and launch it.</li>
+<li><p class="first">Das Skript benötigt für die Abarbeitung einige Minuten. Nach der Fertigstellung sehen wir 9 neue Layer mit dem Namen <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>. Wir führen diese Layer zu einem Layer zusammen. Gehe zum Algorithmus <span class="menuselection">Vektoren allgemein ‣ Vektorlayer zusammenführen</span> und starte ihn.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/275.png" class="align-center" src="../../_images/275.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
-<li>Select all 9 <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code> as the <span class="guilabel">Input layers</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Wähle alle 9 Layer <code class="docutils literal"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code> als <span class="guilabel">Eingabelayer</span> und klicke auf <span class="guilabel">Starte</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/285.png" class="align-center" src="../../_images/285.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
-<li>A new <code class="docutils literal"><span class="pre">Merged</span></code> layer will be created which will contain shortest path between our origins and destinations.</li>
+<li><p class="first">Ein neuer Layer <code class="docutils literal"><span class="pre">Zusammengeführt</span></code> mit den kürzesten Verbindungen zwischen Start- und Zielpunkten wird erstellt.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/294.png" class="align-center" src="../../_images/294.png" />
@@ -505,7 +535,7 @@ from &#39;Output OD Matrix&#39; group by origin_id
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Oct 29, 2019.<br/>
+      Zuletzt aktualisiert am Nov 06, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
     <link rel="next" title="Animating Time Series Data (QGIS3)" href="animating_time_series.html" />
-    <link rel="prev" title="Performing Spatial Joins (QGIS3)" href="performing_spatial_joins.html" />
+    <link rel="prev" title="공간 결합 수행 (QGIS3)" href="performing_spatial_joins.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -96,19 +96,19 @@
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">항공사진 지오레퍼런싱 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">디지타이징 맵 데이터</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">테이블 결합 작업(QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">공간 결합 수행 (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">열지도 만들기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">공간 조회 실행(QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">최근린 분석(QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">점 또는 다각형을 이용한 래스터 데이터 표본 추출 작업(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">점 데이터 보간법</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">프로세싱 프레임을 이용한 일괄처리과정</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">프로세싱 모델러를 사용하여 복잡한 작업흐름 자동화하기(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Openrouteservice를 이용한 서비스 영역 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">QGIS 탐색기 이용</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">BIL, BIP 혹은 BSQ 파일 열기</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
@@ -135,7 +135,7 @@
               
                 
   <li>
-    <a href="performing_spatial_joins.html" title="Previous Chapter: Performing Spatial Joins (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Performing Sp...</span>
+    <a href="performing_spatial_joins.html" title="Previous Chapter: 공간 결합 수행 (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; 공간 결합 수행 (QGIS3)</span>
     </a>
   </li>
   <li>
@@ -174,8 +174,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<h4>Looking for QGIS training?</h4>
-<a href="https://spatialthoughts.com/training">See my offerings</a>
+<p>Visit <a href="https://spatialthoughts.com">spatialthoughts.com</a> for more learning resources and QGIS training.</p>
 <hr>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
@@ -230,100 +229,114 @@
 
   <div class="section" id="creating-heatmaps-qgis3">
 <h1>열지도 만들기 (QGIS3)<a class="headerlink" href="#creating-heatmaps-qgis3" title="제목 주소">¶</a></h1>
-<p>Heatmaps are one of the best visualization tools for dense point data. Heatmap is an interpolation technique that useful in determining density of input features. Heatmaps are most commonly used to visualize crime data, traffic incidents, housing density etc. QGIS has a heatmap renderer that can be used to style a point layer and a Processing algorithm <strong>Heatmap (Kernel Density Estimation)</strong> that can be used to create an raster from a point layer.</p>
+<p>열지도는 밀도 포인트 정보에 대해서 시각화하는데 중요한 도구입니다. 열지도는 사용하는 데이터에 대한 정보의 밀도를 결정하는데 유용한 보간법입니다. 열지도는 보통 범죄정보, 교통 사고, 주택밀집도 등 시각화 하는데 사용됩니다. QGIS의 점 레이어 스타일도구에서 열지도를 표현할 수 있고 점 레이어를 통해 레스터를 만들 수 있는 <strong>열지도(케널 밀도 추정)</strong> 알고리즘도 있습니다.</p>
 <div class="section" id="overview-of-the-task">
 <h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
 <p>UK Surrey의 범죄위치 데이터를 활용하여 범죄율이 높은 지역의 열지도를 만들것입니다.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>이 예제에서 필요한 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
 <ul class="simple">
-<li>Using virtual fields and conditional expressions</li>
+<li><p class="first">가상필드사용하기 및 적절하게 표현하기</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
-<p><a class="reference external" href="https://data.police.uk">data.police.uk</a> provides street-level crime, outcome, and stop and search data in simple CSV format. Download the data for <a class="reference external" href="https://data.police.uk/data/">Surrey Police</a> and unzip the downloaded archive to extract the CSV file.</p>
-<p>For convenience, you may directly download a copy of the dataset from the link below:</p>
+<p><a class="reference external" href="https://data.police.uk">data.police.uk</a> 는 도로에 따른 범죄, 결과 등 관련 정보를 CSV 형태로 제공합니다. <a href="#id2"><span class="problematic" id="id3">`Surrey Police https://data.police.uk/data/&gt;`_</span></a> 정보를 내려받아서 묶여있는 파일을 풀어서 CSV파일을 얻습니다.</p>
+<p>아래 링크에서 다음 데이터를 손쉽게 내려받을 수 있습니다:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/2019-02-surrey-street.csv">2019-02-surrey-street.csv</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#policeuk" id="id1">[POLICEUK]</a></p>
+<p>정보 출처 <a class="reference internal" href="../credits.html#policeuk" id="id1">[POLICEUK]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
 <ol class="arabic simple">
-<li>We will first load a basemap layer from OpenStreetMap and then import the CSV data. Click the <span class="guilabel">Open Data Source Manager</span> button.</li>
+<li><p class="first">오픈스트리트맵에서 기본지도를 열어준 다음 CSV파일을 열어줍니다. &#8216;데이터 소스 관리자&#8217;를 열어주세요.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/128.png" class="align-center" src="../../_images/128.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Select the <span class="guilabel">Browser</span> tab in the left-hand panel and find the <span class="guilabel">OpenStreetMap</span> layer under <span class="guilabel">XYZ Tiles</span>. Right-click and select <span class="guilabel">Add Selected Layer(s) to Canvas</span> to add this layer in QGIS.</li>
+<li><p class="first">왼편 패널에서 &#8216;탐색기&#8217;창을 누른후 &#8216;XYZ Tiles&#8217;에서 &#8216;OpenStreetMap&#8217;을 찾습니다. 그리고 오른쪽 마우스클릭한 후 &#8216;캔버스에 선택한 레이어(들)추가&#8217;를 눌러 QGIS레이어를 생성합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/220.png" class="align-center" src="../../_images/220.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Switch to the <span class="guilabel">Delimited Text</span> tab. Here we will import the crime data which comes in a CSV format text file. Click the <span class="guilabel">...</span> button next to <span class="guilabel">File name</span> and browse to the downloaded <code class="docutils literal"><span class="pre">2019-02-surrey-street.csv</span></code> file. The <span class="guilabel">X field</span> and <span class="guilabel">Y field</span> in the <span class="guilabel">Geometry Definition</span> section to be auto-populated with the <code class="docutils literal"><span class="pre">Longitude</span></code> and <code class="docutils literal"><span class="pre">Latitude</span></code> columns. The <span class="guilabel">Geometry CRS</span> should be left to default <code class="docutils literal"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> definition. Make sure the data looks correct in the <span class="guilabel">Sample data</span> panel and click <span class="guilabel">Add</span>, followed by <span class="guilabel">Close</span>.</li>
+<li><p class="first">&#8216;구분자로 분리된 텍스트&#8217;항목으로 갑니다. 이곳에서 CSV파일 형태로 구성된 범죄 정보를 넣어줄 예정입니다. &#8216;...&#8217;을 누른 후 &#8216;파일명&#8217;에 내려받았던  <code class="docutils literal"><span class="pre">2019-02-surrey-street.csv</span></code> 을 넣으세요. Geometry Definition항목에서 &#8220;X 필드&#8221;와 &#8220;Y 필드&#8221;는 에 관련한 내용으로 &#8220;경도&#8221;와 &#8220;위도&#8221;로 나타내게 됩니다. <cite>Geometry CRS`는  ``EPSG:4326 - WGS 84`</cite> 로 설정합니다. 예시데이터 항목에 속성이 알맞게 들어가는지 확인 후 추가 및 닫기합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/317.png" class="align-center" src="../../_images/317.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>You will see 2 layers - <code class="docutils literal"><span class="pre">OpenStreetMap</span></code> and <code class="docutils literal"><span class="pre">2019-02-surrey-street</span></code> loaded in the QGIS <span class="guilabel">Layers</span> panel. Right-click the <code class="docutils literal"><span class="pre">2019-02-surrey-street</span></code> layer and select <span class="guilabel">Zoom to Layer</span>.</li>
+<li><p class="first">레이어 패널에 내려받은 두가지 레이어가 있습니다- &#8220;오픈스트리트맵&#8221;과  <code class="docutils literal"><span class="pre">2019-02-surrey-street</span></code>. <a href="#id1"><span class="problematic" id="id2">`</span></a>2019-02-surrey-street``레이어를 오른쪽 클릭 한 후 &#8216;레이어로 확대/축소&#8217;를 합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/48.png" class="align-center" src="../../_images/48.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>You will see the crime incident points layer overlaid on the OpenStreetMap basemap. Zoom and Pan to explore the data. The data is quite dense and it is hard to get an idea of where there is a high concentration of crime. This is where a heatmap visualization will come in handy. Select the <code class="docutils literal"><span class="pre">2019-02-surrey-street</span></code> layer and  click the <span class="guilabel">Open the Layer Styling panel</span> button.</li>
+<li><p class="first">범죄 사고 점 정보를 오픈스트리트 맵을 기본으로 하는 지도에 올려서 봅니다. 정보를 둘러보시죠. 정보의 밀집정도가 높아 어디가 범죄율이 높은지 찾아내기 힘듭니다. 이런 경우에 열지도 시각화를 통해 쉽게 찾아낼 수 있습니다. <code class="docutils literal"><span class="pre">2019-02-surrey-street</span></code> 레이어를 활성화 시킨후 &#8216;오픈레이어 스타일링 도구&#8217;를 눌러줍시다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/58.png" class="align-center" src="../../_images/58.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Select <code class="docutils literal"><span class="pre">Heatmap</span></code> as the renderer in the dropbox menu. The <span class="guilabel">Layer Styling panel</span> is interactive and you can see the effect of your changes reflected in the canvas immediately. The layer will now be displayed in the default grayscale color-ramp.</li>
+<li><p class="first">렌더링 드롭박스에서 &#8220;열지도&#8221;를 고릅니다. &#8216;레이어 스타일 패널&#8217;은 캔버스에서 내가 변경해준 값에 대해 어떻게 변화했는지 캔버스에서 바로 확인할 수 있도록 고안되었습니다.  이 레이어는 현재 그레이스케일의 형태로 보여집니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/68.png" class="align-center" src="../../_images/68.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>A heatmap is typically renderer using a yellow&#8211;to-red or white&#8211;to-red color ramp where higher concentration of points result in more <strong>heat</strong>. Click the <span class="guilabel">Color ramp</span> dropdown menu and select <code class="docutils literal"><span class="pre">Reds</span></code> color-ramp.</li>
+<li><p class="first">열지도는 보통 높은 밀도의 점 벡터들이 있는 구간에 &#8220;열&#8221;형태로 노랑-빨강 또는 흰-빨강의 색상표로 사용됩니다. &#8216;색상표&#8217;를 누른 후 &#8220;Reds&#8221;를 사용합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/78.png" class="align-center" src="../../_images/78.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Next you need to choose a <span class="guilabel">Radius</span>. This parameter determines the circular neighborhood around each point where that point will have an influence. This value will largely depend on the type of your input data. For our data, let&#8217;s assume a crime incident will have an influence upto 5 Kilometers from the location. Notice that the current project CRS is set to <code class="docutils literal"><span class="pre">EPSG:</span> <span class="pre">3857</span></code> in the bottom-right corner. This CRS has a unit of meter, so we should specify <code class="docutils literal"><span class="pre">5000</span></code> meters as the radius. Another parameter that is hidden from this menu is the <span class="guilabel">Kernel shape</span>. This is a function that determines how the influence of a point should be spread out over the given radius. The Heatmap renderer uses the <code class="docutils literal"><span class="pre">Quartic</span></code> function for this calculation. There are other types of kernels such as <code class="docutils literal"><span class="pre">Triangular</span></code>, <code class="docutils literal"><span class="pre">Uniform</span></code>, <code class="docutils literal"><span class="pre">Triweight</span></code> and <code class="docutils literal"><span class="pre">Epanechnikov</span></code> that can be specified in when using a different heatmap creation method described later in this tutorial. See <a class="reference external" href="https://www.geodose.com/2017/11/qgis-heatmap-using-kernel-density.html">this post</a> for a good explanation and guidance for select the right radius and kernel shape.</li>
+<li><p class="first">그 다음 &#8216;반지름&#8217;값을 설정해줍니다. 이 값은 개별의 점 정보 주변에 얼마나 영향을 미치는지 설정할 수 있습니다. 정보유형에 따라서 이 값이 의미하는 바는 다릅니다. 우리가 예제로 사용하고있는 정보에서는,  반경 5km내에서 범죄 사고가 영향을 미친다고 가정합시다. 오른쪽 제일 아래 프로젝트 좌표정보가 <code class="docutils literal"><span class="pre">EPSG:</span> <span class="pre">3857``인지</span> <span class="pre">확인합니다.</span> <span class="pre">이</span> <span class="pre">좌표계의</span> <span class="pre">기본</span> <span class="pre">단위는</span> <span class="pre">'미터'임으로,</span> <span class="pre">반지름</span> <span class="pre">항목에</span> <span class="pre">&quot;5000&quot;을</span> <span class="pre">입력합니다.</span> <span class="pre">다른</span> <span class="pre">파라미터는</span> <span class="pre">`Kernel</span> <span class="pre">shape`인데</span> <span class="pre">숨겨져있는</span> <span class="pre">항목입니다.</span> <span class="pre">이것은</span> <span class="pre">주어진</span> <span class="pre">반지름에</span> <span class="pre">대해서</span> <span class="pre">얼만큼</span> <span class="pre">퍼져나갈지</span> <span class="pre">결정하는</span> <span class="pre">함수값입니다.</span> <span class="pre">열지도</span> <span class="pre">렌더링은</span> <span class="pre">&quot;4차&quot;함수를</span> <span class="pre">계산식에서</span> <span class="pre">사용합니다.</span> <span class="pre">Kernel</span> <span class="pre">모양은</span> <span class="pre">보통</span> <span class="pre">``Triangular</span></code>, <code class="docutils literal"><span class="pre">Uniform</span></code>, <a href="#id1"><span class="problematic" id="id2">``</span></a>Triweight&#8221; 그리고 <a href="#id3"><span class="problematic" id="id4">`</span></a>Epanechnikov``의 형태의 함수를 사용하기도 합니다. &#8216;&lt;<a class="reference external" href="https://www.geodose.com/2017/11/qgis-heatmap-using-kernel-density.html">https://www.geodose.com/2017/11/qgis-heatmap-using-kernel-density.html</a>&gt;&#8217; 이곳에서 열지도와 Kernel shape에 따른 적절한 반지름값 정보를 더 확인하실 수 있습니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/88.png" class="align-center" src="../../_images/88.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>The heatmap visualization is ready. We can adjust the <span class="guilabel">Opacity</span> of the heatmap in the <span class="guilabel">Layer Rendering</span> section at the bottom. Set the opacity to <code class="docutils literal"><span class="pre">60</span> <span class="pre">%</span></code> so you can see the basemap along with the heatmap.</li>
+<li><p class="first">그렇다면 열지도 시각화가 준비되었습니다. Layer Rendering 항목에서 불투명도를 조정해줍시다. 60%로 설정하여 기본지도와 함께 열지도를 볼 수 있게 해줍시다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/98.png" class="align-center" src="../../_images/98.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>For many types of analysis, just considering density of points is good enough. But sometimes, you may want to give different importance to each point. A more violent crime should have more influence on the output heatmap than a robbery. Similarly, sometimes a point may represent multiple observations at a single location which needs to be accounted for in the analysis. To do this, you are able to supply an optional numeric <strong>weight</strong> field which specifies a value for each point. Let&#8217;s add a weight field and use it to improve the heatmap. Right-click the <code class="docutils literal"><span class="pre">2019-02-surrey-street</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">여러종류의 분석에서, 점의 밀도를 고려하는 것만으로도 충분합니다. 하지만 가끔씩, 개별 점에 대해서 중요도를 다르게 주고 싶을 때도 있습니다. 열지도에서 강도사건보다 더 심각한 범죄가 영향이 크다는 것을 설정할수 있습니다. 한 지역의 점의 정보는 다양하게 분석될 수 있습니다. 이렇게, 개별 점 정보를 <a href="#id1"><span class="problematic" id="id2">**</span></a>가중치**를 설정하여 다른 의미를 부여해 줄 수 있습니다. 가중치 필드를 생성하여 열지도를 더 발전시켜봅시다. <a href="#id3"><span class="problematic" id="id4">``</span></a>2019-02-surrey-street``레이어를 오른쪽 클릭 후 &#8216;속성 테이블 열기&#8217;를 합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/108.png" class="align-center" src="../../_images/108.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>You will see a text field called <code class="docutils literal"><span class="pre">Crime</span> <span class="pre">type</span></code> in the input data that describes the type of crime. We can use these to categorize the different types of crimes and assign a higher weight to more violent crimes.</li>
+<li><p class="first">테이블 필드 중에서 범죄 유형을 구분한 &#8220;Crime type&#8221;을 확인할 수 있습니다. 다른 범죄 유형에 따라 높은 가중치를 주어 분류해봅시다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1111.png" class="align-center" src="../../_images/1111.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>Click the <span class="guilabel">Open field calculator</span>.</li>
+<li><p class="first">&#8216;필드계산기&#8217;를 열어봅시다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/129.png" class="align-center" src="../../_images/129.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>We will now input a formula that uses the <code class="docutils literal"><span class="pre">Crime</span> <span class="pre">type</span></code> and determines the weight value. QGIS has a handy way to add such computed fields using <em>Virtual Fields</em>. The virtual field is saved in the QGIS project and doesn&#8217;t modify the source data. It is also dynamically computed and can be used anywhere in QGIS just like any other attribute value. Enter <code class="docutils literal"><span class="pre">weight</span></code> as the <span class="guilabel">Output field name</span> and set the <span class="guilabel">Output field type</span> to <code class="docutils literal"><span class="pre">Whole</span> <span class="pre">number</span> <span class="pre">(integer)</span></code>. Enter the following expression in the <span class="guilabel">Expression editor</span>. Here we are using <strong>CASE</strong> statement to assign different values based on different conditions. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">``</span></a>Crime type``에 따라 계산식을 통해 가중치를 계산할 것입니다. QGIS는 가상필드 생성하기 기능이 있습니다. 이 기능은 QGIS 프로젝트 상에서는 저장되지만 데이터 원본에는 저장되지 않습니다. 다양하게 계산될 수 있으며 QGIS상에서 어디서든 테이블 값으로 사용될 수 있습니다. 산출필드명에 <a href="#id3"><span class="problematic" id="id4">``</span></a>weight``를 입력한 후 <a href="#id5"><span class="problematic" id="id6">``</span></a>정수 (integer)`를 설정해줍니다. 표현식 패널안에서 작성을 할 것입니다. 우리는 <strong>CASE</strong> 진술을 사용할 것입니다. 다른 상태에따라 다른 값을 가집니다. 입력 후 확인을 누릅니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>CASE
@@ -336,78 +349,89 @@ END
 <img alt="../../_images/138.png" class="align-center" src="../../_images/138.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>A new attribute will be added for each feature with the appropriate weight value.</li>
+<li><p class="first">가중치에 대한 정보가 들어있는 새로운 필드가 생성되었습니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/147.png" class="align-center" src="../../_images/147.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Back in the <span class="guilabel">Layer Styling</span> panel, click the drop-down menu for <span class="guilabel">Weight points by</span> and select the newly added <code class="docutils literal"><span class="pre">weight</span></code> field.</li>
+<li><p class="first">레이어 스타일 패널에 돌아가서, 가중치 부여 항목에서 &#8220;weight&#8221;를 설정해줍니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/157.png" class="align-center" src="../../_images/157.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>You will see the heatmap rendering change to account for the weight parameter. Close the <span class="guilabel">Layer Styling</span> panel.</li>
+<li><p class="first">열지도에서 가중치에 따른 변화를 보실 수 있습니다. 레이어 스타일 패널을 닫아줍니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/166.png" class="align-center" src="../../_images/166.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>If you need the heatmap visualization to be saved as a permanent raster layer or want to customize the heatmap with advanced options such as different kernels or dynamic radius, you can use the <strong>Heatmap (Kernel Density Estimation)</strong> from the Processing Toolbox. We will now use this algorithm. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">열지도에 대한 시각화 정보를 파라미터 레스터 레이어 또는 원하는 kernels, 다양한 반지름에 따라 변경하고 싶을 경우 공간툴박스에서 <a href="#id1"><span class="problematic" id="id2">**</span></a>열지도(커널 밀집도 평가)**를 사용할 수 있습니다. 이제 이 알고리즘을 사용해봅시다. 공간처리 툴박스에 갑시다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/177.png" class="align-center" src="../../_images/177.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Before we can create the heatmap, we need to re-project the source data to a projected CRS. As distance plays an important role in computation of heatmap, it is not correct to use a geographic CRS. Search and find the <span class="menuselection">Vector general ‣ Reproject layer</span> algorithm.</li>
+<li><p class="first">열지도를 생성하기 전, 우리는 좌표계를 변경하기 위해 재투영을 할 필요가 있습니다. 거리는 열지도를 계산하기에 있어서 중요하기 때문에, 지리상 좌표계를 사용한다면 맞지 않을 수 있습니다. 공간처리 툴박스에서 벡터일반&#8211;&gt; 레이어 재투영을 누릅니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/186.png" class="align-center" src="../../_images/186.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>In the <span class="guilabel">Reproject layer</span> dialog, click the <span class="guilabel">Select CRS</span> button for <span class="guilabel">Target CRS</span>. Search for and select the <code class="docutils literal"><span class="pre">EPSG:27700</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code> CRS. This projected CRS is a good choice for data in the UK. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">레이어 재투영에서 &#8216;좌표계 선택&#8217;을 눌러준 후 <code class="docutils literal"><span class="pre">EPSG:27700</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code> 이 좌표계를 설정합니다. 이 좌표계는 영국과 알맞은 좌표계입니다. 확인을 누릅니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/196.png" class="align-center" src="../../_images/196.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li>A new layer named <code class="docutils literal"><span class="pre">Reprojected</span></code> will be added to the <span class="guilabel">Layers</span> panel. Un-check the box next to the old <code class="docutils literal"><span class="pre">2019-02-surrey-street</span></code> layer to hide it.</li>
+<li><p class="first">레이어 패널에서 재투영 레이어가 추가되었습니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>2019-02-surrey-street``레이어는 비활성화해줍니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/205.png" class="align-center" src="../../_images/205.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li>Search and find the <span class="menuselection">Interpolation ‣ Heatmap (Kernel Density Estimation)</span> algorithm.</li>
+<li><p class="first">공간처리툴박스에서 &#8216;보간법 &#8211;&gt; 열지도(커널 밀집도 평가)&#8217;를 누릅니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2110.png" class="align-center" src="../../_images/2110.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li>In the <span class="guilabel">Heatmap (Kernel Density Estimation)</span> dialog, we will use the same paramters as earlier. Select <span class="guilabel">Radius</span> as <code class="docutils literal"><span class="pre">5000</span></code> meters and <span class="guilabel">Weight from field</span> as <code class="docutils literal"><span class="pre">weight</span></code>. Set the <span class="guilabel">Pixel size X</span> and <span class="guilabel">Pixel size Y</span> to <code class="docutils literal"><span class="pre">50</span></code> meters. Let the <span class="guilabel">Kernel shape</span> to the default value of <code class="docutils literal"><span class="pre">Quartic</span></code>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">열지도(커널 밀집도 평가) 창에서, 앞에서 진행해왔던 정보값을 동일하게 적용할 것입니다. 반지름은 5000 미터로 설정한 후, 가중치 부여는 &#8220;weight&#8221; 항목을 설정하고 X,Y의 픽셀 크기는 50미터로 설정합니다. 그리고 Kernel shape는 4차로 설정한 후 확인합니다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/225.png" class="align-center" src="../../_images/225.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">주석</p>
-<p class="last">The <span class="guilabel">Radius from field</span> parameter allows you to specify a dynamic search radius for each point. This can be used along with <span class="guilabel">Weight from field</span> to have fine grainer control on how each point&#8217;s influence is spread.</p>
+<p class="last">&#8216;필드값을 반지름으로&#8217;라는 항목은 각 개별 점에 대해서 다양한 반지름 값을 부여할 경우 사용합니다. &#8216;가중치 부여&#8217;와 함께 사용하여 얼마나 개별 점이 영향을 주는지 사용할 수 있습니다.</p>
 </div>
 <ol class="arabic simple" start="23">
-<li>Once the processing finishes, a new raster layer named <code class="docutils literal"><span class="pre">OUTPUT</span></code> will be loaded. The default visualization is ugly since it uses the <code class="docutils literal"><span class="pre">Singleband</span> <span class="pre">gray</span></code> renderer. Click the <span class="guilabel">Open the Layer Styling panel</span> button.</li>
+<li><p class="first">과정이 끝났다면, 새로운 레스터 레이어가 &#8220;결과물&#8221;로 나타나있을 것입니다. 기본으로 설정되어 표시되는 시각자료는 &#8216;단일 밴드 그레이&#8217;로 매우 멋스럽지 못합니다. 레스터 스타일 패널을 들어가줍시다.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/233.png" class="align-center" src="../../_images/233.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li>Change the render to <code class="docutils literal"><span class="pre">Singleband</span> <span class="pre">Pseudocolor</span></code> and select the <code class="docutils literal"><span class="pre">Reds</span></code> color ramp. The layer now looks like the heatmap visualization that we had created earlier.</li>
+<li><p class="first">&#8220;단일 밴드 유사색상&#8221;으로 변경해준 후 &#8220;Reds&#8221;로 색상도를 변경합니다. 이제 레이어가 앞에서 했었던 열지도 시각화처럼 보이네요.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/244.png" class="align-center" src="../../_images/244.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">주석</p>
-<p class="last">Notice that <code class="docutils literal"><span class="pre">OUTPUT</span></code> layer in the <span class="guilabel">Layers</span> panel has a legend but the <code class="docutils literal"><span class="pre">2019-02-surrey-street</span></code> layer does not. A common problem with using a heatmap layer created with the Heatmap renderer is the lack of a legend. Say you want use the heatmap in the <span class="guilabel">Print Layout</span> and add a legend. A raster heatmap created with the Heatmap processing algorithm method makes this possible.</p>
+<p class="last">&#8220;결과물&#8221;레이어는 <a href="#id1"><span class="problematic" id="id2">``</span></a>2019-02-surrey-street``레이어와 다릅니다. 열지도 렌더링에서 열지도 레이어를 표현 시 문제점은 범례를 사용할 수 없습니다. 범례를 사용하여 열지도를 표현하고 싶다면,  범례를 추가하여 &#8216;새 조판만들기&#8217;를 하십시오. 레스터로 만들어진 열지도 만들기는 이러한 경우에 사용할 수 있습니다.</p>
 </div>
 </div>
 </div>
@@ -434,7 +458,7 @@ END
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      최종 업데이트: Oct 29, 2019<br/>
+      최종 업데이트: Nov 06, 2019<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
