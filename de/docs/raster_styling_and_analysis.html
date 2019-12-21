@@ -104,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Stapelverarbeitung mit dem Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Komplexe Arbeitsabläufe mit Hilfe der Verarbeitungsmodellierung (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automatisierung der Kartenerstellung mit dem Drucklayout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/multi_criteria_overlay.html">Multi Criteria Overlay Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Einfache Netzwerkvisualisierung und Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Lokalisierung der am nächsten gelegenen Einrichtung mit einer Quelle-Ziel-Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Einzugsgebietsanalyse mit dem Openrouteservice (QGIS3)</a></li>
@@ -243,7 +244,7 @@
 <li><p class="first">Gehen Sie auf die <a class="reference external" href="http://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-density/data-download">Population Density Grid, v3 Download Seite.</a> Wählen Sie <span class="guilabel">Data Attributes</span> als <span class="guilabel">.ascii format</span>, <span class="guilabel">1° resolution</span> und <span class="guilabel">1990 year</span>. Klicken Sie auf <span class="guilabel">Download</span>. An diesem Punkt können Sie einen freien Account erstellen und sich einloggen, oder Sie benutzen den <span class="guilabel">Guest Download</span> Button am Ende der Seite um die Daten sofort runterzuladen. Wiederholen Sie den Vorgang für den <span class="guilabel">2000 year</span> Datensatz.</p>
 </li>
 </ol>
-<img alt="../_images/1182.png" class="align-center" src="../_images/1182.png" />
+<img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
 <p>Sie haben nun 2 ZIP Datensätze runtergeladen.</p>
 <p>Der einfachheitshalber können Sie auch eine Kopie der Datensätze direkt von den folgenden Links runterladen:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/gl_gpwv3_pdens_90_ascii_one.zip">gl_gpwv3_pdens_90_ascii_one.zip</a></p>
@@ -256,82 +257,82 @@
 <li><p class="first">Öffnen Sie QGIS und wählen dann <span class="menuselection">Layer ‣ Rasterlayer hinzufügen..</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2138.png" class="align-center" src="../_images/2138.png" />
+<img alt="../_images/2143.png" class="align-center" src="../_images/2143.png" />
 <ol class="arabic simple" start="3">
 <li><p class="first">Suchen Sie die runtergeladenen ZIP Ordner. Halten Sie die <code class="kbd docutils literal"><span class="pre">Strg</span></code> Taste gedrückt und klicken Sie auf die beiden ZIP Ordner um sie auszuwählen. Auf diese Weise können Sie beide Ordner in einem einzigen Schritt laden.</p>
 </li>
 </ol>
-<img alt="../_images/378.png" class="align-center" src="../_images/378.png" />
+<img alt="../_images/379.png" class="align-center" src="../_images/379.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Jeder ZIP Ordner enthält 2 Gitterdatein. Das &#8220;a&#8221; in den Dateinamen deutet an, dass die Bevölkerungszahlen angepasst wurden um den UN Summen zu entsprechen. Wir werden die angepassten Gitter für dieses Tutorial verwenden. Wählen Sie <code class="docutils literal"><span class="pre">glds00ag60.asc</span></code> als den Layer zum hinzufügen aus. Klicken Sie <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/456.png" class="align-center" src="../_images/456.png" />
+<img alt="../_images/457.png" class="align-center" src="../_images/457.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Der Layer hat noch kein KBS definiert, und da die Gitter in Längen- und Breitengraden angegeben sind, wählen Sie <cite>EPSG:4326</cite> als das Koordinatenreferenzsystem.</p>
 </li>
 </ol>
-<img alt="../_images/557.png" class="align-center" src="../_images/557.png" />
+<img alt="../_images/558.png" class="align-center" src="../_images/558.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Da wir beide ZIP Ordner ausgewählt haben, werden Sie einen ähnlichen Dialog nochmal sehen. Wiederholen Sie den Vorgang und wählen Sie das <code class="docutils literal"><span class="pre">glds90ag60.asc</span></code> Gitter als den Layer zum hinzufügen aus.</p>
 </li>
 </ol>
-<img alt="../_images/654.png" class="align-center" src="../_images/654.png" />
+<img alt="../_images/655.png" class="align-center" src="../_images/655.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Wählen Sie <cite>EPSG:4326</cite> wieder als das KBS aus.</p>
 </li>
 </ol>
-<img alt="../_images/753.png" class="align-center" src="../_images/753.png" />
+<img alt="../_images/754.png" class="align-center" src="../_images/754.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Sie sehen nun beide Raster in QGIS geladen. Das Raster wird in einer Grauskala herausgegeben, bei denen die dunkleren Pixel niedrigere Werte und die helleren Pixel höhere Werte aufzeigen.</p>
 </li>
 </ol>
-<img alt="../_images/851.png" class="align-center" src="../_images/851.png" />
+<img alt="../_images/852.png" class="align-center" src="../_images/852.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Jedes Rasterpixel hat einen zugewiesenen Wert. Dieser Wert steht für die Bevölkerungsdichte des jeweiligen Gitters. Klicken Sie auf den <span class="guilabel">Objekte abfragen</span> Button um das Werkzeug auszuwählen und klicken Sie irgendwo auf das Raster um den Wert dieses Pixels zu sehen.</p>
 </li>
 </ol>
-<img alt="../_images/950.png" class="align-center" src="../_images/950.png" />
+<img alt="../_images/951.png" class="align-center" src="../_images/951.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Um das Muster der Bevölkerungsdichte besser sichtbar machen zu können, müssen wir es stylen. Machen Sie dafür einen Rechtsklick auf den Layernamen und wählen <span class="guilabel">Eigenschaften</span> aus. Sie können aber auch einen Doppelklick auf den Layernamen im Inhaltsverzeichnis machen um die Layereigenschaften aufzurufen.</p>
 </li>
 </ol>
-<img alt="../_images/1049.png" class="align-center" src="../_images/1049.png" />
+<img alt="../_images/1050.png" class="align-center" src="../_images/1050.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Unter dem Eintrag <span class="guilabel">Style</span> wechseln Sie die <span class="guilabel">Darstellungsart</span> zu <span class="guilabel">Einkanalpseudofarbe</span>. Als nächstes drücken Sie auf <span class="guilabel">Klassifizieren</span> unter <span class="guilabel">Neue Farbabbildung generieren</span>. Sie sehen nun 5 neu hergestellte Farbwerte. Klicken Sie auf <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
+<img alt="../_images/1185.png" class="align-center" src="../_images/1185.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Zurück im QGIS Hauptfenster sehen Sie eine Heatmap-artige Umwandlung des Rasters. Wiederholen Sie diesen Vorgang ebenfalls für das andere Raster.</p>
 </li>
 </ol>
-<img alt="../_images/1249.png" class="align-center" src="../_images/1249.png" />
+<img alt="../_images/1250.png" class="align-center" src="../_images/1250.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Für unsere Analyse wollen wir die Gebiete mit der größten Bevölkerungsänderung zwischen den Jahren 1990 und 2000 finden. Um das zu erreichen, müssen wir die Unterschiede zwischen jedem Gitterpixelwert der beiden Layer finden. Wählen Sie  <span class="menuselection">Raster ‣ Rasterrechner ...</span>. aus.</p>
 </li>
 </ol>
-<img alt="../_images/1348.png" class="align-center" src="../_images/1348.png" />
+<img alt="../_images/1349.png" class="align-center" src="../_images/1349.png" />
 <ol class="arabic simple" start="14">
 <li><p class="first">Im Abschnitt <span class="guilabel">Rasterkanäle</span> können Sie den Layer durch einen Doppel-Klick auswählen. Die Kanäle sind benannt nach dem Rasternamen gefolgt von einem &#64; und der Kanalnummer. Da jeder unserer Raster nur 1 Kanal besitzt, sehen Sie nur 1 Eintrag pro Raster. Der Rasterrechner kann mathematische Operationen an den Rasterpixel durchführen. In diesem Fall wollen wir eine einfache Formel einsetzen um die 1990 Bevölkerungsdichte von der von 2000 abzuziehen. Geben Sie <cite>glds00ag60&#64;1 - glds90ag60&#64;1`</cite> als die Formel ein. Benennen Sie Ihren Ausgabelayer als <code class="docutils literal"><span class="pre">pop_density_change_2000_1990.tif</span></code> und klicken Sie das Kästchen neben <span class="guilabel">Das Ergebnis zum Projekt hinzufügen</span> an. Klicken Sie auf <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1446.png" class="align-center" src="../_images/1446.png" />
+<img alt="../_images/1447.png" class="align-center" src="../_images/1447.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Sobald die Berechnung abgeschlossen ist, sehen Sie ein neues Layer in QGIS.</p>
 </li>
 </ol>
-<img alt="../_images/1544.png" class="align-center" src="../_images/1544.png" />
+<img alt="../_images/1545.png" class="align-center" src="../_images/1545.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Diese Graustufenvisualizierung ist nützlich, aber wir können eine noch informativere Ausgabe erstellen. Machen Sie einen Rechts-Klick auf den <code class="docutils literal"><span class="pre">pop_density_change_2000_1990</span></code> Layer und wählen <span class="guilabel">Eigenschaften</span> aus.</p>
 </li>
 </ol>
-<img alt="../_images/1641.png" class="align-center" src="../_images/1641.png" />
+<img alt="../_images/1642.png" class="align-center" src="../_images/1642.png" />
 <ol class="arabic simple" start="17">
 <li><p class="first">Wir wollen den Layer so gestalten, so dass Pixelwerte in einem bestimmten Bereich die gleiche Farbe erhalten. Bevor wir uns darum kümmern, gehen Sie zum  <span class="guilabel">Metadata</span> Bereich und schauen Sie sich die Rastereigenschaften an. Beachten Sie dabei die minimal und die maximal Werte des Layers.</p>
 </li>
 </ol>
-<img alt="../_images/1737.png" class="align-center" src="../_images/1737.png" />
+<img alt="../_images/1738.png" class="align-center" src="../_images/1738.png" />
 <ol class="arabic simple" start="18">
 <li>Now go to the <span class="guilabel">Style</span> tab. Select <span class="guilabel">Singleband
 pseudocolor</span> as the <span class="guilabel">Render type</span> under <span class="guilabel">Band
@@ -344,25 +345,25 @@ above -2000, we choose -2000 as the first entry. This will be for the No
 Data values. Enter the values and Labels for other entries as below and
 click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1837.png" class="align-center" src="../_images/1837.png" />
+<img alt="../_images/1838.png" class="align-center" src="../_images/1838.png" />
 <ol class="arabic simple" start="19">
 <li>Now you will see a much more powerful visualization where you can see areas
 which has seen positive and negative population density changes. Click on
 <span class="guilabel">Zoom In</span> button and draw a rectangle around Europe to
 explore the region in more detail.</li>
 </ol>
-<img alt="../_images/1932.png" class="align-center" src="../_images/1932.png" />
+<img alt="../_images/1933.png" class="align-center" src="../_images/1933.png" />
 <ol class="arabic simple" start="20">
 <li>Select the <span class="guilabel">Identify</span> tool and click on the Red and Blue regions
 to verify that your styling rules worked as intended.</li>
 </ol>
-<img alt="../_images/2025.png" class="align-center" src="../_images/2025.png" />
+<img alt="../_images/2026.png" class="align-center" src="../_images/2026.png" />
 <ol class="arabic simple" start="21">
 <li>Now let’s take this analysis one-step further and find areas with only
 <cite>negative</cite> population density change. Open <span class="menuselection">Raster ‣
 Raster calculator</span>.</li>
 </ol>
-<img alt="../_images/2139.png" class="align-center" src="../_images/2139.png" />
+<img alt="../_images/2144.png" class="align-center" src="../_images/2144.png" />
 <ol class="arabic simple" start="22">
 <li>Enter the expression as shown below What this expression will do is set the
 value of the pixel to 1 is if matches the expression and 0 if it doesn&#8217;t.
@@ -374,7 +375,7 @@ result to project</span>. Click OK.</li>
 <div class="highlight-none"><div class="highlight"><pre><span></span>pop_density_change_2000_1990@1 &lt; -10
 </pre></div>
 </div>
-<img alt="../_images/2225.png" class="align-center" src="../_images/2225.png" />
+<img alt="../_images/2226.png" class="align-center" src="../_images/2226.png" />
 <ol class="arabic simple" start="23">
 <li>Once the new layer is loaded, right-click on it and select
 <span class="guilabel">Properties</span>. In the <span class="guilabel">Transparency</span> tab, add 0 as the
@@ -412,7 +413,7 @@ pixels.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Nov 09, 2019.<br/>
+      Zuletzt aktualisiert am Dec 21, 2019.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
