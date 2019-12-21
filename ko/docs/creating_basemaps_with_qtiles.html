@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Creating Basemaps with QTiles &mdash; QGIS Tutorials and Tips</title>
+    <title>QTiles로 베이스 맵 만들기 &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -108,7 +108,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/multi_criteria_overlay.html">Multi Criteria Overlay Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">가장 가까운 기-종점 매트릭스 위치 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Openrouteservice를 이용한 서비스 영역 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">QGIS 탐색기 이용</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">BIL, BIP 혹은 BSQ 파일 열기</a></li>
@@ -121,12 +121,12 @@
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">QTiles로 베이스 맵 만들기</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">플러그인 사용하기</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">오픈스트리트맵 데이터의 검색과 다운로드</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS 수업 자원</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">데이터 크레딧</a></li>
-<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">프로세싱 프레임을 이용한 일괄처리과정</a></li>
 </ul>
 </ul>
 </li>
@@ -229,104 +229,67 @@
       
 
   <div class="section" id="creating-basemaps-with-qtiles">
-<h1>Creating Basemaps with QTiles<a class="headerlink" href="#creating-basemaps-with-qtiles" title="제목 주소">¶</a></h1>
-<p>Tiles have revolutionized the idea of web mapping and has given us fast and
-easy access to large datasets. Tiling schemes divide the world into small tiles
-(typically 256 x 256 pixels) for each zoom level and pre-render datasets to
-these tiles. This way only a small fraction of a large dataset is served to the
-user at any given time - resulting in a map that can be zoomed or panned with
-ease over the internet. There are many methods to create tiles from GIS
-datasets. One easy way to create tiles from your QGIS project is a plugin
-called <strong>QTiles</strong>. In this tutorial, you will learn how to create PNG tiles
-from any set of layers loaded in QGIS and create a basemap to be used in a web
-mapping project.</p>
+<h1>QTiles로 베이스 맵 만들기<a class="headerlink" href="#creating-basemaps-with-qtiles" title="제목 주소">¶</a></h1>
+<p>Tiles는 웹 매핑의 아이디어를 혁신 시켰으며 대규모 데이터 세트에 빠르고 쉽게 접근할 수 있었습니다. Tiling schemes는 세계를 각 확대 / 축소 수준에 따라 작은 타일 (일반적으로 256 x 256 픽셀)로 분할하고 이러한 타일에 대한 사전 렌더링 데이터 세트를 제공합니다. 이 방법을 사용하면 주어진 시간에 대규모 데이터 세트의 일부만 사용자에게 제공되므로 인터넷을 통해 쉽게 확대 / 축소하거나  이동할 수있는 맵이 생성됩니다. GIS 데이터 세트에서 타일을 생성하는 방법에는 여러 가지가 있습니다. QGIS 프로젝트에서 타일을 만드는 쉬운 방법 중 하나는 ** QTiles <a href="#id1"><span class="problematic" id="id2">**</span></a>라는 플러그인입니다. 이 튜토리얼에서는 QGIS에로드 된 모든 레이어 세트에서 PNG 타일을 만들고 웹 매핑 프로젝트에 사용할 베이스 맵을 만드는 방법을 배웁니다.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
-<p>We will create tiles from the Natural Earth raster covering the entire planet.</p>
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<p>우리는 자연 지구 래스터로 타일을 만들고 지구 전체를 덮는 것입니다.</p>
 </div>
 <div class="section" id="get-the-data">
 <h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-2/">Natural Earth 2</a>
-dataset from Natural Earth.</p>
-<p>Download the medium-size <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/NE2_LR_LC_SR_W_DR.zip">Natural Earth II with Shaded Relief, Water, and
-Drainages</a>
-zip file.</p>
-<p>Data Source <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>Natural Earth의 Natural Earth 2 &lt;<a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-2/">http://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-2/</a>&gt;`_ 데이터 세트를 사용합니다.</p>
+<p>음영 처리 된 물, 배수 및 배수구 zip 파일이 포함 된 중간 크기의 자연 지구 II를&lt;<a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/NE2_LR_LC_SR_W_DR.zip">http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/NE2_LR_LC_SR_W_DR.zip</a>&gt;`_ 다운로드하십시오.</p>
+<p>데이터 출처[NATURALEARTH]_</p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
 <ol class="arabic simple">
-<li>Unzip the downloaded <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.zip</span></code> file to a folder on your
-computer. Open QGIS and go to
-<span class="menuselection">Layer ‣ Add Raster Layer</span>. Browse to the location of the
-extracted files and select <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.tif</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">다운로드 한 NE2_LR_LC_SR_W.zip 파일을 컴퓨터의 폴더에 압축 해제하십시오. QGIS를 열고 레이어 ‣ 래스터 레이어 추가로 이동하십시오. 추출 된 파일의 위치를 찾아 NE2_LR_LC_SR_W.tif를 선택하십시오. 확인을 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/1145.png" class="align-center" src="../_images/1145.png" />
 <ol class="arabic simple" start="2">
-<li>Install the <code class="docutils literal"><span class="pre">QTiles</span></code> plugin by going to <span class="menuselection">Plugins ‣ Manage and
-Install Plugin</span>. Note that the plugin is currently marked <strong>experimental</strong>,
-so you will need to check <span class="guilabel">Show also experimental plugins</span> in
-Plugin Settings. (See <a class="reference internal" href="using_plugins.html"><em>플러그인 사용하기</em></a> for more details on installing
-plugins in QGIS). Once the plugin is installed, go to
-<span class="menuselection">Plugins ‣ QTiles ‣ QTiles</span>.</li>
+<li><p class="first">플러그인 ‣ 플러그인 관리 및 설치로 이동하여 QTiles 플러그인을 설치하십시오. 플러그인은 현재 실험용으로 표시되어 있으므로 플러그인 설정에서 실험용 플러그인 표시도 확인해야합니다. (QGIS에 플러그인 설치에 대한 자세한 내용은 플러그인 사용하기 참조). 플러그인이 설치되면 플러그인 ‣ QTiles ‣ QTiles로 이동하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/2103.png" class="align-center" src="../_images/2103.png" />
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">QTiles</span> dialog, select <span class="guilabel">Directory</span> as the
-<span class="guilabel">Output</span> and browse to a folder of your choice where the output
-tiles will be created. Choose <span class="guilabel">Layer extent</span> of the
-<code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W</span></code> layer as the extent of the tiles. Set the
-<span class="guilabel">Maximum Zoom</span> to <code class="docutils literal"><span class="pre">6</span></code>. Expand the <span class="guilabel">Parameters</span> section
-and check the <span class="guilabel">Write Leaflet-based viewer</span>. Click <span class="guilabel">Run</span>
-to start the process of rendering the tiles.</li>
+<li><p class="first">QTiles 대화 상자에서 출력으로 디렉토리를 선택하고 출력 타일이 생성 될 선택한 폴더를 찾습니다. 타일 범위로 NE2_LR_LC_SR_W 레이어의 레이어 범위를 선택하십시오. 최대 줌을 6으로 설정하십시오. 매개 변수 섹션을 펼치고 Write Leaflet-based viewer를 확인하십시오. 타일 렌더링 프로세스를 시작하려면 실행을 클릭하십시오.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">주석</p>
-<p class="last">The number of tiles increase 4 times for every additional zoom level
-and since our layer has an extend of the entire world - there will be millions
-of tiles at higher zoom levels.</p>
+<p class="last">타일 수는 추가 확대 / 축소 수준마다 4 배씩 증가하며 레이어가 전 세계로 확장되므로 확대 / 축소 수준에는 수백만 개의 타일이 있습니다.</p>
 </div>
 <img alt="../_images/354.png" class="align-center" src="../_images/354.png" />
 <ol class="arabic simple" start="4">
-<li>Once the process finishes, close the <span class="guilabel">QTiles</span> dialog and browse to
-the output folder you had selected. You will notice folders for each zoom
-level upto the maximum zoom level. Each folder further contains subfolder
-for X coordinates and then the actual tiles named for Y coordinates.</li>
+<li><p class="first">프로세스가 완료되면 QTiles 대화 상자를 닫고 선택한 출력 폴더를 찾으십시오. 각 확대 / 축소 수준의 폴더를 최대 확대 / 축소 수준까지 확인할 수 있습니다. 각 폴더에는 X 좌표의 하위 폴더와 Y 좌표의 이름으로 저장한 실제 타일이 포함됩니다.</p>
+</li>
 </ol>
 <img alt="../_images/436.png" class="align-center" src="../_images/436.png" />
 <ol class="arabic simple" start="5">
-<li>In the parent directory of top-level tiles directory, you will find a
-<code class="docutils literal"><span class="pre">QTiles.html</span></code> file. This is a simple viewer to explore the tiles using the
-Leaflet web mapping library.</li>
+<li><p class="first">최상위 타일 디렉토리의 상위 디렉토리에 QTiles.html 파일이 있습니다. Leaflet 웹 매핑 라이브러리를 사용하여 타일을 탐색 할 수있는 간단한 뷰어입니다.</p>
+</li>
 </ol>
 <img alt="../_images/536.png" class="align-center" src="../_images/536.png" />
 <ol class="arabic simple" start="6">
-<li>Double-click the <code class="docutils literal"><span class="pre">QTiles.html</span></code> to open it in a web browser. You can zoom
-and pan around to see the tiles seamlessly form the original raster layer.</li>
+<li><p class="first">QTiles.html을 두 번 클릭하여 웹 브라우저에서 여십시오. 타일이 원본 래스터 레이어를 완벽하게 형성하는 것을보기 위해 확대 / 축소 및 이동을 할 수 있습니다.</p>
+</li>
 </ol>
 <img alt="../_images/634.png" class="align-center" src="../_images/634.png" />
 <ol class="arabic simple" start="7">
-<li>You can use these tiles with any web-mapping library that supports XYZ
-tiling schemes and overlay other layers on top. To demonstrate the
-usefulness and portability of such tiles, we will now add the tiles created
-in this tutorial as the basemap for the airports map created in
-<a class="reference internal" href="web_mapping_with_qgis2web.html"><em>Web Mapping with QGIS2Web</em></a> tutorial. In that tutorial, we chose to use
-a ready-made basemap from OpenStreetMap. We can easily swap that with our
-own custom basemap created in this tutorial. Go to the output directory
-where the qgis2web map was exported. Open the <span class="menuselection">Layers ‣
-layers.js</span> file created during the export.</li>
+<li><p class="first">이 타일을 XYZ 타일링 체계를 지원하고 다른 레이어를 오버레이하는 웹 매핑 라이브러리와 함께 사용할 수 있습니다. 이러한 타일의 유용성과 이식성을 설명하기 위해 이제이 튜토리얼에서 생성 된 타일을 QGIS2Web 튜토리얼로 Web Mapping에서 생성 된 공항 맵의베이스 맵으로 추가합니다. 이 튜토리얼에서는 OpenStreetMap에서 기성품베이스 맵을 사용합니다. 이 튜토리얼에서 만든 사용자 베이스 맵으로 쉽게 바꿀 수 있습니다. qgis2web 맵을 내 보낸 출력 디렉토리로 이동하십시오. 내보내기 중에 생성 된 Layers ‣ layers.js 파일을 엽니 다.</p>
+</li>
 </ol>
 <img alt="../_images/734.png" class="align-center" src="../_images/734.png" />
 <ol class="arabic simple" start="8">
-<li>Locate the code block where the <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">B</span> <span class="pre">&amp;</span> <span class="pre">W</span></code> base layer is defined.</li>
+<li><p class="first">OSM B &amp; W 베이스 레이어이 정의 된 코드 블록을 찾으십시오.</p>
+</li>
 </ol>
 <img alt="../_images/833.png" class="align-center" src="../_images/833.png" />
 <ol class="arabic simple" start="9">
-<li>Replace the definition of the base layer with our own tiles. At this point,
-the tiles exist only on your computer, so the URL will be the local
-directory. But you can also upload the tiles to a server and give the URL of
-the server. Change the title and source with appropriate values for Natural
-Earth. Save the file.</li>
+<li><p class="first">기본 레이어의 정의를 자체 타일로 바꿉니다. 이때 타일은 컴퓨터에만 존재하므로 URL은 로컬 디렉토리가됩니다. 그러나 타일을 서버에 업로드하고 서버의 URL을 제공 할 수도 있습니다. Natural Earth에 적절한 값으로 제목과 소스를 변경하십시오. 파일을 저장하십시오.</p>
+</li>
 </ol>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">new</span> <span class="nx">ol</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">Tile</span><span class="p">({</span>
  <span class="s1">&#39;title&#39;</span><span class="o">:</span> <span class="s1">&#39;Natural Earth 2&#39;</span><span class="p">,</span>
@@ -340,8 +303,8 @@ Earth. Save the file.</li>
 </div>
 <img alt="../_images/934.png" class="align-center" src="../_images/934.png" />
 <ol class="arabic simple" start="10">
-<li>Open the web map in a browser and you will see that the B &amp; W OSM layer is
-replaced by our freshly created tiles.</li>
+<li><p class="first">브라우저에서 웹 맵을 열면 B &amp; W OSM 레이어가 새로 생성 된 타일로 대체 된 것을 볼 수 있습니다.</p>
+</li>
 </ol>
 <img alt="../_images/1032.png" class="align-center" src="../_images/1032.png" />
 </div>

@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Working with Projections &mdash; QGIS Tutorials and Tips</title>
+    <title>Lavorare con le Proiezioni &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -91,7 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Lavorare con i dati del terrreno</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Lavorare con i dati WMS</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Working with Projections</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Lavorare con le Proiezioni</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferenziazione carte topografiche e mappe scannerizzate (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Vettorializzare mappe raster</a></li>
@@ -229,38 +229,30 @@
       
 
   <div class="section" id="working-with-projections">
-<h1>Working with Projections<a class="headerlink" href="#working-with-projections" title="Link a questa intestazione">¶</a></h1>
-<p>Map projections - or Coordinate Reference System (CRS) - often cause a lot of
-frustration when working with GIS data.  But proper understanding of the
-concepts and access to the right tools will make it much easier to deal with
-projections. In this tutorial, we will explore how projections work in QGIS and
-learn about tools available for vector and rasters - particularly re-projecting
-vector and raster data, enabling on-the-fly re-projection and assigning
-projection to data without projection.</p>
+<h1>Lavorare con le Proiezioni<a class="headerlink" href="#working-with-projections" title="Link a questa intestazione">¶</a></h1>
+<p>Le proiezioni delle mappe - o Coordinate Reference System (CRS) - spesso causano molta frustrazione quando si lavora con i dati GIS. Ma una corretta comprensione dei concetti e l&#8217;accesso agli strumenti giusti renderanno molto più semplice gestire le proiezioni. In questo tutorial, esploreremo il modo in cui funzionano le proiezioni in QGIS e scopriremo gli strumenti disponibili per vettori e raster, in particolare riprometteremo i dati vettoriali e raster, consentendo la (ri)proiezione al volo e assegnando la proiezione ai dati senza proiezione.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Descrizione dell&#8217;esercizio<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
-<p>The task is to re-project and overlay data layers of difference projections
-together in QGIS.</p>
+<p>Il compito è ri-proiettare e sovrapporre assieme livelli di dati da differenti proiezioni in QGIS.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Altri aspetti che avremo modo di apprendere nel corso dell&#8217;esercizio<a class="headerlink" href="#other-skills-you-will-learn" title="Link a questa intestazione">¶</a></h3>
 <ul class="simple">
-<li>Use <code class="docutils literal"><span class="pre">.tfw</span></code> files to georeference to rasters.</li>
-<li>How to save selected features from a layer to a new layer.</li>
-<li>How to view metadata information for layers in QGIS.</li>
+<li><p class="first">Utilizziamo i file <code class="docutils literal"><span class="pre">.tfw</span></code> per georeferenziare i raster</p>
+</li>
+<li><p class="first">Come salvare le caratteristiche selezionate da un livello in un nuovo livello.</p>
+</li>
+<li><p class="first">Come visualizzare le informazioni sui metadati per i layer in QGIS.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Ottenere i dati necessari<a class="headerlink" href="#get-the-data" title="Link a questa intestazione">¶</a></h2>
-<p>Natural Earth has <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/">Admin 0 - Countries</a>
-dataset. Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">countries</a></p>
-<p><a class="reference external" href="https://www.ordnancesurvey.co.uk/">UK&#8217;s Ordnance Survey</a> provides open data
-for download. Download the <a class="reference external" href="https://www.ordnancesurvey.co.uk/opendatadownload/products.html">MiniScale raster product</a> for Great
-Britain and extract it to a folder on your computer.</p>
+<p>Natural Earth ha un insieme di dati <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/">Admin 0 - Countries</a> . Scaricate  <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">countries</a></p>
+<p><a class="reference external" href="https://www.ordnancesurvey.co.uk/">Indagine sull&#8217;Ordinanza in  Gran Bretagna</a> fornisce dati aperti per il download. Scaricate il prodotto raster <a class="reference external" href="https://www.ordnancesurvey.co.uk/opendatadownload/products.html">MiniScale</a> per la Gran Bretagna ed estraetelo in una cartella sul vostro computer.</p>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">You will need to enter your personal details to be able to download the
-Ordnance Survey dataset.</p>
+<p class="last">Dovrai inserire i tuoi dati personali per poter scaricare l&#8217;insieme dei dati dell&#8217;Indagine sull&#8217;Ordnanza.</p>
 </div>
 <p>For convenience, you may directly download a copy of the dataset from the link
 below:</p>

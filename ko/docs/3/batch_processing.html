@@ -108,7 +108,7 @@
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multi_criteria_overlay.html">Multi Criteria Overlay Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">가장 가까운 기-종점 매트릭스 위치 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Openrouteservice를 이용한 서비스 영역 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">QGIS 탐색기 이용</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">BIL, BIP 혹은 BSQ 파일 열기</a></li>
@@ -121,12 +121,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../creating_basemaps_with_qtiles.html">QTiles로 베이스 맵 만들기</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_plugins.html">플러그인 사용하기</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../downloading_osm_data.html">오픈스트리트맵 데이터의 검색과 다운로드</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../learning_resources.html">QGIS 수업 자원</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../credits.html">데이터 크레딧</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../batch_processing.html">프로세싱 프레임을 이용한 일괄처리과정</a></li>
 </ul>
 </ul>
 </li>
@@ -230,45 +230,45 @@
 
   <div class="section" id="batch-processing-using-processing-framework-qgis3">
 <h1>프로세싱 프레임을 이용한 일괄처리과정<a class="headerlink" href="#batch-processing-using-processing-framework-qgis3" title="제목 주소">¶</a></h1>
-<p>The <em>Processing Framework</em> in QGIS provides an environment within
-QGIS to run native and third-party algorithms for processing data. It contains
-a nice batch processing interface that allows one to execute an algorithm on
-several layers easily. Batch processing is a useful tool that can save manual
-effort and help you automate repetitive tasks.</p>
+<p>QGIS의 <a href="#id1"><span class="problematic" id="id2">**</span></a>Processing Framework**는 QGIS에서 데이터 처리를 위해 토착형 그리고 제 3 자형 알고리즘을 구동할 수 있는 환경을 제공합니다. 이것은 여러개의 레이어에 대해 쉽게 알고리즘을 실행할 수 있도록 괜찮은 일괄처리 과정 인터페이스를 포함하고 있습니다. 일괄처리 과정은 수동적인 노력을 절감하고 반복적인 작업을 자동적으로 수행할 수 있도록 해주는 유용한 툴입니다.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
-<p>We will take several global vector layers and clip them to the extent of Africa
-in a single batch command.</p>
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<p>단일 일괄처리 명령하에서 몇몇 전지구적 벡터 레이어를 사용하여 아프리카의 범위로 잘라내기를 할 것입니다.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<h3>기타 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
 <ul class="simple">
-<li>Create a <strong>Filter</strong> to remove unwanted features from a layer without creating a new layer.</li>
-<li>Merge multiple layers into a single Geopackage file.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">**</span></a>Filter**를 만들어 새 레이어를 만들지 않고 레이어에서 원치 않는 피처를 제거합니다.</p>
+</li>
+<li><p class="first">여러 레이어를 단일 Geopackage file로 병합합니다.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
-<p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> has several global vector
-layers. Download the following layers</p>
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>Natural Earth &lt;<a class="reference external" href="http://naturalearthdata.com">http://naturalearthdata.com</a>&gt;`_에는 전 지구적 벡터레이가 있습니다. 다음의 레이어를 다운로드하십시오.</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Countries</a></li>
-<li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads.zip">Railroads</a></li>
+<li><p class="first">100%match
+<a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads.zip">Railroads</a></p>
+</li>
 <li><a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_ports.zip">Ports</a></li>
 <li><a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_urban_areas.zip">Urban Areas</a></li>
 </ul>
-<p>For convenience, you may directly download a geopackage containing the above layers from below:</p>
+<p>편의성을 위해 아래에서 geopackage를 포함한 레이어를 바로 다운받으실 수 있습니다.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_global.gpkg">ne_global.gpkg</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>데이터 출처: <a class="reference internal" href="../credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
 <ol class="arabic simple">
-<li>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal"><span class="pre">zip</span></code> or the <code class="docutils literal"><span class="pre">gpkg</span></code>  entry and select the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer. Drag the layer to the canvas.</li>
+<li><p class="first">QGIS 브라우저 패널에서 다운로드 한 데이터를 저장 한 디렉토리를 찾으십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>zip &#8216;&#8217;또는``gpkg &#8216;&#8217;항목을 확장하고``ne_10m_admin_0_countries &#8216;&#8217;레이어를 선택하십시오. 레이어를 캔버스로 드래그하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/116.png" class="align-center" src="../../_images/116.png" />
 <ol class="arabic simple" start="2">
-<li>You will see the layer loaded in the Layers panel. As our task is to clip the global layers to the boundary of Africa, we need to first prepare a layer containg features only from that continent. Let&#8217;s look at the attribute table to see what column can be used to query features belonging to a particular continent. Right-click the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">레이어 패널에 레이어가 로드 된 것을 볼 수 있습니다. 우리의 임무는 글로벌 레이어를 아프리카의 경계까지 자르는 것이므로, 먼저 해당 대륙에서만 레이어 포함 피처를 준비해야합니다. 특정 대륙에 속하는 지형지 물을 쿼리하는 데 사용할 수있는 열을 확인하기 위해 속성 테이블을 살펴 보겠습니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>ne_10m_admin_0_countries &#8216;&#8217;레이어를 마우스 오른쪽 버튼으로 클릭하고 <a href="#id3"><span class="problematic" id="id4">`</span></a>속성 테이블 열기`를 선택하십시오.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">주석</p>
@@ -276,110 +276,135 @@ layers. Download the following layers</p>
 </div>
 <img alt="../../_images/215.png" class="align-center" src="../../_images/215.png" />
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">Attribute Table</span> window, as you scroll horizontally, you will see that the data contains an attribute called <strong>CONTINENT</strong>. We can use this attribute to filter features.</li>
+<li><p class="first"><cite>Attribute Table</cite> 창에서 가로로 스크롤하면 데이터에 ** CONTINENT <a href="#id1"><span class="problematic" id="id2">**</span></a>라는 속성이 포함되어 있음을 알 수 있습니다. 이 속성을 사용하여 기능을 필터링 할 수 있습니다.</p>
+</li>
 </ol>
 <img alt="../../_images/313.png" class="align-center" src="../../_images/313.png" />
 <ol class="arabic simple" start="4">
-<li>Close the attribute table and return to the main QGIS window. Right-click the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer and select <span class="guilabel">Filter</span>.</li>
+<li><p class="first">속성 테이블을 닫고 기본 QGIS 창으로 돌아갑니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>ne_10m_admin_0_countries &#8216;&#8217;레이어를 마우스 오른쪽 버튼으로 클릭하고 : <a href="#id3"><span class="problematic" id="id4">`</span></a>Filter`를 선택하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/45.png" class="align-center" src="../../_images/45.png" />
 <ol class="arabic simple" start="5">
-<li>In the <span class="guilabel">Query Builder</span> window, select the <strong>CONTINENT</strong> field and click <span class="guilabel">Sample</span>. This will populate the <span class="guilabel">Values</span> panel with the a subset of values of that attribute from features. This step is useful to get an understanding of what type of values are present in your dataset. We can see that our dataset contains contains a value called <strong>Africa</strong> among others.</li>
+<li><p class="first"><cite>Query Builder</cite> 창에서 ** CONTINENT ** 필드를 선택하고 <a href="#id1"><span class="problematic" id="id2">`</span></a>Sample`을 클릭하십시오. 이것은 <a href="#id3"><span class="problematic" id="id4">`</span></a>Values &#8216;패널을 기능에서 해당 속성 값의 서브 세트로 채웁니다. 이 단계는 데이터 세트에 어떤 유형의 값이 있는지 이해하는 데 유용합니다. 데이터 셋에 ** Africa <a href="#id5"><span class="problematic" id="id6">**</span></a>라는 값이 포함되어 있음을 알 수 있습니다.</p>
+</li>
 </ol>
 <img alt="../../_images/55.png" class="align-center" src="../../_images/55.png" />
 <ol class="arabic simple" start="6">
-<li>Now enter the expression in the <span class="guilabel">Provider specific filter expression</span> textbox. You can click the <strong>CONTINENT</strong> label, followed by <span class="guilabel">=</span> button and <strong>Africa</strong> label. Or you can type the following expression in the textbox. Click <span class="guilabel">OK</span> after entering the expression.</li>
+<li><p class="first">이제 <cite>Provider specific filter expression</cite> 텍스트 상자에 표현식을 입력하십시오. ** CONTINENT ** 레이블을 클릭 한 다음 <a href="#id1"><span class="problematic" id="id2">`</span></a>=`버튼과 ** Africa ** 레이블을 클릭 할 수 있습니다. 또는 텍스트 상자에 다음 표현식을 입력 할 수 있습니다. 표현식을 입력 한 후 <a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre><span></span>&quot;CONTINENT&quot; = &#39;Africa&#39;
 </pre></div>
 </div>
 <img alt="../../_images/65.png" class="align-center" src="../../_images/65.png" />
 <ol class="arabic simple" start="7">
-<li>You will see that the map canvas now contains only the countries from Africa. Note the filter icon next to the layer name indicating that that layer a filter applied to it. If you wanted to see and use all the features from the layer, you can click the filter icon and clear the expression. For now, we will keep the filter so we can clip other layers to Africa.</li>
+<li><p class="first">이제 지도 캔버스에 아프리카 국가만 포함되어 있음을 알 수 있습니다. 레이어 이름 옆에있는 필터 아이콘은 해당 레이어에 필터가 적용되었음을 나타냅니다. 레이어에서 모든 기능을 보고 사용하려면 필터 아이콘을 클릭하고 표현식을 지울 수 있습니다. 지금은 필터를 유지하여 다른 레이어를 아프리카에 클립 할 수 있습니다.</p>
+</li>
 </ol>
 <img alt="../../_images/75.png" class="align-center" src="../../_images/75.png" />
 <ol class="arabic simple" start="8">
-<li>We are now ready to run the batch process to clip the layers. Locate the natural earth global layers <code class="docutils literal"><span class="pre">ne_10m_railroads</span></code>, <code class="docutils literal"><span class="pre">ne_10m_ports</span></code> and <code class="docutils literal"><span class="pre">ne_10m_urban_areas</span></code> in the <span class="guilabel">QGIS Browser</span> panel. Hold the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and click each layer to select them. Once selected, drag them to the canvas.</li>
+<li><p class="first">이제 배치 프로세스를 실행하여 레이어를 클리핑 할 준비가되었습니다. <cite>QGIS Browser &#8216;패널에서 자연 지구 전역 레이어``ne_10m_railroads&#8217; &#8216;,``ne_10m_ports&#8217; &#8216;및``ne_10m_urban_areas&#8217; &#8216;를 찾으십시오. : kbd :`Ctrl</cite> 키를 누른 상태에서 각 레이어를 클릭하여 선택하십시오. 선택한 후에는 캔버스로 드래그하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/85.png" class="align-center" src="../../_images/85.png" />
 <ol class="arabic simple" start="9">
-<li>Once the layers are loaded, you will notice that they are global layers and have features spanning all the countries.  Now, it&#8217;s time to start our batch clip process to clip these layers to Africa. Open <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">레이어가 로드되면  global layers를 확인할 수 있으며 그것은 모든 국가에 걸쳐 기능이 있음을 알 수 있습니다. 이제 이 클립들을 아프리카에 클립하기 위해 배치 클립 프로세스를 시작할 차례입니다. Open : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Processing-&gt; Toolbox`를 엽니 다.</p>
+</li>
 </ol>
 <img alt="../../_images/95.png" class="align-center" src="../../_images/95.png" />
 <ol class="arabic simple" start="10">
-<li>Browse all available algorithms and find the <span class="guilabel">Clip</span> tool from <span class="menuselection">Vector overlay ‣ Clip</span>. You may also use the <span class="guilabel">Search</span> box to easily find the algorithm as well.</li>
+<li><p class="first">사용 가능한 모든 알고리즘을 찾아보고 <cite>Clip</cite> tool from <span class="menuselection">Vector overlay ‣ Clip</span>. You may also use the <cite>Search</cite> box를 사용하여 알고리즘을 쉽게 찾을 수도 있습니다.</p>
+</li>
 </ol>
 <img alt="../../_images/105.png" class="align-center" src="../../_images/105.png" />
 <ol class="arabic simple" start="11">
-<li>Right-click the <span class="guilabel">Clip</span> algorithm and select <span class="guilabel">Execute as Batch Process</span>.</li>
+<li><p class="first"><cite>Clip</cite> 알고리즘을 우측클릭하고 일괄작업으로 수행 <a href="#id1"><span class="problematic" id="id2">`</span></a>Execure as batch process`을 선택합니다.</p>
+</li>
 </ol>
 <img alt="../../_images/117.png" class="align-center" src="../../_images/117.png" />
 <ol class="arabic simple" start="12">
-<li>In the <span class="guilabel">Batch Processing</span> dialog, the first tab is <span class="guilabel">Parameters</span> where we define our inputs. Each row in the table represents 1 processing task. Click <span class="guilabel">Add row</span> button to add a new row. As our task involves 3 layers, add 3 rows.</li>
+<li><p class="first"><cite>Batch Processing</cite> 다이알로그에서 첫번재 탭은 입력을 결정하는 <a href="#id1"><span class="problematic" id="id2">`</span></a>Parameters`입니다. 테이블의 각 행은 1 개의 처리 작업을 나타냅니다. <a href="#id3"><span class="problematic" id="id4">`</span></a>Add row`버튼을 클릭하여 새 행을 추가하십시오. 우리의 작업에는 3 개의 레이어가 포함되므로 3 개의 행을 추가하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/125.png" class="align-center" src="../../_images/125.png" />
 <ol class="arabic simple" start="13">
-<li>Click the <span class="guilabel">...</span> next to the first row in the <span class="guilabel">Input layers</span> column. Select <span class="guilabel">Select from Open Layers</span>.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">`</span></a>입력 레이어`열의 첫 번째 행 옆에있는 <a href="#id3"><span class="problematic" id="id4">`</span></a>...`을 클릭하십시오. <a href="#id5"><span class="problematic" id="id6">`</span></a>Open Layers에서 선택`을 선택하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/135.png" class="align-center" src="../../_images/135.png" />
 <ol class="arabic simple" start="14">
-<li>In the <span class="guilabel">Multiple selection</span> dialog, check the 3 layers that we want to clip and click <span class="guilabel">OK</span>.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">`</span></a>복수 선택`대화 상자에서 클립하려는 3 개의 레이어를 확인하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/145.png" class="align-center" src="../../_images/145.png" />
 <ol class="arabic simple" start="15">
-<li>You will notice that the <span class="guilabel">Input layer</span> columns will be auto-populated with all layers you had selected. Next, we need to select the layer containing the boundary to clip our input layers. Click the <span class="guilabel">...</span> button for the first row under <span class="guilabel">Overlay layer</span> column and select <span class="guilabel">Select form Open Layers</span>.</li>
+<li><p class="first"><cite>Input layer &#8216;열은 선택한 모든 레이어에 자동으로 채워집니다. 다음으로 입력 레이어를 클리핑 할 경계가 포함 된 레이어를 선택해야합니다. `Overlay layer</cite> 열에서 첫 번째 행에 대해 <cite>...</cite> 버튼을 클릭하고 <a href="#id1"><span class="problematic" id="id2">`</span></a>Select form Open Layers`을 선택하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/155.png" class="align-center" src="../../_images/155.png" />
 <ol class="arabic simple" start="16">
-<li>In the <span class="guilabel">Multiple selection</span> dialog, check <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">`</span></a>Multiple selection``대화 상자에서``ne_10m_admin_0_countries &#8216;&#8217;를 확인하고 <a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/165.png" class="align-center" src="../../_images/165.png" />
 <ol class="arabic simple" start="17">
-<li>Since the clip layer is the same for all our inputs, a handy shortcut is to double-click the column header <span class="guilabel">Overlay layer</span> and the same layer will be auto-filled for all the rows.</li>
+<li><p class="first">클립 레이어는 모든 입력에 대해 동일하므로 열 머리글 <a href="#id1"><span class="problematic" id="id2">`</span></a>Overlay layer`를 두 번 클릭하면 모든 레이어에 동일한 레이어가 자동으로 채워집니다.</p>
+</li>
 </ol>
 <img alt="../../_images/175.png" class="align-center" src="../../_images/175.png" />
 <ol class="arabic simple" start="18">
-<li>Next, we need to define our outputs.  Click the <span class="guilabel">...</span> buton next to the first row in the <span class="guilabel">Clipped</span> column.</li>
+<li><p class="first">다음으로 출력을 정의해야합니다. <cite>Clipped</cite> 열의 첫 번째 행 옆에있는`...`버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/184.png" class="align-center" src="../../_images/184.png" />
 <ol class="arabic simple" start="19">
-<li>Browse the the directory where you want your output layers. Type the filename as <code class="docutils literal"><span class="pre">clipped_</span></code> and click <span class="guilabel">Save</span>.</li>
+<li><p class="first">출력 레이어를 원하는 디렉토리를 찾습니다. 파일 이름을``clipped_ &#8216;&#8217;로 입력하고`Save`를 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/194.png" class="align-center" src="../../_images/194.png" />
 <ol class="arabic simple" start="20">
-<li>You will see a new <span class="guilabel">Autofill settings</span> dialog pop up. Select <code class="docutils literal"><span class="pre">Fill</span> <span class="pre">with</span> <span class="pre">parameter</span> <span class="pre">values</span></code> as the <span class="guilabel">Autofill mode</span>. Select <code class="docutils literal"><span class="pre">Input</span> <span class="pre">layer</span></code> as the <span class="guilabel">Parameter to use</span>. This setting will add the input file name to the output along with the specified <code class="docutils literal"><span class="pre">clipped_</span></code> filename. This is important to ensure all the output files have unique names and they do not overwrite each other.</li>
+<li><p class="first">새로운 <a href="#id1"><span class="problematic" id="id2">`</span></a>Autofill settings &#8216;대화 상자가 나타납니다. :<a href="#id3"><span class="problematic" id="id4">`</span></a>Autofill mode`로``Fill with parameter values&#8217;&#8216;를 선택하십시오. <a href="#id5"><span class="problematic" id="id6">`</span></a>Parameter to use`로 <a href="#id7"><span class="problematic" id="id8">``</span></a><a href="#id9"><span class="problematic" id="id10">`</span></a>Input layer &#8216;&#8217;를 선택하십시오. 이 설정은 입력 파일 이름을 지정된``clipped_ &#8216;&#8217;파일 이름과 함께 출력에 추가합니다. 모든 출력 파일의 이름이 고유하고 서로 겹쳐 쓰지 않도록하는 것이 중요합니다.</p>
+</li>
 </ol>
 <img alt="../../_images/203.png" class="align-center" src="../../_images/203.png" />
 <ol class="arabic simple" start="21">
-<li>Now we are ready to start the batch procesing. Make sure to check <span class="guilabel">Load layers on completion</span> and click <span class="guilabel">Run</span>.</li>
+<li><p class="first">이제 일괄 처리를 시작할 준비가되었습니다. &#8216;Load layers on completion&#8217;를 확인하고 &#8216;Run&#8217;을 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/216.png" class="align-center" src="../../_images/216.png" />
 <ol class="arabic simple" start="22">
-<li>The clip algorithm will run for each of the inputs and create output files are we have specified. Once the batch process finishes, click <span class="guilabel">Close</span> to return to QGIS.</li>
+<li><p class="first">클립 알고리즘은 각 입력에 대해 실행되며 지정된 출력 파일을 작성합니다. 배치 프로세스가 완료되면 <a href="#id1"><span class="problematic" id="id2">`</span></a>Close`를 클릭하여 QGIS로 돌아갑니다.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">주석</p>
-<p class="last">Tip: QGIS can now run Processing tasks in the background without blocking the user interface. So if your batch process is taking long, you can close the dialog and continue to work on other tasks in QGIS while the process keeps running in the background.</p>
+<p class="last">팁 : QGIS는 이제 사용자 인터페이스를 차단하지 않고 백그라운드에서 처리 작업을 실행할 수 있습니다. 따라서 배치 프로세스가 오래 걸리는 경우 프로세스가 백그라운드에서 계속 실행되는 동안 대화 상자를 닫고 QGIS의 다른 작업을 계속 수행 할 수 있습니다.</p>
 </div>
 <img alt="../../_images/223.png" class="align-center" src="../../_images/223.png" />
 <ol class="arabic simple" start="23">
-<li>Back in the main QGIS window, you will see the layers added to QGIS canvas. As you will notice, all the global layers are properly clipped to the continent boundary that we had specified.</li>
+<li><p class="first">기본 QGIS 창으로 돌아 가면 QGIS 캔버스에 레이어가 추가 된 것을 볼 수 있습니다. 알다시피, 모든 전역 레이어는 우리가 지정한 대륙 경계에 올바르게 클리핑됩니다.</p>
+</li>
 </ol>
 <img alt="../../_images/232.png" class="align-center" src="../../_images/232.png" />
 <ol class="arabic simple" start="24">
-<li>We have accomplished the task of clipping multiple layers in a batch. But QGIS3 has another handy feature that will help you save and deliver the result in a more efficient way. If you wanted to deliver the clipped layers to someone, you would zip the individual files outside of QGIS. A better option to to package the output layers in a single Geopackage. In the <span class="guilabel">QGIS Browser</span>, locate the clipped output layers. You may have to click the <span class="guilabel">Refresh</span> button to see the newly added files.</li>
+<li><p class="first">여러 레이어를 일괄 처리하는 작업을 수행했습니다. 그러나 QGIS3에는보다 효율적인 방식으로 결과를 저장하고 전달하는 데 도움이되는 또 다른 편리한 기능이 있습니다. 클리핑 된 레이어를 누군가에게 전달하려면 QGIS 외부의 개별 파일을 압축해야합니다. 단일 Geopackage에서 출력 레이어를 패키지하는 더 나은 옵션입니다. <a href="#id1"><span class="problematic" id="id2">`</span></a>QGIS Browser`에서 잘린 출력 레이어를 찾으십시오. 새로 추가 된 파일을 보려면 <a href="#id3"><span class="problematic" id="id4">`</span></a>Refresh &#8216;버튼을 클릭해야 할 수도 있습니다.</p>
+</li>
 </ol>
 <img alt="../../_images/242.png" class="align-center" src="../../_images/242.png" />
 <ol class="arabic simple" start="25">
-<li>Hold <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and select the layers. Drag them to the canvas to load them in QGIS.</li>
+<li><p class="first">: kbd :<cite>Ctrl</cite> 키를 누른 상태에서 레이어를 선택하십시오. 캔버스로 드래그하여 QGIS에로드합니다.</p>
+</li>
 </ol>
 <img alt="../../_images/252.png" class="align-center" src="../../_images/252.png" />
 <ol class="arabic simple" start="25">
-<li>In <span class="guilabel">Processing Toolbox</span>, locate the <span class="menuselection">Database ‣ Package layers</span> tool.</li>
+<li><p class="first"><cite>Processing Toolbox`에서 : menuselection :`Database-&gt; Package layer</cite> 도구를 찾으십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/262.png" class="align-center" src="../../_images/262.png" />
 <ol class="arabic simple" start="27">
-<li>In the <span class="guilabel">Package layers</span> dialog, click the <span class="guilabel">...</span> button next to <span class="guilabel">Input layers</span>.</li>
+<li><p class="first">&#8216;Package layers&#8217;대화 상자에서 <cite>Input layers &#8216;옆에있는</cite>...`버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/272.png" class="align-center" src="../../_images/272.png" />
 <ol class="arabic simple" start="28">
@@ -387,19 +412,23 @@ layers. Download the following layers</p>
 </ol>
 <img alt="../../_images/282.png" class="align-center" src="../../_images/282.png" />
 <ol class="arabic simple" start="29">
-<li>Once the input layers are selected, click the <span class="guilabel">...</span> next to <span class="guilabel">Destination Geopackage</span> and choose <span class="guilabel">Save To File</span>.</li>
+<li><p class="first">입력 레이어가 선택되면 &#8216;Destination Geopackage&#8217;옆에있는 &#8216;...&#8217;을 클릭하고 &#8216;Save To File&#8217;을 선택하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/291.png" class="align-center" src="../../_images/291.png" />
 <ol class="arabic simple" start="30">
-<li>Enter the output file name as <code class="docutils literal"><span class="pre">clipped_layers</span></code>.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">``</span></a>clipped_layers``로 최종결과물의 이름을 정합니다.</p>
+</li>
 </ol>
 <img alt="../../_images/301.png" class="align-center" src="../../_images/301.png" />
 <ol class="arabic simple" start="31">
-<li>Click <span class="guilabel">Run</span> to start the packaging process.</li>
+<li><p class="first">패키징 프로세스를 시작하려면`Run`을 실행하십시오.</p>
+</li>
 </ol>
 <img alt="../../_images/314.png" class="align-center" src="../../_images/314.png" />
 <ol class="arabic simple" start="32">
-<li>Once the process finishes, you will see a new geopackage file in your <span class="guilabel">QGIS Browser</span> containing all the clipped output layers. This is a single file on your computer that contains all the output layers.</li>
+<li><p class="first">프로세스가 완료되면 클리핑 된 모든 출력 레이어를 포함하는 <a href="#id1"><span class="problematic" id="id2">`</span></a>QGIS Browser &#8216;에 새로운 지오 패키지 파일이 나타납니다. 이것은 모든 출력 레이어를 포함하는 컴퓨터의 단일 파일입니다.</p>
+</li>
 </ol>
 <img alt="../../_images/322.png" class="align-center" src="../../_images/322.png" />
 </div>

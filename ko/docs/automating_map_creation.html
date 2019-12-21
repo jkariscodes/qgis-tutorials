@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Automating Map Creation with Print Composer Atlas &mdash; QGIS Tutorials and Tips</title>
+    <title>Print Composer Atlas를 활용한 지도 생성 자동화 &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/multi_criteria_overlay.html">Multi Criteria Overlay Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">가장 가까운 기-종점 매트릭스 위치 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Openrouteservice를 이용한 서비스 영역 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">QGIS 탐색기 이용</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">BIL, BIP 혹은 BSQ 파일 열기</a></li>
@@ -119,12 +119,12 @@
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Web Mapping with QGIS2Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">QTiles로 베이스 맵 만들기</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">플러그인 사용하기</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">오픈스트리트맵 데이터의 검색과 다운로드</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">QGIS 수업 자원</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">데이터 크레딧</a></li>
-<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">프로세싱 프레임을 이용한 일괄처리과정</a></li>
 </ul>
 </ul>
 </li>
@@ -219,72 +219,62 @@
       
 
   <div class="section" id="automating-map-creation-with-print-composer-atlas">
-<h1>Automating Map Creation with Print Composer Atlas<a class="headerlink" href="#automating-map-creation-with-print-composer-atlas" title="제목 주소">¶</a></h1>
+<h1>Print Composer Atlas를 활용한 지도 생성 자동화<a class="headerlink" href="#automating-map-creation-with-print-composer-atlas" title="제목 주소">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">경고</p>
-<p class="last">A new version of this tutorial is available at <a class="reference internal" href="3/automating_map_creation.html"><em>Automating Map Creation with Print Layout Atlas (QGIS3)</em></a></p>
+<p class="last">이 튜토리얼은 새로운 버전에서 사용이 가능합니다.</p>
 </div>
-<p>If your organization publishes printed or online maps, you often would need to
-create many maps with the same template - usually one for each administrative
-unit or a region of interest. Creating these maps manually can take a long time
-and if you want to update these on a regular basis, it can turn into a chore.
-QGIS has a tool called <code class="docutils literal"><span class="pre">Atlas</span></code> that can help you create a map template and
-easily publish a large number of maps for different geographic regions. If you
-are not familiar with the basics of Print Composer, please go through the
-<a class="reference internal" href="making_a_map.html"><em>지도만들기</em></a> tutorial.</p>
+<p>당신이 어느 그룹에서 인쇄 또는 온라인지도를 게시하는 경우 대개 동일한 템플릿으로 여러지도를 만들어야합니다 (보통 각 관리 단위 또는 관심 지역마다 하나씩). 이 맵을 수동으로 작성하는 데 시간이 오래 걸릴 수 있으며 정기적으로 맵을 업데이트하려는 경우 집안일이 될 수 있습니다. QGIS에는``Atlas &#8216;&#8217;라는 도구가있어 맵 템플릿을 만들고 여러 지역에 대해 많은 수의 맵을 쉽게 게시 할 수 있습니다. Print Composer의 기본 사항에 익숙하지 않은 경우 : doc :<cite>making_a_map</cite> 자습서를 참조하십시오.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
-<p>This tutorial shows how to create wetlands map for each county in the state of
-Hawaii.</p>
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<p>이 튜토리얼은 하와이 주에서 각 카운티에 대한 습지지도를 작성하는 방법을 보여줍니다.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<h3>배워야 할 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
 <ul class="simple">
-<li>How to use the <code class="docutils literal"><span class="pre">Inverted</span> <span class="pre">Polygons</span></code> style renderer to fill areas outside of polygons.</li>
-<li>How to use an expression in the <code class="docutils literal"><span class="pre">Rule</span> <span class="pre">Based</span></code> style renderer to show only
-the current feature in Atlas.</li>
-<li>Apply expressions to create dynamic labels in Print Composer.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">``</span></a>거꾸로 된 다각형 &#8216;&#8217;스타일 렌더러를 사용하여 다각형 외부의 영역을 채우는 방법</p>
+</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">``</span></a>규칙 기반 &#8216;&#8217;스타일 렌더러에서 표현식을 사용하여 Atlas의 현재 기능 만 표시하는 방법</p>
+</li>
+<li><p class="first">Print Composer에서 표현식을 적용하여 동적 레이블을 작성하십시오.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://planning.hawaii.gov/gis/download-gis-data/">GIS Data Layers</a> from <a class="reference external" href="http://planning.hawaii.gov/">State of Hawaii -
-Office of Planning</a></p>
-<p>Download the <a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip">Wetlands</a> layer from
-Biologic and Ecologic category.</p>
-<p>Download the <a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/county10.shp.zip">Census County Boundaries 2010</a> layer from the
-Cultural and Demographic category.</p>
-<p>For convenience, you may directly download a copy of both the datasets from the links
-below:</p>
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+<p><a href="#id2"><span class="problematic" id="id3">`하와이 주-계획 실 &lt;http://planning.hawaii.gov/의`GIS 데이터 레이어 &lt;http://planning.hawaii.gov/gis/download-gis-data/&gt;`_를 사용합니다. &gt;`_</span></a></p>
+<p>Biologic and Ecologic 범주에서`Wetlands &lt;<a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip">http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip</a>&gt;`_ 레이어를 다운로드하십시오.</p>
+<p>Cultural and Demographic 카테고리에서`Census County Boundaries 2010 &lt;<a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/county10.shp.zip">http://files.hawaii.gov/dbedt/op/gis/data/county10.shp.zip</a>&gt;`_ 레이어를 다운로드하십시오.</p>
+<p>편의를 위해 아래 링크에서 두 데이터 세트의 사본을 직접 다운로드 할 수 있습니다.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/HI_Wetlands.shp.zip">HI_Wetlands.shp.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/county10.shp.zip">county10.shp.zip</a></p>
 <p>Data Source <a class="reference internal" href="credits.html#hawaii" id="id1">[HAWAII]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
 <ol class="arabic simple">
-<li>Launch QGIS and go to <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector
-Layer</span>.</li>
+<li><p class="first">QGIS를 시작하고 : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer-&gt; Add Layer-&gt; Add Vector Layer`로 이동합니다.</p>
+</li>
 </ol>
 <img alt="../_images/1134.png" class="align-center" src="../_images/1134.png" />
 <ol class="arabic simple" start="2">
-<li>Browse to the <code class="docutils literal"><span class="pre">HI_Wetlands.shp.zip</span></code> file and click <span class="guilabel">Open</span>.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">``</span></a>HI_Wetlands.shp.zip &#8216;&#8217;파일을 찾아 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Open`을 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/290.png" class="align-center" src="../_images/290.png" />
 <ol class="arabic simple" start="3">
-<li>Select the <code class="docutils literal"><span class="pre">HI_Wetlands_Poly</span></code> layer and click <span class="guilabel">OK</span>.</li>
+<li><p class="first"><a href="#id1"><span class="problematic" id="id2">``</span></a>HI_Wetlands_Poly &#8216;&#8217;레이어를 선택하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/346.png" class="align-center" src="../_images/346.png" />
 <ol class="arabic simple" start="4">
-<li>You will see the polygons representing the wetlands in the entire state of
-Hawaii. Since we want to make separate wetlands map for each county in the
-state, we will need the county boundaries layer. Go to <span class="menuselection">Layer
-‣ Add Layer ‣ Add Vector Layer</span> and browse to the <code class="docutils literal"><span class="pre">county10.shp.zip</span></code>
-file. Click <span class="guilabel">Open</span>.</li>
+<li><p class="first">하와이 전체의 습지를 나타내는 다각형이 표시됩니다. 주의 각 카운티마다 별도의 습지지도를 만들고자하므로 카운티 경계 레이어가 필요합니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer-&gt; Add Layer-&gt; Add Vector Layer`로 이동하여``county10.shp.zip &#8216;&#8217;파일을 찾습니다. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>열기`를 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/430.png" class="align-center" src="../_images/430.png" />
 <ol class="arabic simple" start="5">
-<li>Go to <span class="menuselection">Project ‣ New Print Composer</span>.</li>
+<li><p class="first">: menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Project-&gt; New Print Composer로 이동하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/530.png" class="align-center" src="../_images/530.png" />
 <ol class="arabic simple" start="6">
@@ -292,180 +282,156 @@ file. Click <span class="guilabel">Open</span>.</li>
 </ol>
 <img alt="../_images/629.png" class="align-center" src="../_images/629.png" />
 <ol class="arabic simple" start="7">
-<li>Go to <span class="menuselection">Layout ‣ Add Map</span>.</li>
+<li><p class="first">: menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layout-&gt; Add Map`으로 이동하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/729.png" class="align-center" src="../_images/729.png" />
 <ol class="arabic simple" start="8">
-<li>Drag a rectangle while holding the left mouse button where you would like to
-insert the map.</li>
+<li><p class="first">지도를 삽입 할 곳에서 마우스 왼쪽 버튼을 누른 상태에서 직사각형을 드래그합니다.</p>
+</li>
 </ol>
 <img alt="../_images/828.png" class="align-center" src="../_images/828.png" />
 <ol class="arabic simple" start="9">
-<li>Scroll down in the <span class="guilabel">Item Properties</span> tab and check the
-<span class="guilabel">Controlled by atlas</span> box. This will indicate the composer that
-the extent of the map displayed in this item will be determined by the
-<code class="docutils literal"><span class="pre">Atlas</span></code> tool.</li>
+<li><p class="first">: guilabel :<cite>Item Properties</cite> 탭에서 아래로 스크롤하여 : guilabel :<cite>Controlled by atlas</cite> 상자를 확인하십시오. 작곡가는이 항목에 표시되는지도의 범위가``아틀라스 &#8216;&#8217;도구에 의해 결정됨을 나타냅니다.</p>
+</li>
 </ol>
 <img alt="../_images/929.png" class="align-center" src="../_images/929.png" />
 <ol class="arabic simple" start="10">
-<li>Switch to the <span class="guilabel">Atlas generation</span> tab. Check the
-<span class="guilabel">Generate an atlas</span> box. Select the <code class="docutils literal"><span class="pre">county10</span></code> as the
-<span class="guilabel">Coverage layer</span>. This will indicate that we want to create 1 map
-each for every polygon feature in the <code class="docutils literal"><span class="pre">county10</span></code> layer. You can also
-check the <span class="guilabel">Hidden coverage layer</span> so that the features themselves
-will not appear on the map.</li>
+<li><p class="first">: guilabel :<cite>Atlas generation</cite> 탭으로 전환하십시오. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>아틀라스 생성`상자를 확인하십시오. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Coverage layer`로``county10 &#8216;&#8217;을 선택하십시오. 이것은``county10 &#8216;&#8217;레이어의 모든 다각형 피처에 대해 각각 1 개의 맵을 만들려고 함을 나타냅니다. 지형지 물 자체가지도에 표시되지 않도록 : guilabel :<a href="#id5"><span class="problematic" id="id6">`</span></a>숨겨진 적용 범위 계층`을 확인할 수도 있습니다.</p>
+</li>
 </ol>
 <img alt="../_images/1027.png" class="align-center" src="../_images/1027.png" />
 <ol class="arabic simple" start="11">
-<li>You will notice that the map image does not change after configuring the
-Atlas settings. Go to <span class="menuselection">Atlas ‣ Preview Atlas</span>.</li>
+<li><p class="first">Atlas 설정을 구성한 후 맵 이미지가 변경되지 않습니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Atlas-&gt; Preview Atlas`로 이동하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/1135.png" class="align-center" src="../_images/1135.png" />
 <ol class="arabic simple" start="12">
-<li>Now you will see the map refresh and show how individual map will look
-like. Notice that it shows the current feature number from the coverage
-layer at the bottom right.</li>
+<li><p class="first">이제지도가 새로 고침되고 개별지도가 어떻게 표시되는지 보여줍니다. 오른쪽 하단의 적용 범위 계층의 현재 기능 번호가 표시됩니다.</p>
+</li>
 </ol>
 <img alt="../_images/1229.png" class="align-center" src="../_images/1229.png" />
 <ol class="arabic simple" start="13">
-<li>You can preview how the map will look for each of the county polygons. Go
-to <span class="menuselection">Atlas ‣ Next Feature</span>.</li>
+<li><p class="first">각 카운티 다각형에 대해지도가 어떻게 보이는지 미리 볼 수 있습니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Atlas-&gt; Next Feature`로 이동하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/1329.png" class="align-center" src="../_images/1329.png" />
 <ol class="arabic simple" start="14">
-<li>Atlas will render the map to the extent of the next feature in the coverage
-layer.</li>
+<li><p class="first">Atlas는 커버리지 레이어의 다음 기능 범위까지 맵을 렌더링합니다.</p>
+</li>
 </ol>
 <img alt="../_images/1427.png" class="align-center" src="../_images/1427.png" />
 <ol class="arabic simple" start="15">
-<li>Let&#8217;s add a label to the map. Go to <span class="menuselection">Layout ‣ Add Label</span>.</li>
+<li><p class="first">지도에 라벨을 추가하겠습니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layout-&gt; Add Label`으로 이동하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/1526.png" class="align-center" src="../_images/1526.png" />
 <ol class="arabic simple" start="16">
-<li>Under the <span class="guilabel">Item properties</span> tab, click <span class="guilabel">Insert an
-expression...</span> button.</li>
+<li><p class="first">: guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>항목 속성`탭에서 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>표현식 삽입 ...`버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/1624.png" class="align-center" src="../_images/1624.png" />
 <ol class="arabic simple" start="17">
-<li>The label of the map can use the attributes from the coverage layer.he
-<code class="docutils literal"><span class="pre">concat</span></code> function is used to join multiple text items into a single text
-item. In this case we will join the value of the <code class="docutils literal"><span class="pre">NAME10</span></code> attribute of
-the <code class="docutils literal"><span class="pre">county10</span></code> layer with the text <code class="docutils literal"><span class="pre">County</span> <span class="pre">of</span></code>. Add an expression like
-below and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">맵의 레이블은 적용 범위 계층의 속성을 사용할 수 있습니다 .``concat &#8216;&#8217;기능은 여러 텍스트 항목을 단일 텍스트 항목으로 결합하는 데 사용됩니다. 이 경우``county10 &#8216;&#8217;레이어의``NAME10 &#8216;&#8217;속성 값을``County of &#8216;&#8217;텍스트와 결합합니다. 아래와 같은 표현식을 추가하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>OK`를 클릭하십시오.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre><span></span>concat(&#39;County of &#39;, &quot;NAME10&quot;)
 </pre></div>
 </div>
 <ol class="arabic simple" start="18">
-<li>Adjust the font size to your liking.</li>
+<li><p class="first">글꼴 크기를 원하는대로 조정하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/1821.png" class="align-center" src="../_images/1821.png" />
 <ol class="arabic simple" start="19">
-<li>Add another label and enter <code class="docutils literal"><span class="pre">Wetlands</span> <span class="pre">Map</span></code> under the <span class="guilabel">Main
-properties</span>. Since there is no expression here, this text will remain the
-same on all maps.</li>
+<li><p class="first">다른 레이블을 추가하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>주요 속성`아래에``습지 맵 &#8216;&#8217;을 입력하십시오. 여기에는 표현이 없으므로이 텍스트는 모든지도에서 동일하게 유지됩니다.</p>
+</li>
 </ol>
 <img alt="../_images/1918.png" class="align-center" src="../_images/1918.png" />
 <ol class="arabic simple" start="20">
-<li>Go to <span class="menuselection">Atlas ‣ Last Feature</span> and verify that the map
-labels do work as intended. You will notice that the wetland map has
-polygons extending out in the ocean that looks ugly. We can change the
-style to that areas outside the county boundaries are hidden.</li>
+<li><p class="first">: menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Atlas-&gt; Last Feature`로 이동하여 맵 레이블이 의도 한대로 작동하는지 확인하십시오. 습지지도에는 바다에서 뻗어 보이는 다각형이 있습니다. 카운티 경계 외부의 영역이 숨겨 지도록 스타일을 변경할 수 있습니다.</p>
+</li>
 </ol>
 <img alt="../_images/2013.png" class="align-center" src="../_images/2013.png" />
 <ol class="arabic simple" start="21">
-<li>Switch to the main QGIS window. Right-click the <code class="docutils literal"><span class="pre">county10</span></code> layer and
-select <span class="guilabel">Properties</span>.</li>
+<li><p class="first">메인 QGIS 창으로 전환하십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>county10 &#8216;&#8217;레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Properties`를 선택하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/2118.png" class="align-center" src="../_images/2118.png" />
 <ol class="arabic simple" start="22">
-<li>In the <span class="guilabel">Style</span> tab, select the <span class="guilabel">Inverted polygons</span>
-renderer. This renderer styles the <cite>outside</cite> of the polygon - not inside.
-Select white as the fill color and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">: guilabel :<cite>Style</cite> 탭에서 : guilabel :<cite>Inverted polygons</cite> 렌더러를 선택하십시오. 이 렌더러는 내부가 아닌 다각형의 외부 스타일을 지정합니다. 채우기 색상으로 흰색을 선택하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>OK`를 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/2216.png" class="align-center" src="../_images/2216.png" />
 <ol class="arabic simple" start="23">
-<li>Switch to the Print Composer window. If we want the effect of the inverted
-polygons to show, we need to uncheck the <span class="guilabel">Hidden coverage layer</span>
-box under <span class="guilabel">Atlas generation</span>. You will now see that the rendered
-image is clean and areas outside the coverage polygon is not visible.</li>
+<li><p class="first">인쇄 작곡가 창으로 전환하십시오. 역 다각형의 효과를 나타내려면 : guilabel :<cite>Atlas generation</cite> 아래의 : guilabel :<cite>Hidden coverage layer</cite> 상자를 선택 취소해야합니다. 이제 렌더링 된 이미지가 깨끗하고 적용 범위 다각형 외부의 영역이 보이지 않습니다.</p>
+</li>
 </ol>
 <img alt="../_images/2312.png" class="align-center" src="../_images/2312.png" />
 <ol class="arabic simple" start="24">
-<li>There is one problem though. You can see areas of the map that are outside
-the coverage layer boundary but still visible. This is because Atlas
-doesn&#8217;t automatically hide other features. This can be useful in some
-cases, but for our purpose, we only want to show wetlands of the county
-whose map is being generated. To fix this, switch back to the main QGIS
-window and right-click the <code class="docutils literal"><span class="pre">county10</span></code> layer and select
-<span class="guilabel">Properties</span>.</li>
+<li><p class="first">그래도 한 가지 문제가 있습니다. 커버리지 레이어 경계 외부에 있지만 여전히 보이는 맵 영역을 볼 수 있습니다. Atlas는 다른 기능을 자동으로 숨기지 않기 때문입니다. 이는 경우에 따라 유용 할 수 있지만, 목적 상지도가 생성되는 카운티의 습지 만 표시하려고합니다. 이 문제를 해결하려면 메인 QGIS 창으로 돌아가서``county10 &#8216;&#8217;레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Properties`를 선택하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/2412.png" class="align-center" src="../_images/2412.png" />
 <ol class="arabic simple" start="25">
-<li>In the <span class="guilabel">Style</span> tab, select <span class="guilabel">Rule-based</span> renderer as the
-<span class="guilabel">Sub renderer</span>. Double-click the area under <span class="guilabel">Rule</span>.</li>
+<li><p class="first">: guilabel :<cite>Style</cite> 탭에서 : guilabel :<cite>Sub renderer`로 : guilabel :`Rule-based</cite> 렌더러를 선택하십시오. : guilabel :<cite>Rule</cite> 아래 영역을 두 번 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/2512.png" class="align-center" src="../_images/2512.png" />
 <ol class="arabic simple" start="26">
-<li>Click the <span class="guilabel">...</span> button next to <span class="guilabel">Filter</span>.</li>
+<li><p class="first">: guilabel :<cite>Filter</cite> 옆에있는 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>...`단추를 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/2610.png" class="align-center" src="../_images/2610.png" />
 <ol class="arabic simple" start="27">
-<li>In the <span class="guilabel">Expression string builder</span>, expand the <span class="guilabel">Atlas</span>
-group of functions. The <code class="docutils literal"><span class="pre">$atlasfeatureid</span></code> function will return the
-currently selected feature. We will construct an expression that will
-select only the currently selected Atlas feature. Enter the expression as
-below:</li>
+<li><p class="first">: guilabel :<cite>Expression string builder`에서 : guilabel :`Atlas</cite> 기능 그룹을 펼치십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>$ atlasfeatureid &#8216;&#8217;기능은 현재 선택된 기능을 반환합니다. 현재 선택된 Atlas 기능 만 선택하는 표현식을 구성합니다. 아래와 같이 표현식을 입력하십시오.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre><span></span>$id = $atlasfeatureid
 </pre></div>
 </div>
 <img alt="../_images/2710.png" class="align-center" src="../_images/2710.png" />
 <ol class="arabic simple" start="28">
-<li>Back in the Print Composer window, click the <span class="guilabel">Update preview</span>
-button under <span class="guilabel">Item properties</span> tab to see the changes. Notice
-that now only the area covering the county boundary is shown.</li>
+<li><p class="first">인쇄 작곡가 창으로 돌아가서 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>항목 속성`탭에서 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>업데이트 미리보기`버튼을 클릭하여 변경 사항을 봅니다. 이제 카운티 경계를 덮고있는 영역 만 표시됩니다.</p>
+</li>
 </ol>
 <img alt="../_images/2810.png" class="align-center" src="../_images/2810.png" />
 <ol class="arabic simple" start="29">
-<li>We will now add another dynamic label to show the current date. Go to
-<span class="menuselection">Layout ‣ Add Label</span> and select the area on the map. Click
-<span class="guilabel">Insert an expression</span> button.</li>
+<li><p class="first">이제 현재 날짜를 표시하기 위해 다른 동적 레이블을 추가합니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layout-&gt; Add Label`으로 이동하여지도에서 영역을 선택하십시오. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>표현식 삽입 &#8216;버튼을 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/297.png" class="align-center" src="../_images/297.png" />
 <ol class="arabic simple" start="30">
-<li>Expand the <span class="guilabel">Date and Time</span> functions group and you will find the
-<code class="docutils literal"><span class="pre">$now</span></code> function. This holds the current system time. The function
-<code class="docutils literal"><span class="pre">todate()</span></code> will convert this to a date string. Enter the expression as
-below:</li>
+<li><p class="first">: guilabel :<cite>Date and Time</cite> 기능 그룹을 확장하면``$ now &#8216;&#8217;기능을 찾을 수 있습니다. 현재 시스템 시간이 유지됩니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>todate ()``함수는 이것을 날짜 문자열로 변환합니다. 아래와 같이 표현식을 입력하십시오.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre><span></span>concat(&#39;Created on: &#39;, todate($now))
 </pre></div>
 </div>
 <img alt="../_images/304.png" class="align-center" src="../_images/304.png" />
 <ol class="arabic simple" start="31">
-<li>Add another label citing the data source. You may also add other map
-elements such as a north arrow, scalebar etc. as described in
-<a class="reference internal" href="making_a_map.html"><em>지도만들기</em></a> tutorial.</li>
+<li><p class="first">데이터 소스를 인용하는 다른 레이블을 추가하십시오. : doc :<cite>making_a_map</cite> 튜토리얼에 설명 된대로 북쪽 화살표, 스케일 바 등과 같은 다른 맵 요소를 추가 할 수도 있습니다.</p>
+</li>
 </ol>
 <img alt="../_images/3111.png" class="align-center" src="../_images/3111.png" />
 <ol class="arabic simple" start="32">
-<li>Once you are satisfied with the map layout, go to <span class="menuselection">Atlas ‣
-Export Atlas as Images</span>.</li>
+<li><p class="first">맵 레이아웃에 만족하면 : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Atlas-&gt; Atlas as Images as 이미지로 이동하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/3210.png" class="align-center" src="../_images/3210.png" />
 <ol class="arabic simple" start="33">
-<li>Select a directory on your computer and click <span class="guilabel">Choose</span>.</li>
+<li><p class="first">컴퓨터에서 디렉토리를 선택하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Choose`를 클릭하십시오.</p>
+</li>
 </ol>
 <img alt="../_images/3310.png" class="align-center" src="../_images/3310.png" />
 <ol class="arabic simple" start="34">
-<li>The Atlas tool will now iterate through each feature in the coverage layer
-and create a separate map image based on the template we created. You can
-see the images in the directory once the process completes.</li>
+<li><p class="first">Atlas 도구는 이제 적용 범위 계층의 각 기능을 반복하고 생성 한 템플릿을 기반으로 별도의 맵 이미지를 만듭니다. 프로세스가 완료되면 디렉토리에서 이미지를 볼 수 있습니다.</p>
+</li>
 </ol>
 <img alt="../_images/347.png" class="align-center" src="../_images/347.png" />
 <ol class="arabic simple" start="35">
-<li>Here are the map images for refeence.</li>
+<li><p class="first">참조 용지도 이미지는 다음과 같습니다.</p>
+</li>
 </ol>
 <img alt="../_images/35_1.jpg" class="align-center" src="../_images/35_1.jpg" />
 <img alt="../_images/35_2.jpg" class="align-center" src="../_images/35_2.jpg" />

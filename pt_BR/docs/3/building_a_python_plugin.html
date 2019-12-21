@@ -90,7 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Trabalhando com Dados de Terreno</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Working with WMS Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Trabalhando com Dados WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Trabalhando com Projeções</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georreferenciamento de imagens aéreas (QGIS3)</a></li>
@@ -230,7 +230,7 @@
 
   <div class="section" id="building-a-python-plugin-qgis3">
 <h1>Construindo um complemento com Python<a class="headerlink" href="#building-a-python-plugin-qgis3" title="Link permanente para este título">¶</a></h1>
-<p>Os complementos são uma grande forma de estender a funcionalidade do QGIS. Você pode escrever complementos usando Python que podem desde adicionar um simples botão até um sofisticado kit de ferramentas. Esse tutorial esboça o processo envolvido na configuração do ambiente de desenvolvimento, projeto da interface de usuário para o complemento e escrito de código para interação com o QGIS. Por favor, revise o tutorial <a class="reference internal" href="getting_started_with_pyqgis.html"><em>Getting Started With Python Programming (QGIS3)</em></a>&nbsp; para se familiarizar com a base ncessária.</p>
+<p>Complementos são uma grande forma de estender a funcionalidade do QGIS. Você pode escrever complementos usando Python que podem desde adicionar um simples botão até um sofisticado conjunto de ferramentas. Esse tutorial esboça o processo envolvido na configuração do ambiente de desenvolvimento, projeto da interface de usuário para um complemento e escrita de código para interação com o QGIS. Por favor, revise o tutorial <a class="reference internal" href="getting_started_with_pyqgis.html"><em>Getting Started With Python Programming (QGIS3)</em></a>&nbsp; para se familiarizar com a base ncessária.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Visão Geral da Tarefa<a class="headerlink" href="#overview-of-the-task" title="Link permanente para este título">¶</a></h2>
 <p>Nós iremos desenvolver um simples complemento chamado <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span></code> que irá permitir aos usuários escolher uma camada vetoriaç e escrever os seus atributos para um arquivo CSV.</p>
@@ -239,7 +239,7 @@
 <h2>Obtenha as Ferramentas<a class="headerlink" href="#get-the-tools" title="Link permanente para este título">¶</a></h2>
 <div class="section" id="qt-creator">
 <h3>Qt Creator<a class="headerlink" href="#qt-creator" title="Link permanente para este título">¶</a></h3>
-<p><a class="reference external" href="http://www.qt.io/">Qt</a> is a software development framework that is used to develop applications that run on Windows, Mac, Linux as well as various mobile operating systems. QGIS itself is written using the Qt framework. For plugin development, we will use an application called <a class="reference external" href="https://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Creator</a> to design the interface for our plugin.</p>
+<p><a class="reference external" href="http://www.qt.io/">Qt</a> é um framework para desenvolvimento de software utilizado para desenvolvimento de aplicações que rodam em Windows, Mac, Linux e diversos sistemas operacionais móveis. O QGIS é escrito utilizando o framework Qt. Para desenvolvimento de complementos, nós usaremos a aplicação chamada <a class="reference external" href="https://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Creator</a> para design da interface do nosso complemento.</p>
 <p>Baixe e instale o instalador do Qt Creator do <a class="reference external" href="https://www.qt.io/offline-installers">Qt Offline Installers</a>.&nbsp;Certifique-se que você selecionou <strong>Qt Creator</strong> na página de download. Observe que você terá de criar uma conta Qt gratuita para instalar o pacote.</p>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
@@ -251,7 +251,7 @@
 <h3>Bindings em Python para o Qt<a class="headerlink" href="#python-bindings-for-qt" title="Link permanente para este título">¶</a></h3>
 <p>Como estamos desenvolvendo um complemento em Python, nós precisamos instalar os bindings Python para o Qt. O método para instalar estes dependerá da plataformo que você está usando. Para construir complementos, no precisaremos da ferramenta de linha de comando <code class="docutils literal"><span class="pre">pyrcc5</span></code>.</p>
 <p><strong>Windows</strong></p>
-<p>Anexos relevantes para python são incluídos na instalação do QGIS no Windows. Entretanto, para usá-los da pasta de complementos, nós precisamos indicar o caminho (path) de instalação do QGIS.</p>
+<p>Anexos relevantes para Python são incluídos na instalação do QGIS no Windows. Entretanto, para usá-los da pasta de complementos, nós precisamos indicar o caminho de instalação do QGIS.</p>
 <p>Create a Windows Batch file (.bat extension) with the following content and save it on your computer as <code class="docutils literal"><span class="pre">compile.bat</span></code>. We will later copy this file to the plugin folder. If you installed QGIS at a different path, replace the <code class="docutils literal"><span class="pre">C:\OSGeo4W64\bin\</span></code> with your path.</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>@echo off
 call &quot;C:\OSGeo4W64\bin\o4w_env.bat&quot;
@@ -264,32 +264,32 @@ pyrcc5 -o resources.py resources.qrc
 </div>
 <img alt="../../_images/setup2.png" class="align-center" src="../../_images/setup2.png" />
 <p><strong>Mac</strong></p>
-<p>Install the <a class="reference external" href="http://brew.sh">Homebrew</a> package manager. Install <code class="docutils literal"><span class="pre">PyQt</span></code> package by running the following command:</p>
+<p>Instale o pacote <a class="reference external" href="http://brew.sh">Homebrew</a> package manager. Install <code class="docutils literal"><span class="pre">PyQt</span></code> executando o seguinte comando:</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>brew install pyqt
 </pre></div>
 </div>
 <dl class="docutils">
 <dt><strong>Linux</strong></dt>
-<dd>Depending on your distribution, find and install the <code class="docutils literal"><span class="pre">python-qt5</span></code> package. On Ubuntu and Debian-based distributions, you can run the following command:</dd>
+<dd><p class="first last">Dependendo da sua distribuição, encontre e instale o pacote  <code class="docutils literal"><span class="pre">python-qt5</span></code>. No Ubuntu e distribuições baseadas em Debian, você pode executar o seguinte comando:</p>
+</dd>
 </dl>
 <div class="highlight-none"><div class="highlight"><pre><span></span>sudo apt-get install python-qt5
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">You may find that QGIS has already installed this package.</p>
+<p class="last">Você pode encontrar que o QGIS já instalou este pacote.</p>
 </div>
 </div>
 <div class="section" id="a-text-editor-or-a-python-ide">
-<h3>A Text Editor or a Python IDE<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Link permanente para este título">¶</a></h3>
+<h3>Um editor de texto ou um ambiente de desenvolvimento integrado - IDE.<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Link permanente para este título">¶</a></h3>
 <p>Any kind of software development requires a good text editor. If you already have a favorite text editor or an IDE (Integrated Development Environment), you may use it for this tutorial. Otherwise, each platform offers a wide variety of free or paid options for text editors. Choose the one that fits your needs.</p>
-<p>This tutorial uses Notepad++ editor on Windows.</p>
+<p>Este tutorial utiliza o editor Notepad++ no Windows.</p>
 <p><strong>Windows</strong></p>
-<p><a class="reference external" href="http://notepad-plus-plus.org/">Notepad++</a> is a good free editor for windows.
-Download and install the <a class="reference external" href="https://notepad-plus-plus.org/download/">Notepad++ editor</a>.</p>
+<p><a class="reference external" href="http://notepad-plus-plus.org/">Notepad++</a> é um bom editor gratuito para Windows. Baixe e instale o  <a class="reference external" href="https://notepad-plus-plus.org/download/">Notepad++ editor</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">If you are using Notepad++, makes sure to go to <span class="menuselection">Settings ‣ Preferences ‣ Tab Settings</span> and enable <span class="guilabel">Replace by space</span>. Python is very sensitive about whitespace and this setting will ensure tabs and spaces are treated properly.</p>
+<p class="last">Se você estiver utilizando o Notepad++, certifique-se de ir em <span class="menuselection">Settings ‣ Preferences ‣ Tab Settings</span> and enable <span class="guilabel">Replace by space</span>. O Python é muito sensível com espaços em branco e esta configuração irá garantir que espaços e tabulações serão tratados apropriadamente.</p>
 </div>
 </div>
 <div class="section" id="plugin-builder-plugin">
@@ -306,7 +306,7 @@ Download and install the <a class="reference external" href="https://notepad-plu
 </div>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link permanente para este título">¶</a></h2>
+<h2>Procedimento<a class="headerlink" href="#procedure" title="Link permanente para este título">¶</a></h2>
 <ol class="arabic simple">
 <li>Open QGIS. Go to <span class="menuselection">Plugins ‣ Plugin Builder ‣ Plugin Builder</span>.</li>
 </ol>
@@ -320,7 +320,8 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <div><img alt="../../_images/217.png" class="align-center" src="../../_images/217.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Enter a brief description of the plugin for the <span class="guilabel">About</span> dialog and click <span class="guilabel">Next</span>.</li>
+<li><p class="first">Insira uma breve descrição do complemento para o <span class="guilabel">About</span> dialog and click <span class="guilabel">Next</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/315.png" class="align-center" src="../../_images/315.png" />
