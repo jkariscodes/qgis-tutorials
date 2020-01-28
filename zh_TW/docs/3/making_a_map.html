@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">空間連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -259,13 +260,13 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
+<div><img alt="../../_images/180.png" class="align-center" src="../../_images/180.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li>You may notice that the map has labels in Greek. This project uses variables to set the language. We can change the variables by going to <span class="menuselection">Project ‣ Properties</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/236.png" class="align-center" src="../../_images/236.png" />
+<div><img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">註解</p>
@@ -275,28 +276,28 @@
 <li>Switch to the <span class="guilabel">Variables</span> tab in the <span class="guilabel">Project Properties</span> dialog. Locate the <code class="docutils literal"><span class="pre">project_language</span></code> variable and click on the <span class="guilabel">Value</span> column to edit it. Change the language to <code class="docutils literal"><span class="pre">name_en</span></code> and click <span class="guilabel">OK</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/326.png" class="align-center" src="../../_images/326.png" />
+<div><img alt="../../_images/327.png" class="align-center" src="../../_images/327.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p class="first">回到 QGIS 主視窗，按下在 <span class="guilabel">地圖瀏覽工具欄</span> 中的 <span class="guilabel">重新整理</span> 按鈕，就可以看到現在英文標籤已經套用在地圖上了。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/413.png" class="align-center" src="../../_images/413.png" />
+<div><img alt="../../_images/414.png" class="align-center" src="../../_images/414.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p class="first">使用在 <span class="guilabel">地圖瀏覽工具欄</span> 中的平移與縮放地圖工具，移動到日本的位置。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/513.png" class="align-center" src="../../_images/513.png" />
+<div><img alt="../../_images/514.png" class="align-center" src="../../_images/514.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p class="first">你可以把一些我們在這裡用不到的地圖圖層給關起來。展開 <code class="docutils literal"><span class="pre">z5</span> <span class="pre">-</span> <span class="pre">1:18m</span></code> 資料結然後取消勾選  <code class="docutils literal"><span class="pre">ne_10m_geography_marine_polys</span></code> 和  <code class="docutils literal"><span class="pre">ne_10m_admin_0_disputed_areas</span></code> 圖層旁邊的方格。在我們真的製作適合列印的地圖前，我們還得挑選一個適當的地圖投影。本專案的預設 CRS 是 <code class="docutils literal"><span class="pre">EPSG:3857</span> <span class="pre">Pseudo-Mercator</span></code>，在線上地圖中非常流行，而且也很適合我們的目的，所以我們就把沿用這個預設的投影模式。現在前往 <span class="menuselection">專案 ‣ New Print Layout</span>。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/613.png" class="align-center" src="../../_images/613.png" />
+<div><img alt="../../_images/614.png" class="align-center" src="../../_images/614.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">註解</p>
@@ -307,7 +308,7 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/712.png" class="align-center" src="../../_images/712.png" />
+<div><img alt="../../_images/713.png" class="align-center" src="../../_images/713.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">註解</p>
@@ -318,35 +319,35 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/812.png" class="align-center" src="../../_images/812.png" />
+<div><img alt="../../_images/813.png" class="align-center" src="../../_images/813.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p class="first">現在我們要把在 QGIS 畫布中的東西放進來，請選擇 <span class="menuselection">Add Item ‣ Add 地圖</span>。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/912.png" class="align-center" src="../../_images/912.png" />
+<div><img alt="../../_images/913.png" class="align-center" src="../../_images/913.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p class="first">在 <span class="guilabel">加入地圖</span> 模式啟動之後，必須要在地圖版面上拖曳一塊你想插入地圖的區域。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1012.png" class="align-center" src="../../_images/1012.png" />
+<div><img alt="../../_images/1013.png" class="align-center" src="../../_images/1013.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p class="first">你會看到這個區域馬上就填上了 QGIS 畫布中的東西。不過它未必會跟我們所要的製圖區域完全重合，這個時候可以使用 <span class="menuselection">編輯 ‣ Select/Move item</span>，和 <span class="menuselection">編輯 ‣ 移動內容</span> 然後直接把在這個區域裡的東西拖曳到你所想要的範圍。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1115.png" class="align-center" src="../../_images/1115.png" />
+<div><img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p class="first">地圖的比例尺也可以稍做調整，在右側的 <span class="guilabel">項目屬性</span> 分頁中的 <span class="guilabel">比例</span> 欄位輸入 <a href="#id1"><span class="problematic" id="id2">``</span></a>10000000``看看。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1213.png" class="align-center" src="../../_images/1213.png" />
+<div><img alt="../../_images/1214.png" class="align-center" src="../../_images/1214.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p class="first">接下來我們會插入一個東京區域的放大版地圖，不過在進行任何更動之前，要把已經弄好的底圖給鎖起來。請勾選 <span class="guilabel">Lock layers</span> 以及 <span class="guilabel">Lock styles for layers</span>，這兩個選項是用來確保接下來在 QGIS 畫布上的更動，不會連帶影響到設計視窗中已經弄好的部分。</p>
@@ -360,14 +361,14 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1411.png" class="align-center" src="../../_images/1411.png" />
+<div><img alt="../../_images/1412.png" class="align-center" src="../../_images/1412.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p class="first">接下來就可以弄插頁小圖了。切換到 <span class="guilabel">Print Layout</span> 視窗，然後選擇 <span class="menuselection">Add Item ‣ 加入地圖</span>。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
+<div><img alt="../../_images/1511.png" class="align-center" src="../../_images/1511.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p class="first">在你想要插入東京區域地圖的地方拉一個長方形。現在我們有 2 個地圖物件在同一個設計稿上了，所以如果你要改動其中任意一個地圖，就要先確認正確的地圖物件有沒有被選取起來。</p>
@@ -381,14 +382,14 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
+<div><img alt="../../_images/1711.png" class="align-center" src="../../_images/1711.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p class="first">這裡有個很方便的功能，可以幫你標示小插圖是位在主地圖的哪裡。首先在 <span class="guilabel">項目</span> 分頁中選擇 <code class="docutils literal"><span class="pre">地圖</span> <span class="pre">0</span></code>，然後在 <span class="guilabel">項目屬性</span> 分頁中，往下捲動到 <span class="guilabel">全覽圖</span> 的欄位，點選 <span class="guilabel">新增全覽圖</span> 的按鈕。</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/189.png" class="align-center" src="../../_images/189.png" />
+<div><img alt="../../_images/1810.png" class="align-center" src="../../_images/1810.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p class="first">在 <span class="guilabel">圖框</span> 選單中選擇 <code class="docutils literal"><span class="pre">地圖</span> <span class="pre">2`，就可以把</span> <span class="pre">``地圖</span> <span class="pre">2</span></code> 的小圖範圍標示在 <code class="docutils literal"><span class="pre">地圖</span> <span class="pre">1</span></code> 中。</p>
@@ -423,7 +424,7 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
+<div><img alt="../../_images/238.png" class="align-center" src="../../_images/238.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
 <li><p class="first">往下移到 <span class="guilabel">框線</span> 的區塊然後勾選 <span class="guilabel">Draw coordinates</span>。預設使用的格式是 <code class="docutils literal"><span class="pre">經緯度</span></code> 但是卻是使用像數字格式一樣的顯示。我們可以修改設定讓數字後方添加度數的標誌。選擇 <code class="docutils literal"><span class="pre">自訂</span></code> 然後點選在旁邊的 <span class="guilabel">表達式</span> 按鈕。</p>
@@ -489,7 +490,7 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/327.png" class="align-center" src="../../_images/327.png" />
+<div><img alt="../../_images/328.png" class="align-center" src="../../_images/328.png" />
 </div></blockquote>
 <ol class="arabic simple" start="33">
 <li><p class="first">總算到了上標題的時間！選擇 <span class="menuselection">Add Item ‣ Add 標記</span>，</p>
@@ -548,7 +549,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Dec 31, 2019.<br/>
+      最後更新日期是 Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

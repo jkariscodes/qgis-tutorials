@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -262,7 +263,7 @@ links below:</p>
 <li>We will first load the census tracts shapefile. Go to <span class="menuselection">Layer
 ‣ Add Vector Layer</span>.</li>
 </ol>
-<img alt="../_images/1173.png" class="align-center" src="../_images/1173.png" />
+<img alt="../_images/1176.png" class="align-center" src="../_images/1176.png" />
 <ol class="arabic simple" start="2">
 <li>Browse to the downloaded zip file <code class="docutils literal"><span class="pre">tl_2013_06_tract.zip</span></code> and select it. QGIS
 can open zip files directly so no need to uncompress it first.</li>
@@ -271,23 +272,23 @@ can open zip files directly so no need to uncompress it first.</li>
 <ol class="arabic simple" start="3">
 <li>Select the <code class="docutils literal"><span class="pre">tl_2013_06_tract.shp</span></code> layer and click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/373.png" class="align-center" src="../_images/373.png" />
+<img alt="../_images/374.png" class="align-center" src="../_images/374.png" />
 <ol class="arabic simple" start="4">
 <li>You will see the census tracts loaded into QGIS.</li>
 </ol>
-<img alt="../_images/451.png" class="align-center" src="../_images/451.png" />
+<img alt="../_images/452.png" class="align-center" src="../_images/452.png" />
 <ol class="arabic simple" start="5">
 <li>Right-click on the layer and select <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
-<img alt="../_images/552.png" class="align-center" src="../_images/552.png" />
+<img alt="../_images/553.png" class="align-center" src="../_images/553.png" />
 <ol class="arabic simple" start="6">
 <li>Examine the attributes of the tracts shapefile. To join a table with this shapefile, we need a unique and common attribute for each feature. In this case, the <strong>GEOID</strong> field is a unique identifier for each tract and can be used to <cite>link</cite> this shapefile with any other table containing the same ID.</li>
 </ol>
-<img alt="../_images/650.png" class="align-center" src="../_images/650.png" />
+<img alt="../_images/651.png" class="align-center" src="../_images/651.png" />
 <ol class="arabic simple" start="7">
 <li>Open the CSV file <code class="docutils literal"><span class="pre">ca_tracts_pop.csv</span></code> in a text editor. You will notice that each row of the file contains information about a tract along with the unique identifier we saw in the previous step. Note that this field is called <strong>GEO.id2</strong> in the CSV. You will also note that the <strong>D001</strong> column has population value for each of the census tract.</li>
 </ol>
-<img alt="../_images/749.png" class="align-center" src="../_images/749.png" />
+<img alt="../_images/750.png" class="align-center" src="../_images/750.png" />
 <ol class="arabic simple" start="8">
 <li>We could import this csv file without any further action and it would be
 imported. But, the default type of each column would be a <em>String</em> (text).
@@ -299,12 +300,12 @@ file will have only 1 row specifying data types for each column. Save this
 file as <code class="docutils literal"><span class="pre">ca_tracts_pop.csvt</span></code> in the same directory as the original <cite>.csv</cite>
 file. You can also <a class="reference external" href="../../downloads/ca_tracts_pop.csvt">download the csvt file from here.</a></li>
 </ol>
-<img alt="../_images/847.png" class="align-center" src="../_images/847.png" />
+<img alt="../_images/848.png" class="align-center" src="../_images/848.png" />
 <ol class="arabic simple" start="9">
 <li>Now we are ready to import the CSV file to QGIS. Go to <span class="menuselection">Layer
 ‣ Add Delimited Text Layer</span>.</li>
 </ol>
-<img alt="../_images/946.png" class="align-center" src="../_images/946.png" />
+<img alt="../_images/947.png" class="align-center" src="../_images/947.png" />
 <ol class="arabic simple" start="10">
 <li>Browse to the folder containing the CSV file and select it. Make sure you
 have selected <span class="guilabel">File format</span> as <span class="guilabel">CSV (comma separated
@@ -312,16 +313,16 @@ values)</span>. Since we are importing this as a table, we must specify that our
 file contains no geometry. Select the <span class="guilabel">No geometry (attribute
 only table)</span> option. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1045.png" class="align-center" src="../_images/1045.png" />
+<img alt="../_images/1046.png" class="align-center" src="../_images/1046.png" />
 <ol class="arabic simple" start="11">
 <li>The CSV will now be imported as a table to QGIS.</li>
 </ol>
-<img alt="../_images/1174.png" class="align-center" src="../_images/1174.png" />
+<img alt="../_images/1177.png" class="align-center" src="../_images/1177.png" />
 <ol class="arabic simple" start="12">
 <li>Select the <code class="docutils literal"><span class="pre">tl_2013_06_tract</span></code> layer. Right-click on it and select
 <span class="guilabel">Properties</span>.</li>
 </ol>
-<img alt="../_images/1246.png" class="align-center" src="../_images/1246.png" />
+<img alt="../_images/1247.png" class="align-center" src="../_images/1247.png" />
 <ol class="arabic simple" start="13">
 <li>In the <span class="guilabel">Layer Properties</span> dialog, select the <span class="guilabel">Joins</span>
 tab. Click on the <cite>+</cite> button at the bottom to create a new table join.</li>
@@ -334,14 +335,14 @@ both the shapefile and the CSV. Select <cite>GEO.id2</cite> and <cite>GEOID</cit
 <span class="guilabel">Join field</span> and <span class="guilabel">Target field</span> respectively. Click
 <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1443.png" class="align-center" src="../_images/1443.png" />
+<img alt="../_images/1444.png" class="align-center" src="../_images/1444.png" />
 <ol class="arabic simple" start="15">
 <li>Close the <span class="guilabel">Layer Properties</span> dialog and return to the main QGIS
 window. At this point, the fields from the CSV file are joined with the
 shapefile. Right-click on the <code class="docutils literal"><span class="pre">tl_2013_06_tract</span></code> layer and select
 <span class="guilabel">Open Attribute Table</span>.</li>
 </ol>
-<img alt="../_images/1541.png" class="align-center" src="../_images/1541.png" />
+<img alt="../_images/1542.png" class="align-center" src="../_images/1542.png" />
 <ol class="arabic simple" start="16">
 <li>You can now see a new set of fields, including
 <span class="guilabel">ca_tracts_pop_D001</span> field added to each feature. Now you have
@@ -352,7 +353,7 @@ attribute table and return to the main QGIS window.</li>
 <ol class="arabic simple" start="17">
 <li>Right-click the <code class="docutils literal"><span class="pre">tl_2013_06_tract</span></code> layer and select <span class="guilabel">Properties</span>.</li>
 </ol>
-<img alt="../_images/1734.png" class="align-center" src="../_images/1734.png" />
+<img alt="../_images/1735.png" class="align-center" src="../_images/1735.png" />
 <ol class="arabic simple" start="18">
 <li>Select the <span class="guilabel">Style</span> tab. Select the <span class="guilabel">Graduated</span> from the
 drop-down menu. As we are looking to create a population map, we want to
@@ -363,7 +364,7 @@ drop-down. In the <span class="guilabel">Mode</span>, select <span class="guilab
 Count)</span>. Next click <span class="guilabel">Classify</span>. You will see a different color
 assigned to certain population ranges. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1834.png" class="align-center" src="../_images/1834.png" />
+<img alt="../_images/1835.png" class="align-center" src="../_images/1835.png" />
 <ol class="arabic simple" start="19">
 <li>You will now see a nice visualization of the census tracts as styled using
 population values. Use the <span class="guilabel">Zoom in</span> tool to select a smaller
@@ -404,7 +405,7 @@ the same technique to create maps based on variety of census data.</li>
     </p>
     <p>
         &copy; Bản quyền thuộc 2019, Ujaval Gandhi.<br/>
-      Cập nhật mới nhất vào Dec 31, 2019.<br/>
+      Cập nhật mới nhất vào Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

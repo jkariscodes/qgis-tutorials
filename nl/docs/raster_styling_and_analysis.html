@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Ruimtelijke samenvoegingen uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Ruimtelijke query&#8217;s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
@@ -246,7 +247,7 @@
 <li><p class="first">Ga naar de downloadpagina <a class="reference external" href="http://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-density/data-download">Population Density Grid, v3 download page.</a> Selecteer de <span class="guilabel">Data Attributes</span> als <span class="guilabel">.ascii format</span>, <span class="guilabel">1° resolution</span> en <span class="guilabel">1990 year</span>. Klik op <span class="guilabel">Download</span>. Op dit punt zou u een gratis account en inlog aan kunnen maken, of de knop <span class="guilabel">Guest Download</span> aan de onderzijde gebruiken om de gegevens direct downloaden. Herhaal het proces voor de gegevens van <span class="guilabel">2000 year</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
+<img alt="../_images/1187.png" class="align-center" src="../_images/1187.png" />
 <p>U zult nu 2 zip-bestanden hebben gedownload.</p>
 <p>Voor het gemak kunt u direct een kopie van de gegevensset downloaden vanaf de links hieronder:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/gl_gpwv3_pdens_90_ascii_one.zip">gl_gpwv3_pdens_90_ascii_one.zip</a></p>
@@ -264,52 +265,52 @@
 <li><p class="first">Lokaliseer de downloade zip-bestanden. Houd de <code class="kbd docutils literal"><span class="pre">Ctrl</span></code>-toets ingedrukt en klik op beide zip-bestanden om ze allebei te selecteren. Op deze manier bent u in staat om beide bestanden in één stap te laden.</p>
 </li>
 </ol>
-<img alt="../_images/379.png" class="align-center" src="../_images/379.png" />
+<img alt="../_images/380.png" class="align-center" src="../_images/380.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Elk zip-bestand bevat 2 rasterbestanden. De <code class="docutils literal"><span class="pre">a</span></code> in de bestandsnaam geeft aan dat de tellingen van de bevolking werd aangepast om overeen te komen met de totalen van de UN. We zullen voor deze handleiding de aangepaste rasters gebruiken. Selecteer <code class="docutils literal"><span class="pre">glds00ag60.asc</span></code> als de laag om toe te voegen. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/457.png" class="align-center" src="../_images/457.png" />
+<img alt="../_images/458.png" class="align-center" src="../_images/458.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">De laag heeft geen CRS gedefinieerd, en omdat de rasters in lat/long zijn, kies <cite>EPSG:4326</cite> als het coórdinaten referentiesysteem.</p>
 </li>
 </ol>
-<img alt="../_images/558.png" class="align-center" src="../_images/558.png" />
+<img alt="../_images/559.png" class="align-center" src="../_images/559.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">U zult soortgelijke dialoogvensters tweemaal zien langskomen, omdat we beide zip-bestanden hebben geselecteerd. Herhaal het proces en selecteer het raster <code class="docutils literal"><span class="pre">glds90ag60.asc</span></code> als de laag om toe te voegen.</p>
 </li>
 </ol>
-<img alt="../_images/655.png" class="align-center" src="../_images/655.png" />
+<img alt="../_images/656.png" class="align-center" src="../_images/656.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Kies nogmaals <cite>EPSG:4326</cite> als het CRS.</p>
 </li>
 </ol>
-<img alt="../_images/754.png" class="align-center" src="../_images/754.png" />
+<img alt="../_images/755.png" class="align-center" src="../_images/755.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Nu zult u beide rasters zien geladen in QGIS. Het raster is gerenderd in grijswaarden, waar donkere pixels lagere waarden aangeven en lichtere pixels hogere waarden aangeven.</p>
 </li>
 </ol>
-<img alt="../_images/852.png" class="align-center" src="../_images/852.png" />
+<img alt="../_images/853.png" class="align-center" src="../_images/853.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Elke pixel in het raster heeft een toegewezen waarde. Die waarde is de bevolkingsdichtheid voor dat raster. Klik op de knop <span class="guilabel">Objecten identificeren</span> om het gereedschap te selecteren en klik ergens in het raster om de waarde van die pixel te zien.</p>
 </li>
 </ol>
-<img alt="../_images/951.png" class="align-center" src="../_images/951.png" />
+<img alt="../_images/952.png" class="align-center" src="../_images/952.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">We zouden het moeten opmaken om het patroon van de bevolkingsdichtheid beter te visualiseren. klik met rechts op de laagnaam en selecteer <span class="guilabel">Eigenschappen</span>. U kunt ook dubbelkkikken op de naam in de inhoudsopgave om het dialoogvenster Laag-eigenschappen op te roepen.</p>
 </li>
 </ol>
-<img alt="../_images/1050.png" class="align-center" src="../_images/1050.png" />
+<img alt="../_images/1051.png" class="align-center" src="../_images/1051.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Wijzig, op de tab <span class="guilabel">Stijl</span>, het <span class="guilabel">Rendertype</span> naar <span class="guilabel">Enkelbands pseudokleur</span>. Klik vervolgens op <span class="guilabel">Classificeren</span> onder <span class="guilabel">Genereer nieuw kleurenpalet</span>. U zult zien dat er 5 nieuwe kleurwaarden worden gemaakt. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1185.png" class="align-center" src="../_images/1185.png" />
+<img alt="../_images/1188.png" class="align-center" src="../_images/1188.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Terug in het kaartvenster van QGIS zult u een als een heatmap gerenderde weergave van het raster zien. Herhaal het proces ook voor het andere raster.</p>
 </li>
 </ol>
-<img alt="../_images/1250.png" class="align-center" src="../_images/1250.png" />
+<img alt="../_images/1251.png" class="align-center" src="../_images/1251.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Voor onze analyse willen we zoeken naar de gebieden met de grootste wijziging in de bevolking tussen 1990 en 2000. De manier om dit te bereiken is door te zoeken naar het verschil tussen de waarde van elke pixel voor het raster in beide lagen. Selecteer <span class="menuselection">Raster ‣ Rasterberekeningen</span>.</p>
 </li>
@@ -319,12 +320,12 @@
 <li><p class="first">In het gedeelte <span class="guilabel">Rasterbanden</span> kunt u de laag selecteren door er op te dubbelklikken. De banden zijn vernoemd naar de naam van het raster, gevolgd door &#64; en het nummer van de band. Omdat onze rasters slechts 1 band hebben, zult u slechts 1 item per band zien. Rasterberekeningen kan rekenkundige bewerkingen toepassen op de pixels van de rasters. In dit geval willen we een eenvoudige formule invoeren om de bevolkingsdichtheid van 1990 af te trekken van die van 2000. Voer <code class="docutils literal"><span class="pre">glds00ag60&#64;1</span> <span class="pre">-</span> <span class="pre">glds90ag60&#64;1</span></code> in als de formule. Noem uw uitvoerlaag <code class="docutils literal"><span class="pre">pop_density_change_2000_1990.tif</span></code> en selecteer het vak naast <span class="guilabel">Voeg resultaat toe aan project</span>. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1447.png" class="align-center" src="../_images/1447.png" />
+<img alt="../_images/1448.png" class="align-center" src="../_images/1448.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Als de bewerking voltooid is ziet u de nieuwe laag geladen in QGIS</p>
 </li>
 </ol>
-<img alt="../_images/1545.png" class="align-center" src="../_images/1545.png" />
+<img alt="../_images/1546.png" class="align-center" src="../_images/1546.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Deze visualisatie in grijswaarden is nuttig, maar we kunnen een veel meer informatieve uitvoer maken. Klik met rechts op de laag <code class="docutils literal"><span class="pre">pop_density_change_2000_1990</span></code> en selecteer <span class="guilabel">Eigenschappen</span>.</p>
 </li>
@@ -334,12 +335,12 @@
 <li><p class="first">We willen de laag zo opmaken dat waarden van pixels in bepaalde bereiken dezelfde kleur krijgen. Ga, vóór we daar verder mee gaan, naar de tab <span class="guilabel">Metadata</span> en bekijk de eigenschappen van het raster. Bekijk de minimum en maximum waarden van deze laag.</p>
 </li>
 </ol>
-<img alt="../_images/1738.png" class="align-center" src="../_images/1738.png" />
+<img alt="../_images/1739.png" class="align-center" src="../_images/1739.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Ga nu naar de tab <span class="guilabel">Stijl</span>. Selecteer <span class="guilabel">Enkelbands pseudokleur</span> als het <span class="guilabel">Rendertype</span> onder <span class="guilabel">Rendering van banden</span>. Stel <span class="guilabel">Kleurinterpolatie</span> in op <span class="guilabel">Discreet</span>. Klik 4 keer op de knop <span class="guilabel">Voeg handmatig waarden in</span> om 4 unieke klassen te maken. Klik op een item om de waarden te wijzigen. De manier waarop kleurkaarten werken is dat alle waarden die lager zijn dan de opgegeven waarde zullen de kleur krijgen van dat item. Omdat de minimumwaarde in ons raster net boven -2000 ligt, kiezen we -2000 als het eerste item. Dit zal voor de waarden geen gegevens zijn. Voer de waarden en labels voor de andere items in zoals hieronder en klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1838.png" class="align-center" src="../_images/1838.png" />
+<img alt="../_images/1839.png" class="align-center" src="../_images/1839.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Nu zult u een veel krachtiger visualisatie zien waar u gebieden kunt zien met positieve en negatieve wijzigingen in de dichtheid van de bevolking. Klik op de knop <span class="guilabel">Inzoomen</span> en teken een rechthoek rondom Europa om die regio meer in detail te verkennen.</p>
 </li>
@@ -367,7 +368,7 @@
 <li><p class="first">Klik met rechts, als de nieuwe laag eenmaal is geladen, op de nieuwe laag en selecteer <span class="guilabel">Eigenschappen</span>. Op de tab <span class="guilabel">Transparantie</span>, voeg 0 toe als de <span class="guilabel">Aanvullende &#8216;no data&#8217; waarde</span>. Deze instelling zal de pixels met de waarden 0 ook transparant maken. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2322.png" class="align-center" src="../_images/2322.png" />
+<img alt="../_images/2323.png" class="align-center" src="../_images/2323.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first">Nu zult u de gebieden met een negatieve wijziging in de bevolkingsdichtheid als grijze pixels zien.</p>
 </li>
@@ -402,7 +403,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Dec 31, 2019.<br/>
+      Laatste aanpassing op Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

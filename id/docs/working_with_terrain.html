@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -254,7 +255,7 @@
 <li><p class="first">Pergi ke <a class="reference external" href="http://earthexplorer.usgs.gov/">USGS Earthexplorer</a> . Pada tab:guilabel:<cite>Search Criteria</cite> , cari tempat bernama <cite>Mt. Everest</cite> . Klik hasil untuk memilih lokasi.</p>
 </li>
 </ol>
-<img alt="../_images/1200.png" class="align-center" src="../_images/1200.png" />
+<img alt="../_images/1202.png" class="align-center" src="../_images/1202.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Pada tab <span class="guilabel">Data Sets</span> , ekspan grup <span class="guilabel">Digital Elevation</span>, dan centrang <span class="guilabel">GMTED2010</span>.</p>
 </li>
@@ -264,12 +265,12 @@
 <li><p class="first">Anda dapat melewatkan beberapa hal sampai tab <span class="guilabel">Results</span> dan lihat bagian dataset yang sesuai dengan kriteria anda. Klik tombol <span class="guilabel">Download Options</span> . Anda akan diharuskan untuk log in pada sebuah situ. Anda bisa membuat akun bebas jika anda belum punya.</p>
 </li>
 </ol>
-<img alt="../_images/388.png" class="align-center" src="../_images/388.png" />
+<img alt="../_images/389.png" class="align-center" src="../_images/389.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Pilih opsi <span class="guilabel">30 ARC SEC</span> dan pilih <span class="guilabel">Select Download Option</span>.</p>
 </li>
 </ol>
-<img alt="../_images/466.png" class="align-center" src="../_images/466.png" />
+<img alt="../_images/467.png" class="align-center" src="../_images/467.png" />
 <p>Sekarang anda akan memilik file bernama <cite>GMTED2010N10E060_300.zip</cite> . Data elevasi ini terdistribusi dalam berbagai format raster seperti xxx dan lain-lain. QGIS mendukung banyak  <a class="reference external" href="http://www.gdal.org/formats_list.html">variety of raster formats</a> lewat library GDAL. Data GMTED berbentuk file GeoTiff yang berada dalam arsip zip.</p>
 <p>Untuk kenyamanan, anda akan mengunduh sebuah kopi data secara langsund dari bawah.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/GMTED2010N10E060_300.zip">GMTED2010N10E060_300.zip</a></p>
@@ -281,22 +282,22 @@
 <li><p class="first">Buka <span class="menuselection">Layer ‣ Add Raster Layer</span> dan jelajahi file zip yang sudah diunduh.</p>
 </li>
 </ol>
-<img alt="../_images/567.png" class="align-center" src="../_images/567.png" />
+<img alt="../_images/568.png" class="align-center" src="../_images/568.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Ada banyak file berbeda yang dihasilkan dari algoritma yang berbeda. Untuk tutorial ini, kita akan menggunakan file bernama <cite>10n060e_20101117_gmted_mea300.tif</cite>.</p>
 </li>
 </ol>
-<img alt="../_images/664.png" class="align-center" src="../_images/664.png" />
+<img alt="../_images/665.png" class="align-center" src="../_images/665.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Anda akan melihat data permukaan medan yang dirender di kanvas QGIS. Tiap pixel pada raster permukaan medan merepresentasikan elevasi rata-rata dalam meter pada lokasi tersebut. Pixek yang gelap merepresentasikan area dengan ketinggian rendah dan pixel yang lebih teran merepresentasikan area dengan Ketinggian yang tinggi.</p>
 </li>
 </ol>
-<img alt="../_images/763.png" class="align-center" src="../_images/763.png" />
+<img alt="../_images/764.png" class="align-center" src="../_images/764.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Mari cari area yang akan kita selidiki. Dari <a class="reference external" href="http://en.wikipedia.org/wiki/Mount_Everest">Wikipedia</a> , kita menemukan bahwa koordinat untuk area ketertarikkan kita - Gunung Everest - berlokasi pada koordinat 27.9881° N, 86.9253° E . Catat bahwa QGIS menggunakan koordinat dalam format (X,Y), jadi anda harus menggunakan koordinat seperti (Bujur, Lintang). Paste <cite>86.9253,27.9881</cite> pada sebelah bawah jendela QGIS dimana ada disebutkan <span class="guilabel">Coordinate</span> dan tekan Enter. Viewport akan terpusatkan pada koordinat ini. Untuk menzoom-in, masukkan <cite>1:1000000</cite> pada field <span class="guilabel">Scale</span> dan tekan Enter. Anda akan melihat viewport terzoom ke area di sekitar Himalaya.</p>
 </li>
 </ol>
-<img alt="../_images/861.png" class="align-center" src="../_images/861.png" />
+<img alt="../_images/862.png" class="align-center" src="../_images/862.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Sekarang kita akan melakukan crop raster pada area interest ini. Pilih tool Clipper dari <span class="menuselection">Raster ‣ Extraction ‣ Clipper</span>.</p>
 </li>
@@ -305,22 +306,22 @@
 <p class="first admonition-title">Catatan</p>
 <p class="last">Menu <span class="guilabel">Raster</span> di QGIS termasuk dalam plugin inti bernama <span class="guilabel">GdalTools</span> . Jika anda tidak melihat menu <span class="guilabel">Raster</span>, aktifkan plugin <span class="guilabel">GdalTools</span> dari <span class="menuselection">Plugins ‣ Manage and install plugins ‣ Installed</span> . Lihat <code class="xref doc docutils literal"><span class="pre">docs/using_plugins</span></code> untuk detail yang lebih jelas.</p>
 </div>
-<img alt="../_images/960.png" class="align-center" src="../_images/960.png" />
+<img alt="../_images/961.png" class="align-center" src="../_images/961.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Pada jendela <span class="guilabel">Clipper</span>, beri nama file output <cite>everest_gmted30.tif</cite> . Pilih <span class="guilabel">Clipping mode</span> untuk <span class="guilabel">Extent</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1059.png" class="align-center" src="../_images/1059.png" />
+<img alt="../_images/1060.png" class="align-center" src="../_images/1060.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Pilih jendela <span class="guilabel">Clipper</span>  buka dan ganti ke jendela utama QGIS. Tahan tombol kiri mouse anda dan gambar sebuah segi empat yang meliputi seluruh kanvas.</p>
 </li>
 </ol>
-<img alt="../_images/11101.png" class="align-center" src="../_images/11101.png" />
+<img alt="../_images/11102.png" class="align-center" src="../_images/11102.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Sekarang kembali ke jendela <span class="guilabel">Clipper</span> , anda akan melihat koordinat terkumpul secara otomastis dari seleksi anda. Pastikan opsi <span class="guilabel">Load into canvas when finished</span> aktif , dan klik <span class="guilabel">OK.</span></p>
 </li>
 </ol>
-<img alt="../_images/1258.png" class="align-center" src="../_images/1258.png" />
+<img alt="../_images/1259.png" class="align-center" src="../_images/1259.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Ketika proses selesai, anda akan melihat sebuah layer baru terbuka di QGIS. Layer meliputi hanya area di sekitar Gunung  Everst. Sekarang kita siap untuk menghasilkan kontur. Pilih tool kontur dari <span class="menuselection">Raster ‣ Extraction ‣ Contour</span>.</p>
 </li>
@@ -330,12 +331,12 @@
 <li><p class="first">Pada dialog <span class="guilabel">Contour</span> , pilih <cite>everest_gmted30</cite> untuk <span class="guilabel">Input file</span> . Beri nama <span class="guilabel">Output file for contour lines</span> dengan <cite>everest_countours.shp</cite> . Kita akan menghasilkan garis kontur untuk interval 100m, jadi taruh 100 untuk <span class="guilabel">Interval between contour lines.</span>  . Centrang juga opsi <span class="guilabel">Attribute name</span> sehingga nilai elevasi akan terekam sebagai atribut dari setiap garis kontur. Klik <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1455.png" class="align-center" src="../_images/1455.png" />
+<img alt="../_images/1456.png" class="align-center" src="../_images/1456.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Ketika proses sudah selesai., anda akan melihat garis kontur terbuka di kanvas. Setiap garis pada layer merepresentasikan sebuah elevasi tertentu. Semua poin sepanjang garis kontur pada raster memiliki elevasi yang sama. Semakin dekat garis, semakin dalam juga lerengnya, Mari inspeksi kontur lebih lagi. Klik kanan pada layer kontur dan pilih <span class="guilabel">Open Attribute Table</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1552.png" class="align-center" src="../_images/1552.png" />
+<img alt="../_images/1553.png" class="align-center" src="../_images/1553.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Anda akan melihat setiap fitur garis punya sebuah attribut yanbg bernama <span class="guilabel">ELEV</span> . Ini merupakan tinggi dalam meter yang mewakili setiap garis. Klik pada header kolom beberapa kali untuk mengurutkan nilai dari paling besar. Berikut anda akan menemukan garis yang merepresentasikan elevasi tertinggi pada data kita, seperti Gunung Everest</p>
 </li>
@@ -345,12 +346,12 @@
 <li><p class="first">Pilih baris atas, dan klik tombol <span class="guilabel">Zoom to selection</span> button.</p>
 </li>
 </ol>
-<img alt="../_images/1744.png" class="align-center" src="../_images/1744.png" />
+<img alt="../_images/1745.png" class="align-center" src="../_images/1745.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Ganti ke jendela utama qgis. Anda akan melihat garis kontur terpilih ditandai dengan warna kuning. Ini adalah area dengan elevasi tertinggi dalam dataset kita.</p>
 </li>
 </ol>
-<img alt="../_images/1844.png" class="align-center" src="../_images/1844.png" />
+<img alt="../_images/1845.png" class="align-center" src="../_images/1845.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Sekarang mari kita buat peta hillshade dari raster. Pilih <span class="menuselection">Raster ‣ Analysis ‣ DEM (Terrain Models)</span>.</p>
 </li>
@@ -375,7 +376,7 @@
 <li><p class="first">Anda dapat juga memvisualisasikan layer kontur anda dan verifikasi analisa anda dengan mengekspor layer kontur sebagai KML dan melihatnya di Google Earth. Klik kanan layer kontur, pilih <span class="guilabel">Save as..</span>.</p>
 </li>
 </ol>
-<img alt="../_images/2327.png" class="align-center" src="../_images/2327.png" />
+<img alt="../_images/2328.png" class="align-center" src="../_images/2328.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first">Pilih <span class="guilabel">Keyhole Markup Language [KML]</span> untuk <span class="guilabel">Format</span> . Beri nama output anda dengan <cite>contours.kml</cite> dan klik <span class="guilabel">OK</span>.</p>
 </li>
@@ -415,7 +416,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Dec 31, 2019.<br/>
+      Terakhir diperbarui pada Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

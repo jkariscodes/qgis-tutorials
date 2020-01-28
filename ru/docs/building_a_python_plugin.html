@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -290,7 +291,7 @@ install plugins.</p>
 <li><p class="first">Откройте QGIS. Перейдите к меню <span class="menuselection">Plugins ‣ Plugin Builder ‣ Plugin Builder</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1140.png" class="align-center" src="../_images/1140.png" />
+<img alt="../_images/1143.png" class="align-center" src="../_images/1143.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Вы увидите диалоговое окно <span class="guilabel">QGIS Plugin Builder</span> с формой. Вы можете заполнить форму, указав детали, касающиеся нашего модуля. В поле <span class="guilabel">Class name</span> нужно указать имя класса Python, содержащего логику модуля. Это также будет имя папки, содержащей все файлы модуля. Введите строку <code class="docutils literal"><span class="pre">SaveAttributes</span></code> в качестве имени класса. <span class="guilabel">Plugin name</span> - это имя, под которым ваш плагин появится в меню <span class="guilabel">Plugin Manager</span>. Введите `` Save Attributes``. Добавьте описание в поле <span class="guilabel">Description</span>. <span class="guilabel">Module name</span> - это имя основного файла Python для модуля. Укажите его как <code class="docutils literal"><span class="pre">safe_attributes</span></code>. Оставьте номер версии без изменения. Строка <span class="guilabel">Text for menu item</span> указывает, как пользователи будут видеть ваш плагин в меню QGIS. Введите <code class="docutils literal"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code>. Введите свое имя и адрес электронной почты в соответствующих полях. Поле <span class="guilabel">Menu</span> показывает, в какое меню QGIS будет добавлен ваш модуль. Так как наш плагин предназначен для векторных данных, выберите <code class="docutils literal"><span class="pre">Vector</span></code>. Отметьте галочкой поле <span class="guilabel">Flag the plugin as experimental</span> в нижней части. Нажмите <span class="guilabel">OK</span>.</p>
 </li>
@@ -312,17 +313,17 @@ install plugins.</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>/home/username/.qgis2/python/plugins
 </pre></div>
 </div>
-<img alt="../_images/350.png" class="align-center" src="../_images/350.png" />
+<img alt="../_images/352.png" class="align-center" src="../_images/352.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Вы увидите диалоговое окно подтверждения при создании шаблона вашего модуля. Обратите внимание на путь к папке с модулем.</p>
 </li>
 </ol>
-<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
+<img alt="../_images/434.png" class="align-center" src="../_images/434.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Прежде чем мы сможем использовать вновь созданный плагин, мы должны скомпилировать файл <code class="docutils literal"><span class="pre">resources.qrc</span></code>, который был создан модулем Plugin Builder. Запустите <span class="guilabel">OSGeo4W Shell</span> под Windows или в терминале на Mac или Linux.</p>
 </li>
 </ol>
-<img alt="../_images/533.png" class="align-center" src="../_images/533.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Перейдите к папке модуля, в которой были созданы файлы с помощью модуля <code class="docutils literal"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>. Вы можете использовать команду <code class="docutils literal"><span class="pre">cd</span></code> с последующим указанием пути к директории.</p>
 </li>
@@ -330,7 +331,7 @@ install plugins.</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>cd c:\Users\username\.qgis2\python\plugins\SaveAttributes
 </pre></div>
 </div>
-<img alt="../_images/632.png" class="align-center" src="../_images/632.png" />
+<img alt="../_images/633.png" class="align-center" src="../_images/633.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Оказавшись в каталоге, напечатайте <code class="docutils literal"><span class="pre">make</span></code>. Это запустит команду <code class="docutils literal"><span class="pre">pyrcc4</span></code>, которую мы установили, как часть расширения Qt для Python.</p>
 </li>
@@ -338,7 +339,7 @@ install plugins.</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>make
 </pre></div>
 </div>
-<img alt="../_images/732.png" class="align-center" src="../_images/732.png" />
+<img alt="../_images/733.png" class="align-center" src="../_images/733.png" />
 <ol class="arabic simple" start="8">
 <li>Now we are ready to have a first look at the brand new plugin we created.
 Close QGIS and launch it again. Go to <span class="menuselection">Plugins ‣ Manage
@@ -348,28 +349,28 @@ in the toolbar and a new menu entry under <span class="menuselection">Vector
 ‣ Save Attributes ‣ Save Attributes as CSV`</span>. Select it to launch
 the plugin dialog.</li>
 </ol>
-<img alt="../_images/831.png" class="align-center" src="../_images/831.png" />
+<img alt="../_images/832.png" class="align-center" src="../_images/832.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Вы заметите новое пустое диалоговое окно под названием <span class="guilabel">Save Attributes</span>. Закройте это окно.</p>
 </li>
 </ol>
-<img alt="../_images/932.png" class="align-center" src="../_images/932.png" />
+<img alt="../_images/933.png" class="align-center" src="../_images/933.png" />
 <ol class="arabic simple" start="10">
 <li>We will now design our dialog box and add some user interface elements to
 it. Open the <code class="docutils literal"><span class="pre">Qt</span> <span class="pre">Creator</span></code> program and to to <span class="guilabel">File &#8211;&gt; Open File
 or Project...</span>.</li>
 </ol>
-<img alt="../_images/1030.png" class="align-center" src="../_images/1030.png" />
+<img alt="../_images/1031.png" class="align-center" src="../_images/1031.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Перейдите к папке с модулем и выберите файл <code class="docutils literal"><span class="pre">save_attributes_dialog_base.ui</span></code>. Нажмите <span class="guilabel">Open</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1141.png" class="align-center" src="../_images/1141.png" />
+<img alt="../_images/1144.png" class="align-center" src="../_images/1144.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Вы увидите пустое диалоговое окно модуля. Вы можете перетаскивать элементы из панели слева в диалоговое окно. Мы добавим <span class="guilabel">Input Widget</span> вида <span class="guilabel">Combo Box</span>. Перетащите его в диалоговое окно модуля.</p>
 </li>
 </ol>
-<img alt="../_images/1232.png" class="align-center" src="../_images/1232.png" />
+<img alt="../_images/1233.png" class="align-center" src="../_images/1233.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Настройте подходящий размер поля со списком. Теперь перетащите элемент <span class="guilabel">Display Widget</span> типа <span class="guilabel">Label</span> в диалоговое окно.</p>
 </li>
@@ -379,12 +380,12 @@ or Project...</span>.</li>
 <li><p class="first">Щелкните на тексте и введите <code class="docutils literal"><span class="pre">Select</span> <span class="pre">a</span> <span class="pre">layer</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1430.png" class="align-center" src="../_images/1430.png" />
+<img alt="../_images/1431.png" class="align-center" src="../_images/1431.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Сохраните этот файл, перейдя в <span class="menuselection">File ‣ Save save_attributes_dialog_base.ui</span>. Заметьте, что имя объекта поля со списком - <code class="docutils literal"><span class="pre">comboBox</span></code>. Для взаимодействия с этим объектом через код Python, мы должны обратиться к нему по этому имени.</p>
 </li>
 </ol>
-<img alt="../_images/1529.png" class="align-center" src="../_images/1529.png" />
+<img alt="../_images/1530.png" class="align-center" src="../_images/1530.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Давайте перезагрузим наш модуль, чтобы мы могли видеть изменения в диалоговом окне. Перейдите к <span class="menuselection">Plugin ‣ Plugin Reloader ‣ Choose a plugin to be reloaded</span>.</p>
 </li>
@@ -394,12 +395,12 @@ or Project...</span>.</li>
 <li><p class="first">Выберите <code class="docutils literal"><span class="pre">SaveAttributes</span></code> в диалоговом окне <span class="guilabel">Configure Plugin reloader</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1724.png" class="align-center" src="../_images/1724.png" />
+<img alt="../_images/1725.png" class="align-center" src="../_images/1725.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Теперь нажмите кнопку <span class="guilabel">Save Attributes as CSV</span>. Вы увидите только что созданное диалоговое окно.</p>
 </li>
 </ol>
-<img alt="../_images/1824.png" class="align-center" src="../_images/1824.png" />
+<img alt="../_images/1825.png" class="align-center" src="../_images/1825.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Давайте добавим в модуль алгоритм, заполняющий выпадающий список слоями, загружаенными в QGIS. Перейдите в папку модуля и откройте файл <code class="docutils literal"><span class="pre">save_attributes.py</span></code> в текстовом редакторе. Прокрутите вниз и найдите метод <code class="docutils literal"><span class="pre">run(self)</span></code>. Этот метод будет вызываться, когда вы нажмете кнопку на панели инструментов или выберете пункт меню модуля. Добавьте следующий код в начале метода. Этот код получает слои, загруженные в QGIS, и добавляет их в объект <code class="docutils literal"><span class="pre">comboBox</span></code> из диалогового окна модуля.</p>
 </li>
@@ -437,7 +438,7 @@ the file.</li>
 <li><p class="first">Теперь мы добавим код Python, который откроет файловый браузер, когда пользователь нажимает на кнопку  <code class="docutils literal"><span class="pre">...</span></code>, и покажет выбранный путь в строке редактирования. Откройте файл <code class="docutils literal"><span class="pre">save_attributes.py</span></code> в текстовом редакторе. Добавьте <code class="docutils literal"><span class="pre">QFileDialog</span></code> в наш список импорта в верхней части файла.</p>
 </li>
 </ol>
-<img alt="../_images/2313.png" class="align-center" src="../_images/2313.png" />
+<img alt="../_images/2314.png" class="align-center" src="../_images/2314.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first">Добавьте новый метод под названием <code class="docutils literal"><span class="pre">select_output_file</span></code> со следующим кодом. Этот код откроет файловый браузер и вставит в строку редактирования путь к файлу, выбранный пользователем.</p>
 </li>
@@ -744,7 +745,7 @@ button widget.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Обновлено: Dec 31, 2019.<br/>
+      Обновлено: Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">空間連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -253,7 +254,7 @@
 <li><p class="first">選擇 <span class="menuselection">附加元件 ‣ 管理與安裝附加元件</span>，然後安裝 <code class="docutils literal"><span class="pre">qgis2leaf``（譯按：現在已是</span> <span class="pre">``qgis2web</span></code>）附加元件。(有關如何安裝 QGIS 的附加元件，請參考 <a class="reference internal" href="using_plugins.html"><em>使用附加元件</em></a> )</p>
 </li>
 </ol>
-<img alt="../_images/1162.png" class="align-center" src="../_images/1162.png" />
+<img alt="../_images/1165.png" class="align-center" src="../_images/1165.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">解壓縮剛下載的 <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code>，然後開啟 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>，找到剛解壓縮的 <code class="docutils literal"><span class="pre">ne_10m_airports.shp</span></code> 檔案，按下 <span class="guilabel">開啟</span>。</p>
 </li>
@@ -263,17 +264,17 @@
 <li><p class="first"><code class="docutils literal"><span class="pre">ne_10m_airports</span></code> 圖層載入後，可使用 <span class="guilabel">識別圖徵</span> 工具點選任一圖徵，查看內含的屬性。我們要製作的地圖會把所有的機場分成 3 種類別，而分類的過程中需要使用到 <code class="docutils literal"><span class="pre">type</span></code> 這個屬性。</p>
 </li>
 </ol>
-<img alt="../_images/366.png" class="align-center" src="../_images/366.png" />
+<img alt="../_images/367.png" class="align-center" src="../_images/367.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">在 <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> 圖層上按右鍵，選擇 <span class="guilabel">開啟屬性表格</span>，</p>
 </li>
 </ol>
-<img alt="../_images/446.png" class="align-center" src="../_images/446.png" />
+<img alt="../_images/447.png" class="align-center" src="../_images/447.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">在屬性表格視窗中，按下 <span class="guilabel">切換編輯模式</span> 鈕以進入編輯模式，在此模式中，按下 <span class="guilabel">開啟欄位計算</span> 鈕。</p>
 </li>
 </ol>
-<img alt="../_images/546.png" class="align-center" src="../_images/546.png" />
+<img alt="../_images/547.png" class="align-center" src="../_images/547.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">接下來要做的是建立一個稱為 <code class="docutils literal"><span class="pre">type_code</span></code> 的新屬性，所有主要機場的屬性值是 3，中型機場的屬性值是 2，其餘的機場是 1。我們可使用 <em>CASE</em> 流程控制語法，然後撰寫表達式，藉由判斷 <code class="docutils literal"><span class="pre">type</span></code> 屬性的值來給定 <code class="docutils literal"><span class="pre">type_code</span></code> 的值。勾選 <span class="guilabel">建立新欄位</span> 方框然後在 <span class="guilabel">輸出欄位名稱</span> 填入 <code class="docutils literal"><span class="pre">type_code</span></code>，然後在 <span class="guilabel">輸出欄位類別</span> 選擇 <span class="guilabel">數字 (整數)</span>。接著在 <span class="guilabel">表示式</span> 視窗中，輸入以下數行。</p>
 </li>
@@ -284,37 +285,37 @@
 END
 </pre></div>
 </div>
-<img alt="../_images/644.png" class="align-center" src="../_images/644.png" />
+<img alt="../_images/645.png" class="align-center" src="../_images/645.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">回到 <span class="guilabel">屬性表格</span>，新的欄位就會出現在表格最末端。檢查表達式有正確運作後，再次按下 <span class="guilabel">切換編輯模式</span> 以儲存剛才所做的修改。</p>
 </li>
 </ol>
-<img alt="../_images/743.png" class="align-center" src="../_images/743.png" />
+<img alt="../_images/744.png" class="align-center" src="../_images/744.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">讓我們來使用新建立的 <code class="docutils literal"><span class="pre">type_code</span></code> 屬性調整一下機場圖層的樣式。在 <code class="docutils literal"><span class="pre">ne_10m_airports</span></code>  圖層上按右鍵選擇 <span class="guilabel">屬性</span>。</p>
 </li>
 </ol>
-<img alt="../_images/842.png" class="align-center" src="../_images/842.png" />
+<img alt="../_images/843.png" class="align-center" src="../_images/843.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">在 <span class="guilabel">圖層屬性</span> 視窗中切換至 <span class="guilabel">樣式</span> 分頁，在下拉選單中選擇 <span class="guilabel">類別</span> 樣式然後在 <span class="guilabel">行</span> 中選擇 <code class="docutils literal"><span class="pre">type_code</span></code>。選擇一個你喜歡的色彩映射表然後按下 <span class="guilabel">分類，最後按下 :guilabel:`確定</span> 回到 QGIS 主視窗。</p>
 </li>
 </ol>
-<img alt="../_images/942.png" class="align-center" src="../_images/942.png" />
+<img alt="../_images/943.png" class="align-center" src="../_images/943.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">現在機場地圖已經設定好不錯的樣式了，讓我們開始製作互動性網頁地圖吧。選擇 <span class="menuselection">網路（Web） ‣ qgis2leaf ‣ Exports a QGIS Project to a working leaflet webmap</span>。（譯按：現在路徑已更改為 <span class="menuselection">網路（Web） ‣ qgis2web ‣ Create web map</span>。以下操作的文字說明將以新版的 <strong>qgis2web</strong> 為主，因此可能會與舊版的 <strong>qgis2leaf</strong> 截圖不符。）</p>
 </li>
 </ol>
-<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
+<img alt="../_images/1041.png" class="align-center" src="../_images/1041.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">在 <span class="guilabel">Export to web map</span> 視窗中，點選下方左側的 <span class="guilabel">Leaflet</span> 以切換到 Leaflet 的製圖模式，<span class="guilabel">Data export</span> 中的 <span class="guilabel">Export folder</span> 選擇輸出檔存放的路徑，<span class="guilabel">Scale/Zoom</span> 中的 <span class="guilabel">Extent</span> 選擇 <span class="guilabel">Fit to layers extent</span>，<span class="guilabel">Appearance</span> 中的 <span class="guilabel">Template</span> 選擇 <span class="guilabel">full-screen</span>，右下角的欄位選擇 <span class="guilabel">OSM</span> 作為底圖，最後按下 <span class="guilabel">Export</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1163.png" class="align-center" src="../_images/1163.png" />
+<img alt="../_images/1166.png" class="align-center" src="../_images/1166.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">輸出完成後，打開瀏覽器，開啟在你剛剛選擇的輸出資料夾中的 <code class="docutils literal"><span class="pre">Index.html</span></code> 檔案，就可以看到你剛剛在 QGIS 中看到的地圖複製品。你可以縮放、移至地圖上的任意區域，而且只要點選任一圖徵，就會看到圖徵的屬性資訊顯示在跳出來的訊息框中。只要把資料夾內的所有內容複製起來，就能夠把此地圖移到網頁伺服器，當作線上展示的互動地圖。</p>
 </li>
 </ol>
-<img alt="../_images/1241.png" class="align-center" src="../_images/1241.png" />
+<img alt="../_images/1242.png" class="align-center" src="../_images/1242.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">現在我們要來看看如何進一步使用此附加元件來調整、自訂我們的地圖。你可能已注意到，在網頁地圖跳出的視窗中，記載著圖徵所有屬性的資料，但其中某些屬性並沒有那麼重要，而且預設的跳出式視窗文字格式也實在不怎麼好看。因此我們接著要來換掉預設的格式，使用我們自己的 HTML 語法，讓它能夠漂亮地呈現資訊。具體來說，我們現在要把自訂的 HTML 加到一個新增的 <code class="docutils literal"><span class="pre">html_exp</span></code> 欄位內。在 <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> 圖層上按右鍵，選擇 <span class="guilabel">開啟屬性表格</span>。</p>
 </li>
@@ -324,7 +325,7 @@ END
 <li><p class="first">在屬性表格視窗中，按下 <span class="guilabel">切換編輯模式</span> 鈕以進入編輯模式，在此模式中，按下 <span class="guilabel">開啟欄位計算</span> 鈕。</p>
 </li>
 </ol>
-<img alt="../_images/1438.png" class="align-center" src="../_images/1438.png" />
+<img alt="../_images/1439.png" class="align-center" src="../_images/1439.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">勾選 <span class="guilabel">建立新欄位</span> 方框，在 <span class="guilabel">輸出欄位名稱</span> 內輸入 <code class="docutils literal"><span class="pre">html_exp</span></code>，然後在 <span class="guilabel">輸出欄位類別</span> 內選擇 <span class="guilabel">文字 (字串)</span>。因為我們要建立的是很長的 HTML 字串，所以 <span class="guilabel">輸出欄位寬度</span> 要調成很大，例如 <code class="docutils literal"><span class="pre">200</span></code>。在 <span class="guilabel">表示式</span> 區塊中輸入如下的表達式，雖然表達式看起來很複雜，不過其實內容是在定義 HTML 的 table 元件，然後把 <code class="docutils literal"><span class="pre">lata_code</span></code>、<code class="docutils literal"><span class="pre">name</span></code> 和 <code class="docutils literal"><span class="pre">type</span></code> 欄位的屬性值放到元件內。檢查一下 <span class="guilabel">輸出預覽</span> 以確認表達式是否正確。</p>
 </li>
@@ -338,7 +339,7 @@ END
 <p class="first admonition-title">註解</p>
 <p class="last">shapefile 格式可在一個欄位內放上至多 254 個字元。如果你要在欄位中放入更長的字串，請使用其他格式儲存。</p>
 </div>
-<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
+<img alt="../_images/1538.png" class="align-center" src="../_images/1538.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">回到 <span class="guilabel">屬性表格</span>，新的欄位就會出現在表格最末端。檢查表達式有正確運作後，再次按下 <span class="guilabel">切換編輯模式</span> 以儲存剛才所做的修改。</p>
 </li>
@@ -348,12 +349,12 @@ END
 <li><p class="first">現在請再次選擇 <span class="menuselection">網路（Web） ‣ qgis2web ‣ Create web map</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1730.png" class="align-center" src="../_images/1730.png" />
+<img alt="../_images/1731.png" class="align-center" src="../_images/1731.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">選擇和之前相同的選項。</p>
 </li>
 </ol>
-<img alt="../_images/1830.png" class="align-center" src="../_images/1830.png" />
+<img alt="../_images/1831.png" class="align-center" src="../_images/1831.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">當輸出完成後，前往輸出檔案的資料夾，其中會有一個子資料夾，名字包含了現在的時間戳記。使用瀏覽器打開此資料中的 <code class="docutils literal"><span class="pre">Index.html</span></code>，然後再點選任一圖徵查看跳出視窗。現在它提供的資訊看起來清楚多了。</p>
 </li>
@@ -381,7 +382,7 @@ END
 <li><p class="first">在 <span class="guilabel">儲存向量圖層為...</span> 視窗中，把輸出檔命名為 <code class="docutils literal"><span class="pre">major_airports.shp</span></code>，然後勾選 <span class="guilabel">加入儲存檔案至地圖中`（譯註：如果有 :guilabel:`儲存僅選取的圖徵</span>，也應一併勾選），最後按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/2316.png" class="align-center" src="../_images/2316.png" />
+<img alt="../_images/2317.png" class="align-center" src="../_images/2317.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first">當 <code class="docutils literal"><span class="pre">major_airports</span></code> 已載入到 QGIS 中後，右鍵點選圖層然後選擇 <span class="guilabel">開啟屬性表格</span>。</p>
 </li>
@@ -460,7 +461,7 @@ width="100%" height="600px"></iframe>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Dec 31, 2019.<br/>
+      最後更新日期是 Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">空間連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -246,7 +247,7 @@
 <li><p class="first">前往 <a class="reference external" href="http://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-density/data-download">Population Density Grid, v3 download page.</a>，在 <span class="guilabel">Data Attributes</span> 中選擇 <span class="guilabel">.ascii format</span>、<span class="guilabel">1° resolution</span> 與 <span class="guilabel">1990</span> 年，然後按 <span class="guilabel">Download</span>。接下來你可能要建立一個免費帳號然後登入，或是直接使用底下的 <span class="guilabel">Guest Download</span> 來下載。接者以同樣的方式取得 <span class="guilabel">2000</span> 年的資料。</p>
 </li>
 </ol>
-<img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
+<img alt="../_images/1187.png" class="align-center" src="../_images/1187.png" />
 <p>完成後會有 2 個 zip 檔。</p>
 <p>為了方便起見，你也可以直接用下面的連結下載：</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/gl_gpwv3_pdens_90_ascii_one.zip">gl_gpwv3_pdens_90_ascii_one.zip</a></p>
@@ -264,52 +265,52 @@
 <li><p class="first">移到下載檔案的資料夾，按住 <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> 鍵後點選兩個 zip 檔，這樣就可以一次讀取它們。（譯註：如果出現錯誤訊息的話，先解壓縮到同一個資料夾中，然後再參考下一步，選擇目標檔案即可。）</p>
 </li>
 </ol>
-<img alt="../_images/379.png" class="align-center" src="../_images/379.png" />
+<img alt="../_images/380.png" class="align-center" src="../_images/380.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">每個 zip 檔都有 2 個網格檔。有 <code class="docutils literal"><span class="pre">a</span></code> 的那個檔表示人口數量有經過調整以符合聯合國的統計數值。本教學使用調整過後的資料。選擇 <code class="docutils literal"><span class="pre">glds00ag60.asc</span></code> 圖層，然後按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/457.png" class="align-center" src="../_images/457.png" />
+<img alt="../_images/458.png" class="align-center" src="../_images/458.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">這個圖層並沒有定義 CRS，因此我們得手動選擇 <cite>EPSG:4326</cite> 作為這個以經緯度為單位的圖層之座標參考系統。</p>
 </li>
 </ol>
-<img alt="../_images/558.png" class="align-center" src="../_images/558.png" />
+<img alt="../_images/559.png" class="align-center" src="../_images/559.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">由於我們選擇了兩個 zip 檔，因此同樣的步驟要做兩次。重複以上步驟，這次選擇 <code class="docutils literal"><span class="pre">glds90ag60.asc</span></code> 加到專案中。</p>
 </li>
 </ol>
-<img alt="../_images/655.png" class="align-center" src="../_images/655.png" />
+<img alt="../_images/656.png" class="align-center" src="../_images/656.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">再一次選 <cite>EPSG:4326</cite> 作為 CRS。</p>
 </li>
 </ol>
-<img alt="../_images/754.png" class="align-center" src="../_images/754.png" />
+<img alt="../_images/755.png" class="align-center" src="../_images/755.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">現在兩個圖層都讀到 QGIS 內了。網格式影像會使用灰階來呈現，顏色越深表示像素值越低，而顏色越淺表示像素值越高。</p>
 </li>
 </ol>
-<img alt="../_images/852.png" class="align-center" src="../_images/852.png" />
+<img alt="../_images/853.png" class="align-center" src="../_images/853.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">影像中的每個像素都有自身值，在這兩個檔案中，這個值就是人口密度。選擇 <span class="guilabel">識別圖徵</span> 後在影像的任一處點一下，就可以看到這個像素的人口密度值。</p>
 </li>
 </ol>
-<img alt="../_images/951.png" class="align-center" src="../_images/951.png" />
+<img alt="../_images/952.png" class="align-center" src="../_images/952.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">為了適當的呈現人口密度分佈的圖樣，得調整一下樣式才行。在圖層名字上按右鍵選擇 <span class="guilabel">屬性</span>，或是直接在圖層名字上按兩下，都可以進到圖層屬性的視窗。</p>
 </li>
 </ol>
-<img alt="../_images/1050.png" class="align-center" src="../_images/1050.png" />
+<img alt="../_images/1051.png" class="align-center" src="../_images/1051.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">在 <span class="guilabel">樣式</span> 分頁下，把 <span class="guilabel">繪圖類型</span> 換成 <span class="guilabel">單波段偽彩色</span>，然後按下位於 <span class="guilabel">產生新的色彩對映表</span> 中的 <span class="guilabel">分類</span> 鈕。會有 5 個新顏色和值跑出來，最後按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1185.png" class="align-center" src="../_images/1185.png" />
+<img alt="../_images/1188.png" class="align-center" src="../_images/1188.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">回到 QGIS 主畫面，就可以看到影像使用類似溫度分佈圖的概念著色。順便也對另一個影像執行相同步驟。</p>
 </li>
 </ol>
-<img alt="../_images/1250.png" class="align-center" src="../_images/1250.png" />
+<img alt="../_images/1251.png" class="align-center" src="../_images/1251.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">我們的分析目標是找出在 1990 年到 2000 年間有劇烈的人口變動的地方，方法則是計算這兩個影像的每個像素數值的差異。選擇 <span class="menuselection">影像 ‣ 影像計算</span>，</p>
 </li>
@@ -319,12 +320,12 @@
 <li><p class="first">在 <span class="guilabel">影像波段</span> 的選擇框中，可以點兩下以選擇某個圖層。這裡的波段命名方式是圖層名稱加上「&#64;」再加上波段編號，由於我們的影像都只有 1 個波段，所有每個影像都只會有「編號 1」。在影像計算的功能中，可以針對像素進行基本的數學運算，為了找出人口密度差異，必須要在 2000 年的資料中減掉 1990 年的資料，所以計算式要輸入 <code class="docutils literal"><span class="pre">glds00ag60&#64;1</span> <span class="pre">-</span> <span class="pre">glds90ag60&#64;1</span></code>。把輸出檔命名為 <code class="docutils literal"><span class="pre">pop_density_change_2000_1990.tif</span></code>，勾選 <span class="guilabel">將結果加入專案</span> ，最後按 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1447.png" class="align-center" src="../_images/1447.png" />
+<img alt="../_images/1448.png" class="align-center" src="../_images/1448.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">操作完成後，新圖層會被加入到 QGIS 中。</p>
 </li>
 </ol>
-<img alt="../_images/1545.png" class="align-center" src="../_images/1545.png" />
+<img alt="../_images/1546.png" class="align-center" src="../_images/1546.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">雖然灰階看起來還不錯，但我們還是可以改一個更能表達資訊的樣式。在 <code class="docutils literal"><span class="pre">pop_density_change_2000_1990</span></code> 圖層上按右鍵後進入 <span class="guilabel">屬性</span>，</p>
 </li>
@@ -334,12 +335,12 @@
 <li><p class="first">這次我們要把在同一個範圍之內的像素值設成相同顏色。在設定之前，先到 <span class="guilabel">詮釋資料</span> 分頁內看一下這個影像的屬性，尤其是最大值和最小值。</p>
 </li>
 </ol>
-<img alt="../_images/1738.png" class="align-center" src="../_images/1738.png" />
+<img alt="../_images/1739.png" class="align-center" src="../_images/1739.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">切到 <span class="guilabel">樣式</span> 分頁下，把 <span class="guilabel">繪圖類型</span> 換成 <span class="guilabel">單波段偽彩色</span>，再把  <span class="guilabel">色彩內插</span> 調成  <span class="guilabel">離散</span>。之後按下  <span class="guilabel">手動新增值</span> 4 次以建立 4 個類別，點一下類別的數值就可以進行更改。在這裡，色彩對應的規則是「像素值比這個類別的值低的所有像素，都會被設成這個類別的顏色」。因為我們的影像的像素最小值比 -2000 還高一點，所以我們把第一個類別的值設成 -2000，這樣這個顏色代表的就是「沒有資料值」（No Data Values）。照如下的方式把所有類別都設定完成，然後按下  <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/1838.png" class="align-center" src="../_images/1838.png" />
+<img alt="../_images/1839.png" class="align-center" src="../_images/1839.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">現在人口變多或變少的地方就清楚的顯示出來了。接下來按下  <span class="guilabel">放大</span> 鈕在歐洲附近拉一個矩形，縮進去看看細節。</p>
 </li>
@@ -367,7 +368,7 @@
 <li><p class="first">新圖層產生後，以右鍵進入 <span class="guilabel">屬性</span> ，在 <span class="guilabel">透明度</span> 分頁中的 <span class="guilabel">附加無資料值</span> 的地方打上 <strong>0</strong> ，這樣的話值為 0 的像素也會被設成透明。最後按下 <span class="guilabel">確定</span>。</p>
 </li>
 </ol>
-<img alt="../_images/2322.png" class="align-center" src="../_images/2322.png" />
+<img alt="../_images/2323.png" class="align-center" src="../_images/2323.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first">最後，就只剩下所有的負人口增長區是灰黑色的了。</p>
 </li>
@@ -402,7 +403,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Dec 31, 2019.<br/>
+      最後更新日期是 Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

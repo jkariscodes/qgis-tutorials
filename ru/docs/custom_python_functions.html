@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -251,7 +252,7 @@
 <li><p class="first">Откройте QGIS и перейдите в Меню - &gt; Слои -&gt; Вектор - &gt; Добавить векторный слой</p>
 </li>
 </ol>
-<img alt="../_images/1148.png" class="align-center" src="../_images/1148.png" />
+<img alt="../_images/1151.png" class="align-center" src="../_images/1151.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Перейдите к загруженному файлу <code class="docutils literal"><span class="pre">Shapefiles.zip</span></code> и выберите его. Нажмите <span class="guilabel">Открыть</span>.</p>
 </li>
@@ -261,12 +262,12 @@
 <li><p class="first">Перейдите</p>
 </li>
 </ol>
-<img alt="../_images/356.png" class="align-center" src="../_images/356.png" />
+<img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
 <ol class="arabic simple" start="4">
 <li>Switch to the <span class="guilabel">Function Editor</span> tab. Here you can write any
 PyQGIS code that will be executed by the expression engine.</li>
 </ol>
-<img alt="../_images/438.png" class="align-center" src="../_images/438.png" />
+<img alt="../_images/439.png" class="align-center" src="../_images/439.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Мы определим пользовательскую функцию с именем &#8220;GetUtmZone&#8221;, которая будет рассчитывать номер UTM зоны для каждого объекта.  Пользовательские функции в QGIS работают на уровне объектов. Мы используем центра геометрического объекта и вычислим UTM зону по широте и долготе центра объекта. Мы так же добавим &#8216;N&#8217; и &#8216;S&#8217; обозначения к зоне, для  того что бы определить к какому из полушарий - северному или южному относится зона. Введите следующий код в редактор, именем файла назначьте <a href="#id1"><span class="problematic" id="id2">``</span></a>utm_zones.py` и нажмите  <span class="guilabel">Сохранить файл</span>.</p>
 </li>
@@ -294,12 +295,12 @@ PyQGIS code that will be executed by the expression engine.</li>
     <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">zone_number</span><span class="p">),</span> <span class="n">zone_letter</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/538.png" class="align-center" src="../_images/538.png" />
+<img alt="../_images/539.png" class="align-center" src="../_images/539.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Нажмите <span class="guilabel">Запустить скрипт</span>.  Это запустит python скрипт и зарегистрирует функцию &#8221; GetUtmZone&#8221; с помощью движка выражений. Обратите внимание что это необходимо делать только один раз. С того момента как функция зарегистрирована, она будет всегда доступна в движке выражений.</p>
 </li>
 </ol>
-<img alt="../_images/636.png" class="align-center" src="../_images/636.png" />
+<img alt="../_images/637.png" class="align-center" src="../_images/637.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Перейдите на вкладку  <span class="guilabel">Выражения</span> в окне <span class="guilabel">выбрать объекты удовлетворяющие условию</span> dialog.</p>
 </li>
@@ -307,13 +308,13 @@ PyQGIS code that will be executed by the expression engine.</li>
 <div class="highlight-none"><div class="highlight"><pre><span></span>$GetUtmZone = &#39;40N&#39;
 </pre></div>
 </div>
-<img alt="../_images/736.png" class="align-center" src="../_images/736.png" />
+<img alt="../_images/737.png" class="align-center" src="../_images/737.png" />
 <ol class="arabic simple" start="8">
 <li>Back in the main QGIS window, you will see many points highlighted in
 yellow. These are the points falling in the UTM Zone we specified in the
 expression.</li>
 </ol>
-<img alt="../_images/835.png" class="align-center" src="../_images/835.png" />
+<img alt="../_images/836.png" class="align-center" src="../_images/836.png" />
 <ol class="arabic simple" start="9">
 <li>You saw how we defined and used a custom function to select features by
 expression. We will now use the same function in another context. One of the
@@ -321,7 +322,7 @@ hidden gems in QGIS is the <code class="docutils literal"><span class="pre">Map<
 text when you hover over a feature. Right-click the
 <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> layer and select <span class="guilabel">Properties</span>.</li>
 </ol>
-<img alt="../_images/936.png" class="align-center" src="../_images/936.png" />
+<img alt="../_images/937.png" class="align-center" src="../_images/937.png" />
 <ol class="arabic simple" start="10">
 <li>Switch to the <span class="guilabel">Display</span> tab and select <span class="guilabel">HTML</span>. Here you
 can enter any text that will be displayed when you hover over the features
@@ -329,7 +330,7 @@ of the layer. Even better, you can use layer field values and expressions
 to define a much more useful message. Click on the <span class="guilabel">Insert
 expression...</span> button.</li>
 </ol>
-<img alt="../_images/1034.png" class="align-center" src="../_images/1034.png" />
+<img alt="../_images/1035.png" class="align-center" src="../_images/1035.png" />
 <ol class="arabic simple" start="11">
 <li>You will see the familiar expression editor again. We will use the
 <code class="docutils literal"><span class="pre">concat</span></code> function to join the value of the field <code class="docutils literal"><span class="pre">name</span></code> and the result
@@ -339,12 +340,12 @@ click <span class="guilabel">OK</span>.</li>
 <div class="highlight-none"><div class="highlight"><pre><span></span>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
 </pre></div>
 </div>
-<img alt="../_images/1149.png" class="align-center" src="../_images/1149.png" />
+<img alt="../_images/1152.png" class="align-center" src="../_images/1152.png" />
 <ol class="arabic simple" start="12">
 <li>You will see the expression entered as the value of the <span class="guilabel">Display</span>
 text. Click <span class="guilabel">OK</span>.</li>
 </ol>
-<img alt="../_images/1235.png" class="align-center" src="../_images/1235.png" />
+<img alt="../_images/1236.png" class="align-center" src="../_images/1236.png" />
 <ol class="arabic simple" start="13">
 <li>Before we proceed, let us de-select the features that were selected in the
 previous step. Go to <span class="menuselection">View ‣ Select ‣ Deselect Features
@@ -355,13 +356,13 @@ from All Layers</span>.</li>
 <li>Activate the <code class="docutils literal"><span class="pre">Map</span> <span class="pre">Tips</span></code> tool by going to <span class="menuselection">View ‣ Map
 Tips</span>.</li>
 </ol>
-<img alt="../_images/1433.png" class="align-center" src="../_images/1433.png" />
+<img alt="../_images/1434.png" class="align-center" src="../_images/1434.png" />
 <ol class="arabic simple" start="15">
 <li>Zoom into any area of the map and put your mouse cursor over any feature.
 You will see the name of the city and corresponding UTM zone displayed as
 the map tip.</li>
 </ol>
-<img alt="../_images/1532.png" class="align-center" src="../_images/1532.png" />
+<img alt="../_images/1533.png" class="align-center" src="../_images/1533.png" />
 </div>
 </div>
 
@@ -391,7 +392,7 @@ the map tip.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Обновлено: Dec 31, 2019.<br/>
+      Обновлено: Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

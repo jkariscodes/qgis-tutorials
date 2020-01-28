@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -266,7 +267,7 @@
 <li><p class="first">Перейдите в <span class="menuselection">Слой ‣ Добавить векторный слой</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1138.png" class="align-center" src="../_images/1138.png" />
+<img alt="../_images/1141.png" class="align-center" src="../_images/1141.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">Найдите распакованный ранее файл <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries.shp</span></code> и нажмите <span class="guilabel">Открыть</span>.</p>
 </li>
@@ -276,12 +277,12 @@
 <li><p class="first">Так как мы хотим обрезать глобальные слои только в Африке, сначала нам нужно сделать слой, содержащий полигон с континентом.  Слой со странами имеет атрибут, называющийся <strong>CONTINENT</strong>. Мы можем использовать инструмент <em>Роспуск</em>, чтобы слить все страны одного континента в один полигон.</p>
 </li>
 </ol>
-<img alt="../_images/349.png" class="align-center" src="../_images/349.png" />
+<img alt="../_images/350.png" class="align-center" src="../_images/350.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Откройте <span class="guilabel">Роспуск</span> из меню <span class="menuselection">Вектор ‣ Инструменты геообработки ‣ Роспуск</span>.</p>
 </li>
 </ol>
-<img alt="../_images/432.png" class="align-center" src="../_images/432.png" />
+<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Выберите <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> как <span class="guilabel">Входной векторный слой</span>. <span class="guilabel">Поле роспуска</span> должно быть <code class="docutils literal"><span class="pre">CONTINENT</span></code>. Назовите выходной файл <code class="docutils literal"><span class="pre">continents.shp</span></code> и отметьте галочку <span class="guilabel">Добавить результат на холст</span>.</p>
 </li>
@@ -290,42 +291,42 @@
 <p class="first admonition-title">Примечание</p>
 <p class="last">Если Вы хотите слить <strong>ВСЕ</strong> полигоны независимо от их атрибутов, выберите <span class="guilabel">&#8211; Роспуск всего &#8211;</span> как <span class="guilabel">Поле роспуска</span>. Это скомбинирует все полигоны в один слой и предоставит вам один цельный полигон.</p>
 </div>
-<img alt="../_images/532.png" class="align-center" src="../_images/532.png" />
+<img alt="../_images/533.png" class="align-center" src="../_images/533.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Процесс роспуска может занять некоторое время. По окончанию Вы увидите новый слой <code class="docutils literal"><span class="pre">continent</span></code>, добавленный в QGIS. Используйте инструмент <span class="guilabel">Выбор одного элемента</span> с панели инструментов и нажмите на Африку, чтобы выбрать полигон континента.</p>
 </li>
 </ol>
-<img alt="../_images/631.png" class="align-center" src="../_images/631.png" />
+<img alt="../_images/632.png" class="align-center" src="../_images/632.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">Щёлкните правой кнопкой мыши по слою <code class="docutils literal"><span class="pre">continents</span></code> и выберите <span class="guilabel">Сохранить выделение как...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/731.png" class="align-center" src="../_images/731.png" />
+<img alt="../_images/732.png" class="align-center" src="../_images/732.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Назовите выходной файл <code class="docutils literal"><span class="pre">africa.shp</span></code>. Так как нам важна лишь форма, а не атрибуты, можете поставить галочку у <span class="guilabel">Пропустить создание атрибутов</span>. Убедитесь, что галочка <span class="guilabel">Добавить сохранённый файл на карту</span> отмечена и нажмите <span class="guilabel">ОК</span>.</p>
 </li>
 </ol>
-<img alt="../_images/830.png" class="align-center" src="../_images/830.png" />
+<img alt="../_images/831.png" class="align-center" src="../_images/831.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Теперь у Вас в QGIS появится слой <code class="docutils literal"><span class="pre">africa</span></code>, содержащий полигон всего континента. Настало время обрезки. Откройте меню <span class="menuselection">Обработка ‣ Инструменты</span>.</p>
 </li>
 </ol>
-<img alt="../_images/931.png" class="align-center" src="../_images/931.png" />
+<img alt="../_images/932.png" class="align-center" src="../_images/932.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Среди доступных алгоритмов найдите <span class="guilabel">Обрезка</span> из меню <span class="menuselection">Геоалгоритмы QGIS ‣ Инструменты векторного наложения ‣ Обрезка</span>. Вы также можете использовать <span class="guilabel">Поиск</span>, чтобы легче найти алгоритм.</p>
 </li>
 </ol>
-<img alt="../_images/1029.png" class="align-center" src="../_images/1029.png" />
+<img alt="../_images/1030.png" class="align-center" src="../_images/1030.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Щёлкните правой кнопкой мыши на алгоритм <span class="guilabel">Обрезка</span> и выберите <span class="guilabel">Выполнить как пакетный файл</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1139.png" class="align-center" src="../_images/1139.png" />
+<img alt="../_images/1142.png" class="align-center" src="../_images/1142.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">В окне <span class="guilabel">Обработка пакетного файла</span>, на первой вкладке <span class="guilabel">Параметры</span> мы укажем входные данные. Нажмите на <span class="guilabel">...</span> рядом с первой строкой в столбце <span class="guilabel">Входной слой</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1231.png" class="align-center" src="../_images/1231.png" />
+<img alt="../_images/1232.png" class="align-center" src="../_images/1232.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Проследуйте в папку, куда Вы распаковали все глобальные слои. Зажав кнопку <code class="kbd docutils literal"><span class="pre">Ctrl</span></code>, выберите все слои, которые хотите обрезать. Вы также можете использовать <code class="kbd docutils literal"><span class="pre">Shift</span></code> или <code class="kbd docutils literal"><span class="pre">Ctrl+A</span></code>, чтобы сделать множественное выделение. Нажмите <span class="guilabel">Открыть</span>.</p>
 </li>
@@ -335,12 +336,12 @@
 <li><p class="first">Вы заметите, что столбцы <span class="guilabel">Входной слой</span> будут автоматически заполнены выбранными слоями. Вы можете использовать кнопку <span class="guilabel">Добавить строку</span>, чтобы включить больше файлов. Нажмите на <span class="guilabel">...</span> возле первой строки и добавьте <code class="docutils literal"><span class="pre">africa.shp</span></code> как <span class="guilabel">Слой для обрезки</span>. Так как слой для обрезки везде одинаковый, Вы можете просто дважды щёлкнуть название столбца <span class="guilabel">Слой для обрезки</span>, и он будет скопирован во все строки. Теперь нам нужно указать имена выходных файлов. Нажмите на <span class="guilabel">...</span> рядом с первой строкой в столбце <span class="guilabel">Результат</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1429.png" class="align-center" src="../_images/1429.png" />
+<img alt="../_images/1430.png" class="align-center" src="../_images/1430.png" />
 <ol class="arabic simple" start="15">
 <li>Browse the the directory where you want your output layers. Type the
 filename as <code class="docutils literal"><span class="pre">clipped_</span></code> and click <span class="guilabel">Save</span>.</li>
 </ol>
-<img alt="../_images/1528.png" class="align-center" src="../_images/1528.png" />
+<img alt="../_images/1529.png" class="align-center" src="../_images/1529.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">У Вас откроется новое окно <span class="guilabel">Настройки автозаполнения</span>. Выберите <span class="guilabel">Заполнить значениями параметра</span> как <span class="guilabel">Режим автозаполнения</span> и <span class="guilabel">Используемый параметр</span> как <span class="guilabel">Входной слой</span>. Эта настройка добавит имя входного файла в выходной файл вместе с заданным ранее <code class="docutils literal"><span class="pre">output_</span></code>. Это важно, чтобы выходные файлы имели уникальные имена и не переписывали друг друга.</p>
 </li>
@@ -350,12 +351,12 @@ filename as <code class="docutils literal"><span class="pre">clipped_</span></co
 <li><p class="first">Теперь мы готовы выполнить пакетный файл. Нажмите <span class="guilabel">Выполнить</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1723.png" class="align-center" src="../_images/1723.png" />
+<img alt="../_images/1724.png" class="align-center" src="../_images/1724.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Алгоритм обрезки будет выполнен для каждого из входных файлов и создаст указанный выходной файл для каждого. Когда процесс будет завершён, Вы увидите новые слои в QGIS. В них все глобальные слои будут правильно обрезаны так, как Вы указали.</p>
 </li>
 </ol>
-<img alt="../_images/1823.png" class="align-center" src="../_images/1823.png" />
+<img alt="../_images/1824.png" class="align-center" src="../_images/1824.png" />
 </div>
 </div>
 
@@ -385,7 +386,7 @@ filename as <code class="docutils literal"><span class="pre">clipped_</span></co
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Обновлено: Dec 31, 2019.<br/>
+      Обновлено: Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

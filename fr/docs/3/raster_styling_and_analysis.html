@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -259,7 +260,7 @@ links below:</p>
 <li>Open QGIS and locate the downloaded files in the <span class="guilabel">Browser</span> panel. Expand the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</span></code> file and drag the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min.tif</span></code> file to the canvas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1108.png" class="align-center" src="../../_images/1108.png" />
+<div><img alt="../../_images/1128.png" class="align-center" src="../../_images/1128.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li>A new layer <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code> will be added to the <span class="guilabel">Layers</span> panel. Similarly, locate the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</span></code> file and drag the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min.tif</span></code> file to the canvas.</li>
@@ -271,43 +272,43 @@ links below:</p>
 <li>Let&#8217;s explore these layers. Click the <span class="guilabel">Identify</span> button on the <span class="guilabel">Attributes Toolbar</span>. Once the tool is selected, click on any point on the canvas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/340.png" class="align-center" src="../../_images/340.png" />
+<div><img alt="../../_images/342.png" class="align-center" src="../../_images/342.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li>The value associated with that pixel will be displayed in a new <span class="guilabel">Identify Results</span> panel. In the <span class="guilabel">Identify Results</span> panel, change the <span class="guilabel">Mode</span> to <code class="docutils literal"><span class="pre">Top</span> <span class="pre">down</span></code>. This will display pixel values of all rasters instead of just the topmost layer. Compare the values from both the layers. As the resolution of the rasters is approximately 5km x 5km, the pixel values represent the total population in the area (25 sq. km) represented by the pixel.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/425.png" class="align-center" src="../../_images/425.png" />
+<div><img alt="../../_images/426.png" class="align-center" src="../../_images/426.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li>Close the <span class="guilabel">Identify Results</span> panel. Let&#8217;s create a better visualization of the layers. Click the <span class="guilabel">Open the layer Styling panel</span> button in the <span class="guilabel">Layers</span> panel.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/525.png" class="align-center" src="../../_images/525.png" />
+<div><img alt="../../_images/526.png" class="align-center" src="../../_images/526.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li>In the <span class="guilabel">Layer Styling</span> panel, click the <span class="guilabel">Render type</span> dropdown and select <code class="docutils literal"><span class="pre">Singleband</span> <span class="pre">pseudocolor</span></code> renderer.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/624.png" class="align-center" src="../../_images/624.png" />
+<div><img alt="../../_images/625.png" class="align-center" src="../../_images/625.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li>This renderer will style the layer using a color ramp. The default color ramp is white-red where the minimum value will be assigned the white color and the maximum value in the layer will be assigned the red color. The intermediate values will be assigned a shade of red linear interpolation. Expand the <span class="guilabel">Min / Max Value Settings</span> and choose <code class="docutils literal"><span class="pre">Cumulative</span> <span class="pre">count</span> <span class="pre">cut</span></code> option. You will see that the map visualization is much better now. The  The standard data range is set from 2% to 98% of the data values, meaning that the outliers will not be used to set the minimum and maximum values, resulting in a much more representative visualization.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/724.png" class="align-center" src="../../_images/724.png" />
+<div><img alt="../../_images/725.png" class="align-center" src="../../_images/725.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li>Close the <span class="guilabel">Layer Styling</span> panel. We can apply the similar styling to the other layer as well. But there is an easier way to transfer the styles from one layer to the other. Right-click the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min</span></code> layer and select <span class="menuselection">Styles ‣ Copy Style</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/823.png" class="align-center" src="../../_images/823.png" />
+<div><img alt="../../_images/824.png" class="align-center" src="../../_images/824.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li>Now right-click the un-styled <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code> layer and select <span class="menuselection">Styles ‣ Paste Style</span>.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/924.png" class="align-center" src="../../_images/924.png" />
+<div><img alt="../../_images/925.png" class="align-center" src="../../_images/925.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li>The same styling parameters will be applied to the other layer. This feature is particularly useful when you want to compare different layers using the same categorization. As you toggle the visibility of the top layer, you can see the changes in population visually.</li>
@@ -328,7 +329,7 @@ links below:</p>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&quot;gpw-v4-population-count-rev11_2010_2pt5_min@1&quot; - &quot;gpw-v4-population-count-rev11_2000_2pt5_min@1&quot;
 </pre></div>
 </div>
-<img alt="../../_images/1224.png" class="align-center" src="../../_images/1224.png" />
+<img alt="../../_images/1225.png" class="align-center" src="../../_images/1225.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li>Enter <code class="docutils literal"><span class="pre">population_change_2010_2000.tif</span></code> as the <span class="guilabel">Output file</span>. Click <span class="guilabel">OK</span> to start the computation.</li>
@@ -340,13 +341,13 @@ links below:</p>
 <li>Once completed a new layer <code class="docutils literal"><span class="pre">population_change_2010_2000</span></code> will be added to the <span class="guilabel">Layers</span> panel. Let&#8217;s change the styling so that the negative and positive population changes are better visualized.  Click the <span class="guilabel">Open the layer Styling panel</span> button in the <span class="guilabel">Layers</span> panel.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1422.png" class="align-center" src="../../_images/1422.png" />
+<div><img alt="../../_images/1423.png" class="align-center" src="../../_images/1423.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li>One option is to use the similar styling technique as earlier and choose a diverging color ramp. Click the <span class="guilabel">Color ramp</span> drop-down and select <code class="docutils literal"><span class="pre">Spectral</span></code> ramp. Click the dro-down again and choose <code class="docutils literal"><span class="pre">Invert</span> <span class="pre">Color</span> <span class="pre">Ramp</span></code> to assign blues to low values and reds to high values.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1522.png" class="align-center" src="../../_images/1522.png" />
+<div><img alt="../../_images/1523.png" class="align-center" src="../../_images/1523.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li>This is a good visualization, but not easy to interpret. Let&#8217;s create a better map with 4 discrete categories, <code class="docutils literal"><span class="pre">Decline</span></code>, <code class="docutils literal"><span class="pre">Neutral</span></code>, <code class="docutils literal"><span class="pre">Growth</span></code> and <code class="docutils literal"><span class="pre">High</span> <span class="pre">Growth</span></code>. Scroll down to the tables with classes. Hold the <code class="kbd docutils literal"><span class="pre">Shift</span></code> key and select all the rows. Click the <span class="guilabel">Remove selected row(s)</span> button.</li>
@@ -358,13 +359,13 @@ links below:</p>
 <li>Change the <span class="guilabel">Interpolation</span> mode to <code class="docutils literal"><span class="pre">Discrete</span></code>. We will now create a color map manually. Click the <span class="guilabel">Add values manually</span> button. Enter <code class="docutils literal"><span class="pre">-100</span></code> as the <span class="guilabel">Value</span> and <code class="docutils literal"><span class="pre">Decline</span></code> as the <span class="guilabel">Label</span>. Assign blue color to this category. The way color map works is that all values lower than the value entered will be given the color of that entry. You will notice the canvas will show only those areas with negative population change.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1720.png" class="align-center" src="../../_images/1720.png" />
+<div><img alt="../../_images/1721.png" class="align-center" src="../../_images/1721.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li>Complete the color-map with suitable values. I chose <code class="docutils literal"><span class="pre">100</span></code>, <code class="docutils literal"><span class="pre">1000</span></code> and <code class="docutils literal"><span class="pre">100000</span></code> as the upper-bounds for the <code class="docutils literal"><span class="pre">Neutral</span></code>, <code class="docutils literal"><span class="pre">Growth</span></code> and <code class="docutils literal"><span class="pre">High</span> <span class="pre">Growth</span></code> categories respectively.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1819.png" class="align-center" src="../../_images/1819.png" />
+<div><img alt="../../_images/1820.png" class="align-center" src="../../_images/1820.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li>Once you are satisfied with the visualization, close the <span class="guilabel">Layer Styling</span> panel. You now have a global thematic map of population change.</li>
@@ -401,7 +402,7 @@ links below:</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Mis à jour le Dec 31, 2019.<br/>
+      Mis à jour le Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

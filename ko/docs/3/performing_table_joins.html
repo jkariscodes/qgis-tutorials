@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">공간 결합 수행 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">공간 조회 실행(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">최근린 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">점 또는 다각형을 이용한 래스터 데이터 표본 추출 작업(QGIS3)</a></li>
@@ -265,7 +266,7 @@
 <li>Locate the <code class="docutils literal"><span class="pre">tl_2018_06_tract.zip</span></code> file in the QGIS Browser and expand it. Select the <code class="docutils literal"><span class="pre">tl_2018_06_tract.shp</span></code> file and drag it to the canvas.</li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/1104.png" class="align-center" src="../../_images/1104.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p class="first">레이어 패널에 <code class="docutils literal"><span class="pre">tl_2018_06_tract</span></code> 레이어가 추가된 것을 볼 수 있습니다. 이 레이어에는 캘리포니아의 인구 조사 구역 경계가 있습니다.  <a href="#id1"><span class="problematic" id="id2">``</span></a>tl_2018_06_tract` 레이어를 마우스 오른쪽 버튼으로 클릭하고 속성 테이블 열기를 선택하십시오.</p>
@@ -279,70 +280,70 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/334.png" class="align-center" src="../../_images/334.png" />
+<div><img alt="../../_images/335.png" class="align-center" src="../../_images/335.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p class="first">ACS_17_5YR_B01003.zip 파일의 압축을 풀고 텍스트 편집기에서 ACS_17_5YR_B01003_with_ann.csv 파일을여십시오. 전 단계에서 보았던 유일한 구분자와 같이 있는 트랙에 대한 정보가 파일의 각 행에 포함되어 있음을 알게됩니다. CSV에서 &#8216;GEO.id2&#8217;라는 필드에 주목하십시오. 더불어 &#8216;HD01_VD01&#8217;열도 각 센서스 트랙의 인구값을 갖고 있음을 주지해야 합니다.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/419.png" class="align-center" src="../../_images/419.png" />
+<div><img alt="../../_images/420.png" class="align-center" src="../../_images/420.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p class="first">이 CSV 파일을 가져 오기 전에 약간 수정해야합니다. QGIS CSV 임포터는 파일의 첫 번째 행에 열 제목을 포함하고 나머지 모든 행에는이 열에 대한 데이터가 포함될 것을 원합니다. 이 파일에는 열 레이블이있는 추가 행 2가 포함되어 있습니다. 해당 행을 삭제하고 파일을 저장하십시오.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/519.png" class="align-center" src="../../_images/519.png" />
+<div><img alt="../../_images/520.png" class="align-center" src="../../_images/520.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p class="first">이제 QGIS에 CSV파일을 불러들일 준비가 되었습니다. 메뉴 레이어 &#8211;&gt; 구분자로 분리된 텍스트 레이어를 추가 :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer &#8211;&gt; Add Delimited Text Layer`로 갑니다.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/619.png" class="align-center" src="../../_images/619.png" />
+<div><img alt="../../_images/620.png" class="align-center" src="../../_images/620.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p class="first">데이터 소스 관리자 창에서 &#8216;...&#8217; 단추를 클릭하고 CSV 파일을 찾아서 선택하십시오. 파일 형식을 CSV (쉼표로 구분 된 값)로 선택했는지 확인하십시오. 이것을 테이블로 가져오기 때문에, &#8216;지오메트리 없음 (속성 테이블만)&#8217; 옵션을 사용하여 파일에 지오메트리가 포함되지 않도록 지정해야합니다. 하단의 샘플 데이터 미리보기가 제대로 표시되는지 확인하고 추가를 클릭 한 다음 닫기를 클릭하십시오.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/718.png" class="align-center" src="../../_images/718.png" />
+<div><img alt="../../_images/719.png" class="align-center" src="../../_images/719.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p class="first">CSV는 이제 QGIS에 테이블로 가져오고 레이어 패널에서 ACS_17_5YR_B01003_with_ann으로 나타납니다. 이제 테이블 조인을 만들 준비가되었습니다. 처리 ‣ 톨박스 로 이동하십시오.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/818.png" class="align-center" src="../../_images/818.png" />
+<div><img alt="../../_images/819.png" class="align-center" src="../../_images/819.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p class="first">먼저 Processing Toolbox에서 기본 설정을 변경해야합니다. 옵션 버튼을 클릭하십시오.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/918.png" class="align-center" src="../../_images/918.png" />
+<div><img alt="../../_images/919.png" class="align-center" src="../../_images/919.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p class="first">처리 옵션 탭에서 Use filename as layer name를 선택하십시오. Processing Toolbox의 알고리즘을 사용할 때 이 옵션을 사용하면 출력 레이어 이름이 훨씬 직관적이고 유용합니다. 확인을 클릭하십시오.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1018.png" class="align-center" src="../../_images/1018.png" />
+<div><img alt="../../_images/1019.png" class="align-center" src="../../_images/1019.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p class="first">처리 도구 상자로 돌아가서 일반벡터 ‣ &#8216;필드값으로 속성결합&#8217; 알고리즘을 찾아서 두 번 클릭하여 엽니다.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1121.png" class="align-center" src="../../_images/1121.png" />
+<div><img alt="../../_images/1122.png" class="align-center" src="../../_images/1122.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p class="first">&#8216;필드값으로 속성결합&#8217; 대화상자에서 tl_2018_06_tract를 레이어로 입력, GEOID를 테이블 필드로 선택하십시오. ACS_17_5YR_B01003_with_ann을 입력 레이어 2로 선택하고 GEO.id2를 테이블 필드로 선택하십시오. 다른 옵션을 기본값으로두고 ‘...’ 버튼을 클릭하여 출력 파일 위치를 선택하고 GeoPackage에 저장을 선택하십시오.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1219.png" class="align-center" src="../../_images/1219.png" />
+<div><img alt="../../_images/1220.png" class="align-center" src="../../_images/1220.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p class="first">출력 GeoPackage를 이름을 join.gpkg로 지정하고 출력 레이어를 ,‘joined’ 이름으로 지정하십시오. 실행을 클릭하십시오.</p>
@@ -356,14 +357,14 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1417.png" class="align-center" src="../../_images/1417.png" />
+<div><img alt="../../_images/1418.png" class="align-center" src="../../_images/1418.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p class="first">새 레이어가 레이어 패널에 로드된 것을 볼 수 있습니다. 이제 CSV 파일의 필드는 센서스 레이어와 결합됩니다. 결합된 레이어를 마우스 오른쪽 버튼으로 클릭하고 속성 테이블 열기를 선택하십시오.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
+<div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p class="first">모집단 추정치가 포함 된 HD01_VD01 필드를 포함하여 새로운 필드 세트가 표시됩니다.</p>
@@ -377,14 +378,14 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
+<div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p class="first">레이어 스타일링 패널의 드롭 다운 메뉴에서 눈금을 선택합니다. 인구 맵을 만들려고 할 때 인구 추정값을 기반으로 각 인구 조사관 기능에 서로 다른 색상을 표시하려고 합니다. 열로 HD01_VD01을 선택하십시오. 색상 램프 드롭 다운에서 원하는 색상 램프를 선택하십시오. 모드에서 5 개의 클래스가 있는 Quantile (등수)를 선택하십시오. 분류 버튼을 클릭하면 인구 범위가 색상 별로 표시하고 지도 레이어 업데이트가 됩니다. 맵에 만족하면 레이어 스타일링 패널을 닫을 수 있습니다.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
+<div><img alt="../../_images/1816.png" class="align-center" src="../../_images/1816.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p class="first">모든 GIS 분석에서 결과를 검증하는 것은 좋은 습관입니다. 작업을 확인하기 위해 결과 레이어에서 간단한 쿼리를 실행하여 결과가 올바른지 확인할 수 있습니다. 데이터베이스 ‣ DB 관리자로 이동하십시오.</p>
@@ -453,7 +454,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      최종 업데이트: Dec 31, 2019<br/>
+      최종 업데이트: Jan 28, 2020<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

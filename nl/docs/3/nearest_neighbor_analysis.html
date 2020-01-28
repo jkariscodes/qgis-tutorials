@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Ruimtelijke samenvoegingen uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Ruimtelijke query&#8217;s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
@@ -260,7 +261,7 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/180.png" class="align-center" src="../../_images/180.png" />
+<div><img alt="../../_images/1100.png" class="align-center" src="../../_images/1100.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p class="first">U zult een nieuwe laag <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> zien geladen in het paneel <span class="guilabel">Lagen</span>. Deze laag bevat de punten die bevolkte plaatsen weergeven. Nu zullen we de laag met aardbevingen laden. Deze laag wordt aangeboden als een tekstbestand <em>Tab Seperated Values (TSV)</em>. Klik, om dit bestand te laden, op de knop <span class="guilabel">Databronnen beheren openen</span> op de <span class="guilabel">werkbalk Databronnen</span>. U kunt ook de sneltoets <code class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">L</span></code> gebruiken.</p>
@@ -274,42 +275,42 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/329.png" class="align-center" src="../../_images/329.png" />
+<div><img alt="../../_images/330.png" class="align-center" src="../../_images/330.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p class="first">Zoom eens rond en verken beide gegevenssets. Elke gele punt vertegenwoordigt de locatie van een significante aardbeving en elke rode punt vertegenwoordigt de locatie van een bevolkte plaats. Ons doel is een manier te vinden om uit te zoeken waar elk dichtstbijzijnde punt uit de laag met bevolkte plaatsen ligt voor elk van de punten in de laag met aardbevingen.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/415.png" class="align-center" src="../../_images/415.png" />
+<div><img alt="../../_images/416.png" class="align-center" src="../../_images/416.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p class="first">Voor we de analyse uitvoeren moeten we onze invoer opschonen. De laag <code class="docutils literal"><span class="pre">signif</span></code> bevat veel records zonder ene geldige geometrie. Deze records werden geïmporteerd met een geometrie <strong>NULL</strong>. Laten we dus eerst deze records verwijderen. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/515.png" class="align-center" src="../../_images/515.png" />
+<div><img alt="../../_images/516.png" class="align-center" src="../../_images/516.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p class="first">Zoek en lokaliseer het algoritme <span class="menuselection">Vector geometrie ‣ Geometrieën null verwijderen</span>. Dubbelklik erop om het te openen.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/615.png" class="align-center" src="../../_images/615.png" />
+<div><img alt="../../_images/616.png" class="align-center" src="../../_images/616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p class="first">Selecteer <code class="docutils literal"><span class="pre">signif</span></code> als de <span class="guilabel">Invoerlaag</span> en klik op <span class="guilabel">Uitvoeren</span>. Klik, als de verwerking is voltooid, op <span class="guilabel">Close</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/714.png" class="align-center" src="../../_images/714.png" />
+<div><img alt="../../_images/715.png" class="align-center" src="../../_images/715.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p class="first">U zult een nieuwe laag, genaamd <code class="docutils literal"><span class="pre">Geen</span> <span class="pre">geometrieën</span> <span class="pre">null</span></code> zien geladen in het paneel <span class="guilabel">Lagen</span>. We zullen deze laag gebruiken in onze verdere analyse in plaats van de originele laag <code class="docutils literal"><span class="pre">signif</span></code>. Deselecteer de laag <code class="docutils literal"><span class="pre">signif</span></code> in het paneel <span class="guilabel">Lagen</span> om die te verbergen. Nu is het tijd om de analyse Dichtstbijzijnde buur uit te voeren. Zoek en lokaliseer het gereedschap <span class="menuselection">Vectoranalyse ‣ Afstand tot dichtstbijzijnde naaf (lijn naar naaf)</span>. Dubbelklik erop om het te starten.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/814.png" class="align-center" src="../../_images/814.png" />
+<div><img alt="../../_images/815.png" class="align-center" src="../../_images/815.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Notitie</p>
@@ -320,28 +321,28 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/914.png" class="align-center" src="../../_images/914.png" />
+<div><img alt="../../_images/915.png" class="align-center" src="../../_images/915.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p class="first">Terug in het hoofdvenster van QGIS zult u een nieuwe laag zien, genaamd <code class="docutils literal"><span class="pre">Afstand</span> <span class="pre">tot</span> <span class="pre">hub</span></code>, geladen in het paneel <span class="guilabel">Lagen</span>. Deze laag heeft objecten lijn die elke punt van een aardbeving verbinden met de dichtst bij gelegen bevolkte plaats. Klik met rechts op de laag <code class="docutils literal"><span class="pre">Afstand</span> <span class="pre">tot</span> <span class="pre">hub</span></code> en selecteer <span class="guilabel">Attributentabel openen</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1014.png" class="align-center" src="../../_images/1014.png" />
+<div><img alt="../../_images/1015.png" class="align-center" src="../../_images/1015.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p class="first">Scroll naar rechts naar de laatste kolommen en u zult 2 nieuwe attributen, genaamd <strong>HubName</strong> en <strong>HubDist</strong>, zien toegevoegd aan de originele objecten van de aardbevingen. Dit zijn de naam en de afstand tot de dichtstbijzijnde buur van de laag met bevolkte plaatsen.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1117.png" class="align-center" src="../../_images/1117.png" />
+<div><img alt="../../_images/1118.png" class="align-center" src="../../_images/1118.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p class="first">Onze analyse is voltooid. We kunnen nu een ander gereedschap gaan verkennen dat een soortgelijke analyse kan uitvoeren. <strong>Afstandsmatrix</strong> is een krachtig gereedschap dat u in staat stelt niet alleen afstanden tot het dichtstbijzijnde punt te berekenen, maar naar alle punten van een andere laag. We kunnen deze methode gebruiken als een alternatief voor het gereedschap <em>Afstand tot dichtstbijzijnde naaf</em>. Deselecteer de laag <code class="docutils literal"><span class="pre">Afstand</span> <span class="pre">tot</span> <span class="pre">hub</span></code> m die te verbergen. Zoek en lokaliseer het gereedschap <span class="menuselection">Vectoranalyse ‣ Afstandsmatrix</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1215.png" class="align-center" src="../../_images/1215.png" />
+<div><img alt="../../_images/1216.png" class="align-center" src="../../_images/1216.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p class="first">Stel, in het dialoogvenster <span class="guilabel">Afstandsmatrix</span>, <code class="docutils literal"><span class="pre">Geen</span> <span class="pre">geometrieën</span> <span class="pre">null</span></code> in als de <span class="guilabel">Invoer puntenlaag</span> en <code class="docutils literal"><span class="pre">I_D</span></code> als het <span class="guilabel">Invoer unieke ID-veld</span>. Stel <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> in als de <span class="guilabel">Doel-puntenlaag</span> en <code class="docutils literal"><span class="pre">name</span></code> als het <span class="guilabel">Doel unieke ID-veld</span>. Selecteer <code class="docutils literal"><span class="pre">Lineaire</span> <span class="pre">(N*k</span> <span class="pre">x</span> <span class="pre">3)</span> <span class="pre">dafstandsmatrix</span></code> als het <span class="guilabel">Uitvoer matrixtype</span>. De sleutel hier is om de parameter <span class="guilabel">Alleen dichtstbijzijnde (k) doelpunten gebruiken</span> in te stellen op <code class="docutils literal"><span class="pre">1</span></code> - wat u alleen de dichtstbijzijnde buur in de uitvoer zal geven. Klik op <span class="guilabel">Uitvoeren</span> om het berekenen van de matrix te starten. Klik op <span class="guilabel">Close</span> als de verwerking is voltooid.</p>
@@ -355,14 +356,14 @@
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1413.png" class="align-center" src="../../_images/1413.png" />
+<div><img alt="../../_images/1414.png" class="align-center" src="../../_images/1414.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p class="first">Op dit punt kunt u uw resultaten opslaan in de indeling die u wilt door met rechts te klikken en <span class="menuselection">Exporteren ‣ Objecten opslaan als</span> te selecteren. Als u de resultaten beter wilt visualiseren, kunnen we eenvoudig een rendering naaf-spaak maken uit de geometrie van de objecten. Klik met rechts op de laag <code class="docutils literal"><span class="pre">Afstandsmatrix</span></code> en selecteer <span class="guilabel">Eigenschappen</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1512.png" class="align-center" src="../../_images/1512.png" />
+<div><img alt="../../_images/1513.png" class="align-center" src="../../_images/1513.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p class="first">Schakel naar de tab <span class="guilabel">Symbologie</span> in het dialoogvenster <span class="guilabel">Eigenschappen</span>. Klik op de sub-renderer <code class="docutils literal"><span class="pre">Standaard</span> <span class="pre">vulling</span></code> en selecteer <code class="docutils literal"><span class="pre">Geometrie-generator</span></code> als het <span class="guilabel">Symboollaagtype</span>. Stel <code class="docutils literal"><span class="pre">Lijn</span> <span class="pre">/</span> <span class="pre">MultiLijn</span></code> in als het <span class="guilabel">Type geometrie</span>. Klik op de knop <span class="guilabel">Expressie</span>.</p>
@@ -379,14 +380,14 @@
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>make_line(point_n( $geometry, 1), point_n( $geometry, 2))
 </pre></div>
 </div>
-<img alt="../../_images/1712.png" class="align-center" src="../../_images/1712.png" />
+<img alt="../../_images/1713.png" class="align-center" src="../../_images/1713.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p class="first">Stel, terug op de tab <span class="guilabel">Symbologie</span>, de stijl van de lijn in zoals u dat wilt en klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1811.png" class="align-center" src="../../_images/1811.png" />
+<div><img alt="../../_images/1812.png" class="align-center" src="../../_images/1812.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p class="first">U zult de laag <code class="docutils literal"><span class="pre">Afstandsmatrix</span></code> nu zien gerenderd met lijnen in plaats van punten. Onthoud dat we geen nieuwe laag hoefden te maken voor deze visualisatie. De laag bevat nog steeds geometrieën MultiPunt, maar die zijn dynamisch gerenderd als lijnen, gebaseerd op de expressie.</p>
@@ -424,7 +425,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Dec 31, 2019.<br/>
+      Laatste aanpassing op Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Ruimtelijke samenvoegingen uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Ruimtelijke query&#8217;s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
@@ -262,7 +263,7 @@
 <li><p class="first">Open QGIS en ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Vectorlaag toevoegen</span>. Blader naar het gedownloade bestand en selecteer  <code class="docutils literal"><span class="pre">ne_10m_airports.zip</span></code>. Klik op <span class="guilabel">Openen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1195.png" class="align-center" src="../_images/1195.png" />
+<img alt="../_images/1198.png" class="align-center" src="../_images/1198.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">We zullen nu een kaart maken in QGIS die er uitziet en zich gedraagt net zoals we zouden willen voor een kaart voor het web. De plug-in <code class="docutils literal"><span class="pre">qgis2web</span></code> zal de instellingen  van QGIS overnemen en automatisch de kaart voor het web maken zonder dat wij iets merken van de bibliotheken voor het maken van kaarten voor het web. Als een gebruiker op een markering voor een vliegveld klikt, willen we een informatie-venster weergeven dat nuttige informatie over het vliegveld weergeeft. Deze informatie is al aanwezig in de attributentabel van de lagen <code class="docutils literal"><span class="pre">ne_10m_airports</span></code>. Klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> en selecteer <span class="guilabel">Eigenschappen</span>.</p>
 </li>
@@ -272,37 +273,37 @@
 <li><p class="first">Schakel naar de tab <span class="guilabel">Velden</span>. U zult zien dat de verschillende attributen aanwezig zijn op de laag. Sommige hiervan zijn niet relevant voor de gebruikers van onze webkaart, dus kunnen we ervoor kiezen om ze te verbergen. We zullen de velden <code class="docutils literal"><span class="pre">type</span></code>, <code class="docutils literal"><span class="pre">name</span></code>, <code class="docutils literal"><span class="pre">iata_code</span></code> en <code class="docutils literal"><span class="pre">wikipedia</span></code> behouden en de andere verbergen. Klik op de knop <span class="guilabel">Tekst bewerken</span> in de kolom <span class="guilabel">Wijzig-hulpmiddel</span> voor het veld <code class="docutils literal"><span class="pre">`scalerank</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/385.png" class="align-center" src="../_images/385.png" />
+<img alt="../_images/386.png" class="align-center" src="../_images/386.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Kies, in het dialoogvenster <span class="guilabel">Eigenschappen Widget bewerken</span>, <code class="docutils literal"><span class="pre">Verborgen</span></code> als het type. Klik op <span class="guilabel">OK</span>.</p>
 </li>
 </ol>
-<img alt="../_images/463.png" class="align-center" src="../_images/463.png" />
+<img alt="../_images/464.png" class="align-center" src="../_images/464.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first">Stel op dezelfde wijze ander velden in op het type Verborgen. Zoals u waarschijnlijk zal zijn opgevallen, zijn er nog andere veldtypen beschikbaar die het ons mogelijk maken om in te stellen hoe gebruikers van onze kaart de velden zien. Klik op <span class="guilabel">Tekst bewerken</span> voor het veld <code class="docutils literal"><span class="pre">wikipedia</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/564.png" class="align-center" src="../_images/564.png" />
+<img alt="../_images/565.png" class="align-center" src="../_images/565.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Selecteer <code class="docutils literal"><span class="pre">Webweergave</span></code> als het veldtype. Dit type geeft aan dat de in dit veld opgenomen waarde een URL is.</p>
 </li>
 </ol>
-<img alt="../_images/661.png" class="align-center" src="../_images/661.png" />
+<img alt="../_images/662.png" class="align-center" src="../_images/662.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first">We kunnen ook de kolom <span class="guilabel">Alias</span> gebruiken om een alternatieve naam aan te geven voor de velden zonder de onderliggende gegevenstabel te wijzigen. Dit is nuttig om meer vriendelijkere veldnamen te presenteren aan de gebruikers van onze kaart. Voeg aliassen van uw keuze toe en klik op <span class="guilabel">Ok</span>.</p>
 </li>
 </ol>
-<img alt="../_images/760.png" class="align-center" src="../_images/760.png" />
+<img alt="../_images/761.png" class="align-center" src="../_images/761.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first">Kies, terug in het hoofdvenster van QGIS, het gereedschap <span class="guilabel">Objecten identificeren</span> en klik op een willekeurige stip. Het paneel <span class="guilabel">Identificatieresultaten</span> zal de keurig opgemaakte attributen laten zien met de nieuw toegevoegde aliassen. Het moet u opvallen dat de verborgen velden niet in de resultaten verschijnen.</p>
 </li>
 </ol>
-<img alt="../_images/858.png" class="align-center" src="../_images/858.png" />
+<img alt="../_images/859.png" class="align-center" src="../_images/859.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first">Hoewel deze methode nuttig is, is er een beperking. We kunnen de volgorde van de velden niet veranderen. Eén manier om deze beperking te omzeilen is door een <code class="docutils literal"><span class="pre">Virtueel</span> <span class="pre">veld</span></code> te maken. In ons geval, als we zouden willen dat het veld <code class="docutils literal"><span class="pre">type</span></code> aan het einde van het informatie-venster zou moeten verschijnen, kunnen we eenvoudigweg een nieuw virtueel veld aan het einde toevoegen en het originele veld <code class="docutils literal"><span class="pre">type</span></code> verbergen. Nu we er toch zijn - we kunnen ook een expressie gebruiken om de waarden van de types beter op te maken. Klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> en kies <span class="guilabel">Eigenschappen</span>. Ga naar de tab <span class="guilabel">Velden</span> en klik op <span class="guilabel">Veldberekening</span>.</p>
 </li>
 </ol>
-<img alt="../_images/957.png" class="align-center" src="../_images/957.png" />
+<img alt="../_images/958.png" class="align-center" src="../_images/958.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first">Gebruik, omdat de veldnamen uniek moeten zijn, <code class="docutils literal"><span class="pre">Type</span></code> als de nieuwe veldnaam. Stel het veldtype in op <code class="docutils literal"><span class="pre">Tekst</span> <span class="pre">(String)</span></code> met een lengte van <code class="docutils literal"><span class="pre">25</span></code> tekens. Het veld <code class="docutils literal"><span class="pre">type</span></code> bevat waarden zoals <code class="docutils literal"><span class="pre">small</span></code>, <code class="docutils literal"><span class="pre">mid</span></code>, <code class="docutils literal"><span class="pre">large</span></code> etc. We kunnen een expressie toevoegen om de hoofd-/kleine letters te wijzigen en jet woord <em>airport</em> toevoegen voor betere leesbaarheid. Voer de volgende expressie in in het vak <span class="guilabel">Expressie</span> en klik op <span class="guilabel">OK</span>.</p>
 </li>
@@ -310,17 +311,17 @@
 <div class="highlight-none"><div class="highlight"><pre><span></span>concat( title(&quot;type&quot;), &#39; Airport&#39;)
 </pre></div>
 </div>
-<img alt="../_images/1056.png" class="align-center" src="../_images/1056.png" />
+<img alt="../_images/1057.png" class="align-center" src="../_images/1057.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Nu we een veel beter uitziend veld <code class="docutils literal"><span class="pre">Type</span></code> hebben, kunt u doorgaan en <span class="guilabel">Tekst bewerken</span> voor het veld <code class="docutils literal"><span class="pre">type</span></code> instellen op <code class="docutils literal"><span class="pre">Verborgen</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1196.png" class="align-center" src="../_images/1196.png" />
+<img alt="../_images/1199.png" class="align-center" src="../_images/1199.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Gebruik het gereedschap <span class="guilabel">objecten identificeren</span> om te verifiëren of de attributen verschijnen zoals mag worden verwacht.</p>
 </li>
 </ol>
-<img alt="../_images/1255.png" class="align-center" src="../_images/1255.png" />
+<img alt="../_images/1256.png" class="align-center" src="../_images/1256.png" />
 <ol class="arabic simple" start="13">
 <li><p class="first">Laten we nu onze laag beter opmaken zodat die visueel aantrekkelijker is en informatiever. Klik met rechts op de laag <code class="docutils literal"><span class="pre">ne_10m_airports</span></code> en selecteer <span class="guilabel">Eigenschappen</span>. Schakel naar de tab <span class="guilabel">Stijl</span>. Kies de stijl <code class="docutils literal"><span class="pre">Categoriën</span></code> en ons virtuele veld <code class="docutils literal"><span class="pre">Type</span></code> als de <span class="guilabel">Kolom</span>. Klik op <span class="guilabel">Classificeren</span>.</p>
 </li>
@@ -330,12 +331,12 @@
 <li><p class="first">U zult zien dat een verschillende gekleurde cirkel wordt toegewezen aan een verschillend type vliegveld. Ten behoeve van deze handleiding zullen we de kaart beperken tot burgervliegvelden. Houd de <code class="kbd docutils literal"><span class="pre">Ctrl</span></code>-toets ingedrukt en selecteer alle categorieën voor militaire vliegvelden. Als alles is geselecteerd, klik op <span class="guilabel">Verwijderen</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1452.png" class="align-center" src="../_images/1452.png" />
+<img alt="../_images/1453.png" class="align-center" src="../_images/1453.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first">Apart van het toewijzen van een verschillende kleur aan de categorie, kunnen we de grootte van het symbool vergroten om onze gebruikers visueel te helpen de verschillende type vliegvelden te onderscheiden. Klik met rechts op een categorie en selecteer <span class="guilabel">Wijzig formaat</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1549.png" class="align-center" src="../_images/1549.png" />
+<img alt="../_images/1550.png" class="align-center" src="../_images/1550.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Stel de waarde <span class="guilabel">Grootte</span> in op <code class="docutils literal"><span class="pre">3</span></code> voor de categorie <code class="docutils literal"><span class="pre">Large</span> <span class="pre">airport</span></code>.</p>
 </li>
@@ -345,12 +346,12 @@
 <li><p class="first">Stel, op dezelfde wijze, de <span class="guilabel">Grootte</span> <code class="docutils literal"><span class="pre">2</span></code> in voor <code class="docutils literal"><span class="pre">Mid</span> <span class="pre">airport</span></code> en <code class="docutils literal"><span class="pre">1</span></code> voor <code class="docutils literal"><span class="pre">Small</span> <span class="pre">airport</span></code>.</p>
 </li>
 </ol>
-<img alt="../_images/1742.png" class="align-center" src="../_images/1742.png" />
+<img alt="../_images/1743.png" class="align-center" src="../_images/1743.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Voor een volledige kaart dienen we ook elk vliegveld te voorzien van een label. Schakel naar de tab <span class="guilabel">Labels</span> in het dialoogvenster <span class="guilabel">Eigenschappen</span>. Selecteer <code class="docutils literal"><span class="pre">Labels</span> <span class="pre">voor</span> <span class="pre">deze</span> <span class="pre">laag</span> <span class="pre">weergeven</span></code> en kies <code class="docutils literal"><span class="pre">iata_code</span></code> als de waarde voor <span class="guilabel">Label met</span>. We zullen ook een optie instellen voor <span class="guilabel">Rendering</span> zodat de labels alleen tevoorschijn komen als de gebruiker voldoende is ingezoomd. Selecteer <span class="guilabel">Schaalgebaseerde zichtbaarheid</span> onder <span class="guilabel">Label opties</span>. Voer <code class="docutils literal"><span class="pre">1</span></code> in als de <span class="guilabel">Minimum</span> schaal en <code class="docutils literal"><span class="pre">10000000</span></code> als de maximum schaal. Deze instelling zal de labels alleen renderen nadtat de gebruiker is ingezoomd voor meer dan dan de schaal <code class="docutils literal"><span class="pre">1:10000000</span></code> en zal zichtbara blijven tot de schaal <code class="docutils literal"><span class="pre">1:1</span></code> is.</p>
 </li>
 </ol>
-<img alt="../_images/1842.png" class="align-center" src="../_images/1842.png" />
+<img alt="../_images/1843.png" class="align-center" src="../_images/1843.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first">Omdat we cirkels gebruiken om de vliegvelden weer te geven, dienen we er voor te zorgen dat de labels de cirkels niet overlappen. Ga naar de tab <span class="guilabel">Plaatsing</span> in het dialoogvenster <span class="guilabel">Labels</span> en stel de <span class="guilabel">Plaatsing</span> in op <code class="docutils literal"><span class="pre">Cartographisch</span></code>. Selecteer <code class="docutils literal"><span class="pre">Vanaf</span> <span class="pre">grens</span> <span class="pre">symbolen</span></code> als <span class="guilabel">Verschuiving afstand vanaf</span>. Klik op <span class="guilabel">OK</span>.</p>
 </li>
@@ -375,7 +376,7 @@
 <li><p class="first">Als het exporteren is voltooid, zal de standaard browser voor uw computer openen en de interactieve webkaart weergeven.</p>
 </li>
 </ol>
-<img alt="../_images/2325.png" class="align-center" src="../_images/2325.png" />
+<img alt="../_images/2326.png" class="align-center" src="../_images/2326.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first">Uw webkaart is nu klaar om te publiceren.</p>
 </li>
@@ -438,7 +439,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op Dec 31, 2019.<br/>
+      Laatste aanpassing op Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

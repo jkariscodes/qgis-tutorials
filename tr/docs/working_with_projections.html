@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -268,7 +269,7 @@ required for this tutorial)</p>
 <li><p class="first">QGIS&#8217;i açın ve  <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector Layer...</span> adımlarını izleyin.</p>
 </li>
 </ol>
-<img alt="../_images/1199.png" class="align-center" src="../_images/1199.png" />
+<img alt="../_images/1201.png" class="align-center" src="../_images/1201.png" />
 <ol class="arabic simple" start="2">
 <li><p class="first">İndirdiğiniz <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries.zip</span></code> dosyasını bularak <span class="guilabel">Open</span> butonuna basın.</p>
 </li>
@@ -278,32 +279,32 @@ required for this tutorial)</p>
 <li><p class="first">Pencerenin alt kısmında <span class="guilabel">Coordinate</span> etiketini göreceksiniz. Fareyi hareket ettirdikçe işlecin bulunduğu konumun X ve Y değerlerini verecektir. Sağ alt kısımda <span class="guilabel">EPSG:4326</span> göreceksiniz. Projenizin mevcut projeksiyonu budur.</p>
 </li>
 </ol>
-<img alt="../_images/387.png" class="align-center" src="../_images/387.png" />
+<img alt="../_images/388.png" class="align-center" src="../_images/388.png" />
 <ol class="arabic simple" start="4">
 <li><p class="first">Daha sonradan da göreceğimiz üzere projeninin CRS&#8217;si katmanların CRS&#8217;sinden farklı olabilir. Bunu katman metaverisinden kontrol edebiliriz. <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> katmanını sağ tıklayın ve <span class="guilabel">Properties</span> seçin.</p>
 </li>
 </ol>
-<img alt="../_images/465.png" class="align-center" src="../_images/465.png" />
+<img alt="../_images/466.png" class="align-center" src="../_images/466.png" />
 <ol class="arabic simple" start="5">
 <li><p class="first"><span class="guilabel">Layer Properties</span> penceresinde <span class="guilabel">Metadata</span> sekmesine geçiş yapın. Alt kısımda <span class="guilabel">Layer Spatial Reference System</span> başlığında katmanın CRS&#8217;sini göreceksiniz. Bu tanım <a class="reference external" href="https://en.wikipedia.org/wiki/PROJ.4">PROJ.4 formatındadır</a>.</p>
 </li>
 </ol>
-<img alt="../_images/566.png" class="align-center" src="../_images/566.png" />
+<img alt="../_images/567.png" class="align-center" src="../_images/567.png" />
 <ol class="arabic simple" start="6">
 <li><p class="first">Şimdi katmanın projeksiyonunu nasıl değiştireceğimize bakalım. Bu işleme <strong>Re-Projeksiyon</strong> adı verilir. Tüm katmanı yeniden projekte etmek yerine seçtiğimiz bir kısmını da re-projeksiyon işlemine tabi tutabiliriz. <span class="guilabel">Select features by area or single click</span> aracına tıklayın ve Amerika Birleşik Devletlerini seçin.</p>
 </li>
 </ol>
-<img alt="../_images/663.png" class="align-center" src="../_images/663.png" />
+<img alt="../_images/664.png" class="align-center" src="../_images/664.png" />
 <ol class="arabic simple" start="7">
 <li><p class="first"><code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> katmanını sağ tıklayıp <span class="guilabel">Save As</span> seçin.</p>
 </li>
 </ol>
-<img alt="../_images/762.png" class="align-center" src="../_images/762.png" />
+<img alt="../_images/763.png" class="align-center" src="../_images/763.png" />
 <ol class="arabic simple" start="8">
 <li><p class="first"><span class="guilabel">Save vector layer as...</span> penceresinde yeni katman adını <code class="docutils literal"><span class="pre">united_states.shp</span></code> olarak ayarlayın. <span class="guilabel">Save only selected features</span> kutusunu işaretleyin. Böylece sadece seçilen objelerin yeni katmana yeniden projekte edilerek aktarıldığından emin olmuş oluyoruz. Yeni katmanımızın projeksiyonunu ayarlamak için <span class="guilabel">Select CRS</span> seçiyoruz.</p>
 </li>
 </ol>
-<img alt="../_images/860.png" class="align-center" src="../_images/860.png" />
+<img alt="../_images/861.png" class="align-center" src="../_images/861.png" />
 <ol class="arabic simple" start="9">
 <li><p class="first"><span class="guilabel">Coordinate Reference System Selector</span> penceresinde <span class="guilabel">Filter</span> olarak <code class="docutils literal"><span class="pre">north</span> <span class="pre">america</span></code> yazın. Seçeneklerden <cite>North_America_Albers_Equal_Area_Conic (EPSG:102008)`</cite> seçerek <span class="guilabel">OK</span> tıklayın.</p>
 </li>
@@ -312,22 +313,22 @@ required for this tutorial)</p>
 <p class="first admonition-title">Not</p>
 <p class="last">Bu kılavuz için Albers Equal Area Conic seçiyoruz çünkü ABD tematik haritaları için popüler bir projeksiyon. Hangi projeksiyonu seçmeniz amaçlarınızla doğru orantılı olarak değişmektedir. Konuyla ilgili olarak <cite>bu kılavuzdan &lt;http://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/coordinate_reference_systems.html&gt;</cite> yardım alabilirsiniz.</p>
 </div>
-<img alt="../_images/959.png" class="align-center" src="../_images/959.png" />
+<img alt="../_images/960.png" class="align-center" src="../_images/960.png" />
 <ol class="arabic simple" start="10">
 <li><p class="first"><span class="guilabel">Save vector layer as...</span> penceresinde yeni CRS&#8217;nin seçildiğini göreceksiniz.</p>
 </li>
 </ol>
-<img alt="../_images/1058.png" class="align-center" src="../_images/1058.png" />
+<img alt="../_images/1059.png" class="align-center" src="../_images/1059.png" />
 <ol class="arabic simple" start="11">
 <li><p class="first">Yeni oluşturduğumuz katman yüklenince farklı projeksiyonda olmalarına rağmen <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> katmanıyla mükemmel şekilde hizalandığını göreceksiniz. Bunu sebebi QGIS&#8217;in eşzamanlı projeksiyon dönüştürme özelliğine sahip olmasıdır. QGIS penceresinin alt kısmındaki projeksiyon metninde <span class="guilabel">EPSG:4326`</span> yanında <code class="docutils literal"><span class="pre">OTF</span></code> ifadesi bulunmaktadır. Bu konuda daha fazla şey öğrenmek için QGIS CRS menüsünü araştırabilirsiniz.</p>
 </li>
 </ol>
-<img alt="../_images/11100.png" class="align-center" src="../_images/11100.png" />
+<img alt="../_images/11101.png" class="align-center" src="../_images/11101.png" />
 <ol class="arabic simple" start="12">
 <li><p class="first">Şuraya gidin <span class="menuselection">Settings ‣ Options...</span>.</p>
 </li>
 </ol>
-<img alt="../_images/1257.png" class="align-center" src="../_images/1257.png" />
+<img alt="../_images/1258.png" class="align-center" src="../_images/1258.png" />
 <ol class="arabic simple" start="13">
 <li>Switch to the <span class="guilabel">CRS</span> tab in the <span class="guilabel">Options</span> dialog. You
 will see that the default is <span class="guilabel">Automatically enable &#8216;on the fly&#8217;
@@ -341,12 +342,12 @@ each other. Click <span class="guilabel">OK</span>.</li>
 <li><p class="first">Bu seçeneği kapatın ve neler olacağını görelim. Sağ alt kısımnda <span class="guilabel">Current CRS</span> metnini tıklayın.</p>
 </li>
 </ol>
-<img alt="../_images/1454.png" class="align-center" src="../_images/1454.png" />
+<img alt="../_images/1455.png" class="align-center" src="../_images/1455.png" />
 <ol class="arabic simple" start="15">
 <li><p class="first"><span class="guilabel">Project Properties</span>  penceresinde <span class="guilabel">Enable &#8216;on the fly&#8217; CRS transformation`seçeneğini kaldıralım ve :guilabel:`OK</span> yapalım.</p>
 </li>
 </ol>
-<img alt="../_images/1551.png" class="align-center" src="../_images/1551.png" />
+<img alt="../_images/1552.png" class="align-center" src="../_images/1552.png" />
 <ol class="arabic simple" start="16">
 <li><p class="first">Arka tarafta QGIS ana penceresinde dünya haritasının kaybolduğunu göreceksiniz. Bunun sebebi KRS&#8217;nin <code class="docutils literal"><span class="pre">North_America_Albers_Equal_Area_Conic</span></code> olarak değişmesi ve koordinatlar ile ölçeklerin farklılaşması. <cite>united_states`</cite> katmanını sağ tıklayıp <span class="guilabel">Zoom to Layer</span> seçin.</p>
 </li>
@@ -356,12 +357,12 @@ each other. Click <span class="guilabel">OK</span>.</li>
 <li><p class="first">Şimdi seçili projeksiyonda ABD&#8217;yi görüyorsunuz. Dikkat ederseniz <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> katmanındaki objeler farklı bir projeksiyonda olduğundan ekranda görünmüyorlar. Tekrar <span class="guilabel">Project Properties</span> penceresine gidin ve <span class="guilabel">Enable &#8216;on the fly&#8217; CRS transformation</span> yeniden etkinleştirin.</p>
 </li>
 </ol>
-<img alt="../_images/1743.png" class="align-center" src="../_images/1743.png" />
+<img alt="../_images/1744.png" class="align-center" src="../_images/1744.png" />
 <ol class="arabic simple" start="18">
 <li><p class="first">Şimdi br raster katman ekleyelim. <code class="docutils literal"><span class="pre">minisc_gb.zip</span></code> dosyasını açtığınız klasöre gidin. TIFF (GeoTIFF değil) dosyalarını içeren <code class="docutils literal"><span class="pre">RGB_TIF_COMPRESSED</span></code> klasörünü bulun. Bu dosyalarda projeksiyon bilgisi bulunmamaktadır. Bu resimleri CBS amaçları için kullanmak istiyorsak coğrafi referanslama yapmamız gerekir. Bir coğrafi referans 2 farklı bilgi içerir: kaplam ve projeksiyon. Kaplamlar genellikle <a class="reference external" href="https://en.wikipedia.org/wiki/World_file">World dosyası</a> olarak saklanır ve <code class="docutils literal"><span class="pre">.tfw</span></code> or <code class="docutils literal"><span class="pre">.jgw</span></code> gibi uzantılara sahip olur. Birçok CBS yazılımı gibi QGIS de görüntüyle aynı klasörde bulunmak ve aynı isimde olmak şartıyla bu world dosyalarını okuyabilir. Bazı raster dosyaları için <code class="docutils literal"><span class="pre">.tfw</span></code> bilgisi ayrı bir klasör içinde <code class="docutils literal"><span class="pre">georeferencing_files</span></code> adıyla saklanır.</p>
 </li>
 </ol>
-<img alt="../_images/1843.png" class="align-center" src="../_images/1843.png" />
+<img alt="../_images/1844.png" class="align-center" src="../_images/1844.png" />
 <ol class="arabic simple" start="19">
 <li><p class="first"><code class="docutils literal"><span class="pre">georeferencing_files</span></code> klasörü altındaki <code class="docutils literal"><span class="pre">ESRI_TFW_FILES</span></code> klasörünü açın. <code class="docutils literal"><span class="pre">.tfw</span></code> dosyaları metin dosyalarıdır. Bir tanesini Notepa gibi bir metin editörü ile açın.</p>
 </li>
@@ -394,7 +395,7 @@ Line 6: F: y-coordinate of the center of the upper left pixel
 <li><p class="first">Birleşik Krallık Harita Kurumu dosyaları British National Grid  projeksiyonundadır. <span class="guilabel">Coordinate Reference System Selector</span> penceresinde  <code class="docutils literal"><span class="pre">british</span> <span class="pre">national</span></code> arayın ve <code class="docutils literal"><span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span> <span class="pre">(EPSG:27700)</span></code> seçip <span class="guilabel">OK</span> yapın.</p>
 </li>
 </ol>
-<img alt="../_images/2326.png" class="align-center" src="../_images/2326.png" />
+<img alt="../_images/2327.png" class="align-center" src="../_images/2327.png" />
 <ol class="arabic simple" start="24">
 <li><p class="first"><code class="docutils literal"><span class="pre">MiniScale_(standard)_R17</span></code> katmanı yüklendiğinde sağ tıklayıp <span class="guilabel">Zoom to layer</span> seçin.</p>
 </li>
@@ -434,7 +435,7 @@ Line 6: F: y-coordinate of the center of the upper left pixel
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Son güncelleme: Dec 31, 2019.<br/>
+      Son güncelleme: Jan 28, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
