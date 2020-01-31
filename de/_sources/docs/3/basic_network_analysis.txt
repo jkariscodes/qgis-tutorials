@@ -64,4 +64,69 @@ Procedure
   
 7. The goal is to create an expression that selects all one-way streets. Enter the following expression and click :guilabel:`OK`.
 
-  ..
+  .. code-block:: none
+
+    "DIRECTIONA" = 'One way (Against digitizing direction)' OR  "DIRECTIONA" ='One Way (Digitizing direction)' 
+  
+  .. image:: /static/3/basic_network_analysis/images/7.png
+    :align: center
+  
+8. Next, change the :guilabel:`Symbol layer type` to ``Marker line``.
+
+  .. image:: /static/3/basic_network_analysis/images/8.png
+    :align: center
+  
+9. Select ``on center point`` under :guilabel:`Marker placement`.
+
+  .. image:: /static/3/basic_network_analysis/images/9.png
+    :align: center
+  
+10. Click on the ``Simple marker`` symbol. Scroll down and pick the ``filled_arrowhead`` marker. You will see that the arrow-like symbol now appears on the one-way streets. But all of them are pointing in a single direction, whereas we know that our filter contains roads in multiple directions. We can further refine the symbols with a data-defined override for the :guilabel:`Rotation` value.
+
+  .. image:: /static/3/basic_network_analysis/images/10.png
+    :align: center
+  
+11. Click the :guilabel:`Data defined override` button next to :guilabel:`Rotation`.
+
+  .. image:: /static/3/basic_network_analysis/images/11.png
+    :align: center
+  
+12. We can put a conditional expression that returns different rotation value depending on the one-way direction. A simple 0 or 180 degree rotation works to account for the direction, but it works only for horizontal lines. To align the arrow-head perpendicular to all the lines - we need to account for the angle of the line in the expression as well. The ``angle_at_vertex`` function helps us find the angle and use it in the expression. Enter the following expression and click :guilabel:`OK`.
+
+  .. code-block:: none
+  
+    CASE 
+      WHEN "DIRECTIONA" =  'One Way (Digitizing direction)'
+        THEN angle_at_vertex($geometry, 1) - 90
+      WHEN "DIRECTIONA" =  'One way (Against digitizing direction)'
+        THEN angle_at_vertex($geometry, 1) - 90 + 180
+    END
+ 
+  .. image:: /static/3/basic_network_analysis/images/12.png
+    :align: center
+  
+13. Now you will see the arrow-heads aligned to the correct road direction and angle. To keep the style uncluttered, we are choosing to display arrows only on one-way streets. Unlabeled streets are assumed to be two-way. Now that we have the network styled correctly, we can do some analysis. Go to :menuselection:`Processing --> Toolbox`.
+
+  .. image:: /static/3/basic_network_analysis/images/13.png
+    :align: center
+  
+14. Search for and locate the :menuselection:`Network analysis --> Shortest path (point to point)` algorithm. Double-click to launch it.
+
+  .. image:: /static/3/basic_network_analysis/images/14.png
+    :align: center
+  
+15. In the :guilabel:`Shortest Path (Point to Point)` dialog, select ``Street_Centerlines`` as the :guilabel:`Vector layer representing network`.  Keep the :guilabel:`Path type to calculate` as ``Shortest``. Next we need to pick a start and end point. You can click the :guilabel:`...` button and click on any point on the network in the canvas. If you want to replicate the results in this tutorial, you can enter ``-76.99730092166396,38.887624846748984`` as the :guilabel:`Start point` and ``-76.99154831062152,38.89151000569929`` as the :guilabel:`End point`. Expand the :guilabel:`Advanced parameter` section. Choose ``DIRECTIONA`` as the :guilabel:`Direction field`. You must be familiar with the one-way direction values for forward and backward traffic flow. Enter ``One Way (Digitizing direction)`` as the :guilabel:`Value for forward direction` and ``One way (Against digitizing direction)`` as the :guilabel:`Value for backward direction`. Keep other options to their default values and click :guilabel:`Run`.
+
+  .. image:: /static/3/basic_network_analysis/images/15.png
+    :align: center
+  
+16. The algorithm will use the geometry of the layer and provided parameters to build a network graph. This graph is then used to find the shortest path between the start and end points. Once the algorithm finishes, you will see a new layer ``Shortest path`` added to the :guilabel:`Layers` panel that shows the shortest path between start and end points.
+
+  .. image:: /static/3/basic_network_analysis/images/16.png
+    :align: center
+  
+17. You will see that there are many possible paths between start and end points. But given the constraints of the network - such as one-ways, the result is the shortest possible path. It is always a good idea to validate your analysis and assumptions. One easy way to validate it is to use a third-party mapping service to see if their results match with the ones we derived. Here is the shortest path `suggested by Google Maps <https://goo.gl/maps/XwTXTkvuaCuteocr8>`_ between the same start and end points. As you can see the recommended shortest route matches exactly with our results - validating our analysis.
+
+  .. image:: /static/3/basic_network_analysis/images/17.png
+    :align: center
+  
