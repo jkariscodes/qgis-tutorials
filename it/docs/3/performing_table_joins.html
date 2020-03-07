@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Performing Table Joins (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Realizzare unioni tabellari (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -83,11 +83,11 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduzione</a></li>
 <li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Creazione di una stampa (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Lavorare con gli Attributi (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Importare fogli elettronici o file CSV (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Tematizzare i dati vettoriali (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calcolare la Lunghezza Lineare e le Statistiche (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Tematizzazione ed analisi di RASTER (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Lavorare con i dati del terrreno</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Lavorare con i dati WMS</a></li>
@@ -95,14 +95,14 @@
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferenziazione carte topografiche e mappe scannerizzate (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Vettorializzare mappe raster</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Performing Table Joins (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Realizzare unioni tabellari (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Campionare i dati di un raster usando punti o poligoni (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpolazione di dati puntuali</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
@@ -232,15 +232,16 @@
       
 
   <div class="section" id="performing-table-joins-qgis3">
-<h1>Performing Table Joins (QGIS3)<a class="headerlink" href="#performing-table-joins-qgis3" title="Link a questa intestazione">¶</a></h1>
-<p>Not every dataset you want to use comes in spatial format. Often the data would come as a table or a spreadsheet and you would need to link it with your existing spatial data for use in your analysis. This operation is known as a <strong>Table Join</strong> and is done using the <code class="docutils literal"><span class="pre">Join</span> <span class="pre">attributes</span> <span class="pre">by</span> <span class="pre">field</span> <span class="pre">value</span></code> Processing algorithm.</p>
+<h1>Realizzare unioni tabellari (QGIS3)<a class="headerlink" href="#performing-table-joins-qgis3" title="Link a questa intestazione">¶</a></h1>
+<p>Non tutti i dataset che utilizziamo nel nostro lavoro si presentano come degli shapefile o, comunque, in formato spaziale. I dati possono presentarsi in forma di tabella o all&#8217;interno di un foglio di calcolo (e.g. MS Excel) e potrebbe essere necessario unirli con i nostri dati spaziali per utilizzarli nelle nostre analisi. Questa operazione è conosciuta come Join/Unione Tabellare e questo esercizio mostrerà come realizzarla in QGIS.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
+<h2>Descrizione del compito<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
 <p>We will use a shapefile of census tracts for California and population data table from US Census Bureau to create a population density map for california.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link a questa intestazione">¶</a></h3>
+<h3>Altri aspetti che avremo modo di apprendere nel corso dell&#8217;esercizio<a class="headerlink" href="#other-skills-you-will-learn" title="Link a questa intestazione">¶</a></h3>
 <ul class="simple">
-<li>Loading CSV files that do not contain any geometry in QGIS.</li>
+<li><p class="first">Caricare file CSV che non contengono alcuna geometria in QGIS.</p>
+</li>
 <li>Using DB Manager to perform SQL queries to calculate group statistics.</li>
 </ul>
 </div>
@@ -425,7 +426,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento Mar 05, 2020.<br/>
+      Ultimo aggiornamento Mar 07, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
