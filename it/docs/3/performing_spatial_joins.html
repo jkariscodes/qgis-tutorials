@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Performing Spatial Joins (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Realizzare unioni spaziali (Spatial Joins) (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,7 +30,7 @@
     <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
-    <link rel="next" title="Creating Heatmaps (QGIS3)" href="creating_heatmaps.html" />
+    <link rel="next" title="Realizzare Heatmaps (mappe di concentrazione)" href="creating_heatmaps.html" />
     <link rel="prev" title="Realizzare unioni tabellari (QGIS3)" href="performing_table_joins.html" />
 
 <meta charset='utf-8'>
@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Tematizzare i dati vettoriali (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calcolare la Lunghezza Lineare e le Statistiche (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Tematizzazione ed analisi di RASTER (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Mosaici e operazioni di ritaglio con i layer raster (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Lavorare con i dati del terrreno</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Lavorare con i dati WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Lavorare con le Proiezioni</a></li>
@@ -96,11 +96,11 @@
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Vettorializzare mappe raster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizzare unioni tabellari (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Performing Spatial Joins (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Realizzare unioni spaziali (Spatial Joins)  (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Realizzare Heatmaps (mappe di concentrazione)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Utilizzare le interrogazioni spaziali (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Campionare i dati di un raster usando punti o poligoni (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpolazione di dati puntuali</a></li>
@@ -141,7 +141,7 @@
     </a>
   </li>
   <li>
-    <a href="creating_heatmaps.html" title="Next Chapter: Creating Heatmaps (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Creating Heat... &raquo;</span>
+    <a href="creating_heatmaps.html" title="Next Chapter: Realizzare Heatmaps (mappe di concentrazione)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Realizzare He... &raquo;</span>
     </a>
   </li>
               
@@ -232,64 +232,71 @@
       
 
   <div class="section" id="performing-spatial-joins-qgis3">
-<h1>Performing Spatial Joins (QGIS3)<a class="headerlink" href="#performing-spatial-joins-qgis3" title="Link a questa intestazione">¶</a></h1>
-<p>Spatial Join is a classic GIS problem - transferring attributes from one layer to another based on their spatial relationship. In QGIS, this functionality is available through the <code class="docutils literal"><span class="pre">Join</span> <span class="pre">attributes</span> <span class="pre">by</span> <span class="pre">location</span></code> Processing algorithm.</p>
+<h1>Realizzare unioni spaziali (Spatial Joins)  (QGIS3)<a class="headerlink" href="#performing-spatial-joins-qgis3" title="Link a questa intestazione">¶</a></h1>
+<p>L&#8217;unione spaziale è un classico problema in ambito GIS - si tratta di trasferire attributi da un layer ad un altro basandosi sulle loro reciproche relazioni spaziali. In QGIS questa funzionalità può essere avviata attraverso lo strumento  <strong>Unisci attributi per posizione</strong> .</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
-<p>We will use 2 layers - A shapefile of Borough boundaries of New York city and another shapefile of Street Pavement Rating for all streets in New York city. The first task will be to find the average rating of streets in each of the borough using a spatial join with summary algorithm. The second task will be to add the name of the borough to the street features through a one-to-many spatial join.</p>
+<h2>Descrizione del compito<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
+<p>Useremo due layer - Uno shapefile dei confini amministrativi dei quartieri di New York e un altro shapefile che contiene gli  indirizzi delle case di cura a New York. Useremo la tecnica di unione spaziale (join) per accertare la capacità totale delle case di cura in ciascuno dei quartieri di New York.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link a questa intestazione">¶</a></h3>
+<h3>Altri aspetti che avremo modo di apprendere nel corso dell&#8217;esercizio<a class="headerlink" href="#other-skills-you-will-learn" title="Link a questa intestazione">¶</a></h3>
 <ul class="simple">
-<li>Creating filters to temporarily exclude certain features from computation.</li>
+<li><p class="first">Creare filtri per escludere temporaneamente alcuni elementi dal calcolo</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Link a questa intestazione">¶</a></h2>
-<p><a class="reference external" href="https://data.cityofnewyork.us/">NYC Open Data Portal</a> is an excellent source of free data for New York city.</p>
-<p>Download the <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Borough Boundaries</a> zip file using the Export option on the portal.</p>
+<h2>Ottenere i dati necessari.<a class="headerlink" href="#get-the-data" title="Link a questa intestazione">¶</a></h2>
+<p><a class="reference external" href="https://data.cityofnewyork.us/">NYC Open Data Portal</a> è una fonte straordinaria di open data che riguardano la città di New York.</p>
+<p>Scaricate il file .zip dei confini amministrativi dei quartieri di New York <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Borough Boundaries</a> usando l&#8217;opzione Export sul portale.</p>
 <img alt="../../_images/data11.png" class="align-center" src="../../_images/data11.png" />
-<p>Download the <a class="reference external" href="https://data.cityofnewyork.us/Transportation/Street-Pavement-Rating/2cav-chmn">Street Pavement Rating</a> zip file using the Export option on the portal.</p>
+<p>Scaricare il file .zip <a class="reference external" href="https://data.cityofnewyork.us/Transportation/Street-Pavement-Rating/2cav-chmn">Street Pavement Rating</a>   usando l&#8217;opzione export del portale.</p>
 <img alt="../../_images/data2.png" class="align-center" src="../../_images/data2.png" />
-<p>For convenience, you may directly download a copy of the datasets from the links below:</p>
+<p>Per comodità, potete scaricare direttamente una copia del dataset dal seguente link:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/nybb_19a.zip">nybb_19a.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/V_SSS_SEGMENTRATING_1.zip">V_SSS_SEGMENTRATING_1.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#cityofny" id="id1">[CITYOFNY]</a></p>
+<p>Fonte Dati <a class="reference internal" href="../credits.html#cityofny" id="id1">[CITYOFNY]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link a questa intestazione">¶</a></h2>
+<h2>Procedimento<a class="headerlink" href="#procedure" title="Link a questa intestazione">¶</a></h2>
 <ol class="arabic simple">
-<li>Locate the <code class="docutils literal"><span class="pre">nybb_19a.zip</span></code> file in the QGIS Browser and expand it. Select the <code class="docutils literal"><span class="pre">nybb_19a/nybb.shp</span></code> layer and drag it to the canvas. This is a polygon layer representing the borough boundaries in New York city.</li>
+<li><p class="first">Individuate il file appena scaricato  <code class="docutils literal"><span class="pre">nybb_19a.zip</span></code>  usando il browser di QGIS  e trascinatelo nel progetto. Questo è un livello con poligoni che rappresentano confini in New York</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Next, locate the <code class="docutils literal"><span class="pre">V_SSS_SEGMENTRATING_1.zip</span></code> file and expand it. Select the <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129.shp</span></code> layer and add it to the canvas. This is a line layer of all streets in the city.</li>
+<li><p class="first">Trovate il file <code class="docutils literal"><span class="pre">V_SSS_SEGMENTRATING_1.zip</span></code> ed estrate il contenuto dello ZIP. Selezionate e aggiungete il livello <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129.shp</span></code> . Sono le strade di NY.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/249.png" class="align-center" src="../../_images/249.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Let&#8217;s examine the attributes available for each feature of the <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> layer. Right-click and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Per esaminare gli attributi del livello <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> fate click con il tasto destro sul layer e selezionate <span class="guilabel">Apri Tabella degli Attributi</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/333.png" class="align-center" src="../../_images/333.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>You will notice the attribute called <code class="docutils literal"><span class="pre">Rating_B</span></code> which has values in the range 0-10 representing the street segment&#8217;s rating. The attribute <code class="docutils literal"><span class="pre">RatingWord</span></code> has descriptive rating. We can use the <code class="docutils literal"><span class="pre">Rating_B</span></code> field to calculate the average rating.</li>
+<li><p class="first">Noterete la colonna <code class="docutils literal"><span class="pre">Rating_B</span></code> con valori tra  0-10 ovvero un indice di qualità della pavimentazione. La colonna <code class="docutils literal"><span class="pre">RatingWord</span></code> ha un indice categorico. Possiamo utilizzare la colonna <code class="docutils literal"><span class="pre">Rating_B</span></code> per calcolare una media di qualità della pavimentazione.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/418.png" class="align-center" src="../../_images/418.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>You may have notice some features have a rating of <code class="docutils literal"><span class="pre">NR</span></code>. These are the segments that were not rated. Including them in our analysis will not be correct. Before we do the spatial join, let&#8217;s set up a <strong>Filter</strong> to exclude these records. Right-click the <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> layer and select <span class="guilabel">Filter</span>.</li>
+<li><p class="first">Alcuni elementi hanno un indice valorizzato come <code class="docutils literal"><span class="pre">NR</span></code>. Questi segmenti non sono stati valutati. Includerli nell&#8217;analisi non sarebbe corretto, dunque prima di eseguire l&#8217;unione spaziale usiamo un filtro <strong>Filter</strong> per escluderli. Tasto destro sul livello <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> e selezionare <span class="guilabel">Filter</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/518.png" class="align-center" src="../../_images/518.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>In the <span class="guilabel">Query Builder</span>, type the following expression to select all records that are not rated <code class="docutils literal"><span class="pre">NR</span></code>. You can also build the expression interactively by clicking on <span class="guilabel">Field</span>, <span class="guilabel">Operator</span> and selecting the appropriate <span class="guilabel">Value</span>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Nella sezione <span class="guilabel">Query Builder</span>, inserire la seguente espressione per selezionare tutti gli elementi senza il valore <code class="docutils literal"><span class="pre">NR</span></code>. E&#8217; possibile creare la funzione in modo interattivo selezionando <span class="guilabel">Field</span>, <span class="guilabel">Operator</span> e selezionando i valori appropriati in <span class="guilabel">Value</span>. Clicca <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&quot;RatingWord&quot; != &#39;NR&#39;
@@ -298,83 +305,96 @@
 <img alt="../../_images/618.png" class="align-center" src="../../_images/618.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>You will notice the <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> layer now has a filter icon indicating that there is an active filter applied to this layer. Now we can do a spatial join using this layer. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">Vedrete il livello  <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> ha ora un&#8217;icona a forma di imbuto che indica che c&#8217;è un filtro attivo su questo livello. Ora possiamo eseguire un&#8217;unione (join) spaziale su questo livello. Vai sul pannello <span class="menuselection">Processing ‣ Toolbox</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/717.png" class="align-center" src="../../_images/717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Search and locate the <span class="menuselection">Vector general ‣ Join attribute by location (summary)</span> algorithm. Double-click to launch it.</li>
+<li><p class="first">Cerca e trova la voce <span class="menuselection">Vector general ‣ Join attribute by location (summary)</span> . Doppio click per lanciare il modulo.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/817.png" class="align-center" src="../../_images/817.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>In the <span class="guilabel">Join attribute by location (summary)</span> dialog, select <code class="docutils literal"><span class="pre">nybb</span></code> as the <span class="guilabel">Input layer</span>. The street layer <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> will be the <span class="guilabel">Join layer</span>. You can leave the <span class="guilabel">Geometry predicate</span> to the default <code class="docutils literal"><span class="pre">Intersects</span></code>. Click the <span class="guilabel">...</span> button next to <span class="guilabel">Fields to sumarize</span>.</li>
+<li><p class="first">Nella finestra <span class="guilabel">Join attribute by location (summary)</span> , seleziona <code class="docutils literal"><span class="pre">nybb</span></code> come <span class="guilabel">Input layer</span>. Il livello <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> sarò il <span class="guilabel">Join layer</span>. Potete lasciare il criterio di unione spaziale <span class="guilabel">Geometry predicate</span> impostato a quello predefinito (interseca) <code class="docutils literal"><span class="pre">Intersects</span></code>. Clicca il pulsante <span class="guilabel">...</span> vicino a  <span class="guilabel">Fields to sumarize</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/917.png" class="align-center" src="../../_images/917.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">A tip to help you select the correct input and join layers: The input layer is the one that will be modified will new attributes in the spatial join. As we want the average rating field to be added to the borough layer, it will be the input layer.</p>
+<p class="last">Una nota per definire bene i livelli di input e di unione (join): Il livello &#8220;input&#8221; è quello al quale vengono aggiunte le colonne del livello &#8220;unione&#8221; . Noi vogliamo aggiungere ai poligoni con i confini amministrativi, la media degli indici di qualità della pavimentazione stradale. Dunque il livello di input sarà quello dei confini amministrativi.</p>
 </div>
 <ol class="arabic simple" start="10">
-<li>Select <code class="docutils literal"><span class="pre">Rating_B</span></code> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Seleziona <code class="docutils literal"><span class="pre">Rating_B</span></code> e <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1017.png" class="align-center" src="../../_images/1017.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>Similarly, click the <span class="guilabel">...</span> button next to <span class="guilabel">Summaries to calculate</span>.</li>
+<li><p class="first">Clicca il pulsante   <span class="guilabel">...</span> vicino a <span class="guilabel">Summaries to calculate</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1120.png" class="align-center" src="../../_images/1120.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>Select <code class="docutils literal"><span class="pre">mean</span></code> as the summary operator and click <span class="guilabel">OK</span>. Now we are ready to start the processing. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Seleziona <code class="docutils literal"><span class="pre">mean</span></code> (media) come operatore di aggregazione e clicca <span class="guilabel">OK</span>. Ora possiamo lanciare il processo.  Clicca <span class="guilabel">Run</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1218.png" class="align-center" src="../../_images/1218.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>The processing algorithm will work through the features and apply the spatial join. Verify that the processing job was successful and click <span class="guilabel">Close</span>.</li>
+<li><p class="first">Verifica che il processo sia terminato senza problemi e clicca <span class="guilabel">Close</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1317.png" class="align-center" src="../../_images/1317.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Back in the main QGIS window, you will see a new <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer</span></code> layer added to canvas. Open the attribute table for this layer. You will see a new column <code class="docutils literal"><span class="pre">Rating_B_mean</span></code> is added to the input borough layer with the average rating of all streets that are interesecting with that feature.</li>
+<li><p class="first">Nella finestra di QGIS vedrete un livello <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer</span></code> aggiunto. Aprite la tabella attributi del livello. Vedrete una nuova colonna chiamata <code class="docutils literal"><span class="pre">Rating_B_mean</span></code> che contiene il valore medio degli indici di qualità della pavimentazione delle strate dentro ogni area.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1416.png" class="align-center" src="../../_images/1416.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Now we can perform a reverse operation. Sometimes your analysis requires getting attributes from another layer based on the spatial relationship but not compute any summary. We can use the <code class="docutils literal"><span class="pre">Join</span> <span class="pre">attribute</span> <span class="pre">by</span> <span class="pre">location</span></code> algorithm for such analysis. The task is to add the name of the borough to each feature in the streets layer based on which borough polygon it intersects with. Before we run this algorithm, let&#8217;s remove the filter from the <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> layer. Click the filter icon and press the <span class="guilabel">Clear</span> in the <span class="guilabel">Query Builder</span>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Ora facciamo un&#8217;operazione inversa. A volte si vuole aggiungere un attributo ad un livello prendendolo da un&#8217;altro livello. Usiamo il modulo <code class="docutils literal"><span class="pre">Join</span> <span class="pre">attribute</span> <span class="pre">by</span> <span class="pre">location</span></code> per questa analisi. L&#8217;obiettivo è quello di aggiungere, ad ogni segmento di strada, il nome dell&#8217;area amministrativa dove ricade. Prima di lanciare il procedimento, togliamo il filtro dal livello <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code>. Cliccare l&#8217;icona con il filtro e selezionare <span class="guilabel">Clear</span> nella ifnestra del <span class="guilabel">Query Builder</span>. Cliccare <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1515.png" class="align-center" src="../../_images/1515.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>Turn of the <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer</span></code> in the <span class="guilabel">Layers</span> panel. Find the <span class="menuselection">Vector general ‣ Join attribute by location</span> algorithm in the Processing Toolbox and double-click it to launch.</li>
+<li><p class="first">Nascondi il livello <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer</span></code> nel pannello <span class="guilabel">Layers</span>. Trova il modulo <span class="menuselection">Vector general ‣ Join attribute by location</span>  nel pannello Strumenti di processing e fai doppio click.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1614.png" class="align-center" src="../../_images/1614.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>Select <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> as the <span class="guilabel">Input layer</span> and <code class="docutils literal"><span class="pre">nybb</span></code> as the <span class="guilabel">Join layer</span>. You can leave the <span class="guilabel">Geometry predicate</span> to the default <code class="docutils literal"><span class="pre">Intersects</span></code>. Click the <span class="guilabel">...</span> button next to <span class="guilabel">Fields to add</span>  and select <code class="docutils literal"><span class="pre">BoroName</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Seleziona <code class="docutils literal"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> come  <span class="guilabel">Input layer</span> e <code class="docutils literal"><span class="pre">nybb</span></code> come <span class="guilabel">Join layer</span>. Lasciare pure il <span class="guilabel">Geometry predicate</span> al valore di default <code class="docutils literal"><span class="pre">Intersects</span></code>. Clicca il pulsante <span class="guilabel">...</span> vicino a <span class="guilabel">Fields to add</span>  e seleziona la colonna <code class="docutils literal"><span class="pre">BoroName</span></code>. Click <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1715.png" class="align-center" src="../../_images/1715.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>The line segment may cross a borough boundary, so we choose the <span class="guilabel">Join type</span> as <code class="docutils literal"><span class="pre">Crate</span> <span class="pre">separate</span> <span class="pre">feature</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">located</span> <span class="pre">feature</span> <span class="pre">(one-to-many)</span></code>. Click <span class="guilabel">Run</span>.</li>
+<li><p class="first">Siccome un segmento stradale può &#8220;scavalcare&#8221; un confine amministrativo, i.e. non trovarsi completamente dentro un unico confine amministrativo, selezioniamo l&#8217;opzione <span class="guilabel">Join type</span> come <code class="docutils literal"><span class="pre">Crate</span> <span class="pre">separate</span> <span class="pre">feature</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">located</span> <span class="pre">feature</span> <span class="pre">(one-to-many)</span></code>. Cliccare <span class="guilabel">Run</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>Once the processing finishes, open the attribute table of the newly added <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer</span></code>. You will see that there is a new <code class="docutils literal"><span class="pre">BoroName</span></code> attribute added to each street feature.</li>
+<li><p class="first">Una volta finito il process, aprite la tabella attributi del livello appena aggiunto <code class="docutils literal"><span class="pre">Joined</span> <span class="pre">layer</span></code>. Vedrete una nuova colonna <code class="docutils literal"><span class="pre">BoroName</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
@@ -408,7 +428,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento Mar 07, 2020.<br/>
+      Ultimo aggiornamento Mar 17, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
