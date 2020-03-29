@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Importing Spreadsheets or CSV files (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Importando Hojas de Cálculo o archivos CSV (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -84,7 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducción</a></li>
 <li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Trabajando con atributos (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Importando Hojas de Cálculo o archivos CSV (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
@@ -112,7 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Usando QGIS Browser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Abrir archivos BIL, BIP o BSQ en QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
@@ -122,7 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Realización de uniones de tabla (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../web_mapping_with_qgis2web.html">Mapeo web con QGIS2Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../creating_basemaps_with_qtiles.html">Creando Mapas Base con QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_plugins.html">Uso de complementos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../downloading_osm_data.html">Buscando y descargando datos de OpenStreetMap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../learning_resources.html">Recursos de aprendizaje QGIS</a></li>
@@ -232,46 +232,50 @@
       
 
   <div class="section" id="importing-spreadsheets-or-csv-files-qgis3">
-<h1>Importing Spreadsheets or CSV files (QGIS3)<a class="headerlink" href="#importing-spreadsheets-or-csv-files-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Many times the GIS data comes in a table or an Excel spreadsheet. Also, if you have a list lat/long coordinates, you can easily import this data in your GIS project.</p>
+<h1>Importando Hojas de Cálculo o archivos CSV (QGIS3)<a class="headerlink" href="#importing-spreadsheets-or-csv-files-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Muchas veces los datos SIG vienen en una tabla o una hoja de cálculo Excel. También, si usted tiene una lista de coordenadas latitud/longitud , usted puede importar fácilmente estos datos en su proyecto SIG.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will be importing a text file of earthquake data to QGIS.</p>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Estaremos importando un archivo texto de datos de sismo a QGIS.</p>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Learn more.</a></p>
-<p>Download <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">Significant Earthquake Database</a> text file.</p>
-<p>For convenience, you may directly download a copy of both the datasets from the links below:</p>
+<h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El National Geophysical Data Center de NOAA produce un gran conjunto de datos de todos los sismos significativos desde 2150 BC. <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Saber más.</a></p>
+<p>Descarga el archivo de texto <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">Base de Datos de Sismos Significativos</a>.</p>
+<p>Para su comodidad, puedes descargar directamente una copia de ambos conjuntos de datos desde los enlaces abajo:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#ngdc" id="id1">[NGDC]</a></p>
+<p>Fuente de Datos <a class="reference internal" href="../credits.html#ngdc" id="id1">[NGDC]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li>Examine your tabular data source. To import this data to QGIS, you will have to save it as a text file and need at least 2 columns which contain the X and Y coordinates. If you have a spreadsheet, use <cite>Save As</cite> function in your program to save it as a <cite>Tab Delimited File</cite> or a <cite>Comma Separated Values (CSV)</cite> file. Once you have the data exported this way, you can open it in a text editor such as Notepad to view the contents. In case of the Significant Earthquake Database, the data already comes as a text file which contains latitude and longitude of the earthquake centers along with other related attributes. You will see that each field is separated by a TAB.</li>
+<li><p class="first">Examine su fuente de datos tabulares. Para importar estos datos a QGIS, tendrá que guardarlo como un archivo de texto y necesitará al menos 2 columnas que contengan la coordenadas X e Y. Si usted tiene una hoja de cálculo, utilice la función <cite>Guardar como</cite> en su programa para guardarlo como un archivo delimitado por tabuladores o  archivo de <cite>Valores separados por comas (CSV)</cite>. Una vez que tenga los datos exportados de esta manera, puede ver el contenido abriéndolo utilizando un editor de texto como el Bloc de notas. En el caso de la base de datos de terremotos significativos, los datos ya vienen como un archivo de texto que contiene la latitud y la longitud de los centros del terremoto, junto con otros atributos relacionados. Usted verá que cada campo está separado por un tabulador.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/170.png" class="align-center" src="../../_images/170.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>QGIS3 comes with a unified data manager that allows you to load all the various supported data format. Click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You can also use <code class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">L</span></code> keyboard shortcut.</li>
+<li><p class="first">QGIS3 viene con un administrador unificado de datos que le permite cargar todos los formatos de datos soportados. Clic el botón <span class="guilabel">Abrir Administrador de Fuente de Datos</span> en la <span class="guilabel">Barra de Herramientas Fuente de Datos</span>. También puedes usar el atajo de teclado <code class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">L</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/236.png" class="align-center" src="../../_images/236.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Switch to the <span class="guilabel">Delimited Text</span> tab. Click the <span class="guilabel">...</span> button next to <span class="guilabel">File name</span> and specify the path to the text file you downloaded. In the <span class="guilabel">File format</span> section, select <span class="guilabel">Custom delimiters</span> and check <span class="guilabel">Tab</span>. The <span class="guilabel">Geometry definition</span> secction will be auto-populated if it finds a suitable X and Y coordinate fields. In our case they are <code class="docutils literal"><span class="pre">LONGITUDE</span></code> and <code class="docutils literal"><span class="pre">LATITUDE</span></code>. You may change it if the import selects the wrong fields. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code> CRS. If your file contained coordinates in a different CRS, you can select the appropriate CRS here. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Pásate a la pestaña <span class="guilabel">Texto Delimitado</span>. Clic el botón <span class="guilabel">...</span> junto a <span class="guilabel">Nombre de Archivo</span> y especifica la ruta al archivo de texto que descargaste. En la sección <span class="guilabel">Formato de Archivo</span>, selecciona <span class="guilabel">Delimitadores personalizados</span> y marca <span class="guilabel">Tab</span>. La sección <span class="guilabel">Definición de geometría</span> será auto-poblada si encuentra campos de coordenadas X y Y apropiados. En nuestro caso estos son <code class="docutils literal"><span class="pre">LONGITUDE</span></code> y <code class="docutils literal"><span class="pre">LATITUDE</span></code>. Puedes cambiarlo si la importación selecciona los campos errados. Puedes dejar la <span class="guilabel">CRS de la geometría</span> a la CRS predeterminada <code class="docutils literal"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code>. Si tu archivo contenía coordendas en una CRS diferente, puedes seleccionar la CRS apropiada aquí. Clic <span class="guilabel">Aceptar</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/326.png" class="align-center" src="../../_images/326.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">It is easy to confuse X and Y coordinates. Latitude specifies the north-south position of a point and hence it is a <strong>Y</strong> coordinate. Similarly Longitude specifies the east-west position of a point and it is a <strong>X</strong> coordinate.</p>
+<p class="last">Es fácil confundir coordenadas X y Y. La latitud especifica la posición norte-sur de un punto y por lo tanto es una coordenada <strong>Y</strong>. Similarmente la Longitud especifica la posición este-oeste de un punto y es una coordenada <strong>X</strong>.</p>
 </div>
 <ol class="arabic simple" start="4">
-<li>You will now see that the data will be imported and displayed in the QGIS canvas as a new layer called <code class="docutils literal"><span class="pre">signif</span></code>.</li>
+<li><p class="first">Ahora verás que los datos serán importados y mostrados en la pantalla QGIS como una nueva capa llamada <code class="docutils literal"><span class="pre">signif</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/413.png" class="align-center" src="../../_images/413.png" />
@@ -305,7 +309,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Mar 22, 2020.<br/>
+      Actualizado por última vez en Mar 29, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

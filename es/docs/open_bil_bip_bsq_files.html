@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Open BIL, BIP or BSQ files in QGIS &mdash; QGIS Tutorials and Tips</title>
+    <title>Abrir archivos BIL, BIP o BSQ en QGIS &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -84,7 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introducción</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Trabajando con atributos (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importando Hojas de Cálculo o archivos CSV (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
@@ -112,7 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Usando QGIS Browser</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Open BIL, BIP or BSQ files in QGIS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Abrir archivos BIL, BIP o BSQ en QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
@@ -122,7 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Realización de uniones de tabla (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Mapeo web con QGIS2Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creando Mapas Base con QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Uso de complementos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Buscando y descargando datos de OpenStreetMap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Recursos de aprendizaje QGIS</a></li>
@@ -232,64 +232,39 @@
       
 
   <div class="section" id="open-bil-bip-or-bsq-files-in-qgis">
-<h1>Open BIL, BIP or BSQ files in QGIS<a class="headerlink" href="#open-bil-bip-or-bsq-files-in-qgis" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>When dealing with remote sensing and scientific datasets, one often comes
-across data in formats like <strong>BIL</strong>, <strong>BIP</strong> or <strong>BSQ</strong>. <a class="reference external" href="http://www.gdal.org">The GDAL library</a> - which is used by QGIS to read raster files - has
-support for these formats, but it cannot open these files by itself. We will go
-through the process of creating support files so these formats can be read by
-QGIS.</p>
-<p>Band interleaved by line (BIL), band interleaved by pixel (BIP), and band
-sequential (BSQ) are common methods of organizing image data for multiband
-images. (<a class="reference external" href="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=BIL,_BIP,_and_BSQ_raster_files">Read more about these formats</a>)</p>
-<p>Typically, these files are accompanies by a <code class="docutils literal"><span class="pre">.hdr</span></code> file. If your dataset came
-with a <code class="docutils literal"><span class="pre">.hdr</span></code> file, make sure the root name of the .bil, .bsq or .bip file and
-the .hdf files match and they are in the same directory. For example, if the
-file is called <code class="docutils literal"><span class="pre">image.bil</span></code> , the associated file should be named <code class="docutils literal"><span class="pre">image.hdr</span></code> and
-present in the same directory as the <code class="docutils literal"><span class="pre">image.bil</span></code> file. Then when you go to
-<span class="menuselection">Layer ‣ Add Raster Layer</span>, select the <code class="docutils literal"><span class="pre">image.bil</span></code> file and
-it will open without problems.</p>
-<p>Many a times, the files do not come with an associated <code class="docutils literal"><span class="pre">.hdr</span></code> file. In such
-cases, you must create this file by hand as shown in this tutorial.</p>
+<h1>Abrir archivos BIL, BIP o BSQ en QGIS<a class="headerlink" href="#open-bil-bip-or-bsq-files-in-qgis" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Cuanto trate con conjuntos de datos de teledetección y científicos, a menudo uno se encuentra con datos en formatos como <strong>BIL</strong>, <strong>BIP</strong> o <strong>BSQ</strong>. <a class="reference external" href="http://www.gdal.org">La librería GDAL</a> - que es usada por QGIS para leer archivos raster - tiene soporte para estos formatos, pero no puede abrir estos archivos por si mismos. Iremos por el proceso para crear archivos de soporte para que estos formatos puedan ser leídos por QGIS.</p>
+<p>Band interleaved by line (BIL), band interleaved by pixel (BIP), and band sequential (BSQ) son métodos comunes de organización de datos de imagen para imágenes multibanda. (<a class="reference external" href="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=BIL,_BIP,_and_BSQ_raster_files">Lea más acerca de estos formatos en</a>)</p>
+<p>Típicamente, estos archivos están acompañados por un archivo <code class="docutils literal"><span class="pre">.hdr</span></code>. Si tu conjunto de datos vino con un archivo <code class="docutils literal"><span class="pre">.hdr</span></code>, asegúrese que el nombre raíz del archivo .bil, .bsq o .bip coincidan y que estén en el mismo directorio. Por ejemplo, si el archivo se llama <code class="docutils literal"><span class="pre">image.bil</span></code>, el archivo asociado deberá llamarse <code class="docutils literal"><span class="pre">image.hdr</span></code> y estar presente en el mismo directorio que el archivo <code class="docutils literal"><span class="pre">image.bil</span></code>. Entonces vaya a <span class="menuselection">Capa ‣ Agregar Capa Raster</span>, seleccione el archivo <code class="docutils literal"><span class="pre">image.bil</span></code> y abrirá sin problemas.</p>
+<p>Muchas veces, los archivos no vienen con un archivo asociado <code class="docutils literal"><span class="pre">.hdr</span></code>. En tales casos, debes crear este archivo a mano como se muestra en este tutorial.</p>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://glcf.umd.edu/data/landcover/data.shtml">AVHRR Global Land Cover Classification data</a> from <a class="reference external" href="http://glcf.umd.edu/">Global Land Cover
-Facility</a> as an example.</p>
-<p>The Global Coverage datasets are distributed as <strong>BSQ</strong> files. Download the <a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.bsq.gz">1
-Degree pixel resolution</a>
-dataset.</p>
-<p>For convenience, you may directly download a copy of the dataset from the link
-below:</p>
+<p>Usaremos el <a class="reference external" href="http://glcf.umd.edu/data/landcover/data.shtml">AVHRR Global Land Cover Classification data</a> del <a class="reference external" href="http://glcf.umd.edu/">Global Land Cover Facility</a> como ejemplo.</p>
+<p>Los conjuntos de datos Cobertura Global son distribuidos como archivos <strong>BSQ</strong>. Descargue el conjunto de datos <a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.bsq.gz">1 Degree pixel resolution</a>.</p>
+<p>Para su comodidad, puede descargar directamente una copia del conjunto de datos del siguiente enlace:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/gl-latlong-1deg-landcover.bsq.gz">gl-latlong-1deg-landcover.bsq.gz</a></p>
-<p>Data Source <a class="reference internal" href="credits.html#glcf" id="id1">[GLCF]</a></p>
+<p>Fuente de Datos <a class="reference internal" href="credits.html#glcf" id="id1">[GLCF]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li>Unzip and extract the .bsq file. On Windows, you may use the excellent
-<a class="reference external" href="http://www.7-zip.org/">7-Zip utility</a> to read and extract .gz file. You
-will see that you only have a .bsq file named
-<code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code>.  There is no hdr file.</li>
+<li><p class="first">Descomprima y extraiga el archivo .bsq. En Windows, puede utilizar la excelente <a class="reference external" href="http://www.7-zip.org/">utilidad 7-Zip</a> para leer y extraer un archivo .gz. Verá que sólo tiene un archivo .bsq llamado <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code>. No existe archivo hdr.</p>
+</li>
 </ol>
 <img alt="../_images/1171.png" class="align-center" src="../_images/1171.png" />
 <ol class="arabic simple" start="2">
-<li>Note that if you try to open the <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> file in
-QGIS as it is, you will get an error message.</li>
+<li><p class="first">Note que si intenta abrir el archivo <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> en QGIS tal como está, obtendrá un mensaje de error.</p>
+</li>
 </ol>
 <img alt="../_images/2131.png" class="align-center" src="../_images/2131.png" />
 <ol class="arabic simple" start="3">
-<li>To overcome this error, we will create a header file with <code class="docutils literal"><span class="pre">.hdr</span></code> extension.
-The header file contains information about the dataset and how it is organized.
-Usually, this information is supplied as part of Metadata for the dataset.
-If you do not have the metadata, look at the website or documentation for
-clues. Some of the information can be guessed if you do not know it. In case
-of this dataset, the data download page links to the <a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.glcf">metadata</a>.
-Download the metadata and open it.</li>
+<li><p class="first">Para superar este error, crearemos un archivo encabezado con extensión <code class="docutils literal"><span class="pre">.hdr</span></code>. El archivo encabezado contiene información acerca del conjunto de datos y cómo está organizado. Usualmente, esta información es proporcionada como parte de los Metadatos para el conjunto de datos. Si no tienes los metadatos, revisa en el sitio web o la documentación para pistas. Algo de la información puede ser adivinada si no la conoces. En el caso de este conjunto de datos, la página de descarga de datos enlaza a los <a class="reference external" href="ftp://ftp.glcf.umd.edu/glcf/Global_Land_Cover/Global/1deg/gl-latlong-1deg-landcover.glcf">metadatos</a>. Descargue los metadatos y ábralos.</p>
+</li>
 </ol>
 <img alt="../_images/370.png" class="align-center" src="../_images/370.png" />
 <ol class="arabic simple" start="4">
-<li>The .hdr file needs to be a plain text file in the following format. Some of
-these parameters are given to us and some needs to be worked out. <a class="reference external" href="http://www.gdal.org/frmt_various.html">Learn
-more about the format</a>.</li>
+<li><p class="first">El archivo .hdr necesita ser un archivo de texto plano en el siguiente formato. Alguno de los parámetros nos son dados y algunos necesitan ser investigados. <a class="reference external" href="http://www.gdal.org/frmt_various.html">Aprenda más acerca del formato en</a>.</p>
+</li>
 </ol>
 <div class="highlight-none"><div class="highlight"><pre><span></span>ncols &lt;number of columns or width of the raster&gt;
 nrows &lt;number of rows or height of the raster&gt;
@@ -303,32 +278,18 @@ byteorder &lt;byte order in which image pixel values are stored, msb or lsb&gt;
 </pre></div>
 </div>
 <ol class="arabic simple" start="5">
-<li>Open a text editor and create a file in the format specified in the previous
-step. Save the file as <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.hdr</span></code>. Make sure the file
-doesn’t have <code class="docutils literal"><span class="pre">.txt</span></code> at the end. Some of the values in the text files are
-easy to understand. The <strong>ncols</strong> and <strong>nrows</strong> come from the metadata as the
-Number of Lines and Number of Pixels per Line. The <strong>cellsize</strong> is 1 as the
-Pixel resolution from the metadata. The X,Y coordinate of lower-left corner
-needs to be worked out by us. Since the file covers the entire world and
-units are lat/long, <strong>xllcorner</strong> and <strong>yllcorner</strong> are -180 and -90
-respectively. We do not have any information about the nodata_value, so -9999
-is a safe bet. From metadata again, Pixel Format is Byte, so <strong>nbits</strong> will
-equal to 8 and pixeltype will be <strong>byte_unsigned</strong>. We do not have
-information about the byteorder, so leave it as msbfirst. You may download
-the correctly formatted HDR file from <a class="reference external" href="../../downloads/gl-latlong-1deg-landcover.hdr">here</a>.</li>
+<li><p class="first">Abra un editor de texto y cree un archivo en el formato especificado en el paso previo. Guarde el archivo como <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.hdr</span></code>. Asegúrese que el archivo no tiene <code class="docutils literal"><span class="pre">.txt</span></code> al final. Alguno de los valores en los archivos texto son fáciles de comprender. Las <strong>ncols</strong> y <strong>nrows</strong> vienen de los metadatos como el Número de Líneas y Número de Píxeles por Línea. El <strong>cellsize</strong> es 1 como la resolución de Píxel de los metadatos. La coordenada X,Y de la esquina inferior izquierda necesita ser identificada por nosotros. Debido a que el archivo cubre todo el mundo y las unidades son lat/long, <strong>xllcorner</strong> y <strong>yllcorner</strong> son -180 y -90 respectivamente. No tenemos ninguna información acerca de nodata_value, así que -9999 es un valor seguro. De los metadatos de nuevo, Pixel Format es Byte, así que <strong>nbits</strong> será igual a 8 y pixeltype será <strong>byte_unsigned</strong>. No tenemos información acerca de byteorder, así que lo dejamos como msbfirst. Puede descargar el archivo HDR correctamente formateado de <a class="reference external" href="../../downloads/gl-latlong-1deg-landcover.hdr">aquí</a>.</p>
+</li>
 </ol>
 <img alt="../_images/550.png" class="align-center" src="../_images/550.png" />
 <ol class="arabic simple" start="6">
-<li>Now that you have the header file, put it in the same directory as
-<code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code>. Then in QGIS, go to
-<span class="menuselection">Layer ‣ Add Raster Layer</span>. Select
-<code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> as your input and click <span class="guilabel">Open</span>.</li>
+<li><p class="first">Ahora usted tiene el archivo encabezado, póngalo en el mismo directorio que <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code>. Luego en QGIS, vaya a  <span class="menuselection">Capa ‣ Agregar Capa Raster</span>. Seleccione <code class="docutils literal"><span class="pre">gl-latlong-1deg-landcover.bsq</span></code> como su entrada y clic <span class="guilabel">Abrir</span>.</p>
+</li>
 </ol>
 <img alt="../_images/648.png" class="align-center" src="../_images/648.png" />
 <ol class="arabic simple" start="7">
-<li>In the next screen, you may be prompted to choose a CRS. Since the data is
-in Lat/Long, choose <strong>WGS84 EPSG:4326</strong> as your CRS. Now you will see the
-dataset loaded in QGIS.</li>
+<li><p class="first">En la siguiente pantalla, puede ser que se te pida la CRS. Debido a que los datos están en Lat/Lon, elige <strong>WGS84 EPSG:4326</strong> como tu CRS. Ahora verás el conjunto de datos cargado en QGIS.</p>
+</li>
 </ol>
 <img alt="../_images/747.png" class="align-center" src="../_images/747.png" />
 </div>
@@ -360,7 +321,7 @@ dataset loaded in QGIS.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Mar 22, 2020.<br/>
+      Actualizado por última vez en Mar 29, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

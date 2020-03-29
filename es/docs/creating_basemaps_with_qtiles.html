@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Creating Basemaps with QTiles &mdash; QGIS Tutorials and Tips</title>
+    <title>Creando Mapas Base con QTiles &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -84,7 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introducción</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Trabajando con atributos (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importando Hojas de Cálculo o archivos CSV (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
@@ -112,7 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Usando QGIS Browser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Abrir archivos BIL, BIP o BSQ en QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
@@ -122,7 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Realización de uniones de tabla (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Mapeo web con QGIS2Web</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Creando Mapas Base con QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Uso de complementos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Buscando y descargando datos de OpenStreetMap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Recursos de aprendizaje QGIS</a></li>
@@ -232,104 +232,67 @@
       
 
   <div class="section" id="creating-basemaps-with-qtiles">
-<h1>Creating Basemaps with QTiles<a class="headerlink" href="#creating-basemaps-with-qtiles" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Tiles have revolutionized the idea of web mapping and has given us fast and
-easy access to large datasets. Tiling schemes divide the world into small tiles
-(typically 256 x 256 pixels) for each zoom level and pre-render datasets to
-these tiles. This way only a small fraction of a large dataset is served to the
-user at any given time - resulting in a map that can be zoomed or panned with
-ease over the internet. There are many methods to create tiles from GIS
-datasets. One easy way to create tiles from your QGIS project is a plugin
-called <strong>QTiles</strong>. In this tutorial, you will learn how to create PNG tiles
-from any set of layers loaded in QGIS and create a basemap to be used in a web
-mapping project.</p>
+<h1>Creando Mapas Base con QTiles<a class="headerlink" href="#creating-basemaps-with-qtiles" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Las teselas han revolucionado la idea de mapeo web y nos ha dado acceso rápido y fácil a grandes conjuntos de datos. Los esquemas de mosaicos de teselas dividen el mundo en pequeñas teselas (típicamente 256 x 256 píxeles) para cada nivel de acercamiento y pre-representan los conjuntos de datos a estas teselas. De esta manera sólo una pequeña fracción de un conjunto de datos grande es servido al usuario en un momento dao - resultando en un mapa que puede ser acercado o explorado con facilidad sobre internet. Hay varios métodos para crear teselas a partir de conjuntos de datos SIG. Una manera fácil de crear teselas de tu proyecto QGIS es un complemento llamado <strong>QTiles</strong>. En este tutorial, aprenderás como crear teselas PNG de cualquier conjunto de capas cargadas en QGIS y crear un mapa base a ser usado en un proyecto de mapeo web.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will create tiles from the Natural Earth raster covering the entire planet.</p>
+<h2>Vista General de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Crearemos teselas del raster Natural Earth que cubre todo el planeta.</p>
 </div>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-2/">Natural Earth 2</a>
-dataset from Natural Earth.</p>
-<p>Download the medium-size <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/NE2_LR_LC_SR_W_DR.zip">Natural Earth II with Shaded Relief, Water, and
-Drainages</a>
-zip file.</p>
-<p>Data Source <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>Usaremos el conjunto de datos <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-2/">Natural Earth 2</a> de Natural Earth.</p>
+<p>Descargue el archivo de tamaño medio <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/NE2_LR_LC_SR_W_DR.zip">Natural Earth II with Shaded Relief, Water, and Drainages</a></p>
+<p>Fuente de Datos <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li>Unzip the downloaded <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.zip</span></code> file to a folder on your
-computer. Open QGIS and go to
-<span class="menuselection">Layer ‣ Add Raster Layer</span>. Browse to the location of the
-extracted files and select <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.tif</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Descomprima el archivo <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.zip</span></code> descargado en una carpeta en su computadora. Abra QGIS y vaya a <span class="menuselection">Capa ‣ Agregar Capa Raster</span>. Navegue a la ubicación de los archivos extraídos y seleccione <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W.tif</span></code>. Clic <span class="guilabel">Aceptar</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1148.png" class="align-center" src="../_images/1148.png" />
 <ol class="arabic simple" start="2">
-<li>Install the <code class="docutils literal"><span class="pre">QTiles</span></code> plugin by going to <span class="menuselection">Plugins ‣ Manage and
-Install Plugin</span>. Note that the plugin is currently marked <strong>experimental</strong>,
-so you will need to check <span class="guilabel">Show also experimental plugins</span> in
-Plugin Settings. (See <a class="reference internal" href="using_plugins.html"><em>Uso de complementos</em></a> for more details on installing
-plugins in QGIS). Once the plugin is installed, go to
-<span class="menuselection">Plugins ‣ QTiles ‣ QTiles</span>.</li>
+<li><p class="first">Instale el complemento <code class="docutils literal"><span class="pre">QTiles</span></code> yendo a <span class="menuselection">Complementos ‣ Administrar e Instalar Complemento</span>. Note que el complemento está actualmente marcado como <strong>experimental</strong>, por lo que necesitará marcar <span class="guilabel">Mostrar también complemento experimentales</span> en la Configuración de Complemento. (Vea <a class="reference internal" href="using_plugins.html"><em>Uso de complementos</em></a> para más detalles sobre la instalación de complementos en QGIS). Una vez que el complemento esté instalado, vaya a <span class="menuselection">Complementos ‣ QTiles ‣ QTiles</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2103.png" class="align-center" src="../_images/2103.png" />
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">QTiles</span> dialog, select <span class="guilabel">Directory</span> as the
-<span class="guilabel">Output</span> and browse to a folder of your choice where the output
-tiles will be created. Choose <span class="guilabel">Layer extent</span> of the
-<code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W</span></code> layer as the extent of the tiles. Set the
-<span class="guilabel">Maximum Zoom</span> to <code class="docutils literal"><span class="pre">6</span></code>. Expand the <span class="guilabel">Parameters</span> section
-and check the <span class="guilabel">Write Leaflet-based viewer</span>. Click <span class="guilabel">Run</span>
-to start the process of rendering the tiles.</li>
+<li><p class="first">En el diálogo <span class="guilabel">QTiles</span>, seleccione <span class="guilabel">Directorio</span> como la <span class="guilabel">Salida</span> y explore a una carpeta de su elección donde serán creadas las teselas de salida. Escoja <span class="guilabel">Extensión de la capa</span> de la capa <code class="docutils literal"><span class="pre">NE2_LR_LC_SR_W</span></code> como la extensión de las teselas. Establezca el <span class="guilabel">Acercamiento máximo</span> a <code class="docutils literal"><span class="pre">6</span></code>. Expanda la sección <span class="guilabel">Parámetros</span> y marque <span class="guilabel">Escribir visualizador basado en Leaflet</span>. Clic <span class="guilabel">Ejecutar</span> para iniciar el proceso de representación de las teselas.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">The number of tiles increase 4 times for every additional zoom level
-and since our layer has an extend of the entire world - there will be millions
-of tiles at higher zoom levels.</p>
+<p class="last">El número de teselas se incrementa 4 veces para cada nivel de acercamiento adicional y debido a que nuestra capa tiene una extensión de todo el mundo - habrán millones de teselas en los niveles de acercamiento mayores.</p>
 </div>
 <img alt="../_images/355.png" class="align-center" src="../_images/355.png" />
 <ol class="arabic simple" start="4">
-<li>Once the process finishes, close the <span class="guilabel">QTiles</span> dialog and browse to
-the output folder you had selected. You will notice folders for each zoom
-level upto the maximum zoom level. Each folder further contains subfolder
-for X coordinates and then the actual tiles named for Y coordinates.</li>
+<li><p class="first">Una vez que termine el proceso, cierre el diálogo <span class="guilabel">QTiles</span> y navegue a la carpeta de salida que había seleccionado. Notará carpetas para cada nivel de acercamiento hast el máximo nivel de acercamiento. Cada carpeta contien más subcarpetas para las coordenadas X y luego las teselas propias nombradas para las coordenadas Y.</p>
+</li>
 </ol>
 <img alt="../_images/437.png" class="align-center" src="../_images/437.png" />
 <ol class="arabic simple" start="5">
-<li>In the parent directory of top-level tiles directory, you will find a
-<code class="docutils literal"><span class="pre">QTiles.html</span></code> file. This is a simple viewer to explore the tiles using the
-Leaflet web mapping library.</li>
+<li><p class="first">En el directorio padre de las teselas de nivel superior, encontrarás un archivo <code class="docutils literal"><span class="pre">QTiles.html</span></code>. Este es un visualizador simple para explorar las teselas usando la librería de mapeo web Leaflet.</p>
+</li>
 </ol>
 <img alt="../_images/537.png" class="align-center" src="../_images/537.png" />
 <ol class="arabic simple" start="6">
-<li>Double-click the <code class="docutils literal"><span class="pre">QTiles.html</span></code> to open it in a web browser. You can zoom
-and pan around to see the tiles seamlessly form the original raster layer.</li>
+<li><p class="first">Doble-clic el <code class="docutils literal"><span class="pre">QTiles.html</span></code> para abrirlo en un navegador web. Podrás acercarte y desplazarlo para ver las teselas formar perfectamente la capa raster original.</p>
+</li>
 </ol>
 <img alt="../_images/635.png" class="align-center" src="../_images/635.png" />
 <ol class="arabic simple" start="7">
-<li>You can use these tiles with any web-mapping library that supports XYZ
-tiling schemes and overlay other layers on top. To demonstrate the
-usefulness and portability of such tiles, we will now add the tiles created
-in this tutorial as the basemap for the airports map created in
-<a class="reference internal" href="web_mapping_with_qgis2web.html"><em>Mapeo web con QGIS2Web</em></a> tutorial. In that tutorial, we chose to use
-a ready-made basemap from OpenStreetMap. We can easily swap that with our
-own custom basemap created in this tutorial. Go to the output directory
-where the qgis2web map was exported. Open the <span class="menuselection">Layers ‣
-layers.js</span> file created during the export.</li>
+<li><p class="first">Puedes usar estas teselas con cualquier librería de mapeo web que soporte esquemas de teselas XYZ y sobreponer otras capas encima. Para demostrar la utilidad y portabilidad de tales teselas, ahora agregaremos las teselas creadas en este tutorial como el mapa base para el mapa de aeropuertos creado en el tutorial <a class="reference internal" href="web_mapping_with_qgis2web.html"><em>Mapeo web con QGIS2Web</em></a>. En ese tutorial, escogimos usar un mapa base preparado a partir de OpenStreetMap. Podemos fácilmente intercambiarlo con nuestro mapa base personalizado creado en este tutorial. Vaya al directorio de salida donde se exportó el mapa qgis2web. Abre el archivo  <span class="menuselection">Capas ‣ layers.js</span> creado durante la exportación.</p>
+</li>
 </ol>
 <img alt="../_images/735.png" class="align-center" src="../_images/735.png" />
 <ol class="arabic simple" start="8">
-<li>Locate the code block where the <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">B</span> <span class="pre">&amp;</span> <span class="pre">W</span></code> base layer is defined.</li>
+<li><p class="first">Localice el bloque de código donde la capa base <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">B</span> <span class="pre">&amp;</span> <span class="pre">W</span></code> está definida.</p>
+</li>
 </ol>
 <img alt="../_images/834.png" class="align-center" src="../_images/834.png" />
 <ol class="arabic simple" start="9">
-<li>Replace the definition of the base layer with our own tiles. At this point,
-the tiles exist only on your computer, so the URL will be the local
-directory. But you can also upload the tiles to a server and give the URL of
-the server. Change the title and source with appropriate values for Natural
-Earth. Save the file.</li>
+<li><p class="first">Reemplace la definición de la capa base con nuestras propias teselas.  A esta altura, las teselas existen sólo en su computadora, así que la URL será a un directorio local. Puede puede también subir las teselas a un servidor y dar la URL del servidor. Cambie el título y fuente con valores apropiados para Natural Earth. Guarde el archivo.</p>
+</li>
 </ol>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">new</span> <span class="nx">ol</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">Tile</span><span class="p">({</span>
  <span class="s1">&#39;title&#39;</span><span class="o">:</span> <span class="s1">&#39;Natural Earth 2&#39;</span><span class="p">,</span>
@@ -343,8 +306,8 @@ Earth. Save the file.</li>
 </div>
 <img alt="../_images/935.png" class="align-center" src="../_images/935.png" />
 <ol class="arabic simple" start="10">
-<li>Open the web map in a browser and you will see that the B &amp; W OSM layer is
-replaced by our freshly created tiles.</li>
+<li><p class="first">Abra el mapa web en el navegador y verá que la capa B &amp; W OSM es reemplazada por nuestra teselas recientemente creadas.</p>
+</li>
 </ol>
 <img alt="../_images/1033.png" class="align-center" src="../_images/1033.png" />
 </div>
@@ -376,7 +339,7 @@ replaced by our freshly created tiles.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Mar 22, 2020.<br/>
+      Actualizado por última vez en Mar 29, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

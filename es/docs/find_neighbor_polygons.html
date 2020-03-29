@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Find Neighbor Polygons in a Layer &mdash; QGIS Tutorials and Tips</title>
+    <title>Encontrar Polígonos Vecinos en una capa &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -82,7 +82,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introducción</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Trabajando con atributos (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importando Hojas de Cálculo o archivos CSV (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
@@ -110,7 +110,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Usando QGIS Browser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Abrir archivos BIL, BIP o BSQ en QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
@@ -120,7 +120,7 @@
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Realización de uniones de tabla (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Mapeo web con QGIS2Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creando Mapas Base con QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Uso de complementos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Buscando y descargando datos de OpenStreetMap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Recursos de aprendizaje QGIS</a></li>
@@ -222,84 +222,69 @@
       
 
   <div class="section" id="find-neighbor-polygons-in-a-layer">
-<h1>Find Neighbor Polygons in a Layer<a class="headerlink" href="#find-neighbor-polygons-in-a-layer" title="Enlazar permanentemente con este título">¶</a></h1>
+<h1>Encontrar Polígonos Vecinos en una capa<a class="headerlink" href="#find-neighbor-polygons-in-a-layer" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">If you are using QGIS3, there is a simpler and better way to do this analysis using the aggregate function. See my post <a class="reference external" href="https://spatialthoughts.com/2019/05/23/neighbor-polygons-aggregate-qgis/">Find Neighbor Polygons using Summary Aggregate Function in QGIS</a></p>
+<p class="last">Si estás usando QGIS3, hay una manera más simple y mejor de hacer este análisis usando la función agregar. Vea my publicación <a class="reference external" href="https://spatialthoughts.com/2019/05/23/neighbor-polygons-aggregate-qgis/">Find Neighbor Polygons using Summary Aggregate Function in QGIS</a></p>
 </div>
-<p>There are some use cases where you want to find all neighboring polygons of
-each of the polygons in a layer. With a little python script, we can accomplish
-this and much more in QGIS. Here is an example script you can use to find all
-polygons that share boundary with each of the polygons in a layer and also add
-their names to the attribute table. As an added bonus, the script also sums up
-an attribute of your choice from all the neighboring polygons.</p>
+<p>Hay algunos casos de uso donde quieres encontrar todos los polígonos que son vecinos de cada uno de los polígonos en una capa. Con un pequeño script python, puedes alcanzar esto y mucho más en QGIS. Aquí tiene un script ejemplo que puede usar para encontrar todos los polígonos que comparten borde con cada uno de los polígonos en una capa y también agregar sus nombres a la tabla de atributos. Como un bono adicional, el script también acumula la suma de un atributo de su elección de todos los polígonos vecinos.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>To demonstrate how the script works, we will use a layer of country polygons
-and find countries that share the border. We also want to compute the total
-population of the country’s neighbors.</p>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para demostrar como funciona el script, usaremos una capa de polígonos de países y encontraremos países que comparte el límite. También queremos calcular la población total de los vecinos del país.</p>
 </div>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Countries</a>
-dataset from Natural Earth.</p>
-<p>Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - countries shapefile.</a>.</p>
-<p>Data Source <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>Usaremos el conjunto de datos <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Countries</a> de Natural Earth.</p>
+<p>Descargar el <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">archivo shape Admin 0 - countries.</a>.</p>
+<p>Fuente de Datos <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="get-the-script">
 <h2>Obtener el script<a class="headerlink" href="#get-the-script" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Download the <a class="reference download internal" href="../_downloads/neighbors.py" download=""><code class="xref download docutils literal"><span class="pre">neighbors.py</span> <span class="pre">script</span></code></a>
-and save it to your disk.</p>
+<p>Descargue el <a class="reference download internal" href="../_downloads/neighbors.py" download=""><code class="xref download docutils literal"><span class="pre">neighbors.py</span> <span class="pre">script</span></code></a> y guárdelo en su disco.</p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li>Load the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer by going to
-<span class="menuselection">Layer ‣ Add Vector Layer</span>.</li>
+<li><p class="first">Cargue la capa <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> yendo a  <span class="menuselection">Capa ‣ Agregar Capa Vectorial</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1157.png" class="align-center" src="../_images/1157.png" />
 <ol class="arabic simple" start="2">
-<li>The script uses 2 fields to perform the action. A name field and a field
-that you want to sum up. Use the <span class="guilabel">Identify</span> tool to click on any
-feature and examine the attributes. In this case the name field is <strong>NAME</strong> and we want
-to sum up the population estimates from <strong>POP_EST</strong> field.</li>
+<li><p class="first">El script usa 2 campos para realizar la acción. Un campo nombre y un campo que quieres que se sume. Usa la herramienta <span class="guilabel">Identificar</span> para hacer clic en cualquier elemento y examinar los atributos. En este caso el campo nombre es <strong>NAME</strong> y queremos sumar los estimados de población a partir del campo <strong>POP_EST</strong>.</p>
+</li>
 </ol>
 <img alt="../_images/2108.png" class="align-center" src="../_images/2108.png" />
 <ol class="arabic simple" start="3">
-<li>Go to <span class="menuselection">Plugins ‣ Python Console</span>.</li>
+<li><p class="first">Vaya a <span class="menuselection">Complementos ‣ Consola de Python</span>.</p>
+</li>
 </ol>
 <img alt="../_images/362.png" class="align-center" src="../_images/362.png" />
 <ol class="arabic simple" start="4">
-<li>In the <span class="guilabel">Python Console</span> window, click the <span class="guilabel">Show Editor</span>
-button.</li>
+<li><p class="first">En la ventan <span class="guilabel">Python Console</span>, clic al botón <span class="guilabel">Mostrar Editor</span></p>
+</li>
 </ol>
 <img alt="../_images/442.png" class="align-center" src="../_images/442.png" />
 <ol class="arabic simple" start="5">
-<li>In the <span class="guilabel">Editor</span> panel, click the <span class="guilabel">Open file</span> button and
-browse to downloaded <code class="docutils literal"><span class="pre">neighbors.py</span></code> script and click <span class="guilabel">Open</span>.</li>
+<li><p class="first">En el panel <span class="guilabel">Editor</span>, clic al botón <span class="guilabel">Abrir archivo</span> y navegue al script descargado <code class="docutils literal"><span class="pre">neighbors.py</span></code> y clic <span class="guilabel">Abrir</span>.</p>
+</li>
 </ol>
 <img alt="../_images/542.png" class="align-center" src="../_images/542.png" />
 <ol class="arabic simple" start="6">
-<li>Once the script is loaded, you may want to change the <code class="docutils literal"><span class="pre">_NAME_FIELD</span></code> and
-<code class="docutils literal"><span class="pre">_SUM_FIELD</span></code> values to match the attributes from your own layer. If you
-are working with the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer, you can leave those
-as they are. Click the <span class="guilabel">Save</span> button in the <span class="guilabel">Editor</span>
-panel if you made any changes. Now click the <span class="guilabel">Run script</span> button
-to execute the script.</li>
+<li><p class="first">Una vez que el script está cargado, puedes querer cambiar los valores <code class="docutils literal"><span class="pre">_NAME_FIELD</span></code> y <code class="docutils literal"><span class="pre">_SUM_FIELD</span></code> para que coincidan con los atributos de tu propia capa. Si estás trabajando con la capa <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code>, puedes dejarlos tal como están. Clic al botón  <span class="guilabel">Guardar</span> en el panel <span class="guilabel">Editor</span> si has hecho algún cambio. Ahora clic al botón <span class="guilabel">Ejecutar script</span> para ejecutar el script.</p>
+</li>
 </ol>
 <img alt="../_images/640.png" class="align-center" src="../_images/640.png" />
 <ol class="arabic simple" start="7">
-<li>Once the script finishes, right-click the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer
-and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Una vez que el script finalizar, clic-derecho a la capa <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> y selecciona <span class="guilabel">Abrir Tabla de Atributos</span>.</p>
+</li>
 </ol>
 <img alt="../_images/740.png" class="align-center" src="../_images/740.png" />
 <ol class="arabic simple" start="8">
-<li>You will notice 2 new attributes called <code class="docutils literal"><span class="pre">NEIGHBORS</span></code> and <code class="docutils literal"><span class="pre">SUM</span></code>. These
-were added by the script.</li>
+<li><p class="first">Notarás 2 nuevos atributos llamados <code class="docutils literal"><span class="pre">NEIGHBORS</span></code> y <code class="docutils literal"><span class="pre">SUM</span></code>. Estos fueron agregados por el script.</p>
+</li>
 </ol>
 <img alt="../_images/839.png" class="align-center" src="../_images/839.png" />
-<p>Below is the complete script for reference. You may modify it to suit your
-needs.</p>
+<p>Abajo está el script completo de referencia. Puedes modificarlo para que se ajuste a tus necesidades.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
 <span class="c1"># Copyright 2014 Ujaval Gandhi</span>
 <span class="c1">#</span>
@@ -412,7 +397,7 @@ needs.</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Mar 22, 2020.<br/>
+      Actualizado por última vez en Mar 29, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
