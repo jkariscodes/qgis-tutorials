@@ -113,11 +113,11 @@
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Usando QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Abrir archivos BIL, BIP o BSQ en QGIS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Iniciándote con la Programación Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Usando Funciones de Expresión Python Personalizadas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Realización de uniones de tabla (PyQGIS)</a></li>
@@ -233,45 +233,38 @@
 
   <div class="section" id="performing-table-joins-pyqgis">
 <h1>Realización de uniones de tabla (PyQGIS)<a class="headerlink" href="#performing-table-joins-pyqgis" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>This tutorial shows how to use Python scripting in QGIS (PyQGIS) to perform a
-table join and apply a graduated style to the resulting layer. This tutorial
-replicates the steps of the <a class="reference internal" href="performing_table_joins.html"><em>Realización de uniones de tabla</em></a> tutorial using only
-python scripting.</p>
+<p>Este tutorial muestra como usar script Python en QGIS (PyQGIS) para realizar una unión de tablas y aplicar un estilo graduado a la capa resultante. Este tutorial replica los pasos del tutorial <a class="reference internal" href="performing_table_joins.html"><em>Realización de uniones de tabla</em></a> usando sólo script python.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Please refer to <a class="reference internal" href="performing_table_joins.html"><em>Realización de uniones de tabla</em></a> tutorial for the overview.</p>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Por favor refiérase al tutorial <a class="reference internal" href="performing_table_joins.html"><em>Realización de uniones de tabla</em></a> para la vista general.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Otras habilidades que aprenderá.<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li>Loading zipped layers in QGIS via Python.</li>
-<li>Using QgsGraduatedSymbolRendererV2 to apply a graduated style to a vector
-layer.</li>
+<li><p class="first">Cargando capas comprimidas en QGIS mediante Python.</p>
+</li>
+<li><p class="first">Usando QgsGraduatedSymbolRendererV2 para aplicar un estilo graduado a la capa vectorial.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Download the following files to your computer.</p>
-<p><a class="reference external" href="http://www.qgistutorials.com/downloads/tl_2013_06_tract.zip">tl_2013_06_tract.zip</a></p>
-<p><a class="reference external" href="http://www.qgistutorials.com/downloads/ca_tracts_pop.csv">ca_tracts_pop.csv</a></p>
-<p><a class="reference external" href="http://www.qgistutorials.com/downloads/ca_tracts_pop.csvt">ca_tracts_pop.csvt</a></p>
-<p>Data Source <a class="reference internal" href="credits.html#tiger" id="id1">[TIGER]</a> <a class="reference internal" href="credits.html#uscensus" id="id2">[USCENSUS]</a></p>
+<p>Descargue los siguientes archivos a su computadora.</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>tl_2013_06_tract.zip <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>ca_tracts_pop.csv <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>ca_tracts_pop.csvt <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p>Fuente de Datos <a class="reference internal" href="credits.html#tiger" id="id1">[TIGER]</a> <a class="reference internal" href="credits.html#uscensus" id="id2">[USCENSUS]</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>You can type the following commands in the <span class="guilabel">Python Console</span> or the
-built-in <span class="guilabel">Editor</span> in QGIS.</p>
+<p>Puedes escribir los siguientes comandos en la <span class="guilabel">Console Python</span> o el <a href="#id1"><span class="problematic" id="id2">:guilabeSl:`Editor`</span></a> incorporado en QGIS.</p>
 <ol class="arabic simple">
-<li>Load the shapefile. The Census Tracts file is a zip file containing the
-shapefile. While we can unzip it and load the shapefile, The OGR provider
-has the ability to load the zip file directly via a Virtual Filesystem.
-Adding <code class="docutils literal"><span class="pre">/vsizip/</span></code> in the path, we can access the shapefile contained in
-the zip archive.</li>
+<li><p class="first">Cargue el archivo shape. El archivo Zonas Censales es una archivo zip que contiene el archivo shape. A pesar de que podemos descomprimirlo y cargar el archivo shape, el proveedor OGR tiene la habilidad para cargar el archivo zip directamente mediante un Sistema de Archivo Virtual. Agregando  <code class="docutils literal"><span class="pre">/vsizip/</span></code> en la ruta, podemos acceder al archivo shape contenido en el archivo zip.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">The zip_uri would begin with <code class="docutils literal"><span class="pre">/vsizip//</span></code> on Linux and Mac systems.
-(Note the extra /)</p>
+<p class="last">La zip_url comenzaría con <code class="docutils literal"><span class="pre">/vsizip//</span></code> en sistemas Linux y Mac. (Note el / extra)</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">zip_uri</span> <span class="o">=</span> <span class="s1">&#39;/vsizip/C:/Users/Ujaval/Downloads/tl_2013_06_tract.zip&#39;</span>
 <span class="n">shp</span> <span class="o">=</span>  <span class="n">QgsVectorLayer</span><span class="p">(</span><span class="n">zip_uri</span><span class="p">,</span> <span class="s1">&#39;tl_2013_06_tract&#39;</span><span class="p">,</span> <span class="s1">&#39;ogr&#39;</span><span class="p">)</span>
@@ -280,8 +273,8 @@ the zip archive.</li>
 </div>
 <img alt="../_images/1178.png" class="align-center" src="../_images/1178.png" />
 <ol class="arabic simple" start="2">
-<li>Load the CSV file. As the CSV file doesn&#8217;t contain any spatial data, we load
-it as a table using the <code class="docutils literal"><span class="pre">delimitedtext</span></code> provider.</li>
+<li><p class="first">Cargue el archivo CSV. Como el archivo CS no contiene ningún dato espacial, lo cargaremos como una tabla usado el proveedor <a href="#id1"><span class="problematic" id="id2">``</span></a>delimitedtext`.`</p>
+</li>
 </ol>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">csv_uri</span> <span class="o">=</span> <span class="s1">&#39;file:///C:/Users/Ujaval/Downloads/ca_tracts_pop.csv?delimiter=,&#39;</span>
 <span class="n">csv</span> <span class="o">=</span> <span class="n">QgsVectorLayer</span><span class="p">(</span><span class="n">csv_uri</span><span class="p">,</span> <span class="s1">&#39;ca_tracts_pop&#39;</span><span class="p">,</span> <span class="s1">&#39;delimitedtext&#39;</span><span class="p">)</span>
@@ -290,17 +283,12 @@ it as a table using the <code class="docutils literal"><span class="pre">delimit
 </div>
 <img alt="../_images/2136.png" class="align-center" src="../_images/2136.png" />
 <ol class="arabic simple" start="3">
-<li>Create the table join. Table joins in QGIS are performed using
-<code class="docutils literal"><span class="pre">QgsVectorJoinInfo</span></code> object. We need to specify the <code class="docutils literal"><span class="pre">GEO.id2</span></code> field from
-the CSV layer as the <span class="guilabel">Join Field</span> and the <code class="docutils literal"><span class="pre">GEOID</span></code> field from the
-shapefile layer as the <span class="guilabel">Target Field</span>. Once you run the following
-code, the shapefile layer will have additional attributes joined from the
-csv layer.</li>
+<li><p class="first">Cree la tabla de unión. Las uniones de tabla son realizadas en QGIS usando el objeto <code class="docutils literal"><span class="pre">QgsVectorJoinInfo</span></code>. Necesitamos especificar el campo <code class="docutils literal"><span class="pre">GEO.id2</span></code> de la capa CSV como el <span class="guilabel">Campo de Unión</span> y el campo <code class="docutils literal"><span class="pre">GEOID</span></code> de la capa archivo shape como el <span class="guilabel">Campo Destino</span>. Una vez que ejecutas el código siguiente, la capa archivo shape tendrá atributos adicionales unidos a la capa csv.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">A common pitfall when using QgsVectorJoinInfo is that both the layers must be
-loaded in the QgsMapLayerRegistry - otherwise the join would not work.</p>
+<p class="last">Una dificultad común cuando se usa QgsVectorJoinInfo es que ambas capas deben estar cargadas en el QgsMapLayerRegistry - si no la unión no funcionaría.</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">shpField</span><span class="o">=</span><span class="s1">&#39;GEOID&#39;</span>
 <span class="n">csvField</span><span class="o">=</span><span class="s1">&#39;GEO.id2&#39;</span>
@@ -314,16 +302,12 @@ loaded in the QgsMapLayerRegistry - otherwise the join would not work.</p>
 </div>
 <img alt="../_images/375.png" class="align-center" src="../_images/375.png" />
 <ol class="arabic simple" start="4">
-<li>An easier - and preferred way of accomplishing the same thing is via the
-Processing Framework. You can call the algorithm
-<code class="docutils literal"><span class="pre">qgis:joinattributestable</span></code> and create a joined layer.</li>
+<li><p class="first">Una manera más fácil - y preferida de alcanzar la misma cosa es mediante el Marco de Procesamiento. Puedes llamar al algoritmo <code class="docutils literal"><span class="pre">qgis:joinattributestable</span></code> y crear una capa unida.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">We are using the <code class="docutils literal"><span class="pre">processing.runandload()</span></code> method to execute the algorithm
-instead of the more common <code class="docutils literal"><span class="pre">processing.runalg()</span></code>. Since we want to load
-the resulting joined layer in QGIS, <code class="docutils literal"><span class="pre">processing.runandload()</span></code> is a better
-choice.</p>
+<p class="last">Estamos usando el método <code class="docutils literal"><span class="pre">processing.runandload()</span></code> para ejecutar el algoritmo en vez del más común <code class="docutils literal"><span class="pre">processing.runalg()</span></code>. Como queremos cargar la capa unida resultante en QGIS, <code class="docutils literal"><span class="pre">processing.runandload()</span></code> es una mejor elección.</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
 <span class="n">shpField</span><span class="o">=</span><span class="s1">&#39;GEOID&#39;</span>
@@ -333,12 +317,8 @@ choice.</p>
 </div>
 <img alt="../_images/453.png" class="align-center" src="../_images/453.png" />
 <ol class="arabic simple" start="5">
-<li>We will stick with the original join using <code class="docutils literal"><span class="pre">QgsVectorJoinInfo</span></code> for the
-remainder of the tutorial. Now it is time to apply a graduated style to the
-joined layer. The population field name in the joined layer is
-<code class="docutils literal"><span class="pre">ca_tracts_pop_D001</span></code>. We will apply a graduated renderer using the
-<code class="docutils literal"><span class="pre">QgsGraduatedSymbolRendererV2</span></code> class in the <code class="docutils literal"><span class="pre">Quantile</span></code> mode. Refer to
-<a class="reference internal" href="performing_table_joins.html"><em>Realización de uniones de tabla</em></a> for the colors and ranges that we need to use.</li>
+<li><p class="first">Nos mantendremos con la unión original usando <code class="docutils literal"><span class="pre">QgsVectorJoinInfo</span></code> por el resto del tutorial. Ahora es tiempo de aplicar un estilo graduado a la capa unida. El nombre del campo población en la capa unida es <code class="docutils literal"><span class="pre">ca_tracts_pop_D001</span></code>. Aplicaremos un representador graduado usando la clase <code class="docutils literal"><span class="pre">QgsGraduatedSymbolRendererV2</span></code> en el modo <code class="docutils literal"><span class="pre">Cuantil</span></code>. Refiérase a <a class="reference internal" href="performing_table_joins.html"><em>Realización de uniones de tabla</em></a> para los colores y rangos que necesitaremos usar.</p>
+</li>
 </ol>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
 
@@ -394,14 +374,11 @@ joined layer. The population field name in the joined layer is
 </div>
 <img alt="../_images/554.png" class="align-center" src="../_images/554.png" />
 <ol class="arabic simple" start="6">
-<li>Typing the code in the Python Console is useful for small tasks, but it
-is far easier to use the built-in <span class="guilabel">Editor</span>. You can copy the
-entire script in the <span class="guilabel">Editor</span> and click <span class="guilabel">Run</span>. As the
-script finishes, you would have created a table join and styled the
-resulting layer without any manual steps.</li>
+<li><p class="first">Es útil escribir el código en la Consola de Python para pequeñas tareas, pero es de lejos más fácil usar el <span class="guilabel">Editor</span> incorporado. Puedes copiar el script completo en el <span class="guilabel">Editor</span> y clic <span class="guilabel">Ejecutar</span>. Cuando el script culmine, habrás creado una unión de tablas y dado estilo a la capa resultante sin pasos manuales.</p>
+</li>
 </ol>
 <img alt="../_images/652.png" class="align-center" src="../_images/652.png" />
-<p>Below is the full <code class="docutils literal"><span class="pre">join_attributes.py</span></code> file as a reference.</p>
+<p>Abajo está el archivo completo <code class="docutils literal"><span class="pre">join_attributes.py</span></code> como referencia.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
 <span class="n">zip_uri</span> <span class="o">=</span> <span class="s1">&#39;/vsizip/C:/Users/Ujaval/Downloads/tl_2013_06_tract.zip/tl_2013_06_tract.shp&#39;</span>
 <span class="n">shp</span> <span class="o">=</span>  <span class="n">QgsVectorLayer</span><span class="p">(</span><span class="n">zip_uri</span><span class="p">,</span> <span class="s1">&#39;tl_2013_06_tract&#39;</span><span class="p">,</span> <span class="s1">&#39;ogr&#39;</span><span class="p">)</span>
@@ -499,7 +476,7 @@ resulting layer without any manual steps.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Apr 01, 2020.<br/>
+      Actualizado por última vez en Apr 07, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

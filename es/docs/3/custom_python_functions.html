@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using Custom Python Expression Functions (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Usando Funciones de Expresión Python Personalizadas (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -113,11 +113,11 @@
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Usando QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Abrir archivos BIL, BIP o BSQ en QGIS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Iniciándote con la Programación Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Using Custom Python Expression Functions (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Usando Funciones de Expresión Python Personalizadas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Realización de uniones de tabla (PyQGIS)</a></li>
@@ -232,50 +232,55 @@
       
 
   <div class="section" id="using-custom-python-expression-functions-qgis3">
-<h1>Using Custom Python Expression Functions (QGIS3)<a class="headerlink" href="#using-custom-python-expression-functions-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Expressions in QGIS have a lot of power and are used in many core features: selection, calculating field values, styling, labelling etc. QGIS also has support for user-defined expressions. With a little bit of python programming, you can define your own functions that can be used within the expression engine.</p>
+<h1>Usando Funciones de Expresión Python Personalizadas (QGIS3)<a class="headerlink" href="#using-custom-python-expression-functions-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Las expresiones en QGIS tiene bastante poder y son usadas en varias funcionalidades centrales: selección, cálculo de valores de campo, estilo, etiquetado, etc. QGIS también tiene soporte para expresiones definidas por el usuario. Con un poco de programación python, puedes definir tus propias funciones que pueden ser usadas dentro del motor de expresión.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will define a custom function that finds the <a class="reference external" href="http://www.dmap.co.uk/utmworld.htm">UTM zone number</a> of a map feature and use this function to write an expression that displays the UTM zone as a map tip when hovered over the point.</p>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Definiremos una función personalizada que encuentra el  <a class="reference external" href="http://www.dmap.co.uk/utmworld.htm">número de zona UTM</a> de una entidad de mapa y usaremos esta función para escribir un expresión que muestra la zona UTM como una nota de mapa cuando se pasa por encima del punto.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li>How to use the <code class="docutils literal"><span class="pre">Map</span> <span class="pre">Tips</span></code> tool to display custom text when hovering over a feature.</li>
+<li><p class="first">Como usar la herramienta <code class="docutils literal"><span class="pre">Notas</span> <span class="pre">de</span> <span class="pre">Mapa</span></code> para mostrar texto personalizado cuando se pasa por encima de una entidad.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will use Natural Earth&#8217;s <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Populated Places</a> dataset. Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">simple (less columns) dataset</a></p>
+<h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Usaremos el conjunto de datos <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Lugares Poblados</a> de Natural Earth. Descargue el <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">conjunto de datos simple (menos columnas)</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li>Locate the <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code> file in the QGIS Browser and expand it. Select the <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.shp</span></code> file and drag it to the canvas.</li>
+<li><p class="first">Ubique el archivo <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code> en el Navegador QGIS y expándalo. Seleccione el archivo <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.shp</span></code> y arrástrelo a la pantalla.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/130.png" class="align-center" src="../../_images/130.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Go to <span class="menuselection">Edit ‣ Select ‣ Select Features By Expression...</span> or click the <span class="guilabel">Select features using an expression</span> button on the <span class="guilabel">Attributes Toolbar</span>.</li>
+<li><p class="first">Vaya a <span class="menuselection">Editar ‣ Seleccionar ‣ Seleccionar Entidades Por Expresión...</span> o clic en el botón <span class="guilabel">Seleccionar entidades usando una expresión</span> en la <span class="guilabel">Barra de Herramientas Atributos</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/226.png" class="align-center" src="../../_images/226.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">Select by Expression</span> dialog, switch to the <span class="guilabel">Function Editor</span> tab. Here you can write any PyQGIS code that will be executed by the expression engine.</li>
+<li><p class="first">En el diálogo <span class="guilabel">Seleccionar por Expresión</span>, cambie a la pestaña <span class="guilabel">Editor de Función</span>. Aquí podrás escribir cualquier código PyQGIS que será ejecutado por el motor de expresión.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/318.png" class="align-center" src="../../_images/318.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>We will define a custom function named <code class="docutils literal"><span class="pre">GetUtmZone</span></code> that will calculate the UTM zone number for each feature. Since custom functions in QGIS work at the feature level. We will use the centroid of the feature&#8217;s geometry and compute the UTM Zone from the latitude and longitude of the centroid geometry. We will also add a &#8216;N&#8217; or &#8216;S&#8217; designation to the zone to indicate whether the zone is in the northern or southern hemisphere. Press the <span class="guilabel">+</span> button in the lower left of the screen and type <code class="docutils literal"><span class="pre">utm_zones.py</span></code> as the file name. You can click the <span class="guilabel">Help</span> label in the bottom panel to close it and expand the code panel.</li>
+<li><p class="first">Definiremos una función personalizada llamada <code class="docutils literal"><span class="pre">GetUtmZone</span></code> que calculará el número de zona UTM para cada entidad. Debido a que las funciones personalizadas en QGIS trabajan a nivel de entidad. Usaremos el centroide de la geometría de la entidad y calcularemos la Zona UTM a partir de la latitud y longitud de la geometría del centroide. También agregaremos una designación &#8216;N&#8217; o &#8216;S&#8217; a la zona para indicar si la zona está en el hemisferio norte o sur. Presione el botón <a href="#id1"><span class="problematic" id="id2">:guilaber:`+`</span></a> abajo a la izquierda de la pantalla y escriba <code class="docutils literal"><span class="pre">utm_zones.py</span></code> como el nombre de archivo. Puedes hacer clic en el <span class="guilabel">Help</span> en el panel de abajo para cerrar y expandir el panel de código.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/4.gif" class="align-center" src="../../_images/4.gif" />
 </div></blockquote>
 <ol class="arabic" start="5">
-<li><p class="first">UTM Zones are longitudinal projection zones numbered from 1 to 60. Each UTM zone is 6 degree wide. Here we use a simple mathematical formula to find the appropriate zone for a given longitude value. This formula works for all except a few <a class="reference external" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions">special UTM zones</a>. Type the following code into the editor window. When you are finished click <span class="guilabel">Save and Load Functions</span>.</p>
+<li><p class="first">Las Zonas UTm son una proyección longitudinal numerada de 1 a 60. Cada zona UTM tiene un ancho de 6 grados. Aquí usaremos una fórmula matemática para encontrar la zona apropiada para un valor dado de longitud. Esta fórmula funciona para todas excepto una pocas <a class="reference external" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions">zonas UTM especiales</a>. Escriba el siguiente código en la ventana del editor. Cuando haya terminada clic en <span class="guilabel">Guardar y Cargar Funciones</span>.</p>
 <blockquote>
 <div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
@@ -303,10 +308,10 @@
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">Currently there is no way to delete an expression file from the GUI. If you wish to delete the <code class="docutils literal"><span class="pre">utm_zone.py</span></code> file, you can go to <span class="menuselection">Settings ‣ User Profiles ‣ Open Active Profile Folder</span> and delete the file from <span class="menuselection">python ‣ expressions</span>.</p>
+<p class="last">Actualmente no hay manera de borrar un archivo de expresión desde el IGU. Si desea borrar el archivo <code class="docutils literal"><span class="pre">utm_zone.py</span></code>, puede ir a <span class="menuselection">Configuración ‣ Perfiles de Usuario ‣ Abrir Carpeta de Perfil Activo</span> y borrar el archivo desde <span class="menuselection">python ‣ expresiones</span>.</p>
 </div>
 <ol class="arabic" start="6">
-<li><p class="first">Switch to the Expression tab in the Select by expression dialog. Find and expand the <span class="guilabel">Custom</span> group in the Functions section. You will notice a new custom function <code class="docutils literal"><span class="pre">GetUtmZone</span></code> in the list. We can now use this function in the expressions just like any other function. Type the following expression in the editor. This expression will     select all points that fall in the UTM Zone <code class="docutils literal"><span class="pre">33N</span></code>. Click <span class="guilabel">Zoom to Features</span> and the map will change, if you click <span class="guilabel">Select Features</span> you should see the points in UTM zone 33N change colour to yellow.</p>
+<li><p class="first">Cambie a la pestaña Expresión en el diálogo Seleccionar por expresión. Encuentre y expanda el grupo <span class="guilabel">Personalizado</span> en la sección Funciones. Notará una nueva función personalizada <code class="docutils literal"><span class="pre">GetUtmZone</span></code> en la lista. Ahora podemos usar esta función en las expresiones justo como cualquier otra función. Escriba la siguiente expresión en el editor. Esta expresión seleccionará todos los puntos que caen en la Zona UTM <code class="docutils literal"><span class="pre">33N</span></code>. Clic <span class="guilabel">Acercamiento a Entidades</span> y el mapa cambiará, si haces clic en <span class="guilabel">Seleccionar Entidades</span> deberías ver cambiar los puntos en la zona UTM 33N a amarillo.</p>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>GetUtmZone() = &#39;33N&#39;
 </pre></div>
@@ -317,36 +322,36 @@
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">Due to a bug, this feature did not work in earlier versions of QGIS 3. It has been fixed from version 3.4.5 onwards.</p>
+<p class="last">Debido a un error, esta funcionalidad no trabajaba en versiones previas a QGIS3. Ha sido corregida desde la versión 3.4.5 en adelante.</p>
 </div>
 <ol class="arabic" start="7">
-<li><p class="first">Back in the main QGIS window, you should see some points highlighted in yellow. These are the points falling in the UTM Zone we specified in the expression.</p>
+<li><p class="first">De vuelta en la ventana principal QGIS, debería ver algunos puntos resaltados en amarillo. Estos son puntos que caen en la Zona UTM que especificamos en la expresión.</p>
 <blockquote>
 <div><img alt="../../_images/79.png" class="align-center" src="../../_images/79.png" />
 </div></blockquote>
 </li>
-<li><p class="first">You saw how we defined and used a custom function to select features by expression. We will now use the same function in another context. One of the hidden gems in QGIS is the <strong>Map Tip</strong> tool. This tool shows user-defined text when you hover over a feature. Right-click the <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> layer and select Properties.</p>
+<li><p class="first">Usted vio como definimos y usamos una función para seleccionar entidades por expresión. Ahora usaremos la misma función en otro contexto. Una de las gemas escondidas en QGIS es la herramienta <strong>Aviso de Mapa</strong>. Esta herramienta muestra texto definido por el usuario cuando pasas por encima de una entidad. Clic-derecho en la capa <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> y seleccione Propiedades.</p>
 <img alt="../../_images/89.png" class="align-center" src="../../_images/89.png" />
 </li>
-<li><p class="first">Switch to the Display tab. Here you can enter any text that will be displayed when you hover over the features of the layer. Even better, you can use layer field values and expressions to define a much more useful message. Click on the <span class="guilabel">Ɛ</span> button.</p>
+<li><p class="first">Cambie a la pestaña Despliegue. Aquí puede ingresar cualquier texto que será mostrado cuando pase por encima de las entidades de la capa. Aún mejor, puede usar los valores o expresiones de un campo de la capa para definir un mensaje mucho más útil. Clic sobre el botón <span class="guilabel">Ɛ</span>.</p>
 <img alt="../../_images/99.png" class="align-center" src="../../_images/99.png" />
 </li>
-<li><p class="first">You will see the familiar expression editor again. We will use the <code class="docutils literal"><span class="pre">concat</span></code> function to join the value of the field <code class="docutils literal"><span class="pre">name</span></code> and the result of our custom function <code class="docutils literal"><span class="pre">GetUtmZone</span></code>. Enter the following expression and click <span class="guilabel">OK</span>.</p>
+<li><p class="first">Verá de nuevo el familiar editor de expresión. Usaremos la función <code class="docutils literal"><span class="pre">concat</span></code> para unir el valor del campo <code class="docutils literal"><span class="pre">name</span></code> y el resultado de nuestra función <code class="docutils literal"><span class="pre">GetUtmZone</span></code>. Ingrese la siguiente expresión y clic <span class="guilabel">Aceptar</span>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">concat</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s1">&#39; | UTM Zone: &#39;</span><span class="p">,</span> <span class="n">GetUtmZone</span><span class="p">())</span>
 </pre></div>
 </div>
 <img alt="../../_images/109.png" class="align-center" src="../../_images/109.png" />
 </li>
-<li><p class="first">You will see the expression entered as the value of the Display text. Click <span class="guilabel">Insert</span> to add it to the HTML box and then press <span class="guilabel">OK</span>.</p>
+<li><p class="first">Verá la expresión ingresada como el valor del texto Despliegue. Clic en <span class="guilabel">Insert</span> para agregarlo a la caja HTML y luego presiona <span class="guilabel">Aceptar</span>.</p>
 <img alt="../../_images/1112.png" class="align-center" src="../../_images/1112.png" />
 </li>
-<li><p class="first">Before we proceed, let us de-select the features that were selected in the previous step. Go to <span class="menuselection">Edit ‣ Select ‣ Deselect Features From All Layers</span> or click the <span class="guilabel">Deselect Features From All Layers</span> button on the <span class="guilabel">Attribute Toolbar</span>.</p>
+<li><p class="first">Antes que procedamos, deseleccionemos las entidades que fueron seleccionadas en el paso previo. Vaya a <span class="menuselection">Editar ‣ Seleccionar ‣ Deseleccionar Entidades de Todas las Capas</span> o clic al botón  <span class="guilabel">Deseleccionar Entidades de Todas las Capas</span> en la <span class="guilabel">Barra de Herramientas de Atributo</span>.</p>
 <img alt="../../_images/1210.png" class="align-center" src="../../_images/1210.png" />
 </li>
-<li><p class="first">Activate the <code class="docutils literal"><span class="pre">Map</span> <span class="pre">Tips</span></code> tool by going to <span class="menuselection">View ‣ Map Tips</span> or clicking the <span class="guilabel">Show Map Tips</span> button on the <span class="guilabel">Attributes Toolbar</span>.</p>
+<li><p class="first">Active la herramienta <code class="docutils literal"><span class="pre">Avisos</span> <span class="pre">de</span> <span class="pre">Mapa</span></code> yendo a <span class="menuselection">Vista ‣ Avisos de Mapa</span> o haciendo clic en el botón <span class="guilabel">Mostrar Avisos de Mapa</span> en la <span class="guilabel">Barra de Herramientas de Atributos</span>.</p>
 <img alt="../../_images/139.png" class="align-center" src="../../_images/139.png" />
 </li>
-<li><p class="first">Zoom into any area of the map and put your mouse cursor over any feature. You will see the name of the city and corresponding UTM zone displayed as the map tip.</p>
+<li><p class="first">Acérquese a cualquier área del mapa y ponga el cursor del ratón sobre cualquier entidad. Verá el nombre de la ciudad y la zona UTM correspondiente mostradas como el aviso del mapa.</p>
 <img alt="../../_images/14.gif" class="align-center" src="../../_images/14.gif" />
 </li>
 </ol>
@@ -379,7 +384,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Apr 01, 2020.<br/>
+      Actualizado por última vez en Apr 07, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

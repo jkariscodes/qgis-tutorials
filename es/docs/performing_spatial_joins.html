@@ -111,11 +111,11 @@
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_qgis_browser.html">Usando QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_bil_bip_bsq_files.html">Abrir archivos BIL, BIP o BSQ en QGIS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Iniciándote con la Programación Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/building_a_python_plugin.html">Building a Python Plugin (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Using Custom Python Expression Functions (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Usando Funciones de Expresión Python Personalizadas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Running and Scheduling QGIS Processing Jobs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins_pyqgis.html">Realización de uniones de tabla (PyQGIS)</a></li>
@@ -225,117 +225,97 @@
 <h1>Realización de uniones espaciales<a class="headerlink" href="#performing-spatial-joins" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Advertencia</p>
-<p class="last">This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/performing_spatial_joins.html"><em>Performing Spatial Joins (QGIS3)</em></a></p>
+<p class="last">Este tutorial está ahora obsoleto. Una versión nueva y actualizada está disponible en <a class="reference internal" href="3/performing_spatial_joins.html"><em>Performing Spatial Joins (QGIS3)</em></a></p>
 </div>
-<p>Spatial Join is a classic GIS problem - transferring attributes from one layer
-to another based on their spatial relationship. In QGIS, this functionality is
-available through the <strong>Join Attributes by Location</strong> tool.</p>
+<p>La Unión Espacial es un clásico problema SIG - transferir atributos de una capa a otra en base a su relación espacial. En QGIS, esta funcionalidad está disponible a través de la herramienta <strong>Unir Atributos por Ubicación</strong>.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will use 2 layers - A shapefile of burough boundaries of New York city and
-another shapefile of nursing home locations in New York city. We will use
-spatial join technique to find the total nursing home capacity for each of the
-buroughs.</p>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Usaremos 2 capas - Un archivo shape de límites de distritos de la ciudad de Nueva York. Usaremos una técnica de unión espacial para encontrar la capacidad total de asilos de ancianos para cada uno de los distritos.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Otras habilidades que aprenderás<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li>Deleting columns from the attribute table of a layer.</li>
+<li><p class="first">Borrar columnas de la tabla de atributos de una capa.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p><a class="reference external" href="https://data.cityofnewyork.us/">NYC Open Data Portal</a> is an excellent source
-of free data for New York city.</p>
+<p><a class="reference external" href="https://data.cityofnewyork.us/">Portal de Datos Abiertos NYC</a> es una fuente excelente de datos libres para la ciudad de Nueva York.</p>
 <ol class="arabic simple">
-<li>Download the <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Borough Boundaries</a>
-zip file using the Export option on the portal.</li>
+<li><p class="first">Descargue archivo zip <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Límites de Distrito</a> usando la opción Exportar en el portal.</p>
+</li>
 </ol>
 <img alt="../_images/1172.png" class="align-center" src="../_images/1172.png" />
 <ol class="arabic simple" start="2">
-<li>Download the <a class="reference external" href="https://data.cityofnewyork.us/Health/Nursing-Homes/9tqc-rnkr">Nursing Homes</a>  zip file
-using the Export option on the portal.</li>
+<li><p class="first">Descargue el archivo zip <a class="reference external" href="https://data.cityofnewyork.us/Health/Nursing-Homes/9tqc-rnkr">Asilos de Anciano</a>  usando la opción Exportar en el portal.</p>
+</li>
 </ol>
 <img alt="../_images/2132.png" class="align-center" src="../_images/2132.png" />
-<p>For convenience, you may directly download a copy of the datasets from the
-links below:</p>
+<p>Para su comodidad, puede descargar directamente una copia de los conjuntos de datos de los enlaces abajo:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/nybb_12c.zip">nybb_12c.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/OEM_NursingHomes_001.zip">OEM_NursingHomes_001.zip</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple" start="3">
-<li>Go to <span class="menuselection">Layer ‣ Add Vector Layer</span>. Browse to the downloaded
-zip file <code class="docutils literal"><span class="pre">nybb_12c.zip</span></code> and select <span class="guilabel">Open</span>.</li>
+<li><p class="first">Vaya a <span class="menuselection">Capa ‣ Agregar Capa Vectorial</span>. Navegue al archivo zip descargado <code class="docutils literal"><span class="pre">nybb_12c.zip</span></code> y seleccione <span class="guilabel">Abrir</span>.</p>
+</li>
 </ol>
 <img alt="../_images/372.png" class="align-center" src="../_images/372.png" />
 <ol class="arabic simple" start="4">
-<li>Select the layer <code class="docutils literal"><span class="pre">nybb.shp</span></code> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Seleccione la capa <code class="docutils literal"><span class="pre">nybb.shp</span></code> y clic <span class="guilabel">Aceptar</span>.</p>
+</li>
 </ol>
 <img alt="../_images/450.png" class="align-center" src="../_images/450.png" />
 <ol class="arabic simple" start="5">
-<li>Repeat the steps 3 and 4 for the another file <code class="docutils literal"><span class="pre">OEM_NursingHomes_001.zip</span></code>
-and load the <code class="docutils literal"><span class="pre">OEM_NursingHomes_001.shp</span></code> layer. Once both the layers are
-loaded, right-click on the <code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code> layer and select
-<span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Repita los pasos 3 y 4 para el otro archivo <code class="docutils literal"><span class="pre">OEM_NursingHomes_001.zip</span></code> y cargue la capa <code class="docutils literal"><span class="pre">OEM_NursingHomes_001.shp</span></code>. Una vez que las capas estén cargadas, clic-derecho sobre la capa <code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code> y seleccione  <span class="guilabel">Abrir Tabla de Atributos</span>.</p>
+</li>
 </ol>
 <img alt="../_images/551.png" class="align-center" src="../_images/551.png" />
 <ol class="arabic simple" start="6">
-<li>Examine the attributes available for each feature. Since our task is to
-calculate the total nursing home capacity for each borough, we can use the
-attribute <strong>Capacity</strong> which can join to the boundaries layer.</li>
+<li><p class="first">Examine los atributos disponibles para cada  elemento. Debido a que nuestra tarea es calcular la capacidad total de asilos de ancianos para cada distrito, usaremos el atributo <strong>Capacity</strong> que podemos unir a la capa de límites.</p>
+</li>
 </ol>
 <img alt="../_images/649.png" class="align-center" src="../_images/649.png" />
 <ol class="arabic simple" start="7">
-<li>Go to <span class="menuselection">Vector ‣ Data Mangement Tools ‣ Join attributes by
-location</span>.</li>
+<li><p class="first">Vaya a <span class="menuselection">Vector ‣ Herramientas de Gestión de Datos ‣ Unir atributos por ubicación</span>.</p>
+</li>
 </ol>
 <img alt="../_images/748.png" class="align-center" src="../_images/748.png" />
 <ol class="arabic simple" start="8">
-<li>The <span class="guilabel">Target vector layer</span> is the one we want to add the attributes
-to. In our case, this will be the boroughs boundary <code class="docutils literal"><span class="pre">nybb</span></code> layer. The
-<span class="guilabel">Join vector layer</span> will be the nursing homes
-<code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code> layer. As we want to sum the capacity of nursing
-homes, select <span class="guilabel">Take summary of intersecting features</span> and choose
-<span class="guilabel">Sum</span>. Name the output file as <code class="docutils literal"><span class="pre">nyc_borough_join.shp</span></code>. In the
-<span class="guilabel">Output table</span> select <span class="guilabel">Keep all records`</span>.</li>
+<li><p class="first">El <span class="guilabel">Capa vector destino</span> es aquella a la que queremos agregar los atributos. En nuestro caso, serán el límite de distritos de la capa <code class="docutils literal"><span class="pre">nybb</span></code>. La <span class="guilabel">Capa vectorial de unión</span> será la capa de asilos de ancianos <code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code>. Como queremos sumar la capacidad de asilos de ancianos, seleccione y <span class="guilabel">Haga resumen de elementos intersectados</span> y elija  <span class="guilabel">Suma</span>. Dele nombre al archivo de salida como <code class="docutils literal"><span class="pre">nyc_borough_join.shp</span></code>. En <span class="guilabel">Tabla de salida</span> seleccione <span class="guilabel">Mantener todos los registros`</span>.</p>
+</li>
 </ol>
 <img alt="../_images/846.png" class="align-center" src="../_images/846.png" />
 <ol class="arabic simple" start="9">
-<li>Once the process finishes, select <span class="guilabel">Yes</span> when asked if you want to
-add the layer to TOC. The new layer <code class="docutils literal"><span class="pre">nyc_borough_join</span></code> would have the
-features from <code class="docutils literal"><span class="pre">nybb</span></code> layer along with spatially joined attributes from
-<code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code> layer. Right-click on the layer and select
-<span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Una vez termine el proceso, seleccione <span class="guilabel">Si</span> cuando se le pregunte si quiere agregar la capa a la tabla de contenido. La nueva capa <code class="docutils literal"><span class="pre">nyc_borough_join</span></code> tendría los elementos de la capa <code class="docutils literal"><span class="pre">nybb</span></code> junto con los atributos unidos espacialmente de la capa <code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code>. Clic-derecho sobre la capa y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>.</p>
+</li>
 </ol>
 <img alt="../_images/945.png" class="align-center" src="../_images/945.png" />
 <ol class="arabic simple" start="10">
-<li>You will see a column <strong>SUMCapacit</strong> in the attribute table. This is the
-sum of the <strong>Capacity</strong> attribute for the nursing homes that fall within
-each borough feature.</li>
+<li><p class="first">Verás una columna <strong>SUMCapacit</strong> en la tabla de atributos. Esta es la suma del atributo <strong>Capacity</strong> para los asilos de ancianos que caen dentro de cada elemento distrito.</p>
+</li>
 </ol>
 <img alt="../_images/1044.png" class="align-center" src="../_images/1044.png" />
 <ol class="arabic simple" start="11">
-<li>This is the answer we are looking for. But there are extra columns that we
-do not need in our output. Let&#8217;s clean up our output. Click on the
-<span class="guilabel">Toggle editing</span> button and then the <span class="guilabel">Delete column</span>
-button.</li>
+<li><p class="first">Esta es la respuesta que estamos buscando. Pero hay columnas extras que no necesitamos en nuestra salida. Limpiemos nuestra salida. Clic en el botón <span class="guilabel">Activar edición</span> y luego el botón <span class="guilabel">Borrar columna</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1173.png" class="align-center" src="../_images/1173.png" />
 <ol class="arabic simple" start="12">
-<li>Press <code class="kbd docutils literal"><span class="pre">Control-A</span></code> to select all columns in the <span class="guilabel">Delete
-Attributes</span> dialog. Next hold the <code class="kbd docutils literal"><span class="pre">Control</span></code> key and de-select the
-columns you want to keep. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Presione <code class="kbd docutils literal"><span class="pre">Control-A</span></code> para seleccionar todas las columnas en el diálogo <span class="guilabel">Borrar Atributos</span>. a continuación mantenga la tecla <code class="kbd docutils literal"><span class="pre">Control</span></code> presionada y quite la selección de las columnas que quiere mantener. Clic en <span class="guilabel">Aceptar</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1245.png" class="align-center" src="../_images/1245.png" />
 <ol class="arabic simple" start="13">
-<li>In the attribute table, click <span class="guilabel">Toggle editing</span> button again to
-save the changes.</li>
+<li><p class="first">En la tabla de atributos, clic el botón <span class="guilabel">Activar edición</span> de nuevo para guardar los cambios.</p>
+</li>
 </ol>
 <img alt="../_images/1343.png" class="align-center" src="../_images/1343.png" />
 <ol class="arabic simple" start="14">
-<li>Back in the QGIS Canvas, use the <span class="guilabel">Identify</span> tool to verify that
-the output file has the desired attributes for each burough feature.</li>
+<li><p class="first">De vuelta en la pantalla QGIS, use la herramienta <span class="guilabel">Identificar</span> para verificar que el archivo de salida tiene los atributos deseados para cada elemento distrito.</p>
+</li>
 </ol>
 <img alt="../_images/1442.png" class="align-center" src="../_images/1442.png" />
 </div>
@@ -367,7 +347,7 @@ the output file has the desired attributes for each burough feature.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Apr 01, 2020.<br/>
+      Actualizado por última vez en Apr 07, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
