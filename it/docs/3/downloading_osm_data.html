@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Searching and Downloading OpenStreetMap Data (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Cercare e Scaricare Dati OpenStreetMap (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -220,148 +220,171 @@
       
 
   <div class="section" id="searching-and-downloading-openstreetmap-data-qgis3">
-<h1>Searching and Downloading OpenStreetMap Data (QGIS3)<a class="headerlink" href="#searching-and-downloading-openstreetmap-data-qgis3" title="Link a questa intestazione">¶</a></h1>
-<p>Getting high quality data is essential for any GIS task. One great resource for free and openly licensed data is <a class="reference external" href="http://www.openstreetmap.org/">OpenStreetMap(OSM)</a> . The OSM database consists of all types of mapping data - streets, local data, building polygons, administrative boundaries etc. Getting access to OSM data in a GIS format in QGIS is possible via the <em>QuickOSM*</em> plugin. This tutorial explains the process for searching, downloading and using this plugin.</p>
+<h1>Cercare e Scaricare Dati OpenStreetMap (QGIS3)<a class="headerlink" href="#searching-and-downloading-openstreetmap-data-qgis3" title="Link a questa intestazione">¶</a></h1>
+<p>Disporre di dati di alta qualità è essenziale in qualsiasi compito si intenda realizzare con i sistemi GIS. <a class="reference external" href="http://www.openstreetmap.org/">OpenStreetMap(OSM)</a> costituisce una straordinaria risorsa per ottenere dati gratuiti e dotati di licenza aperta. Il database di OSM è costituito da strade, dati localizzati e poligoni di edifici. L&#8217;accesso ai dati di OpenStreetMap in modalità GIS è completamente integrato all&#8217;interno di QGIS. Questa esercitazione descrive le operazioni attraverso cui possiamo cercare, scaricare e utilizzare dati OSM in QGIS con questo plugin.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
-<p>We will extract locations of all bars and pubs in London from the OpenStreetMap database and save it as a vector layer.</p>
+<h2>Descrizione del compito.<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
+<p>Individueremo Londra all&#8217;interno del database OSM, esamineremo e selezioneremo un settore della città, quindi estrarremo tutti i punti indicanti le posizioni dei pub in quella zona e, infine, collocheremo questi punti all&#8217;interno di un nuovo livello vettorial.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link a questa intestazione">¶</a></h3>
 <ul class="simple">
-<li>How to Merge multiple vector layers.</li>
+<li><p class="first">Come unire livelli vettoriali multipli</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Link a questa intestazione">¶</a></h2>
+<h2>Procedura<a class="headerlink" href="#procedure" title="Link a questa intestazione">¶</a></h2>
 <ol class="arabic simple">
-<li>Search and install the <strong>QuickOSM</strong> plugin from the QGIS Official Plugin Repository. See <a class="reference internal" href="../using_plugins.html"><em>Usare i Plugins</em></a> for instructions on downloading plugins. Note that at the time of writing this tutorial, this plugin is marked as <em>Experimental</em>, so make sure you check <code class="docutils literal"><span class="pre">Show</span> <span class="pre">also</span> <span class="pre">experimental</span> <span class="pre">plugins</span></code> in the <span class="guilabel">Settings</span> tab in the <span class="guilabel">Plugins</span> dialog to be able to install it.</li>
+<li><p class="first">Cerca ed installa il plugin <strong>QuickOSM</strong> dalla QGIS Official Plugin Repository. Vedi <a class="reference internal" href="../using_plugins.html"><em>Usare i Plugins</em></a> per istruzioni su come usare i plugin. Nota che quando è stato scritto questo tutorial, il plugin è in fase sperimentale quindi marcato come <em>Experimental</em>, quindi assicurati di aver selezionato su &#8220;impostazioni&#8221; anche l&#8217;opzione <code class="docutils literal"><span class="pre">Mostra</span> <span class="pre">anche</span> <span class="pre">plugin</span> <span class="pre">sperimentali</span></code> nella sezione <span class="guilabel">Impostazioni</span> nella finestra <span class="guilabel">Plugins</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/140.png" class="align-center" src="../../_images/140.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Once installed, launch the plugin from <span class="menuselection">Vector ‣ QuickOSM -&gt; QuickOSM...</span>.</li>
+<li><p class="first">Una volta installato, attiva il plugin dal menù <span class="menuselection">Vector ‣ QuickOSM -&gt; QuickOSM...</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/227.png" class="align-center" src="../../_images/227.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>In the <span class="guilabel">Quick query</span> tab, you can set a filter to select a subset. The attributes of the map features in the OSM database are stored as <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tags">Tags</a>. Tags are represented with a key and a value. The key is a topic and a value is a specific form. See <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Map_Features">this page</a> for a comprehensive list of tags for various types of features. Bars are represented using the tag <code class="docutils literal"><span class="pre">amenity:bar</span></code> and pubs with the tag <code class="docutils literal"><span class="pre">amenity:pub</span></code>. We will first extract the bars. Select <code class="docutils literal"><span class="pre">amenity</span></code> as the <span class="guilabel">Key</span> from the drop-down menu.</li>
+<li><p class="first">Nella sezione <span class="guilabel">Richiesta Rapida</span> potete selezionare un filtro che limita gli elementi che vengono scaricati. Gli attributi filtrabili sono definiti <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tags">Tags</a>. I tags sono rappresentati con un riferimento chiave:valore. La chiave è una classe di oggetti, ed il valore è una sotto-classe di oggetti. Vedete <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Map_Features">questa pagina</a> per una lista di tags e descrizioni. I bar si trovano nel tag chiave:valore = <code class="docutils literal"><span class="pre">amenity:bar</span></code> ed i pub con il tag <code class="docutils literal"><span class="pre">amenity:pub</span></code>. Andiamo a scaricare prima i bar: selezionate <code class="docutils literal"><span class="pre">amenity</span></code> come <span class="guilabel">Key</span> dal menù a tendina.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/319.png" class="align-center" src="../../_images/319.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Select <code class="docutils literal"><span class="pre">bar</span></code> from the <span class="guilabel">Value</span> drop-down menu.</li>
+<li><p class="first">Seleziona <a href="#id1"><span class="problematic" id="id2">``</span></a>bar``dal menu <span class="guilabel">Value</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/49.png" class="align-center" src="../../_images/49.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Enter <code class="docutils literal"><span class="pre">London</span></code> as the <span class="guilabel">In</span> to restrict the search within the city boundary.</li>
+<li><p class="first">Seleziona <code class="docutils literal"><span class="pre">London</span></code> nella sezione  <span class="guilabel">In</span> per limitare la ricerca nell&#8217;area di Londar.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/510.png" class="align-center" src="../../_images/510.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Expand the <span class="guilabel">Advanced</span> section. In the OSM data model, features are represented using <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Elements">nodes, ways and relations</a>. As we are interested in the point features, you can select only <code class="docutils literal"><span class="pre">Node</span></code> and <code class="docutils literal"><span class="pre">Points</span></code> . Click <span class="guilabel">Run query</span>.</li>
+<li><p class="first">Esapandi la sezione <span class="guilabel">Advanced</span> section. Nel modello OSM gli elementi sono rappresentati utilizzando  <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Elements">nodes, ways and relations</a>.  Noi siamo interessati negli elementi puntuali, quindi potete selezionare solo <code class="docutils literal"><span class="pre">Node</span></code> and <code class="docutils literal"><span class="pre">Points</span></code> . Cliccare <span class="guilabel">Run query</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/610.png" class="align-center" src="../../_images/610.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>The plugin with query the OpenStreetMap database using the <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Overpass_API">Overpass API</a> and convert the data into a QGIS vector layer.</li>
+<li><p class="first">Il plugin interreoga il database OpenStreetMap  utilizzando l&#8217;API <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Overpass_API">Overpass API</a> e converte il formato dei dati in QGIS.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/710.png" class="align-center" src="../../_images/710.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Once the query finishes, switch to the main QGIS window. You will see a new layer called <code class="docutils literal"><span class="pre">amenity_bar_london</span></code> added to the <span class="guilabel">Layers</span> panel. The canvas will show the locations of the bars that were extracted.</li>
+<li><p class="first">Finita l&#8217;interrogazione tornate alla finestra QGIS. Vedrete un nuovo livello chiamato <code class="docutils literal"><span class="pre">amenity_bar_london</span></code> aggiunto al pannello <span class="guilabel">Layers</span>. Nella vista vedrete i punti con i bar.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/810.png" class="align-center" src="../../_images/810.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Switch back to the <span class="guilabel">QuickOSM</span> window, and edit the query to select <code class="docutils literal"><span class="pre">pub</span></code> as the <span class="guilabel">Value</span>. Click <span class="guilabel">Run query</span>.</li>
+<li><p class="first">Nella finestra <span class="guilabel">QuickOSM</span> seleziona <code class="docutils literal"><span class="pre">pub</span></code> nella parte <span class="guilabel">Value</span>. Clicca <span class="guilabel">Run query</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/910.png" class="align-center" src="../../_images/910.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>This time the plugin will fetch all the points tagged with <code class="docutils literal"><span class="pre">amenity:pub</span></code> from the OSM database.</li>
+<li><p class="first">Questa volta verranno recuperati i punti <code class="docutils literal"><span class="pre">amenity:pub</span></code> da OSM database.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1010.png" class="align-center" src="../../_images/1010.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>Once the query is complete, a new layer <code class="docutils literal"><span class="pre">amenity_pub_london</span></code> will be added to the <span class="guilabel">Layers</span> panel. We now have 2 vector layers. These are temporary memory layers that will get lost after we exit QGIS. Let&#8217;s merge these to a single vector layer and save it to the disk. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p class="first">Il livello <code class="docutils literal"><span class="pre">amenity_pub_london</span></code> sarà aggiunto al pannello <span class="guilabel">Layers</span>. Abbiamo ora  2 livelli vettoriali. Questo saranno livelli temporanei che saranno persi se usciamo da QGIS. Uniamoli in un unico livello che poi salveremo. Andate su <span class="menuselection">Processing ‣ Strumenti</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1113.png" class="align-center" src="../../_images/1113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>Search and locate the <span class="menuselection">Vector general ‣ Merge vector layers</span> tool. Double-click to launch it.</li>
+<li><p class="first">Trovate lo strumento <span class="menuselection">Generale vettore ‣ Fondi vettori</span> tool. Fate doppio click per lanciarlo.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1211.png" class="align-center" src="../../_images/1211.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>In the <span class="guilabel">Merge Vector Layers</span> dialog, click the <span class="guilabel">...</span> button next to <span class="guilabel">Input layers</span>. Select both the <code class="docutils literal"><span class="pre">amenity_bar_london</span></code> and <code class="docutils literal"><span class="pre">amenity_pub_london</span></code> layers. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Nella finestra <span class="guilabel">Fondi vettori (merge)</span>, clicca il pulsante guilabel:<cite>...</cite> vicino a <span class="guilabel">Layers in ingresso</span>. Seleziona i due layer <code class="docutils literal"><span class="pre">amenity_bar_london</span></code> e <code class="docutils literal"><span class="pre">amenity_pub_london</span></code> . Clicca <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1310.png" class="align-center" src="../../_images/1310.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Click <span class="guilabel">...</span> button next to <span class="guilabel">Merged</span> and select <span class="guilabel">Save to GeoPackage</span>.</li>
+<li><p class="first">Clicca il pulsante <span class="guilabel">...</span> vicino a <span class="guilabel">Fuso (merged)</span> e seleziona <span class="guilabel">Salva come GeoPackage</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/148.png" class="align-center" src="../../_images/148.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Browse to the directory where you want to save the data and name the output <code class="docutils literal"><span class="pre">longon.gpkg</span></code>.</li>
+<li><p class="first">Vai alla cartella dove vuoi salvare i dati e nomina il livello <code class="docutils literal"><span class="pre">longon.gpkg</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/158.png" class="align-center" src="../../_images/158.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>Enter <code class="docutils literal"><span class="pre">bars_and_pubs</span></code> as the <span class="guilabel">Layer name</span>.</li>
+<li><p class="first">Inserisci <code class="docutils literal"><span class="pre">bars_and_pubs</span></code> come <span class="guilabel">Nome vettore</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/167.png" class="align-center" src="../../_images/167.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>Click <span class="guilabel">Run</span> to execute the merge process.</li>
+<li><p class="first">Clicca <span class="guilabel">Run</span> .</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/178.png" class="align-center" src="../../_images/178.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Once the processing finishes, you will see a new layer <code class="docutils literal"><span class="pre">bars_and_pubs</span></code> added in the <span class="guilabel">Layers</span> panel. You will see that this layer is the union of all features from both the previous layers. Right-click the <code class="docutils literal"><span class="pre">bars_and_pubs</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">A fine del processo, trovate un nuovo livello chiamato <code class="docutils literal"><span class="pre">bars_and_pubs</span></code> nel pannello <span class="guilabel">Layers</span>. Vedrete che il livello è l&#8217;unione dei due scaricati da OSM. Con il tasto destro del mouse selezionate il livello <code class="docutils literal"><span class="pre">bars_and_pubs</span></code> e selezionate  <span class="guilabel">Apri tabella attributi</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/187.png" class="align-center" src="../../_images/187.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>In the <span class="guilabel">Attribute Table</span>, you will see that the layer contains both pub and bar amenity types along with the names of these establishments and other attributes.</li>
+<li><p class="first">Nella <span class="guilabel">Tabella attributi</span>, vedrai che il livello contiene entrambi i tipi pub e bar insieme agli altri attributi</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/197.png" class="align-center" src="../../_images/197.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li>We have achieved the objective of extracting the bars and pub locations in London. We had to perform 2 separate queries to get the relevant data and merge it. This is fine for our task, but you maybe in a situation where you need to perform a complex query to get the right set of data for your project. Fortunately, the QuickOSM plugin provides a way to write  and execute custom queries. Let&#8217;s see how we can write a singel query for the task at hand. Switch to the <span class="guilabel">QuickOSM</span> window and click <span class="guilabel">Show query</span>.</li>
+<li><p class="first">L&#8217;obiettivo di ottenere le informazioni sui bar e pub a Londra è stato raggiunto. Abbiamo dovuto fare due passaggi separati per scaricare i due livelli. Per questo esercizio va bene, ma potrebbero esserci delle situazioni dove devi fare una query complessa per avere i dati corretti nel vostro progetto. Fortunatamente il plugin QuickOSM fornisce gli strumenti per interrogazioni (query) complesse. Vediamo come fare. Andate sulla finestra <span class="guilabel">QuickOSM</span> e cliccate <span class="guilabel">Show query</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/206.png" class="align-center" src="../../_images/206.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li>The plugin will switch to the <span class="guilabel">Query</span> tab. The <span class="guilabel">Overpass query</span> section will show the query that was constructed based on the user input. This field is editable and one can enter any query. The format of the query is in the <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide">Overpass Query Language (QL)</a>. For our purpose, select the section between the &lt;query&gt; ... &lt;/query&gt; XML tags and copy it.</li>
+<li><p class="first">Appare la sezione  <span class="guilabel">Query</span> . La sezione guilabel:<cite>Overpass query</cite> farà vedere l&#8217;interrogazione costruita in base all&#8217;input dell&#8217;utente. Potete modificare il testo della query. Il formato e la sintassi appartengono all&#8217;API <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide">Overpass Query Language (QL)</a>. Per ilnostro esercizio selezionate la sezione tra il testo XML  &lt;query&gt; ... &lt;/query&gt; e copiatelo.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2111.png" class="align-center" src="../../_images/2111.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li>Paste it after the existing query section and change the value from <code class="docutils literal"><span class="pre">pub</span></code> to <code class="docutils literal"><span class="pre">bar</span></code>. Below is the full query that will fetch values from both the tags in a single query. Click <span class="guilabel">Run query</span>.</li>
+<li><p class="first">Incollatelo dopo la sezione della query già presente e modificate il valore  value da <code class="docutils literal"><span class="pre">pub</span></code> a <code class="docutils literal"><span class="pre">bar</span></code>. Sotto la query come dovrebbe essere. Cliccate <span class="guilabel">Run query</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&lt;osm-script output=&quot;xml&quot; timeout=&quot;25&quot;&gt;
@@ -387,7 +410,8 @@
 <img alt="../../_images/228.png" class="align-center" src="../../_images/228.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
-<li>Once the query finishes, you will see a new layer <code class="docutils literal"><span class="pre">OsmQuery</span></code> added to the <span class="guilabel">Layers</span> panel. This layer contains points representing both bars and pubs in London.</li>
+<li><p class="first">A fine interrogazione troverete il livello``OsmQuery`` aggiunto al pannello <span class="guilabel">Layers</span> . Questo livello contiene ambedue le informazioni, sui pub e sui bar.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/234.png" class="align-center" src="../../_images/234.png" />
