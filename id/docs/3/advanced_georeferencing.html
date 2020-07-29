@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Georeferencing Aerial Imagery (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Citra Udara BasisGeo &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -93,7 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Bekerja dengan data WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Georeferencing Aerial Imagery (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Citra Udara BasisGeo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitalisasi Data Peta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
@@ -176,7 +176,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<p>Interested in learning QGIS? I offer certification courses for beginner, intermediate and advanced users. Visit <a href="https://spatialthoughts.com/courses" target="_blank">spatialthoughts.com</a> to continue your QGIS learning journey.
+<p>Want a structured introduction to QGIS? Take my <a href="https://spatialthoughts.com/training/spatial-data-viz/">Spatial Data Visualization and Analytics</a> course. Want to earn QGIS certification? See my <a href="https://spatialthoughts.com/training/advanced-qgis/">Advanced QGIS Certification</a> course. </p>
 
 <hr>
 <!-- Begin Mailchimp Signup Form -->
@@ -230,7 +230,7 @@
       
 
   <div class="section" id="georeferencing-aerial-imagery-qgis3">
-<h1>Georeferencing Aerial Imagery (QGIS3)<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="Link permanen untuk headline ini">¶</a></h1>
+<h1>Citra Udara BasisGeo<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="Link permanen untuk headline ini">¶</a></h1>
 <p>In the tutorial <a class="reference internal" href="georeferencing_basics.html"><em>Georeferencing Topo Sheets and Scanned Maps (QGIS3)</em></a> we covered the basic process of georeferencing in QGIS. That method involved reading the coordinates from your scanned map and entering them manually as control points. Many times though you may not have the coordinates printed on your map, or you are trying to georeference an image. In that case, you can use another georeferenced data-source as your input. In this tutorial, you will learn how to use existing open data sources in your georeferencing process.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Tinjauan Tugas<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
@@ -241,8 +241,10 @@
 <li><p class="first">Mengunduh citra domain publik dengan resolusi super tinggi</p>
 </li>
 <li>Using XYZ Tile Layers as basemap.</li>
-<li>Using the OSM Place Search plugin in QGIS.</li>
-<li>Setting a custom no-data value for a layer.</li>
+<li><p class="first">Menggunakan plugin OSM Place Search di QGIS</p>
+</li>
+<li><p class="first">Buat data tak bernilai untuk layer.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -250,7 +252,7 @@
 <h2>Mendapatkan data<a class="headerlink" href="#get-the-data" title="Link permanen untuk headline ini">¶</a></h2>
 <p>In this tutorial, we will be using kite and balloon imagery collected by <a class="reference external" href="http://publiclaboratory.org/archive">The Public Laboratory</a>. They make the georeferenced versions of the images also available, but we will download a non-georeferenced JPG image and go through the process of georeferencing it in QGIS.</p>
 <p>Download the JPG image of <a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">Washington Square Park, New York</a>. You can right-click the JPG button and choose <span class="guilabel">Save link as...</span>.</p>
-<p>For convenience, you may directly download a copy of the dataset from the link below:</p>
+<p>Demi kenyamanan, silahkan unduh salinan dataset melalui tautan berikut:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
 </div>
 <div class="section" id="procedure">
@@ -290,13 +292,15 @@
 <div><img alt="../../_images/5.png" class="align-center" src="../../_images/5.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>In the <span class="guilabel">Georeferencer</span> window, go to <span class="menuselection">File ‣ Open Raster</span>. Navigate to the downloaded JPG file and click <span class="guilabel">Open</span>.</li>
+<li><p class="first">Pada jendela <span class="guilabel">Georeferencer</span>, pilih <span class="menuselection">File ‣ Open Raster</span>. Kemudian klik pada berkas JPG yang diunduh <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/6.png" class="align-center" src="../../_images/6.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>In the next screen, you will asked to choose the raster’s coordinate reference system (CRS). Our source image is a plain JPEG file and doesn&#8217;t have any coordinate reference system atached to it, so you can click <span class="guilabel">Cancel</span>.</li>
+<li><p class="first">Pada layar berikut, silahkan pilih gambar raster CRS (Coordinate Reference System). Pastikan gambar menggunakan format JPEG dan tidak terkait dengan CRS lainnya, agar bisa diklik <span class="guilabel">Cancel</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/7.png" class="align-center" src="../../_images/7.png" />
@@ -354,7 +358,8 @@
 <div><img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>To make the output look nicer, let’s remove the white border. Right-click on the image layer and choose <span class="guilabel">Properties</span>.</li>
+<li><p class="first">Agar lebih cantik, hapus kotak putih. Klik kanan pada lapisan gambar dan pilih <span class="guilabel">Properties</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
@@ -370,7 +375,8 @@
 <p class="last">8-bit images have pixel values in the range 0-255. 0 is black and 255 is white.</p>
 </div>
 <ol class="arabic simple" start="18">
-<li>Now you will see your georeferenced image nicely overlaid on the base layer.</li>
+<li><p class="first">Sekarang terlihat citra BasisGeo terletak di layer dasar.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
@@ -404,7 +410,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada May 25, 2020.<br/>
+      Terakhir diperbarui pada Jul 29, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

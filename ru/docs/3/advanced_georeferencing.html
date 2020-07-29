@@ -105,8 +105,8 @@
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Интерполяция точечных данных</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automating Complex Workflows using Processing Modeler (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Автоматизация сложных процессов с помощью Processing Modeler (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Автоматизация компоновки карты с помощью инструмента создания атласа (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multi_criteria_overlay.html">Multi Criteria Overlay Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
@@ -176,7 +176,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<p>Interested in learning QGIS? I offer certification courses for beginner, intermediate and advanced users. Visit <a href="https://spatialthoughts.com/courses" target="_blank">spatialthoughts.com</a> to continue your QGIS learning journey.
+<p>Want a structured introduction to QGIS? Take my <a href="https://spatialthoughts.com/training/spatial-data-viz/">Spatial Data Visualization and Analytics</a> course. Want to earn QGIS certification? See my <a href="https://spatialthoughts.com/training/advanced-qgis/">Advanced QGIS Certification</a> course. </p>
 
 <hr>
 <!-- Begin Mailchimp Signup Form -->
@@ -253,23 +253,25 @@
 <h2>Получение данных<a class="headerlink" href="#get-the-data" title="Ссылка на этот заголовок">¶</a></h2>
 <p>В этом уроке мы будем использовать снимки, полученные с воздушных змеев и шаров, собранные <a class="reference external" href="http://publiclaboratory.org/archive">The Public Laboratory</a>. На портале доступны привязанные версии изображений, но мы загрузим непривязанные изображения в формате JPG и привяжем их в QGIS. Если вам нравятся предоставленные снимки, вы можете <a class="reference external" href="http://google-latlong.blogspot.in/2012/04/balloon-and-kite-imagery-in-google.html">посмотреть больше снимков</a> в Google Планета Земля.</p>
 <p>Загрузите JPG изображение <a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">Вашингтон-Сквер-парка в Нью-Йорке</a>. Вы можете щелкнуть правой кнопкой мыши на кнопке JPG и выбрать <span class="guilabel">Сохранить ссылку как...</span>.</p>
-<p>For convenience, you may directly download a copy of the dataset from the link below:</p>
+<p>Вы можете напрямую скачать копию набора данных, пройдя по ссылке ниже:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Ссылка на этот заголовок">¶</a></h2>
+<h2>Порядок действий<a class="headerlink" href="#procedure" title="Ссылка на этот заголовок">¶</a></h2>
 <ol class="arabic simple">
-<li>We will use a basemap from OpenStreetMap to capture the coordinates for georeferencing. QGIS3 comes with  built-in support for tile layers. These are commonly known as &#8216;XYZ&#8217; layers since they are made using individual map tiles for each zoom level (z) on a x,y coordinate grid. You can find the <code class="docutils literal"><span class="pre">OpenStreetMap</span></code> layer under <span class="guilabel">XYZ Tiles</span> in the <span class="guilabel">Browser Panel</span>. Drag the layer to the main canvas. Once loaded, note the Coordinate Reference System (CRS) for this layer in the bottom-right corder. It is set as <code class="docutils literal"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>. This is important because the coordinates we infer from this layer during georeferencing will be in this CRS.</li>
+<li><p class="first">Мы будем снимать координаты для привязки, используя картографическую подложку OpenStreetMap. QGIS3 имеет встроенную поддержку тайловых слоев, которые также называют &#8220;XYZ-слоями&#8221;, поскольку состоят из отдельных фрагментов (тайлов), каждый из которых описывается тремя числами - координатами его местоположения (X, Y) и масштабом (Z). Слой OpenStreetMap может быть загружен из <span class="guilabel">Панели Браузера</span>, группа <span class="guilabel">XYZ Tiles</span>, для чего его необходимо перетащить в область карты. После загрузки слоя обратите внимание на систему координат и проекцию, которые указаны в правом нижнем углу окна приложения. Для слоя OpenStreetMap установлена проекция <code class="docutils literal"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>. Важно помнить о данном параметре, поскольку координаты, которые мы снимем с карты в процессе привязки, будут именно в этой проекции.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Примечание</p>
-<p class="last">See <a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">this page</a> for more details on XYZ layers and how to add other basemaps in QGIS.</p>
+<p class="last">По <a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">этой ссылке</a> вы найдете подробную информацию об XYZ-слоях и о том, как добавить в QGIS другие картографические подложки.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li>The image we are georeferencing is for <code class="docutils literal"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code>. You can zoom/pan try to locate this park in the map. But that is cumbersome and may not be practical. An easier way is to use the OpenStreetMap (OSM) Place Search plugin to search for the exact location. Install the <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">Place</span> <span class="pre">Search</span></code> plugin from <span class="menuselection">Plugins ‣ Manage and install plugins ‣ All</span>. If you do not see this plugin in the search results, make sure you have checked <span class="guilabel">Also show experimental plugins</span> under <span class="guilabel">Settings</span>. See <a class="reference internal" href="../using_plugins.html"><em>Использование модулей расширения</em></a> for more information on using plugins in QGIS.</li>
+<li><p class="first">На изображении, которое мы будем привязывать, показан Washington Square Park в Нью-Йорке. Можно найти этот парк перемещаясь по карте и меняя ее масштаб. Однако такой подход непрактичен. Гораздо проще воспользоваться для поиска определенного объекта модулем &#8220;OpenStreetMap (OSM) Place Search&#8221;. Установите модуль &#8220;OSM Place Search&#8221;, воспользовавшись Менеджером Модулей <span class="menuselection">Модули ‣ Управление и установка модулей... ‣ Все</span>. Если вы не видите данный модуль среди результатов поиска, убедитесь, что у вас активирована настройка <span class="guilabel">Разрешить установку экспериментальных модулей</span> на вкладке <span class="guilabel">Параметры</span>. В разделе <a class="reference internal" href="../using_plugins.html"><em>Использование модулей расширения</em></a> приведена более подробная информация об использовании модулей в QGIS.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
@@ -407,7 +409,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Обновлено: May 25, 2020.<br/>
+      Обновлено: Jul 29, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
