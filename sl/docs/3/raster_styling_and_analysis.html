@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basic Raster Styling and Analysis (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Osnovne analize in prikazi rastrov (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -81,18 +81,18 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Uvod</a></li>
 <li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Ustvarjanje karte (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Delo z atributi (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Uvoz podatkov preglednic ali datotek CSV (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Osnovno oblikovanje vektorskih slojev (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Basic Raster Styling and Analysis (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Osnovne analize in prikazi rastrov (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Working with Terrain Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Delo s podatki o reliefu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Delo s podatki prek vmesnika WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitizing Map Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitalizacija podatkov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
@@ -229,98 +229,110 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
       
 
   <div class="section" id="basic-raster-styling-and-analysis-qgis3">
-<h1>Basic Raster Styling and Analysis (QGIS3)<a class="headerlink" href="#basic-raster-styling-and-analysis-qgis3" title="Povezava na naslov">¶</a></h1>
-<p>A lot of scientific observations and research produces raster datasets. Rasters are grids of pixels that have a specific value assigned to them. By doing mathematical operations on these values, one can do some interesting analysis. QGIS has some basic analysis capabilities built-in via <strong>Raster Calculator</strong>. In this tutorial, we will explore the options available for styling rasters and functionality provided by the raster calculator.</p>
+<h1>Osnovne analize in prikazi rastrov (QGIS3)<a class="headerlink" href="#basic-raster-styling-and-analysis-qgis3" title="Povezava na naslov">¶</a></h1>
+<p>Veliko raziskav ustvari rastrske podatke. Raster je mreža celic, imenovanih piksli, ki so jim pripisane vrednosti. Z matematičnimi operacijami lahko s temi vrednostmi naredimo osnovne in napredne analize. QGIS ima osnovna orodja za računanje z rastri vgrajena v orodju <strong>Raster Calculator</strong>. V tej vadnici bomo raziskali osnove možnosti oblikovanja rastrskih slojev in zmogljivosti rastrskega računala.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
-<p>We will use population grid data to create a thematic map of the global population change between year 2000 and 2010.</p>
+<h2>Pregled naloge<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
+<p>Uporabili bomo podatke o gostoti prebivalcev in ustvarili tematsko karto s spremembami števila prebivalcev med leti 2000 in 2010.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Povezava na naslov">¶</a></h3>
+<h3>Česa se bomo še naučili<a class="headerlink" href="#other-skills-you-will-learn" title="Povezava na naslov">¶</a></h3>
 <ul class="simple">
-<li>How to copy/paste styles between layers</li>
+<li><p class="first">Kako kopirati (copy/paste) sloge med sloji</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
-<p>We will use the <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/collection/gpw-v4">Gridded Population of the World (GPW) v4</a> dataset from Columbia University. Specifically, we need the <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download">Population Count</a> for the entire globe at 2.5 Degree Minute resolution in GeoTiFF format and for the year 2000 and 2010. You will need a free <a class="reference external" href="https://urs.earthdata.nasa.gov/home">Earth Data account</a> to download the data.</p>
+<h2>Pridobivanje podatkov<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
+<p>Uporabili bomo podatkovni sloj <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/collection/gpw-v4">Gridded Population of the World (GPW) v4</a>, ki so ga pripravili na Columbia University. Natančneje, poiskali bomo sloj <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download">Population Count</a>, ki za celotno Zemljo v ločljivosti 2,5 stopinje podaja podatke za leti 2000 in 2010 v zapisu GeoTIFF. Za prenos podatkov boste potrebovali brezlačen račun <a class="reference external" href="https://urs.earthdata.nasa.gov/home">Earth Data account</a>.</p>
 <img alt="../../_images/data16.png" class="align-center" src="../../_images/data16.png" />
-<p>For convenience, you may directly download a copy of the datasets from the
-links below:</p>
+<p>Kopijo podatkov lahko poberete tudi neposredno s spodnjega naslova:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#gpw4" id="id1">[GPW4]</a></p>
+<p>Vir podatkov[GPW4]_</p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
+<h2>Postopek<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
 <ol class="arabic simple">
-<li>Open QGIS and locate the downloaded files in the <span class="guilabel">Browser</span> panel. Expand the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</span></code> file and drag the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min.tif</span></code> file to the canvas.</li>
+<li><p class="first">Odprite QGIS in poiščite prenesene datoteke na orodni plošči <span class="guilabel">Browser</span>. Razširite datoteko <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</span></code> in povlecite <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min.tif</span></code> v glavno okno programa.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1128.png" class="align-center" src="../../_images/1128.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>A new layer <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code> will be added to the <span class="guilabel">Layers</span> panel. Similarly, locate the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</span></code> file and drag the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min.tif</span></code> file to the canvas.</li>
+<li><p class="first">Na plošči <span class="guilabel">Layers</span> se pojavi nov sloj <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code>. Po enakem postopku odprite datoteko <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</span></code> in v okno programa povlecite <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min.tif</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/270.png" class="align-center" src="../../_images/270.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Let&#8217;s explore these layers. Click the <span class="guilabel">Identify</span> button on the <span class="guilabel">Attributes Toolbar</span>. Once the tool is selected, click on any point on the canvas.</li>
+<li><p class="first">Oglejmo si sloja. Kliknite gumb <span class="guilabel">Identify</span> v orodjarni <span class="guilabel">Attributes Toolbar</span>. Ko je orodje izbrano, kliknite katerokoli točko v glavnem oknu.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/342.png" class="align-center" src="../../_images/342.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>The value associated with that pixel will be displayed in a new <span class="guilabel">Identify Results</span> panel. In the <span class="guilabel">Identify Results</span> panel, change the <span class="guilabel">Mode</span> to <code class="docutils literal"><span class="pre">Top</span> <span class="pre">down</span></code>. This will display pixel values of all rasters instead of just the topmost layer. Compare the values from both the layers. As the resolution of the rasters is approximately 5km x 5km, the pixel values represent the total population in the area (25 sq. km) represented by the pixel.</li>
+<li><p class="first">Vrednost, ki je shranjena v izbranem pikslu se bo izpisala na plošči  <span class="guilabel">Identify Results</span>. Na plošči <span class="guilabel">Identify Results</span> spremenite <span class="guilabel">Mode</span> v <code class="docutils literal"><span class="pre">Top</span> <span class="pre">down</span></code>. Tako bodo prikazane vrednosti pikslov vseh rastrov namesto samo zgornje plasti. Primerjajte vrednosti iz obeh plasti. Ker je ločljivost rastrov približno 5 km x 5 km, vrednosti pikslov predstavljajo skupno populacijo na območju (25 kvadratnih kilometrov).</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/426.png" class="align-center" src="../../_images/426.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Close the <span class="guilabel">Identify Results</span> panel. Let&#8217;s create a better visualization of the layers. Click the <span class="guilabel">Open the layer Styling panel</span> button in the <span class="guilabel">Layers</span> panel.</li>
+<li><p class="first">Zaprite ploščo <span class="guilabel">Identify Results</span>. Ustvarimo boljši prikaz obeh slojev. Kliknite gumb <span class="guilabel">Open the layer Styling panel</span> v plošči <span class="guilabel">Layers</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/526.png" class="align-center" src="../../_images/526.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>In the <span class="guilabel">Layer Styling</span> panel, click the <span class="guilabel">Render type</span> dropdown and select <code class="docutils literal"><span class="pre">Singleband</span> <span class="pre">pseudocolor</span></code> renderer.</li>
+<li><p class="first">Na plošči <span class="guilabel">Layer Styling</span> kliknite padajoče polje <span class="guilabel">Render type</span> in izberite način prikaza <code class="docutils literal"><span class="pre">Singleband</span> <span class="pre">pseudocolor</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/625.png" class="align-center" src="../../_images/625.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>This renderer will style the layer using a color ramp. The default color ramp is white-red where the minimum value will be assigned the white color and the maximum value in the layer will be assigned the red color. The intermediate values will be assigned a shade of red linear interpolation. Expand the <span class="guilabel">Min / Max Value Settings</span> and choose <code class="docutils literal"><span class="pre">Cumulative</span> <span class="pre">count</span> <span class="pre">cut</span></code> option. You will see that the map visualization is much better now. The  The standard data range is set from 2% to 98% of the data values, meaning that the outliers will not be used to set the minimum and maximum values, resulting in a much more representative visualization.</li>
+<li><p class="first">Ta način prikaza bo sloj oblikoval z barvno lestvico. Privzeta lestvica je belo-rdeča, kjer bo najmanjša vrednost dodeljena beli barvi, največja vrednost v sloju pa rdeči. Vmesnim vrednostim bo dodeljen odtenek rdeče, dobljen z linearno interpolacijo. Razširite <span class="guilabel">Min / Max Value Settings`in izberite možnost ``Cumulative count cut`</span> . Videli boste, da je vizualizacija zemljevida zdaj veliko boljša. Standardni obseg podatkov je nastavljen na 2% do 98% vrednosti podatkov, kar pomeni, da se za določanje najnižjih in največjih vrednosti ne bodo uporabljali izstopajoči kazalniki, kar ustvari veliko bolj reprezentativno vizualizacijo.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/725.png" class="align-center" src="../../_images/725.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Close the <span class="guilabel">Layer Styling</span> panel. We can apply the similar styling to the other layer as well. But there is an easier way to transfer the styles from one layer to the other. Right-click the <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min</span></code> layer and select <span class="menuselection">Styles ‣ Copy Style</span>.</li>
+<li><p class="first">Zaprite ploščo <span class="guilabel">Layer Styling</span>. Enako oblikovanje lahko nastavimo tudi za drugi prikazani sloj. Obstaja pa lažji način prenosa oblikovanja iz enega sloja na drugega. Desno kliknite sloj <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min</span></code> in izberite  <span class="menuselection">Styles ‣ Copy Style</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/824.png" class="align-center" src="../../_images/824.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Now right-click the un-styled <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code> layer and select <span class="menuselection">Styles ‣ Paste Style</span>.</li>
+<li><p class="first">Desno kliknite neoblikovani sloj <code class="docutils literal"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code> in izberite <span class="menuselection">Styles ‣ Paste Style</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/925.png" class="align-center" src="../../_images/925.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>The same styling parameters will be applied to the other layer. This feature is particularly useful when you want to compare different layers using the same categorization. As you toggle the visibility of the top layer, you can see the changes in population visually.</li>
+<li><p class="first">Enaki parametri oblikovanja bodo uporabljeni za drugi sloj. Ta funkcija je še posebej uporabna, če želite primerjati različne sloje z isto kategorizacijo. Ko preklapljate vidnost zgornje plasti, lahko takoj opazite spremembe v populaciji.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/101.gif" class="align-center" src="../../_images/101.gif" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>Our task is to create a thematic map of the changes in population. Let&#8217;s compute the difference between the 2 layers and create another raster where each pixel represents the change in the population. Go to <span class="menuselection">Raster ‣ Raster calculator</span>.</li>
+<li><p class="first">Naša naloga je ustvariti tematsko karto sprememb v populacij. Izračunajmo razliko 2 slojev in ustvarimo razred, kjer vsakemu pikslu ustreza vrednost spremembe gostote prebivalstva. Izberite <span class="menuselection">Raster ‣ Raster calculator</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/101.gif" class="align-center" src="../../_images/101.gif" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>In the <span class="guilabel">Raster bands</span> section, you can select the layer by double-clicking on them. The bands are named after the raster name followed by <code class="docutils literal"><span class="pre">&#64;</span></code> and band number. Since each of our rasters have only 1 band, you will the names with <code class="docutils literal"><span class="pre">&#64;1</span></code> appended to the layer name. The raster calculator can apply mathematical     operations on the raster pixels. In this case we want to enter a simple formula to subtract the 2010 population from 2000. Enter the following expression. Next, click the <span class="guilabel">...</span> button next to <span class="guilabel">Output layer</span>.</li>
+<li><p class="first">V delu <span class="guilabel">Raster bands</span> lahko izberete sloj tako, da ga dvakrat kliknete. Kanali sloja so poimenovani z imenom rastra, ki mu sledi <code class="docutils literal"><span class="pre">&#64;</span></code> in številka kanala. Ker ima vsak od naših slojev le 1 kanal, imajo imena slojev dodano samo <code class="docutils literal"><span class="pre">&#64;1</span></code>. Rastrski kalkulator opravlja matematične izračune na vsakem pikslu rastra posebej. V našem primeru vpišemo enostaven izraz, s katerim od prebivalstva leta 2010 odštejemo prebivalstvo leta 2000. Vpišite spodnjo enačbo. Nato kliknite gumb <span class="guilabel">...</span> poleg <span class="guilabel">Output layer</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none"><div class="highlight"><pre><span></span>&quot;gpw-v4-population-count-rev11_2010_2pt5_min@1&quot; - &quot;gpw-v4-population-count-rev11_2000_2pt5_min@1&quot;
@@ -329,43 +341,50 @@ links below:</p>
 <img alt="../../_images/1225.png" class="align-center" src="../../_images/1225.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>Enter <code class="docutils literal"><span class="pre">population_change_2010_2000.tif</span></code> as the <span class="guilabel">Output file</span>. Click <span class="guilabel">OK</span> to start the computation.</li>
+<li><p class="first">Vpišite <code class="docutils literal"><span class="pre">population_change_2010_2000.tif</span></code> kot ime izhodne datoteke v <span class="guilabel">Output file</span>. Kliknite <span class="guilabel">OK</span> in poženite izračun.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1324.png" class="align-center" src="../../_images/1324.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Once completed a new layer <code class="docutils literal"><span class="pre">population_change_2010_2000</span></code> will be added to the <span class="guilabel">Layers</span> panel. Let&#8217;s change the styling so that the negative and positive population changes are better visualized.  Click the <span class="guilabel">Open the layer Styling panel</span> button in the <span class="guilabel">Layers</span> panel.</li>
+<li><p class="first">Ko bo računanje zaključeno, se bo v plošči <span class="guilabel">Layers</span> pojavil nov sloj <code class="docutils literal"><span class="pre">population_change_2010_2000</span></code>. Spremenimo prikaz tako, da bodo jasneje vidne negativne in pozitivne spremembe prebivalstva.  Kliknite gumb <span class="guilabel">Open the layer Styling panel</span> na plošči <span class="guilabel">Layers</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1423.png" class="align-center" src="../../_images/1423.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>One option is to use the similar styling technique as earlier and choose a diverging color ramp. Click the <span class="guilabel">Color ramp</span> drop-down and select <code class="docutils literal"><span class="pre">Spectral</span></code> ramp. Click the dro-down again and choose <code class="docutils literal"><span class="pre">Invert</span> <span class="pre">Color</span> <span class="pre">Ramp</span></code> to assign blues to low values and reds to high values.</li>
+<li><p class="first">Ena od možnosti je uporaba podobnega prikaza kot predhodno in izbira drugačne barvne lestvice. Kliknite padajoči meni <span class="guilabel">Color ramp</span> in izberite lestvico <code class="docutils literal"><span class="pre">Spectral</span></code>. Ponovno kliknite padajoči meni in izberite <code class="docutils literal"><span class="pre">Invert</span> <span class="pre">Color</span> <span class="pre">Ramp</span></code>, s čimer boste modre odtenke priredili nizkim vrednostim, rdeče pa visokim.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1523.png" class="align-center" src="../../_images/1523.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>This is a good visualization, but not easy to interpret. Let&#8217;s create a better map with 4 discrete categories, <code class="docutils literal"><span class="pre">Decline</span></code>, <code class="docutils literal"><span class="pre">Neutral</span></code>, <code class="docutils literal"><span class="pre">Growth</span></code> and <code class="docutils literal"><span class="pre">High</span> <span class="pre">Growth</span></code>. Scroll down to the tables with classes. Hold the <code class="kbd docutils literal"><span class="pre">Shift</span></code> key and select all the rows. Click the <span class="guilabel">Remove selected row(s)</span> button.</li>
+<li><p class="first">Vizualizacija je dobra, vendar ni preprosta za interpretacijo. Ustvarimo boljšo karto s 4 diskretnimi kategorijami: <code class="docutils literal"><span class="pre">Upad</span></code>, <code class="docutils literal"><span class="pre">Rast</span></code> in``Hitra rast``. Premaknite se do tabele z razredi. Držite tipko <code class="kbd docutils literal"><span class="pre">Shift</span></code> in izberite vrstice. Kliknite gumb <span class="guilabel">Remove selected row(s)</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1620.png" class="align-center" src="../../_images/1620.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>Change the <span class="guilabel">Interpolation</span> mode to <code class="docutils literal"><span class="pre">Discrete</span></code>. We will now create a color map manually. Click the <span class="guilabel">Add values manually</span> button. Enter <code class="docutils literal"><span class="pre">-100</span></code> as the <span class="guilabel">Value</span> and <code class="docutils literal"><span class="pre">Decline</span></code> as the <span class="guilabel">Label</span>. Assign blue color to this category. The way color map works is that all values lower than the value entered will be given the color of that entry. You will notice the canvas will show only those areas with negative population change.</li>
+<li><p class="first">Spremenite način <span class="guilabel">Interpolation</span> v <code class="docutils literal"><span class="pre">Discrete</span></code>. Barvno lestvico bomo ustvarili ročno. Kliknite gumb <span class="guilabel">Add values manually</span>. Vpišite <code class="docutils literal"><span class="pre">-100</span></code> kot <span class="guilabel">Value</span> in``Upad`` kot <span class="guilabel">Label</span>. Kategoriji pripišite modro barvo. Kategorizacija vse vrednosti, ki so manjše od vpisane vrednosti prikaže z izbrano barvo. Na karti bodo prikazane samo vrednosti negativnih sprememb prebivalstva.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1721.png" class="align-center" src="../../_images/1721.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Complete the color-map with suitable values. I chose <code class="docutils literal"><span class="pre">100</span></code>, <code class="docutils literal"><span class="pre">1000</span></code> and <code class="docutils literal"><span class="pre">100000</span></code> as the upper-bounds for the <code class="docutils literal"><span class="pre">Neutral</span></code>, <code class="docutils literal"><span class="pre">Growth</span></code> and <code class="docutils literal"><span class="pre">High</span> <span class="pre">Growth</span></code> categories respectively.</li>
+<li><p class="first">Ustvarite barvno karto s primernimi vrednostmi. Recimo <code class="docutils literal"><span class="pre">100</span></code>, <code class="docutils literal"><span class="pre">1000</span></code> in <code class="docutils literal"><span class="pre">100000</span></code> kot gornje vrednosti za kategorije <code class="docutils literal"><span class="pre">Nevtralno</span></code>, <code class="docutils literal"><span class="pre">Rast</span></code> in <code class="docutils literal"><span class="pre">Hitra</span> <span class="pre">rast</span></code>. Ustrezno obarvajte ustvarjen kategorije, recimo bež, oranžno in rdeče.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1820.png" class="align-center" src="../../_images/1820.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li>Once you are satisfied with the visualization, close the <span class="guilabel">Layer Styling</span> panel. You now have a global thematic map of population change.</li>
+<li><p class="first">Ko ste s prikazom zadovoljni, zaprite ploščo <span class="guilabel">Layer Styling</span>. Ustvarili ste tematsko karto sprememb prebivalstva.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1916.png" class="align-center" src="../../_images/1916.png" />
@@ -399,7 +418,7 @@ links below:</p>
     </p>
     <p>
         &copy; Vse pravice pridržane 2019, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno Oct 26, 2020.<br/>
+      Zadnjič posodobljeno Nov 01, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

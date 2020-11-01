@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Importing Spreadsheets or CSV files (QGIS3) &mdash; QGIS Tutorials and Tips</title>
+    <title>Uvoz podatkov preglednic ali datotek CSV (QGIS3) &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
     <link rel="next" title="Osnovno oblikovanje vektorskih slojev (QGIS3)" href="basic_vector_styling.html" />
-    <link rel="prev" title="Working with Attributes (QGIS3)" href="working_with_attributes.html" />
+    <link rel="prev" title="Delo z atributi (QGIS3)" href="working_with_attributes.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -81,18 +81,18 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Uvod</a></li>
 <li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Ustvarjanje karte (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Delo z atributi (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Uvoz podatkov preglednic ali datotek CSV (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Osnovno oblikovanje vektorskih slojev (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Osnovne analize in prikazi rastrov (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Working with Terrain Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Delo s podatki o reliefu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Delo s podatki prek vmesnika WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitizing Map Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitalizacija podatkov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
@@ -135,7 +135,7 @@
               
                 
   <li>
-    <a href="working_with_attributes.html" title="Previous Chapter: Working with Attributes (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Working with ...</span>
+    <a href="working_with_attributes.html" title="Previous Chapter: Delo z atributi (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Delo z atribu...</span>
     </a>
   </li>
   <li>
@@ -229,46 +229,50 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
       
 
   <div class="section" id="importing-spreadsheets-or-csv-files-qgis3">
-<h1>Importing Spreadsheets or CSV files (QGIS3)<a class="headerlink" href="#importing-spreadsheets-or-csv-files-qgis3" title="Povezava na naslov">¶</a></h1>
-<p>Many times the GIS data comes in a table or an Excel spreadsheet. Also, if you have a list lat/long coordinates, you can easily import this data in your GIS project.</p>
+<h1>Uvoz podatkov preglednic ali datotek CSV (QGIS3)<a class="headerlink" href="#importing-spreadsheets-or-csv-files-qgis3" title="Povezava na naslov">¶</a></h1>
+<p>Podatke za analizo in kartiranje pogosto dobimo v obliki tabel ali preglednic Excel. Če se v tabeli nahajajo stolpci s koordinatami x/y ali lat/long, jo lahko enostavno uvozite v QGIS projekt.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
-<p>We will be importing a text file of earthquake data to QGIS.</p>
+<h2>Pregled naloge<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
+<p>Podatke o potresih bomo iz besedilne datoteke uvozili v QGIS.</p>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
-<p>NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Learn more.</a></p>
-<p>Download <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">Significant Earthquake Database</a> text file.</p>
-<p>For convenience, you may directly download a copy of both the datasets from the links below:</p>
+<h2>Pridobivanje podatkov<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
+<p>National Geophysical Data Center, ki deluje v okviru ameriške agencije NOAA je pripravil ogromno bazo podatkov o večjih potresih od leta 2150 pr.n.št. <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Več o bazi.</a></p>
+<p>Poberite besedilno datoteko <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">Significant Earthquake Database</a>.</p>
+<p>Kopijo podatkov lahko poberete tudi neposredno s spodnjega naslova:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#ngdc" id="id1">[NGDC]</a></p>
+<p>Vir podatkov <a class="reference internal" href="../credits.html#ngdc" id="id1">[NGDC]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
+<h2>Postopek<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
 <ol class="arabic simple">
-<li>Examine your tabular data source. To import this data to QGIS, you will have to save it as a text file and need at least 2 columns which contain the X and Y coordinates. If you have a spreadsheet, use <cite>Save As</cite> function in your program to save it as a <cite>Tab Delimited File</cite> or a <cite>Comma Separated Values (CSV)</cite> file. Once you have the data exported this way, you can open it in a text editor such as Notepad to view the contents. In case of the Significant Earthquake Database, the data already comes as a text file which contains latitude and longitude of the earthquake centers along with other related attributes. You will see that each field is separated by a TAB.</li>
+<li><p class="first">Oglejte si originalno datoteko. Če želite tovrstne podatke uvoziti v QGIS, jih morate shraniti v besedilno datoteko z najmanj dvema stolpcema, ki vsebujeta koordinati X in Y. Če uporabljate preglednico, recimo Excel, podatke shranite z ukazom <cite>Save As</cite> in kot izhodni tip datoteke izberite <cite>Tab Delimited File</cite> ali <cite>Comma Separated Values (CSV)</cite>. Ko boste podatke izvozili, jih odprite z urejevalnikom (Notepad, Notepad++) in si oglejte vsebino datoteke. V primeru baze <em>Significant Earthquake Database</em> so podatki že v pravi obliki in vsebujejo geografsko dolžino in širino središč potresov, skupaj z ustreznimi atributi. Videli boste, da so polja ločena s tabulatorji.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/170.png" class="align-center" src="../../_images/170.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>QGIS3 comes with a unified data manager that allows you to load all the various supported data format. Click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You can also use <code class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">L</span></code> keyboard shortcut.</li>
+<li><p class="first">QGIS3 vsebuje enoten upravljalnik podatkov, s katerim lahko preberete podatke različnih podprtih podatkovnih zapisov. Kliknite gumb <span class="guilabel">Open Data Source Manager</span> v orodjarni <span class="guilabel">Data Source Toolbar</span>. Uporabite lahko tudi bližnjico <code class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">L</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/236.png" class="align-center" src="../../_images/236.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Switch to the <span class="guilabel">Delimited Text</span> tab. Click the <span class="guilabel">...</span> button next to <span class="guilabel">File name</span> and specify the path to the text file you downloaded. In the <span class="guilabel">File format</span> section, select <span class="guilabel">Custom delimiters</span> and check <span class="guilabel">Tab</span>. The <span class="guilabel">Geometry definition</span> secction will be auto-populated if it finds a suitable X and Y coordinate fields. In our case they are <code class="docutils literal"><span class="pre">LONGITUDE</span></code> and <code class="docutils literal"><span class="pre">LATITUDE</span></code>. You may change it if the import selects the wrong fields. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code> CRS. If your file contained coordinates in a different CRS, you can select the appropriate CRS here. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Skočite na kartico <span class="guilabel">Delimited Text</span>. Kliknite gumb <span class="guilabel">...</span> poleg <span class="guilabel">File name</span> in določite pot do besedilne datoteke, ki ste jo prenesli. V delu <span class="guilabel">File format</span> izberite <span class="guilabel">Custom delimiters</span> in obkljukajte polje <span class="guilabel">Tab</span>. Razdelek <span class="guilabel">Geometry definition</span> se bo zapolnil samodejno, če program najde ustrezna polja za koordinati X in Y. V našem primeru sta to <code class="docutils literal"><span class="pre">LONGITUDE</span></code> and <code class="docutils literal"><span class="pre">LATITUDE</span></code>.  Če program izbere napačna polja, jih lahko spremenite. Polje <span class="guilabel">Geometry CRS</span> lahko pustite na privzeto vrednost CRS <code class="docutils literal"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code>. Če bi imela vaša datoteka koordinate v drugem koordinatnem sistemu, bi lahko tu izbrali pravi CRS. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/326.png" class="align-center" src="../../_images/326.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Opomba</p>
-<p class="last">It is easy to confuse X and Y coordinates. Latitude specifies the north-south position of a point and hence it is a <strong>Y</strong> coordinate. Similarly Longitude specifies the east-west position of a point and it is a <strong>X</strong> coordinate.</p>
+<p class="last">Koordinati X in Y je zelo lahko zamešati. Geografska širina (Longitude) določa položaj v smeri sever-jug in je torej koordinata <strong>Y</strong>. Geografska dolžina (Latitude) pa določa položaj v smeri vzhod-zahod in je koordinata <strong>X</strong>.</p>
 </div>
 <ol class="arabic simple" start="4">
-<li>You will now see that the data will be imported and displayed in the QGIS canvas as a new layer called <code class="docutils literal"><span class="pre">signif</span></code>.</li>
+<li><p class="first">Podatki, ki ste jih uvozili, se bodo pojavili v glavnem oknu QGISa kot nov sloj <code class="docutils literal"><span class="pre">signif</span></code>.</p>
+</li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/413.png" class="align-center" src="../../_images/413.png" />
@@ -302,7 +306,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Vse pravice pridržane 2019, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno Oct 26, 2020.<br/>
+      Zadnjič posodobljeno Nov 01, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

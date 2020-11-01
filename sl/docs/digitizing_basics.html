@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Digitizing Map Data &mdash; QGIS Tutorials and Tips</title>
+    <title>Digitalizacija podatkov &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -81,18 +81,18 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Uvod</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Ustvarjanje karte (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Delo z atributi (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Uvoz podatkov preglednic ali datotek CSV (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_vector_styling.html">Osnovno oblikovanje vektorskih slojev (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Osnovne analize in prikazi rastrov (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Working with Terrain Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Delo s podatki o reliefu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Delo s podatki prek vmesnika WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Digitizing Map Data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Digitalizacija podatkov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
@@ -229,302 +229,218 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
       
 
   <div class="section" id="digitizing-map-data">
-<h1>Digitizing Map Data<a class="headerlink" href="#digitizing-map-data" title="Povezava na naslov">¶</a></h1>
-<p>Digitizing is one of the most common tasks that a GIS Specialist has to do.
-Often a large amount of <em>GIS time</em> is spent in digitizing raster data to create
-vector layers that you use in your analysis. QGIS has powerful on-screen
-digitizing and editing capabilities that we will explore in this tutorial.</p>
+<h1>Digitalizacija podatkov<a class="headerlink" href="#digitizing-map-data" title="Povezava na naslov">¶</a></h1>
+<p>Digitalizacija ali vektorizacija je eden od najpogostejših postopkov, ki ga srečamo pri delu z geografskimi informacijskimi sistemi. Pogosto velik ali celo največji del <em>časa GIS</em> porabimo za digitalizacijo rastrskih podatkov in pridobivanje vektorskih podatkov za analize. QGIS ima zelo zmogljivo orodje za zaslonsko digitalizacijo, ki ga bomo preizkusili v tej vadnici.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
-<p>We will use a raster topographic map and create several vector layers
-representing features around a park.</p>
+<h2>Pregled naloge<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
+<p>Uporabili bomo rastrsko topografsko karto in ustvarili več vektorskih slojev s podatki o objektih v okolici parka.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Povezava na naslov">¶</a></h3>
+<h3>Česa se bomo še naučili<a class="headerlink" href="#other-skills-you-will-learn" title="Povezava na naslov">¶</a></h3>
 <ul class="simple">
-<li>Building pyramids for large raster datasets to speed up zoom and pan
-operations.</li>
-<li>Working with a Spatialite database.</li>
+<li><p class="first">Kako ustvariti piramidne sloje (pyramids), ki pospešijo prikaz (zoomiranje, premikanje) in delo z velikimi rastri.</p>
+</li>
+<li><p class="first">Delati s podatkovno zbirko oblike Spatialite.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
-<p><a class="reference external" href="http://www.linz.govt.nz/">Land Information New Zealand (LINZ)</a> provides
-raster topographic maps at 1:50,000 scale for the New Zealand mainland and
-Chatham Islands.</p>
-<p>Download the <a class="reference external" href="http://topo.linz.govt.nz/Topo50_raster_images/GeoTIFFTopo50/BX24_GeoTifv1-02.tif">GeoTIFF Image file</a>
-from the <a class="reference external" href="http://www.linz.govt.nz/topography/topo-maps/map-chooser/christchurch/christchurch#digitalfile">Christchurch Topo50 map download page</a>.</p>
-<p>For convenience, you may directly download a copy of the dataset from the
-link below:</p>
+<h2>Pridobivanje podatkov<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
+<p>Spletna stran <a class="reference external" href="http://www.linz.govt.nz/">Land Information New Zealand (LINZ)</a> ponuja rastrske topografske karte v merilu 1:50.000 scale za Novo Zelandijo in bližnje otoke.</p>
+<p>Poberite <a class="reference external" href="http://topo.linz.govt.nz/Topo50_raster_images/GeoTIFFTopo50/BX24_GeoTifv1-02.tif">slikovno datoteko GeoTIFF</a> s spletnega naslova <a class="reference external" href="http://www.linz.govt.nz/topography/topo-maps/map-chooser/christchurch/christchurch#digitalfile">Topo50 map BX24 - Christchurch</a>.</p>
+<p>Lahko jih poberete tudi neposredno na spodnji povezavi:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/BX24_GeoTifv1-02-clip.tif">BX24_GeoTifv1-02-clip.tif</a></p>
-<p>Data Source <a class="reference internal" href="credits.html#linz" id="id1">[LINZ]</a></p>
+<p>Vir podatkov <a class="reference internal" href="credits.html#linz" id="id1">[LINZ]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
+<h2>Postopek<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
 <ol class="arabic simple">
-<li>Go to <span class="menuselection">Layer ‣ Add Raster Layer</span>. Locate the downloaded
-<code class="docutils literal"><span class="pre">BX24_GeoTifv1-02.tif</span></code> and click <span class="guilabel">Open</span>.</li>
+<li><p class="first">Izberite ukaz <span class="menuselection">Layer ‣ Add Raster Layer</span>. Poiščite pobrano datoteko <code class="docutils literal"><span class="pre">BX24_GeoTifv1-02.tif</span></code> in kliknite <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1153.png" class="align-center" src="../_images/1153.png" />
 <ol class="arabic simple" start="2">
-<li>This is a large raster file and you may notice that when you zoom or pan
-around the map, the map takes a little time to render the image. QGIS offers
-a simple solution to make rasters load much faster by using <strong>Image
-Pyramids</strong>. QGIS creates pre-rendered tiles at different resolutions and
-these are presented to you instead of the full raster. This makes map
-navigation snappy and responsive. Right-click the <code class="docutils literal"><span class="pre">BX24_GeoTifv1-02</span></code> layer
-and choose <span class="guilabel">Properties</span>.</li>
+<li><p class="first">Gre za veliko rastrsko sliko in morda boste opazili počasen prikaz med zoomiranjem in premikanjem na rastru. QGIS vsebuje elegantno rešitev, s katero močno pospešimo prikaze rastrov - ustvarjanje <strong>piramidnih slojev (Image Pyramids)</strong>. Program pripravi sliko v različnih ločljivostih, tako imenovane piramidne ploščice, in nato prikazuje te namesto polnega rastra. Gibanje po karti je zato veliko bolj gladko, prikaz pa hitrejši. Desno kliknite sloj <code class="docutils literal"><span class="pre">BX24_GeoTifv1-02</span></code> in izberite <span class="guilabel">Properties</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2106.png" class="align-center" src="../_images/2106.png" />
 <ol class="arabic simple" start="3">
-<li>Choose the <span class="guilabel">Pyramids</span> tab. Hold the <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> key and select all
-the resolutios offered in the <span class="guilabel">Resolutions</span> panel. Leave other
-options to defaults and click <span class="guilabel">Build pyramids</span>. Once the process
-finishes, click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Izberite kartico <span class="guilabel">Pyramids</span>. Pritisnite in držite tipko <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> ter izberite vse ločljivosti, ki jih ponuja plošča <span class="guilabel">Resolutions</span>. Postite ostale nastavitve tako kot so in kliknite gump <span class="guilabel">Build pyramids</span>. Ko se postopek konča, kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/358.png" class="align-center" src="../_images/358.png" />
 <ol class="arabic simple" start="4">
-<li>Back in the main QGIS window, use the <span class="guilabel">Zoom</span> tool to locate
-<em>Hagley Park</em> area in Christchurch. This is the park that we will be
-digitizing.</li>
+<li><p class="first">Ko se vrnete v glavno okno QGIS-a, uporabite orodje <span class="guilabel">Zoom</span> in približajte območje <em>Hagley Park</em> v Christchurchu. To je park, ki ga bomo digitalizirali.</p>
+</li>
 </ol>
 <img alt="../_images/440.png" class="align-center" src="../_images/440.png" />
 <ol class="arabic simple" start="5">
-<li>Before we start, we need to set default <strong>Digitizing Options</strong>. Go to
-<span class="menuselection">Settings ‣ Options...</span>.</li>
+<li><p class="first">Preden začnemo, moramo pripraviti pravilne privzete <strong>možnosti za digitalizacijo</strong>. Izberite meni <span class="menuselection">Settings ‣ Options...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/540.png" class="align-center" src="../_images/540.png" />
 <ol class="arabic simple" start="6">
-<li>Select the <span class="guilabel">Digitizing</span> tab in the <span class="guilabel">Options</span> dialog.
-Set the <span class="guilabel">Default snap mode</span> to <span class="guilabel">To vertex and segment</span>.
-This will allow you to snap to the nearest vertex or line segment. I also
-prefer to set the <span class="guilabel">Default snapping tolerance</span> and
-<span class="guilabel">Search radius for vertex edits</span> in pixels instead of map units.
-This will ensure that the snapping distance remains constant regardless of
-zoom level. Depending on your computer screen resolution, you
-may choose an appropriate value. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Izberite zavihek <span class="guilabel">Digitizing</span> v pogovornem oknu <span class="guilabel">Options</span>. Nastavite <span class="guilabel">Default snap mode</span> na <span class="guilabel">To vertex and segment</span>. S tem bomo pri digitalizaciji točke prilepili na najbližja vozlišča (vertekse) ali linijske segmente. Primerno je nastaviti tudi <span class="guilabel">Default snapping tolerance</span> in <span class="guilabel">Search radius for vertex edits</span> v piksel namesto enote karte. S tem ostane razdalja <em>lepljenja</em> enaka, ne glede na stopnjo zooma. Ustrezno vrednost je potrebno izbrati glede na ločljivost zaslona. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/638.png" class="align-center" src="../_images/638.png" />
 <ol class="arabic simple" start="7">
-<li>Now we are ready to start digitizing. We will first create a roads layer and
-digitize the roads around the park area. Select <span class="menuselection">Layer ‣ New
-‣ New Spatialite Layer...</span>. You may also choose to create a <span class="guilabel">New
-Shapefile Layer...</span> instead if you prefer. Spatialite is an open database
-format similar to ESRI&#8217;s geodatabase format. Spatialite database is
-contained within a single file on your hard drive and can contain diferent
-types of spatial (point, line, polygon) as well as non-spatial layers. This
-makes is much easier to move it around instead of a bunch of shapefiles. In
-this tutorial, we are creating a couple of polygon layers and a line layer,
-so a Spatialite database will be better suited. You can always load a
-spatialite layer and save it as a shapefile or any other format you want.</li>
+<li><p class="first">Tako smo se pripravili na digitalizacijo. Najprej bomo ustvarili sloj cest in digitalizirali ceste okrog parka. Izberite <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer...</span>. Izberete lahko tudi <span class="guilabel">New Shapefile Layer...</span>, če želite. Spatialite je odprt format prostorskih podatkovnih zbirk, ki je podoben ESRIjevemu zapisu geodatabase. Podatkovna zbirka Spatialite je shranjena v eni sami datoteki in lahko vsebuje podatke različnih tipov (točke, linije in poligone) ter tudi neprostorske sloje. Zaradi take oblike zapisa lahko datoteko precej laže hot shapefile premikamo in kopiramo. V vadnici bomo ustvarili nekaj poligonskih in nekaj linijskih slojev, zato je Spatialite še posebej prikladen zapis. Če želite lahko sloje oblike spatialite kadarkoli pretvorite v shape ali katerikoli drug zapis.</p>
+</li>
 </ol>
 <img alt="../_images/738.png" class="align-center" src="../_images/738.png" />
 <ol class="arabic simple" start="8">
-<li>In the <span class="guilabel">New Spatialite Layer</span> dialog, click the <span class="guilabel">...</span>
-button and save a new spatialite database named <code class="docutils literal"><span class="pre">nztopo.sqlite</span></code>. Choose
-the <span class="guilabel">Layer name</span> as <code class="docutils literal"><span class="pre">Roads</span></code> and select <code class="docutils literal"><span class="pre">Line</span></code> as the
-<span class="guilabel">Type</span>. The base topographic map is in the
-<code class="docutils literal"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code> CRS, so we can select
-the same for our roads layer. Check the <span class="guilabel">Create an
-autoincrementing primary key</span> box. This will create a field called <strong>pkuid</strong>
-in the attribute table and assign a unique numeric id automatically to each
-feature. When creating a GIS layer, you must decide on the attributes that
-each feature will have. Since this is a roads layer, we will have 2 basic
-attributes - Name and Class. Enter <code class="docutils literal"><span class="pre">Name</span></code> as the <span class="guilabel">Name</span>
-of the attribute in the <span class="guilabel">New attribute</span> section and click
-<span class="guilabel">Add to attribute list.</span></li>
+<li><p class="first">V pogovornem oknu <span class="guilabel">New Spatialite Layer</span> kliknite gumb <span class="guilabel">...</span> in sloj shranite v datoteko <code class="docutils literal"><span class="pre">nztopo.sqlite</span></code>. Kot <span class="guilabel">Layer name</span> določite <code class="docutils literal"><span class="pre">Roads</span></code> in za <span class="guilabel">Type</span> izberite <code class="docutils literal"><span class="pre">Line</span></code>. Topografska karta je v koordinatnem sistemu CRS <code class="docutils literal"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>, zato tega istega izberemo za sloj cest. Preverite, da je vklopljeno polje <span class="guilabel">Create an autoincrementing primary key</span>. S tem bomo v atributni tabeli ustvarili polje <strong>pkuid</strong> in vsakemu objektu samodejno priredili enoznačen numerični id. Ko ustvarjate sloj, se morate odločiti tudi katere atribute bo imel. Naš sloj cest bo imel dva - ime in razred. Za <span class="guilabel">Name</span> novega atributa izberite <code class="docutils literal"><span class="pre">Name</span></code> v razdelku <span class="guilabel">New attribute</span> in kliknite <span class="guilabel">Add to attribute list</span>.</p>
+</li>
 </ol>
 <img alt="../_images/837.png" class="align-center" src="../_images/837.png" />
 <ol class="arabic simple" start="9">
-<li>Similarly create a new attribute <code class="docutils literal"><span class="pre">Class</span></code> of the type <span class="guilabel">Text data</span>.
-Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Podobno ustvarite atribut <code class="docutils literal"><span class="pre">Class</span></code> tipa <span class="guilabel">Text data</span>. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/938.png" class="align-center" src="../_images/938.png" />
 <ol class="arabic simple" start="10">
-<li>Once the layer is loaded, click the <span class="guilabel">Toggle Editing</span> button to
-put the layer in editing mode.</li>
+<li><p class="first">Ko se sloj naloži, kliknite gumb <span class="guilabel">Toggle Editing</span> in sloj boste lahko začeli urejati.</p>
+</li>
 </ol>
 <img alt="../_images/1036.png" class="align-center" src="../_images/1036.png" />
 <ol class="arabic simple" start="11">
-<li>Click the <span class="guilabel">Add feature</span> button. Click on the map canvas to add a
-new vertex. Add new vertices along the road feature. Once you have digitized
-a road segment, right-click to end the feature.</li>
+<li><p class="first">Kliknite gumb <span class="guilabel">Add feature</span>. Klinite na zemljevid da dodaste prvo vozlišče (točko). Sledite cesti in dodajate vozlišča. Ko zaključite del ceste, desno kliknite in s tem objekt dokončajte.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Opomba</p>
-<p class="last">You can use the scroll wheel of the mouse to zoom in or out while digitizing.
-You can also hold the scroll button and move the mouse to pan around.</p>
+<p class="last">Med urejanjem lahko uporabljate kolesce na miški za približevanje in oddaljevanje. Lahko tudi držite gumb za vrtenje in se s tem premikate naokrog.</p>
 </div>
 <img alt="../_images/1154.png" class="align-center" src="../_images/1154.png" />
 <ol class="arabic simple" start="12">
-<li>After you right-click to end the feature, you will get a pop-up dialog
-called <span class="guilabel">Attributes</span>. Here you can enter attributes of the newly
-created feature. Since the <strong>pkuid</strong> is an auto-incrementing field, you
-will not be able to enter a value manually. Leave it blank and enter the
-road name as it appears on the topo map. Optionally, assign a Road Class
-value as well. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Ko zaključite dodajanje objekta z desnim klikom, s pojavi pogovorno okno <span class="guilabel">Attributes</span>. Tu lahko vpišete atribute novo ustvarjenega objekta. Ker se polje <strong>pkuid</strong> ustvarja samo, vanj ne moremo vpisati vrednosti. Pustimo praznega in v polje z imenom vpišemo ime ceste, tako kot je prikazano na karti. Dodamo lahko tudi razred ceste. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1237.png" class="align-center" src="../_images/1237.png" />
 <ol class="arabic simple" start="13">
-<li>The default style of the new line layer is a thin line. Let&#8217;s change it so
-we can better see the digitized features on the canvas. Right click the
-<code class="docutils literal"><span class="pre">Roads</span></code> layer and select <span class="guilabel">Properties</span>.</li>
+<li><p class="first">Privzeti sloj novo ustvarjenega sloja je tanka črta. Spremenimo ga, da bomo laže digitalizirali naslednje ceste. Desno kliknite sloj <code class="docutils literal"><span class="pre">Roads</span></code> in izberite <span class="guilabel">Properties</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1336.png" class="align-center" src="../_images/1336.png" />
 <ol class="arabic simple" start="14">
-<li>Select the <span class="guilabel">Style</span> tab in the <span class="guilabel">Layer Properties</span>
-dialog. Choose a thicker line style such as <span class="guilabel">Primary</span> from the
-predefined styles. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Izberite kartico <span class="guilabel">Style</span> v pogovornem oknu <span class="guilabel">Layer Properties</span>. Določite debelejši slog, recimo med že določenimi je primeren <span class="guilabel">Primary</span>. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1435.png" class="align-center" src="../_images/1435.png" />
 <ol class="arabic simple" start="15">
-<li>Now you will see the digitized road feature clearly. Click <span class="guilabel">Save
-Layer Edits</span> to commit the new feature to disk.</li>
+<li><p class="first">Digitalizirano cesto bomo zdaj precej bolje videli. Kliknite <span class="guilabel">Save Layer Edits</span> da potrdite spremembe in se te zapišejo na disk.</p>
+</li>
 </ol>
 <img alt="../_images/1534.png" class="align-center" src="../_images/1534.png" />
 <ol class="arabic simple" start="16">
-<li>Before we digitize remaining roads, it is important to update some other
-settings that are important to create an error free layer. Go to
-<span class="menuselection">Settings ‣ Snapping Options...</span>.</li>
+<li><p class="first">Preden nadaljujemo z digitalizacijo, bomo spremenili še nekatere dodatne nastavitve, ki so potrebne, da končni podatkovni sloj ne bo imel napak. Pojdite v <span class="menuselection">Settings ‣ Snapping Options...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1630.png" class="align-center" src="../_images/1630.png" />
 <ol class="arabic simple" start="17">
-<li>In the <span class="guilabel">Snapping Options</span> dialog, check the <span class="guilabel">Enable
-topological editing</span>. This option will ensure that the common boundaries
-are maintained correctly in polygon layers. Also check the
-<span class="guilabel">Enable snapping on intersection</span> which allows you to snap on an
-intersection of a background layer.</li>
+<li><p class="first">V pogovornem oknu <span class="guilabel">Snapping Options</span> preverite, da je vključeno <span class="guilabel">Enable topological editing</span>. S tem bomo poskrbeli, da bodo imeli poligoni pravilne skupne meje. Prav tako mora biti vključeno <span class="guilabel">Enable snapping on intersection</span>, s katerim lahko <em>prilepimo</em> na vozlišča sloja, ki je v ozadju.</p>
+</li>
 </ol>
 <img alt="../_images/1728.png" class="align-center" src="../_images/1728.png" />
 <ol class="arabic simple" start="18">
-<li>Now you can click <span class="guilabel">Add feature</span> button and digitize other roads
-around the park. Make sure to click <span class="guilabel">Save Edits</span> after you add a
-new feaure to save your work. A useful tool to help you with digitizing is
-the <strong>Node Tool</strong>. Click the <span class="guilabel">Node Tool</span> button.</li>
+<li><p class="first">Zdaj lahko znova kliknete gumb <span class="guilabel">Add feature</span> in digitalizirate druge ceste v parku. Pazite, da kliknete gumb <span class="guilabel">Save Edits</span>, ko dodate nov objekt. S tem redno shranjujete svoje delo. Uporabno orodje pri digitalizaciji je namenjeno delu z <strong>vozlišči (node)</strong>. Kliknite gumb <span class="guilabel">Node Tool</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1828.png" class="align-center" src="../_images/1828.png" />
 <ol class="arabic simple" start="19">
-<li>Once the node tool is activated, click on any feature to show the vertices.
-Click on any vertex to select it. The vertex will change the color once it
-is selected. Now you can click and drag your mouse to move the vertex. This
-is useful when you want to make adjustments after the feature is created.
-You can also delete a selected vertex by clicking the <code class="kbd docutils literal"><span class="pre">Delete</span></code> key.
-(<code class="kbd docutils literal"><span class="pre">Option+Delete</span></code> on a mac)</li>
+<li><p class="first">Ko je orodje aktivirano, lahko kliknete na katerikoli objekt in prikazala se bodo njegova vozlišča. Posamezno oglišče spremeni barvo, ko ga izberete. Z miško ga lahko kliknete in premikate. S tem lahko objekt popravite potem, ko je bil že ustvarjen. Izbrano oglišče lahko tudi izbrišete tako, da pritisnete tipko <code class="kbd docutils literal"><span class="pre">Delete</span></code> (<code class="kbd docutils literal"><span class="pre">Option+Delete</span></code> na Macih).</p>
+</li>
 </ol>
 <img alt="../_images/1922.png" class="align-center" src="../_images/1922.png" />
 <ol class="arabic simple" start="20">
-<li>Once you have finished digitizing all the roads, click the
-<span class="guilabel">Toggle Editing</span> button.</li>
+<li><p class="first">Ko boste digitalizirali vse ceste, zaključite urejanje tako, da kliknite gumb <span class="guilabel">Toggle Editing</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2016.png" class="align-center" src="../_images/2016.png" />
 <ol class="arabic simple" start="21">
-<li>Now we will create a polygon layer representing the park boundaries. Go to
-<span class="menuselection">Layer ‣ New ‣ New Spatialite Layer...</span>. Select the
-<code class="docutils literal"><span class="pre">nztopo.sqlite</span></code> database from the dropdown list. Name the new layer as
-<code class="docutils literal"><span class="pre">Parks</span></code>. Select <code class="docutils literal"><span class="pre">Polygon</span></code> as the <span class="guilabel">Type</span>. Create a new
-attribute called <code class="docutils literal"><span class="pre">Name</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">V nadaljevanju bomo ustvarili poligon, s katerim bomo označili območje parka. Pojdite v meni <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer...</span>. Kot podatkovno zbirko v padajočem meniju izberite <code class="docutils literal"><span class="pre">nztopo.sqlite</span></code>. Nov sloj poimenujte <code class="docutils literal"><span class="pre">Parks</span></code>, za <span class="guilabel">Type</span> pa izberite <code class="docutils literal"><span class="pre">Polygon</span></code>. Sloj naj ima atribut ime, recimo <code class="docutils literal"><span class="pre">Name</span></code>. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2121.png" class="align-center" src="../_images/2121.png" />
 <ol class="arabic simple" start="22">
-<li>Click the <span class="guilabel">Add feature</span> button and click on the map canvas to add
-a polygon vertex. Digitize the polygon representing the park. Make sure you
-snap to the roads vertices so there are no gaps between the park polygons
-and road lines. Right-click to finish the polygon.</li>
+<li><p class="first">Kliknite gumb <span class="guilabel">Add feature</span> in kliknite karto ter tako dodajte novo vozlišče. Digitalizirajte poligon in pokrijte celoten park. Pazite, da se dotikate vozlišč ceste in med cestami in parkom ni praznega prostora. Ko končate. Zaključite poligon z desnim klikom.</p>
+</li>
 </ol>
 <img alt="../_images/2219.png" class="align-center" src="../_images/2219.png" />
 <ol class="arabic simple" start="23">
-<li>Enter the park name in the <span class="guilabel">Attributes</span> pop-up.</li>
+<li><p class="first">V pogovornem oknu <span class="guilabel">Attributes</span> vpišite ime parka.</p>
+</li>
 </ol>
 <img alt="../_images/2316.png" class="align-center" src="../_images/2316.png" />
 <ol class="arabic simple" start="24">
-<li>Polygon layers offer another very useful setting called <strong>Avoid
-intersections of new polygons</strong>. Go to <span class="menuselection">Settings ‣
-Snapping Options...</span>. Check the box in the <span class="guilabel">Avoid Int</span> column in
-the row for the <code class="docutils literal"><span class="pre">Parks</span></code> layer. Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Poligonski sloji omogočajo dodatno možnost <strong>izogibanja presekom novih poligonov</strong>. Pojdite v <span class="menuselection">Settings ‣ Snapping Options...</span>. V stolpcu <span class="guilabel">Avoid Int</span> izberite možnost za sloj <code class="docutils literal"><span class="pre">Parks</span></code>. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2415.png" class="align-center" src="../_images/2415.png" />
 <ol class="arabic simple" start="25">
-<li>Now click on <span class="guilabel">Add feature</span> to add a polygon. With the <strong>Avoid
-intersections of new polygons</strong>, you will be able quickly digitize a new
-polygon without worrying about snapping exactly to the neighboring polygons.</li>
+<li><p class="first">Ponovno kliknite na <span class="guilabel">Add feature</span> in dodajte nov poligon. Z vključeno možnostjo  <a href="#id1"><span class="problematic" id="id2">**</span></a>Avoid intersections of new polygons* boste lahko dodali nov poligon, ne da bi vas skrbelo preklapljanje z obstoječimi sosednjimi.</p>
+</li>
 </ol>
 <img alt="../_images/2514.png" class="align-center" src="../_images/2514.png" />
 <ol class="arabic simple" start="26">
-<li>Right-click to finish the polygon and enter the attributes. Magically the
-new polygon is shrunk and snapped exactly to the boundary of the neighboring
-polygons! This is very useful when digitizing complex boundaries where you
-need not be very precise and still have topologically correct polygon.
-Click <span class="guilabel">Toggle Editing</span> to finish editing the <code class="docutils literal"><span class="pre">Parks</span></code> layer.</li>
+<li><p class="first">Kliknite desno, da zaključite urejanje in vpišete atribute. Nov poligon se čudežno prilepi na sosednje! To je pri zapletenih strukturah še kako pomembno, saj želimo natančno digitalizirati in ohraniti topološko pravilen poligon. Kliknite <span class="guilabel">Toggle Editing</span> in s tem zaključite urejanje sloja <code class="docutils literal"><span class="pre">Parks</span></code>.</p>
+</li>
 </ol>
 <img alt="../_images/2612.png" class="align-center" src="../_images/2612.png" />
 <ol class="arabic simple" start="27">
-<li>Now it is time to digitize a buildings layer. Create a new polygon layer named
-<code class="docutils literal"><span class="pre">Buildings</span></code> by going to <span class="menuselection">Layer ‣ New ‣ New Spatialite
-Layer</span>.</li>
+<li><p class="first">Na vrsti je digitalizacija stavb. Ustvarite nov poligonski sloj z imenom <code class="docutils literal"><span class="pre">Buildings</span></code>. Izberite <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2712.png" class="align-center" src="../_images/2712.png" />
 <ol class="arabic simple" start="28">
-<li>Once the <code class="docutils literal"><span class="pre">Buildings</span></code> layer is added, turn off the <code class="docutils literal"><span class="pre">Parks</span></code> and <code class="docutils literal"><span class="pre">Roads</span></code>
-layer so the base topo map is visible. Select the <code class="docutils literal"><span class="pre">Buildings</span></code> layer and
-click <span class="guilabel">Toggle Editing</span>.</li>
+<li><p class="first">Ko dodate sloj <code class="docutils literal"><span class="pre">Buildings</span></code>, izključite sloja <code class="docutils literal"><span class="pre">Parks</span></code> in <code class="docutils literal"><span class="pre">Roads</span></code>, zato da bo vidna topografska karta. Kliknite sloj <code class="docutils literal"><span class="pre">Buildings</span></code> in gumb <span class="guilabel">Toggle Editing</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2612.png" class="align-center" src="../_images/2612.png" />
 <ol class="arabic simple" start="29">
-<li>Digitizing buildings can be a cumbersome task. Also it is difficult to add
-vertices manually so that the edges are perpendicular and form a rectangle.
-We will use a plugin called <strong>Rectangles Ovals Digitizing</strong> to help with
-this task. See <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a> to see how to search and install
-plugins. Once the <strong>Rectangles Ovals Digitizing</strong> plugin is installed, you
-will see a new toolbar appear above the canvas.</li>
+<li><p class="first">Digitalizacija stavb je zelo zapletena. Poleg tega je težko ročno dodajati vozlišča in ohranjati pravokotnost. Delo si bomo olajšali z uporabo vtičnika (plugin) z imenom <strong>Rectangles Ovals Digitizing</strong>. Poglejte <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a>, kako iskati in namestiti vtičnike. Ko se vtičnik <strong>Rectangles Ovals Digitizing</strong> naloži, se bo pojavila nova orodjarna.</p>
+</li>
 </ol>
 <img alt="../_images/2910.png" class="align-center" src="../_images/2910.png" />
 <ol class="arabic simple" start="30">
-<li>Zoom to an area with the buildings and click <span class="guilabel">Rectangle by
-Extent</span> button. Click and drag the mouse to draw a perfect rectangle.
-Similarly, add remaining buildings.</li>
+<li><p class="first">Približajte se območju s stavbami in kliknite <span class="guilabel">Rectangle by Extent</span> button. Kliknite in z miško narišite popoln pravokotnik. Podobno dodajte ostale stavbe.</p>
+</li>
 </ol>
 <img alt="../_images/305.png" class="align-center" src="../_images/305.png" />
 <ol class="arabic simple" start="31">
-<li>You will notice that some buildings are not vertical. We will need to draw
-a rectangle at an angle to match the building footprint. Click the
-<span class="guilabel">Rectangle from center</span>.</li>
+<li><p class="first">Opazili boste, da niso vse stavbe v smeri sever jug, zato moramo pravokotnike risati pod kotom. Kliknite <span class="guilabel">Rectangle from center</span>.</p>
+</li>
 </ol>
 <img alt="../_images/3112.png" class="align-center" src="../_images/3112.png" />
 <ol class="arabic simple" start="32">
-<li>Click at the center of the building and drag the mouse to draw a vertical
-rectangle.</li>
+<li><p class="first">Kliknite sredino stavbe in narišite pravokotnik v smeri sever jug.</p>
+</li>
 </ol>
 <img alt="../_images/3211.png" class="align-center" src="../_images/3211.png" />
 <ol class="arabic simple" start="33">
-<li>We need to rotate this rectangle to match the image on the topo map. The
-rotate tool is available in the <strong>Advanced Digitizing</strong> toolbar.
-Right-click on an empty area on the toolbar section and enable the
-<span class="guilabel">Advanced Digitizing</span> toolbar.</li>
+<li><p class="first">Zdaj ga moramo zavrteti, da bo ustrezal stanju na karti. Orodje za vrtenje ne na voljo v orodjarni <strong>Advanced Digitizing</strong>. Desno kliknite kjerkoli v orodjarni in omogočite orodjarno <span class="guilabel">Advanced Digitizing</span>.</p>
+</li>
 </ol>
 <img alt="../_images/3311.png" class="align-center" src="../_images/3311.png" />
 <ol class="arabic simple" start="34">
-<li>Click the <span class="guilabel">Rotate Feature(s)</span> button.</li>
+<li><p class="first">Kliknite gumb <span class="guilabel">Rotate Feature(s)</span>.</p>
+</li>
 </ol>
 <img alt="../_images/3410.png" class="align-center" src="../_images/3410.png" />
 <ol class="arabic simple" start="35">
-<li>Use the <span class="guilabel">Select Single feature</span> tool to select the polygon that
-you want to rotate. Once the <span class="guilabel">Rotate Feature(s)</span> tool is
-activated, you will see crosshairs at the center of the polygon. Click
-exactly on that crosshairs and drag the mouse while holding the left-click
-button. A preview of the rotated feature will appear. Let go of the mouse
-button when the polygon aligns with the building footprint.</li>
+<li><p class="first">Izberite orodje <span class="guilabel">Select Single feature</span>, da izberete samo poligon, ki ga želite vrteti. Ko izberete orodje <span class="guilabel">Rotate Feature(s)</span> boste opazili križec v sredini poligona. Kliknite križec in z miško zavrtite poligon. Pokazal se bo pregled novega stanja in ko ste zadovoljni s položajem spustite miško.</p>
+</li>
 </ol>
 <img alt="../_images/359.png" class="align-center" src="../_images/359.png" />
 <ol class="arabic simple" start="36">
-<li>Save the layer edits and click <span class="guilabel">Toggle Editing</span> once you finish
-digitizing all buildings. You can drag the layers to change their order of
-appearance.</li>
+<li><p class="first">Shranite popravke in kliknite <span class="guilabel">Toggle Editing</span>, ko boste končali z digitalizacijo vseh stavb. Spremenite lahko vrstni red slojev.</p>
+</li>
 </ol>
 <img alt="../_images/361.png" class="align-center" src="../_images/361.png" />
 <ol class="arabic simple" start="37">
-<li>The digitizing task is now complete. You can play with the styling and
-labelling options in layer properties to create a nice looking map from the
-data you created.</li>
+<li><p class="first">Digitalizacija je zaključena. Lahko se še poigramo z oblikovanjem slojev, dodamo oznake in tako pripravimo karto na tisk ali dodatne analize.</p>
+</li>
 </ol>
 <img alt="../_images/371.png" class="align-center" src="../_images/371.png" />
 </div>
@@ -556,7 +472,7 @@ data you created.</li>
     </p>
     <p>
         &copy; Vse pravice pridržane 2019, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno Oct 26, 2020.<br/>
+      Zadnjič posodobljeno Nov 01, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>

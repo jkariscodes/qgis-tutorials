@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Performing Spatial Queries &mdash; QGIS Tutorials and Tips</title>
+    <title>Prostorske analize &mdash; QGIS Tutorials and Tips</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -79,18 +79,18 @@
       aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Uvod</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Ustvarjanje karte (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Delo z atributi (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/importing_spreadsheets_csv.html">Uvoz podatkov preglednic ali datotek CSV (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/basic_vector_styling.html">Osnovno oblikovanje vektorskih slojev (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_line_lengths.html">Calculating Line Lengths and Statistics (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Osnovne analize in prikazi rastrov (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Working with Terrain Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Delo s podatki o reliefu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Delo s podatki prek vmesnika WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalizacija podatkov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
@@ -219,161 +219,139 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
       
 
   <div class="section" id="performing-spatial-queries">
-<h1>Performing Spatial Queries<a class="headerlink" href="#performing-spatial-queries" title="Povezava na naslov">¶</a></h1>
+<h1>Prostorske analize<a class="headerlink" href="#performing-spatial-queries" title="Povezava na naslov">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Opozorilo</p>
-<p class="last">This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/performing_spatial_queries.html"><em>Performing Spatial Queries (QGIS3)</em></a></p>
+<p class="last">Vadnica je zastarela. Nova in posodobljena verzija je na voljo v <a class="reference internal" href="3/performing_spatial_queries.html"><em>Performing Spatial Queries (QGIS3)</em></a></p>
 </div>
-<p>Spatial queries are core to many types of GIS analysis. In QGIS, this
-functionality is available via the <strong>Spatial Query</strong> plugin.</p>
+<p>Prostorske poizvedbe so bistveni del GIS analiz. V QGIS-u jih najdemo v dodatku <strong>Spatial Query</strong>.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
-<p>We will be working with 2 datasets - a lines layer representing rivers and a
-point layer representing cities. The task is to run a spatial query to find all
-cities that are within 10 kms of a river.</p>
+<h2>Pregled naloge<a class="headerlink" href="#overview-of-the-task" title="Povezava na naslov">¶</a></h2>
+<p>Delali bomo z dvema podatkovnima setoma - linijskim slojem rek in jezer ter točkovnim slojem mest. Naša naloga bo poiskati vsa mesta, ki ležijo bliže kot 10 km od rek.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Povezava na naslov">¶</a></h3>
+<h3>Česa se bomo še naučili<a class="headerlink" href="#other-skills-you-will-learn" title="Povezava na naslov">¶</a></h3>
 <ul class="simple">
-<li>Opening .zip files directly in QGIS.</li>
-<li>Choosing an appropriate projection and re-projecting vector data.</li>
-<li>Creating buffers.</li>
-<li>Selecting features using SQL-like expressions.</li>
-<li>Coverting a shpefile to a KML file.</li>
-<li>Validating your results using Google Earth.</li>
+<li><p class="first">Kako v QGIS-u opreti datoteke ZIP.</p>
+</li>
+<li><p class="first">Izbrati pravo projekcijo in preporojicirati vektorske podatke.</p>
+</li>
+<li><p class="first">Ustvarjati pasove (buffer).</p>
+</li>
+<li><p class="first">Izbirati objekte z ukazi SQL.</p>
+</li>
+<li><p class="first">Pretvoriti datoteke SHP v KML.</p>
+</li>
+<li><p class="first">Prelgedati rezultate s programom Google Earth.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
-<p>We will use <code class="docutils literal"><span class="pre">ne_10m_rivers_lake_centerlines</span></code> and
-<code class="docutils literal"><span class="pre">10m_populated_places_simple</span></code> datasets from Natural Earth.</p>
-<p>Download <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_rivers_lake_centerlines.zip">Rivers and Lake Centerlines</a></p>
-<p>Download <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">Populated Places</a>.</p>
-<p>Data Source: <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<h2>Pridobivanje podatkov<a class="headerlink" href="#get-the-data" title="Povezava na naslov">¶</a></h2>
+<p>Uporabili bomo sloja <code class="docutils literal"><span class="pre">ne_10m_rivers_lake_centerlines</span></code> in <code class="docutils literal"><span class="pre">10m_populated_places_simple</span></code> iz zbirke Natural Earth.</p>
+<p>Poberite <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_rivers_lake_centerlines.zip">Rivers and Lake Centerlines</a></p>
+<p>POberite <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">Populated Places</a>.</p>
+<p>Vir podatkov: <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
+<h2>Postopek<a class="headerlink" href="#procedure" title="Povezava na naslov">¶</a></h2>
 <ol class="arabic simple">
-<li>Once you have downloaded the data, open QGIS. Go to
-<span class="menuselection">Layer ‣ Add Vector Layer</span>.</li>
+<li><p class="first">Ko boste pobrali podatke, odprite QGIS. Izberite meni <span class="menuselection">Layer ‣ Add Vector Layer</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1174.png" class="align-center" src="../_images/1174.png" />
 <ol class="arabic simple" start="2">
-<li>Click <span class="guilabel">Browse</span> and navigate to the folder where you downloaded the
-zip files.</li>
+<li><p class="first">Kliknite <span class="guilabel">Browse</span> in se premaknite v mapo s pobranimi datotekami ZIP.</p>
+</li>
 </ol>
 <img alt="../_images/2133.png" class="align-center" src="../_images/2133.png" />
 <ol class="arabic simple" start="3">
-<li>Hold the <code class="kbd docutils literal"><span class="pre">Shift</span></code> key and click on both the zip files to select them.
-Click <span class="guilabel">Open</span>.</li>
+<li><p class="first">Držite tipko <code class="kbd docutils literal"><span class="pre">Shift</span></code> in izberite datoteki ZIP. Kliknite <span class="guilabel">Open</span>.</p>
+</li>
 </ol>
 <img alt="../_images/373.png" class="align-center" src="../_images/373.png" />
 <ol class="arabic simple" start="4">
-<li>You will be asked to choose a layer from the zip archive.
-Select <code class="docutils literal"><span class="pre">ne_10m_rivers_lake_centerlines.shp</span></code> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Izbrati boste morali ustrezen sloj iz arhiva ZIP. Izberite <code class="docutils literal"><span class="pre">ne_10m_rivers_lake_centerlines.shp</span></code> in kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/451.png" class="align-center" src="../_images/451.png" />
 <ol class="arabic simple" start="5">
-<li>Since you have selected multiple files, repeat the process for the next file.
-Select 10m_populated_places_simple.shp and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Ker ste izbrali več datotek, ponovite postopek z naslednjo datoteko. Izberite <code class="docutils literal"><span class="pre">10m_populated_places_simple.shp</span></code> in kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/552.png" class="align-center" src="../_images/552.png" />
 <ol class="arabic simple" start="6">
-<li>You will see both the shapefiles now loaded in QGIS.</li>
+<li><p class="first">Oba sloja se bosta naložila v QGIS.</p>
+</li>
 </ol>
 <img alt="../_images/650.png" class="align-center" src="../_images/650.png" />
 <ol class="arabic simple" start="7">
-<li>We will be created buffers around the point and line layers. The <cite>Buffer</cite>
-geoprocessing tool in QGIS uses <cite>layer units</cite> to calculate buffer distances.
-The layers we have are in <cite>Geographic Coordinate Reference System (CRS)</cite> with
-the unit of <cite>degrees</cite>. This is not appropriate as we want our analysis to use
-<cite>metres</cite> or <cite>kilometres</cite>. To achive this, we must re-project our layers to a
-<cite>Projected Coordinate Reference System (CRS)</cite>. Right-click on the
-<code class="docutils literal"><span class="pre">10m_populated_places_simple</span> <span class="pre">layer</span></code> and choose <span class="guilabel">Save As</span>.</li>
+<li><p class="first">Okrog linij rek in točk mest bomo ustvarili pas (buffer). Orodje <cite>Buffer</cite> v QGIS-u za računanje razdalj uporablja <cite>enote sloja</cite>. Sloji, ki smo jih naložili uporabljajo koordinatni sistem <cite>Geographic Coordinate Reference System (CRS)</cite>, v katerem so enote <cite>stopinje</cite>. To ni ustrezno, za analizo želimo uporabiti <cite>metre</cite> ali <cite>kilometre</cite>. Spremeniti moramo koordinatni sistem slojev. Desno kliknite sloj <code class="docutils literal"><span class="pre">10m_populated_places_simple</span></code> in izberite <span class="guilabel">Save As</span>.</p>
+</li>
 </ol>
 <img alt="../_images/749.png" class="align-center" src="../_images/749.png" />
 <ol class="arabic simple" start="8">
-<li>In the <span class="guilabel">Save vector layer as...</span> dialog, click <span class="guilabel">Browse</span>
-next to <span class="guilabel">Save as</span> and select the output file location. Name the
-output file as <code class="docutils literal"><span class="pre">populated_places_reprojected.shp</span></code>. Next, click the
-<span class="guilabel">Browse</span> button next to <span class="guilabel">CRS</span>.</li>
+<li><p class="first">V pogovornem oknu <span class="guilabel">Save vector layer as...</span> kliknite <span class="guilabel">Browse</span> poleg polja <span class="guilabel">Save as</span> in izberite mapo za shranjevanje. Ime izhodne datoteko naj bo <code class="docutils literal"><span class="pre">populated_places_reprojected.shp</span></code>. Poleg polja <span class="guilabel">CRS</span> kliknite gumb <span class="guilabel">Browse</span>.</p>
+</li>
 </ol>
 <img alt="../_images/847.png" class="align-center" src="../_images/847.png" />
 <ol class="arabic simple" start="9">
-<li>Now we must choose an appropriate CRS for our purpose. For creating buffers,
-a Azimuthal Equidistant projection would be best suited as radial distances
-around the center of the projection are accurate. In our case, since the
-dataset is global, we will choose a world projection. In the
-<span class="guilabel">Coordinate Reference System Selector</span> dialog, start searching for
-<cite>world az..</cite> and you will see the results show up. Select the
-<cite>World_Azimuthal_Equidistant</cite> and click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Izbrati moramo CRS, ki je primerna za naše potrebe. Za ustvarjanje pasov je najbolj primerna projekcija <cite>Azimuthal Equidistant</cite>, saj so pri njej radialne razdalje okrog središča projekcija natančne. Ker so naši podatki globalni, bomo izbrali svetovno projekcijo. V pogovornem oknu <span class="guilabel">Coordinate Reference System Selector</span> poiščite <code class="docutils literal"><span class="pre">world</span> <span class="pre">az</span></code> in med rezultati izberite <cite>World_Azimuthal_Equidistant</cite>. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Opomba</p>
-<p class="last">The <cite>World_Azimuthal_Equidistant</cite> projection spans 90 degrees from the
-origin. Here the origin being 0 degrees longitude, the only data contained
-within +/- 90 degrees longitude will be converted.</p>
+<p class="last">Projekcija <cite>World_Azimuthal_Equidistant</cite> se razširja 90 stopinj od izhodišča. Ker je izhodišče geografska dolžina 0 stopinj, se bodo preprojicirali samo podatki med geografsko dolžino +/- 90 stopinj.</p>
 </div>
 <img alt="../_images/946.png" class="align-center" src="../_images/946.png" />
 <ol class="arabic simple" start="10">
-<li>Back in <span class="guilabel">Save vector layer as ...</span> dialog, check the box next to
-<span class="guilabel">Add saved file to map</span> and click <cite>OK</cite>.</li>
+<li><p class="first">Preverite, da je v oknu <span class="guilabel">Save vector layer as ...</span> označeno polje pred <span class="guilabel">Add saved file to map</span> in kliknite <cite>OK</cite>.</p>
+</li>
 </ol>
 <img alt="../_images/1045.png" class="align-center" src="../_images/1045.png" />
 <ol class="arabic simple" start="11">
-<li>Repeat the re-projection process for the <code class="docutils literal"><span class="pre">ne_10m_rivers_lake_centerlines</span></code>
-layer and save the new layer as <code class="docutils literal"><span class="pre">rivers_lake_reprojected.shp</span></code>.</li>
+<li><p class="first">Postopek ponovite za sloj <code class="docutils literal"><span class="pre">ne_10m_rivers_lake_centerlines</span></code>, ki ga shranite pod imenom <code class="docutils literal"><span class="pre">rivers_lake_reprojected.shp</span></code>.</p>
+</li>
 </ol>
 <img alt="../_images/1175.png" class="align-center" src="../_images/1175.png" />
 <ol class="arabic simple" start="12">
-<li>Now you will have 4 layers in your <span class="guilabel">Layers Panel</span>. Un-check the
-boxes next to the original layers to display only the re-projected layers.
-The re-projected layers are still being shown in the <cite>Geographic CRS</cite>
-because of a setting. Let&#8217;s turn that off. Click on the
-<span class="guilabel">Project Properties</span> button. This setting can also be accessed
-from <span class="menuselection">Project ‣ Project Properties</span>.</li>
+<li><p class="first">Na plošči <span class="guilabel">Layers Panel</span> boste zdaj imeli štiri sloje. Originalne sloje lahko skrijete tako, da jih v plošči odznačite. Preprojicirani sloji so zaradi nastavitev projekta še vedno prikazani v <cite>Geographic CRS</cite>. QGIS namreč projekcijo za projekt izbere takrat, ko naložimo prvi podatkovni sloj. Spremenimo nastavitve. Kliknite gumb <span class="guilabel">Project Properties</span> ali pa izberite <span class="menuselection">Project ‣ Project Properties</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1246.png" class="align-center" src="../_images/1246.png" />
 <ol class="arabic simple" start="13">
-<li>In the <span class="guilabel">CRS</span> tab of the <span class="guilabel">Project Properties</span> dialog,
-un-check the box next to <span class="guilabel">Enable on-the-fly CRS transformation</span>.
-Click <span class="guilabel">OK</span>.</li>
+<li><p class="first">Na kartici <span class="guilabel">CRS</span> okna <span class="guilabel">Project Properties</span> odznačite polje <span class="guilabel">Enable on-the-fly CRS transformation</span>. Kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1344.png" class="align-center" src="../_images/1344.png" />
 <ol class="arabic simple" start="14">
-<li>Back in the main QGIS window, right-click on any one of the re-projected
-layers and select <span class="guilabel">Zoom to Layer Extent</span>.</li>
+<li><p class="first">Ko se vrnete v glavno okno QGIS-a, desno kliknite enega od preprojiciranih slojev in izberite <span class="guilabel">Zoom to Layer Extent</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1443.png" class="align-center" src="../_images/1443.png" />
 <ol class="arabic simple" start="15">
-<li>Now you will see the data in the layer&#8217;s CRS. We will now create buffers for
-both the datasets. Click <span class="menuselection">Vector ‣ Geoprocessing Tools ‣
-Buffer</span>.</li>
+<li><p class="first">Sloj bo zdaj prikazan v lastnem koordinatnem sistemu. Za oba sloja bomo ustvarili pasove. Izberite meni <span class="menuselection">Vector ‣ Geoprocessing Tools ‣ Buffer</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1541.png" class="align-center" src="../_images/1541.png" />
 <ol class="arabic simple" start="16">
-<li>In the <span class="guilabel">Buffer</span> tool, select <code class="docutils literal"><span class="pre">populated_places_reprojected</span></code>
-layer as Input. Enter the buffer distance as <cite>10000</cite>. Note that we want a
-buffer of 10kms and since the CRS units are metres, we need to enter 10,000.
-Enter the output file name as <code class="docutils literal"><span class="pre">populated_places_buffer.shp</span></code>. Click
-<span class="guilabel">OK</span>.</li>
+<li><p class="first">V orodju <span class="guilabel">Buffer</span> izberite <code class="docutils literal"><span class="pre">populated_places_reprojected</span></code> kot <span class="guilabel">Input</span>. Vpišite razdaljo <cite>10000</cite>. Ker želimo določiti pas širine 10 km, moramo v enotah izbrane projekcije vpisati 10.000 m. Izhodno datoteko poimenujte <code class="docutils literal"><span class="pre">populated_places_buffer.shp</span></code> in kliknite <span class="guilabel">OK</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1637.png" class="align-center" src="../_images/1637.png" />
 <ol class="arabic simple" start="17">
-<li>Once the buffer processing is over, click the <span class="guilabel">Yes</span> to add the
-newly created layer to the TOC.</li>
+<li><p class="first">Ko se računanje pasov konča, kliknite <span class="guilabel">Yes</span>, da dodate nov sloj v TOC in ga prikažite v QGIS-u.</p>
+</li>
 </ol>
 <img alt="../_images/1734.png" class="align-center" src="../_images/1734.png" />
 <ol class="arabic simple" start="18">
-<li>Repeat the same buffer process for the <code class="docutils literal"><span class="pre">rivers_lake_reprojected</span></code> layer and
-create an output file named <code class="docutils literal"><span class="pre">rivers_lake_buffer.shp</span></code>.</li>
+<li><p class="first">Ponovite enak postopek za sloj <code class="docutils literal"><span class="pre">rivers_lake_reprojected</span></code> in ustvarite izhodno datoteko <code class="docutils literal"><span class="pre">rivers_lake_buffer.shp</span></code>.</p>
+</li>
 </ol>
 <img alt="../_images/1834.png" class="align-center" src="../_images/1834.png" />
 <ol class="arabic simple" start="19">
-<li>The <code class="docutils literal"><span class="pre">rivers_lake_buffer</span></code> contains features that are both rivers as well as
-lakes. Our analysis calls for using only river features, so we will run a
-query to select only river features. Right-click on the
-<code class="docutils literal"><span class="pre">rivers_lake_buffer</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p class="first">Sloj <code class="docutils literal"><span class="pre">rivers_lake_buffer</span></code> vsebuje objekte, ki so tako reke kot tudi jezera. Ker nas zanimajo samo reke, jih izluščimo iz sloja s poizvedbo. Desno kliknite sloj <code class="docutils literal"><span class="pre">rivers_lake_buffer</span></code> in izberite <span class="guilabel">Open Attribute Table</span>.</p>
+</li>
 </ol>
 <img alt="../_images/1928.png" class="align-center" src="../_images/1928.png" />
 <ol class="arabic simple" start="20">
@@ -383,52 +361,43 @@ expression</cite> button.</li>
 </ol>
 <img alt="../_images/2021.png" class="align-center" src="../_images/2021.png" />
 <ol class="arabic simple" start="21">
-<li>Enter the expression <cite>&#8220;featurecla&#8221; = &#8220;River&#8221;</cite> and click <span class="guilabel">Select</span>
-and then click <span class="guilabel">Close</span> to back to the main QGIS window.</li>
+<li><p class="first">Vnesite izraz <cite>&#8220;featurecla&#8221; = &#8220;River&#8221;</cite> in kliknite <span class="guilabel">Select</span> ter nato <span class="guilabel">Close</span>, da se vrnete v glavno okno QGIS-a.</p>
+</li>
 </ol>
 <img alt="../_images/2134.png" class="align-center" src="../_images/2134.png" />
 <ol class="arabic simple" start="22">
-<li>Now we are ready to perform the spatial query. You need to enable the
-<cite>Spatial Query plugin</cite> to use this functionality. See <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a>
-for more details. Once enabled, go to <span class="menuselection">Vector ‣ Spatial
-Query ‣ Spatial Query</span>.</li>
+<li><p class="first">Zdaj lahko izvedemo prostorsko poizvedbo. Najprej je potrebno aktivirati oziroma namestiti, če še ni, vtičnik <cite>Spatial Query plugin</cite>. Kako to storiti, je opisano v <a class="reference internal" href="using_plugins.html"><em>Using Plugins</em></a>. Ko je vtičnik aktiviran, izberite ukaz <span class="menuselection">Vector ‣ Spatial Query ‣ Spatial Query</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2223.png" class="align-center" src="../_images/2223.png" />
 <ol class="arabic simple" start="23">
-<li>For our query, we want to select features from the buffered places that
-intersect with the buffered river lines. Make sure the checkbox next to
-<cite>selected geometries</cite> is checked. This is to ensure the query uses only
-river features that we selected previously. Click <span class="guilabel">Apply</span>.</li>
+<li><p class="first">Izbrati želimo objekte, ki se dotikajo (imajo skupno presečišče, intersect) s pasom okrog linij rek. Preverite, da je označeno polje <cite>selected geometries</cite>. S tem zagotovimo, da bomo poizvedbo delali le na tistih elementih sloja rek, ki smo jih predhodno izbrali. Kliknite <span class="guilabel">Apply</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2320.png" class="align-center" src="../_images/2320.png" />
 <ol class="arabic simple" start="24">
-<li>Once the query is complete, you will see a new section named
-<span class="guilabel">Selected features</span>. Click on the <span class="guilabel">Create layer with
-selected</span> button. A new layer will be added to the <cite>Layers Panel</cite>. Click
-<span class="guilabel">Close</span>.</li>
+<li><p class="first">Ko bo poizvedba izvršena, boste opazili nov izbor z imenom <span class="guilabel">Selected features</span>. Kliknite gumb <span class="guilabel">Create layer with selected</span> in med sloji se bo pojavil nov. Kliknite <span class="guilabel">Close</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2419.png" class="align-center" src="../_images/2419.png" />
 <ol class="arabic simple" start="25">
-<li>Zoom-in to any area and compare the results. You will notice that the new
-layer contains only the features that intersect with river buffers.</li>
+<li><p class="first">Približajte se in si oglejte rezultate. Opazili boste, da ustvarjeni sloj vsebuje le tiste objekte, ki se dotikajo pasu okrog rek.</p>
+</li>
 </ol>
 <img alt="../_images/2518.png" class="align-center" src="../_images/2518.png" />
 <ol class="arabic simple" start="26">
-<li>We should always verify my results to ensure the analysis is not flawed. One
-way to verify the results is to export this layer as a KML file and load it
-up in Google Earth. You can check if the areas you found really are within
-10kms of a river. Right-click the layer and <span class="guilabel">Save As...</span>.</li>
+<li><p class="first">Rezultate moramo vedno preveriti, saj gre pri analizah lahko marsikaj narobe. Eden od načinov za preverjanje je izvoz sloja v zapis KML in ogled s programom Google Earth. Tam si lahko na satelitskem posnetku ali karti ogledamo, ali so res izbrana samo mesta, ki so bliže kot 10 km od rek. Desno kliknite ustvarjeni končni sloj in izberite <span class="guilabel">Save As...</span>.</p>
+</li>
 </ol>
 <img alt="../_images/2616.png" class="align-center" src="../_images/2616.png" />
 <ol class="arabic simple" start="27">
-<li>In the <span class="guilabel">Save vector layer as...</span>, choose <cite>WGS84</cite> as the CRS. This
-because KML format needs the coordinates to be in this CRS. Name your KML as
-<code class="docutils literal"><span class="pre">cities_near_river.kml</span></code>.</li>
+<li><p class="first">V oknu <span class="guilabel">Save vector layer as...</span> kot format izberite KML in kot CRS <cite>WGS84</cite>, kar je pravi koordiantni sistem za zapis KML. Izhodno datoteko poimenujte <code class="docutils literal"><span class="pre">cities_near_river.kml</span></code>.</p>
+</li>
 </ol>
 <img alt="../_images/2716.png" class="align-center" src="../_images/2716.png" />
 <ol class="arabic simple" start="28">
-<li>Open Google Earth and verify that the cities represented by these buffers
-are indeed close to rivers.</li>
+<li><p class="first">Poženite program Google Earth in preverite, da so mesta prikazana s pasovi in da so res blizu rek.</p>
+</li>
 </ol>
 <img alt="../_images/2814.png" class="align-center" src="../_images/2814.png" />
 </div>
@@ -460,7 +429,7 @@ are indeed close to rivers.</li>
     </p>
     <p>
         &copy; Vse pravice pridržane 2019, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno Oct 26, 2020.<br/>
+      Zadnjič posodobljeno Nov 01, 2020.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
