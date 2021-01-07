@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="de">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Verarbeitungsroutinen mit Python ausführen (QGIS3) &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verarbeitungsroutinen mit Python ausführen (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="search" title="Suche" href="../../search.html" />
     <link rel="next" title="Ein Python Plugin erstellen (QGIS3)" href="building_a_python_plugin.html" />
     <link rel="prev" title="Mit der Pythonprogrammierung loslegen (QGIS3)" href="getting_started_with_pyqgis.html" />
 
@@ -37,6 +20,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -49,8 +36,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -61,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -112,7 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Using the QGIS Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Mit der Pythonprogrammierung loslegen (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Verarbeitungsroutinen mit Python ausführen (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Verarbeitungsroutinen mit Python ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Ein Python Plugin erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_python_plugin.html">Ein Verarbeitungsplugin erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">Angepasste Python Funktionsausdrücke verwenden (QGIS3)</a></li>
@@ -268,20 +254,19 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="running-processing-algorithms-via-python-qgis3">
 <h1>Verarbeitungsroutinen mit Python ausführen (QGIS3)<a class="headerlink" href="#running-processing-algorithms-via-python-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Die QGIS-Verarbeitungswerkzeuge enthalten eine ständig wachsende Sammlung an Geoverarbeitungswerkzeugen. Die Verarbeitungswerkzeuge besitzen eine einfache Oberfläche zur Stapelverarbeitung von vielen Eingangsdaten. Siehe <a class="reference internal" href="batch_processing.html"><em>Stapelverarbeitung mit dem Processing Framework (QGIS3)</em></a>. Es gibt aber Fälle in denen man die Stapelverarbeitung durch eigene Anpassungen erweitern möchte. Alle Verarbeitungsalgorithmen können auch über die Python API gestartet werden. Diese Anleitung zeigt, wie man einen angepassten Verarbeitungsalgorithmus mit Hilfe der Python Konsole startet. Dazu sind nur einige wenige Zeilen Programmiercode erforderlich. Unter <a class="reference internal" href="getting_started_with_pyqgis.html"><em>Mit der Pythonprogrammierung loslegen (QGIS3)</em></a> kann man sich mit den Grundlagen der Python Scripting Umgebung in QGIS vertraut machen.</p>
+<p>Die QGIS-Verarbeitungswerkzeuge enthalten eine ständig wachsende Sammlung an Geoverarbeitungswerkzeugen. Die Verarbeitungswerkzeuge besitzen eine einfache Oberfläche zur Stapelverarbeitung von vielen Eingangsdaten. Siehe <a class="reference internal" href="batch_processing.html"><span class="doc">Stapelverarbeitung mit dem Processing Framework (QGIS3)</span></a>. Es gibt aber Fälle in denen man die Stapelverarbeitung durch eigene Anpassungen erweitern möchte. Alle Verarbeitungsalgorithmen können auch über die Python API gestartet werden. Diese Anleitung zeigt, wie man einen angepassten Verarbeitungsalgorithmus mit Hilfe der Python Konsole startet. Dazu sind nur einige wenige Zeilen Programmiercode erforderlich. Unter <a class="reference internal" href="getting_started_with_pyqgis.html"><span class="doc">Mit der Pythonprogrammierung loslegen (QGIS3)</span></a> kann man sich mit den Grundlagen der Python Scripting Umgebung in QGIS vertraut machen.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Wie werden 12 Layer mit Rastergittern der Monatsniederschläge verwenden, um den mittleren monatlichen Niederschlag je Postleitzahlengebiet im Gebiet um Seattle zu bestimmen.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Weitere Fähigkeiten die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
-<li><p class="first">Wie man eine Spalte (d.h. ein Attributfeld) eines Vektorlayers löscht.</p>
-</li>
+<li><p>Wie man eine Spalte (d.h. ein Attributfeld) eines Vektorlayers löscht.</p></li>
 </ul>
 </div>
 </div>
@@ -293,113 +278,100 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <p>Der Einfachheit halber können wir beide Datensätze unter folgenden links herunterladen:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/PRISM_ppt_stable_4kmM3_2017_all_bil.zip">PRISM_ppt_stable_4kmM3_2017_all_bil.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Zip_Codes.zip">Zip_Codes.zip</a></p>
-<p>Datenquelle <a class="reference internal" href="../credits.html#prism" id="id1">[PRISM]</a> <a class="reference internal" href="../credits.html#cityofseattle" id="id2">[CITYOFSEATTLE]</a></p>
+<p>Datenquelle <a class="reference internal" href="../credits.html#prism" id="id1"><span>[PRISM]</span></a> <a class="reference internal" href="../credits.html#cityofseattle" id="id2"><span>[CITYOFSEATTLE]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">Entpacke die die Datei <code class="docutils literal"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil.zip</span></code>. Gehe im QGIS Browser zum Ordner <code class="docutils literal"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil</span></code> und erweitere ihn. Der Ordner enthält 12 Layer für jeden Monat. Halte die Taste <code class="kbd docutils literal"><span class="pre">Ctrl</span></code> gedrückt und wähle die 12 Dateien mit der Endung <code class="docutils literal"><span class="pre">.bil</span></code> aus. Ziehe die Dateien danach in den Arbeitsbereich.</p>
-</li>
+<li><p>Entpacke die die Datei <code class="docutils literal notranslate"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil.zip</span></code>. Gehe im QGIS Browser zum Ordner <code class="docutils literal notranslate"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil</span></code> und erweitere ihn. Der Ordner enthält 12 Layer für jeden Monat. Halte die Taste <kbd class="kbd docutils literal notranslate">Ctrl</kbd> gedrückt und wähle die 12 Dateien mit der Endung <code class="docutils literal notranslate"><span class="pre">.bil</span></code> aus. Ziehe die Dateien danach in den Arbeitsbereich.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1105.png" class="align-center" src="../../_images/1105.png" />
+<div><img alt="../../_images/1104.png" class="align-center" src="../../_images/1104.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">Die Daten liegen in folgendem Format vor: <a class="reference external" href="http://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/bil-bip-and-bsq-raster-files.htm">BIL format</a>. Zu jedem Layer gehören mehrere Dateien. Die Datei mit der Endung <code class="docutils literal"><span class="pre">.bil</span></code> enthält die aktuellen Daten, die Datei mit der Endung <code class="docutils literal"><span class="pre">.hdr</span></code> beschreibt die Datenstruktur und die Datei mit der Endung <code class="docutils literal"><span class="pre">.prj</span></code> enthält die Information zur Projektion des Koordinatensystems.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>Die Daten liegen in folgendem Format vor: <a class="reference external" href="http://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/bil-bip-and-bsq-raster-files.htm">BIL format</a>. Zu jedem Layer gehören mehrere Dateien. Die Datei mit der Endung <code class="docutils literal notranslate"><span class="pre">.bil</span></code> enthält die aktuellen Daten, die Datei mit der Endung <code class="docutils literal notranslate"><span class="pre">.hdr</span></code> beschreibt die Datenstruktur und die Datei mit der Endung <code class="docutils literal notranslate"><span class="pre">.prj</span></code> enthält die Information zur Projektion des Koordinatensystems.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p class="first">Als nächstes entpacken wir die Datei <code class="docutils literal"><span class="pre">Zip_Codes.zip</span></code>. Wir suchen den Ordner <code class="docutils literal"><span class="pre">Zip_Codes</span></code> und ziehen die Datei <code class="docutils literal"><span class="pre">Zip_Codes.shp</span></code> aus dem Ordner in den Arbeitsbereich.</p>
-</li>
+<li><p>Als nächstes entpacken wir die Datei <code class="docutils literal notranslate"><span class="pre">Zip_Codes.zip</span></code>. Wir suchen den Ordner <code class="docutils literal notranslate"><span class="pre">Zip_Codes</span></code> und ziehen die Datei <code class="docutils literal notranslate"><span class="pre">Zip_Codes.shp</span></code> aus dem Ordner in den Arbeitsbereich.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/258.png" class="align-center" src="../../_images/258.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">The unzip step is important because the Zonal Statistics algorithm works by adding a new field to the layer. If the layer is zipped, QGIS cannot update the layer.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>The unzip step is important because the Zonal Statistics algorithm works by adding a new field to the layer. If the layer is zipped, QGIS cannot update the layer.</p>
 </div>
 <ol class="arabic simple" start="3">
-<li><p class="first">Wir klicken mit der rechten Maustaste auf den Layer <code class="docutils literal"><span class="pre">Zip_Codes</span></code> und wählen <span class="guilabel">Auf den Layer zoomen</span>. Jetzt sehen wir die Polygone der Postleitzahlen für die Stadt Seattle und Umgebung.</p>
-</li>
+<li><p>Wir klicken mit der rechten Maustaste auf den Layer <code class="docutils literal notranslate"><span class="pre">Zip_Codes</span></code> und wählen <span class="guilabel">Auf den Layer zoomen</span>. Jetzt sehen wir die Polygone der Postleitzahlen für die Stadt Seattle und Umgebung.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/336.png" class="align-center" src="../../_images/336.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p class="first">Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p>
-</li>
+<li><p>Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/421.png" class="align-center" src="../../_images/421.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p class="first">Der Algorithmus, um Rasterlayer auf Basis eines überlagerten Vektorlayers abzutasten ist als &#8220;Zonenstatistik&#8221; bekannt. Suche nach dem Algorithmus in den <span class="guilabel">Verarbeitungswerkzeugen</span>. Wähle den Algorithmus aus und bewege den Mauszeiger darüber. Wir sehen einen Hinweis mit dem Text <em>Algorithmen Kennung: &#8216;qgis:zonalstatistics&#8217;</em>. Beachte, dass diese Kennung für den Aufruf des Algorithmus mit der Python API benötigt wird. Klicke doppelt auf den Algorithmus <code class="docutils literal"><span class="pre">Zonenstatistik</span></code>, um ihn zu starten.</p>
-</li>
+<li><p>Der Algorithmus, um Rasterlayer auf Basis eines überlagerten Vektorlayers abzutasten ist als „Zonenstatistik“ bekannt. Suche nach dem Algorithmus in den <span class="guilabel">Verarbeitungswerkzeugen</span>. Wähle den Algorithmus aus und bewege den Mauszeiger darüber. Wir sehen einen Hinweis mit dem Text <em>Algorithmen Kennung: ‚qgis:zonalstatistics‘</em>. Beachte, dass diese Kennung für den Aufruf des Algorithmus mit der Python API benötigt wird. Klicke doppelt auf den Algorithmus <code class="docutils literal notranslate"><span class="pre">Zonenstatistik</span></code>, um ihn zu starten.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/521.png" class="align-center" src="../../_images/521.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p class="first">Wir werden zuerst einen manuellen Test mit einem Layer durchführen. Das ist ein praktischer Weg, um zu sehen, wie sich der Algorithmus verhält und um herauszufinden, wie man die relevanten Parameter mit Python an den Algorithmus übergeben kann. Wir geben im Dialogfenster <span class="guilabel">Zonenstatistik</span> die Datei <code class="docutils literal"><span class="pre">PRISM_ppt_stable_4kmM3_201701_bil</span></code> als <span class="guilabel">Rasterlayer</span> und <code class="docutils literal"><span class="pre">Zip_Codes</span></code> als <span class="guilabel">Zonenvektorlayer</span> an. Die anderen Parameter lassen wir auf den Voreinstellungen. Klicke auf den Knopf <span class="guilabel">...</span> neben <span class="guilabel">Zu berechnende Statistik</span> und wähle nur <code class="docutils literal"><span class="pre">Mittel</span></code> aus. Klicke auf <span class="guilabel">Starte</span>.</p>
-</li>
+<li><p>Wir werden zuerst einen manuellen Test mit einem Layer durchführen. Das ist ein praktischer Weg, um zu sehen, wie sich der Algorithmus verhält und um herauszufinden, wie man die relevanten Parameter mit Python an den Algorithmus übergeben kann. Wir geben im Dialogfenster <span class="guilabel">Zonenstatistik</span> die Datei <code class="docutils literal notranslate"><span class="pre">PRISM_ppt_stable_4kmM3_201701_bil</span></code> als <span class="guilabel">Rasterlayer</span> und <code class="docutils literal notranslate"><span class="pre">Zip_Codes</span></code> als <span class="guilabel">Zonenvektorlayer</span> an. Die anderen Parameter lassen wir auf den Voreinstellungen. Klicke auf den Knopf <span class="guilabel">…</span> neben <span class="guilabel">Zu berechnende Statistik</span> und wähle nur <code class="docutils literal notranslate"><span class="pre">Mittel</span></code> aus. Klicke auf <span class="guilabel">Starte</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/621.png" class="align-center" src="../../_images/621.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p class="first">Nachdem die Berechnung abgeschlossen wurde, gehen wir zum <span class="guilabel">Log</span> tab. Wir machen uns eine Notiz der <span class="guilabel">Eingabeparameter</span> die an den Algorithmus übergeben wurden und klicken auf <span class="guilabel">Schließen</span>.</p>
-</li>
+<li><p>Nachdem die Berechnung abgeschlossen wurde, gehen wir zum <span class="guilabel">Log</span> tab. Wir machen uns eine Notiz der <span class="guilabel">Eingabeparameter</span> die an den Algorithmus übergeben wurden und klicken auf <span class="guilabel">Schließen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/720.png" class="align-center" src="../../_images/720.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p class="first">Wir sehen uns das Ergebnis der Berechnung an. Im QGIS Hauptfenster klicken wir mit der rechten Maustaste auf den Layer <code class="docutils literal"><span class="pre">Zip_Codes</span></code> und wählen <span class="guilabel">Attributtabelle öffnen</span>. Der verwendete Algorithmus verändert den Eingabelayer und fügt für jede berechnete Statistik eine neue Spalte hinzu. Da wir nur <code class="docutils literal"><span class="pre">Mittel</span></code> gewählt hatten, wurde eine neue Spalte <code class="docutils literal"><span class="pre">_mean</span></code> zur Tabelle hinzugefügt. Das Zeichen <code class="docutils literal"><span class="pre">_</span></code> wird als Standard Prefix verwendet. Wenn wir den Algorithmus für die Layer aller Monate starten, ist es sinnvoll einen angepassten Prefix wie z.B. die Monatsnummer (01_mean, 02_mean usw.) zu verwenden. Damit sind die Werte einfach einem Monat zuzuordnen. Die Verwendung eines angepassten Präfixes ist innerhalb der Stapelverarbeitung von QGIS nicht möglich. Man müsste hier manuell für jeden Layer den angepassten Prefix eingeben. Wenn man mit vielen Layern arbeitet, ist das sehr mühsam. Wir nutzen daher die Python API, um die Anpassung mit Hilfe einer For-Schleife zu erreichen.</p>
-</li>
+<li><p>Wir sehen uns das Ergebnis der Berechnung an. Im QGIS Hauptfenster klicken wir mit der rechten Maustaste auf den Layer <code class="docutils literal notranslate"><span class="pre">Zip_Codes</span></code> und wählen <span class="guilabel">Attributtabelle öffnen</span>. Der verwendete Algorithmus verändert den Eingabelayer und fügt für jede berechnete Statistik eine neue Spalte hinzu. Da wir nur <code class="docutils literal notranslate"><span class="pre">Mittel</span></code> gewählt hatten, wurde eine neue Spalte <code class="docutils literal notranslate"><span class="pre">_mean</span></code> zur Tabelle hinzugefügt. Das Zeichen <code class="docutils literal notranslate"><span class="pre">_</span></code> wird als Standard Prefix verwendet. Wenn wir den Algorithmus für die Layer aller Monate starten, ist es sinnvoll einen angepassten Prefix wie z.B. die Monatsnummer (01_mean, 02_mean usw.) zu verwenden. Damit sind die Werte einfach einem Monat zuzuordnen. Die Verwendung eines angepassten Präfixes ist innerhalb der Stapelverarbeitung von QGIS nicht möglich. Man müsste hier manuell für jeden Layer den angepassten Prefix eingeben. Wenn man mit vielen Layern arbeitet, ist das sehr mühsam. Wir nutzen daher die Python API, um die Anpassung mit Hilfe einer For-Schleife zu erreichen.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/820.png" class="align-center" src="../../_images/820.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p class="first">Bevor wir fortfahren, löschen wir die Spalte <code class="docutils literal"><span class="pre">_mean</span></code>, die während des Tests erstellt wurde. Klicke auf den Knopf <span class="guilabel">Bearbeitungsmodus umschalten</span> und danach auf den Knopf <span class="guilabel">Spalte löschen</span>. Wähle das Feld <code class="docutils literal"><span class="pre">_mean</span></code> und klicke auf <span class="guilabel">OK</span>.</p>
-</li>
+<li><p>Bevor wir fortfahren, löschen wir die Spalte <code class="docutils literal notranslate"><span class="pre">_mean</span></code>, die während des Tests erstellt wurde. Klicke auf den Knopf <span class="guilabel">Bearbeitungsmodus umschalten</span> und danach auf den Knopf <span class="guilabel">Spalte löschen</span>. Wähle das Feld <code class="docutils literal notranslate"><span class="pre">_mean</span></code> und klicke auf <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/920.png" class="align-center" src="../../_images/920.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p class="first">Klicke noch einmal auf den Knopf <span class="guilabel">Bearbeitungsmodus umschalten</span> und <span class="guilabel">Speichern</span>, um die Änderung zu speichern.</p>
-</li>
+<li><p>Klicke noch einmal auf den Knopf <span class="guilabel">Bearbeitungsmodus umschalten</span> und <span class="guilabel">Speichern</span>, um die Änderung zu speichern.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1020.png" class="align-center" src="../../_images/1020.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p class="first">Zurück im QGIS Hauptfenster gehen wir zu <span class="menuselection">Erweiterungen ‣ Python-Konsole</span>.</p>
-</li>
+<li><p>Zurück im QGIS Hauptfenster gehen wir zu <span class="menuselection">Erweiterungen ‣ Python-Konsole</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1123.png" class="align-center" src="../../_images/1123.png" />
+<div><img alt="../../_images/1124.png" class="align-center" src="../../_images/1124.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p class="first">Um den Algorithmus mittels Python zu starten, müssen wir auf alle Layernamen zugreifen. Wir geben den folgenden Programmkode in der <span class="guilabel">Python-Konsole</span> ein und drücken <code class="kbd docutils literal"><span class="pre">Enter</span></code>. Man sieht nun, wie die Namen aller Layer in der Konsole angezeigt werden.</p>
-</li>
+<li><p>Um den Algorithmus mittels Python zu starten, müssen wir auf alle Layernamen zugreifen. Wir geben den folgenden Programmkode in der <span class="guilabel">Python-Konsole</span> ein und drücken <kbd class="kbd docutils literal notranslate">Enter</kbd>. Man sieht nun, wie die Namen aller Layer in der Konsole angezeigt werden.</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">layerTreeRoot</span><span class="p">()</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">layerTreeRoot</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span><span class="p">():</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
 </pre></div>
 </div>
 <img alt="../../_images/121.gif" class="align-center" src="../../_images/121.gif" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p class="first">Um einen angepassten Prefix zu vergeben, müssen wir den Layernamen betrachten und die Teilzeichenkette der Monatsnummer daraus extrahieren. Gebe nachfolgenden Programmkode ein, um alle Rasterlayer durchzugehen, den angepassten Prefix zu extrahieren und den <code class="docutils literal"><span class="pre">qgis:zonalstatistics</span></code> Algorithmus mit diesem Präfix zu starten.</p>
-</li>
+<li><p>Um einen angepassten Prefix zu vergeben, müssen wir den Layernamen betrachten und die Teilzeichenkette der Monatsnummer daraus extrahieren. Gebe nachfolgenden Programmkode ein, um alle Rasterlayer durchzugehen, den angepassten Prefix zu extrahieren und den <code class="docutils literal notranslate"><span class="pre">qgis:zonalstatistics</span></code> Algorithmus mit diesem Präfix zu starten.</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">layerTreeRoot</span><span class="p">()</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">layerTreeRoot</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span><span class="p">():</span>
   <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;PRISM&#39;</span><span class="p">):</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">()[</span><span class="o">-</span><span class="mi">6</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
@@ -410,15 +382,13 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <img alt="../../_images/131.gif" class="align-center" src="../../_images/131.gif" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p class="first">Nachdem die Berechnung abgeschlossen wurde, klicken wir mit der rechten Maustaste auf den Layer <code class="docutils literal"><span class="pre">Zip_Codes</span></code> und wählen <span class="guilabel">Attributtabelle öffnen</span>.</p>
-</li>
+<li><p>Nachdem die Berechnung abgeschlossen wurde, klicken wir mit der rechten Maustaste auf den Layer <code class="docutils literal notranslate"><span class="pre">Zip_Codes</span></code> und wählen <span class="guilabel">Attributtabelle öffnen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1419.png" class="align-center" src="../../_images/1419.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p class="first">Wir sehen 12 neue Spalten mit dem angepassten Prefix, die den mittleren aus den Rasterlayern extrahierten Niederschlag enthalten.</p>
-</li>
+<li><p>Wir sehen 12 neue Spalten mit dem angepassten Prefix, die den mittleren aus den Rasterlayern extrahierten Niederschlag enthalten.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1518.png" class="align-center" src="../../_images/1518.png" />
@@ -448,8 +418,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Zuletzt aktualisiert am Jan. 07, 2021.<br/>
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 erstellt.<br/>
     </p>
   </div>
 </footer>

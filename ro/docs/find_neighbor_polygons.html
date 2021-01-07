@@ -1,39 +1,27 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="ro">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Găsirea Poligoanelor Învecinate Dintr-un Strat &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Găsirea Poligoanelor Învecinate Dintr-un Strat &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="search" title="Căutare" href="../search.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -46,8 +34,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -58,7 +45,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html"><img src="../_static/logo.png">
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -257,74 +244,66 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="find-neighbor-polygons-in-a-layer">
-<h1>Găsirea Poligoanelor Învecinate Dintr-un Strat<a class="headerlink" href="#find-neighbor-polygons-in-a-layer" title="Permalink to this headline">¶</a></h1>
+<h1>Găsirea Poligoanelor Învecinate Dintr-un Strat<a class="headerlink" href="#find-neighbor-polygons-in-a-layer" title="Link permanent la acest titlu">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you are using QGIS3, there is a simpler and better way to do this analysis using the aggregate function. See my post <a class="reference external" href="https://spatialthoughts.com/2019/05/23/neighbor-polygons-aggregate-qgis/">Find Neighbor Polygons using Summary Aggregate Function in QGIS</a></p>
+<p class="admonition-title">Notă</p>
+<p>If you are using QGIS3, there is a simpler and better way to do this analysis using the aggregate function. See my post <a class="reference external" href="https://spatialthoughts.com/2019/05/23/neighbor-polygons-aggregate-qgis/">Find Neighbor Polygons using Summary Aggregate Function in QGIS</a></p>
 </div>
 <p>Există unele cazuri de utilizare, când se dorește găsirea tuturor poligoanelor învecinate, pentru fiecare dintre poligoanele dintr-un strat. Cu un mic script în Python, putem realiza acest lucru și multe altele, în QGIS. Aici este un exemplu de script, pe care îl puteți folosi pentru a găsi toate poligoanele care au granița comună, pentru fiecare dintre poligoanele stratului și, de asemenea, să le adăugați numele în tabela de atribute. Ca bonus, script-ul însumează un atribut, la alegere, din toate poligoanele învecinate.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
+<h2>Privire de ansamblu asupra activității<a class="headerlink" href="#overview-of-the-task" title="Link permanent la acest titlu">¶</a></h2>
 <p>Pentru a demonstra modul în care funcționează script-ul, vom folosi un strat poligonal de țări și vom găsi țările care împart aceeași frontieră. De asemenea, vom calcula totalul populației din țările învecinate.</p>
 </div>
 <div class="section" id="get-the-data">
-<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>Obținerea datelor<a class="headerlink" href="#get-the-data" title="Link permanent la acest titlu">¶</a></h2>
 <p>Vom folosi setul de date <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Țări</a> de la Natural Earth.</p>
 <p>Vom folosi setul de date <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - fișierul shape al țărilor.</a></p>
-<p>Sursa de date <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>Sursa de date <a class="reference internal" href="credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
 </div>
 <div class="section" id="get-the-script">
-<h2>Obținerea script-ului<a class="headerlink" href="#get-the-script" title="Permalink to this headline">¶</a></h2>
-<p>Descărcați script-ul <a class="reference download internal" href="../_downloads/neighbors.py" download=""><code class="xref download docutils literal"><span class="pre">neighbors.py</span></code></a> și salvați-l pe discul dumneavoastră.</p>
+<h2>Obținerea script-ului<a class="headerlink" href="#get-the-script" title="Link permanent la acest titlu">¶</a></h2>
+<p>Descărcați script-ul <a class="reference download internal" download="" href="../_downloads/4cea2e81c7cbba6c6a79b31dd0eb3c2a/neighbors.py"><code class="xref download docutils literal notranslate"><span class="pre">neighbors.py</span></code></a> și salvați-l pe discul dumneavoastră.</p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedura<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
+<h2>Procedura<a class="headerlink" href="#procedure" title="Link permanent la acest titlu">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">Încărcați stratul <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> mergând la <span class="menuselection">Layer ‣ Add Vector Layer</span>.</p>
-</li>
+<li><p>Încărcați stratul <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> mergând la <span class="menuselection">Layer ‣ Add Vector Layer</span>.</p></li>
 </ol>
 <img alt="../_images/1157.png" class="align-center" src="../_images/1157.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">Script-ul folosește 2 câmpuri pentru a efectua acțiunea. Un câmp pentru nume, și un câmp pe care doriți să-l însumați. Utilizați instrumentul <span class="guilabel">Identify</span> pentru a face clic pe orice element, pentru a-i examina atributele. În acest caz, câmpul pentru nume este <strong>NAME</strong>, și dorim să însumăm estimările de populație din câmpul <strong>POP_EST</strong>.</p>
-</li>
+<li><p>Script-ul folosește 2 câmpuri pentru a efectua acțiunea. Un câmp pentru nume, și un câmp pe care doriți să-l însumați. Utilizați instrumentul <span class="guilabel">Identify</span> pentru a face clic pe orice element, pentru a-i examina atributele. În acest caz, câmpul pentru nume este <strong>NAME</strong>, și dorim să însumăm estimările de populație din câmpul <strong>POP_EST</strong>.</p></li>
 </ol>
 <img alt="../_images/2108.png" class="align-center" src="../_images/2108.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">Mergeți la <span class="menuselection">Plugins ‣ Python Console</span>.</p>
-</li>
+<li><p>Mergeți la <span class="menuselection">Plugins ‣ Python Console</span>.</p></li>
 </ol>
 <img alt="../_images/362.png" class="align-center" src="../_images/362.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">În fereastra <span class="guilabel">Python Console</span>, faceți clic pe butonul <span class="guilabel">Show Editor</span>.</p>
-</li>
+<li><p>În fereastra <span class="guilabel">Python Console</span>, faceți clic pe butonul <span class="guilabel">Show Editor</span>.</p></li>
 </ol>
 <img alt="../_images/442.png" class="align-center" src="../_images/442.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">În panoul <span class="guilabel">Editor</span>, faceți clic pe butonul <span class="guilabel">Open file</span>, navigați la script-ul descărcat <code class="docutils literal"><span class="pre">neighbors.py</span></code> și apăsați <span class="guilabel">Open</span>.</p>
-</li>
+<li><p>În panoul <span class="guilabel">Editor</span>, faceți clic pe butonul <span class="guilabel">Open file</span>, navigați la script-ul descărcat <code class="docutils literal notranslate"><span class="pre">neighbors.py</span></code> și apăsați <span class="guilabel">Open</span>.</p></li>
 </ol>
 <img alt="../_images/542.png" class="align-center" src="../_images/542.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">O dată ce script-ul este încărcat, este posibil să doriți să schimbați valorile <code class="docutils literal"><span class="pre">_NAME_FIELD</span></code> și <code class="docutils literal"><span class="pre">_SUM_FIELD</span></code> pentru a se potrivi cu atributele din propriul strat. Dacă lucrați cu stratul  <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code>, le puteți lăsa așa cum sunt. Faceți clic pe butonul <span class="guilabel">Save</span> din panoul <span class="guilabel">Editor</span>, dacă ați făcut vreo schimbare. Apoi apăsați butonul <span class="guilabel">Run script</span> pentru a rula script-ul.</p>
-</li>
+<li><p>O dată ce script-ul este încărcat, este posibil să doriți să schimbați valorile <code class="docutils literal notranslate"><span class="pre">_NAME_FIELD</span></code> și <code class="docutils literal notranslate"><span class="pre">_SUM_FIELD</span></code> pentru a se potrivi cu atributele din propriul strat. Dacă lucrați cu stratul  <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code>, le puteți lăsa așa cum sunt. Faceți clic pe butonul <span class="guilabel">Save</span> din panoul <span class="guilabel">Editor</span>, dacă ați făcut vreo schimbare. Apoi apăsați butonul <span class="guilabel">Run script</span> pentru a rula script-ul.</p></li>
 </ol>
 <img alt="../_images/640.png" class="align-center" src="../_images/640.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">O dată ce script-ul se încheie, faceți clic-dreapta pe stratul <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code>, apoi selectați <span class="guilabel">Open Attribute Table</span>.</p>
-</li>
+<li><p>O dată ce script-ul se încheie, faceți clic-dreapta pe stratul <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code>, apoi selectați <span class="guilabel">Open Attribute Table</span>.</p></li>
 </ol>
 <img alt="../_images/740.png" class="align-center" src="../_images/740.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">Veți observa 2 noi atribute, numite <code class="docutils literal"><span class="pre">NEIGHBORS</span></code> și <code class="docutils literal"><span class="pre">SUM</span></code>. Acestea au fost adăugate de către script.</p>
-</li>
+<li><p>Veți observa 2 noi atribute, numite <code class="docutils literal notranslate"><span class="pre">NEIGHBORS</span></code> și <code class="docutils literal notranslate"><span class="pre">SUM</span></code>. Acestea au fost adăugate de către script.</p></li>
 </ol>
 <img alt="../_images/839.png" class="align-center" src="../_images/839.png" />
 <p>Pentru referință, mai jos este script-ul complet. Îl puteți modifica pentru a se potrivi cerințelor dumneavoastră.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
 <span class="c1"># Copyright 2014 Ujaval Gandhi</span>
 <span class="c1">#</span>
 <span class="c1">#This program is free software; you can redistribute it and/or</span>
@@ -377,7 +356,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 
 <span class="c1"># Loop through all features and find features that touch each feature</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s1">&#39;Working on </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="p">[</span><span class="n">_NAME_FIELD</span><span class="p">]</span>
+    <span class="nb">print</span> <span class="s1">&#39;Working on </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="p">[</span><span class="n">_NAME_FIELD</span><span class="p">]</span>
     <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
     <span class="c1"># Find all features that intersect the bounding box of the current feature.</span>
     <span class="c1"># We use spatial index to find the features intersecting the bounding box</span>
@@ -404,7 +383,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     <span class="n">layer</span><span class="o">.</span><span class="n">updateFeature</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="n">layer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
-<span class="k">print</span> <span class="s1">&#39;Processing complete.&#39;</span>
+<span class="nb">print</span> <span class="s1">&#39;Processing complete.&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -432,8 +411,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Ultima actualizare la ian. 07, 2021.<br/>
+      Generat cu <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
 </footer>

@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh_TW">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Handling Invalid Geometries (QGIS3) &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handling Invalid Geometries (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="search" title="搜尋" href="../../search.html" />
     <link rel="next" title="Performing Spatial Queries (QGIS3)" href="performing_spatial_queries.html" />
     <link rel="prev" title="Animating Time Series Data (QGIS3)" href="animating_time_series.html" />
 
@@ -37,6 +20,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -49,8 +36,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -61,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -97,7 +83,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">空間連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Handling Invalid Geometries (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
@@ -268,145 +254,145 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="handling-invalid-geometries-qgis3">
-<h1>Handling Invalid Geometries (QGIS3)<a class="headerlink" href="#handling-invalid-geometries-qgis3" title="Permalink to this headline">¶</a></h1>
+<h1>Handling Invalid Geometries (QGIS3)<a class="headerlink" href="#handling-invalid-geometries-qgis3" title="本標題的永久連結">¶</a></h1>
 <p>When working with vector data layers, you may encounter geometry errors. These errors often become part of your data after running geoprocessing, digitizing, editing or data conversion. QGIS3 comes with build-in tools and algorithms to detect and fix invalid geometries. This tutorial will show you a typical workflow for handling invalid geometries in your data.</p>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">Different software systems implement different notions of geometry validity. But the leading standard for the geometry model for use in a GIS is the OGC <a class="reference external" href="https://www.opengeospatial.org/standards/sfs">Simple Features Specifications (SFS)</a>. In this tutorial, we will use GEOS library to check for geometry validity which uses this standard. <a class="reference external" href="https://knowledge.safe.com/articles/21674/invalid-ogc-geometry-examples.html">This post</a> gives a good overview of common geometry errors as defined by the OGC standard.</p>
+<p class="admonition-title">備註</p>
+<p>Different software systems implement different notions of geometry validity. But the leading standard for the geometry model for use in a GIS is the OGC <a class="reference external" href="https://www.opengeospatial.org/standards/sfs">Simple Features Specifications (SFS)</a>. In this tutorial, we will use GEOS library to check for geometry validity which uses this standard. <a class="reference external" href="https://knowledge.safe.com/articles/21674/invalid-ogc-geometry-examples.html">This post</a> gives a good overview of common geometry errors as defined by the OGC standard.</p>
 </div>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
+<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="本標題的永久連結">¶</a></h2>
 <p>We will work with an admin boundary layer for India and fix a geometry error for a state polygon.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
+<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="本標題的永久連結">¶</a></h3>
 <ul class="simple">
-<li>Using the <em>Topological Coloring</em> algorithm to apply a coloring scheme to a polygon layer.</li>
+<li><p>Using the <em>Topological Coloring</em> algorithm to apply a coloring scheme to a polygon layer.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>Get the data<a class="headerlink" href="#get-the-data" title="本標題的永久連結">¶</a></h2>
 <p><a class="reference external" href="http://projects.datameet.org/maps/">Datameet</a> provides community-created administrative boundary shapefiles for India.</p>
-<p>Download the <a class="reference external" href="https://codeload.github.com/datameet/maps/zip/0fa9fd850eda3d2062e66f2caabc65872639c85a">Datameet Spatial Data Repository [~150 MB]</a> zipfile. The downloaded archive contains multiple folders. Extract the archive and use the files in the <code class="docutils literal"><span class="pre">States/</span></code> folder.</p>
-<p>Data Source: <a class="reference internal" href="../credits.html#datameet" id="id1">[DATAMEET]</a></p>
+<p>Download the <a class="reference external" href="https://codeload.github.com/datameet/maps/zip/0fa9fd850eda3d2062e66f2caabc65872639c85a">Datameet Spatial Data Repository [~150 MB]</a> zipfile. The downloaded archive contains multiple folders. Extract the archive and use the files in the <code class="docutils literal notranslate"><span class="pre">States/</span></code> folder.</p>
+<p>Data Source: <a class="reference internal" href="../credits.html#datameet" id="id1"><span>[DATAMEET]</span></a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
+<h2>Procedure<a class="headerlink" href="#procedure" title="本標題的永久連結">¶</a></h2>
 <ol class="arabic simple">
-<li>Browse to the downloaded <code class="docutils literal"><span class="pre">India-States.zip</span></code> file in QGIS Browser. Expand it and drag the <code class="docutils literal"><span class="pre">India-States.shp</span></code> file to the map canvas.</li>
+<li><p>Browse to the downloaded <code class="docutils literal notranslate"><span class="pre">India-States.zip</span></code> file in QGIS Browser. Expand it and drag the <code class="docutils literal notranslate"><span class="pre">India-States.shp</span></code> file to the map canvas.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/160.png" class="align-center" src="../../_images/160.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>You will see a new <code class="docutils literal"><span class="pre">India-States</span></code> layer loaded in the <span class="guilabel">Layers</span> panel. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</li>
+<li><p>You will see a new <code class="docutils literal notranslate"><span class="pre">India-States</span></code> layer loaded in the <span class="guilabel">Layers</span> panel. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/235.png" class="align-center" src="../../_images/235.png" />
+<div><img alt="../../_images/230.png" class="align-center" src="../../_images/230.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>We will attemp to run a processing algorithm on the input layer to demonstrate how invalid geometries can cause problems during geoprocessing operations. Search for and locate the <span class="menuselection">Cartography ‣ Topological coloring</span> algorithm. Double-click to launch it.</li>
+<li><p>We will attemp to run a processing algorithm on the input layer to demonstrate how invalid geometries can cause problems during geoprocessing operations. Search for and locate the <span class="menuselection">Cartography ‣ Topological coloring</span> algorithm. Double-click to launch it.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/325.png" class="align-center" src="../../_images/325.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>In the <span class="guilabel">Topological coloring</span> dialog, select <code class="docutils literal"><span class="pre">India-States</span></code> as the <span class="guilabel">Input layer</span>. Keep all other parameters to default and click <span class="guilabel">Run</span>.</li>
+<li><p>In the <span class="guilabel">Topological coloring</span> dialog, select <code class="docutils literal notranslate"><span class="pre">India-States</span></code> as the <span class="guilabel">Input layer</span>. Keep all other parameters to default and click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/412.png" class="align-center" src="../../_images/412.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">The <em>Topological coloring</em> algorithm implements an algorithm to color a map so that no adjacent polygons have the same color. This is a useful cartography technique and the <a class="reference external" href="https://en.wikipedia.org/wiki/Four_color_theorem">Four Color Theorem</a> states that 4 colors are enough to achieve this result. There is a graph-theory version of this thorem called <a class="reference external" href="https://en.wikipedia.org/wiki/Five_color_theorem">Five color theorem</a>. The QGIS algorithm implementation is based on  graphs so in practive you will see that complex polygon layers such as this will require upto 5 colors.</p>
+<p class="admonition-title">備註</p>
+<p>The <em>Topological coloring</em> algorithm implements an algorithm to color a map so that no adjacent polygons have the same color. This is a useful cartography technique and the <a class="reference external" href="https://en.wikipedia.org/wiki/Four_color_theorem">Four Color Theorem</a> states that 4 colors are enough to achieve this result. There is a graph-theory version of this thorem called <a class="reference external" href="https://en.wikipedia.org/wiki/Five_color_theorem">Five color theorem</a>. The QGIS algorithm implementation is based on  graphs so in practive you will see that complex polygon layers such as this will require upto 5 colors.</p>
 </div>
 <ol class="arabic simple" start="5">
-<li>As the algorithm runs, you will see a warning displayed in the <span class="guilabel">Log</span> tab. 1 feature in the input layer had invalid geometry and was skipped during the processing. The default setting to handle invalid geometry in the Processing Toolbox is located at <span class="menuselection">Settings ‣ Options ‣ Processing ‣ General ‣ Invalid features filtering</span> and is set to <code class="docutils literal"><span class="pre">Skip</span> <span class="pre">(ignore)</span> <span class="pre">features</span> <span class="pre">with</span> <span class="pre">invalid</span> <span class="pre">geometries</span></code>. This is a good default setting, but if your input is large, you may miss this warning and may not know that an input feature was skipped. You may want to change the value to <code class="docutils literal"><span class="pre">Stop</span> <span class="pre">algorithm</span> <span class="pre">execution</span> <span class="pre">when</span> <span class="pre">a</span> <span class="pre">geometry</span> <span class="pre">is</span> <span class="pre">invalid</span></code>.</li>
+<li><p>As the algorithm runs, you will see a warning displayed in the <span class="guilabel">Log</span> tab. 1 feature in the input layer had invalid geometry and was skipped during the processing. The default setting to handle invalid geometry in the Processing Toolbox is located at <span class="menuselection">Settings ‣ Options ‣ Processing ‣ General ‣ Invalid features filtering</span> and is set to <code class="docutils literal notranslate"><span class="pre">Skip</span> <span class="pre">(ignore)</span> <span class="pre">features</span> <span class="pre">with</span> <span class="pre">invalid</span> <span class="pre">geometries</span></code>. This is a good default setting, but if your input is large, you may miss this warning and may not know that an input feature was skipped. You may want to change the value to <code class="docutils literal notranslate"><span class="pre">Stop</span> <span class="pre">algorithm</span> <span class="pre">execution</span> <span class="pre">when</span> <span class="pre">a</span> <span class="pre">geometry</span> <span class="pre">is</span> <span class="pre">invalid</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/513.png" class="align-center" src="../../_images/513.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Back in the main QGIS window, you will see a new layer <code class="docutils literal"><span class="pre">Colored</span></code> added to the <span class="guilabel">Layers</span> panel. Notice that the new layer is missing a state which had invalid geometry. We now know that this particular state polygon had invalid geometry but we don&#8217;t know what was the cause. We can easily find that out. Search for and locate the <span class="menuselection">Vector geometry ‣ Check validity</span> algorithm.</li>
+<li><p>Back in the main QGIS window, you will see a new layer <code class="docutils literal notranslate"><span class="pre">Colored</span></code> added to the <span class="guilabel">Layers</span> panel. Notice that the new layer is missing a state which had invalid geometry. We now know that this particular state polygon had invalid geometry but we don’t know what was the cause. We can easily find that out. Search for and locate the <span class="menuselection">Vector geometry ‣ Check validity</span> algorithm.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/613.png" class="align-center" src="../../_images/613.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>In the <span class="guilabel">Check Validity</span> dialog, select <code class="docutils literal"><span class="pre">India-States</span></code> as the <span class="guilabel">Input layer</span>. Select <code class="docutils literal"><span class="pre">GEOS</span></code> as the <span class="guilabel">Method</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p>In the <span class="guilabel">Check Validity</span> dialog, select <code class="docutils literal notranslate"><span class="pre">India-States</span></code> as the <span class="guilabel">Input layer</span>. Select <code class="docutils literal notranslate"><span class="pre">GEOS</span></code> as the <span class="guilabel">Method</span>. Click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/712.png" class="align-center" src="../../_images/712.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>As the algorithm finishes processing, you will see 3 new layers in the <span class="guilabel">Layers</span> panel - <code class="docutils literal"><span class="pre">Valid</span> <span class="pre">output</span></code>, <code class="docutils literal"><span class="pre">Invalid</span> <span class="pre">output</span></code> and <code class="docutils literal"><span class="pre">Error</span> <span class="pre">output</span></code>. The layer <code class="docutils literal"><span class="pre">Error</span> <span class="pre">output</span></code> contains the locations and description of the geometry errors. Right-click it and select <span class="guilabel">Open Attribute Table</span>.</li>
+<li><p>As the algorithm finishes processing, you will see 3 new layers in the <span class="guilabel">Layers</span> panel - <code class="docutils literal notranslate"><span class="pre">Valid</span> <span class="pre">output</span></code>, <code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">output</span></code> and <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">output</span></code>. The layer <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">output</span></code> contains the locations and description of the geometry errors. Right-click it and select <span class="guilabel">Open Attribute Table</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/812.png" class="align-center" src="../../_images/812.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>You will see that the error message is <em>Ring self-intersection</em>. Select the row and click <span class="guilabel">Zoom map to selected features</span> button. As you zoom in, you will see the root cause of the geometry error.</li>
+<li><p>You will see that the error message is <em>Ring self-intersection</em>. Select the row and click <span class="guilabel">Zoom map to selected features</span> button. As you zoom in, you will see the root cause of the geometry error.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/912.png" class="align-center" src="../../_images/912.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>QGIS comes with a built-in algorithm to fix geometry errors automatically. Search for and locate the <span class="menuselection">Vector geometry ‣ Fix geometries</span> algorithm. Double-click to run it.</li>
+<li><p>QGIS comes with a built-in algorithm to fix geometry errors automatically. Search for and locate the <span class="menuselection">Vector geometry ‣ Fix geometries</span> algorithm. Double-click to run it.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1012.png" class="align-center" src="../../_images/1012.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>In the <span class="guilabel">Fix Geometries</span> dialog, select <code class="docutils literal"><span class="pre">India-States</span></code> as the <span class="guilabel">Input layer</span> and click <span class="guilabel">Run</span>.</li>
+<li><p>In the <span class="guilabel">Fix Geometries</span> dialog, select <code class="docutils literal notranslate"><span class="pre">India-States</span></code> as the <span class="guilabel">Input layer</span> and click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1115.png" class="align-center" src="../../_images/1115.png" />
+<div><img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>A new layer <code class="docutils literal"><span class="pre">Fixed</span> <span class="pre">Geometries</span></code> will be added to the <span class="guilabel">Layers</span> panel. At this point, the geometry error is fixed and you can run any processing algorithm on this layer without problems. But we can see that there is still a gap between the adjacent polygons that is unexpected and can cause topological errors down the line. We can fix this too by editing the polygon. Click the <span class="guilabel">Toggle Editing</span> button in the <span class="guilabel">Digitizing Toolbar</span>. Select the <span class="guilabel">Vertex Tool</span> and from the drop-down select <code class="docutils literal"><span class="pre">Vertex</span> <span class="pre">Tool</span> <span class="pre">(Current</span> <span class="pre">Layer)</span></code>.</li>
+<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Fixed</span> <span class="pre">Geometries</span></code> will be added to the <span class="guilabel">Layers</span> panel. At this point, the geometry error is fixed and you can run any processing algorithm on this layer without problems. But we can see that there is still a gap between the adjacent polygons that is unexpected and can cause topological errors down the line. We can fix this too by editing the polygon. Click the <span class="guilabel">Toggle Editing</span> button in the <span class="guilabel">Digitizing Toolbar</span>. Select the <span class="guilabel">Vertex Tool</span> and from the drop-down select <code class="docutils literal notranslate"><span class="pre">Vertex</span> <span class="pre">Tool</span> <span class="pre">(Current</span> <span class="pre">Layer)</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1213.png" class="align-center" src="../../_images/1213.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>When the vertex tool is active, click on a vertex to select it. You can press <code class="kbd docutils literal"><span class="pre">Delete</span></code> key to delete a vertex or drag it to move it. You can move the vertex so that the polygon edge now touches the adjacent polygon.</li>
+<li><p>When the vertex tool is active, click on a vertex to select it. You can press <kbd class="kbd docutils literal notranslate">Delete</kbd> key to delete a vertex or drag it to move it. You can move the vertex so that the polygon edge now touches the adjacent polygon.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/13.gif" class="align-center" src="../../_images/13.gif" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Once done, click the <span class="guilabel">Toggle Editing</span> button again and click <span class="guilabel">Save</span>.</li>
+<li><p>Once done, click the <span class="guilabel">Toggle Editing</span> button again and click <span class="guilabel">Save</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1411.png" class="align-center" src="../../_images/1411.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Let&#8217;s run the <span class="menuselection">Cartography ‣ Topological coloring</span> algorithm again.</li>
+<li><p>Let’s run the <span class="menuselection">Cartography ‣ Topological coloring</span> algorithm again.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>In the <span class="guilabel">Topological Coloring</span> dialog, make sure you select <code class="docutils literal"><span class="pre">Fixed</span> <span class="pre">Geometries</span></code> as the <span class="guilabel">Input layer</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p>In the <span class="guilabel">Topological Coloring</span> dialog, make sure you select <code class="docutils literal notranslate"><span class="pre">Fixed</span> <span class="pre">Geometries</span></code> as the <span class="guilabel">Input layer</span>. Click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>You will see the algorithm run without any errors and a new layer <code class="docutils literal"><span class="pre">Colored</span></code> will be added to the <span class="guilabel">Layers</span> panel. Note that the algorithm doesn&#8217;t color the layer by itself, but works by adding a new column called <code class="docutils literal"><span class="pre">color_id</span></code> to each polygon that can be used to assign a unique color that is different than adjacent polygons. Select the <code class="docutils literal"><span class="pre">Colored</span></code> layer and click the <span class="guilabel">Open the Layer Styling Panel</span> button.</li>
+<li><p>You will see the algorithm run without any errors and a new layer <code class="docutils literal notranslate"><span class="pre">Colored</span></code> will be added to the <span class="guilabel">Layers</span> panel. Note that the algorithm doesn’t color the layer by itself, but works by adding a new column called <code class="docutils literal notranslate"><span class="pre">color_id</span></code> to each polygon that can be used to assign a unique color that is different than adjacent polygons. Select the <code class="docutils literal notranslate"><span class="pre">Colored</span></code> layer and click the <span class="guilabel">Open the Layer Styling Panel</span> button.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Select <code class="docutils literal"><span class="pre">Categorized</span></code> renderer and the column <code class="docutils literal"><span class="pre">color_id</span></code> as the <span class="guilabel">Value</span>. Click <span class="guilabel">Classify</span>. You will now see the map colored so that adjacent polygons have different colors.</li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Categorized</span></code> renderer and the column <code class="docutils literal notranslate"><span class="pre">color_id</span></code> as the <span class="guilabel">Value</span>. Click <span class="guilabel">Classify</span>. You will now see the map colored so that adjacent polygons have different colors.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/189.png" class="align-center" src="../../_images/189.png" />
+<div><img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
 </div></blockquote>
 </div>
 </div>
@@ -433,8 +419,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      最後更新於 1月 07, 2021。<br/>
+      使用 <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 創建。<br/>
     </p>
   </div>
 </footer>

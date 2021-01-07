@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Escribir Scripts Python para el Marco de Procesamiento &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escribir Scripts Python para el Marco de Procesamiento &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="search" title="Búsqueda" href="../search.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -47,8 +34,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -59,7 +45,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html"><img src="../_static/logo.png">
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -258,53 +244,50 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="writing-python-scripts-for-processing-framework">
 <h1>Escribir Scripts Python para el Marco de Procesamiento<a class="headerlink" href="#writing-python-scripts-for-processing-framework" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">Advertencia</p>
-<p class="last">Una nueva versión de este tutorial está disponible en <a class="reference internal" href="3/processing_python_scripts.html"><em>Escribir Scripts Python para el Marco de Procesamiento (QGIS3)</em></a></p>
+<p class="admonition-title">Advertencia</p>
+<p>Una nueva versión de este tutorial está disponible en <a class="reference internal" href="3/processing_python_scripts.html"><span class="doc">Escribir Scripts Python para el Marco de Procesamiento (QGIS3)</span></a></p>
 </div>
 <p>Uno puede escribir scripts pyqgis autónomos que pueden ser ejecutados mediante la Consola Python en QGIS. Con unos pocos ajustes, puede hacer que sus scripts autónomos  corran mediante el Marco de Procesamiento. Esto tiene varias ventajas. Primero, tomar la entrada de usuario y escribir archivos de salida es de lejos más fácil debido a que el Marco de Procesamiento ofrece un interfaz de usuario estandarizado para éstos. Segundo, el tener un script en la Caja de Herramientas de Procesamiento también le permite ser parte de cualquier Modelo de Procesamiento o ser ejecutado como un trabajo por Lote con múltiples entradas. Este tutorial mostrará cómo escribir un script python personalizado que puede ser parte de un Marco de Procesamiento en QGIS.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Our script will perform a dissolve operation based on a field chosen by the
 user. It will also sum up values of another field for the dissolved features.
-In the example, we will dissolve a World shapefile based on a <code class="docutils literal"><span class="pre">SUBREGION</span></code>
-attribute and sum up <code class="docutils literal"><span class="pre">POP_EST</span></code> field to calculate total population in the
+In the example, we will dissolve a World shapefile based on a <code class="docutils literal notranslate"><span class="pre">SUBREGION</span></code>
+attribute and sum up <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> field to calculate total population in the
 dissolved region.</p>
 <div class="admonition note">
-<p class="first admonition-title">Nota</p>
-<p class="last">Si está buscando hacer una operación Dissolve junto con Statistics, puede usar el excelente complemento <code class="docutils literal"><span class="pre">DissolveWithStats</span></code>. Este script es una demostración de cómo implementar una funcionalidad similar mediante un script de Procesamiento.</p>
+<p class="admonition-title">Nota</p>
+<p>Si está buscando hacer una operación Dissolve junto con Statistics, puede usar el excelente complemento <code class="docutils literal notranslate"><span class="pre">DissolveWithStats</span></code>. Este script es una demostración de cómo implementar una funcionalidad similar mediante un script de Procesamiento.</p>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Usaremos el conjunto de datos <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Countries</a> de Natural Earth.</p>
 <p>Descargar el <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">archivo shape Admin 0 - countries.</a>.</p>
-<p>Fuente de Datos <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>Fuente de Datos <a class="reference internal" href="credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
 <p>Para su comodidad, puede descargar directamente una copia de los conjuntos de datos de los enlaces abajo:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">ne_10_admin_0_countries.zip</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">Abra QGIS y vaya a <span class="menuselection">Capa ‣ Añadir capa ‣ Añadir Capa Vectorial</span>. Explore el archivo descargado <code class="docutils literal"><span class="pre">ne_10_admin_0_countries.zip</span></code> y cargue la capa <code class="docutils literal"><span class="pre">ne_10_admin_0_countries</span></code>. Vaya a <span class="menuselection">Procesos ‣ Caja de Herramientas</span>.</p>
-</li>
+<li><p>Abra QGIS y vaya a <span class="menuselection">Capa ‣ Añadir capa ‣ Añadir Capa Vectorial</span>. Explore el archivo descargado <code class="docutils literal notranslate"><span class="pre">ne_10_admin_0_countries.zip</span></code> y cargue la capa <code class="docutils literal notranslate"><span class="pre">ne_10_admin_0_countries</span></code>. Vaya a <span class="menuselection">Procesos ‣ Caja de Herramientas</span>.</p></li>
 </ol>
 <img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">Expanda el grupo <span class="guilabel">Scripts</span> en la <span class="guilabel">Caja de herramientas de Procesos</span> y seleccione <span class="guilabel">Crear script nuevo</span>.</p>
-</li>
+<li><p>Expanda el grupo <span class="guilabel">Scripts</span> en la <span class="guilabel">Caja de herramientas de Procesos</span> y seleccione <span class="guilabel">Crear script nuevo</span>.</p></li>
 </ol>
 <img alt="../_images/2140.png" class="align-center" src="../_images/2140.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">Para que un script python sea reconocido como un script de Procesamiento, el inicio del script debe ser las especificaciones de la entrada y salidas. Esto será usado para construir el interfaz de usuario para ejecutar el script. Puede aprender más acerca del formato de estas líneas de la <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/scripts.html">QGIS Documentación de Procesamiento</a>. Ingrese las siguientes líneas en el <span class="guilabel">Editor de Script</span>. Aquí estamos especificando 3 entradas de usuario: <code class="docutils literal"><span class="pre">dissolve_layer</span></code>, <code class="docutils literal"><span class="pre">dissolve_field</span></code> y <code class="docutils literal"><span class="pre">sum_field</span></code>. Note que estamos agregando <code class="docutils literal"><span class="pre">dissolve_layer</span></code> después de ambas definiciones de entrada de campo. Esto significa que la entrada será pre-poblada con una selección de campos de <code class="docutils literal"><span class="pre">dissolve_layer</span></code>. También especificamos la <code class="docutils literal"><span class="pre">output_layer</span></code> como la capa vectorial de salida. Clic en el botón <span class="guilabel">Guardar</span>.</p>
-</li>
+<li><p>Para que un script python sea reconocido como un script de Procesamiento, el inicio del script debe ser las especificaciones de la entrada y salidas. Esto será usado para construir el interfaz de usuario para ejecutar el script. Puede aprender más acerca del formato de estas líneas de la <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/scripts.html">QGIS Documentación de Procesamiento</a>. Ingrese las siguientes líneas en el <span class="guilabel">Editor de Script</span>. Aquí estamos especificando 3 entradas de usuario: <code class="docutils literal notranslate"><span class="pre">dissolve_layer</span></code>, <code class="docutils literal notranslate"><span class="pre">dissolve_field</span></code> y <code class="docutils literal notranslate"><span class="pre">sum_field</span></code>. Note que estamos agregando <code class="docutils literal notranslate"><span class="pre">dissolve_layer</span></code> después de ambas definiciones de entrada de campo. Esto significa que la entrada será pre-poblada con una selección de campos de <code class="docutils literal notranslate"><span class="pre">dissolve_layer</span></code>. También especificamos la <code class="docutils literal notranslate"><span class="pre">output_layer</span></code> como la capa vectorial de salida. Clic en el botón <span class="guilabel">Guardar</span>.</p></li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre><span></span>##dissolve_layer=vector
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##dissolve_layer=vector
 ##dissolve_field=field dissolve_layer
 ##sum_field=field dissolve_layer
 ##output_layer=output vector
@@ -312,29 +295,25 @@ dissolved region.</p>
 </div>
 <img alt="../_images/378.png" class="align-center" src="../_images/378.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">Nombre el script como <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> y guárdelo en la ubicación predeterminada bajo la carpeta <span class="menuselection">.qgis2 ‣ processing ‣ scripts</span>.</p>
-</li>
+<li><p>Nombre el script como <code class="docutils literal notranslate"><span class="pre">dissolve_with_sum</span></code> y guárdelo en la ubicación predeterminada bajo la carpeta <span class="menuselection">.qgis2 ‣ processing ‣ scripts</span>.</p></li>
 </ol>
 <img alt="../_images/456.png" class="align-center" src="../_images/456.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">De vuelta en el <span class="guilabel">Editor de scripts</span>, clic en el botón <span class="guilabel">Ejecutar script</span> para previsualizar el interfaz de usuario.</p>
-</li>
+<li><p>De vuelta en el <span class="guilabel">Editor de scripts</span>, clic en el botón <span class="guilabel">Ejecutar script</span> para previsualizar el interfaz de usuario.</p></li>
 </ol>
 <img alt="../_images/557.png" class="align-center" src="../_images/557.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">Puede ver que con solo agregar unas pocas líneas, tenemos un agradable interfaz de usuario para que se especifiquen las entradas. Esto es también consistente con todos los algoritmo de Procesos, por lo que nos existe una curva de aprendizaje involucrada en el uso de su algoritmo personalizado.</p>
-</li>
+<li><p>Puede ver que con solo agregar unas pocas líneas, tenemos un agradable interfaz de usuario para que se especifiquen las entradas. Esto es también consistente con todos los algoritmo de Procesos, por lo que nos existe una curva de aprendizaje involucrada en el uso de su algoritmo personalizado.</p></li>
 </ol>
 <img alt="../_images/654.png" class="align-center" src="../_images/654.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">En el <span class="guilabel">Editor de scripts</span>, ingrese el siguiente código. Notará que estamos usandos algunos métodos especiales como <code class="docutils literal"><span class="pre">processing.getObject()</span></code> y <code class="docutils literal"><span class="pre">processing.features()</span></code>. Estos son wrappers convenientes para facilitan el trabajo con datos. Puede aprender más acerca de éstos de la sección <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/console.html#additional-functions-for-handling-data">Additional functions for handling data</a> de la Documentación de Procesamiento QGIS. Clic en <span class="guilabel">Guardar</span> para guardar el código recientemente ingresado y luego el botón <span class="guilabel">X</span> para cerrar el editor.</p>
-</li>
+<li><p>En el <span class="guilabel">Editor de scripts</span>, ingrese el siguiente código. Notará que estamos usandos algunos métodos especiales como <code class="docutils literal notranslate"><span class="pre">processing.getObject()</span></code> y <code class="docutils literal notranslate"><span class="pre">processing.features()</span></code>. Estos son wrappers convenientes para facilitan el trabajo con datos. Puede aprender más acerca de éstos de la sección <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/console.html#additional-functions-for-handling-data">Additional functions for handling data</a> de la Documentación de Procesamiento QGIS. Clic en <span class="guilabel">Guardar</span> para guardar el código recientemente ingresado y luego el botón <span class="guilabel">X</span> para cerrar el editor.</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Nota</p>
-<p class="last">Este script usa extensamente del entendimiento de lista de python. Déle una mirada a este <a class="reference external" href="https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions">tutorial de entendimiento de lista</a> para familiarizarse con la sintáxis.</p>
+<p class="admonition-title">Nota</p>
+<p>Este script usa extensamente del entendimiento de lista de python. Déle una mirada a este <a class="reference external" href="https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions">tutorial de entendimiento de lista</a> para familiarizarse con la sintáxis.</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">inlayer</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">dissolve_layer</span><span class="p">)</span>
@@ -345,41 +324,37 @@ dissolved region.</p>
 <span class="n">unique_values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">[</span><span class="n">dissolve_field</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span>
 <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">inlayer</span><span class="p">)])</span>
 
-<span class="k">print</span> <span class="n">unique_values</span>
+<span class="nb">print</span> <span class="n">unique_values</span>
 </pre></div>
 </div>
 <img alt="../_images/753.png" class="align-center" src="../_images/753.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">Mientras escribe código, es importante que sea capaz de ver errores y depure su código. Sus scripts de procesamiento pueden ser fácilmente depurados mediante la Consola de Python incorporada. En la ventana principal QGIS, vaya a <span class="menuselection">Plugins ‣ Consola de Python</span>. Una vez esté abierta la consola, encuentre su script en la <span class="guilabel">Caja de herramientas de Procesos</span>  y doble-clic para iniciarlo.</p>
-</li>
+<li><p>Mientras escribe código, es importante que sea capaz de ver errores y depure su código. Sus scripts de procesamiento pueden ser fácilmente depurados mediante la Consola de Python incorporada. En la ventana principal QGIS, vaya a <span class="menuselection">Plugins ‣ Consola de Python</span>. Una vez esté abierta la consola, encuentre su script en la <span class="guilabel">Caja de herramientas de Procesos</span>  y doble-clic para iniciarlo.</p></li>
 </ol>
 <img alt="../_images/851.png" class="align-center" src="../_images/851.png" />
 <ol class="arabic simple" start="9">
-<li><p class="first">Seleccione <code class="docutils literal"><span class="pre">SUBREGION</span></code> como el <span class="guilabel">campo de disolución</span>. Puede elegir cualquier campo como el <span class="guilabel">campo de suma</span> ya que el script aún no tiene ningún código para lidiar con ello. Clic en <span class="guilabel">Ejecutar</span>.</p>
-</li>
+<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">SUBREGION</span></code> como el <span class="guilabel">campo de disolución</span>. Puede elegir cualquier campo como el <span class="guilabel">campo de suma</span> ya que el script aún no tiene ningún código para lidiar con ello. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <img alt="../_images/950.png" class="align-center" src="../_images/950.png" />
 <ol class="arabic simple" start="10">
-<li><p class="first">Verá un diálogo de error. Esto era esperado ya que el script está incompleto y aún no genera ninguna salida.</p>
-</li>
+<li><p>Verá un diálogo de error. Esto era esperado ya que el script está incompleto y aún no genera ninguna salida.</p></li>
 </ol>
 <img alt="../_images/1049.png" class="align-center" src="../_images/1049.png" />
 <ol class="arabic simple" start="11">
-<li><p class="first">En la ventana principal QGIS, verá la salida de depuración del scrip impresa en la consola. Esta es una forma útil para agregar instrucciones de impresión y ver valores intermedios de variable.</p>
-</li>
+<li><p>En la ventana principal QGIS, verá la salida de depuración del scrip impresa en la consola. Esta es una forma útil para agregar instrucciones de impresión y ver valores intermedios de variable.</p></li>
 </ol>
 <img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
 <ol class="arabic simple" start="12">
-<li>Let&#8217;s go back to editing the script by right-clicking the script and select
-<span class="guilabel">Edit script</span>.</li>
+<li><p>Let’s go back to editing the script by right-clicking the script and select
+<span class="guilabel">Edit script</span>.</p></li>
 </ol>
 <img alt="../_images/1249.png" class="align-center" src="../_images/1249.png" />
 <ol class="arabic simple" start="13">
-<li>Enter the following code to complete the script. Note that we are using the
+<li><p>Enter the following code to complete the script. Note that we are using the
 existing dissolve algorithm in QGIS via processing using
-<code class="docutils literal"><span class="pre">processing.runalg()</span></code> method.</li>
+<code class="docutils literal notranslate"><span class="pre">processing.runalg()</span></code> method.</p></li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary to hold values from the sum field</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary to hold values from the sum field</span>
 <span class="n">sum_unique_values</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">inlayer</span><span class="p">)]</span>
 
@@ -407,30 +382,30 @@ existing dissolve algorithm in QGIS via processing using
 </div>
 <img alt="../_images/1347.png" class="align-center" src="../_images/1347.png" />
 <ol class="arabic simple" start="14">
-<li>Run the algorithm by selecting <code class="docutils literal"><span class="pre">SUBREGION</span></code> as the <span class="guilabel">dissolve
-field</span> and <code class="docutils literal"><span class="pre">POP_EST</span></code> as the <span class="guilabel">sum field</span>. Click <span class="guilabel">Run</span>.</li>
+<li><p>Run the algorithm by selecting <code class="docutils literal notranslate"><span class="pre">SUBREGION</span></code> as the <span class="guilabel">dissolve
+field</span> and <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> as the <span class="guilabel">sum field</span>. Click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Nota</p>
-<p class="last">The processing algorithm may take upto 10 minutes to finish depending on
+<p class="admonition-title">Nota</p>
+<p>The processing algorithm may take upto 10 minutes to finish depending on
 your system.</p>
 </div>
 <img alt="../_images/1446.png" class="align-center" src="../_images/1446.png" />
 <ol class="arabic simple" start="15">
-<li>Once the processing finishes, you can use the <span class="guilabel">Identify</span> tool and
-click on any polygon. You will see the newly added <code class="docutils literal"><span class="pre">SUM</span></code> field with the
-<code class="docutils literal"><span class="pre">POP_EST</span></code> values from all original polygons added up.</li>
+<li><p>Once the processing finishes, you can use the <span class="guilabel">Identify</span> tool and
+click on any polygon. You will see the newly added <code class="docutils literal notranslate"><span class="pre">SUM</span></code> field with the
+<code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> values from all original polygons added up.</p></li>
 </ol>
 <img alt="../_images/1544.png" class="align-center" src="../_images/1544.png" />
 <ol class="arabic simple" start="16">
-<li>You will note that all other fields in the output are still present. When
-you dissolve many features to create a single feature, it doesn&#8217;t make
+<li><p>You will note that all other fields in the output are still present. When
+you dissolve many features to create a single feature, it doesn’t make
 sense to keep the original fields in the output. Go back to the
 <span class="guilabel">Script editor</span> and add the following code to delete all fields
-except the <code class="docutils literal"><span class="pre">SUM</span></code> field and the field that was used to dissolve the
-original layer. Click <span class="guilabel">Save</span> button and close the window.</li>
+except the <code class="docutils literal notranslate"><span class="pre">SUM</span></code> field and the field that was used to dissolve the
+original layer. Click <span class="guilabel">Save</span> button and close the window.</p></li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Delete all fields except dissolve field and the newly created &#39;SUM&#39; field.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Delete all fields except dissolve field and the newly created &#39;SUM&#39; field.</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">startEditing</span><span class="p">()</span>
 
 <span class="n">fields_to_delete</span> <span class="o">=</span> <span class="p">[</span><span class="n">fid</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">fields</span><span class="p">()))</span> <span class="k">if</span> <span class="n">fid</span> <span class="o">!=</span> <span class="n">new_field_index</span> <span class="ow">and</span> <span class="n">fid</span> <span class="o">!=</span> <span class="n">dissolve_field_index</span><span class="p">]</span>
@@ -442,53 +417,53 @@ original layer. Click <span class="guilabel">Save</span> button and close the wi
 </div>
 <img alt="../_images/1640.png" class="align-center" src="../_images/1640.png" />
 <ol class="arabic simple" start="17">
-<li>One of the hidden features of the Processing Framework is that all
+<li><p>One of the hidden features of the Processing Framework is that all
 algorithms can work on selected features of a layer. This is very helpful
 when you want to run an algorithm on the subset of a layer. As our script
-uses <code class="docutils literal"><span class="pre">processing.features()</span></code> method to read features, it will respect the
-current selection. To demonstrate that, let&#8217;s make a selection first. Click
-on the <span class="guilabel">Select features using an expression</span> button.</li>
+uses <code class="docutils literal notranslate"><span class="pre">processing.features()</span></code> method to read features, it will respect the
+current selection. To demonstrate that, let’s make a selection first. Click
+on the <span class="guilabel">Select features using an expression</span> button.</p></li>
 </ol>
 <img alt="../_images/1737.png" class="align-center" src="../_images/1737.png" />
 <ol class="arabic simple" start="18">
-<li>Enter the following expression to select features from North and South
-America and click <span class="guilabel">Select</span>.</li>
+<li><p>Enter the following expression to select features from North and South
+America and click <span class="guilabel">Select</span>.</p></li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre><span></span>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
 </pre></div>
 </div>
-<img alt="../_images/1837.png" class="align-center" src="../_images/1837.png" />
+<img alt="../_images/1836.png" class="align-center" src="../_images/1836.png" />
 <ol class="arabic simple" start="19">
-<li>You will see the selected features highlighted in yellow. Right-click the
-<code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> script and select <span class="guilabel">Execute</span>.</li>
+<li><p>You will see the selected features highlighted in yellow. Right-click the
+<code class="docutils literal notranslate"><span class="pre">dissolve_with_sum</span></code> script and select <span class="guilabel">Execute</span>.</p></li>
 </ol>
 <img alt="../_images/1931.png" class="align-center" src="../_images/1931.png" />
 <ol class="arabic simple" start="20">
-<li>Select the inputs as before and click <span class="guilabel">Run</span>.</li>
+<li><p>Select the inputs as before and click <span class="guilabel">Run</span>.</p></li>
 </ol>
-<img alt="../_images/2024.png" class="align-center" src="../_images/2024.png" />
+<img alt="../_images/2023.png" class="align-center" src="../_images/2023.png" />
 <ol class="arabic simple" start="22">
-<li>A new <code class="docutils literal"><span class="pre">output</span> <span class="pre">layer</span></code> will be added to QGIS. This will contain dissolved
+<li><p>A new <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code> will be added to QGIS. This will contain dissolved
 geometries only from the selected features in the input layer. You will
-also note that the <code class="docutils literal"><span class="pre">output</span> <span class="pre">layer</span></code> will contain only 2 fields as expected.</li>
+also note that the <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code> will contain only 2 fields as expected.</p></li>
 </ol>
 <img alt="../_images/2141.png" class="align-center" src="../_images/2141.png" />
 <ol class="arabic simple" start="23">
-<li>One last but important remmaining work is to document our algorithm. The
+<li><p>One last but important remmaining work is to document our algorithm. The
 Processing Framework has nice tools to write and access help. Go to the
 <span class="guilabel">Script editor</span> and click the <span class="guilabel">Edit script help</span>
-button.</li>
+button.</p></li>
 </ol>
 <img alt="../_images/2225.png" class="align-center" src="../_images/2225.png" />
 <ol class="arabic simple" start="24">
-<li>Fill in the details for different elements and click <span class="guilabel">OK</span>. Now a
+<li><p>Fill in the details for different elements and click <span class="guilabel">OK</span>. Now a
 detailed help will be available to all users of your script in the
-<span class="guilabel">Help</span> tab when they launch the algorithm.</li>
+<span class="guilabel">Help</span> tab when they launch the algorithm.</p></li>
 </ol>
-<img alt="../_images/2322.png" class="align-center" src="../_images/2322.png" />
+<img alt="../_images/2321.png" class="align-center" src="../_images/2321.png" />
 <p>Below is the complete script for reference. You may modify it to suit your
 needs.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">##dissolve_layer=vector</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##dissolve_layer=vector</span>
 <span class="c1">##dissolve_field=field dissolve_layer</span>
 <span class="c1">##sum_field=field dissolve_layer</span>
 <span class="c1">##output_layer=output vector</span>
@@ -561,8 +536,8 @@ needs.</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Actualizado por última vez en ene. 07, 2021.<br/>
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
 </footer>

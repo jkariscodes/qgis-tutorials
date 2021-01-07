@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="de">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Stichproben aus Rasterdaten mit Hilfe von Punkten und Polygonen (QGIS3) &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stichproben aus Rasterdaten mit Hilfe von Punkten und Polygonen (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="search" title="Suche" href="../../search.html" />
     <link rel="next" title="Interpolating Point Data" href="../interpolating_point_data.html" />
     <link rel="prev" title="Nächster Nachbar Analyse (QGIS3)" href="nearest_neighbor_analysis.html" />
 
@@ -37,6 +20,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -49,8 +36,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -61,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -100,7 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Räumliche Abfragen ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nächster Nachbar Analyse (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Stichproben aus Rasterdaten mit Hilfe von Punkten und Polygonen (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Stichproben aus Rasterdaten mit Hilfe von Punkten und Polygonen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpolating Point Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Stapelverarbeitung mit dem Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Komplexe Arbeitsabläufe mit Hilfe der Verarbeitungsmodellierung (QGIS3)</a></li>
@@ -268,148 +254,131 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="sampling-raster-data-using-points-or-polygons-qgis3">
 <h1>Stichproben aus Rasterdaten mit Hilfe von Punkten und Polygonen (QGIS3)<a class="headerlink" href="#sampling-raster-data-using-points-or-polygons-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Viele wissenschaftliche Daten oder Umweltdaten liegen als Rasterdaten vor. Digitale Geländemodelle (DGM oder DEM) werden ebenso als Rasterdaten angeboten. In diesen Rastendaten ist der thematische Parameter im Pixelwert einer Rasterzelle hinterlegt. Oftmals benötigt man diesen Pixelwert für einen bestimmten Ort oder auch eine Aggreation der Pixelwerte für ein bestimmtes Gebiet. Diese Funktionalität ist in den Verarbeitungswerkzeugen von QGIS enthalten. Die Algorithmen heißen <code class="docutils literal"><span class="pre">Rasterwerte</span> <span class="pre">abtasten</span></code> für Punktlayer und <code class="docutils literal"><span class="pre">Zonenstatistik</span></code> für Polygonlayer.</p>
+<p>Viele wissenschaftliche Daten oder Umweltdaten liegen als Rasterdaten vor. Digitale Geländemodelle (DGM oder DEM) werden ebenso als Rasterdaten angeboten. In diesen Rastendaten ist der thematische Parameter im Pixelwert einer Rasterzelle hinterlegt. Oftmals benötigt man diesen Pixelwert für einen bestimmten Ort oder auch eine Aggreation der Pixelwerte für ein bestimmtes Gebiet. Diese Funktionalität ist in den Verarbeitungswerkzeugen von QGIS enthalten. Die Algorithmen heißen <code class="docutils literal notranslate"><span class="pre">Rasterwerte</span> <span class="pre">abtasten</span></code> für Punktlayer und <code class="docutils literal notranslate"><span class="pre">Zonenstatistik</span></code> für Polygonlayer.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Mit einem gegebenen Rasterdatensatz der maximalen Temperatur der Kontinetalfläche der USA wollen wir die Temperatur für Punkte der Ballungsgebiete extrahieren. Außerdem wollen wir für die Fläche der Verwaltungsbezirke die mittlere Temperatur bestimmen.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Weitere Fähigkeiten, die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
-<li><p class="first">Selektion und Entfernen mehrerer Layer aus dem QGIS Inhaltsverzeichnis.</p>
-</li>
+<li><p>Selektion und Entfernen mehrerer Layer aus dem QGIS Inhaltsverzeichnis.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
-<p>Das <a class="reference external" href="http://www.cpc.ncep.noaa.gov/">Climate Prediction Center</a>  der NOAA stellt GIS-Daten zu Temperatur und Niederschlag in den USA bereit: <a class="reference external" href="http://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/">GIS data</a>. Die aktuellen Daten können unter folgendem link heruntergeladen werden: <a class="reference external" href="ftp://ftp.cpc.ncep.noaa.gov/GIS/GRADS_GIS/GeoTIFF/TEMP/us_tmax/">latest grid file for maximum temperatures</a>. Die Datei wird den folgenden Namen erhalten: <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float.tif</span></code></p>
+<p>Das <a class="reference external" href="http://www.cpc.ncep.noaa.gov/">Climate Prediction Center</a>  der NOAA stellt GIS-Daten zu Temperatur und Niederschlag in den USA bereit: <a class="reference external" href="http://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/">GIS data</a>. Die aktuellen Daten können unter folgendem link heruntergeladen werden: <a class="reference external" href="ftp://ftp.cpc.ncep.noaa.gov/GIS/GRADS_GIS/GeoTIFF/TEMP/us_tmax/">latest grid file for maximum temperatures</a>. Die Datei wird den folgenden Namen erhalten: <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_{YYYYMMDD}_float.tif</span></code></p>
 <p>Wir werden folgende CSV Datei mit den Ballungsräumen der USA verwenden: <a class="reference external" href="https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.2018.html">2018 US Gazetteer</a>. Das Ortsverzeichnis laden wir unter:<a class="reference external" href="https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2018_Gazetteer/2018_Gaz_ua_national.zip">Urban Areas Gazetteer File</a> herunter.</p>
 <p><a class="reference external" href="https://www.census.gov/en.html">US Census Bureau</a> stellt folgende Daten bereit: <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">TIGER/Line Shapefiles</a>. Auf der folgenden Seite kann man die Flächeneinheiten der Volkszählung Kaliforniens herunterladen: <a class="reference external" href="https://www2.census.gov/geo/tiger/TIGER2018/">FTP site</a>. Wir wählen die Datei <a class="reference external" href="https://www2.census.gov/geo/tiger/TIGER2018/COUNTY/tl_2018_us_county.zip">Census Tracts for California</a>.</p>
 <p>Der Einfachheit halber können wir eine Kopie der Datensätze unter folgenden links herunterladen:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/us.tmax_nohads_ll_20190501_float.tif">us.tmax_nohads_ll_20190501_float.tif</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/2018_Gaz_ua_national.zip">2018_Gaz_ua_national.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/tl_2018_us_county.zip">tl_2018_us_county.zip</a></p>
-<p>Datenquellen: <a class="reference internal" href="../credits.html#noaacpc" id="id1">[NOAACPC]</a>, <a class="reference internal" href="../credits.html#usgazetteer" id="id2">[USGAZETTEER]</a> <a class="reference internal" href="../credits.html#tiger" id="id3">[TIGER]</a></p>
+<p>Datenquellen: <a class="reference internal" href="../credits.html#noaacpc" id="id1"><span>[NOAACPC]</span></a>, <a class="reference internal" href="../credits.html#usgazetteer" id="id2"><span>[USGAZETTEER]</span></a> <a class="reference internal" href="../credits.html#tiger" id="id3"><span>[TIGER]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">Wir entpacken die Dateien <code class="docutils literal"><span class="pre">2018_Gaz_ua_national.zip</span></code> und <code class="docutils literal"><span class="pre">tl_2018_us_county.zip</span></code> in ein lokales Verzeichnis. Öffne QGIS, gehe im QGIS Browser zur Datei <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_20190501_float.tif</span></code> und ziehe sie in den Arbeitsbereich.</p>
-</li>
+<li><p>Wir entpacken die Dateien <code class="docutils literal notranslate"><span class="pre">2018_Gaz_ua_national.zip</span></code> und <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county.zip</span></code> in ein lokales Verzeichnis. Öffne QGIS, gehe im QGIS Browser zur Datei <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float.tif</span></code> und ziehe sie in den Arbeitsbereich.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1129.png" class="align-center" src="../../_images/1129.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p class="first">Wir sehen den neu geladenen Rasterlayer <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> im <span class="guilabel">Layer</span> Bereich. Die Rasterdatei enthält die maximal erfasste Temperatur für jedes Pixel. Als nächstes laden wir die Punktdatei der Ballungsräume hinzu. Das Format der Datei ist Text mit dem Trennzeichen Tabulator (TSV). Klicke auf den Knopf <span class="guilabel">Datenquellenverwaltung öffnen</span> in der <span class="guilabel">Datenquellenverwaltungsleiste</span>.</p>
-</li>
+<li><p>Wir sehen den neu geladenen Rasterlayer <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> im <span class="guilabel">Layer</span> Bereich. Die Rasterdatei enthält die maximal erfasste Temperatur für jedes Pixel. Als nächstes laden wir die Punktdatei der Ballungsräume hinzu. Das Format der Datei ist Text mit dem Trennzeichen Tabulator (TSV). Klicke auf den Knopf <span class="guilabel">Datenquellenverwaltung öffnen</span> in der <span class="guilabel">Datenquellenverwaltungsleiste</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/278.png" class="align-center" src="../../_images/278.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p class="first">Wir gehen zum Abschnitt <span class="guilabel">Getrennte Texte</span>. Hier klicken wir auf den Knopf <span class="guilabel">...</span> neben <span class="guilabel">Dateiname</span> und geben den Pfad zu der heruntergeladenen Textdatei an. Im Bereich <span class="guilabel">Dateiformat</span> wählen wir <span class="guilabel">Benutzerdefiniert</span> und <span class="guilabel">Tabulator</span>. Als <span class="guilabel">X-Feld</span> wählen wir <code class="docutils literal"><span class="pre">INTPTLONG</span></code> und als <span class="guilabel">Y-Feld</span> <code class="docutils literal"><span class="pre">INTPTLAT</span></code>. Klicke auf <span class="guilabel">Hinzufügen</span> und danach auf <span class="guilabel">Schließen</span>.</p>
-</li>
+<li><p>Wir gehen zum Abschnitt <span class="guilabel">Getrennte Texte</span>. Hier klicken wir auf den Knopf <span class="guilabel">…</span> neben <span class="guilabel">Dateiname</span> und geben den Pfad zu der heruntergeladenen Textdatei an. Im Bereich <span class="guilabel">Dateiformat</span> wählen wir <span class="guilabel">Benutzerdefiniert</span> und <span class="guilabel">Tabulator</span>. Als <span class="guilabel">X-Feld</span> wählen wir <code class="docutils literal notranslate"><span class="pre">INTPTLONG</span></code> und als <span class="guilabel">Y-Feld</span> <code class="docutils literal notranslate"><span class="pre">INTPTLAT</span></code>. Klicke auf <span class="guilabel">Hinzufügen</span> und danach auf <span class="guilabel">Schließen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/343.png" class="align-center" src="../../_images/343.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p class="first">Der neue Punktlayer <code class="docutils literal"><span class="pre">2018_Gaz_ua_national</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Wir können jetzt die Werte unter den Punkten aus dem Rasterlayer extrahieren. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p>
-</li>
+<li><p>Der neue Punktlayer <code class="docutils literal notranslate"><span class="pre">2018_Gaz_ua_national</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Wir können jetzt die Werte unter den Punkten aus dem Rasterlayer extrahieren. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/427.png" class="align-center" src="../../_images/427.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p class="first">Suche den Algorithmus <span class="menuselection">Rasteranalyse ‣ Rasterwerte abtasten</span> und klicke doppelt darauf, um ihn zu starten.</p>
-</li>
+<li><p>Suche den Algorithmus <span class="menuselection">Rasteranalyse ‣ Rasterwerte abtasten</span> und klicke doppelt darauf, um ihn zu starten.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/527.png" class="align-center" src="../../_images/527.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p class="first">Wir wählen <code class="docutils literal"><span class="pre">2018_Gaz_ua_national</span></code> als <span class="guilabel">Eingabepunktlayer</span> und <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> als <span class="guilabel">Raster Layer to sample</span>. Wir erweitern den Bereich <span class="guilabel">Fortgeschrittene Parameter</span> und geben <code class="docutils literal"><span class="pre">tmax</span></code> als <span class="guilabel">Ausgabespaltenpräfix</span> an. Klicke auf <span class="guilabel">Starte</span> und nach Beendigung der Prozessierung auf <span class="guilabel">Schließen</span>.</p>
-</li>
+<li><p>Wir wählen <code class="docutils literal notranslate"><span class="pre">2018_Gaz_ua_national</span></code> als <span class="guilabel">Eingabepunktlayer</span> und <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> als <span class="guilabel">Raster Layer to sample</span>. Wir erweitern den Bereich <span class="guilabel">Fortgeschrittene Parameter</span> und geben <code class="docutils literal notranslate"><span class="pre">tmax</span></code> als <span class="guilabel">Ausgabespaltenpräfix</span> an. Klicke auf <span class="guilabel">Starte</span> und nach Beendigung der Prozessierung auf <span class="guilabel">Schließen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/626.png" class="align-center" src="../../_images/626.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p class="first">Ein neuer Layer <code class="docutils literal"><span class="pre">Abgetastete</span> <span class="pre">Punkte</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Wähle das Tool <span class="guilabel">Objekte abfragen</span> aus der <span class="guilabel">Attributwerkzeugleiste</span> und klicke auf einen beliebigen Punkt. Die Attribute des Punktes werden im Fenster <span class="guilabel">Abfrageergebnisse</span> angezeigt. Wir sehen ein neues Attribut <strong>tmax_1</strong>, das zu jedem Feature hinzugefügt wurde. Dabei handelt es sich um den Wert des Pixels des Rasterlayers unter dem Punkt. Die <em>1</em> steht für die Nummer des Bandes des Rasterlayers. Wenn der Rasterlayer mehrere Bänder enthalten würde, würden entsprechend viele neue Attribute im Ausgabelayer erzeugt werden.</p>
-</li>
+<li><p>Ein neuer Layer <code class="docutils literal notranslate"><span class="pre">Abgetastete</span> <span class="pre">Punkte</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Wähle das Tool <span class="guilabel">Objekte abfragen</span> aus der <span class="guilabel">Attributwerkzeugleiste</span> und klicke auf einen beliebigen Punkt. Die Attribute des Punktes werden im Fenster <span class="guilabel">Abfrageergebnisse</span> angezeigt. Wir sehen ein neues Attribut <strong>tmax_1</strong>, das zu jedem Feature hinzugefügt wurde. Dabei handelt es sich um den Wert des Pixels des Rasterlayers unter dem Punkt. Die <em>1</em> steht für die Nummer des Bandes des Rasterlayers. Wenn der Rasterlayer mehrere Bänder enthalten würde, würden entsprechend viele neue Attribute im Ausgabelayer erzeugt werden.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/726.png" class="align-center" src="../../_images/726.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p class="first">Der erste Teil unserer Analyse ist abgeschlossen. Wir können die nicht mehr benötigten Layer entfernen. Halte die Taste <code class="kbd docutils literal"><span class="pre">Shift</span></code> gedrückt und wähle die Layer <code class="docutils literal"><span class="pre">Abgetastete</span> <span class="pre">Punkte</span></code> und <code class="docutils literal"><span class="pre">2018_Gaz_ua_national</span></code>. Klicke mit der rechten Maustaste auf die Layer und wähle <span class="guilabel">Layer löschen</span>, um die Layer aus QGIS zu entfernen. Bei der Nachfrage <span class="guilabel">2 Layer entfernen?</span> wählen wir <span class="guilabel">OK</span>.</p>
-</li>
+<li><p>Der erste Teil unserer Analyse ist abgeschlossen. Wir können die nicht mehr benötigten Layer entfernen. Halte die Taste <kbd class="kbd docutils literal notranslate">Shift</kbd> gedrückt und wähle die Layer <code class="docutils literal notranslate"><span class="pre">Abgetastete</span> <span class="pre">Punkte</span></code> und <code class="docutils literal notranslate"><span class="pre">2018_Gaz_ua_national</span></code>. Klicke mit der rechten Maustaste auf die Layer und wähle <span class="guilabel">Layer löschen</span>, um die Layer aus QGIS zu entfernen. Bei der Nachfrage <span class="guilabel">2 Layer entfernen?</span> wählen wir <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/825.png" class="align-center" src="../../_images/825.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p class="first">Wir werden jetzt den Layer der Verwaltungsbezirke zur Abstastung der Rasterdaten verwenden und für jeden Bezirk einen Mittelwert der Temperatur bestimmen. Wir gehen im QGIS Browser zur Datei <code class="docutils literal"><span class="pre">tl_2018_us_county.shp</span></code> und ziehen sie in den Arbeitsbereich.</p>
-</li>
+<li><p>Wir werden jetzt den Layer der Verwaltungsbezirke zur Abstastung der Rasterdaten verwenden und für jeden Bezirk einen Mittelwert der Temperatur bestimmen. Wir gehen im QGIS Browser zur Datei <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county.shp</span></code> und ziehen sie in den Arbeitsbereich.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/926.png" class="align-center" src="../../_images/926.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">Die meisten Verarbeitungsalgorithmen lesen den Eingabelayer ein und erzeugen einen neuen Ausgabelayer. Der Algorithmus <strong>Zonenstatistik</strong> arbeitet anders. Er verändert den Eingabelayer und fügt neue Attribute zu ihm hinzu. Daher ist es wichtig, den Eingabelayer vor der Verarbeitung zu entpacken. QGIS kann Layer zwar dirket innerhalb einer zip-Datei einlesen, der Layer kann aber dann nicht verändert werden. Der Verarbeitungsalgorithmus schlägt fehl, wenn der Eingabelayer nicht verändert werden kann.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>Die meisten Verarbeitungsalgorithmen lesen den Eingabelayer ein und erzeugen einen neuen Ausgabelayer. Der Algorithmus <strong>Zonenstatistik</strong> arbeitet anders. Er verändert den Eingabelayer und fügt neue Attribute zu ihm hinzu. Daher ist es wichtig, den Eingabelayer vor der Verarbeitung zu entpacken. QGIS kann Layer zwar dirket innerhalb einer zip-Datei einlesen, der Layer kann aber dann nicht verändert werden. Der Verarbeitungsalgorithmus schlägt fehl, wenn der Eingabelayer nicht verändert werden kann.</p>
 </div>
 <ol class="arabic simple" start="10">
-<li><p class="first">Der Layer <code class="docutils literal"><span class="pre">tl_2018_us_county</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Wir gehen zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p>
-</li>
+<li><p>Der Layer <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code> wird nun im <span class="guilabel">Layer</span> Bereich angezeigt. Wir gehen zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1024.png" class="align-center" src="../../_images/1024.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p class="first">Wir suchen den Algorithmus <span class="menuselection">Rasteranalyse ‣ Zonenstatistik</span> und klicken doppelt darauf, um ihn zu starten.</p>
-</li>
+<li><p>Wir suchen den Algorithmus <span class="menuselection">Rasteranalyse ‣ Zonenstatistik</span> und klicken doppelt darauf, um ihn zu starten.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1130.png" class="align-center" src="../../_images/1130.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p class="first">Wähle <code class="docutils literal"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> als <span class="guilabel">Rasterlayer</span> und <code class="docutils literal"><span class="pre">tl_2018_us_county</span></code> als <span class="guilabel">Zonenvektorlayer</span>. Gebe <code class="docutils literal"><span class="pre">tmax_</span></code> als <span class="guilabel">Ausgabespaltenpräfix</span> vor. Klicke auf <span class="guilabel">...</span> neben <span class="guilabel">Zu berechnende Statistik</span>.</p>
-</li>
+<li><p>Wähle <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> als <span class="guilabel">Rasterlayer</span> und <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code> als <span class="guilabel">Zonenvektorlayer</span>. Gebe <code class="docutils literal notranslate"><span class="pre">tmax_</span></code> als <span class="guilabel">Ausgabespaltenpräfix</span> vor. Klicke auf <span class="guilabel">…</span> neben <span class="guilabel">Zu berechnende Statistik</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1226.png" class="align-center" src="../../_images/1226.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p class="first">Wir wählen nur <code class="docutils literal"><span class="pre">Mittel</span></code> und klicken auf <span class="guilabel">OK</span>.</p>
-</li>
+<li><p>Wir wählen nur <code class="docutils literal notranslate"><span class="pre">Mittel</span></code> und klicken auf <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1325.png" class="align-center" src="../../_images/1325.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p class="first">Klicke zum Starten der Berechnung auf <span class="guilabel">Starte</span>. Die Verarbeitung des Algorithmus kann einige Minuten dauern. Klicke anschließend auf <span class="guilabel">Schließen</span>.</p>
-</li>
+<li><p>Klicke zum Starten der Berechnung auf <span class="guilabel">Starte</span>. Die Verarbeitung des Algorithmus kann einige Minuten dauern. Klicke anschließend auf <span class="guilabel">Schließen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1424.png" class="align-center" src="../../_images/1424.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p class="first">Wie vorher beschrieben erstellt der Algorithmus <strong>Zonenstatistik</strong> keinen neuen Layer. Er modifiziert statt dessen den Zonenvektorlayer. Klicke mit der rechten Maustaste auf den Layer <code class="docutils literal"><span class="pre">tl_2018_us_county</span></code> und wähle <span class="guilabel">Attributtabelle öffnen</span>.</p>
-</li>
+<li><p>Wie vorher beschrieben erstellt der Algorithmus <strong>Zonenstatistik</strong> keinen neuen Layer. Er modifiziert statt dessen den Zonenvektorlayer. Klicke mit der rechten Maustaste auf den Layer <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code> und wähle <span class="guilabel">Attributtabelle öffnen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1524.png" class="align-center" src="../../_images/1524.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p class="first">Wir sehen die neu hinzugefügte Attributspalte <code class="docutils literal"><span class="pre">tmax_mean</span></code> in der Tabelle. Sie enthält die mittlere Temperatur für jedes Polygon über dem Rasterlayer. Es gibt auch einige leere Werte. Sie entstehen für Polygone die außerhalb des Rasterlayers liegen (Alaska, Hawaii und Puerto Rico).</p>
-</li>
+<li><p>Wir sehen die neu hinzugefügte Attributspalte <code class="docutils literal notranslate"><span class="pre">tmax_mean</span></code> in der Tabelle. Sie enthält die mittlere Temperatur für jedes Polygon über dem Rasterlayer. Es gibt auch einige leere Werte. Sie entstehen für Polygone die außerhalb des Rasterlayers liegen (Alaska, Hawaii und Puerto Rico).</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1621.png" class="align-center" src="../../_images/1621.png" />
@@ -439,8 +408,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Zuletzt aktualisiert am Jan. 07, 2021.<br/>
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 erstellt.<br/>
     </p>
   </div>
 </footer>

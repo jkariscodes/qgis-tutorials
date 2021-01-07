@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh_TW">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>使用自訂的 Python 表達式函數 &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>使用自訂的 Python 表達式函數 &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="search" title="搜尋" href="../search.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -47,8 +34,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -59,7 +45,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html"><img src="../_static/logo.png">
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -258,68 +244,62 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="using-custom-python-expression-functions">
-<h1>使用自訂的 Python 表達式函數<a class="headerlink" href="#using-custom-python-expression-functions" title="Permalink to this headline">¶</a></h1>
+<h1>使用自訂的 Python 表達式函數<a class="headerlink" href="#using-custom-python-expression-functions" title="本標題的永久連結">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">警告</p>
-<p class="last">本教學已有新的版本，請前往 <a class="reference internal" href="3/custom_python_functions.html"><em>使用自訂的 Python 表達式函數 (QGIS3)</em></a>。</p>
+<p class="admonition-title">警告</p>
+<p>本教學已有新的版本，請前往 <a class="reference internal" href="3/custom_python_functions.html"><span class="doc">使用自訂的 Python 表達式函數 (QGIS3)</span></a>。</p>
 </div>
 <p>QGIS 表達式非常的強大，而且也使用在許多核心操作上，像是選取、計算影像值、樣式設定、標記等等。QGIS 也支援使用者自定義的表達式，只要使用一點點的 Python 程式，就可以設計自己的函數，然後把它安插到 QGIS 表達式的引擎中。</p>
 <div class="section" id="overview-of-the-task">
-<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
+<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="本標題的永久連結">¶</a></h2>
 <p>我們要定義一個函數，它可以找出地圖的 UTM 分區。然後我們要使用這個函數設計表達式，讓使用者滑鼠在圖徵上移動的時候，可以顯示出此處的 UTM 分區。</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
+<h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="本標題的永久連結">¶</a></h3>
 <ul class="simple">
-<li><p class="first">使用 <code class="docutils literal"><span class="pre">地圖提示（Map</span> <span class="pre">Tips）</span></code> 工具，在滑鼠游移在某圖徵上時顯示自訂的文字。</p>
-</li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">地圖提示（Map</span> <span class="pre">Tips）</span></code> 工具，在滑鼠游移在某圖徵上時顯示自訂的文字。</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>取得資料<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>取得資料<a class="headerlink" href="#get-the-data" title="本標題的永久連結">¶</a></h2>
 <p>我們要使用 Natural Earth 的 <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">人口居住地</a> 資料庫，請下載 <a href="#id1"><span class="problematic" id="id2">`簡化版 (欄位較少) 的資料庫&lt;http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip&gt;`_</span></a>。</p>
 <p>為了方便起見，你也可以直接用下面的連結下載：</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_populated_places_simple.zip">ne_10m_populated_places_simple.zip</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>操作流程<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
+<h2>操作流程<a class="headerlink" href="#procedure" title="本標題的永久連結">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">打開 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入圖層 ‣ 加入向量圖層</span>。</p>
-</li>
+<li><p>打開 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入圖層 ‣ 加入向量圖層</span>。</p></li>
 </ol>
 <img alt="../_images/1151.png" class="align-center" src="../_images/1151.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">選擇剛下載的 <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple.zip</span></code> 並按下 <span class="guilabel">確定</span>。</p>
-</li>
+<li><p>選擇剛下載的 <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.zip</span></code> 並按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
 <img alt="../_images/2105.png" class="align-center" src="../_images/2105.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">選擇 <span class="menuselection">檢視 ‣ 選取 ‣ 使用表示式選取...</span>。</p>
-</li>
+<li><p>選擇 <span class="menuselection">檢視 ‣ 選取 ‣ 使用表示式選取…</span>。</p></li>
 </ol>
 <img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">切換至 <span class="guilabel">函數編輯器</span> 分頁，這裡你可以撰寫用於在表示式引擎中執行的 PyQGIS 程式碼。</p>
-</li>
+<li><p>切換至 <span class="guilabel">函數編輯器</span> 分頁，這裡你可以撰寫用於在表示式引擎中執行的 PyQGIS 程式碼。</p></li>
 </ol>
 <img alt="../_images/439.png" class="align-center" src="../_images/439.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">由於 QGIS 中的自訂函數作用在圖徵層級，所以我們可以定義一個稱為 <code class="docutils literal"><span class="pre">GetUtmZone</span></code> 的函數，用來計算每個圖徵的 UTM 分區號碼。我們使用每個圖徵的中心經緯度座標來計算 UTM 分區號碼，並且會加上 &#8216;N&#8217; 或 &#8216;S&#8217; 來標明此區是位在北半球還是南半球。在編輯器中輸入以下程式碼，把檔案取名為 <code class="docutils literal"><span class="pre">utm_zones.py</span></code>，然後按下 <span class="guilabel">儲存檔案</span>。</p>
-</li>
+<li><p>由於 QGIS 中的自訂函數作用在圖徵層級，所以我們可以定義一個稱為 <code class="docutils literal notranslate"><span class="pre">GetUtmZone</span></code> 的函數，用來計算每個圖徵的 UTM 分區號碼。我們使用每個圖徵的中心經緯度座標來計算 UTM 分區號碼，並且會加上 『N』 或 『S』 來標明此區是位在北半球還是南半球。在編輯器中輸入以下程式碼，把檔案取名為 <code class="docutils literal notranslate"><span class="pre">utm_zones.py</span></code>，然後按下 <span class="guilabel">儲存檔案</span>。</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">UTM 是依照經度把全球投影成 1 到 60 區，每個 UTM 分區都是經度 6 度寬。這裡我們使用的是簡單的數學公式，依照經度的數值來尋找適當的 UTM 分區，所以請注意這個公式並不處理一些比較特殊的 UTM 分區。</p>
+<p class="admonition-title">備註</p>
+<p>UTM 是依照經度把全球投影成 1 到 60 區，每個 UTM 分區都是經度 6 度寬。這裡我們使用的是簡單的數學公式，依照經度的數值來尋找適當的 UTM 分區，所以請注意這個公式並不處理一些比較特殊的 UTM 分區。</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">qgis.gui</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nd">@qgsfunction</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">usesgeometry</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">GetUtmZone</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
     <span class="n">centroid</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
     <span class="n">longitude</span> <span class="o">=</span> <span class="n">centroid</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
@@ -336,59 +316,49 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </div>
 <img alt="../_images/539.png" class="align-center" src="../_images/539.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">按下 <span class="guilabel">執行腳本</span>後程式碼會被執行，<code class="docutils literal"><span class="pre">GetUtmZone</span></code> 函數會被註冊到表達式引擎中。這個步驟只須執行一次，當函數註冊完畢後，就會一直在表達式引擎中出現。</p>
-</li>
+<li><p>按下 <span class="guilabel">執行腳本</span>後程式碼會被執行，<code class="docutils literal notranslate"><span class="pre">GetUtmZone</span></code> 函數會被註冊到表達式引擎中。這個步驟只須執行一次，當函數註冊完畢後，就會一直在表達式引擎中出現。</p></li>
 </ol>
 <img alt="../_images/637.png" class="align-center" src="../_images/637.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">切換到 <span class="guilabel">表示式</span> 分頁，在 <span class="guilabel">Select by expression</span> 視窗中，可看到在 <span class="guilabel">函數列表</span> 的區塊中有個 <span class="guilabel">Custom</span> 群組，其中會出現一個新的函數 <code class="docutils literal"><span class="pre">GetUtmZone</span></code>，這代表我們現在可以像使用其他函數一樣使用這個函數了。在文字編輯器中輸入以下表達式，就可以選擇所有落在 <code class="docutils literal"><span class="pre">40N</span></code> 的 UTM 分區中的點。按下 <span class="guilabel">選取</span>。（譯按：隨著 QGIS 版本的不同，你可能會看到 <code class="docutils literal"><span class="pre">$GetUtmZone</span></code> 或 <code class="docutils literal"><span class="pre">GetUtmZone()</span></code>，但都是一樣的操作方法。）</p>
-</li>
+<li><p>切換到 <span class="guilabel">表示式</span> 分頁，在 <span class="guilabel">Select by expression</span> 視窗中，可看到在 <span class="guilabel">函數列表</span> 的區塊中有個 <span class="guilabel">Custom</span> 群組，其中會出現一個新的函數 <code class="docutils literal notranslate"><span class="pre">GetUtmZone</span></code>，這代表我們現在可以像使用其他函數一樣使用這個函數了。在文字編輯器中輸入以下表達式，就可以選擇所有落在 <code class="docutils literal notranslate"><span class="pre">40N</span></code> 的 UTM 分區中的點。按下 <span class="guilabel">選取</span>。（譯按：隨著 QGIS 版本的不同，你可能會看到 <code class="docutils literal notranslate"><span class="pre">$GetUtmZone</span></code> 或 <code class="docutils literal notranslate"><span class="pre">GetUtmZone()</span></code>，但都是一樣的操作方法。）</p></li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre><span></span>$GetUtmZone = &#39;40N&#39;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$GetUtmZone = &#39;40N&#39;
 </pre></div>
 </div>
 <img alt="../_images/737.png" class="align-center" src="../_images/737.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">回到 QGIS 主視窗，現在有許多點都被選取並標為黃色，這些就是符合我們給定的 UTM 分區表達式的點。</p>
-</li>
+<li><p>回到 QGIS 主視窗，現在有許多點都被選取並標為黃色，這些就是符合我們給定的 UTM 分區表達式的點。</p></li>
 </ol>
 <img alt="../_images/836.png" class="align-center" src="../_images/836.png" />
 <ol class="arabic simple" start="9">
-<li><p class="first">現在你已經知道我們要怎麼利用自訂表達式選取圖徵，接下來我們要使用同一個函數做另一件事。在 QGIS 中有個隱藏的神器稱為 <code class="docutils literal"><span class="pre">地圖提示</span></code> 工具，它會在你把滑鼠移到圖徵上時顯示使用者定義的文字。請在 <code class="docutils literal"><span class="pre">ne_10m_populated_places_simple</span></code> 圖層上按右鍵然後選擇 <span class="guilabel">屬性</span>。</p>
-</li>
+<li><p>現在你已經知道我們要怎麼利用自訂表達式選取圖徵，接下來我們要使用同一個函數做另一件事。在 QGIS 中有個隱藏的神器稱為 <code class="docutils literal notranslate"><span class="pre">地圖提示</span></code> 工具，它會在你把滑鼠移到圖徵上時顯示使用者定義的文字。請在 <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> 圖層上按右鍵然後選擇 <span class="guilabel">屬性</span>。</p></li>
 </ol>
 <img alt="../_images/937.png" class="align-center" src="../_images/937.png" />
 <ol class="arabic simple" start="10">
-<li><p class="first">切換至 <span class="guilabel">顯示</span> 分頁，然後選擇 <span class="guilabel">HTML</span>。在這裡你可以輸入任何你想在圖徵上出現的文字，不過更好的做法是我們可以利用圖層屬性值或是表達式來指定更有用的訊息。按下 <span class="guilabel">插入表達式</span> 鈕。</p>
-</li>
+<li><p>切換至 <span class="guilabel">顯示</span> 分頁，然後選擇 <span class="guilabel">HTML</span>。在這裡你可以輸入任何你想在圖徵上出現的文字，不過更好的做法是我們可以利用圖層屬性值或是表達式來指定更有用的訊息。按下 <span class="guilabel">插入表達式</span> 鈕。</p></li>
 </ol>
 <img alt="../_images/1035.png" class="align-center" src="../_images/1035.png" />
 <ol class="arabic simple" start="11">
-<li><p class="first">你會再次看到熟悉的表達式編輯器。我們要利用 <code class="docutils literal"><span class="pre">concat</span></code> 函數來連接 <code class="docutils literal"><span class="pre">name</span></code> 屬性和 GetUtmZone 函數的輸出字串，因此輸入以下的表達式後，按下 <span class="guilabel">確定</span>。</p>
-</li>
+<li><p>你會再次看到熟悉的表達式編輯器。我們要利用 <code class="docutils literal notranslate"><span class="pre">concat</span></code> 函數來連接 <code class="docutils literal notranslate"><span class="pre">name</span></code> 屬性和 GetUtmZone 函數的輸出字串，因此輸入以下的表達式後，按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre><span></span>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>concat(&quot;name&quot;, &#39; | UTM Zone: &#39;, $GetUtmZone)
 </pre></div>
 </div>
 <img alt="../_images/1152.png" class="align-center" src="../_images/1152.png" />
 <ol class="arabic simple" start="12">
-<li><p class="first">在 <span class="guilabel">顯示</span> 分頁中的文字訊息內就會看到我們剛剛輸入的表達式。按下 <span class="guilabel">確定</span>。</p>
-</li>
+<li><p>在 <span class="guilabel">顯示</span> 分頁中的文字訊息內就會看到我們剛剛輸入的表達式。按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
 <img alt="../_images/1236.png" class="align-center" src="../_images/1236.png" />
 <ol class="arabic simple" start="13">
-<li><p class="first">在測試之前，要先取消我們在前幾個步驟選取的點。選擇 <span class="menuselection">檢視 ‣ 選取 ‣ 取消所有圖層的圖徵選取</span>。</p>
-</li>
+<li><p>在測試之前，要先取消我們在前幾個步驟選取的點。選擇 <span class="menuselection">檢視 ‣ 選取 ‣ 取消所有圖層的圖徵選取</span>。</p></li>
 </ol>
 <img alt="../_images/1335.png" class="align-center" src="../_images/1335.png" />
 <ol class="arabic simple" start="14">
-<li><p class="first">選擇 <span class="menuselection">檢視 ‣ 地圖提示工具</span> 以啟動 <code class="docutils literal"><span class="pre">地圖提示</span></code> 功能。</p>
-</li>
+<li><p>選擇 <span class="menuselection">檢視 ‣ 地圖提示工具</span> 以啟動 <code class="docutils literal notranslate"><span class="pre">地圖提示</span></code> 功能。</p></li>
 </ol>
 <img alt="../_images/1434.png" class="align-center" src="../_images/1434.png" />
 <ol class="arabic simple" start="15">
-<li><p class="first">縮放至地圖的任一處然後把滑鼠游標放在任何圖徵上，你就會看到城市的名字和對應的 UTM  分區顯示在地圖提示之中。</p>
-</li>
+<li><p>縮放至地圖的任一處然後把滑鼠游標放在任何圖徵上，你就會看到城市的名字和對應的 UTM  分區顯示在地圖提示之中。</p></li>
 </ol>
 <img alt="../_images/1533.png" class="align-center" src="../_images/1533.png" />
 </div>
@@ -416,8 +386,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      最後更新於 1月 07, 2021。<br/>
+      使用 <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 創建。<br/>
     </p>
   </div>
 </footer>

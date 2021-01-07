@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="de">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3) &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="search" title="Suche" href="../../search.html" />
     <link rel="next" title="Georeferenzierung von Luftbildern (QGIS3)" href="advanced_georeferencing.html" />
     <link rel="prev" title="Working with Projections" href="../working_with_projections.html" />
 
@@ -37,6 +20,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -49,8 +36,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -61,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -90,7 +76,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Working with Terrain Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Working with WMS Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Working with Projections</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferenzierung von Luftbildern (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitizing Map Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Tabellen verbinden (QGIS3)</a></li>
@@ -268,21 +254,20 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="georeferencing-topo-sheets-and-scanned-maps-qgis3">
 <h1>Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
 <p>Die meisten GIS-Projekte erfordern das Georeferenzieren von Rasterdaten. <em>Georeferenzierung</em> ist der Prozess der Zuweisung von Koordinaten zu jedem Pixel eines Rasterdatensatzes. Oftmals werden die Koordinaten durch Feldarbeit, d.h. durch das Ermitteln der Koordinaten mit Hilfe eines GPS-Gerätes, für einige leicht in der Karte oder dem Bild zu identifizierende Objekte bestimmt. Manchmal findet man beim Digitalisieren auf der gescannten Karte Markierungen, die die Koordinaten anzeigen. Mit Hilfe dieser Markierungspunkte oder Passpunkte (Ground Control Points - GCP) kann das Bild entzerrt und passfähig zum gewählten Koordinatensystem gemacht werden. In dieser Anleitung werden wir die Konzepte, Strategien und Hilfsmittel in QGIS behandeln, um eine hoch genaue Georeferenzierung zu erreichen.</p>
-<p>Diese Anleitung beschriebt die Georeferenzierung mit Hilfe von Markierungen die auf der Karte oder dem Bild vorhanden sind (z.B. beschriftete Koordinatengitter). Wenn dein Bild solche Informationen nicht enthält, kannst du folgende Methode anwenden <a class="reference internal" href="advanced_georeferencing.html"><em>Georeferenzierung von Luftbildern (QGIS3)</em></a>.</p>
+<p>Diese Anleitung beschriebt die Georeferenzierung mit Hilfe von Markierungen die auf der Karte oder dem Bild vorhanden sind (z.B. beschriftete Koordinatengitter). Wenn dein Bild solche Informationen nicht enthält, kannst du folgende Methode anwenden <a class="reference internal" href="advanced_georeferencing.html"><span class="doc">Georeferenzierung von Luftbildern (QGIS3)</span></a>.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Wir werden eine gescannte Karte von Südindien aus dem Jahr 1870 nutzen und diese mit Hilfe von QGIS georeferenzieren.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Weitere Fähigkeiten, die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
-<li><p class="first">Wie man das geodätische Datum und das Koordinatensystem alter Karten bestimmt.</p>
-</li>
+<li><p>Wie man das geodätische Datum und das Koordinatensystem alter Karten bestimmt.</p></li>
 </ul>
 </div>
 </div>
@@ -295,98 +280,87 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </div>
 <div class="section" id="procedure">
 <h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
-<p>1.Die Georeferenzierung in QGIS erfolgt mit Hilfe des <strong>Georeferencer GDAL</strong> plugins. Dabei handelt es sich um ein Kernplugin, d.h. es ist bereits Teil der QGIS-Installation. Du musst es nur aktivieren. Gehe zu <span class="menuselection">Plugins ‣ Manage and Install Plugins</span> und aktiviere das <span class="guilabel">Georeferencer GDAL</span> plugin im <span class="guilabel">Installed</span> Bereich. Unter <a class="reference internal" href="../using_plugins.html"><em>Verwenden von Erweiterungen</em></a> findet man weitere Details zur Arbeit mit plugins.</p>
+<p>1.Die Georeferenzierung in QGIS erfolgt mit Hilfe des <strong>Georeferencer GDAL</strong> plugins. Dabei handelt es sich um ein Kernplugin, d.h. es ist bereits Teil der QGIS-Installation. Du musst es nur aktivieren. Gehe zu <span class="menuselection">Plugins ‣ Manage and Install Plugins</span> und aktiviere das <span class="guilabel">Georeferencer GDAL</span> plugin im <span class="guilabel">Installed</span> Bereich. Unter <a class="reference internal" href="../using_plugins.html"><span class="doc">Verwenden von Erweiterungen</span></a> findet man weitere Details zur Arbeit mit plugins.</p>
 <blockquote>
 <div><img alt="../../_images/149.png" class="align-center" src="../../_images/149.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p class="first">Das plugin wird im Raster Menü installiert. Klicke auf <span class="menuselection">Raster ‣ Georeferencer</span>, um das plugin zu öffnen.</p>
-</li>
+<li><p>Das plugin wird im Raster Menü installiert. Klicke auf <span class="menuselection">Raster ‣ Georeferencer</span>, um das plugin zu öffnen.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/229.png" class="align-center" src="../../_images/229.png" />
+<div><img alt="../../_images/228.png" class="align-center" src="../../_images/228.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p class="first">Das plugin-Fenster ist in 2 Bereiche geteilt. Im oberen Bereich wird das Bild angezeigt und im unteren Bereich werden die Passpunkte in einer Tabelle angezeigt.</p>
-</li>
+<li><p>Das plugin-Fenster ist in 2 Bereiche geteilt. Im oberen Bereich wird das Bild angezeigt und im unteren Bereich werden die Passpunkte in einer Tabelle angezeigt.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/320.png" class="align-center" src="../../_images/320.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p class="first">Jetzt werden wir unser JPG-Bild öffnen. Gehe zu <span class="menuselection">File ‣ Open Raster</span>. Navigiere zu dem heruntergeladenen Bild der gescannten Karte und klicke auf <span class="guilabel">Open</span>.</p>
-</li>
+<li><p>Jetzt werden wir unser JPG-Bild öffnen. Gehe zu <span class="menuselection">File ‣ Open Raster</span>. Navigiere zu dem heruntergeladenen Bild der gescannten Karte und klicke auf <span class="guilabel">Open</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/410.png" class="align-center" src="../../_images/410.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p class="first">Im folgenden Fenster muss das Koordinatenreferenzsystem (KBS) des Rasterdatensatzes angegeben werden. Unser Ausgangsbild ist ein reines JPG-Bild ohne Informationen bezüglich des Koordinatensystems. Wir klicken daher auf <span class="guilabel">Cancel</span>.</p>
-</li>
+<li><p>Im folgenden Fenster muss das Koordinatenreferenzsystem (KBS) des Rasterdatensatzes angegeben werden. Unser Ausgangsbild ist ein reines JPG-Bild ohne Informationen bezüglich des Koordinatensystems. Wir klicken daher auf <span class="guilabel">Cancel</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/511.png" class="align-center" src="../../_images/511.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p class="first">Wir sehen jetzt das Bild, das im oberen Teil des Fensters dargestellt wird. Du kannst die zoom/pan Knöpfe aus der Toolleiste nutzen, um mehr über die Karte zu erfahren.</p>
-</li>
+<li><p>Wir sehen jetzt das Bild, das im oberen Teil des Fensters dargestellt wird. Du kannst die zoom/pan Knöpfe aus der Toolleiste nutzen, um mehr über die Karte zu erfahren.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/611.png" class="align-center" src="../../_images/611.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p class="first">Als nächstes müssen wir Koordinaten für einige Punkte auf der Karte zuweisen. Beim genauen Hinsehen findet man ein beschriftetes Koordinatengitter auf der Karte. Es handelt sich dabei um Linien der Breiten- und Längengrade.</p>
-</li>
+<li><p>Als nächstes müssen wir Koordinaten für einige Punkte auf der Karte zuweisen. Beim genauen Hinsehen findet man ein beschriftetes Koordinatengitter auf der Karte. Es handelt sich dabei um Linien der Breiten- und Längengrade.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/711.png" class="align-center" src="../../_images/711.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p class="first">Bevor wir anfangen Passpunkte (GCP- Ground Control Points) zu setzen, müssen wir die Transformationseinstellungen festlegen. Gehe zu <span class="menuselection">Settings ‣ Transformation settings</span>.</p>
-</li>
+<li><p>Bevor wir anfangen Passpunkte (GCP- Ground Control Points) zu setzen, müssen wir die Transformationseinstellungen festlegen. Gehe zu <span class="menuselection">Settings ‣ Transformation settings</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/811.png" class="align-center" src="../../_images/811.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p class="first">Wähle in den <span class="guilabel">Transformation settings</span> dialog, choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal"><span class="pre">Polynomial</span> <span class="pre">2</span></code> aus. In der <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> findet man weitere Informationen über die verschiedenen Transformationstypen and deren Einsatz. Klicke auf den Knopf <span class="guilabel">Select CRS</span> neben <span class="guilabel">Target SRS</span>.</p>
-</li>
+<li><p>Wähle in den <span class="guilabel">Transformation settings</span> dialog, choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code> aus. In der <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> findet man weitere Informationen über die verschiedenen Transformationstypen and deren Einsatz. Klicke auf den Knopf <span class="guilabel">Select CRS</span> neben <span class="guilabel">Target SRS</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/911.png" class="align-center" src="../../_images/911.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p class="first">Wenn man eine gescannte Karte wie diese georeferenziert, kann die Information zum Koordinatensystem der Karte selbst entnommen werden. Wenn wir auf unsere Karte sehen, erkennen wir, dass die Koordinaten in Breiten- und Längengraden enthalten sind. Es ist kein geodätisches Datum auf der Karte verzeichnet, so dass wir hier eine Annahme treffen müssen. Da es sich um Indien handelt und die Karte ziemlich alt ist, wird wahrscheinlich das geodätische Datum Everest 1830 gut passen. Suche nach &#8220;everest&#8221; und wähle das Koordinatensystem mit der ältesten Angabe des geodätischen Datums Everest (EPSG:4042). Klicke auf <span class="guilabel">OK</span>.</p>
-</li>
+<li><p>Wenn man eine gescannte Karte wie diese georeferenziert, kann die Information zum Koordinatensystem der Karte selbst entnommen werden. Wenn wir auf unsere Karte sehen, erkennen wir, dass die Koordinaten in Breiten- und Längengraden enthalten sind. Es ist kein geodätisches Datum auf der Karte verzeichnet, so dass wir hier eine Annahme treffen müssen. Da es sich um Indien handelt und die Karte ziemlich alt ist, wird wahrscheinlich das geodätische Datum Everest 1830 gut passen. Suche nach „everest“ und wähle das Koordinatensystem mit der ältesten Angabe des geodätischen Datums Everest (EPSG:4042). Klicke auf <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1011.png" class="align-center" src="../../_images/1011.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
+<p class="admonition-title">Bemerkung</p>
 <p>Topographische Karten des nationalen indischen Vermessungsamtes zwischen 1960 und 2000 nutzten den Rotationsellipsoid Everest 1956 und das geographische Datum India_nepal. Wenn man Karten des indischen Vermssungsamtes georeferenziert, kann man in QGIS ein angepasstes Koordinatensystem mit den folgenden Parametern definieren. Die Definition beinhaltet die Parameter delta_x, delta_y und delta_z zur Transformation ins System WGS84. Weitere Informationen findet man unter <a class="reference external" href="https://deeppradhan.heliohost.org/gis/indian-grid/">Indian Grid System</a>.</p>
-<div class="last highlight-none"><div class="highlight"><pre><span></span>+proj=longlat +a=6377301.243 +b=6356100.2284 +towgs84=295,736,257,0,0,0,0 +no_defs
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+proj=longlat +a=6377301.243 +b=6356100.2284 +towgs84=295,736,257,0,0,0,0 +no_defs
 </pre></div>
 </div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">Die meisten Karten verwenden ein projiziertes KBS. Es kann sein, dass die Karte, die georeferenziert werden soll, ein projiziertes KBS verwendet, die Beschriftung an den Koordinatengittern aber im geographischen System (Länge/Breite) erfolgt. In einem solchem Fall kann man ein alternatives Vorgehen wählen, um Verzerrungen zu verringern. Man erstellt dazu ein Vektorgitter und transformieren es in das bekannte projizierte KBS. Man nutzt das Gitter dann als Referenz zur genauen Erfassung der Koordinaten. Weiter Einzelheiten findet man unter folgenden Seite: <a class="reference external" href="https://raisedbeaches.net/2018/02/01/georeferencing-in-qgis/">this page</a>.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>Die meisten Karten verwenden ein projiziertes KBS. Es kann sein, dass die Karte, die georeferenziert werden soll, ein projiziertes KBS verwendet, die Beschriftung an den Koordinatengittern aber im geographischen System (Länge/Breite) erfolgt. In einem solchem Fall kann man ein alternatives Vorgehen wählen, um Verzerrungen zu verringern. Man erstellt dazu ein Vektorgitter und transformieren es in das bekannte projizierte KBS. Man nutzt das Gitter dann als Referenz zur genauen Erfassung der Koordinaten. Weiter Einzelheiten findet man unter folgenden Seite: <a class="reference external" href="https://raisedbeaches.net/2018/02/01/georeferencing-in-qgis/">this page</a>.</p>
 </div>
 <ol class="arabic simple" start="11">
-<li><p class="first">Benenne das Ausgaberaster mit <code class="docutils literal"><span class="pre">1870_southern_india_modified.tif</span></code>. Wähle <code class="docutils literal"><span class="pre">LZW</span></code> als <span class="guilabel">Compression</span>. Stelle sicher, dass die <span class="guilabel">Load in QGIS when done</span> Option aktiviert ist. Klicke <span class="guilabel">OK</span>.</p>
-</li>
+<li><p>Benenne das Ausgaberaster mit <code class="docutils literal notranslate"><span class="pre">1870_southern_india_modified.tif</span></code>. Wähle <code class="docutils literal notranslate"><span class="pre">LZW</span></code> als <span class="guilabel">Compression</span>. Stelle sicher, dass die <span class="guilabel">Load in QGIS when done</span> Option aktiviert ist. Klicke <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1114.png" class="align-center" src="../../_images/1114.png" />
+<div><img alt="../../_images/1115.png" class="align-center" src="../../_images/1115.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">Unkomprimierte GeoTIFF Dateien können sehr viel Platz auf dem Datenträger belegen. Daher ist es immer sinnvoll, sie zu komprimieren. Weiter Informationen über die verschiedenen Möglichkeiten der Kompression von TIFF-Dateien (LZW, PACKBITS oder DEFLATE) findet man unter <a class="reference external" href="https://www.accusoft.com/faqs/differences-compressions-used-tiff-files/">this article</a>.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>Unkomprimierte GeoTIFF Dateien können sehr viel Platz auf dem Datenträger belegen. Daher ist es immer sinnvoll, sie zu komprimieren. Weiter Informationen über die verschiedenen Möglichkeiten der Kompression von TIFF-Dateien (LZW, PACKBITS oder DEFLATE) findet man unter <a class="reference external" href="https://www.accusoft.com/faqs/differences-compressions-used-tiff-files/">this article</a>.</p>
 </div>
 <ol class="arabic simple" start="12">
-<li><p class="first">Jetzt können wir beginnen, Passpunkte zu erzeugen (Ground Control Points - GCP). Die Schnittpunkte der Koordinatengitterlinien werden uns in diesem Fall als <em>Geländedaten</em> dienen. Da die Gitterlinien beschriftet sind, können wir daraus die X und Y Koordinaten der Schnittpunkte ableiten. Klicke auf <span class="guilabel">Hinzufügen Point</span>.</p>
-</li>
+<li><p>Jetzt können wir beginnen, Passpunkte zu erzeugen (Ground Control Points - GCP). Die Schnittpunkte der Koordinatengitterlinien werden uns in diesem Fall als <em>Geländedaten</em> dienen. Da die Gitterlinien beschriftet sind, können wir daraus die X und Y Koordinaten der Schnittpunkte ableiten. Klicke auf <span class="guilabel">Hinzufügen Point</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1212.png" class="align-center" src="../../_images/1212.png" />
@@ -396,43 +370,38 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div><img alt="../../_images/1311.png" class="align-center" src="../../_images/1311.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p class="first">Du wirst bemerken, dass die Passpunkttabelle jetzt eine Zeile mit den Details des ersten Passpunktes enthält.</p>
-</li>
+<li><p>Du wirst bemerken, dass die Passpunkttabelle jetzt eine Zeile mit den Details des ersten Passpunktes enthält.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1410.png" class="align-center" src="../../_images/1410.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p class="first">Füge auf diese Weise weitere Paspunkte hinzu, die im gesamten Bild verteilt sind. Je mehr Punkte du erstellst, desto genauer wird das Bild auf das Zielkoodinatensystem übertragen. Die <code class="docutils literal"><span class="pre">Polynomial</span> <span class="pre">2</span></code> Transformation benötigt mindestens 6 Passpunkte.</p>
-</li>
+<li><p>Füge auf diese Weise weitere Paspunkte hinzu, die im gesamten Bild verteilt sind. Je mehr Punkte du erstellst, desto genauer wird das Bild auf das Zielkoodinatensystem übertragen. Die <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code> Transformation benötigt mindestens 6 Passpunkte.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/159.png" class="align-center" src="../../_images/159.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p class="first">Nachdem wir die für die Transformation erforderliche Anzahl an Punkten erfasst haben, sehen wir, dass zu den Passpunkten jetzt &#8220;dX&#8221;, &#8220;dY&#8221; und &#8220;Rest&#8221; Fehlerwerte angezeigt werden. Wenn ein bestimmter Passpunkt besonders hohe Fehlerwerte aufweist, ist das in der Regel ein Hinweis auf Eingabefehler der Koordinatenwerte. In diesem Fall kann man diesen Passpunkt löschen und ihn anschließend neu erfassen. Alternativ kann man die Koordinatenwerte auch in der <span class="guilabel">GCP Table</span> durch Klicken auf das Wertefeld in den Spalten <span class="guilabel">Dest. X</span> oder <span class="guilabel">Dest. Y</span>. Wenn du mit der Erfassung der Passpunkte zufrieden bist, gehe zu <span class="menuselection">File ‣ Start georeferencing</span>. Das Bild wird nun mit Hilfe der Passpunkte entzerrt.</p>
-</li>
+<li><p>Nachdem wir die für die Transformation erforderliche Anzahl an Punkten erfasst haben, sehen wir, dass zu den Passpunkten jetzt „dX“, „dY“ und „Rest“ Fehlerwerte angezeigt werden. Wenn ein bestimmter Passpunkt besonders hohe Fehlerwerte aufweist, ist das in der Regel ein Hinweis auf Eingabefehler der Koordinatenwerte. In diesem Fall kann man diesen Passpunkt löschen und ihn anschließend neu erfassen. Alternativ kann man die Koordinatenwerte auch in der <span class="guilabel">GCP Table</span> durch Klicken auf das Wertefeld in den Spalten <span class="guilabel">Dest. X</span> oder <span class="guilabel">Dest. Y</span>. Wenn du mit der Erfassung der Passpunkte zufrieden bist, gehe zu <span class="menuselection">File ‣ Start georeferencing</span>. Das Bild wird nun mit Hilfe der Passpunkte entzerrt.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/168.png" class="align-center" src="../../_images/168.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p class="first">Nachdem der Prozess abschlossen ist, wird der georeferenzierte Layer in QGIS geladen. Die Georeferenzierung ist damit abgeschlossen.</p>
-</li>
+<li><p>Nachdem der Prozess abschlossen ist, wird der georeferenzierte Layer in QGIS geladen. Die Georeferenzierung ist damit abgeschlossen.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/179.png" class="align-center" src="../../_images/179.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">Die Passpunkte werden auch im QGIS Hauptarbeitsbereich angezeigt. Wenn du sie entfernen möchstest, gehe zum Fenster <span class="guilabel">Georeferencer</span> und wähle <span class="menuselection">File ‣ Reset Georeferencer</span>.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>Die Passpunkte werden auch im QGIS Hauptarbeitsbereich angezeigt. Wenn du sie entfernen möchstest, gehe zum Fenster <span class="guilabel">Georeferencer</span> und wähle <span class="menuselection">File ‣ Reset Georeferencer</span>.</p>
 </div>
 <ol class="arabic simple" start="18">
-<li><p class="first">Es ist sinnvoll, das Ergebnis zu überprüfen. Wie können wir beurteilen, ob die Georeferenzierung genau war? In diesem Fall können wie die Landesgrenze als shape-Datei von einer vertrauenswürdigen Quelle wie z.B. Natural Earth dataset herunterladen und sie als Vergleich heranziehen. Du wirst bemerken, dass die Grenze gut passt. Es gibt einige Abweichungen, die weiter verringert werden können indem man mehr Passpunkte erzeugt, die Transforamtionsparameter ändert oder ein anderes geodätisches Datum verwendet.</p>
-</li>
+<li><p>Es ist sinnvoll, das Ergebnis zu überprüfen. Wie können wir beurteilen, ob die Georeferenzierung genau war? In diesem Fall können wie die Landesgrenze als shape-Datei von einer vertrauenswürdigen Quelle wie z.B. Natural Earth dataset herunterladen und sie als Vergleich heranziehen. Du wirst bemerken, dass die Grenze gut passt. Es gibt einige Abweichungen, die weiter verringert werden können indem man mehr Passpunkte erzeugt, die Transforamtionsparameter ändert oder ein anderes geodätisches Datum verwendet.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
+<div><img alt="../../_images/187.png" class="align-center" src="../../_images/187.png" />
 </div></blockquote>
 </div>
 </div>
@@ -459,8 +428,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Zuletzt aktualisiert am Jan. 07, 2021.<br/>
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 erstellt.<br/>
     </p>
   </div>
 </footer>

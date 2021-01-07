@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="it">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Trovare i poligoni confinanti in un layer &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trovare i poligoni confinanti in un layer &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="search" title="Cerca" href="../search.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -47,8 +34,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -59,7 +45,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html"><img src="../_static/logo.png">
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -121,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Usare i Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Cercare e scaricare i dati di OpenStreetMap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Risorse disponibili per l&#8217;apprendimento di QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Risorse disponibili per l’apprendimento di QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Fonti dei dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
 </ul>
@@ -258,16 +244,16 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="find-neighbor-polygons-in-a-layer">
 <h1>Trovare i poligoni confinanti in un layer<a class="headerlink" href="#find-neighbor-polygons-in-a-layer" title="Link a questa intestazione">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Nota</p>
-<p class="last">If you are using QGIS3, there is a simpler and better way to do this analysis using the aggregate function. See my post <a class="reference external" href="https://spatialthoughts.com/2019/05/23/neighbor-polygons-aggregate-qgis/">Find Neighbor Polygons using Summary Aggregate Function in QGIS</a></p>
+<p class="admonition-title">Nota</p>
+<p>If you are using QGIS3, there is a simpler and better way to do this analysis using the aggregate function. See my post <a class="reference external" href="https://spatialthoughts.com/2019/05/23/neighbor-polygons-aggregate-qgis/">Find Neighbor Polygons using Summary Aggregate Function in QGIS</a></p>
 </div>
-<p>Si danno casi in cui avete bisogno di individuare tutti i poligoni confinanti con ciascuno dei poligoni presenti in un layer. Con un piccolo script in Python possiamo ottenere questo e molto d&#8217;altro in QGIS. Di seguito viene fornito l&#8217;esempio di uno script che potete usare per trovare tutti i poligoni che confinano con ognuno dei poligoni presenti in un layer e che inoltre vi permette di aggiungerli come nuove colonne nella tabella degli attributi. Come ulteriore premio, lo script vi permette anche di aggiungere un attributo a vostra scelta appartenente ai poligoni confinanti.</p>
+<p>Si danno casi in cui avete bisogno di individuare tutti i poligoni confinanti con ciascuno dei poligoni presenti in un layer. Con un piccolo script in Python possiamo ottenere questo e molto d’altro in QGIS. Di seguito viene fornito l’esempio di uno script che potete usare per trovare tutti i poligoni che confinano con ognuno dei poligoni presenti in un layer e che inoltre vi permette di aggiungerli come nuove colonne nella tabella degli attributi. Come ulteriore premio, lo script vi permette anche di aggiungere un attributo a vostra scelta appartenente ai poligoni confinanti.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Descrizione del compito<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
 <p>Per fornire una dimostrazione di come lavorano gli script useremo un layer poligonale dei paesi e troveremo i paesi confinanti. Intendiamo anche calcolare la popolazione totale dei paesi vicini.</p>
@@ -276,56 +262,48 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <h2>Ottenere i dati necessari<a class="headerlink" href="#get-the-data" title="Link a questa intestazione">¶</a></h2>
 <p>Dai dataset di Natural Earth useremo lo shapefile <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - Countries</a></p>
 <p>Scarichiamo il file <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - countries shapefile.</a>.</p>
-<p>Fonte Dati <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>Fonte Dati <a class="reference internal" href="credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
 </div>
 <div class="section" id="get-the-script">
 <h2>Scaricare lo script<a class="headerlink" href="#get-the-script" title="Link a questa intestazione">¶</a></h2>
-<p>Scaricate il <a class="reference download internal" href="../_downloads/neighbors.py" download=""><code class="xref download docutils literal"><span class="pre">neighbors.py</span> <span class="pre">script</span></code></a> e salvatelo sul vostro supporto di memoria di massa (hard dick, pen drive etc.).</p>
+<p>Scaricate il <a class="reference download internal" download="" href="../_downloads/4cea2e81c7cbba6c6a79b31dd0eb3c2a/neighbors.py"><code class="xref download docutils literal notranslate"><span class="pre">neighbors.py</span> <span class="pre">script</span></code></a> e salvatelo sul vostro supporto di memoria di massa (hard dick, pen drive etc.).</p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedimento<a class="headerlink" href="#procedure" title="Link a questa intestazione">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">Caricate lo shapefile <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> layer andando su <span class="menuselection">Layer ‣ Aggiungi Vettore</span>.</p>
-</li>
+<li><p>Caricate lo shapefile <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> layer andando su <span class="menuselection">Layer ‣ Aggiungi Vettore</span>.</p></li>
 </ol>
 <img alt="../_images/1157.png" class="align-center" src="../_images/1157.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">Lo script adotta due campi per realizzare la propria azione. Un campo nome e un campo che noi abbiamo deciso di aggiungere. Usate lo strumento identifica elemento per fare click su una qualsiasi delle geometrie e quindi esaminare gli attributi. In questo caso il campo nome è NAME e noi vogliamo aggiungere la somma della popolazione stimata nei paesi confinanti con il campo POP_EST.</p>
-</li>
+<li><p>Lo script adotta due campi per realizzare la propria azione. Un campo nome e un campo che noi abbiamo deciso di aggiungere. Usate lo strumento identifica elemento per fare click su una qualsiasi delle geometrie e quindi esaminare gli attributi. In questo caso il campo nome è NAME e noi vogliamo aggiungere la somma della popolazione stimata nei paesi confinanti con il campo POP_EST.</p></li>
 </ol>
 <img alt="../_images/2108.png" class="align-center" src="../_images/2108.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">Andate su <span class="menuselection">Plugins ‣ Console python</span>.</p>
-</li>
+<li><p>Andate su <span class="menuselection">Plugins ‣ Console python</span>.</p></li>
 </ol>
 <img alt="../_images/362.png" class="align-center" src="../_images/362.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">nella finestra <span class="guilabel">Console Python</span> fate click sul pulsante <span class="guilabel">Mostra Editor</span>.</p>
-</li>
+<li><p>nella finestra <span class="guilabel">Console Python</span> fate click sul pulsante <span class="guilabel">Mostra Editor</span>.</p></li>
 </ol>
 <img alt="../_images/442.png" class="align-center" src="../_images/442.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">Nel pannello  <span class="guilabel">Editor</span>, fate click sul pulsante <span class="guilabel">Apri file</span>  e individuate lo script he avete scaricato poco fa e che si chiama <a href="#id1"><span class="problematic" id="id2">``</span></a>neighbors.py` fate click su <span class="guilabel">Apri</span>.</p>
-</li>
+<li><p>Nel pannello  <span class="guilabel">Editor</span>, fate click sul pulsante <span class="guilabel">Apri file</span>  e individuate lo script he avete scaricato poco fa e che si chiama <a href="#id1"><span class="problematic" id="id2">``</span></a>neighbors.py` fate click su <span class="guilabel">Apri</span>.</p></li>
 </ol>
 <img alt="../_images/542.png" class="align-center" src="../_images/542.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">Una volta che lo script è stato caricato, potreste decidere di cambiare le intestazioni del <code class="docutils literal"><span class="pre">_NAME_FIELD</span></code>  e quelle del <code class="docutils literal"><span class="pre">_SUM_FIELD</span></code>  in modo che corrispondano con con quelle presenti sul vostro layer. Ma se state lavorando sul <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> potete lasciare le cose esattamente come sono. Fate click sul pulsante <span class="guilabel">Salva</span>  all&#8217;interno dell&#8217;<span class="guilabel">Editor</span> se effettuate dei cambiamenti. Adesso fate click sul pulsante <span class="guilabel">Esegui script</span> per eseguire lo script.</p>
-</li>
+<li><p>Una volta che lo script è stato caricato, potreste decidere di cambiare le intestazioni del <code class="docutils literal notranslate"><span class="pre">_NAME_FIELD</span></code>  e quelle del <code class="docutils literal notranslate"><span class="pre">_SUM_FIELD</span></code>  in modo che corrispondano con con quelle presenti sul vostro layer. Ma se state lavorando sul <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> potete lasciare le cose esattamente come sono. Fate click sul pulsante <span class="guilabel">Salva</span>  all’interno dell”<span class="guilabel">Editor</span> se effettuate dei cambiamenti. Adesso fate click sul pulsante <span class="guilabel">Esegui script</span> per eseguire lo script.</p></li>
 </ol>
 <img alt="../_images/640.png" class="align-center" src="../_images/640.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">Una volta che lo script termina il suo lavoro, fate click col tasto destro sul layer <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries</span></code> e selezionate <span class="guilabel">Apri tabella degli attributi</span>.</p>
-</li>
+<li><p>Una volta che lo script termina il suo lavoro, fate click col tasto destro sul layer <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> e selezionate <span class="guilabel">Apri tabella degli attributi</span>.</p></li>
 </ol>
 <img alt="../_images/740.png" class="align-center" src="../_images/740.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">Potrete notare 2 nuovi attribiuti chiamati <code class="docutils literal"><span class="pre">NEIGHBORS</span></code> e <code class="docutils literal"><span class="pre">SUM</span></code>. Entrambe le colonne sono state aggiunte dallo script.</p>
-</li>
+<li><p>Potrete notare 2 nuovi attribiuti chiamati <code class="docutils literal notranslate"><span class="pre">NEIGHBORS</span></code> e <code class="docutils literal notranslate"><span class="pre">SUM</span></code>. Entrambe le colonne sono state aggiunte dallo script.</p></li>
 </ol>
 <img alt="../_images/839.png" class="align-center" src="../_images/839.png" />
 <p>Di seguito avete lo script completo a disposizione. Siete liberi di modificarlo per adattarlo alle vostre esigenze.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
 <span class="c1"># Copyright 2014 Ujaval Gandhi</span>
 <span class="c1">#</span>
 <span class="c1">#This program is free software; you can redistribute it and/or</span>
@@ -378,7 +356,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 
 <span class="c1"># Loop through all features and find features that touch each feature</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s1">&#39;Working on </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="p">[</span><span class="n">_NAME_FIELD</span><span class="p">]</span>
+    <span class="nb">print</span> <span class="s1">&#39;Working on </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="p">[</span><span class="n">_NAME_FIELD</span><span class="p">]</span>
     <span class="n">geom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
     <span class="c1"># Find all features that intersect the bounding box of the current feature.</span>
     <span class="c1"># We use spatial index to find the features intersecting the bounding box</span>
@@ -405,7 +383,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     <span class="n">layer</span><span class="o">.</span><span class="n">updateFeature</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="n">layer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
-<span class="k">print</span> <span class="s1">&#39;Processing complete.&#39;</span>
+<span class="nb">print</span> <span class="s1">&#39;Processing complete.&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -433,8 +411,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Ultimo aggiornamento gen 07, 2021.<br/>
+      Creato con <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
 </footer>

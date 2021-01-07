@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="de">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Georeferenzierung von Luftbildern (QGIS3) &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Georeferenzierung von Luftbildern (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="search" title="Suche" href="../../search.html" />
     <link rel="next" title="Digitizing Map Data" href="../digitizing_basics.html" />
     <link rel="prev" title="Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)" href="georeferencing_basics.html" />
 
@@ -37,6 +20,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -49,8 +36,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -61,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -91,7 +77,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Working with WMS Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">Working with Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Georeferenzierung von Luftbildern (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Georeferenzierung von Luftbildern (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitizing Map Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Tabellen verbinden (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Räumliche Verbindungen erstellen (QGIS3)</a></li>
@@ -268,171 +254,150 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="georeferencing-aerial-imagery-qgis3">
 <h1>Georeferenzierung von Luftbildern (QGIS3)<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Im Tutorial <a class="reference internal" href="georeferencing_basics.html"><em>Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)</em></a> haben wir den grundsätzlichen Prozess der Georeferenzierung in QGIS betrachtet. Bei der verwendeten Methode wurden die Koordinaten von der gescannten Karte abgelesen und per Hand als Kontrollpunkte eingetragen. Oftmals sind auf der zu referenzierenden Karte keine Koordinaten vorhanden oder man möchte ein Bild georeferenzieren. In diesen Fällen kann eine andere bereits georeferenzierte Datenquelle als Unterstützung herangezogen werden. In diesem Tutorial lernen wir, wie man existierende frei verfügbare Datensätze bei der Georeferenzierung nutzen kann.</p>
+<p>Im Tutorial <a class="reference internal" href="georeferencing_basics.html"><span class="doc">Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)</span></a> haben wir den grundsätzlichen Prozess der Georeferenzierung in QGIS betrachtet. Bei der verwendeten Methode wurden die Koordinaten von der gescannten Karte abgelesen und per Hand als Kontrollpunkte eingetragen. Oftmals sind auf der zu referenzierenden Karte keine Koordinaten vorhanden oder man möchte ein Bild georeferenzieren. In diesen Fällen kann eine andere bereits georeferenzierte Datenquelle als Unterstützung herangezogen werden. In diesem Tutorial lernen wir, wie man existierende frei verfügbare Datensätze bei der Georeferenzierung nutzen kann.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Wir werden hoch aufgelöste Ballon-Luftbilder georeferenzieren. Dabei nutzen wir Referenzkoordinaten aus OpenStreetMap.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Weitere Fähigkeiten, die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
-<li><p class="first">Herunterladen frei zugänglicher hochauflösender Bilddaten.</p>
-</li>
-<li><p class="first">XYZ-Kachellayer als Hintergrundkarte verwenden.</p>
-</li>
-<li><p class="first">Benutzen des OSM Place Search plugins in QGIS.</p>
-</li>
-<li><p class="first">Festlegen eines benutzerdefinierten no-data-Wertes für einen Layer.</p>
-</li>
+<li><p>Herunterladen frei zugänglicher hochauflösender Bilddaten.</p></li>
+<li><p>XYZ-Kachellayer als Hintergrundkarte verwenden.</p></li>
+<li><p>Benutzen des OSM Place Search plugins in QGIS.</p></li>
+<li><p>Festlegen eines benutzerdefinierten no-data-Wertes für einen Layer.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
 <p>In diesem Tutorial werden wir Drachen- oder Ballon-Luftbildaufnahmen nutzen. Die Aufnahmen werden hier gesammelt: <a class="reference external" href="http://publiclaboratory.org/archive">The Public Laboratory</a>. Man findet hier auch georeferenzierte Aufnahmen. Wir werden aber die nicht georeferenzierten Aufnahmen im JPG-Format herunterladen und den Prozess der Georeferenzierung in QGIS durchgehen.</p>
-<p>Lade folgendes JPG-Bild herunter: <a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">Washington Square Park, New York</a>. Du kannst mit der rechten Maustaste auf den link klicken und auswählen:guilabel:<cite>Save link as...</cite>.</p>
+<p>Lade folgendes JPG-Bild herunter: <a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">Washington Square Park, New York</a>. Du kannst mit der rechten Maustaste auf den link klicken und auswählen:guilabel:<cite>Save link as…</cite>.</p>
 <p>Der Einfachheit halber kannst du auch eine Kopie des Datensatzes unter folgendem link herunterladen:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">Wir nutzen eine Hintergrundkarte von OpenStreetMap, um Koordinaten zu erfassen. QGIS3 unterstützt von Hause aus Kachellayer. Kachellayer werden auch als &#8220;XYZ-Layer&#8221; bezeichnet. Die Layer setzen sich aus einzelnen Kacheln zusammen, die nach Zoomstufe (Z) in einem X,Y-Raster angeordnet werden. Du findest den <code class="docutils literal"><span class="pre">OpenStreetMap</span></code> Layer unter:guilabel:<cite>XYZ Tiles</cite> im <span class="guilabel">Browser Panel</span>. Ziehe den Layer in die Hauptarbeitsfläche. Nachdem der Layer geladen ist, achte auf das unten rechts angezeigte Koordinatensystem (Coordinate Reference System - CRS): <code class="docutils literal"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>. Das ist wichtig, da wir die Koordinaten beim Georeferenzieren in diesem Koordinatensystem vom geladenen Layer ableiten werden.</p>
-</li>
+<li><p>Wir nutzen eine Hintergrundkarte von OpenStreetMap, um Koordinaten zu erfassen. QGIS3 unterstützt von Hause aus Kachellayer. Kachellayer werden auch als „XYZ-Layer“ bezeichnet. Die Layer setzen sich aus einzelnen Kacheln zusammen, die nach Zoomstufe (Z) in einem X,Y-Raster angeordnet werden. Du findest den <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> Layer unter:guilabel:<cite>XYZ Tiles</cite> im <span class="guilabel">Browser Panel</span>. Ziehe den Layer in die Hauptarbeitsfläche. Nachdem der Layer geladen ist, achte auf das unten rechts angezeigte Koordinatensystem (Coordinate Reference System - CRS): <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>. Das ist wichtig, da wir die Koordinaten beim Georeferenzieren in diesem Koordinatensystem vom geladenen Layer ableiten werden.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">Hier <a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">this page</a> findest du mehr Details zu &#8220;XYZ-Layern&#8221; und wie man weitere Hintergrundkarten in QGIS hinzufügt.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>Hier <a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">this page</a> findest du mehr Details zu „XYZ-Layern“ und wie man weitere Hintergrundkarten in QGIS hinzufügt.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p class="first">Das Bild, dass wir georeferenzieren ist vom <code class="docutils literal"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code>. Du kannst mit scrollen und zoomen in der Karte versuchen, den Park zu finden. Das ist allerdings mühsam und unpraktisch. Ein einfachere Möglichkeit ist, dass OpenStreetMap (OSM) &#8220;Place Search&#8221; plugin zum Suchen der exakten Position zu verweden. Installiere das <code class="docutils literal"><span class="pre">OSM</span> <span class="pre">Place</span> <span class="pre">Search</span></code> plugin von:menuselection:<cite>Plugins &#8211;&gt; Manage and install plugins &#8211;&gt; All</cite>. Wenn du das plugin nicht in den Suchergebnissen findest, stelle sicher, dass du folgende Einstellung in QGIS gemacht hast:guilabel:<cite>Also show experimental plugins</cite> unter:guilabel:<cite>Settings</cite>. Weitere Informationen zur Benutzung von plugins in QGIS findet man unter:doc:<cite>../using_plugins</cite>.</p>
-</li>
+<li><p>Das Bild, dass wir georeferenzieren ist vom <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code>. Du kannst mit scrollen und zoomen in der Karte versuchen, den Park zu finden. Das ist allerdings mühsam und unpraktisch. Ein einfachere Möglichkeit ist, dass OpenStreetMap (OSM) „Place Search“ plugin zum Suchen der exakten Position zu verweden. Installiere das <code class="docutils literal notranslate"><span class="pre">OSM</span> <span class="pre">Place</span> <span class="pre">Search</span></code> plugin von:menuselection:<cite>Plugins –&gt; Manage and install plugins –&gt; All</cite>. Wenn du das plugin nicht in den Suchergebnissen findest, stelle sicher, dass du folgende Einstellung in QGIS gemacht hast:guilabel:<cite>Also show experimental plugins</cite> unter:guilabel:<cite>Settings</cite>. Weitere Informationen zur Benutzung von plugins in QGIS findet man unter:doc:<cite>../using_plugins</cite>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p class="first">Nachdem das plugin installiert wurde, sieht man einen neuen Arbeitsbereich:guilabel:<cite>OSM Place Search...</cite>. Suche nach <code class="docutils literal"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park</span></code> im Feld:guilabel:<cite>Name contains..</cite> box and click <span class="guilabel">-&gt;</span>. Du zum Namen passenden Orte erscheinen dann im Ergebnisbereich. Suche den richtigen Ort aus und klicke den:guilabel:<cite>Zoom</cite> Knopf.</p>
-</li>
+<li><p>Nachdem das plugin installiert wurde, sieht man einen neuen Arbeitsbereich:guilabel:<cite>OSM Place Search…</cite>. Suche nach <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park</span></code> im Feld:guilabel:<cite>Name contains..</cite> box and click <span class="guilabel">-&gt;</span>. Du zum Namen passenden Orte erscheinen dann im Ergebnisbereich. Suche den richtigen Ort aus und klicke den:guilabel:<cite>Zoom</cite> Knopf.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/3.png" class="align-center" src="../../_images/3.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p class="first">Wir sehen die bekannte Karte, die die Orientierungspunkte enthält, die wir aus dem JPG-Bild kennen. Du kannst den:guilabel:<cite>OSM Place Search</cite> Bereich nun schließen. Wenn du ihn wieder benötigst, kannst du ihn unter <span class="menuselection">View ‣ Panels ‣ OSM Place Search</span> erneut öffnen.</p>
-</li>
+<li><p>Wir sehen die bekannte Karte, die die Orientierungspunkte enthält, die wir aus dem JPG-Bild kennen. Du kannst den:guilabel:<cite>OSM Place Search</cite> Bereich nun schließen. Wenn du ihn wieder benötigst, kannst du ihn unter <span class="menuselection">View ‣ Panels ‣ OSM Place Search</span> erneut öffnen.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/4.png" class="align-center" src="../../_images/4.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p class="first">Jetzt ist an der Zeit, mit der Georeferenzierung zu beginnen. Starte die <strong>Georeferencer</strong> mit <span class="menuselection">Raster ‣ Georeferencer ‣ Georeferencer</span>. Wenn du das Menü nicht siehst, muss du das <span class="guilabel">Georeferencer GDAL</span> plugin mit <span class="menuselection">Plugins ‣ Manage and install Plugins ‣ Installed</span> aktivieren.</p>
-</li>
+<li><p>Jetzt ist an der Zeit, mit der Georeferenzierung zu beginnen. Starte die <strong>Georeferencer</strong> mit <span class="menuselection">Raster ‣ Georeferencer ‣ Georeferencer</span>. Wenn du das Menü nicht siehst, muss du das <span class="guilabel">Georeferencer GDAL</span> plugin mit <span class="menuselection">Plugins ‣ Manage and install Plugins ‣ Installed</span> aktivieren.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/5.png" class="align-center" src="../../_images/5.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p class="first">Gehen im Fenster <span class="guilabel">Georeferencer</span> zu <span class="menuselection">File ‣ Open Raster</span>. Gehe zum heruntergeladenen JPG-Bild und klicke <span class="guilabel">Open</span>.</p>
-</li>
+<li><p>Gehen im Fenster <span class="guilabel">Georeferencer</span> zu <span class="menuselection">File ‣ Open Raster</span>. Gehe zum heruntergeladenen JPG-Bild und klicke <span class="guilabel">Open</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/6.png" class="align-center" src="../../_images/6.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p class="first">Im folgenden Fenster muss das Koordinatensystem (coordinate reference system - CRS) des Rasterdatensatzes angegeben werden. Unser Ausgangsbild ist ein reines JPG-Bild ohne Informationen bezüglich des Koordinatensystems. Wir klicken daher auf <span class="guilabel">Cancel</span>.</p>
-</li>
+<li><p>Im folgenden Fenster muss das Koordinatensystem (coordinate reference system - CRS) des Rasterdatensatzes angegeben werden. Unser Ausgangsbild ist ein reines JPG-Bild ohne Informationen bezüglich des Koordinatensystems. Wir klicken daher auf <span class="guilabel">Cancel</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/7.png" class="align-center" src="../../_images/7.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p class="first">Bevor wir anfangen Passpunkte (GCP- Ground Control Points) zu setzen, müssen wir die Transformationseinstellungen festlegen. Gehe zu <span class="menuselection">Settings ‣ Transformation settings</span>.</p>
-</li>
+<li><p>Bevor wir anfangen Passpunkte (GCP- Ground Control Points) zu setzen, müssen wir die Transformationseinstellungen festlegen. Gehe zu <span class="menuselection">Settings ‣ Transformation settings</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/8.png" class="align-center" src="../../_images/8.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p class="first">Wähle in den <span class="guilabel">Transformation settings</span> Einstellungen als <span class="guilabel">Transformation type</span> <code class="docutils literal"><span class="pre">Polynomial</span> <span class="pre">2</span></code> aus. In der <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> findet man weitere Informationen über die verschiedenen Transformationstypen und deren Einsatz. Wie schon erwähnt, hat unsere Hintergrundkarte das Koordinatensystem <code class="docutils literal"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>, so dass wir dieses Koordinatensystem als <span class="guilabel">Target CRS</span> auswählen. Wir können den Eintrag unter <span class="guilabel">Output raster</span> unverändert lassen und <code class="docutils literal"><span class="pre">LZW</span></code> als <span class="guilabel">Compression</span> auswählen. Wähle <span class="guilabel">Use 0 for transparency when needed</span>. Achte darauf den Haken bei <span class="guilabel">Load in QGIS when done</span> zu setzen. Klicke <span class="guilabel">OK</span>.</p>
-</li>
+<li><p>Wähle in den <span class="guilabel">Transformation settings</span> Einstellungen als <span class="guilabel">Transformation type</span> <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code> aus. In der <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> findet man weitere Informationen über die verschiedenen Transformationstypen und deren Einsatz. Wie schon erwähnt, hat unsere Hintergrundkarte das Koordinatensystem <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>, so dass wir dieses Koordinatensystem als <span class="guilabel">Target CRS</span> auswählen. Wir können den Eintrag unter <span class="guilabel">Output raster</span> unverändert lassen und <code class="docutils literal notranslate"><span class="pre">LZW</span></code> als <span class="guilabel">Compression</span> auswählen. Wähle <span class="guilabel">Use 0 for transparency when needed</span>. Achte darauf den Haken bei <span class="guilabel">Load in QGIS when done</span> zu setzen. Klicke <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/9.png" class="align-center" src="../../_images/9.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p class="first">Klicke jetzt auf den <span class="guilabel">Hinzufügen Point</span> Knopf auf der Toolleiste und wähle einen einfach zu identifizierenden Punkt auf dem Bild. Ecken, Kreuzungen, Masten o.ä. sind gute Möglichkeiten für Passpunkte.</p>
-</li>
+<li><p>Klicke jetzt auf den <span class="guilabel">Hinzufügen Point</span> Knopf auf der Toolleiste und wähle einen einfach zu identifizierenden Punkt auf dem Bild. Ecken, Kreuzungen, Masten o.ä. sind gute Möglichkeiten für Passpunkte.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/10.png" class="align-center" src="../../_images/10.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p class="first">Wenn du auf dem Bild einen Passpunkt anklickst, erscheint ein neues Fenster, das die Eingabe der Koordinaten des Passpunktes erwartet. Klicke auf den Knopf <span class="guilabel">From map canvas</span>.</p>
-</li>
+<li><p>Wenn du auf dem Bild einen Passpunkt anklickst, erscheint ein neues Fenster, das die Eingabe der Koordinaten des Passpunktes erwartet. Klicke auf den Knopf <span class="guilabel">From map canvas</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/11.png" class="align-center" src="../../_images/11.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p class="first">Finde nun diese Stelle auf der Hintergrundkarte und klicke exakt auf diesen Punkt. Die Koordinaten des Passpunktes werden jetzt automatisch mit den Koordinaten des Punktes auf der Hintergrundkarte gefüllt. Klicke auf Ok. Fahre weiter so fort und füge mindestens 6 Passpunkte hinzu und erfasse jeweils ihre Koordinaten von der Hintergrundkarte.</p>
-</li>
+<li><p>Finde nun diese Stelle auf der Hintergrundkarte und klicke exakt auf diesen Punkt. Die Koordinaten des Passpunktes werden jetzt automatisch mit den Koordinaten des Punktes auf der Hintergrundkarte gefüllt. Klicke auf Ok. Fahre weiter so fort und füge mindestens 6 Passpunkte hinzu und erfasse jeweils ihre Koordinaten von der Hintergrundkarte.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/12.png" class="align-center" src="../../_images/12.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">Tip: Bei der Auswahl eines Passpunktes an einem Gebäube, sollte man die Unterkante des Gebäudes auswählen. Viele Luftbilder und Satellitenbilder stellen Gebäude geneigt dar, so dass die Auswahl von Passpunkten auf dem Dach zu Fehlern führt.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>Tip: Bei der Auswahl eines Passpunktes an einem Gebäube, sollte man die Unterkante des Gebäudes auswählen. Viele Luftbilder und Satellitenbilder stellen Gebäude geneigt dar, so dass die Auswahl von Passpunkten auf dem Dach zu Fehlern führt.</p>
 </div>
 <ol class="arabic simple" start="13">
-<li><p class="first">Wenn wir die minimale Anzahl an Punkten, die zur Transformation benötigt werden, hinzugefügt haben, sehen wir wie sich die &#8220;dX&#8221;, &#8220;dY&#8221; und &#8220;Rest&#8221; Fehlerwerte zu Werten ungleich 0 verändern. Wenn ein bestimmter Passpunkt besonders hohe Fehlerwerte aufweist, ist das in der Regel ein Hinweis auf einen Eingabefehler der Koordinatenwerte. In diesem Fall kann man diesen Passpunkt löschen und ihn anschließend neu erfassen.</p>
-</li>
+<li><p>Wenn wir die minimale Anzahl an Punkten, die zur Transformation benötigt werden, hinzugefügt haben, sehen wir wie sich die „dX“, „dY“ und „Rest“ Fehlerwerte zu Werten ungleich 0 verändern. Wenn ein bestimmter Passpunkt besonders hohe Fehlerwerte aufweist, ist das in der Regel ein Hinweis auf einen Eingabefehler der Koordinatenwerte. In diesem Fall kann man diesen Passpunkt löschen und ihn anschließend neu erfassen.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p class="first">Wenn du mit der Erfassung der Passpunkte zufrieden bist, gehe zu <span class="menuselection">File ‣ Start georeferencing</span>. Das Bild wird nun mit Hilfe der Passpunkte entzerrt.</p>
-</li>
+<li><p>Wenn du mit der Erfassung der Passpunkte zufrieden bist, gehe zu <span class="menuselection">File ‣ Start georeferencing</span>. Das Bild wird nun mit Hilfe der Passpunkte entzerrt.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/14.png" class="align-center" src="../../_images/14.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p class="first">Nachdem der Prozess abgeschlossen ist, wird der georeferenzierte Layer in QGIS geladen. Wenn alles geklappt hat, wird der erzeugte Layer genau an der richtigen Stelle auf der Hintergrundkarte angezeigt.</p>
-</li>
+<li><p>Nachdem der Prozess abgeschlossen ist, wird der georeferenzierte Layer in QGIS geladen. Wenn alles geklappt hat, wird der erzeugte Layer genau an der richtigen Stelle auf der Hintergrundkarte angezeigt.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p class="first">Um das Ergebnis noch schöner zu machen, entfernen wir den weißen Rand. Klicke mit der rechten Maustaste auf den Layer und wähle <span class="guilabel">Properties</span>.</p>
-</li>
+<li><p>Um das Ergebnis noch schöner zu machen, entfernen wir den weißen Rand. Klicke mit der rechten Maustaste auf den Layer und wähle <span class="guilabel">Properties</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>Switch to the <span class="guilabel">Transparency</span> tab. Add <code class="docutils literal"><span class="pre">255</span></code> as the <span class="guilabel">Additional no data value</span> and click <span class="guilabel">OK</span>.</li>
+<li><p>Switch to the <span class="guilabel">Transparency</span> tab. Add <code class="docutils literal notranslate"><span class="pre">255</span></code> as the <span class="guilabel">Additional no data value</span> and click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Bemerkung</p>
-<p class="last">8-bit Bilder haben Pixelwerte von 0-255. Dabei bedeutet 0 schwarz und 255 weiß.</p>
+<p class="admonition-title">Bemerkung</p>
+<p>8-bit Bilder haben Pixelwerte von 0-255. Dabei bedeutet 0 schwarz und 255 weiß.</p>
 </div>
 <ol class="arabic simple" start="18">
-<li><p class="first">Nun sehen wir wie das georeferenzierte Bild schön den Hintergundlayer überlagert.</p>
-</li>
+<li><p>Nun sehen wir wie das georeferenzierte Bild schön den Hintergundlayer überlagert.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
@@ -462,8 +427,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Zuletzt aktualisiert am Jan. 07, 2021.<br/>
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 erstellt.<br/>
     </p>
   </div>
 </footer>

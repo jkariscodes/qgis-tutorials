@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh_TW">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>為紙本地圖進行空間對位 (QGIS3) &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>為紙本地圖進行空間對位 (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="search" title="搜尋" href="../../search.html" />
     <link rel="next" title="為空照圖進行空間對位 (QGIS3)" href="advanced_georeferencing.html" />
     <link rel="prev" title="投影的操作" href="../working_with_projections.html" />
 
@@ -37,6 +20,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -49,8 +36,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -61,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -90,7 +76,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">地形資料的操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">WMS 資料的操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_projections.html">投影的操作</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">為紙本地圖進行空間對位 (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">為紙本地圖進行空間對位 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">為空照圖進行空間對位 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">把地圖數位化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">資料表連接 (QGIS3)</a></li>
@@ -268,123 +254,113 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="georeferencing-topo-sheets-and-scanned-maps-qgis3">
-<h1>為紙本地圖進行空間對位 (QGIS3)<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps-qgis3" title="Permalink to this headline">¶</a></h1>
+<h1>為紙本地圖進行空間對位 (QGIS3)<a class="headerlink" href="#georeferencing-topo-sheets-and-scanned-maps-qgis3" title="本標題的永久連結">¶</a></h1>
 <p>大部分的 GIS 專案都會需要對某些影像進行「 <em>空間對位 （Georeferencing）</em> 」，也就是說要為影像的每個像素指定它在世界上的地理空間座標。在許多的情況下，這些座標是透過野外調查收集而來，例如說用 GPS 裝置定位那些易於辨識的地標。但有的時候，例如說如果你要使用的是某地圖的數位化掃描檔，你也可以藉由地圖上的一些標記來蒐集空間座標。一旦我們有了這些採樣的座標點或地面控制點 (Ground Control Points)，這些影像就可以用給定的座標系統來投影繪製。在本章節中，我們會討論相關的概念、作法與 QGIS 提供的工具，以達成高準確度空間對位的目標。</p>
-<p>本教學的目標是為一張具有座標資訊 (例如有座標標切的經緯度網格) 的地圖影像進行空間對位。如果你的來源影像沒有這類資訊，請參考在 <a class="reference internal" href="advanced_georeferencing.html"><em>為空照圖進行空間對位 (QGIS3)</em></a> 中的說明。</p>
+<p>本教學的目標是為一張具有座標資訊 (例如有座標標切的經緯度網格) 的地圖影像進行空間對位。如果你的來源影像沒有這類資訊，請參考在 <a class="reference internal" href="advanced_georeferencing.html"><span class="doc">為空照圖進行空間對位 (QGIS3)</span></a> 中的說明。</p>
 <div class="section" id="overview-of-the-task">
-<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
+<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="本標題的永久連結">¶</a></h2>
 <p>我們要為一份 1870 年的南印地圖掃描檔，以 QGIS 進行空間對位。</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
+<h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="本標題的永久連結">¶</a></h3>
 <ul class="simple">
-<li><p class="first">如何判斷老地圖的大地座標（Datum）與座標系統（Coordinate System）。</p>
-</li>
+<li><p>如何判斷老地圖的大地座標（Datum）與座標系統（Coordinate System）。</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>取得資料<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>取得資料<a class="headerlink" href="#get-the-data" title="本標題的永久連結">¶</a></h2>
 <p><a class="reference external" href="http://www.hipkiss.org/data/maps.html">Hipkiss’s Scanned Old Maps</a> 網站蒐集了不少版權過期的老地圖掃描檔，非常適合用在研究上。</p>
 <p>這邊可以下載儲存 <a class="reference external" href="http://www.hipkiss.org/data/maps/william-mackenzie_gallery-of-geography_1870_southern-india_3975_3071_600.jpg">1870 年的南印度地圖</a> 的 JPG 檔。</p>
 <p>為了方便起見，你也可以直接用下面的連結下載：</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/1870_southern-india.jpg">1870_southern_india.jpg</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>操作流程<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
-<p>1.Georeferencing in QGIS is done via the <strong>Georeferencer GDAL</strong> plugin. This is a core plugin - meaning it is already part of your QGIS installation. You just need to enable it. Go to <span class="menuselection">Plugins ‣ Manage and Install Plugins</span> and enable the <span class="guilabel">Georeferencer GDAL</span> plugin in the <span class="guilabel">Installed</span> tab. See <a class="reference internal" href="../using_plugins.html"><em>使用附加元件</em></a> for more details on how to work with plugins.</p>
+<h2>操作流程<a class="headerlink" href="#procedure" title="本標題的永久連結">¶</a></h2>
+<p>1.Georeferencing in QGIS is done via the <strong>Georeferencer GDAL</strong> plugin. This is a core plugin - meaning it is already part of your QGIS installation. You just need to enable it. Go to <span class="menuselection">Plugins ‣ Manage and Install Plugins</span> and enable the <span class="guilabel">Georeferencer GDAL</span> plugin in the <span class="guilabel">Installed</span> tab. See <a class="reference internal" href="../using_plugins.html"><span class="doc">使用附加元件</span></a> for more details on how to work with plugins.</p>
 <blockquote>
 <div><img alt="../../_images/149.png" class="align-center" src="../../_images/149.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p class="first">附加元件會放到「影像」的選單內。開啟 <span class="menuselection">影像 ‣ 空間對位</span>。</p>
-</li>
+<li><p>附加元件會放到「影像」的選單內。開啟 <span class="menuselection">影像 ‣ 空間對位</span>。</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/229.png" class="align-center" src="../../_images/229.png" />
+<div><img alt="../../_images/228.png" class="align-center" src="../../_images/228.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p class="first">此附加元件視窗有上下 2 個部分，上半部是影像顯示區，下半部則會以表格方式呈現所有的地面控制點。</p>
-</li>
+<li><p>此附加元件視窗有上下 2 個部分，上半部是影像顯示區，下半部則會以表格方式呈現所有的地面控制點。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/320.png" class="align-center" src="../../_images/320.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p class="first">現在就來開啟我們的 JPG 影像。選擇 <span class="menuselection">檔案 ‣ Open Raster</span>，然後找到剛才下載的地圖掃描檔，按下 <span class="guilabel">開啟舊檔</span>。</p>
-</li>
+<li><p>現在就來開啟我們的 JPG 影像。選擇 <span class="menuselection">檔案 ‣ Open Raster</span>，然後找到剛才下載的地圖掃描檔，按下 <span class="guilabel">開啟舊檔</span>。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/410.png" class="align-center" src="../../_images/410.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p class="first">接下來，程式會要你選擇參考座標系統 (CRS)。我們的來源影像是 JPEG 檔，並沒有包含任何參考座標系統的資訊，所以你可以點選 <span class="guilabel">Cancel</span>。</p>
-</li>
+<li><p>接下來，程式會要你選擇參考座標系統 (CRS)。我們的來源影像是 JPEG 檔，並沒有包含任何參考座標系統的資訊，所以你可以點選 <span class="guilabel">Cancel</span>。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/511.png" class="align-center" src="../../_images/511.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p class="first">現在影像已經被載到螢幕上半部了。可以使用工具列的放大/平移功能觀察一下地圖的細節。</p>
-</li>
+<li><p>現在影像已經被載到螢幕上半部了。可以使用工具列的放大/平移功能觀察一下地圖的細節。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/611.png" class="align-center" src="../../_images/611.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p class="first">現在我們要為圖上的某些點指定座標了。仔細觀察後，可以發現本地圖具有標示經緯度的格線。</p>
-</li>
+<li><p>現在我們要為圖上的某些點指定座標了。仔細觀察後，可以發現本地圖具有標示經緯度的格線。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/711.png" class="align-center" src="../../_images/711.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p class="first">在開啟加入地面控制點 (Ground Control Points, GCP) 之前，必須先填寫空間對位的設定。按下 <span class="menuselection">設定 -&gt; Transformation settings</span>。</p>
-</li>
+<li><p>在開啟加入地面控制點 (Ground Control Points, GCP) 之前，必須先填寫空間對位的設定。按下 <span class="menuselection">設定 -&gt; Transformation settings</span>。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/811.png" class="align-center" src="../../_images/811.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p class="first">在 <span class="guilabel">Transformation settings</span>  視窗中，<span class="guilabel">轉換類型</span> 選擇 <code class="docutils literal"><span class="pre">二階多項式</span></code>。關於不同轉換類型的細節，請參考  <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a>。按下 <span class="guilabel">目標空間參照系</span> 旁邊的 <span class="guilabel">選取 CRS</span> 按鈕。</p>
-</li>
+<li><p>在 <span class="guilabel">Transformation settings</span>  視窗中，<span class="guilabel">轉換類型</span> 選擇 <code class="docutils literal notranslate"><span class="pre">二階多項式</span></code>。關於不同轉換類型的細節，請參考  <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a>。按下 <span class="guilabel">目標空間參照系</span> 旁邊的 <span class="guilabel">選取 CRS</span> 按鈕。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/911.png" class="align-center" src="../../_images/911.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p class="first">在本例的情況下，CRS 資訊可以直接在地圖影像掃描檔上取得。我們先端詳一下地圖，可發現本地圖的座標是經緯度，不過並沒有標示任何的大地座標系統資訊，所以我們得自己假設一個才行。因為此地圖是年代久遠的印度地圖，我們可以猜測它是使用 Everest 1830 大地座標系統，這應該會有不錯的結果。搜尋 <code class="docutils literal"><span class="pre">everest</span></code> 然後選擇最老的 Everest 大地基準的 CRS (EPSG:4042)，然後按下 <span class="guilabel">OK</span>。</p>
-</li>
+<li><p>在本例的情況下，CRS 資訊可以直接在地圖影像掃描檔上取得。我們先端詳一下地圖，可發現本地圖的座標是經緯度，不過並沒有標示任何的大地座標系統資訊，所以我們得自己假設一個才行。因為此地圖是年代久遠的印度地圖，我們可以猜測它是使用 Everest 1830 大地座標系統，這應該會有不錯的結果。搜尋 <code class="docutils literal notranslate"><span class="pre">everest</span></code> 然後選擇最老的 Everest 大地基準的 CRS (EPSG:4042)，然後按下 <span class="guilabel">OK</span>。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1011.png" class="align-center" src="../../_images/1011.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
+<p class="admonition-title">備註</p>
 <p>Survey of India Topo Sheets created between the year 1960 and 2000 use the Everest 1956 spheroid and India_nepal datum. If you are georeferencing SOI Topo Sheets, , you can define a Custom CRS in QGIS with the following paramters and use it in this step. This definition includes a delta_x, delta_y and delta_z parameters for transforming this datum to WGS84. See this page for more information on the <a class="reference external" href="https://deeppradhan.heliohost.org/gis/indian-grid/">Indian Grid System</a>.</p>
-<div class="last highlight-none"><div class="highlight"><pre><span></span>+proj=longlat +a=6377301.243 +b=6356100.2284 +towgs84=295,736,257,0,0,0,0 +no_defs
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+proj=longlat +a=6377301.243 +b=6356100.2284 +towgs84=295,736,257,0,0,0,0 +no_defs
 </pre></div>
 </div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">Most maps are created using a Projected CRS. If the map you are trying to georeference uses a projected CRS that you know of, but the graticules labels are in a Geographic CRS (latitude/longitude), you may use an alternate workflow to minimize distortion. Instead of using a Geographic CRS like we are using here, you can create a vector grid in QGIS and transform it to the projected CRS to be used as a reference for accurate coordinate capture. See <a class="reference external" href="https://raisedbeaches.net/2018/02/01/georeferencing-in-qgis/">this page</a> for more details.</p>
+<p class="admonition-title">備註</p>
+<p>Most maps are created using a Projected CRS. If the map you are trying to georeference uses a projected CRS that you know of, but the graticules labels are in a Geographic CRS (latitude/longitude), you may use an alternate workflow to minimize distortion. Instead of using a Geographic CRS like we are using here, you can create a vector grid in QGIS and transform it to the projected CRS to be used as a reference for accurate coordinate capture. See <a class="reference external" href="https://raisedbeaches.net/2018/02/01/georeferencing-in-qgis/">this page</a> for more details.</p>
 </div>
 <ol class="arabic simple" start="11">
-<li>Name your output raster as  <code class="docutils literal"><span class="pre">1870_southern_india_modified.tif</span></code>. Choose <code class="docutils literal"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. CLick <span class="guilabel">OK</span>.</li>
+<li><p>Name your output raster as  <code class="docutils literal notranslate"><span class="pre">1870_southern_india_modified.tif</span></code>. Choose <code class="docutils literal notranslate"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. CLick <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1114.png" class="align-center" src="../../_images/1114.png" />
+<div><img alt="../../_images/1115.png" class="align-center" src="../../_images/1115.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">Uncompressed GeoTIFF files can be very large in size. So compressing them is always a good idea. You can learn more about different TIFF compression options (LZW, PACKBITS or DEFLATE) in <a class="reference external" href="https://www.accusoft.com/faqs/differences-compressions-used-tiff-files/">this article</a>.</p>
+<p class="admonition-title">備註</p>
+<p>Uncompressed GeoTIFF files can be very large in size. So compressing them is always a good idea. You can learn more about different TIFF compression options (LZW, PACKBITS or DEFLATE) in <a class="reference external" href="https://www.accusoft.com/faqs/differences-compressions-used-tiff-files/">this article</a>.</p>
 </div>
 <ol class="arabic simple" start="12">
-<li>Now we can start adding the Ground Control Points (GCP). The intersections of the grid lines will serve as the <em>ground-truth</em> in our case. As the grid lines are labeled, we can determine the X and Y coordinates of the points using them. Click <span class="guilabel">Add Point</span>.</li>
+<li><p>Now we can start adding the Ground Control Points (GCP). The intersections of the grid lines will serve as the <em>ground-truth</em> in our case. As the grid lines are labeled, we can determine the X and Y coordinates of the points using them. Click <span class="guilabel">Add Point</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1212.png" class="align-center" src="../../_images/1212.png" />
@@ -394,41 +370,38 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div><img alt="../../_images/1311.png" class="align-center" src="../../_images/1311.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p class="first">這下子，下半部的地面控制點表格會新增一欄你剛剛選的地面控制點。</p>
-</li>
+<li><p>這下子，下半部的地面控制點表格會新增一欄你剛剛選的地面控制點。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1410.png" class="align-center" src="../../_images/1410.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Similarly, add at least more GCPs covering the entire image. The more points you have, the more accurate your image is registered to the target coordinates. The <code class="docutils literal"><span class="pre">Polynomial</span> <span class="pre">2</span></code> transform requires at least 6 GCPs.</li>
+<li><p>Similarly, add at least more GCPs covering the entire image. The more points you have, the more accurate your image is registered to the target coordinates. The <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code> transform requires at least 6 GCPs.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/159.png" class="align-center" src="../../_images/159.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>Once you have added the minimum number of points required for the transform, you will notice that the GCPs now have a non-zero <code class="docutils literal"><span class="pre">dX</span></code>, <code class="docutils literal"><span class="pre">dY</span></code> and <code class="docutils literal"><span class="pre">Residual</span></code> error values. If a particular GCP has unusually high error values, that usually means a human-error in entering the coordinate values. So you can delete that GCP and capture it again. You can also edit the coordinate values in the <span class="guilabel">GCP Table</span> by clicking the cell in either <span class="guilabel">Dest. X</span> or <span class="guilabel">Dest. Y</span> columns. Once you are satisfied with the GCPs, go to <span class="menuselection">File ‣ Start georeferencing</span>. This will start the process of warping the image using the GCPs and creating the target raster.</li>
+<li><p>Once you have added the minimum number of points required for the transform, you will notice that the GCPs now have a non-zero <code class="docutils literal notranslate"><span class="pre">dX</span></code>, <code class="docutils literal notranslate"><span class="pre">dY</span></code> and <code class="docutils literal notranslate"><span class="pre">Residual</span></code> error values. If a particular GCP has unusually high error values, that usually means a human-error in entering the coordinate values. So you can delete that GCP and capture it again. You can also edit the coordinate values in the <span class="guilabel">GCP Table</span> by clicking the cell in either <span class="guilabel">Dest. X</span> or <span class="guilabel">Dest. Y</span> columns. Once you are satisfied with the GCPs, go to <span class="menuselection">File ‣ Start georeferencing</span>. This will start the process of warping the image using the GCPs and creating the target raster.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/168.png" class="align-center" src="../../_images/168.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p class="first">處理程式結束後，已經過空間對位修正的圖層會被載入到 QGIS 中，空間對位的操作就此完成。</p>
-</li>
+<li><p>處理程式結束後，已經過空間對位修正的圖層會被載入到 QGIS 中，空間對位的操作就此完成。</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/179.png" class="align-center" src="../../_images/179.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">The GCPs will also be displayed in the main QGIS Canvas. If you wish to remove them, you can switch to the <span class="guilabel">Georeferencer</span> window, and choose <span class="menuselection">File ‣ Reset Georeferencer</span>.</p>
+<p class="admonition-title">備註</p>
+<p>The GCPs will also be displayed in the main QGIS Canvas. If you wish to remove them, you can switch to the <span class="guilabel">Georeferencer</span> window, and choose <span class="menuselection">File ‣ Reset Georeferencer</span>.</p>
 </div>
 <ol class="arabic simple" start="18">
-<li><p class="first">驗證做過的事永遠是件好習慣，現在就讓我們好好檢查一下本操作是否準確。請試著從可信的來源（例如 Natural Earth 資料庫）尋找並讀取含有國家邊界的 shapefile，然後跟我們的結果比對一下。你可以看到，他們基本上對應得相當良好，不過仍然有一點小誤差。如要減少這些誤差，可以增加更多控制點、修改空間對位的參數，或是換另一個猜測的大地座標系統來試試。</p>
-</li>
+<li><p>驗證做過的事永遠是件好習慣，現在就讓我們好好檢查一下本操作是否準確。請試著從可信的來源（例如 Natural Earth 資料庫）尋找並讀取含有國家邊界的 shapefile，然後跟我們的結果比對一下。你可以看到，他們基本上對應得相當良好，不過仍然有一點小誤差。如要減少這些誤差，可以增加更多控制點、修改空間對位的參數，或是換另一個猜測的大地座標系統來試試。</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
+<div><img alt="../../_images/187.png" class="align-center" src="../../_images/187.png" />
 </div></blockquote>
 </div>
 </div>
@@ -455,8 +428,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      最後更新於 1月 07, 2021。<br/>
+      使用 <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 創建。<br/>
     </p>
   </div>
 </footer>

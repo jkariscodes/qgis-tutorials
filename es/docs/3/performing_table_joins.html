@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Realizar Uniones de Tablas (QGIS3) &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Realizar Uniones de Tablas (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="search" title="Búsqueda" href="../../search.html" />
     <link rel="next" title="Realizar Uniones Espaciales (QGIS3)" href="performing_spatial_joins.html" />
     <link rel="prev" title="Digitalizar Datos del Mapa" href="../digitizing_basics.html" />
 
@@ -37,6 +20,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -49,8 +36,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -61,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -93,7 +79,7 @@
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferenciar Hojas Topografícas y Mapas Escaneados (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferenciar Imágenes Aéreas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitalizar Datos del Mapa</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Realizar Uniones de Tablas (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Realizar Uniones de Tablas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizar Uniones Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
@@ -268,188 +254,170 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="performing-table-joins-qgis3">
 <h1>Realizar Uniones de Tablas (QGIS3)<a class="headerlink" href="#performing-table-joins-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>No todos los conjuntos de datos que queremos usar vienen en formato espacial. A menudo los datos vienen como una tabla o una hoja de cálculo y necesitaría enlazarlos con sus datos espaciales existentes para usarlos en su análisis. Esta operación es conocida como una <strong>Unión de Tablas</strong> y es realizada usando el algoritmo de procesamiento <code class="docutils literal"><span class="pre">Unir</span> <span class="pre">atributos</span> <span class="pre">por</span> <span class="pre">el</span> <span class="pre">valor</span> <span class="pre">del</span> <span class="pre">campo</span></code></p>
+<p>No todos los conjuntos de datos que queremos usar vienen en formato espacial. A menudo los datos vienen como una tabla o una hoja de cálculo y necesitaría enlazarlos con sus datos espaciales existentes para usarlos en su análisis. Esta operación es conocida como una <strong>Unión de Tablas</strong> y es realizada usando el algoritmo de procesamiento <code class="docutils literal notranslate"><span class="pre">Unir</span> <span class="pre">atributos</span> <span class="pre">por</span> <span class="pre">el</span> <span class="pre">valor</span> <span class="pre">del</span> <span class="pre">campo</span></code></p>
 <div class="section" id="overview-of-the-task">
 <h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>We will use a shapefile of census tracts for California and population data table from US Census Bureau to create a population density map for california.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li><p class="first">Cargar archivo CSV que no contienen ninguna geometría en QGIS.</p>
-</li>
-<li><p class="first">Usar un Gestor de BD para realizar consultas SQL para calcular estadísticas de grupo.</p>
-</li>
+<li><p>Cargar archivo CSV que no contienen ninguna geometría en QGIS.</p></li>
+<li><p>Usar un Gestor de BD para realizar consultas SQL para calcular estadísticas de grupo.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El <a class="reference external" href="https://www.census.gov/en.html">US Census Bureau</a> provee <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">Archivos shape TIGER/Line</a>. Puede visitar el <a class="reference external" href="https://www2.census.gov/geo/tiger/TIGER2018/">sitio FTP</a> y descargar el archivo shape de las zonas de censo para California. Descargue el archivo <a class="reference external" href="https://www2.census.gov/geo/tiger/TIGER2018/TRACT/tl_2018_06_tract.zip">Census Tracts for California</a>.</p>
-<p><a class="reference external" href="http://factfinder2.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t">Americal FactFinder</a> es un repositorio para todos los datos de censo para los EE.UU. Puede usar la <cite>Búsqueda Avanzada</cite> y consultar <cite>Topic - Basic Count/Estimate</cite> and <cite>Geographies - All Census Tracts in California</cite> para crear un CSV personalizado y descargarlo. Este tutorial usa los datos <code class="docutils literal"><span class="pre">TOTAL</span> <span class="pre">POPULATION</span> <span class="pre">|</span> <span class="pre">2017</span> <span class="pre">ACS</span> <span class="pre">5-year</span> <span class="pre">estimates</span></code>.</p>
+<p><a class="reference external" href="http://factfinder2.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t">Americal FactFinder</a> es un repositorio para todos los datos de censo para los EE.UU. Puede usar la <cite>Búsqueda Avanzada</cite> y consultar <cite>Topic - Basic Count/Estimate</cite> and <cite>Geographies - All Census Tracts in California</cite> para crear un CSV personalizado y descargarlo. Este tutorial usa los datos <code class="docutils literal notranslate"><span class="pre">TOTAL</span> <span class="pre">POPULATION</span> <span class="pre">|</span> <span class="pre">2017</span> <span class="pre">ACS</span> <span class="pre">5-year</span> <span class="pre">estimates</span></code>.</p>
 <img alt="../../_images/data13.png" class="align-center" src="../../_images/data13.png" />
 <p>Para su comodidad, puede descargar directamente una copia de ambos conjuntos de datos desde los enlaces abajo:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/tl_2018_06_tract.zip">tl_2018_06_tract.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ACS_17_5YR_B01003.zip">ACS_17_5YR_B01003.zip</a></p>
-<p>Fuente de Datos <a class="reference internal" href="../credits.html#tiger" id="id1">[TIGER]</a> <a class="reference internal" href="../credits.html#uscensus" id="id2">[USCENSUS]</a></p>
+<p>Fuente de Datos <a class="reference internal" href="../credits.html#tiger" id="id1"><span>[TIGER]</span></a> <a class="reference internal" href="../credits.html#uscensus" id="id2"><span>[USCENSUS]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">Localice el archivo <code class="docutils literal"><span class="pre">tl_2018_06_tract.zip</span></code> en el Explorador QGIS y expándalo. Seleccione el archivo <code class="docutils literal"><span class="pre">tl_2018_06_tract.shp</span></code> y arrástrelo a la pantalla.</p>
-</li>
+<li><p>Localice el archivo <code class="docutils literal notranslate"><span class="pre">tl_2018_06_tract.zip</span></code> en el Explorador QGIS y expándalo. Seleccione el archivo <code class="docutils literal notranslate"><span class="pre">tl_2018_06_tract.shp</span></code> y arrástrelo a la pantalla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1104.png" class="align-center" src="../../_images/1104.png" />
+<div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p class="first">Verá la capa <code class="docutils literal"><span class="pre">tl_2018_06_tract</span></code> cargada en el panel <span class="guilabel">Capas</span>.  Esta capa contiene los límites de las zonas censales en California. Clic-derecho en la capa <code class="docutils literal"><span class="pre">tl_2018_06_tract</span></code> y seleciones <span class="guilabel">Abrir Tabla de Atributos</span>.</p>
-</li>
+<li><p>Verá la capa <code class="docutils literal notranslate"><span class="pre">tl_2018_06_tract</span></code> cargada en el panel <span class="guilabel">Capas</span>.  Esta capa contiene los límites de las zonas censales en California. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">tl_2018_06_tract</span></code> y seleciones <span class="guilabel">Abrir Tabla de Atributos</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p class="first">Examine los atributos de la capa. Para unir una tabla con esta capa, necesitamos un atributo únic y común para cada entidad. En este caso, el campo <code class="docutils literal"><span class="pre">GEOID</span></code> es un identificador único para cada zona y puede ser usado para enlazar esta capa con cualquier otra capa o tabla que contenga el mismo ID.</p>
-</li>
+<li><p>Examine los atributos de la capa. Para unir una tabla con esta capa, necesitamos un atributo únic y común para cada entidad. En este caso, el campo <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> es un identificador único para cada zona y puede ser usado para enlazar esta capa con cualquier otra capa o tabla que contenga el mismo ID.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/335.png" class="align-center" src="../../_images/335.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p class="first">Descomprima el archivo <code class="docutils literal"><span class="pre">ACS_17_5YR_B01003.zip</span></code> y abra el archivo <code class="docutils literal"><span class="pre">ACS_17_5YR_B01003_with_ann.csv</span></code> en un editor de texto. Notará que cada fila del archivo contiene información acerca de una zona junto con un identificador único que vimos en el paso previo. Note que este campo es llamado <code class="docutils literal"><span class="pre">GEO.id2</span></code> en el CSV. Notará también que la columna <code class="docutils literal"><span class="pre">HD01_VD01</span></code> tiene un valor de población para cada una de las zonas del censo.</p>
-</li>
+<li><p>Descomprima el archivo <code class="docutils literal notranslate"><span class="pre">ACS_17_5YR_B01003.zip</span></code> y abra el archivo <code class="docutils literal notranslate"><span class="pre">ACS_17_5YR_B01003_with_ann.csv</span></code> en un editor de texto. Notará que cada fila del archivo contiene información acerca de una zona junto con un identificador único que vimos en el paso previo. Note que este campo es llamado <code class="docutils literal notranslate"><span class="pre">GEO.id2</span></code> en el CSV. Notará también que la columna <code class="docutils literal notranslate"><span class="pre">HD01_VD01</span></code> tiene un valor de población para cada una de las zonas del censo.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/420.png" class="align-center" src="../../_images/420.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p class="first">Antes de importar este archivo CSV, necesitamos hacer una edición menor. El importador CSV de QGIS espera que la primera fila del archivo contenga los encabezados de columna y que todas las filas restantes contengan los datos para estas columnas. Este archivo contiene una fila extra 2 con etiquetas de columna. Borre esta fila y guarde el archivo.</p>
-</li>
+<li><p>Antes de importar este archivo CSV, necesitamos hacer una edición menor. El importador CSV de QGIS espera que la primera fila del archivo contenga los encabezados de columna y que todas las filas restantes contengan los datos para estas columnas. Este archivo contiene una fila extra 2 con etiquetas de columna. Borre esta fila y guarde el archivo.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/520.png" class="align-center" src="../../_images/520.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p class="first">Ahora estamos listos para importar el archivo CSV a QGIS. Vaya a <span class="menuselection">Capas ‣ Añadir Capa ‣ Añadir Capa Texto Delimitado</span>.</p>
-</li>
+<li><p>Ahora estamos listos para importar el archivo CSV a QGIS. Vaya a <span class="menuselection">Capas ‣ Añadir Capa ‣ Añadir Capa Texto Delimitado</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/620.png" class="align-center" src="../../_images/620.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p class="first">En la ventana <span class="guilabel">Administrador de Fuente de Datos</span>, clic el botón <span class="guilabel">...</span> y explore el archivo CSV y selecciónelo. Asegúrese que ha seleccionado para el <span class="guilabel">Formato de Archivo</span> <span class="guilabel">CSV (valores separados por coma)</span>. Como estamos importando esto como una tabla, debemos especificar que nuestro archivo no contiene geometría usando la opción <span class="guilabel">Sin geometría (sólo tabla de atributos)</span>. Verifique que la previsualización <span class="guilabel">Datos de Muestra</span> abajo se vea bien y clic en <span class="guilabel">Añadir</span> seguido de <span class="guilabel">Cerrar</span>.</p>
-</li>
+<li><p>En la ventana <span class="guilabel">Administrador de Fuente de Datos</span>, clic el botón <span class="guilabel">…</span> y explore el archivo CSV y selecciónelo. Asegúrese que ha seleccionado para el <span class="guilabel">Formato de Archivo</span> <span class="guilabel">CSV (valores separados por coma)</span>. Como estamos importando esto como una tabla, debemos especificar que nuestro archivo no contiene geometría usando la opción <span class="guilabel">Sin geometría (sólo tabla de atributos)</span>. Verifique que la previsualización <span class="guilabel">Datos de Muestra</span> abajo se vea bien y clic en <span class="guilabel">Añadir</span> seguido de <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/719.png" class="align-center" src="../../_images/719.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p class="first">El CSV será ahora importado como una tabla a QGIS y aparecerá como <code class="docutils literal"><span class="pre">ACS_17_5YR_B01003_with_ann</span></code> en el panel <span class="guilabel">Capas</span>. Ahora estamos listos para crear la unión de tablas. Vaya a <span class="menuselection">Procesos ‣ Caja de Herramientas</span>.</p>
-</li>
+<li><p>El CSV será ahora importado como una tabla a QGIS y aparecerá como <code class="docutils literal notranslate"><span class="pre">ACS_17_5YR_B01003_with_ann</span></code> en el panel <span class="guilabel">Capas</span>. Ahora estamos listos para crear la unión de tablas. Vaya a <span class="menuselection">Procesos ‣ Caja de Herramientas</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/819.png" class="align-center" src="../../_images/819.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p class="first">Primero necesitamos cambiar la configuración predeterminada en la <span class="guilabel">Caja de Herramienta de Procesos</span>. Clic el botón <span class="guilabel">Opciones</span>.</p>
-</li>
+<li><p>Primero necesitamos cambiar la configuración predeterminada en la <span class="guilabel">Caja de Herramienta de Procesos</span>. Clic el botón <span class="guilabel">Opciones</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/919.png" class="align-center" src="../../_images/919.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p class="first">En la pestaña <span class="guilabel">Opciones de Procesos</span>, marque la opción <span class="guilabel">Usar nombre de archivo como nombre de capa</span>. Cuando use algoritmos de la Caja de Herramientas de Procesos, esta opción hace que los nombres de capas de salida sean más intuitivos y útiles. Clic en <span class="guilabel">Aceptar</span>.</p>
-</li>
+<li><p>En la pestaña <span class="guilabel">Opciones de Procesos</span>, marque la opción <span class="guilabel">Usar nombre de archivo como nombre de capa</span>. Cuando use algoritmos de la Caja de Herramientas de Procesos, esta opción hace que los nombres de capas de salida sean más intuitivos y útiles. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1019.png" class="align-center" src="../../_images/1019.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p class="first">De vuelta en la <span class="guilabel">Caja de Herramientas de Procesos</span>, busque y localice el algoritmo <span class="menuselection">Vector General ‣ Unir atributos por valor de campo</span> y haga doble-clic en él para abrirlo.</p>
-</li>
+<li><p>De vuelta en la <span class="guilabel">Caja de Herramientas de Procesos</span>, busque y localice el algoritmo <span class="menuselection">Vector General ‣ Unir atributos por valor de campo</span> y haga doble-clic en él para abrirlo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1122.png" class="align-center" src="../../_images/1122.png" />
+<div><img alt="../../_images/1123.png" class="align-center" src="../../_images/1123.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p class="first">En el diálogo <span class="guilabel">Unir Atributos por Valores de Campo</span>, seleccione <code class="docutils literal"><span class="pre">tl_2018_06_tract</span></code> como la <span class="guilabel">Capa de entrada</span> y <code class="docutils literal"><span class="pre">GEOID</span></code> como el <span class="guilabel">Campo de tabla</span>. Seleccione <code class="docutils literal"><span class="pre">ACS_17_5YR_B01003_with_ann</span></code> como la <span class="guilabel">Tabla de entrada 2</span> y <code class="docutils literal"><span class="pre">GEO.id2</span></code> como el <span class="guilabel">Campo de tabla 2</span>. Deje las otras opciones en sus valores predeterminados y clic en el botón <span class="guilabel">...</span> para seleccionar la ubicación del archivo de salida y seleccione <code class="docutils literal"><span class="pre">Guardar</span> <span class="pre">a</span> <span class="pre">GeoPackage...</span></code>.</p>
-</li>
+<li><p>En el diálogo <span class="guilabel">Unir Atributos por Valores de Campo</span>, seleccione <code class="docutils literal notranslate"><span class="pre">tl_2018_06_tract</span></code> como la <span class="guilabel">Capa de entrada</span> y <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> como el <span class="guilabel">Campo de tabla</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">ACS_17_5YR_B01003_with_ann</span></code> como la <span class="guilabel">Tabla de entrada 2</span> y <code class="docutils literal notranslate"><span class="pre">GEO.id2</span></code> como el <span class="guilabel">Campo de tabla 2</span>. Deje las otras opciones en sus valores predeterminados y clic en el botón <span class="guilabel">…</span> para seleccionar la ubicación del archivo de salida y seleccione <code class="docutils literal notranslate"><span class="pre">Guardar</span> <span class="pre">a</span> <span class="pre">GeoPackage...</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1220.png" class="align-center" src="../../_images/1220.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p class="first">Nombre el geopackage de salida como <code class="docutils literal"><span class="pre">joined.gpkg</span></code> y la capa de salida como <code class="docutils literal"><span class="pre">joined</span></code>. Clic en <span class="guilabel">Ejecutar</span>.</p>
-</li>
+<li><p>Nombre el geopackage de salida como <code class="docutils literal notranslate"><span class="pre">joined.gpkg</span></code> y la capa de salida como <code class="docutils literal notranslate"><span class="pre">joined</span></code>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1319.png" class="align-center" src="../../_images/1319.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p class="first">Una vez que termine el procesamiento, verifique que el algoritmo fue exitoso y clic en <span class="guilabel">Cerrar</span>.</p>
-</li>
+<li><p>Una vez que termine el procesamiento, verifique que el algoritmo fue exitoso y clic en <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1418.png" class="align-center" src="../../_images/1418.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p class="first">Verá una nueva capa <code class="docutils literal"><span class="pre">joined</span></code> cargada en el panel <span class="guilabel">Capas</span>. En este punto, los campos del archivo CSV están unidos con la capa de zonas censales. Puede cerrar la <span class="guilabel">Caja de Herramientas de Procesamiento</span> por ahora. Clic-derecho en la capa <code class="docutils literal"><span class="pre">joined</span></code> y seleccione:guilabel:<cite>Abrir Tabla de Atributos</cite>.</p>
-</li>
+<li><p>Verá una nueva capa <code class="docutils literal notranslate"><span class="pre">joined</span></code> cargada en el panel <span class="guilabel">Capas</span>. En este punto, los campos del archivo CSV están unidos con la capa de zonas censales. Puede cerrar la <span class="guilabel">Caja de Herramientas de Procesamiento</span> por ahora. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">joined</span></code> y seleccione:guilabel:<cite>Abrir Tabla de Atributos</cite>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p class="first">Verá un nuevo conjunto de campos, incluyendo el campo <code class="docutils literal"><span class="pre">HD01_VD01</span></code> que contiene estimados de población.</p>
-</li>
+<li><p>Verá un nuevo conjunto de campos, incluyendo el campo <code class="docutils literal notranslate"><span class="pre">HD01_VD01</span></code> que contiene estimados de población.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1616.png" class="align-center" src="../../_images/1616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>Now that we have the population data in the census tracts layer, we can style it to create a visualization of population density distribution. Select the <code class="docutils literal"><span class="pre">joined</span></code> layer and click the <span class="guilabel">Open the Layer Styling Panel</span> button.</li>
+<li><p>Now that we have the population data in the census tracts layer, we can style it to create a visualization of population density distribution. Select the <code class="docutils literal notranslate"><span class="pre">joined</span></code> layer and click the <span class="guilabel">Open the Layer Styling Panel</span> button.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>In the <span class="guilabel">Layer Styling</span> panel, select <code class="docutils literal"><span class="pre">Graduated</span></code> from the drop-down menu. As we are looking to create a population density map, we want to assign different color to each census tract feature based on the population density. We have the population in the <strong>HD01_VD01</strong> field, but we don&#8217;t have population density in any fields to select as the <span class="guilabel">Value</span>. Fortunately, QGIS allows us to input an expression here. Click <span class="guilabel">Expression</span> button.</li>
+<li><p>In the <span class="guilabel">Layer Styling</span> panel, select <code class="docutils literal notranslate"><span class="pre">Graduated</span></code> from the drop-down menu. As we are looking to create a population density map, we want to assign different color to each census tract feature based on the population density. We have the population in the <strong>HD01_VD01</strong> field, but we don’t have population density in any fields to select as the <span class="guilabel">Value</span>. Fortunately, QGIS allows us to input an expression here. Click <span class="guilabel">Expression</span> button.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1816.png" class="align-center" src="../../_images/1816.png" />
+<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Nota</p>
-<p class="last">When creating a thematic (choropleth) map such as this, it is important to normalize the values you are mapping. Mapping total counts per polygon is not correct. It is important to normalize the values dividing by the area. If you are displaying totals such as crime, you can normalize them by diving by total population, thus mapping crime rate and not crime. <a class="reference external" href="https://en.wikipedia.org/wiki/Choropleth_map#Normalization">Learn more</a></p>
+<p class="admonition-title">Nota</p>
+<p>When creating a thematic (choropleth) map such as this, it is important to normalize the values you are mapping. Mapping total counts per polygon is not correct. It is important to normalize the values dividing by the area. If you are displaying totals such as crime, you can normalize them by diving by total population, thus mapping crime rate and not crime. <a class="reference external" href="https://en.wikipedia.org/wiki/Choropleth_map#Normalization">Learn more</a></p>
 </div>
 <ol class="arabic simple" start="19">
-<li>Enter the following expression to calculate the population density. <code class="docutils literal"><span class="pre">$area</span></code> calculates the area of the feature in square meters. We then convert it to square miles and calculate the population density with the formula <em>Population/Area</em>. Click <span class="guilabel">OK</span>.</li>
+<li><p>Enter the following expression to calculate the population density. <code class="docutils literal notranslate"><span class="pre">$area</span></code> calculates the area of the feature in square meters. We then convert it to square miles and calculate the population density with the formula <em>Population/Area</em>. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-sql"><div class="highlight"><pre><span></span>&quot;HD01_VD01&quot;/ (0.386*$area/1e6)
+<div><div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>&quot;HD01_VD01&quot;/ (0.386*$area/1e6)
 </pre></div>
 </div>
 <img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li>Back in the <span class="guilabel">Layer Styling Panel</span>, choose a color ramp of your choice and click <span class="guilabel">Classify</span>. You can adjust the class ranges to be more appropriate to the region.</li>
+<li><p>Back in the <span class="guilabel">Layer Styling Panel</span>, choose a color ramp of your choice and click <span class="guilabel">Classify</span>. You can adjust the class ranges to be more appropriate to the region.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2010.png" class="align-center" src="../../_images/2010.png" />
+<div><img alt="../../_images/209.png" class="align-center" src="../../_images/209.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li>The visualization feels a bit cluttered because of the polygon borders. Click on the dropdown next to <span class="guilabel">Symbol</span>. Select <span class="guilabel">Simple fill</span> and check <span class="guilabel">Transparent stroke</span>.</li>
+<li><p>The visualization feels a bit cluttered because of the polygon borders. Click on the dropdown next to <span class="guilabel">Symbol</span>. Select <span class="guilabel">Simple fill</span> and check <span class="guilabel">Transparent stroke</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2115.png" class="align-center" src="../../_images/2115.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li>Now we have a nice looking information visualization of population density in California.</li>
+<li><p>Now we have a nice looking information visualization of population density in California.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2213.png" class="align-center" src="../../_images/2213.png" />
@@ -479,8 +447,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Actualizado por última vez en ene. 07, 2021.<br/>
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
 </footer>

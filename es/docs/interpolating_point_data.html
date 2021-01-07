@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Interpolar Datos Punto &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interpolar Datos Punto &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="search" title="Búsqueda" href="../search.html" />
     <link rel="next" title="Procesamiento por Lotes usando el Marco de Procesamiento (QGIS3)" href="3/batch_processing.html" />
     <link rel="prev" title="Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)" href="3/sampling_raster_data.html" />
 
@@ -37,6 +20,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -49,8 +36,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -61,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html"><img src="../_static/logo.png">
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -101,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Análisis del vecino más cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Interpolar Datos Punto</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Interpolar Datos Punto</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/batch_processing.html">Procesamiento por Lotes usando el Marco de Procesamiento (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_graphical_modeler.html">Automatizar Flujos de Trabajo Complejos usando el Modelador de Procesos (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/automating_map_creation.html">Automatización de la creación de mapas con el Atlas de diseñador de impresiones  (QGIS3)</a></li>
@@ -268,24 +254,21 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="interpolating-point-data">
 <h1>Interpolar Datos Punto<a class="headerlink" href="#interpolating-point-data" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>La interpolación es una técnica usada comúnmente en SIG para crear superficie continua a partir de puntos discretos. Bastantes fenómenos del mundo real son continuos - elevaciones, suelos, temperaturas, etc. Si quisiéramos modelar estas superficies para análisis, es imposible tomar medidas  a lo largo de la superficie. De ahí, que las mediciones de campo son tomadas en varios puntos a lo largo de la superficie y los valores intermedios son inferidos mediante un proceso llamado &#8216;interpolación&#8217;. En QGIS, la interpolación se consigue usando el <code class="docutils literal"><span class="pre">complemento</span> <span class="pre">Interpolación</span></code> incorporado.</p>
+<p>La interpolación es una técnica usada comúnmente en SIG para crear superficie continua a partir de puntos discretos. Bastantes fenómenos del mundo real son continuos - elevaciones, suelos, temperaturas, etc. Si quisiéramos modelar estas superficies para análisis, es imposible tomar medidas  a lo largo de la superficie. De ahí, que las mediciones de campo son tomadas en varios puntos a lo largo de la superficie y los valores intermedios son inferidos mediante un proceso llamado “interpolación”. En QGIS, la interpolación se consigue usando el <code class="docutils literal notranslate"><span class="pre">complemento</span> <span class="pre">Interpolación</span></code> incorporado.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Tomaremos mediciones de campo de profundidad para el Lago Arlington en Texas y crearemos un mapa de relieve de elevación y contornos a partir de estas mediciones.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Otras habilidades que aprenderás<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li><p class="first">Crear contornos a partir de datos punto.</p>
-</li>
-<li><p class="first">Enmascarar valores sin-datos de una capa ráster.</p>
-</li>
-<li><p class="first">Agregar etiquetas a una capa vectorial.</p>
-</li>
+<li><p>Crear contornos a partir de datos punto.</p></li>
+<li><p>Enmascarar valores sin-datos de una capa ráster.</p></li>
+<li><p>Agregar etiquetas a una capa vectorial.</p></li>
 </ul>
 </div>
 </div>
@@ -295,114 +278,94 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <p>Descargue los <a class="reference external" href="http://www.twdb.texas.gov/hydro_survey/Arlington/2007-12/Shapefiles.zip">archivos shape del estudio 2007-12 para el Lago Arlington</a>.</p>
 <p>Para su comodidad, puede descargar directamente datos muestra usados en este tutorial del enlace abajo.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Shapefiles.zip">Shapefiles.zip</a></p>
-<p>Fuente de Datos: <a class="reference internal" href="credits.html#twdb" id="id1">[TWDB]</a></p>
+<p>Fuente de Datos: <a class="reference internal" href="credits.html#twdb" id="id1"><span>[TWDB]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">Abrir QGIS. Ir a <span class="menuselection">Capas ‣ Añadir capa ‣ Añadir capa vectorial...</span>.</p>
-</li>
+<li><p>Abrir QGIS. Ir a <span class="menuselection">Capas ‣ Añadir capa ‣ Añadir capa vectorial…</span>.</p></li>
 </ol>
 <img alt="../_images/1163.png" class="align-center" src="../_images/1163.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">Naveque al archivo descargado <code class="docutils literal"><span class="pre">Shapefiles.zip</span></code> y selecciónelo. Clic en <span class="guilabel">Abrir</span>.</p>
-</li>
+<li><p>Naveque al archivo descargado <code class="docutils literal notranslate"><span class="pre">Shapefiles.zip</span></code> y selecciónelo. Clic en <span class="guilabel">Abrir</span>.</p></li>
 </ol>
 <img alt="../_images/2124.png" class="align-center" src="../_images/2124.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">En el diálogo <span class="guilabel">Seleccionar capas a añadir...</span>, presione la tecla <code class="kbd docutils literal"><span class="pre">Shift</span></code> y seleccione las capas <code class="docutils literal"><span class="pre">Arlington_Soundings_2007_stpl83.shp</span></code> y <code class="docutils literal"><span class="pre">Boundary2004_550_stpl83.shp</span></code>. Clic en <span class="guilabel">Aceptar</span>.</p>
-</li>
+<li><p>En el diálogo <span class="guilabel">Seleccionar capas a añadir…</span>, presione la tecla <kbd class="kbd docutils literal notranslate">Shift</kbd> y seleccione las capas <code class="docutils literal notranslate"><span class="pre">Arlington_Soundings_2007_stpl83.shp</span></code> y <code class="docutils literal notranslate"><span class="pre">Boundary2004_550_stpl83.shp</span></code>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <img alt="../_images/366.png" class="align-center" src="../_images/366.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">Verá que se cargan 2 capas en QGIS. La capa <code class="docutils literal"><span class="pre">Boundary2004_550_stpl83</span></code> representa el límite del lago. Desmarque la caja junto a ella en la Tabla de Contenido.</p>
-</li>
+<li><p>Verá que se cargan 2 capas en QGIS. La capa <code class="docutils literal notranslate"><span class="pre">Boundary2004_550_stpl83</span></code> representa el límite del lago. Desmarque la caja junto a ella en la Tabla de Contenido.</p></li>
 </ol>
 <img alt="../_images/446.png" class="align-center" src="../_images/446.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">Esto revelará los datos de la segunda capa <code class="docutils literal"><span class="pre">Arlington_Soundings_2007_stpl83</span></code>. A pesar de que los datos parecen líneas, es una serie de puntos que están muy cercanos.</p>
-</li>
+<li><p>Esto revelará los datos de la segunda capa <code class="docutils literal notranslate"><span class="pre">Arlington_Soundings_2007_stpl83</span></code>. A pesar de que los datos parecen líneas, es una serie de puntos que están muy cercanos.</p></li>
 </ol>
 <img alt="../_images/546.png" class="align-center" src="../_images/546.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">Clic en el ícono <span class="guilabel">Acercar zoom</span> y seleccione un área pequeña en la pantalla. A medida que se acerca más, verá los puntos. Cada punto representa una lectura tomada por un <em>Medidor de Profundidad</em> en la ubicación registrada por un equipo <em>GPSD</em>.</p>
-</li>
+<li><p>Clic en el ícono <span class="guilabel">Acercar zoom</span> y seleccione un área pequeña en la pantalla. A medida que se acerca más, verá los puntos. Cada punto representa una lectura tomada por un <em>Medidor de Profundidad</em> en la ubicación registrada por un equipo <em>GPSD</em>.</p></li>
 </ol>
 <img alt="../_images/644.png" class="align-center" src="../_images/644.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">Seleccione la herramienta <span class="guilabel">Identificar objetos espaciales</span> y haga clic en un punto. Verá que aparece el panel <span class="guilabel">Resultados de la identificación</span> a la izquierda con el valor de atributo del punto. En este caso, el atributo <code class="docutils literal"><span class="pre">ELEVATION</span></code> contiene la profundidad del lago en la ubicación. Como nuestra tarea es crear un perfil de profundidad y contornos de elevación, usaremos estos valores como entrada para la interpolación.</p>
-</li>
+<li><p>Seleccione la herramienta <span class="guilabel">Identificar objetos espaciales</span> y haga clic en un punto. Verá que aparece el panel <span class="guilabel">Resultados de la identificación</span> a la izquierda con el valor de atributo del punto. En este caso, el atributo <code class="docutils literal notranslate"><span class="pre">ELEVATION</span></code> contiene la profundidad del lago en la ubicación. Como nuestra tarea es crear un perfil de profundidad y contornos de elevación, usaremos estos valores como entrada para la interpolación.</p></li>
 </ol>
 <img alt="../_images/743.png" class="align-center" src="../_images/743.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">Asegúrese que tiene habilitado el <code class="docutils literal"><span class="pre">complemento</span> <span class="pre">Interpolación</span></code>. Vea <a class="reference internal" href="using_plugins.html"><em>Uso de complementos</em></a> sobre cómo habilitar complementos. Una vez habilitado, vaya a <span class="menuselection">Ráster ‣ Interpolación ‣ Interpolación</span>.</p>
-</li>
+<li><p>Asegúrese que tiene habilitado el <code class="docutils literal notranslate"><span class="pre">complemento</span> <span class="pre">Interpolación</span></code>. Vea <a class="reference internal" href="using_plugins.html"><span class="doc">Uso de complementos</span></a> sobre cómo habilitar complementos. Una vez habilitado, vaya a <span class="menuselection">Ráster ‣ Interpolación ‣ Interpolación</span>.</p></li>
 </ol>
 <img alt="../_images/842.png" class="align-center" src="../_images/842.png" />
 <ol class="arabic simple" start="9">
-<li><p class="first">En el diálogo <span class="guilabel">Interpolación</span>, seleccione <code class="docutils literal"><span class="pre">Arlington_Soundings_2007_stpl83</span></code> como las <span class="guilabel">Capas vectoriales</span> en el panel <span class="guilabel">Entrada</span>. Seleccione <code class="docutils literal"><span class="pre">ELEVATION</span></code> como el <span class="guilabel">Atributo de interpolación</span>. Clic en <span class="guilabel">Añadir</span>. Cambie los valores <span class="guilabel">Tamaño celda X</span> y <span class="guilabel">Tamaño celda Y</span> a <code class="docutils literal"><span class="pre">5</span></code>. Este valor es el tamaño de cada píxel en la grid de salida. Debido a que nuestros datos fuentes están en una SRC proyectada con <strong>Pies-EEUU</strong> como unidades, en base a nuestra selección, el tamaño de grid será <strong>5 pies</strong>. Clic en el botón:guilabel:<cite>...</cite> junto a <span class="guilabel">Archivo de salida</span> y nombre el archivo de salida como <code class="docutils literal"><span class="pre">elevation_tin.tif</span></code>. Clic en <span class="guilabel">Aceptar</span>.</p>
-</li>
+<li><p>En el diálogo <span class="guilabel">Interpolación</span>, seleccione <code class="docutils literal notranslate"><span class="pre">Arlington_Soundings_2007_stpl83</span></code> como las <span class="guilabel">Capas vectoriales</span> en el panel <span class="guilabel">Entrada</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">ELEVATION</span></code> como el <span class="guilabel">Atributo de interpolación</span>. Clic en <span class="guilabel">Añadir</span>. Cambie los valores <span class="guilabel">Tamaño celda X</span> y <span class="guilabel">Tamaño celda Y</span> a <code class="docutils literal notranslate"><span class="pre">5</span></code>. Este valor es el tamaño de cada píxel en la grid de salida. Debido a que nuestros datos fuentes están en una SRC proyectada con <strong>Pies-EEUU</strong> como unidades, en base a nuestra selección, el tamaño de grid será <strong>5 pies</strong>. Clic en el botón:guilabel:<cite>…</cite> junto a <span class="guilabel">Archivo de salida</span> y nombre el archivo de salida como <code class="docutils literal notranslate"><span class="pre">elevation_tin.tif</span></code>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Nota</p>
-<p class="last">Los resultados de la interpolación pueden variar significativamente dependiendo del método y parámetros que elige. La interpolación QGIS permite los métodos <em>Red Irregular Triangulada (TIN)</em> y <em>Peso Distancia Inversa (IDW)</em> para interpolación. El método TIN es comúnmente usado para datos de elevación mientras que el método IDW es usado para interpolar otros tipos de datos como concentraciones minerales, poblaciones, etc. Vea el módulo <a class="reference external" href="http://docs.qgis.org/2.2/en/docs/gentle_gis_introduction/spatial_analysis_interpolation.html">Análisis Espacial</a> de la documentación QGIS para más detalles.</p>
+<p class="admonition-title">Nota</p>
+<p>Los resultados de la interpolación pueden variar significativamente dependiendo del método y parámetros que elige. La interpolación QGIS permite los métodos <em>Red Irregular Triangulada (TIN)</em> y <em>Peso Distancia Inversa (IDW)</em> para interpolación. El método TIN es comúnmente usado para datos de elevación mientras que el método IDW es usado para interpolar otros tipos de datos como concentraciones minerales, poblaciones, etc. Vea el módulo <a class="reference external" href="http://docs.qgis.org/2.2/en/docs/gentle_gis_introduction/spatial_analysis_interpolation.html">Análisis Espacial</a> de la documentación QGIS para más detalles.</p>
 </div>
 <img alt="../_images/942.png" class="align-center" src="../_images/942.png" />
 <ol class="arabic simple" start="10">
-<li><p class="first">Verá cargada la nueva capa <code class="docutils literal"><span class="pre">elevation_tin</span></code> en QGIS. Clic-derecho a la capa y seleccione <span class="guilabel">Acerca a la capa</span>.</p>
-</li>
+<li><p>Verá cargada la nueva capa <code class="docutils literal notranslate"><span class="pre">elevation_tin</span></code> en QGIS. Clic-derecho a la capa y seleccione <span class="guilabel">Acerca a la capa</span>.</p></li>
 </ol>
 <img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
 <ol class="arabic simple" start="11">
-<li><p class="first">Ahora verá la extensión completa de la superficie creada. La interpolación no da resultados exactos fuera del ára de colecta. Recortemos la superficie resultante con el límite del lago. Vaya a <span class="menuselection">Ráster ‣ Extracción ‣ Cortar ráster</span>.</p>
-</li>
+<li><p>Ahora verá la extensión completa de la superficie creada. La interpolación no da resultados exactos fuera del ára de colecta. Recortemos la superficie resultante con el límite del lago. Vaya a <span class="menuselection">Ráster ‣ Extracción ‣ Cortar ráster</span>.</p></li>
 </ol>
 <img alt="../_images/1164.png" class="align-center" src="../_images/1164.png" />
 <ol class="arabic simple" start="12">
-<li><p class="first">Nombre el <span class="guilabel">Archivo de salida</span> como <code class="docutils literal"><span class="pre">elevation_tin_clipped.tif</span></code>. Seleccione el <span class="guilabel">Modo de recorte</span> como <span class="guilabel">Capa máscara</span>. Selecione <code class="docutils literal"><span class="pre">Boundary2004_550_stpl83</span></code> como la <span class="guilabel">Capa máscara</span>. Clic en <span class="guilabel">Aceptar</span>.</p>
-</li>
+<li><p>Nombre el <span class="guilabel">Archivo de salida</span> como <code class="docutils literal notranslate"><span class="pre">elevation_tin_clipped.tif</span></code>. Seleccione el <span class="guilabel">Modo de recorte</span> como <span class="guilabel">Capa máscara</span>. Selecione <code class="docutils literal notranslate"><span class="pre">Boundary2004_550_stpl83</span></code> como la <span class="guilabel">Capa máscara</span>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <img alt="../_images/1241.png" class="align-center" src="../_images/1241.png" />
 <ol class="arabic simple" start="13">
-<li><p class="first">Se cargará un nuevo ráster <code class="docutils literal"><span class="pre">elevation_tin_clipped</span></code> en QGIS. Daremos ahora estilo a esta capa para mostrar la diferencia en elevaciones. Note los valores de elevación mín y máx de la capa <code class="docutils literal"><span class="pre">elevation_tin</span></code>. Clic-derecho la capa <code class="docutils literal"><span class="pre">elevation_tin_clipped</span></code> y seleccione <span class="guilabel">Propiedades</span>.</p>
-</li>
+<li><p>Se cargará un nuevo ráster <code class="docutils literal notranslate"><span class="pre">elevation_tin_clipped</span></code> en QGIS. Daremos ahora estilo a esta capa para mostrar la diferencia en elevaciones. Note los valores de elevación mín y máx de la capa <code class="docutils literal notranslate"><span class="pre">elevation_tin</span></code>. Clic-derecho la capa <code class="docutils literal notranslate"><span class="pre">elevation_tin_clipped</span></code> y seleccione <span class="guilabel">Propiedades</span>.</p></li>
 </ol>
 <img alt="../_images/1340.png" class="align-center" src="../_images/1340.png" />
 <ol class="arabic simple" start="14">
-<li><p class="first">Vaya a la pestaña <span class="guilabel">Estilo</span>. Seleccione el <span class="guilabel">Tipo de representador</span> como <code class="docutils literal"><span class="pre">Pseudocolor</span> <span class="pre">banda</span> <span class="pre">única</span></code>. En el panel <span class="guilabel">Generar nuevo mapa de color</span>, seleccione la rampa de color <code class="docutils literal"><span class="pre">Espectral</span></code>. Como queremos crear un mapa de profundidad a diferencia de un mapa de altura, marque la casilla <span class="guilabel">Invertir</span>. Esto asignará azules a las áreas profundas y rojos a las áreas poco profundas. Clic en <span class="guilabel">Clasificar</span>.</p>
-</li>
+<li><p>Vaya a la pestaña <span class="guilabel">Estilo</span>. Seleccione el <span class="guilabel">Tipo de representador</span> como <code class="docutils literal notranslate"><span class="pre">Pseudocolor</span> <span class="pre">banda</span> <span class="pre">única</span></code>. En el panel <span class="guilabel">Generar nuevo mapa de color</span>, seleccione la rampa de color <code class="docutils literal notranslate"><span class="pre">Espectral</span></code>. Como queremos crear un mapa de profundidad a diferencia de un mapa de altura, marque la casilla <span class="guilabel">Invertir</span>. Esto asignará azules a las áreas profundas y rojos a las áreas poco profundas. Clic en <span class="guilabel">Clasificar</span>.</p></li>
 </ol>
 <img alt="../_images/1438.png" class="align-center" src="../_images/1438.png" />
 <ol class="arabic simple" start="15">
-<li><p class="first">Cámbiese a la pestaña <span class="guilabel">Transferencia</span>. Queremos quitar los píxeles negros de nuestra salida. Ingrese <code class="docutils literal"><span class="pre">0</span></code> como el <span class="guilabel">Valor adicional sin datos</span>. Clic en <span class="guilabel">Aceptar</span>.</p>
-</li>
+<li><p>Cámbiese a la pestaña <span class="guilabel">Transferencia</span>. Queremos quitar los píxeles negros de nuestra salida. Ingrese <code class="docutils literal notranslate"><span class="pre">0</span></code> como el <span class="guilabel">Valor adicional sin datos</span>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
 <ol class="arabic simple" start="16">
-<li><p class="first">Ahora tiene un mapa de relieve de elevación para el lago generado a partir de las lecturas individuales de profundidad. Generemos contornos ahora. Vaya a <span class="menuselection">Ráster ‣ Extracción ‣ Contornos</span>.</p>
-</li>
+<li><p>Ahora tiene un mapa de relieve de elevación para el lago generado a partir de las lecturas individuales de profundidad. Generemos contornos ahora. Vaya a <span class="menuselection">Ráster ‣ Extracción ‣ Contornos</span>.</p></li>
 </ol>
 <img alt="../_images/1633.png" class="align-center" src="../_images/1633.png" />
 <ol class="arabic simple" start="17">
-<li><p class="first">En el diálogo <span class="guilabel">Contorno</span>, ingrese <code class="docutils literal"><span class="pre">contours</span></code> como el <span class="guilabel">Archivo de salida para líneas de contornos</span>. Generaremos líneas de contornos a intervalos de 5 pies, por lo que ingrese <code class="docutils literal"><span class="pre">5.00</span></code> como el <span class="guilabel">Intervalo entre líneas de contorno</span>. Marque la casilla <span class="guilabel">Nombre de atributo</span>. Clic en <span class="guilabel">Aceptar</span>.</p>
-</li>
+<li><p>En el diálogo <span class="guilabel">Contorno</span>, ingrese <code class="docutils literal notranslate"><span class="pre">contours</span></code> como el <span class="guilabel">Archivo de salida para líneas de contornos</span>. Generaremos líneas de contornos a intervalos de 5 pies, por lo que ingrese <code class="docutils literal notranslate"><span class="pre">5.00</span></code> como el <span class="guilabel">Intervalo entre líneas de contorno</span>. Marque la casilla <span class="guilabel">Nombre de atributo</span>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <img alt="../_images/1730.png" class="align-center" src="../_images/1730.png" />
 <ol class="arabic simple" start="18">
-<li><p class="first">Las líneas de contorno serán cargadas como capa <code class="docutils literal"><span class="pre">contours</span></code> una vez que el procesamiento finalice. Haga clic-derecho a la capa y seleccione <span class="guilabel">Propiedades</span>.</p>
-</li>
+<li><p>Las líneas de contorno serán cargadas como capa <code class="docutils literal notranslate"><span class="pre">contours</span></code> una vez que el procesamiento finalice. Haga clic-derecho a la capa y seleccione <span class="guilabel">Propiedades</span>.</p></li>
 </ol>
-<img alt="../_images/1830.png" class="align-center" src="../_images/1830.png" />
+<img alt="../_images/1829.png" class="align-center" src="../_images/1829.png" />
 <ol class="arabic simple" start="19">
-<li><p class="first">Vaya a la pestaña <span class="guilabel">Etiquetas</span>. Marque la casilla <span class="guilabel">Etiquetar esta capa con</span> y seleccione <code class="docutils literal"><span class="pre">ELEV</span></code> como el campo. Seleccione <code class="docutils literal"><span class="pre">Curveado</span></code> como el tipo de <span class="guilabel">Ubicación</span> y clic en <span class="guilabel">Aceptar</span>.</p>
-</li>
+<li><p>Vaya a la pestaña <span class="guilabel">Etiquetas</span>. Marque la casilla <span class="guilabel">Etiquetar esta capa con</span> y seleccione <code class="docutils literal notranslate"><span class="pre">ELEV</span></code> como el campo. Seleccione <code class="docutils literal notranslate"><span class="pre">Curveado</span></code> como el tipo de <span class="guilabel">Ubicación</span> y clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <img alt="../_images/1924.png" class="align-center" src="../_images/1924.png" />
 <ol class="arabic simple" start="20">
-<li><p class="first">Verá que cada línea de contorno será apropiadamente etiquetada con la elevación a lo largo de la línea.</p>
-</li>
+<li><p>Verá que cada línea de contorno será apropiadamente etiquetada con la elevación a lo largo de la línea.</p></li>
 </ol>
-<img alt="../_images/2017.png" class="align-center" src="../_images/2017.png" />
+<img alt="../_images/2016.png" class="align-center" src="../_images/2016.png" />
 </div>
 </div>
 
@@ -428,8 +391,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Actualizado por última vez en ene. 07, 2021.<br/>
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
 </footer>

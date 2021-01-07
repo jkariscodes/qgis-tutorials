@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="fi_FI">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Animating Time Series Data (QGIS3) &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animating Time Series Data (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../../index.html" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="search" title="Etsi" href="../../search.html" />
     <link rel="next" title="Handling Invalid Geometries (QGIS3)" href="handling_invalid_geometries.html" />
     <link rel="prev" title="Creating Heatmaps (QGIS3)" href="creating_heatmaps.html" />
 
@@ -36,6 +19,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -48,8 +35,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -60,7 +46,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../index.html"><img src="../../_static/logo.png">
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -95,7 +81,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Animating Time Series Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
@@ -267,179 +253,149 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="animating-time-series-data-qgis3">
 <h1>Animating Time Series Data (QGIS3)<a class="headerlink" href="#animating-time-series-data-qgis3" title="Permalink to this headline">¶</a></h1>
-<p>Time is an important component of many spatial datasets. Along with location information, time providers another dimension for analysis and visualization of data. If you are working with dataset that contains timestamps or have observations recorded at multiple time-steps, you can easily visualize it using the <strong>TimeManager</strong> plugin in QGIS. TimeManager allows you to view and export
-&#8216;slices&#8217; of data between certain time intervals that can be combined into animations.</p>
+<p>Time is an important component of many spatial datasets. Along with location information, time providers another dimension for analysis and visualization of data. If you are working with dataset that contains timestamps or have observations recorded at multiple time-steps, you can easily visualize it using the <strong>Temporal controler</strong> only available from QGIS 3.14 onwards. Temporal controler allows you to view and export ’slices’ of data between certain time intervals that can be combined into animations.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
 <p>We will take a point layer of maritime piracy incidents, create a heatmap visualization and create an animation of how the piracy hot-spots have changed over past 2 decades.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Using the Heatmap renderer for quick visualization of dense point data</li>
-<li>Creating and using custom map projections</li>
+<li><p>Using the Heatmap renderer for quick visualization of dense point data</p></li>
+<li><p>Creating and using custom map projections</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
-<p>National Geospatial-Intelligence Agency&#8217;s <a class="reference external" href="https://msi.nga.mil/NGAPortal/MSI.portal">Maritime Safety Information portal</a> provides a shapefile of all incidencts of maritine piracy in the form on <a class="reference external" href="https://msi.nga.mil/Piracy">Anti-shipping Activity Messages</a>. Download the <a class="reference external" href="https://msi.nga.mil/api/publications/download?key=16920958/SFH00000/ASAM_shp.zip&amp;type=download">Arc Shape file</a> version of the database.</p>
+<p>National Geospatial-Intelligence Agency’s <a class="reference external" href="https://msi.nga.mil/NGAPortal/MSI.portal">Maritime Safety Information portal</a> provides a shapefile of all incidencts of maritine piracy in the form on <a class="reference external" href="https://msi.nga.mil/Piracy">Anti-shipping Activity Messages</a>. Download the <a class="reference external" href="https://msi.nga.mil/api/publications/download?key=16920958/SFH00000/ASAM_shp.zip&amp;type=download">Arc Shape file</a> version of the database.</p>
 <p><a class="reference external" href="http://naturalearthdata.com">Natural Earth</a> has several global vector
 layers. Download the <a class="reference external" href="https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip">10m Physical Vectors - Land</a> containing Land polygons.</p>
 <p>For convenience, you may directly download a copy of the above layers from below:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ASAM_shp.zip">ASAM_shp.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_land.zip">ne_10m_land.zip</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#nga-msi" id="id1">[NGA_MSI]</a> <a class="reference internal" href="../credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
-</div>
-<div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
-<p>Go to <span class="menuselection">Plugins ‣ Manage and Install Plugins...</span>. Search for and install the <strong>TimeManager</strong> plugin.</p>
-<img alt="../../_images/setup1.png" class="align-center" src="../../_images/setup1.png" />
+<p>Data Source: <a class="reference internal" href="../credits.html#nga-msi" id="id1"><span>[NGA_MSI]</span></a> <a class="reference internal" href="../credits.html#naturalearth" id="id2"><span>[NATURALEARTH]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal"><span class="pre">ne_10m_land.zip</span></code> and select the <code class="docutils literal"><span class="pre">ne_10m_land.shp</span></code> layer. Drag the layer to the canvas. Next, locate the <code class="docutils literal"><span class="pre">ASAM_shp.zip</span></code> file. Expand it and select the <code class="docutils literal"><span class="pre">asam_data_download/ASAM_events.shp</span></code> layer and drag it on to the canvas.</li>
+<li><p>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal notranslate"><span class="pre">ne_10m_land.zip</span></code> and select the <code class="docutils literal notranslate"><span class="pre">ne_10m_land.shp</span></code> layer. Drag the layer to the canvas. Next, locate the <code class="docutils literal notranslate"><span class="pre">ASAM_shp.zip</span></code> file. Expand it and select the <code class="docutils literal notranslate"><span class="pre">asam_data_download/ASAM_events.shp</span></code> layer and drag it on to the canvas.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/19.png" class="align-center" src="../../_images/19.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Once the layer is loaded, you can see the individual points representing incidents of piracy locations. There are thousands of incidents and it is difficult to determine with more piracy. Rather than individual points, a better way to visualize this data is through a heatmap. Select the <code class="docutils literal"><span class="pre">ASAM_events</span></code> layers and click the <span class="guilabel">Open the layer Styling Panel</span> button in the <span class="guilabel">Layers</span> panel. Click the <code class="docutils literal"><span class="pre">Single</span> <span class="pre">symbol</span></code> drop-down.</li>
+<li><p>Once the layer is loaded, you can see the individual points representing incidents of piracy locations. There are thousands of incidents and it is difficult to determine with more piracy. Rather than individual points, a better way to visualize this data is through a heatmap. Select the <code class="docutils literal notranslate"><span class="pre">ASAM_events</span></code> layers and click the <span class="guilabel">Open the layer Styling Panel</span> button in the <span class="guilabel">Layers</span> panel. Click the <code class="docutils literal notranslate"><span class="pre">Single</span> <span class="pre">symbol</span></code> drop-down.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/21.png" class="align-center" src="../../_images/21.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>In the renderer selection drop-down, select <code class="docutils literal"><span class="pre">Heatmap</span></code> renderer. Next, select the <code class="docutils literal"><span class="pre">Viridis</span></code> color ramp from the <span class="guilabel">Color ramp</span> selector.</li>
+<li><p>In the renderer selection drop-down, select <code class="docutils literal notranslate"><span class="pre">Heatmap</span></code> renderer. Next, select the <code class="docutils literal notranslate"><span class="pre">Viridis</span></code> color ramp from the <span class="guilabel">Color ramp</span> selector.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/31.png" class="align-center" src="../../_images/31.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Adjust the <span class="guilabel">Radius</span> value to <code class="docutils literal"><span class="pre">5.0</span></code>. At the bottom, expand the <span class="guilabel">Layer Rendering</span> section and adjust the <span class="guilabel">Opacity</span> to <code class="docutils literal"><span class="pre">75.0%</span></code>. This gives a nice visual effect of the hotspots with the land layer below.</li>
+<li><p>Adjust the <span class="guilabel">Radius</span> value to <code class="docutils literal notranslate"><span class="pre">5.0</span></code>. At the bottom, expand the <span class="guilabel">Layer Rendering</span> section and adjust the <span class="guilabel">Opacity</span> to <code class="docutils literal notranslate"><span class="pre">75.0%</span></code>. This gives a nice visual effect of the hotspots with the land layer below.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/41.png" class="align-center" src="../../_images/41.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Now let&#8217;s animate this data to show the yearly map of piracy incidents. Go to <span class="menuselection">Plugins ‣ TimeManager ‣ Toggle visibility</span>.</li>
+<li><p>Now let’s animate this data to show the yearly map of piracy incidents. Right click on <code class="docutils literal notranslate"><span class="pre">ASAM_event</span></code> layer, and choose <code class="docutils literal notranslate"><span class="pre">Properties</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/51.png" class="align-center" src="../../_images/51.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>In the <span class="guilabel">TimeManager</span> panel, click <span class="guilabel">Settings</span>.</li>
+<li><p>In the <span class="guilabel">Layer properties</span> dialog box, select the <span class="guilabel">Temporal</span> tab and enable it by clicking the checkbox..</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/61.png" class="align-center" src="../../_images/61.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>In the <span class="guilabel">Time manager settings</span> window, click <span class="guilabel">Add layer</span> button.</li>
+<li><p>The source data contains an attribute <code class="docutils literal notranslate"><span class="pre">dateofocc</span></code> - representing the date on which the incident took place. This is the field that will be used to determine the points that are rendered for each time period. Select <code class="docutils literal notranslate"><span class="pre">Single</span> <span class="pre">Field</span> <span class="pre">with</span> <span class="pre">Data/Time</span></code> in <span class="guilabel">Configuration</span> Drop down menu, <code class="docutils literal notranslate"><span class="pre">dateofocc</span></code> as <span class="guilabel">Field</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/71.png" class="align-center" src="../../_images/71.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>The source data contains an attribute <code class="docutils literal"><span class="pre">dateofocc</span></code> - representing the date on which the incident took place. This is the field that will be used by the plugin to determine the points that are rendered for each time period. Select <code class="docutils literal"><span class="pre">ASAM_events</span></code> as the <span class="guilabel">Layer</span> and <code class="docutils literal"><span class="pre">dateofocc</span></code> as the <span class="guilabel">Start time</span>. The <span class="guilabel">End time</span> should be set to <code class="docutils literal"><span class="pre">Same</span> <span class="pre">as</span> <span class="pre">start</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p>Now a clock symbol will appear next to the layer name. Click on the <code class="docutils literal notranslate"><span class="pre">Temporal</span> <span class="pre">Control</span> <span class="pre">Panel</span></code> (Clock icon) from Map Navigation Toolbar.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/81.png" class="align-center" src="../../_images/81.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Back in the <span class="guilabel">Time manager settings</span> window, click <span class="guilabel">OK</span>.</li>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">Animated</span> <span class="pre">Temporal</span> <span class="pre">Navigation</span></code> (play icon) to activate the animation controls. Click the <span class="guilabel">Set to Full Range</span> (refresh icon) next to <span class="guilabel">Range</span> to atuomatically set the time range to the match the dataset.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/91.png" class="align-center" src="../../_images/91.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>Click the <span class="guilabel">Power</span> icon in the <span class="guilabel">TimeManager</span> panel to enable the plugin. Set the <span class="guilabel">Time frame size</span> to be <code class="docutils literal"><span class="pre">1</span> <span class="pre">years</span></code>. Once enabled, you will see a filter icon next to the <code class="docutils literal"><span class="pre">ASAM_events</span></code> layer. TimeManager works by applying a filter to the layer based on the selected field and specified time period.</li>
+<li><p>Now you are ready to preview the animation. Set the <span class="guilabel">Step</span> as <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">Year</span></code> then Click the <span class="guilabel">Play</span> button to start the animation.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/101.png" class="align-center" src="../../_images/101.png" />
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Muista</p>
-<p class="last">As TimeManager works by applying a filter on the layer, it only works with layer types that support this feature. Most data source types do support it - with a notable exception being temporary memory layers. If you had done some processing earlier and have a temporary layer, right-click and select <span class="guilabel">Make Permanent</span> before using TimeManager on that layer.</p>
+<p class="admonition-title">Muista</p>
+<p>If the animation is too fast, you can adjust the frame rate by clicking <code class="docutils literal notranslate"><span class="pre">Temporal</span> <span class="pre">Settings</span></code> (yellow gear icon) at top-right corner of Temporal Controller panel. Decreasing the the frame rate (frames per second) will slow down the animation.</p>
 </div>
 <ol class="arabic simple" start="11">
-<li>Now you are ready to see the animation. Click the <span class="guilabel">Play</span> button to see the yearly piracy hotspot animation.</li>
+<li><p>It would be helpful to also display a label showing the current time frame on the map. We can do that using the built in Title decoration. Go to <span class="menuselection">View ‣ Decorations ‣ Title Label</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/11.gif" class="align-center" src="../../_images/11.gif" />
+<div><img alt="../../_images/111.png" class="align-center" src="../../_images/111.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li>You will notice that for each frame of the animation, a date is displayed at the bottom-right. Instead of the full date and time, let&#8217;s change it to display the year that the map represents. Click <span class="guilabel">Settings</span> in the <span class="guilabel">Time Manager</span> panel. Click <span class="guilabel">Time display options</span> in the <span class="guilabel">Time manager settings</span> dialog.</li>
+<li><p>Click the checkbox to enable it and click <code class="docutils literal notranslate"><span class="pre">Insert</span> <span class="pre">an</span> <span class="pre">Expression</span></code> button and enter the following expression to display the year. Here the variable <code class="docutils literal notranslate"><span class="pre">&#64;map_start_time</span></code> contains the timestamp of the current time slice being displayed. So we can use that timestamp and format it to display year of occurrence. See the <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/functions_list.html#format-date">QGIS Documentation</a> for details on various supported formatting options for the timestamp.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/121.png" class="align-center" src="../../_images/121.png" />
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>format_date(@map_start_time, &#39;yyyy&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/121.png" class="align-center" src="../../_images/121.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li>Adjust the <span class="guilabel">Font Size</span> to <code class="docutils literal"><span class="pre">25</span></code>. Change the <span class="guilabel">DateTime</span> format to <code class="docutils literal"><span class="pre">%Y</span></code>. The time format should be specified in the <a class="reference external" href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior">Python strftime</a> format. <code class="docutils literal"><span class="pre">%Y</span></code> is the short-code for a 4 digit year. Also you can change the <span class="guilabel">Placement direction</span> to <code class="docutils literal"><span class="pre">NW</span></code>. Click <span class="guilabel">OK</span>.</li>
+<li><p>Select <span class="guilabel">font size</span> as <code class="docutils literal notranslate"><span class="pre">25</span></code>, set <span class="guilabel">background bar colour</span> as <code class="docutils literal notranslate"><span class="pre">White</span></code> and set the transparency to <code class="docutils literal notranslate"><span class="pre">50%</span></code>. In <span class="guilabel">Placement</span> choose <code class="docutils literal notranslate"><span class="pre">Bottom</span> <span class="pre">Right</span></code>. Now click Ok.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/131.png" class="align-center" src="../../_images/131.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li>Back in <span class="guilabel">Time manager settings</span> dialog, check the <span class="guilabel">Looping animation</span> checkbox. This helps when you are making changes to styling and adjusting styling to make the animation continue playing back from start. Click <span class="guilabel">OK</span>.</li>
+<li><p>Once the parameters are set accordingly, the year will display as shown. To export these as images and convert them as GIF select the <code class="docutils literal notranslate"><span class="pre">Export</span> <span class="pre">Animation</span></code> (save icon) in the Temporal control window.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/141.png" class="align-center" src="../../_images/141.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li>Now if you replay the animation, you will see the label will show the year of the animation in the top-left corner. At this point, we can export the animation, but there is one more change that we can apply to make our map better. The default map projection is <code class="docutils literal"><span class="pre">EPSG:4326</span></code> which is ok for storing the source data, but not ideal for global visualization like this. I really like the <a class="reference external" href="http://equal-earth.com/equal-earth-projection.html">Equal Earth Projection</a> for a visually pleasing and more accurate representation of the world. It is a fairly new projection and not yet available as a predefined option in QGIS. But there is an easy way to use it in QGIS by defining a custom projection. Go to <span class="menuselection">Settings ‣ Custom Projections...</span>.</li>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> <span class="guilabel">Output directory</span> to choose the directory at which the images will be saved.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/151.png" class="align-center" src="../../_images/151.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li>In the <span class="guilabel">Custom Coordinate Reference System Definition</span> dialog, click the <span class="guilabel">+</span> button. Enter <code class="docutils literal"><span class="pre">Equal</span> <span class="pre">Earth</span></code> as the <span class="guilabel">name</span>. Enter the following definition in the <span class="guilabel">Parameters</span> box. The parameters need to be specified in the <a class="reference external" href="https://proj.org/operations/projections/eqearth.html">PROJ format</a>. After entering the parameters, click <span class="guilabel">OK</span>.</li>
+<li><p>Under the <span class="guilabel">Extent</span> select the <span class="menuselection">Calculate from Layer ‣ ne_10_land</span> layer. Click save</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-none"><div class="highlight"><pre><span></span>+proj=eqearth +datum=WGS84 +wktext
-</pre></div>
-</div>
-<img alt="../../_images/161.png" class="align-center" src="../../_images/161.png" />
+<div><img alt="../../_images/161.png" class="align-center" src="../../_images/161.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li>In the main QGIS window, click the <span class="guilabel">Current CRS</span> display on the bottom-right corner.</li>
+<li><p>Once the export finishes, you will see PNG images for each year(total 18 images) in the output directory.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/171.png" class="align-center" src="../../_images/171.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li>Search for <code class="docutils literal"><span class="pre">Equal</span> <span class="pre">Earth</span></code> to find and select the newly defined projection. Click <span class="guilabel">OK</span>.</li>
+<li><p>Now let’s create an animated GIF from these images. There are many options for creating animations from individual image frames. I like <a class="reference external" href="https://ezgif.com/maker">ezgif</a> for an easy and online tool. Visit the site and click <span class="guilabel">Choose Files</span> and select all the .png files. Once selected, click the <span class="guilabel">Upload and make a GIF!</span> button. Once created, you can download the GIF using the <span class="guilabel">Save</span> button.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/181.png" class="align-center" src="../../_images/181.png" />
-</div></blockquote>
-<ol class="arabic simple" start="19">
-<li>You will see the map transform to the Equal Earth projection. Now we are ready to export the animation. Before exporting, make sure to set the time-slider in the <span class="guilabel">Time Manager</span> panel to the start position. Export of the animation will start from the current position of the time slider. Click <span class="guilabel">Export Video</span> button in the <span class="guilabel">Time Manager</span> panel.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/191.png" class="align-center" src="../../_images/191.png" />
-</div></blockquote>
-<ol class="arabic simple" start="20">
-<li>In the <span class="guilabel">Export Video dialog</span>, click <span class="guilabel">Select output folder</span> and select a directory on your computer. Select the <span class="guilabel">Frames only</span> option and click <span class="guilabel">OK</span> to start the export process.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/20.png" class="align-center" src="../../_images/20.png" />
-</div></blockquote>
-<ol class="arabic simple" start="21">
-<li>Once the export finishes, you will see PNG images for each year in the output directory. Now let&#8217;s create an animated GIF from these images. There are many options for creating animations from individual image frames. I like <a class="reference external" href="https://ezgif.com/maker">ezgif.com</a> for an easy and online tool. Visit the site and click <span class="guilabel">Choose Files</span> and select all the <code class="docutils literal"><span class="pre">.png</span></code> files. Note that the export folder will also have a <code class="docutils literal"><span class="pre">.pgw</span></code> file for each frame which contains the georeference information. You may want to sort the images by <code class="docutils literal"><span class="pre">Type</span></code> to allow easy bulk selection of only <code class="docutils literal"><span class="pre">.png</span></code> files. Once selected, click the <span class="guilabel">Upload and  make a GIF!</span> button.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/211.png" class="align-center" src="../../_images/211.png" />
-</div></blockquote>
-<ol class="arabic simple" start="22">
-<li>Once the process finishes, click the <span class="guilabel">Save</span> button to download the GIF to your computer.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/animation.gif" class="align-center" src="../../_images/animation.gif" />
+<div><img alt="../../_images/18.gif" class="align-center" src="../../_images/18.gif" />
 </div></blockquote>
 </div>
 </div>
@@ -466,8 +422,8 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      Last updated on tammik. 07, 2021.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
 </footer>

@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh_TW">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>撰寫 Python 腳本並在處理框架下執行 &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>撰寫 Python 腳本並在處理框架下執行 &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="search" title="搜尋" href="../search.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -47,8 +34,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -59,7 +45,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html"><img src="../_static/logo.png">
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -258,53 +244,50 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="writing-python-scripts-for-processing-framework">
-<h1>撰寫 Python 腳本並在處理框架下執行<a class="headerlink" href="#writing-python-scripts-for-processing-framework" title="Permalink to this headline">¶</a></h1>
+<h1>撰寫 Python 腳本並在處理框架下執行<a class="headerlink" href="#writing-python-scripts-for-processing-framework" title="本標題的永久連結">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">警告</p>
-<p class="last">本教學已有新的版本，請前往 <a class="reference internal" href="3/processing_python_scripts.html"><em>撰寫 Python 腳本並在處理框架下執行（QGIS3)</em></a>。</p>
+<p class="admonition-title">警告</p>
+<p>本教學已有新的版本，請前往 <a class="reference internal" href="3/processing_python_scripts.html"><span class="doc">撰寫 Python 腳本並在處理框架下執行（QGIS3)</span></a>。</p>
 </div>
 <p>獨立的 Pyqgis 程式碼可以從 QGIS 中的 Python 主控台執行，不過只要經過些微調整，它也可以在處理框架中執行。這麼做的好處有兩個，首先因為處理框架提供了標準化的介面，所以指定輸出入檔變容易了；再來就是你可以指定你的腳本成為處理建模中的一部份，這樣一來就可以使用批次執行一次處理許多輸入檔。本教學將示範如何撰寫可以當成 QGIS 中處理框架的一部份的 Python 程式碼。</p>
 <div class="section" id="overview-of-the-task">
-<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
+<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="本標題的永久連結">¶</a></h2>
 <p>Our script will perform a dissolve operation based on a field chosen by the
 user. It will also sum up values of another field for the dissolved features.
-In the example, we will dissolve a World shapefile based on a <code class="docutils literal"><span class="pre">SUBREGION</span></code>
-attribute and sum up <code class="docutils literal"><span class="pre">POP_EST</span></code> field to calculate total population in the
+In the example, we will dissolve a World shapefile based on a <code class="docutils literal notranslate"><span class="pre">SUBREGION</span></code>
+attribute and sum up <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> field to calculate total population in the
 dissolved region.</p>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">如果你想要執行融合操作並附帶統計輸出，可以使用已經完成的 <code class="docutils literal"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">stats</span></code> 這個附加元件。我們要弄的腳本會示範如何使用處理框架的腳本達到類似的功能。</p>
+<p class="admonition-title">備註</p>
+<p>如果你想要執行融合操作並附帶統計輸出，可以使用已經完成的 <code class="docutils literal notranslate"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">stats</span></code> 這個附加元件。我們要弄的腳本會示範如何使用處理框架的腳本達到類似的功能。</p>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>取得資料<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>取得資料<a class="headerlink" href="#get-the-data" title="本標題的永久連結">¶</a></h2>
 <p>我們要使用 Natural Earth 提供的 <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Admin 0 - 國界</a> 資料集。</p>
 <p>下載 <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - 國界（Countries）shapefile</a></p>
-<p>資料來源  <a class="reference internal" href="credits.html#naturalearth" id="id1">[NATURALEARTH]</a></p>
+<p>資料來源  <a class="reference internal" href="credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
 <p>為了方便起見，你也可以直接用下面的連結下載：</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">ne_10_admin_0_countries.zip</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>操作流程<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
+<h2>操作流程<a class="headerlink" href="#procedure" title="本標題的永久連結">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">在 QGIS 中選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>，選擇剛下載的 <code class="docutils literal"><span class="pre">ne_10_admin_0_countries.zip</span></code> 檔案，選擇 <code class="docutils literal"><span class="pre">ne_10_admin_0_countries</span></code> 圖層載入。打開 <span class="menuselection">地理運算 ‣ 工具箱</span>。</p>
-</li>
+<li><p>在 QGIS 中選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>，選擇剛下載的 <code class="docutils literal notranslate"><span class="pre">ne_10_admin_0_countries.zip</span></code> 檔案，選擇 <code class="docutils literal notranslate"><span class="pre">ne_10_admin_0_countries</span></code> 圖層載入。打開 <span class="menuselection">地理運算 ‣ 工具箱</span>。</p></li>
 </ol>
 <img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">在 <span class="guilabel">地理運算工具箱</span> 中展開 <span class="guilabel">腳本</span> 項目，選擇 <span class="guilabel">建立新腳本</span>。</p>
-</li>
+<li><p>在 <span class="guilabel">地理運算工具箱</span> 中展開 <span class="guilabel">腳本</span> 項目，選擇 <span class="guilabel">建立新腳本</span>。</p></li>
 </ol>
 <img alt="../_images/2140.png" class="align-center" src="../_images/2140.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">為了讓此腳本能夠被電腦辨認為要在處理框架下執行的腳本，在開頭的部分必須要指定輸入跟輸出才行。這個部分的資訊會被用在腳本的使用者介面上，你可以參考 <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/scripts.html">QGIS Processing 文件</a> 以了解更多有關這部分的格式說明。在 <span class="guilabel">腳本編輯器</span> 中輸入以下幾行，其中有 3 個使用者指定的輸入：<code class="docutils literal"><span class="pre">dissolve_layer</span></code>、<code class="docutils literal"><span class="pre">dissolve_field</span></code> 和 <code class="docutils literal"><span class="pre">sum_field</span></code>。注意在後兩者中，我們也加入了 <code class="docutils literal"><span class="pre">dissolve_layer</span></code>，意味著這兩個輸入欄位將會從 <code class="docutils literal"><span class="pre">dissolve_layer</span></code> 中挑選。另外，我們也指定了 <code class="docutils literal"><span class="pre">output_layer</span></code> 作為輸出向量檔。完成後按下 <span class="guilabel">儲存</span> 鈕。</p>
-</li>
+<li><p>為了讓此腳本能夠被電腦辨認為要在處理框架下執行的腳本，在開頭的部分必須要指定輸入跟輸出才行。這個部分的資訊會被用在腳本的使用者介面上，你可以參考 <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/scripts.html">QGIS Processing 文件</a> 以了解更多有關這部分的格式說明。在 <span class="guilabel">腳本編輯器</span> 中輸入以下幾行，其中有 3 個使用者指定的輸入：<code class="docutils literal notranslate"><span class="pre">dissolve_layer</span></code>、<code class="docutils literal notranslate"><span class="pre">dissolve_field</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sum_field</span></code>。注意在後兩者中，我們也加入了 <code class="docutils literal notranslate"><span class="pre">dissolve_layer</span></code>，意味著這兩個輸入欄位將會從 <code class="docutils literal notranslate"><span class="pre">dissolve_layer</span></code> 中挑選。另外，我們也指定了 <code class="docutils literal notranslate"><span class="pre">output_layer</span></code> 作為輸出向量檔。完成後按下 <span class="guilabel">儲存</span> 鈕。</p></li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre><span></span>##dissolve_layer=vector
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##dissolve_layer=vector
 ##dissolve_field=field dissolve_layer
 ##sum_field=field dissolve_layer
 ##output_layer=output vector
@@ -312,29 +295,25 @@ dissolved region.</p>
 </div>
 <img alt="../_images/378.png" class="align-center" src="../_images/378.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">把腳本命名為 <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> 然後存至預設的 <span class="menuselection">.qgis2 ‣ processing ‣ scripts</span> 資料夾路徑。</p>
-</li>
+<li><p>把腳本命名為 <code class="docutils literal notranslate"><span class="pre">dissolve_with_sum</span></code> 然後存至預設的 <span class="menuselection">.qgis2 ‣ processing ‣ scripts</span> 資料夾路徑。</p></li>
 </ol>
 <img alt="../_images/456.png" class="align-center" src="../_images/456.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">回到 <span class="guilabel">腳本編輯器</span>，按下 <span class="guilabel">執行演算法</span> 按鈕，預覽使用者介面。</p>
-</li>
+<li><p>回到 <span class="guilabel">腳本編輯器</span>，按下 <span class="guilabel">執行演算法</span> 按鈕，預覽使用者介面。</p></li>
 </ol>
 <img alt="../_images/557.png" class="align-center" src="../_images/557.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">你可以看到腳本雖然只有幾行，就已經具有一個不錯的介面，讓使用者可以指定輸入了。由於其他的地理運算演算法都是使用相同介面，所以就算是自己設計演算法，也可以馬上上手。</p>
-</li>
+<li><p>你可以看到腳本雖然只有幾行，就已經具有一個不錯的介面，讓使用者可以指定輸入了。由於其他的地理運算演算法都是使用相同介面，所以就算是自己設計演算法，也可以馬上上手。</p></li>
 </ol>
 <img alt="../_images/654.png" class="align-center" src="../_images/654.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">在 <span class="guilabel">腳本編輯器</span> 中輸入以下程式碼。你會看到我們其實使用了一些特殊方法，像是 <code class="docutils literal"><span class="pre">processing.getObject()</span></code> 和 <code class="docutils literal"><span class="pre">processing.features()</span></code> 等，這些方法可以幫你更快速的拆解、存取資料，如需更多說明可以參考 QGIS 地理運算文件中的 <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/console.html#additional-functions-for-handling-data">用於處理資料的額外函數</a> 一節的內容。按下 <span class="guilabel">儲存</span> 把剛修改的內容存檔，然後再使用視窗右上的 <span class="guilabel">X</span> 鈕把編輯器關起來。</p>
-</li>
+<li><p>在 <span class="guilabel">腳本編輯器</span> 中輸入以下程式碼。你會看到我們其實使用了一些特殊方法，像是 <code class="docutils literal notranslate"><span class="pre">processing.getObject()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">processing.features()</span></code> 等，這些方法可以幫你更快速的拆解、存取資料，如需更多說明可以參考 QGIS 地理運算文件中的 <a class="reference external" href="https://docs.qgis.org/2.8/en/docs/user_manual/processing/console.html#additional-functions-for-handling-data">用於處理資料的額外函數</a> 一節的內容。按下 <span class="guilabel">儲存</span> 把剛修改的內容存檔，然後再使用視窗右上的 <span class="guilabel">X</span> 鈕把編輯器關起來。</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">本腳本大量使用了 Python 的串列綜合運算（list comprehensions），如果你對其語法不太熟悉，可參考  <a class="reference external" href="https://docs.python.org.tw/3/tutorial/datastructures.html#list-comprehensions">串列綜合運算的教學</a>。</p>
+<p class="admonition-title">備註</p>
+<p>本腳本大量使用了 Python 的串列綜合運算（list comprehensions），如果你對其語法不太熟悉，可參考  <a class="reference external" href="https://docs.python.org.tw/3/tutorial/datastructures.html#list-comprehensions">串列綜合運算的教學</a>。</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qgis.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">inlayer</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">dissolve_layer</span><span class="p">)</span>
@@ -345,40 +324,34 @@ dissolved region.</p>
 <span class="n">unique_values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">[</span><span class="n">dissolve_field</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span>
 <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">inlayer</span><span class="p">)])</span>
 
-<span class="k">print</span> <span class="n">unique_values</span>
+<span class="nb">print</span> <span class="n">unique_values</span>
 </pre></div>
 </div>
 <img alt="../_images/753.png" class="align-center" src="../_images/753.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">在寫程式碼的過程中，接收和處理程式產生的錯誤是非常重要的。地理運算的腳本可以直接在內建的 Python 主控台中除錯，只要點選 <span class="menuselection">附加元件 ‣ Python 主控台</span> 即可打開它。開啟之後，在 <span class="guilabel">地理運算工具箱</span> 中找到我們的腳本，然後點兩下以開始執行程式。</p>
-</li>
+<li><p>在寫程式碼的過程中，接收和處理程式產生的錯誤是非常重要的。地理運算的腳本可以直接在內建的 Python 主控台中除錯，只要點選 <span class="menuselection">附加元件 ‣ Python 主控台</span> 即可打開它。開啟之後，在 <span class="guilabel">地理運算工具箱</span> 中找到我們的腳本，然後點兩下以開始執行程式。</p></li>
 </ol>
 <img alt="../_images/851.png" class="align-center" src="../_images/851.png" />
 <ol class="arabic simple" start="9">
-<li><p class="first">在 <span class="guilabel">dissolve field</span> 中選擇 <code class="docutils literal"><span class="pre">SUBREGION</span></code>，接下來因為我們還沒有在腳本中加入任何有關加總的處理，<span class="guilabel">sum field</span> 那邊可以隨便選擇一個欄位。按下 <span class="guilabel">Run</span>。</p>
-</li>
+<li><p>在 <span class="guilabel">dissolve field</span> 中選擇 <code class="docutils literal notranslate"><span class="pre">SUBREGION</span></code>，接下來因為我們還沒有在腳本中加入任何有關加總的處理，<span class="guilabel">sum field</span> 那邊可以隨便選擇一個欄位。按下 <span class="guilabel">Run</span>。</p></li>
 </ol>
 <img alt="../_images/950.png" class="align-center" src="../_images/950.png" />
 <ol class="arabic simple" start="10">
-<li><p class="first">你會看到錯誤訊息出現，不過這是可預期的，因為我們的腳本還沒完成，並不會產生任何輸出檔。</p>
-</li>
+<li><p>你會看到錯誤訊息出現，不過這是可預期的，因為我們的腳本還沒完成，並不會產生任何輸出檔。</p></li>
 </ol>
 <img alt="../_images/1049.png" class="align-center" src="../_images/1049.png" />
 <ol class="arabic simple" start="11">
-<li><p class="first">在 QGIS 主視窗中，可以看到腳本輸出到 Python 主控台的訊息。在程式執行時，列印出一些新產生的變數對於除錯非常有幫助。</p>
-</li>
+<li><p>在 QGIS 主視窗中，可以看到腳本輸出到 Python 主控台的訊息。在程式執行時，列印出一些新產生的變數對於除錯非常有幫助。</p></li>
 </ol>
 <img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
 <ol class="arabic simple" start="12">
-<li><p class="first">讓我們繼續編輯腳本吧。以右鍵點選腳本，選擇 <span class="guilabel">編輯腳本</span>。</p>
-</li>
+<li><p>讓我們繼續編輯腳本吧。以右鍵點選腳本，選擇 <span class="guilabel">編輯腳本</span>。</p></li>
 </ol>
 <img alt="../_images/1249.png" class="align-center" src="../_images/1249.png" />
 <ol class="arabic simple" start="13">
-<li><p class="first">輸入下面的程式碼，就可完成腳本。注意我們使用的是 QGIS 提供的地理運算庫 <code class="docutils literal"><span class="pre">processing.runalg()</span></code> 中的「融合」演算法。</p>
-</li>
+<li><p>輸入下面的程式碼，就可完成腳本。注意我們使用的是 QGIS 提供的地理運算庫 <code class="docutils literal notranslate"><span class="pre">processing.runalg()</span></code> 中的「融合」演算法。</p></li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary to hold values from the sum field</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary to hold values from the sum field</span>
 <span class="n">sum_unique_values</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">processing</span><span class="o">.</span><span class="n">features</span><span class="p">(</span><span class="n">inlayer</span><span class="p">)]</span>
 
@@ -406,24 +379,21 @@ dissolved region.</p>
 </div>
 <img alt="../_images/1347.png" class="align-center" src="../_images/1347.png" />
 <ol class="arabic simple" start="14">
-<li><p class="first">重新啟動腳本，在 <span class="guilabel">dissolve field</span> 中選擇 <code class="docutils literal"><span class="pre">SUBREGION</span></code>，<span class="guilabel">sum field</span> 選擇 <code class="docutils literal"><span class="pre">POP_EST</span></code>，按下 <span class="guilabel">Run</span>。</p>
-</li>
+<li><p>重新啟動腳本，在 <span class="guilabel">dissolve field</span> 中選擇 <code class="docutils literal notranslate"><span class="pre">SUBREGION</span></code>，<span class="guilabel">sum field</span> 選擇 <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code>，按下 <span class="guilabel">Run</span>。</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">註解</p>
-<p class="last">處理所花費的時間依照你的作業系統而定，可能要花上 10 分鐘。</p>
+<p class="admonition-title">備註</p>
+<p>處理所花費的時間依照你的作業系統而定，可能要花上 10 分鐘。</p>
 </div>
 <img alt="../_images/1446.png" class="align-center" src="../_images/1446.png" />
 <ol class="arabic simple" start="15">
-<li><p class="first">處理完成後，可以使用 <span class="guilabel">識別圖徵</span> 工具在任一多邊形上按一下，你就會看到新的 <code class="docutils literal"><span class="pre">SUM</span></code> 屬性值就是所有原本的多邊形的 <code class="docutils literal"><span class="pre">POP_EST</span></code> 值的總和。</p>
-</li>
+<li><p>處理完成後，可以使用 <span class="guilabel">識別圖徵</span> 工具在任一多邊形上按一下，你就會看到新的 <code class="docutils literal notranslate"><span class="pre">SUM</span></code> 屬性值就是所有原本的多邊形的 <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> 值的總和。</p></li>
 </ol>
 <img alt="../_images/1544.png" class="align-center" src="../_images/1544.png" />
 <ol class="arabic simple" start="16">
-<li><p class="first">現在你會看到在輸出檔中，其他的欄位依舊存在，但因為我們執行的是融合處理，這些欄位代表的值會與新的多邊形圖徵無法對上。因此，我們要再次回到 <span class="guilabel">腳本編輯器</span> 中，然後加入以下的程式碼以刪除除了 <code class="docutils literal"><span class="pre">SUM</span></code> 與用來融合的屬性欄位名稱之外的所有屬性欄位。按下 <span class="guilabel">儲存</span> 鈕，然後關閉視窗。</p>
-</li>
+<li><p>現在你會看到在輸出檔中，其他的欄位依舊存在，但因為我們執行的是融合處理，這些欄位代表的值會與新的多邊形圖徵無法對上。因此，我們要再次回到 <span class="guilabel">腳本編輯器</span> 中，然後加入以下的程式碼以刪除除了 <code class="docutils literal notranslate"><span class="pre">SUM</span></code> 與用來融合的屬性欄位名稱之外的所有屬性欄位。按下 <span class="guilabel">儲存</span> 鈕，然後關閉視窗。</p></li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Delete all fields except dissolve field and the newly created &#39;SUM&#39; field.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Delete all fields except dissolve field and the newly created &#39;SUM&#39; field.</span>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">startEditing</span><span class="p">()</span>
 
 <span class="n">fields_to_delete</span> <span class="o">=</span> <span class="p">[</span><span class="n">fid</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">fields</span><span class="p">()))</span> <span class="k">if</span> <span class="n">fid</span> <span class="o">!=</span> <span class="n">new_field_index</span> <span class="ow">and</span> <span class="n">fid</span> <span class="o">!=</span> <span class="n">dissolve_field_index</span><span class="p">]</span>
@@ -435,45 +405,38 @@ dissolved region.</p>
 </div>
 <img alt="../_images/1640.png" class="align-center" src="../_images/1640.png" />
 <ol class="arabic simple" start="17">
-<li><p class="first">處理框架還有一個隱藏功能，那就是我們可以只針對圖層中選取的區域做處理，當你只想要處理圖層中的某個子集合時非常方便。其原理是我們的腳本使用 <code class="docutils literal"><span class="pre">processing.features()</span></code> 來讀取圖徵，但這個方法其實只會讀取選取的圖徵。接下來就讓我們來示範看看，首先要建立選取範圍，請點選 <span class="guilabel">使用表示式選取圖徵</span>。</p>
-</li>
+<li><p>處理框架還有一個隱藏功能，那就是我們可以只針對圖層中選取的區域做處理，當你只想要處理圖層中的某個子集合時非常方便。其原理是我們的腳本使用 <code class="docutils literal notranslate"><span class="pre">processing.features()</span></code> 來讀取圖徵，但這個方法其實只會讀取選取的圖徵。接下來就讓我們來示範看看，首先要建立選取範圍，請點選 <span class="guilabel">使用表示式選取圖徵</span>。</p></li>
 </ol>
 <img alt="../_images/1737.png" class="align-center" src="../_images/1737.png" />
 <ol class="arabic simple" start="18">
-<li><p class="first">輸入以下的表達式，按下 <span class="guilabel">選取</span> 之後，就可把南北美洲選取起來，</p>
-</li>
+<li><p>輸入以下的表達式，按下 <span class="guilabel">選取</span> 之後，就可把南北美洲選取起來，</p></li>
 </ol>
-<div class="highlight-none"><div class="highlight"><pre><span></span>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
 </pre></div>
 </div>
-<img alt="../_images/1837.png" class="align-center" src="../_images/1837.png" />
+<img alt="../_images/1836.png" class="align-center" src="../_images/1836.png" />
 <ol class="arabic simple" start="19">
-<li><p class="first">你會看到選取的圖徵已經變成黃色顯示。在 <code class="docutils literal"><span class="pre">dissolve_with_sum</span></code> 腳本上按右鍵然後選擇 <span class="guilabel">執行</span>。</p>
-</li>
+<li><p>你會看到選取的圖徵已經變成黃色顯示。在 <code class="docutils literal notranslate"><span class="pre">dissolve_with_sum</span></code> 腳本上按右鍵然後選擇 <span class="guilabel">執行</span>。</p></li>
 </ol>
 <img alt="../_images/1931.png" class="align-center" src="../_images/1931.png" />
 <ol class="arabic simple" start="20">
-<li><p class="first">選擇與之前相同的輸入參數，然後按下 <span class="guilabel">Run</span>。</p>
-</li>
+<li><p>選擇與之前相同的輸入參數，然後按下 <span class="guilabel">Run</span>。</p></li>
 </ol>
-<img alt="../_images/2024.png" class="align-center" src="../_images/2024.png" />
+<img alt="../_images/2023.png" class="align-center" src="../_images/2023.png" />
 <ol class="arabic simple" start="22">
-<li><p class="first">新的 <code class="docutils literal"><span class="pre">output_layer</span></code> 會加入 QGIS 中，它只包含了在輸入圖層選取範圍中融合的圖徵。另外，新的 <code class="docutils literal"><span class="pre">output_layer</span></code> 也如預期所示，只含有 2 個欄位。</p>
-</li>
+<li><p>新的 <code class="docutils literal notranslate"><span class="pre">output_layer</span></code> 會加入 QGIS 中，它只包含了在輸入圖層選取範圍中融合的圖徵。另外，新的 <code class="docutils literal notranslate"><span class="pre">output_layer</span></code> 也如預期所示，只含有 2 個欄位。</p></li>
 </ol>
 <img alt="../_images/2141.png" class="align-center" src="../_images/2141.png" />
 <ol class="arabic simple" start="23">
-<li><p class="first">最後的工作是要為此演算法添加說明文字（很重要！），處理框架本身提供了良好的工具作為協助。前往 <span class="guilabel">腳本編輯器</span> 然後點選 <span class="guilabel">編輯腳本說明</span> 鈕。</p>
-</li>
+<li><p>最後的工作是要為此演算法添加說明文字（很重要！），處理框架本身提供了良好的工具作為協助。前往 <span class="guilabel">腳本編輯器</span> 然後點選 <span class="guilabel">編輯腳本說明</span> 鈕。</p></li>
 </ol>
 <img alt="../_images/2225.png" class="align-center" src="../_images/2225.png" />
 <ol class="arabic simple" start="24">
-<li><p class="first">填上每個不同元素的說明細節，然後按下 <span class="guilabel">確定</span>。現在這些說明就可以在開啟演算法後顯示的視窗中的 <span class="guilabel">Help</span> 分頁出現，以供所有使用者查閱。</p>
-</li>
+<li><p>填上每個不同元素的說明細節，然後按下 <span class="guilabel">確定</span>。現在這些說明就可以在開啟演算法後顯示的視窗中的 <span class="guilabel">Help</span> 分頁出現，以供所有使用者查閱。</p></li>
 </ol>
-<img alt="../_images/2322.png" class="align-center" src="../_images/2322.png" />
+<img alt="../_images/2321.png" class="align-center" src="../_images/2321.png" />
 <p>以下放上完整的腳本供各位參考，你也可以依照個人需求編輯調整此檔案。</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">##dissolve_layer=vector</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##dissolve_layer=vector</span>
 <span class="c1">##dissolve_field=field dissolve_layer</span>
 <span class="c1">##sum_field=field dissolve_layer</span>
 <span class="c1">##output_layer=output vector</span>
@@ -546,8 +509,8 @@ dissolved region.</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      最後更新於 1月 07, 2021。<br/>
+      使用 <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 創建。<br/>
     </p>
   </div>
 </footer>

@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="ko">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>폴리곤내부의 점 분석 &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>폴리곤내부의 점 분석 &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="search" title="검색" href="../search.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -47,8 +34,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -59,7 +45,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html"><img src="../_static/logo.png">
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -258,14 +244,14 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="points-in-polygon-analysis">
 <h1>폴리곤내부의 점 분석<a class="headerlink" href="#points-in-polygon-analysis" title="제목 주소">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">주석</p>
-<p class="last">In QGIS3, you can perform this analysis using the <code class="docutils literal"><span class="pre">Join</span> <span class="pre">attributes</span> <span class="pre">by</span> <span class="pre">location</span> <span class="pre">(summary)</span></code> tool in the Processing Toolbox. Use the polygon layer as the <span class="guilabel">Input Layer</span>, the point layer as the <span class="guilabel">Join layer</span> and <code class="docutils literal"><span class="pre">count</span></code>  as the <span class="guilabel">Summaries to calculate</span>. See <a class="reference internal" href="3/performing_spatial_joins.html"><em>공간 결합 수행 (QGIS3)</em></a> tutorial for step-by-step instructions.</p>
+<p class="admonition-title">참고</p>
+<p>In QGIS3, you can perform this analysis using the <code class="docutils literal notranslate"><span class="pre">Join</span> <span class="pre">attributes</span> <span class="pre">by</span> <span class="pre">location</span> <span class="pre">(summary)</span></code> tool in the Processing Toolbox. Use the polygon layer as the <span class="guilabel">Input Layer</span>, the point layer as the <span class="guilabel">Join layer</span> and <code class="docutils literal notranslate"><span class="pre">count</span></code>  as the <span class="guilabel">Summaries to calculate</span>. See <a class="reference internal" href="3/performing_spatial_joins.html"><span class="doc">공간 결합 수행 (QGIS3)</span></a> tutorial for step-by-step instructions.</p>
 </div>
 <p>GIS의 힘은 여러 데이터 소스를 한꺼번에 같이 분석하는데 있습니다. 종종 찾고있는 답은 수많은 다른 레이어에 있고 이런 정보를 추출하고 컴파일하기 위한 분석을 할 필요가 있습니다.  그러한 유형의 분석이  <a href="#id1"><span class="problematic" id="id2">**</span></a>Points-in-Polygon**입니다. 폴리곤 레이어와 포인트 레이어를 가지고 있을때 그리고 얼만나 많이 혹은 어떤 저들이 각 폴리곤의 경계내에 있는지를 알고자 할때 이 분석방법을 사용할 수 있습니다.</p>
 <div class="section" id="overview-of-the-task">
@@ -280,73 +266,63 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 below:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">ne_10m_admin_0_countries.zip</a></p>
-<p>데이터 출저: <a class="reference internal" href="credits.html#ngdc" id="id1">[NGDC]</a> <a class="reference internal" href="credits.html#naturalearth" id="id2">[NATURALEARTH]</a></p>
+<p>데이터 출저: <a class="reference internal" href="credits.html#ngdc" id="id1"><span>[NGDC]</span></a> <a class="reference internal" href="credits.html#naturalearth" id="id2"><span>[NATURALEARTH]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
 <ol class="arabic simple">
-<li><p class="first">메뉴 레이어 &#8211;&gt; 구분자로 분리된 텍스트 레이어 추가 :menuselection:<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer &#8211;&gt; Add Delimited Text Layer`를 열고 다운로드한 <a href="#id3"><span class="problematic" id="id4">``</span></a>signif.txt``파일을 찾습니다.</p>
-</li>
+<li><p>메뉴 레이어 –&gt; 구분자로 분리된 텍스트 레이어 추가 :menuselection:<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer –&gt; Add Delimited Text Layer`를 열고 다운로드한 <a href="#id3"><span class="problematic" id="id4">``</span></a>signif.txt``파일을 찾습니다.</p></li>
 </ol>
 <img alt="../_images/1179.png" class="align-center" src="../_images/1179.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">이것은 탭으로 구분된 파일 <a href="#id1"><span class="problematic" id="id2">*</span></a>tab-delimited file*이므로 파일 포맷 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>File format`에 탭  :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Tab`을 선택합니다. X필드 :guilabel:<a href="#id7"><span class="problematic" id="id8">`</span></a>X field`와 Y필드 :guilabel:<a href="#id9"><span class="problematic" id="id10">`</span></a>Y field`는 자동적으로 나타납니다. :guilabel:<a href="#id11"><span class="problematic" id="id12">`</span></a>OK`를 클릭합니다.</p>
-</li>
+<li><p>이것은 탭으로 구분된 파일 <a href="#id1"><span class="problematic" id="id2">*</span></a>tab-delimited file*이므로 파일 포맷 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>File format`에 탭  :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Tab`을 선택합니다. X필드 :guilabel:<a href="#id7"><span class="problematic" id="id8">`</span></a>X field`와 Y필드 :guilabel:<a href="#id9"><span class="problematic" id="id10">`</span></a>Y field`는 자동적으로 나타납니다. :guilabel:<a href="#id11"><span class="problematic" id="id12">`</span></a>OK`를 클릭합니다.</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">주석</p>
-<p class="last">파일은 QGIS로 불러오기를 시도하면서 에러메세지를 를 보게됩니다. 이것들은 유효한 에러이고 파일의 몇 행은 불러들여지지 않을 것입니다. 이 예제에서는 에러를 무시할 수 있습니다.</p>
+<p class="admonition-title">참고</p>
+<p>파일은 QGIS로 불러오기를 시도하면서 에러메세지를 를 보게됩니다. 이것들은 유효한 에러이고 파일의 몇 행은 불러들여지지 않을 것입니다. 이 예제에서는 에러를 무시할 수 있습니다.</p>
 </div>
 <img alt="../_images/2137.png" class="align-center" src="../_images/2137.png" />
 <ol class="arabic simple" start="3">
-<li><p class="first">지진 데이터셋은 위도/경도 좌표를 가지므로 좌표계선택 <span class="guilabel">Coordinate Reference System Selector</span> 다이알로그에서 좌표계로 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>WGS 84 EPSG:436`를 선택합니다.</p>
-</li>
+<li><p>지진 데이터셋은 위도/경도 좌표를 가지므로 좌표계선택 <span class="guilabel">Coordinate Reference System Selector</span> 다이알로그에서 좌표계로 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>WGS 84 EPSG:436`를 선택합니다.</p></li>
 </ol>
 <img alt="../_images/376.png" class="align-center" src="../_images/376.png" />
 <ol class="arabic simple" start="4">
-<li>The earthquake point layer would now be loaded and displayed in QGIS. Let&#8217;s
+<li><p>The earthquake point layer would now be loaded and displayed in QGIS. Let’s
 also open the Countries layer. Go to <span class="menuselection">Layer ‣ Add Vector
-Layer</span>.  Browse to the downloaded <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries.zip</span></code> file and
-click <span class="guilabel">Open</span>. Select the <code class="docutils literal"><span class="pre">ne_10m_admin_0_countries.shp</span></code> as the
-layer in the <span class="guilabel">Select layers to add...</span> dialog.</li>
+Layer</span>.  Browse to the downloaded <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.zip</span></code> file and
+click <span class="guilabel">Open</span>. Select the <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.shp</span></code> as the
+layer in the <span class="guilabel">Select layers to add…</span> dialog.</p></li>
 </ol>
 <img alt="../_images/454.png" class="align-center" src="../_images/454.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">메뉴 벡터 &#8211;&gt; 분석 도구 &#8211;&gt; 폴리곤의 점 :menuselection:<a href="#id1"><span class="problematic" id="id2">`</span></a>Vector &#8211;&gt; Analysis Tools &#8211;&gt; Point in Polygon`을 클릭합니다.</p>
-</li>
+<li><p>메뉴 벡터 –&gt; 분석 도구 –&gt; 폴리곤의 점 :menuselection:<a href="#id1"><span class="problematic" id="id2">`</span></a>Vector –&gt; Analysis Tools –&gt; Point in Polygon`을 클릭합니다.</p></li>
 </ol>
 <img alt="../_images/555.png" class="align-center" src="../_images/555.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">팝업창에서 폴리곤 레이어와 포인트 레이어를 각각 선택합니다. 출력 레이어에  <a href="#id1"><span class="problematic" id="id2">``</span></a>earthquake_per_coutry.shp``를 입력하고  :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭합니다.</p>
-</li>
+<li><p>팝업창에서 폴리곤 레이어와 포인트 레이어를 각각 선택합니다. 출력 레이어에  <a href="#id1"><span class="problematic" id="id2">``</span></a>earthquake_per_coutry.shp``를 입력하고  :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭합니다.</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">주석</p>
-<p class="last">OK를 누른 후 기다립니다. QGIS는 결과를 계산하기까지 최대 10분이 소요될 수 있습니다.</p>
+<p class="admonition-title">참고</p>
+<p>OK를 누른 후 기다립니다. QGIS는 결과를 계산하기까지 최대 10분이 소요될 수 있습니다.</p>
 </div>
 <ol class="arabic simple" start="7">
-<li><p class="first">레이어를 TOC에 추가할 것을 물어보면 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Yes`를 클릭하십시오.</p>
-</li>
+<li><p>레이어를 TOC에 추가할 것을 물어보면 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Yes`를 클릭하십시오.</p></li>
 </ol>
 <img alt="../_images/751.png" class="align-center" src="../_images/751.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first">TOC에 새로운 렝어가 추가되는 것을 보게될 것입니다. 레이어를 우측클릭하여 속성 테이블을 열고 속성테이블 열기 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Open Attribute Table`를 선택합니다.</p>
-</li>
+<li><p>TOC에 새로운 렝어가 추가되는 것을 보게될 것입니다. 레이어를 우측클릭하여 속성 테이블을 열고 속성테이블 열기 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Open Attribute Table`를 선택합니다.</p></li>
 </ol>
 <img alt="../_images/849.png" class="align-center" src="../_images/849.png" />
 <ol class="arabic simple" start="9">
-<li><p class="first">속성 테이블에서 <a href="#id1"><span class="problematic" id="id2">``</span></a>PNTCNT``라는 이름의 새로운 필드명을 주목하게 됩니다. 이것은 각 폴리곤내에 포함된 지진레이어에서 점의 갯수를 계산한 것입니다.</p>
-</li>
+<li><p>속성 테이블에서 <a href="#id1"><span class="problematic" id="id2">``</span></a>PNTCNT``라는 이름의 새로운 필드명을 주목하게 됩니다. 이것은 각 폴리곤내에 포함된 지진레이어에서 점의 갯수를 계산한 것입니다.</p></li>
 </ol>
 <img alt="../_images/948.png" class="align-center" src="../_images/948.png" />
 <ol class="arabic simple" start="10">
-<li><p class="first">답을 얻기 위해 <a href="#id1"><span class="problematic" id="id2">``</span></a>PNTCNT``필드를 정렬하면 가장 수가 높은 나라가 답이 됩니다. 내림차순으로 정렬하기 위해 <a href="#id3"><span class="problematic" id="id4">``</span></a>PNTCNT``열을 2번 클릭합니다. 그것을 선택하기 위하여 첫번째 행을 클릭하고 속성 테이블을 닫습니다.</p>
-</li>
+<li><p>답을 얻기 위해 <a href="#id1"><span class="problematic" id="id2">``</span></a>PNTCNT``필드를 정렬하면 가장 수가 높은 나라가 답이 됩니다. 내림차순으로 정렬하기 위해 <a href="#id3"><span class="problematic" id="id4">``</span></a>PNTCNT``열을 2번 클릭합니다. 그것을 선택하기 위하여 첫번째 행을 클릭하고 속성 테이블을 닫습니다.</p></li>
 </ol>
 <img alt="../_images/1047.png" class="align-center" src="../_images/1047.png" />
 <ol class="arabic simple" start="11">
-<li><p class="first">QGIS 창으로 되돌아가면 한 객체가 노란색으로 밝게 빛나는 것을 보게됩니다. 이것이 속성테이블에서 가장 점이 많아서 선택한 행과 연결된 객체입니다. 객체 확인  :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Identify`툴을 선택하고 폴리곤을 클릭합니다. 유효한 지진빈도가 가장 높은 국가가 중국  <a href="#id3"><span class="problematic" id="id4">**</span></a>China**임을 볼 수 있습니다.</p>
-</li>
+<li><p>QGIS 창으로 되돌아가면 한 객체가 노란색으로 밝게 빛나는 것을 보게됩니다. 이것이 속성테이블에서 가장 점이 많아서 선택한 행과 연결된 객체입니다. 객체 확인  :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Identify`툴을 선택하고 폴리곤을 클릭합니다. 유효한 지진빈도가 가장 높은 국가가 중국  <a href="#id3"><span class="problematic" id="id4">**</span></a>China**임을 볼 수 있습니다.</p></li>
 </ol>
 <img alt="../_images/1180.png" class="align-center" src="../_images/1180.png" />
 <p>중국이 가장 많은 주요 지진 횟수를 가지고 있다는 것이 2가지 데이터셋의 간단한 분석에서 명확해 졌습니다. 국가의 인구와 면적을 고려하여 분석을 더욱 개선하고 반대로 주요 지진의 영향을 가장 덜 받는 국가를 찾아 낼 수도 있습니다.</p>
@@ -375,8 +351,8 @@ layer in the <span class="guilabel">Select layers to add...</span> dialog.</li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      최종 업데이트: Dec 01, 2020<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      최종 업데이트: 1월 07, 2021<br/>
+      <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 버전으로 생성되었습니다.<br/>
     </p>
   </div>
 </footer>

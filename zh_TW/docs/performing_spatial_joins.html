@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh_TW">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>空間連接 &mdash; QGIS Tutorials and Tips</title>
-    
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>空間連接 &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/united/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="QGIS Tutorials and Tips" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="search" title="搜尋" href="../search.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
@@ -47,8 +34,7 @@
 </script>
 
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -59,7 +45,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html"><img src="../_static/logo.png">
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
           QGIS Tutorials and Tips</a>
         <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
       </div>
@@ -258,38 +244,35 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 </form>
         </div>
       </div>
-    <div class="col-md-9">
+    <div class="body col-md-9 content" role="main">
       
 
   <div class="section" id="performing-spatial-joins">
-<h1>空間連接<a class="headerlink" href="#performing-spatial-joins" title="Permalink to this headline">¶</a></h1>
+<h1>空間連接<a class="headerlink" href="#performing-spatial-joins" title="本標題的永久連結">¶</a></h1>
 <div class="admonition warning">
-<p class="first admonition-title">警告</p>
-<p class="last">本教學已經過時，如需閱讀新的版本請前往 <a class="reference internal" href="3/performing_spatial_joins.html"><em>空間連接 (QGIS3)</em></a>。</p>
+<p class="admonition-title">警告</p>
+<p>本教學已經過時，如需閱讀新的版本請前往 <a class="reference internal" href="3/performing_spatial_joins.html"><span class="doc">空間連接 (QGIS3)</span></a>。</p>
 </div>
 <p>空間連接是個經典的 GIS 課題：如何基於空間關係，把相關屬性值從一個圖層轉到另一個圖層？在 QGIS 中，有個稱為 <strong>由空間連結屬性</strong> 的工具，可以實現此一功能。</p>
 <div class="section" id="overview-of-the-task">
-<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
+<h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="本標題的永久連結">¶</a></h2>
 <p>我們要使用 2 個圖層，分別為紐約市鄰里的邊界，以及紐約市護理之家的所在地。最終目標是使用空間連接，找出每個區的護理之家的總乘載人數。</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
+<h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="本標題的永久連結">¶</a></h3>
 <ul class="simple">
-<li><p class="first">從圖層的屬性表格中刪除整欄</p>
-</li>
+<li><p>從圖層的屬性表格中刪除整欄</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>取得資料<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<h2>取得資料<a class="headerlink" href="#get-the-data" title="本標題的永久連結">¶</a></h2>
 <p><a class="reference external" href="https://data.cityofnewyork.us/">NYC Open Data Portal</a> 是紐約市不錯的免費資料來源。</p>
 <ol class="arabic simple">
-<li><p class="first">你可以使用介面上的 <code class="docutils literal"><span class="pre">Export</span></code> 鈕下載 <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Borough Boundaries</a> 的 zip 檔。</p>
-</li>
+<li><p>你可以使用介面上的 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 鈕下載 <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Borough Boundaries</a> 的 zip 檔。</p></li>
 </ol>
 <img alt="../_images/1172.png" class="align-center" src="../_images/1172.png" />
 <ol class="arabic simple" start="2">
-<li><p class="first">使用介面上的 <code class="docutils literal"><span class="pre">Export</span></code> 鈕下載 <a class="reference external" href="https://data.cityofnewyork.us/Health/Nursing-Homes/9tqc-rnkr">Nursing Homes</a> 的 zip 檔。</p>
-</li>
+<li><p>使用介面上的 <code class="docutils literal notranslate"><span class="pre">Export</span></code> 鈕下載 <a class="reference external" href="https://data.cityofnewyork.us/Health/Nursing-Homes/9tqc-rnkr">Nursing Homes</a> 的 zip 檔。</p></li>
 </ol>
 <img alt="../_images/2132.png" class="align-center" src="../_images/2132.png" />
 <p>為了方便起見，你也可以直接用下面的連結下載：</p>
@@ -297,65 +280,53 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/OEM_NursingHomes_001.zip">OEM_NursingHomes_001.zip</a></p>
 </div>
 <div class="section" id="procedure">
-<h2>操作流程<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
+<h2>操作流程<a class="headerlink" href="#procedure" title="本標題的永久連結">¶</a></h2>
 <ol class="arabic simple" start="3">
-<li><p class="first">選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>，選擇剛才下載的 <code class="docutils literal"><span class="pre">nybb_12c.zip</span></code> ，然後按 <span class="guilabel">開啟</span>。</p>
-</li>
+<li><p>選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>，選擇剛才下載的 <code class="docutils literal notranslate"><span class="pre">nybb_12c.zip</span></code> ，然後按 <span class="guilabel">開啟</span>。</p></li>
 </ol>
 <img alt="../_images/372.png" class="align-center" src="../_images/372.png" />
 <ol class="arabic simple" start="4">
-<li><p class="first">選擇 <code class="docutils literal"><span class="pre">nybb.shp</span></code> 圖層並點選 <span class="guilabel">確定</span>。</p>
-</li>
+<li><p>選擇 <code class="docutils literal notranslate"><span class="pre">nybb.shp</span></code> 圖層並點選 <span class="guilabel">確定</span>。</p></li>
 </ol>
 <img alt="../_images/450.png" class="align-center" src="../_images/450.png" />
 <ol class="arabic simple" start="5">
-<li><p class="first">對另一個檔案 <code class="docutils literal"><span class="pre">OEM_NursingHomes_001.zip</span></code> 重複步驟 3 與 4，載入 <code class="docutils literal"><span class="pre">OEM_NursingHomes_001.shp</span></code> 圖層。兩個圖層都載入後，右鍵點選 <code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code> 圖層然後選擇 <span class="guilabel">開啟屬性表格</span>。</p>
-</li>
+<li><p>對另一個檔案 <code class="docutils literal notranslate"><span class="pre">OEM_NursingHomes_001.zip</span></code> 重複步驟 3 與 4，載入 <code class="docutils literal notranslate"><span class="pre">OEM_NursingHomes_001.shp</span></code> 圖層。兩個圖層都載入後，右鍵點選 <code class="docutils literal notranslate"><span class="pre">OEM_NursingHomes_001</span></code> 圖層然後選擇 <span class="guilabel">開啟屬性表格</span>。</p></li>
 </ol>
 <img alt="../_images/551.png" class="align-center" src="../_images/551.png" />
 <ol class="arabic simple" start="6">
-<li><p class="first">查閱每個圖徵的屬性，由於我們要計算的是每個區護理之家的總承載人數，因此我們可使用 <strong>Capacity</strong> （乘載人數）屬性來連接行政區的邊界圖層。</p>
-</li>
+<li><p>查閱每個圖徵的屬性，由於我們要計算的是每個區護理之家的總承載人數，因此我們可使用 <strong>Capacity</strong> （乘載人數）屬性來連接行政區的邊界圖層。</p></li>
 </ol>
 <img alt="../_images/649.png" class="align-center" src="../_images/649.png" />
 <ol class="arabic simple" start="7">
-<li><p class="first">選擇 <span class="menuselection">向量 ‣ 資料管理工具 ‣ 由空間連結（Join）屬性</span>。</p>
-</li>
+<li><p>選擇 <span class="menuselection">向量 ‣ 資料管理工具 ‣ 由空間連結（Join）屬性</span>。</p></li>
 </ol>
 <img alt="../_images/748.png" class="align-center" src="../_images/748.png" />
 <ol class="arabic simple" start="8">
-<li><p class="first"><span class="guilabel">目標向量圖層</span> 是我們要加入新屬性的圖層，因此在本教學中為區邊界的 <code class="docutils literal"><span class="pre">nybb</span></code> 圖層。而 <span class="guilabel">結合（Join）向量圖層</span> 則是護理之家的分布圖層 <code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code>。由於我們想要把所有在同一區的護理之家乘載人數加總，因此請選擇 <span class="guilabel">相交圖徵概要</span> 然後選擇 <span class="guilabel">總合</span>。輸出檔命名為 <code class="docutils literal"><span class="pre">nyc_borough_join.shp</span></code>，在 <span class="guilabel">輸出表格</span> 一欄中，選擇 <span class="guilabel">保留所有紀錄</span>。</p>
-</li>
+<li><p><span class="guilabel">目標向量圖層</span> 是我們要加入新屬性的圖層，因此在本教學中為區邊界的 <code class="docutils literal notranslate"><span class="pre">nybb</span></code> 圖層。而 <span class="guilabel">結合（Join）向量圖層</span> 則是護理之家的分布圖層 <code class="docutils literal notranslate"><span class="pre">OEM_NursingHomes_001</span></code>。由於我們想要把所有在同一區的護理之家乘載人數加總，因此請選擇 <span class="guilabel">相交圖徵概要</span> 然後選擇 <span class="guilabel">總合</span>。輸出檔命名為 <code class="docutils literal notranslate"><span class="pre">nyc_borough_join.shp</span></code>，在 <span class="guilabel">輸出表格</span> 一欄中，選擇 <span class="guilabel">保留所有紀錄</span>。</p></li>
 </ol>
 <img alt="../_images/846.png" class="align-center" src="../_images/846.png" />
 <ol class="arabic simple" start="9">
-<li><p class="first">處理結束時，程式會問你要不要把圖層加入 TOC （QGIS 主視窗），選擇 <span class="guilabel">是</span>。新的圖層 <code class="docutils literal"><span class="pre">nyc_borough_join</span></code> 含有從 <code class="docutils literal"><span class="pre">nybb</span></code> 複製過來的圖徵，而且屬性已與 <code class="docutils literal"><span class="pre">OEM_NursingHomes_001</span></code> 連接完成。右鍵點選新圖層，選擇 <span class="guilabel">開啟屬性表格</span>。</p>
-</li>
+<li><p>處理結束時，程式會問你要不要把圖層加入 TOC （QGIS 主視窗），選擇 <span class="guilabel">是</span>。新的圖層 <code class="docutils literal notranslate"><span class="pre">nyc_borough_join</span></code> 含有從 <code class="docutils literal notranslate"><span class="pre">nybb</span></code> 複製過來的圖徵，而且屬性已與 <code class="docutils literal notranslate"><span class="pre">OEM_NursingHomes_001</span></code> 連接完成。右鍵點選新圖層，選擇 <span class="guilabel">開啟屬性表格</span>。</p></li>
 </ol>
 <img alt="../_images/945.png" class="align-center" src="../_images/945.png" />
 <ol class="arabic simple" start="10">
-<li><p class="first">可以看到屬性表中出現了新的欄位 <strong>SUMCapacit</strong>，這就是原本屬於同一區的護理之家的 <strong>Capacity</strong> 屬性加總。</p>
-</li>
+<li><p>可以看到屬性表中出現了新的欄位 <strong>SUMCapacit</strong>，這就是原本屬於同一區的護理之家的 <strong>Capacity</strong> 屬性加總。</p></li>
 </ol>
 <img alt="../_images/1044.png" class="align-center" src="../_images/1044.png" />
 <ol class="arabic simple" start="11">
-<li><p class="first">我們已經找到想要的資訊了，但是在輸出中還存在著其他我們不需要的欄位，讓我們來清理一下。點選 <span class="guilabel">切換編輯模式</span>，然後選擇 <span class="guilabel">刪除欄</span> 按鈕。</p>
-</li>
+<li><p>我們已經找到想要的資訊了，但是在輸出中還存在著其他我們不需要的欄位，讓我們來清理一下。點選 <span class="guilabel">切換編輯模式</span>，然後選擇 <span class="guilabel">刪除欄</span> 按鈕。</p></li>
 </ol>
 <img alt="../_images/1173.png" class="align-center" src="../_images/1173.png" />
 <ol class="arabic simple" start="12">
-<li><p class="first">在 <span class="guilabel">刪除屬性</span> 視窗中按下 <code class="kbd docutils literal"><span class="pre">Control+A</span></code> 以選擇所有欄位，然後按住 <code class="kbd docutils literal"><span class="pre">Control</span></code> 鍵，取消選取你想保留的屬性，最後按下 <span class="guilabel">確定</span>。</p>
-</li>
+<li><p>在 <span class="guilabel">刪除屬性</span> 視窗中按下 <kbd class="kbd docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Control</kbd>+<kbd class="kbd docutils literal notranslate">A</kbd></kbd> 以選擇所有欄位，然後按住 <kbd class="kbd docutils literal notranslate">Control</kbd> 鍵，取消選取你想保留的屬性，最後按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
 <img alt="../_images/1245.png" class="align-center" src="../_images/1245.png" />
 <ol class="arabic simple" start="13">
-<li><p class="first">回到屬性表格，再次按下 <span class="guilabel">切換編輯模式</span> 以儲存剛才的更動。</p>
-</li>
+<li><p>回到屬性表格，再次按下 <span class="guilabel">切換編輯模式</span> 以儲存剛才的更動。</p></li>
 </ol>
 <img alt="../_images/1343.png" class="align-center" src="../_images/1343.png" />
 <ol class="arabic simple" start="14">
-<li><p class="first">回到 QGIS 主畫面中，我們可以使用 <span class="guilabel">識別圖徵</span> 工具，驗證輸出檔中每個區的圖徵只具有我們想要的屬性。</p>
-</li>
+<li><p>回到 QGIS 主畫面中，我們可以使用 <span class="guilabel">識別圖徵</span> 工具，驗證輸出檔中每個區的圖徵只具有我們想要的屬性。</p></li>
 </ol>
 <img alt="../_images/1442.png" class="align-center" src="../_images/1442.png" />
 </div>
@@ -383,8 +354,8 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      最後更新日期是 Dec 01, 2020.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.6.<br/>
+      最後更新於 1月 07, 2021。<br/>
+      使用 <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 創建。<br/>
     </p>
   </div>
 </footer>
