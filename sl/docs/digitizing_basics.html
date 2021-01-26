@@ -284,43 +284,43 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <ol class="arabic simple">
 <li><p>Izberite ukaz <span class="menuselection">Layer ‣ Add Raster Layer</span>. Poiščite pobrano datoteko <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02.tif</span></code> in kliknite <span class="guilabel">Open</span>.</p></li>
 </ol>
-<img alt="../_images/1153.png" class="align-center" src="../_images/1153.png" />
+<img alt="../_images/1155.png" class="align-center" src="../_images/1155.png" />
 <ol class="arabic simple" start="2">
 <li><p>Gre za veliko rastrsko sliko in morda boste opazili počasen prikaz med zoomiranjem in premikanjem na rastru. QGIS vsebuje elegantno rešitev, s katero močno pospešimo prikaze rastrov - ustvarjanje <strong>piramidnih slojev (Image Pyramids)</strong>. Program pripravi sliko v različnih ločljivostih, tako imenovane piramidne ploščice, in nato prikazuje te namesto polnega rastra. Gibanje po karti je zato veliko bolj gladko, prikaz pa hitrejši. Desno kliknite sloj <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02</span></code> in izberite <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/2106.png" class="align-center" src="../_images/2106.png" />
+<img alt="../_images/2122.png" class="align-center" src="../_images/2122.png" />
 <ol class="arabic simple" start="3">
 <li><p>Izberite kartico <span class="guilabel">Pyramids</span>. Pritisnite in držite tipko <kbd class="kbd docutils literal notranslate">Ctrl</kbd> ter izberite vse ločljivosti, ki jih ponuja plošča <span class="guilabel">Resolutions</span>. Postite ostale nastavitve tako kot so in kliknite gump <span class="guilabel">Build pyramids</span>. Ko se postopek konča, kliknite <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/358.png" class="align-center" src="../_images/358.png" />
+<img alt="../_images/362.png" class="align-center" src="../_images/362.png" />
 <ol class="arabic simple" start="4">
 <li><p>Ko se vrnete v glavno okno QGIS-a, uporabite orodje <span class="guilabel">Zoom</span> in približajte območje <em>Hagley Park</em> v Christchurchu. To je park, ki ga bomo digitalizirali.</p></li>
 </ol>
-<img alt="../_images/440.png" class="align-center" src="../_images/440.png" />
+<img alt="../_images/441.png" class="align-center" src="../_images/441.png" />
 <ol class="arabic simple" start="5">
 <li><p>Preden začnemo, moramo pripraviti pravilne privzete <strong>možnosti za digitalizacijo</strong>. Izberite meni <span class="menuselection">Settings ‣ Options…</span>.</p></li>
 </ol>
-<img alt="../_images/540.png" class="align-center" src="../_images/540.png" />
+<img alt="../_images/541.png" class="align-center" src="../_images/541.png" />
 <ol class="arabic simple" start="6">
 <li><p>Izberite zavihek <span class="guilabel">Digitizing</span> v pogovornem oknu <span class="guilabel">Options</span>. Nastavite <span class="guilabel">Default snap mode</span> na <span class="guilabel">To vertex and segment</span>. S tem bomo pri digitalizaciji točke prilepili na najbližja vozlišča (vertekse) ali linijske segmente. Primerno je nastaviti tudi <span class="guilabel">Default snapping tolerance</span> in <span class="guilabel">Search radius for vertex edits</span> v piksel namesto enote karte. S tem ostane razdalja <em>lepljenja</em> enaka, ne glede na stopnjo zooma. Ustrezno vrednost je potrebno izbrati glede na ločljivost zaslona. Kliknite <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/638.png" class="align-center" src="../_images/638.png" />
+<img alt="../_images/639.png" class="align-center" src="../_images/639.png" />
 <ol class="arabic simple" start="7">
 <li><p>Tako smo se pripravili na digitalizacijo. Najprej bomo ustvarili sloj cest in digitalizirali ceste okrog parka. Izberite <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer…</span>. Izberete lahko tudi <span class="guilabel">New Shapefile Layer…</span>, če želite. Spatialite je odprt format prostorskih podatkovnih zbirk, ki je podoben ESRIjevemu zapisu geodatabase. Podatkovna zbirka Spatialite je shranjena v eni sami datoteki in lahko vsebuje podatke različnih tipov (točke, linije in poligone) ter tudi neprostorske sloje. Zaradi take oblike zapisa lahko datoteko precej laže hot shapefile premikamo in kopiramo. V vadnici bomo ustvarili nekaj poligonskih in nekaj linijskih slojev, zato je Spatialite še posebej prikladen zapis. Če želite lahko sloje oblike spatialite kadarkoli pretvorite v shape ali katerikoli drug zapis.</p></li>
 </ol>
-<img alt="../_images/738.png" class="align-center" src="../_images/738.png" />
+<img alt="../_images/739.png" class="align-center" src="../_images/739.png" />
 <ol class="arabic simple" start="8">
 <li><p>V pogovornem oknu <span class="guilabel">New Spatialite Layer</span> kliknite gumb <span class="guilabel">…</span> in sloj shranite v datoteko <code class="docutils literal notranslate"><span class="pre">nztopo.sqlite</span></code>. Kot <span class="guilabel">Layer name</span> določite <code class="docutils literal notranslate"><span class="pre">Roads</span></code> in za <span class="guilabel">Type</span> izberite <code class="docutils literal notranslate"><span class="pre">Line</span></code>. Topografska karta je v koordinatnem sistemu CRS <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>, zato tega istega izberemo za sloj cest. Preverite, da je vklopljeno polje <span class="guilabel">Create an autoincrementing primary key</span>. S tem bomo v atributni tabeli ustvarili polje <strong>pkuid</strong> in vsakemu objektu samodejno priredili enoznačen numerični id. Ko ustvarjate sloj, se morate odločiti tudi katere atribute bo imel. Naš sloj cest bo imel dva - ime in razred. Za <span class="guilabel">Name</span> novega atributa izberite <code class="docutils literal notranslate"><span class="pre">Name</span></code> v razdelku <span class="guilabel">New attribute</span> in kliknite <span class="guilabel">Add to attribute list</span>.</p></li>
 </ol>
-<img alt="../_images/837.png" class="align-center" src="../_images/837.png" />
+<img alt="../_images/838.png" class="align-center" src="../_images/838.png" />
 <ol class="arabic simple" start="9">
 <li><p>Podobno ustvarite atribut <code class="docutils literal notranslate"><span class="pre">Class</span></code> tipa <span class="guilabel">Text data</span>. Kliknite <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/938.png" class="align-center" src="../_images/938.png" />
+<img alt="../_images/939.png" class="align-center" src="../_images/939.png" />
 <ol class="arabic simple" start="10">
 <li><p>Ko se sloj naloži, kliknite gumb <span class="guilabel">Toggle Editing</span> in sloj boste lahko začeli urejati.</p></li>
 </ol>
-<img alt="../_images/1036.png" class="align-center" src="../_images/1036.png" />
+<img alt="../_images/1037.png" class="align-center" src="../_images/1037.png" />
 <ol class="arabic simple" start="11">
 <li><p>Kliknite gumb <span class="guilabel">Add feature</span>. Klinite na zemljevid da dodaste prvo vozlišče (točko). Sledite cesti in dodajate vozlišča. Ko zaključite del ceste, desno kliknite in s tem objekt dokončajte.</p></li>
 </ol>
@@ -328,47 +328,47 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <p class="admonition-title">Opomba</p>
 <p>Med urejanjem lahko uporabljate kolesce na miški za približevanje in oddaljevanje. Lahko tudi držite gumb za vrtenje in se s tem premikate naokrog.</p>
 </div>
-<img alt="../_images/1154.png" class="align-center" src="../_images/1154.png" />
+<img alt="../_images/1156.png" class="align-center" src="../_images/1156.png" />
 <ol class="arabic simple" start="12">
 <li><p>Ko zaključite dodajanje objekta z desnim klikom, s pojavi pogovorno okno <span class="guilabel">Attributes</span>. Tu lahko vpišete atribute novo ustvarjenega objekta. Ker se polje <strong>pkuid</strong> ustvarja samo, vanj ne moremo vpisati vrednosti. Pustimo praznega in v polje z imenom vpišemo ime ceste, tako kot je prikazano na karti. Dodamo lahko tudi razred ceste. Kliknite <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1237.png" class="align-center" src="../_images/1237.png" />
+<img alt="../_images/1238.png" class="align-center" src="../_images/1238.png" />
 <ol class="arabic simple" start="13">
 <li><p>Privzeti sloj novo ustvarjenega sloja je tanka črta. Spremenimo ga, da bomo laže digitalizirali naslednje ceste. Desno kliknite sloj <code class="docutils literal notranslate"><span class="pre">Roads</span></code> in izberite <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/1336.png" class="align-center" src="../_images/1336.png" />
+<img alt="../_images/1337.png" class="align-center" src="../_images/1337.png" />
 <ol class="arabic simple" start="14">
 <li><p>Izberite kartico <span class="guilabel">Style</span> v pogovornem oknu <span class="guilabel">Layer Properties</span>. Določite debelejši slog, recimo med že določenimi je primeren <span class="guilabel">Primary</span>. Kliknite <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1435.png" class="align-center" src="../_images/1435.png" />
+<img alt="../_images/1436.png" class="align-center" src="../_images/1436.png" />
 <ol class="arabic simple" start="15">
 <li><p>Digitalizirano cesto bomo zdaj precej bolje videli. Kliknite <span class="guilabel">Save Layer Edits</span> da potrdite spremembe in se te zapišejo na disk.</p></li>
 </ol>
-<img alt="../_images/1534.png" class="align-center" src="../_images/1534.png" />
+<img alt="../_images/1535.png" class="align-center" src="../_images/1535.png" />
 <ol class="arabic simple" start="16">
 <li><p>Preden nadaljujemo z digitalizacijo, bomo spremenili še nekatere dodatne nastavitve, ki so potrebne, da končni podatkovni sloj ne bo imel napak. Pojdite v <span class="menuselection">Settings ‣ Snapping Options…</span>.</p></li>
 </ol>
-<img alt="../_images/1630.png" class="align-center" src="../_images/1630.png" />
+<img alt="../_images/1631.png" class="align-center" src="../_images/1631.png" />
 <ol class="arabic simple" start="17">
 <li><p>V pogovornem oknu <span class="guilabel">Snapping Options</span> preverite, da je vključeno <span class="guilabel">Enable topological editing</span>. S tem bomo poskrbeli, da bodo imeli poligoni pravilne skupne meje. Prav tako mora biti vključeno <span class="guilabel">Enable snapping on intersection</span>, s katerim lahko <em>prilepimo</em> na vozlišča sloja, ki je v ozadju.</p></li>
 </ol>
-<img alt="../_images/1728.png" class="align-center" src="../_images/1728.png" />
+<img alt="../_images/1729.png" class="align-center" src="../_images/1729.png" />
 <ol class="arabic simple" start="18">
 <li><p>Zdaj lahko znova kliknete gumb <span class="guilabel">Add feature</span> in digitalizirate druge ceste v parku. Pazite, da kliknete gumb <span class="guilabel">Save Edits</span>, ko dodate nov objekt. S tem redno shranjujete svoje delo. Uporabno orodje pri digitalizaciji je namenjeno delu z <strong>vozlišči (node)</strong>. Kliknite gumb <span class="guilabel">Node Tool</span>.</p></li>
 </ol>
-<img alt="../_images/1827.png" class="align-center" src="../_images/1827.png" />
+<img alt="../_images/1828.png" class="align-center" src="../_images/1828.png" />
 <ol class="arabic simple" start="19">
 <li><p>Ko je orodje aktivirano, lahko kliknete na katerikoli objekt in prikazala se bodo njegova vozlišča. Posamezno oglišče spremeni barvo, ko ga izberete. Z miško ga lahko kliknete in premikate. S tem lahko objekt popravite potem, ko je bil že ustvarjen. Izbrano oglišče lahko tudi izbrišete tako, da pritisnete tipko <kbd class="kbd docutils literal notranslate">Delete</kbd> (<kbd class="kbd docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd> na Macih).</p></li>
 </ol>
-<img alt="../_images/1922.png" class="align-center" src="../_images/1922.png" />
+<img alt="../_images/1923.png" class="align-center" src="../_images/1923.png" />
 <ol class="arabic simple" start="20">
 <li><p>Ko boste digitalizirali vse ceste, zaključite urejanje tako, da kliknite gumb <span class="guilabel">Toggle Editing</span>.</p></li>
 </ol>
-<img alt="../_images/2015.png" class="align-center" src="../_images/2015.png" />
+<img alt="../_images/2016.png" class="align-center" src="../_images/2016.png" />
 <ol class="arabic simple" start="21">
 <li><p>V nadaljevanju bomo ustvarili poligon, s katerim bomo označili območje parka. Pojdite v meni <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer…</span>. Kot podatkovno zbirko v padajočem meniju izberite <code class="docutils literal notranslate"><span class="pre">nztopo.sqlite</span></code>. Nov sloj poimenujte <code class="docutils literal notranslate"><span class="pre">Parks</span></code>, za <span class="guilabel">Type</span> pa izberite <code class="docutils literal notranslate"><span class="pre">Polygon</span></code>. Sloj naj ima atribut ime, recimo <code class="docutils literal notranslate"><span class="pre">Name</span></code>. Kliknite <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/2121.png" class="align-center" src="../_images/2121.png" />
+<img alt="../_images/2123.png" class="align-center" src="../_images/2123.png" />
 <ol class="arabic simple" start="22">
 <li><p>Kliknite gumb <span class="guilabel">Add feature</span> in kliknite karto ter tako dodajte novo vozlišče. Digitalizirajte poligon in pokrijte celoten park. Pazite, da se dotikate vozlišč ceste in med cestami in parkom ni praznega prostora. Ko končate. Zaključite poligon z desnim klikom.</p></li>
 </ol>
@@ -376,11 +376,11 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <ol class="arabic simple" start="23">
 <li><p>V pogovornem oknu <span class="guilabel">Attributes</span> vpišite ime parka.</p></li>
 </ol>
-<img alt="../_images/2315.png" class="align-center" src="../_images/2315.png" />
+<img alt="../_images/2317.png" class="align-center" src="../_images/2317.png" />
 <ol class="arabic simple" start="24">
 <li><p>Poligonski sloji omogočajo dodatno možnost <strong>izogibanja presekom novih poligonov</strong>. Pojdite v <span class="menuselection">Settings ‣ Snapping Options…</span>. V stolpcu <span class="guilabel">Avoid Int</span> izberite možnost za sloj <code class="docutils literal notranslate"><span class="pre">Parks</span></code>. Kliknite <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/2415.png" class="align-center" src="../_images/2415.png" />
+<img alt="../_images/2416.png" class="align-center" src="../_images/2416.png" />
 <ol class="arabic simple" start="25">
 <li><p>Ponovno kliknite na <span class="guilabel">Add feature</span> in dodajte nov poligon. Z vključeno možnostjo  <a href="#id1"><span class="problematic" id="id2">**</span></a>Avoid intersections of new polygons* boste lahko dodali nov poligon, ne da bi vas skrbelo preklapljanje z obstoječimi sosednjimi.</p></li>
 </ol>
@@ -400,19 +400,19 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <ol class="arabic simple" start="29">
 <li><p>Digitalizacija stavb je zelo zapletena. Poleg tega je težko ročno dodajati vozlišča in ohranjati pravokotnost. Delo si bomo olajšali z uporabo vtičnika (plugin) z imenom <strong>Rectangles Ovals Digitizing</strong>. Poglejte <a class="reference internal" href="using_plugins.html"><span class="doc">Using Plugins</span></a>, kako iskati in namestiti vtičnike. Ko se vtičnik <strong>Rectangles Ovals Digitizing</strong> naloži, se bo pojavila nova orodjarna.</p></li>
 </ol>
-<img alt="../_images/2910.png" class="align-center" src="../_images/2910.png" />
+<img alt="../_images/2911.png" class="align-center" src="../_images/2911.png" />
 <ol class="arabic simple" start="30">
 <li><p>Približajte se območju s stavbami in kliknite <span class="guilabel">Rectangle by Extent</span> button. Kliknite in z miško narišite popoln pravokotnik. Podobno dodajte ostale stavbe.</p></li>
 </ol>
-<img alt="../_images/305.png" class="align-center" src="../_images/305.png" />
+<img alt="../_images/306.png" class="align-center" src="../_images/306.png" />
 <ol class="arabic simple" start="31">
 <li><p>Opazili boste, da niso vse stavbe v smeri sever jug, zato moramo pravokotnike risati pod kotom. Kliknite <span class="guilabel">Rectangle from center</span>.</p></li>
 </ol>
-<img alt="../_images/3112.png" class="align-center" src="../_images/3112.png" />
+<img alt="../_images/3113.png" class="align-center" src="../_images/3113.png" />
 <ol class="arabic simple" start="32">
 <li><p>Kliknite sredino stavbe in narišite pravokotnik v smeri sever jug.</p></li>
 </ol>
-<img alt="../_images/3211.png" class="align-center" src="../_images/3211.png" />
+<img alt="../_images/3212.png" class="align-center" src="../_images/3212.png" />
 <ol class="arabic simple" start="33">
 <li><p>Zdaj ga moramo zavrteti, da bo ustrezal stanju na karti. Orodje za vrtenje ne na voljo v orodjarni <strong>Advanced Digitizing</strong>. Desno kliknite kjerkoli v orodjarni in omogočite orodjarno <span class="guilabel">Advanced Digitizing</span>.</p></li>
 </ol>
@@ -420,19 +420,19 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <ol class="arabic simple" start="34">
 <li><p>Kliknite gumb <span class="guilabel">Rotate Feature(s)</span>.</p></li>
 </ol>
-<img alt="../_images/3410.png" class="align-center" src="../_images/3410.png" />
+<img alt="../_images/3411.png" class="align-center" src="../_images/3411.png" />
 <ol class="arabic simple" start="35">
 <li><p>Izberite orodje <span class="guilabel">Select Single feature</span>, da izberete samo poligon, ki ga želite vrteti. Ko izberete orodje <span class="guilabel">Rotate Feature(s)</span> boste opazili križec v sredini poligona. Kliknite križec in z miško zavrtite poligon. Pokazal se bo pregled novega stanja in ko ste zadovoljni s položajem spustite miško.</p></li>
 </ol>
-<img alt="../_images/359.png" class="align-center" src="../_images/359.png" />
+<img alt="../_images/3510.png" class="align-center" src="../_images/3510.png" />
 <ol class="arabic simple" start="36">
 <li><p>Shranite popravke in kliknite <span class="guilabel">Toggle Editing</span>, ko boste končali z digitalizacijo vseh stavb. Spremenite lahko vrstni red slojev.</p></li>
 </ol>
-<img alt="../_images/361.png" class="align-center" src="../_images/361.png" />
+<img alt="../_images/363.png" class="align-center" src="../_images/363.png" />
 <ol class="arabic simple" start="37">
 <li><p>Digitalizacija je zaključena. Lahko se še poigramo z oblikovanjem slojev, dodamo oznake in tako pripravimo karto na tisk ali dodatne analize.</p></li>
 </ol>
-<img alt="../_images/371.png" class="align-center" src="../_images/371.png" />
+<img alt="../_images/372.png" class="align-center" src="../_images/372.png" />
 </div>
 </div>
 
@@ -458,7 +458,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno jan. 07, 2021.<br/>
+      Zadnjič posodobljeno jan. 26, 2021.<br/>
       Narejeno s <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>

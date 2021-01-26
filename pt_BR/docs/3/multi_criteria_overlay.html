@@ -289,61 +289,61 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Navegue até o arquivos <code class="docutils literal notranslate"><span class="pre">assam.gpkg</span></code> no QGIS Browser. Expanda e arraste cada uma das 5 camadas de dados individuais para a tela do mapa. Você verá as camadas <code class="docutils literal notranslate"><span class="pre">boundary</span></code>, <code class="docutils literal notranslate"><span class="pre">roads</span></code>, <code class="docutils literal notranslate"><span class="pre">protected_regions</span></code>, <code class="docutils literal notranslate"><span class="pre">water_polygons</span></code> and <code class="docutils literal notranslate"><span class="pre">water_polylines</span></code> carregadas no painel <span class="guilabel">Layers</span> de camadas</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/190.png" class="align-center" src="../../_images/190.png" />
+<div><img alt="../../_images/199.png" class="align-center" src="../../_images/199.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>O primeiro passo na análise de sobreposição é converter cada camada de dados em Raster. Uma consideração importante é que todos os rasters devem ter a mesma extensão. Usaremos a camada `` limite ‘’ como extensão para todos os rasters. Vá para: menuselection: <cite>Processar -&gt; Caixa de Ferramentas</cite>. Pesquise e localize o algoritmo: menuelection: <cite>GDAL -&gt; Conversão de vetor -&gt; Converter vetor para raster (rasterizar)</cite> <a href="#id1"><span class="problematic" id="id2">`</span></a>. Clique duas vezes para iniciá-lo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/238.png" class="align-center" src="../../_images/238.png" />
+<div><img alt="../../_images/240.png" class="align-center" src="../../_images/240.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Na caixa de diálogo: guilabel: <cite>Converter vetor para raster (rasterizar)</cite>, selecione <code class="docutils literal notranslate"><span class="pre">roads</span></code> como a: guilabel: <cite>Camada de entrada</cite>. Queremos criar um raster de saída em que os valores de pixel sejam 1 onde há uma estrada e 0 onde não há estradas. Digite `` 1`` como o: guilabel: <cite>Um valor fixo to burn</cite>. As camadas de entrada estão em um CRS projetado métrico. Selecione <code class="docutils literal notranslate"><span class="pre">Unidades</span> <span class="pre">georreferenciadas</span></code> como: guilabel: <cite>Unidades de tamanho da saída</cite>. Definiremos a resolução do Raster de saída como 15 metros. Selecione `` 15`` como ambos: guilabel: <cite>Largura / resolução horizontal</cite> e: guilabel:` Altura / resolução vertical`. Em seguida, clique no botão: guilabel: <cite>…</cite> ao lado de: guilabel: <cite>Extensão da saída</cite> e selecione` <cite>boundary`</cite> para: guilabel:` Usar extensão da camada`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/329.png" class="align-center" src="../../_images/329.png" />
+<div><img alt="../../_images/330.png" class="align-center" src="../../_images/330.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Role para baixo e clique no botão de seta no: guilabel: <cite>Atribua um valor sem dados específicado às bandas de saída</cite>. Esse campo agora deve ser definido como <code class="docutils literal notranslate"><span class="pre">Não</span> <span class="pre">definido</span></code>. Isso é importante porque quando a calculadora raster (que usaremos mais tarde) encontra um pixel com valor não definido em qualquer camada, ela define a saída como não definido, resultando em uma saída incorreta. Defina o raster de saída: guilabel: <cite>Rasterizado</cite> como` <cite>raster_roads.tif`</cite> e clique em: guilabel:` Executar`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/415.png" class="align-center" src="../../_images/415.png" />
+<div><img alt="../../_images/416.png" class="align-center" src="../../_images/416.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Once the processing finishes, you will see a new layer <span class="guilabel">raster_roads</span> loaded in the <span class="guilabel">Layers</span> panel. The default styling will show pixels with roads as white and others as black. We want to convert other 4 vector layers to rasters as well. Rather than running the rasterize algorithm one-by-one, we can use the built-in batch-processing functionality to convert them all at once. See <a class="reference internal" href="batch_processing.html"><span class="doc">Batch Processing using Processing Framework (QGIS3)</span></a> tutorial to learn more about batch processing. Right-click the <code class="docutils literal notranslate"><span class="pre">Rasterize</span> <span class="pre">(vector</span> <span class="pre">to</span> <span class="pre">raster)</span></code> algorithm and select <span class="guilabel">Execute as Batch Process</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/515.png" class="align-center" src="../../_images/515.png" />
+<div><img alt="../../_images/516.png" class="align-center" src="../../_images/516.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Na caixa de diálogo: guilabel: <cite>Processamento em lote</cite>, clique no botão: guilabel:` … <cite>na primeira linha da coluna: guilabel:</cite> Camada de entrada`. Selecione as camadas `` boundary``, `` protected_regions``, `` water_polygons`` e `` water_polylines`` e clique em: guilabel: <cite>OK</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/615.png" class="align-center" src="../../_images/615.png" />
+<div><img alt="../../_images/616.png" class="align-center" src="../../_images/616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>Preencha os parâmetros com os mesmos valores que usamos na camada de estradas. Após preencher a primeira linha do parâmetro, use a opção: menuselection: <cite>Preenchimento automático -&gt; Preencher para baixo</cite> para adicionar o mesmo valor para todas as camadas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/714.png" class="align-center" src="../../_images/714.png" />
+<div><img alt="../../_images/715.png" class="align-center" src="../../_images/715.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>Na última coluna: guilabel: <cite>Rasterized</cite>, clique no botão: guilabel:` … <cite>na primeira linha. Selecione `</cite> Preencher com valores de parâmetros`` como: guilabel: <cite>modo de preenchimento automático</cite> e` <cite>Camada de entrada`</cite> como o: guilabel:` Parâmetro a ser usado`. Clique em: guilabel: <cite>OK</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/814.png" class="align-center" src="../../_images/814.png" />
+<div><img alt="../../_images/815.png" class="align-center" src="../../_images/815.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>Navegue até um diretório no seu computador e nomeie a camada como `` raster_``. A interface de processamento em lote completará automaticamente o nome com o nome da camada e preencherá todas as linhas. Verifique se a caixa: guilabel: <cite>Carregar camadas após a conclusão</cite> está marcada e clique em: guilabel:` OK`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/914.png" class="align-center" src="../../_images/914.png" />
+<div><img alt="../../_images/915.png" class="align-center" src="../../_images/915.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>Quando o processamento terminar, você terá 4 novas camadas raster carregadas no painel: guilabel: <cite>Camadas</cite>. Você notará que temos 2 camadas relacionadas à água - ambas representando água. Podemos mesclá-los para ter uma única camada representando áreas de água na região. Procure e localize: menuelection: <cite>Raster analysis -&gt; Raster calculator</cite> algoritmo na Processing Toolbox. Clique duas vezes para iniciá-lo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1014.png" class="align-center" src="../../_images/1014.png" />
+<div><img alt="../../_images/1015.png" class="align-center" src="../../_images/1015.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Digite a seguinte expressão na caixa: guilabel: <cite>Expressão</cite>. Você pode clicar na camada apropriada na caixa: guilabel: <cite>Layers</cite> para inserir automaticamente os nomes das camadas. Essa expressão significa que queremos somar os valores de pixel na primeira banda das duas camadas Raster de água. Clique no botão: guilabel: <cite>…</cite> ao lado de: guilabel: <cite>Camada(s) de referência e selecione</cite> <cite>raster_water_polygons`</cite> como a camada de referência. Nomeie a saída `` raster_water_merged.tif`` e clique em: guilabel: <cite>Run</cite>.</p></li>
@@ -352,13 +352,13 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;raster_water_polygons@1&quot; + &quot;raster_water_polylines@1&quot;
 </pre></div>
 </div>
-<img alt="../../_images/1118.png" class="align-center" src="../../_images/1118.png" />
+<img alt="../../_images/1119.png" class="align-center" src="../../_images/1119.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>A varredura resultante resultante terá pixels com o valor 1 para todas as áreas com água. Mas você notará que existem algumas regiões em que havia um polígono da água e uma polilinha da água. Essas áreas terão pixels com o valor 2 - o que não está correto. Podemos corrigi-lo com uma expressão simples. Abra: menuselection: <cite>Análise de varredura -&gt; Calculadora Raster</cite> novamente.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1215.png" class="align-center" src="../../_images/1215.png" />
+<div><img alt="../../_images/1216.png" class="align-center" src="../../_images/1216.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Digite a expressão a seguir, que atribuirá o valor 1 que corresponde à expressão e 0, caso contrário. Clique no botão: guilabel: <cite>…</cite> ao lado de: guilabel: <cite>Camada (s) de referência e selecione a camada</cite> <cite>raster_water_merged`</cite>. Nomeie a saída `` raster_water.tif`` e clique em: guilabel: <cite>Executar</cite>.</p></li>
@@ -367,25 +367,25 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;raster_water_merged@1&quot; &gt; 0
 </pre></div>
 </div>
-<img alt="../../_images/1314.png" class="align-center" src="../../_images/1314.png" />
+<img alt="../../_images/1315.png" class="align-center" src="../../_images/1315.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>A camada resultante `` raster_water`` agora possui pixels com apenas 0 e 1 valores.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1413.png" class="align-center" src="../../_images/1413.png" />
+<div><img alt="../../_images/1414.png" class="align-center" src="../../_images/1414.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>Agora que temos camadas que representam os pixels da estrada e da água, podemos gerar rasters de proximidade. Também são conhecidas como distâncias euclidianas - onde cada pixel do raster de saída representa a distância do pixel mais próximo no raster de entrada. Esse raster resultante pode ser usado para determinar as áreas adequadas que estão a uma certa distância da camada de entrada. Procure e localize o: menuelection: <cite>GDAL -&gt; Análise de dados Raster -&gt; Proximidade (distancia raster)</cite> algoritmo <a href="#id1"><span class="problematic" id="id2">`</span></a>. Clique duas vezes para iniciá-lo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1512.png" class="align-center" src="../../_images/1512.png" />
+<div><img alt="../../_images/1513.png" class="align-center" src="../../_images/1513.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Na caixa de diálogo: guilabel: <cite>Proximidade (distancia raster)</cite>, selecione `` raster_roads`` como a: guilabel: <cite>Camada de entrada</cite>. Escolha `` Coordenadas georreferenciadas`` como: guilabel: <cite>Unidades de distância</cite>. Como as camadas de entrada estão em um CRS projetado com metros como unidades, insira `` 5000`` (5 quilômetros) como: guilabel: <cite>Distância máxima a ser gerada</cite>. Certifique-se de que o valor: guilabel: <cite>Nodata a ser usado para o raster de proximidade de destino</cite> seja` <cite>Não definido`</cite>. Nomeie o arquivo de saída como `` roads_proximity.tif`` e clique em: guilabel: <cite>Run</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1611.png" class="align-center" src="../../_images/1611.png" />
+<div><img alt="../../_images/1612.png" class="align-center" src="../../_images/1612.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -395,19 +395,19 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Quando o processamento terminar, uma nova camada `` roads_proximity`` será adicionada ao painel: guilabel: <cite>Camadas</cite>. Para visualizá-lo melhor, vamos mudar o estilo padrão. Clique no botão: guilabel: <cite>Abra o painel Layer Styling</cite> no painel: guilabel:` Camadas`. Altere o valor: guilabel: <cite>Max</cite> para` <cite>5000`</cite> em: guilabel:` Gradiente de cor`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1712.png" class="align-center" src="../../_images/1712.png" />
+<div><img alt="../../_images/1713.png" class="align-center" src="../../_images/1713.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Repita o algoritmo: guilabel: <cite>Proximity (Raster Distance)</cite> para a camada `` raster_water`` com os mesmos parâmetros e nomeie a saída `` water_proximity.tif``.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1810.png" class="align-center" src="../../_images/1810.png" />
+<div><img alt="../../_images/1811.png" class="align-center" src="../../_images/1811.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Depois que o processamento terminar, você poderá aplicar o estilo semelhante ao anterior para visualizar melhor os resultados. Se você clicar em torno do raster resultante, verá que é um continuum de valores de 0 a 5000. Para usar esse raster na análise de sobreposição, devemos primeiro classificá-la novamente para criar valores discretos. Abra: menuselection: <cite>Análise de Raster -&gt; Calculadora Raster</cite> novamente.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
+<div><img alt="../../_images/1910.png" class="align-center" src="../../_images/1910.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
 <li><p>Queremos atribuir uma pontuação mais alta aos pixels próximos às estradas. Então, vamos usar o seguinte esquema.</p></li>
@@ -420,14 +420,14 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>100*(&quot;roads_proximity@1&quot;&lt;=1000) + 50*(&quot;roads_proximity@1&quot;&gt;1000)*(&quot;roads_proximity@1&quot;&lt;=5000) + 10*(&quot;roads_proximity@1&quot;&gt;5000)
 </pre></div>
 </div>
-<img alt="../../_images/207.png" class="align-center" src="../../_images/207.png" />
+<img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
 </li>
 </ul>
 <ol class="arabic simple" start="21">
 <li><p>Once the re-classification process finishes, a new layer <code class="docutils literal notranslate"><span class="pre">roads_reclass</span></code> will be added to the <span class="guilabel">Layers</span> panel. This layer has only 3 different values, 10, 50 and 100 indicating relative suitability of the pixels with regards to distance from roads. Open <span class="menuselection">Raster analysis ‣ Raster calculator</span> algorithm again.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2113.png" class="align-center" src="../../_images/2113.png" />
+<div><img alt="../../_images/2114.png" class="align-center" src="../../_images/2114.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>Repita o processo de reclassificação para a camada `` water_proximity``. Aqui o esquema será inverso, onde os pixels mais distantes da água terão uma pontuação mais alta.</p></li>
@@ -450,7 +450,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(&quot;roads_reclass@1&quot; + &quot;water_reclass@1&quot;)*(&quot;raster_protected_regions@1&quot;  !=  1 )*&quot;raster_boundary@1&quot;
 </pre></div>
 </div>
-<img alt="../../_images/239.png" class="align-center" src="../../_images/239.png" />
+<img alt="../../_images/2311.png" class="align-center" src="../../_images/2311.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -460,25 +460,25 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Quando o processamento terminar, a rasterização resultante `` overlay`` será adicionada ao painel: guilabel: <cite>Layers</cite>. Os valores de pixel nessa varredura variam de 0 a 200 - onde 0 é o menos adequado e 200 é a área mais adequada para o desenvolvimento. Clique no botão: guilabel: <cite>Abra o painel Layer Styling</cite> no painel: guilabel:` Layers`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/246.png" class="align-center" src="../../_images/246.png" />
+<div><img alt="../../_images/247.png" class="align-center" src="../../_images/247.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
 <li><p>Selecione o renderizador `` singleband_pseudocolor`` e a rampa de cor `` Spectral``. Clique em: guilabel: <cite>Classificar</cite> para aplicar a rampa de cores no raster.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/255.png" class="align-center" src="../../_images/255.png" />
+<div><img alt="../../_images/256.png" class="align-center" src="../../_images/256.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
 <li><p>Clique nos valores padrão das etiquetas ao lado de cada cor e insira as etiquetas apropriadas. Os rótulos também aparecerão como a legenda na camada `` overlay``.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/265.png" class="align-center" src="../../_images/265.png" />
+<div><img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
 <li><p>Camadas de varredura são grades retangulares. Queremos ocultar pixels fora do limite do estado. Uma maneira fácil de conseguir isso é aplicar um `` polígono invertido ‘’ renderizado na camada limite do vetor. Role para baixo no painel: guilabel: <cite>Layers</cite> e localize a camada` <cite>boundary`</cite>. Selecione `` Polígonos invertidos`` como renderizador e deixe outras opções como padrão.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/275.png" class="align-center" src="../../_images/275.png" />
+<div><img alt="../../_images/276.png" class="align-center" src="../../_images/276.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
 <li><p>Para que o efeito do renderizador seja mostrado, ele precisa estar da lista de camadas. Clique com o botão direito do mouse na camada `` boundary`` e selecione: guilabel: <cite>Mover para cima</cite>.</p></li>
@@ -490,7 +490,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Verifique a camada e a tela do mapa será atualizada para mostrar o raster `` overlay`` cortada na camada <code class="docutils literal notranslate"><span class="pre">boundary</span></code>. Esta é a saída final que mostra áreas dentro do estado que são adequadas para o desenvolvimento.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/294.png" class="align-center" src="../../_images/294.png" />
+<div><img alt="../../_images/295.png" class="align-center" src="../../_images/295.png" />
 </div></blockquote>
 </div>
 </div>
@@ -517,7 +517,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Última atualização em jan. 07, 2021.<br/>
+      Última atualização em jan. 26, 2021.<br/>
       Criado usando <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>

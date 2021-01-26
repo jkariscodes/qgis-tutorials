@@ -302,79 +302,79 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Localice el archivo descargado <code class="docutils literal notranslate"><span class="pre">Street_Centerlines.zip</span></code> en el panel <span class="guilabel">Explorador</span>. Expándalo y arrastre el archivo <code class="docutils literal notranslate"><span class="pre">Street_Centerlines.shp</span></code> a la pantalla. De forma similar, localice el archivo <code class="docutils literal notranslate"><span class="pre">Adult_Mental_Health_Providers.zip</span></code>, expándalo y agregue <code class="docutils literal notranslate"><span class="pre">Adult_Mental_Health_Providers.shp</span></code> a la pantalla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1100.png" class="align-center" src="../../_images/1100.png" />
+<div><img alt="../../_images/1101.png" class="align-center" src="../../_images/1101.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>A continuación, localice el archivo <code class="docutils literal notranslate"><span class="pre">Address_Points.zip</span></code>, expándalo y agregue <code class="docutils literal notranslate"><span class="pre">Address_Points.shp</span></code>. Verá bastantes puntos alrededor de la ciudad. Cada punto representa una dirección válida. No seleccionaremos aleatoriamente 1 punto en cada distrito para usarlo como puntos de origen. Esta técnica es llamada muestreo estratificado. Vaya a <span class="menuselection">Procesos ‣ Caja de Herramientas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/247.png" class="align-center" src="../../_images/247.png" />
+<div><img alt="../../_images/249.png" class="align-center" src="../../_images/249.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Busque y localice el algoritmo <span class="menuselection">Selección de Vector ‣ Extracción aleatoria dentro de subconjuntos</span></p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/332.png" class="align-center" src="../../_images/332.png" />
+<div><img alt="../../_images/334.png" class="align-center" src="../../_images/334.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">Address_Points</span></code> como la <span class="guilabel">Capa de Entrada</span>. Cada punto de dirección contiene un atributo llamado <code class="docutils literal notranslate"><span class="pre">WARD_2012</span></code> que tiene el número de distrito asociado con la dirección. Como queremos sólo 1 punto por distrito, usaremos ese atributo como el <span class="guilabel">ID field</span>. Defina <span class="guilabel">Número/porcentaje de entidades seleccionadas</span> como <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/417.png" class="align-center" src="../../_images/417.png" />
+<div><img alt="../../_images/418.png" class="align-center" src="../../_images/418.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Se agregará una nueva capa <code class="docutils literal notranslate"><span class="pre">Extraído</span> <span class="pre">(estratificado</span> <span class="pre">aleatorio)</span></code> al panel <span class="guilabel">Capas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/517.png" class="align-center" src="../../_images/517.png" />
+<div><img alt="../../_images/518.png" class="align-center" src="../../_images/518.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Desactive la visibilidad para la capa <code class="docutils literal notranslate"><span class="pre">Address_Points</span></code>. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">Extraído</span> <span class="pre">(estratificado</span> <span class="pre">aleatorio)</span></code> y seleccione <span class="guilabel">Renombrar capa</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/617.png" class="align-center" src="../../_images/617.png" />
+<div><img alt="../../_images/618.png" class="align-center" src="../../_images/618.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>Renombremos esta capa como <code class="docutils literal notranslate"><span class="pre">origin_points</span></code>. De forma similar, renombre la capa <code class="docutils literal notranslate"><span class="pre">Adult_Mental_Health_Providers</span></code> que representa las instalaciones sanitarias como <code class="docutils literal notranslate"><span class="pre">destination_points</span></code>. Nombrando de esta manera las capas facilita identificarlas en el procesamiento posterior. Vaya a <span class="menuselection">Procesos ‣ Caja de herramientas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/716.png" class="align-center" src="../../_images/716.png" />
+<div><img alt="../../_images/717.png" class="align-center" src="../../_images/717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>Localice el algoritmo <span class="menuselection">QNEAT3 ‣ Matrices de distancia ‣ OD Matrix from Layers as Table (m:n)</span>. Si no ve este algoritmo en la caja de herramientas, asegúrese que tiene instalado el complemento <strong>QNEAT3</strong>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/816.png" class="align-center" src="../../_images/816.png" />
+<div><img alt="../../_images/817.png" class="align-center" src="../../_images/817.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>Este algoritmo ayuda a encontrar las distancias a lo largo de la red entre el origen seleccionado y las capas destino. Seleccione <code class="docutils literal notranslate"><span class="pre">Street_Centerlines</span></code> como la <span class="guilabel">Capa de red</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">origin_points</span></code> como la <span class="guilabel">Capa de puntos Desde</span> y <code class="docutils literal notranslate"><span class="pre">OBJECTID</span></code> como el <span class="guilabel">Campo ID único de punto</span>. De forma similar, defina <code class="docutils literal notranslate"><span class="pre">destination_points</span></code> como la <span class="guilabel">Capa de punto Hacia</span> y <code class="docutils literal notranslate"><span class="pre">OBJECTID</span></code>  como el <span class="guilabel">Campo ID único de punto</span>. Defina el <span class="guilabel">Criterio de Optimización</span> como <code class="docutils literal notranslate"><span class="pre">Ruta</span> <span class="pre">más</span> <span class="pre">corta</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/916.png" class="align-center" src="../../_images/916.png" />
+<div><img alt="../../_images/917.png" class="align-center" src="../../_images/917.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>Como varias calles en la red son de sentido único, necesitaremos definir los <span class="guilabel">Parámetros avanzados</span> para especificar la dirección. Vea <a class="reference internal" href="basic_network_analysis.html"><span class="doc">Visualización y Enrutamiento Básico de Red (QGIS3)</span></a> para más detalles sobre cómo están estructurados estos atributos. Elija <code class="docutils literal notranslate"><span class="pre">DIRECTIONA</span></code> como el <span class="guilabel">Campo dirección</span>. Ingrese <code class="docutils literal notranslate"><span class="pre">Sentido</span> <span class="pre">Único</span> <span class="pre">(dirección</span> <span class="pre">Digitalización)</span></code> como el <span class="guilabel">Valor para la dirección hacia adelante</span>  y <code class="docutils literal notranslate"><span class="pre">Sentido</span> <span class="pre">Único</span> <span class="pre">(contrario</span> <span class="pre">a</span> <span class="pre">dirección</span> <span class="pre">Digitalización)</span></code> como el <span class="guilabel">Valor para la dirección hacia atrás</span>. Mantenga las otras opciones en sus valores predeterminados y clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1016.png" class="align-center" src="../../_images/1016.png" />
+<div><img alt="../../_images/1017.png" class="align-center" src="../../_images/1017.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Será agregada una nueva tabla llamada <code class="docutils literal notranslate"><span class="pre">Output</span> <span class="pre">OD</span> <span class="pre">Matrix</span></code> al panel <span class="guilabel">Capas</span>. Clic-derecho y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>. Verá que la tabla contiene <em>117</em> filas. Teníamos 9 puntos de origen y 13 puntos destino - por lo que la salida contiene <em>9x13 = 117</em> pares de orígenes y destinos. La columna <code class="docutils literal notranslate"><span class="pre">total_cost</span></code> contiene distancia en metros entre cada punto de origen y cada punto destino.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1120.png" class="align-center" src="../../_images/1120.png" />
+<div><img alt="../../_images/1121.png" class="align-center" src="../../_images/1121.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Para este tutorial, estamos interesados sólo en el punto de destino con la distancia más corta. Podemos crear una consulta SQL para escoger el destino con el <code class="docutils literal notranslate"><span class="pre">total_cost</span></code> menor entre todos los destinos. Vaya a <span class="menuselection">Base de Datos ‣ DB Manager..</span></p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1217.png" class="align-center" src="../../_images/1217.png" />
+<div><img alt="../../_images/1218.png" class="align-center" src="../../_images/1218.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>En el diálogo <span class="guilabel">DB Manager</span>, seleccione el <span class="menuselection">Capas Virtuales ‣ capas Proyecto ‣ Output OD Matrix</span> del panel a mano izquierda. Vea la documentación <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/virtual_layers.html">Capas virtuales</a> para aprender más. Clic en el botón <span class="guilabel">Ventana SQL</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1316.png" class="align-center" src="../../_images/1316.png" />
+<div><img alt="../../_images/1317.png" class="align-center" src="../../_images/1317.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Ingrese la siguiente consulta y clic en <span class="guilabel">Ejecutar</span>. Los resultados serán mostrados en el panel abajo. Como se espera, tenemos 9 filas en el resultado - el destino de ruta más corta para cada punto de origen. Marque y seleccione la <span class="guilabel">Columna con valores únicos</span> como <code class="docutils literal notranslate"><span class="pre">origin_id</span></code>. Ingrese <code class="docutils literal notranslate"><span class="pre">nearest_destinations</span></code> como el <span class="guilabel">Nombre de capa (prefijo)</span>. Clic <span class="guilabel">Cargar</span>.</p></li>
@@ -384,49 +384,49 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 from &#39;Output OD Matrix&#39; group by origin_id
 </pre></div>
 </div>
-<img alt="../../_images/1415.png" class="align-center" src="../../_images/1415.png" />
+<img alt="../../_images/1416.png" class="align-center" src="../../_images/1416.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>Se agregará una nueva capa <code class="docutils literal notranslate"><span class="pre">nearest_destinations</span></code> al panel <span class="guilabel">Capas</span>. Esta tabla tiene el resultado de nuestro análisis. El centro de salud mental más cercano para cada uno de los 9 puntos de origen. Intentemos unas pocas maneras diferentes para visualizar y validar estos resultados. Vaya a <span class="menuselection">Procesos ‣ Caja de herramientas</span>. Busque y localice el algoritmo <span class="menuselection">Unir atributos por valor de campo</span>. Haga doble-clic para iniciarlo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1514.png" class="align-center" src="../../_images/1514.png" />
+<div><img alt="../../_images/1515.png" class="align-center" src="../../_images/1515.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">origin_points</span></code> como la <span class="guilabel">Capa de entrada</span> y <code class="docutils literal notranslate"><span class="pre">OBJECTID</span></code> como el <span class="guilabel">Campo tabla</span>. Defina <code class="docutils literal notranslate"><span class="pre">nearest_destinations</span></code> como la <span class="guilabel">Capa entrada 2</span> y <code class="docutils literal notranslate"><span class="pre">origin_id</span></code> como el <span class="guilabel">Campo tabla 2</span>. Clic el botón <span class="guilabel">…</span> junto a <span class="guilabel">Campos capa 2 a copiar</span> y seleccione <code class="docutils literal notranslate"><span class="pre">destination_id</span></code> y <code class="docutils literal notranslate"><span class="pre">shortes_distance</span></code>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1613.png" class="align-center" src="../../_images/1613.png" />
+<div><img alt="../../_images/1614.png" class="align-center" src="../../_images/1614.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Se agregará una nueva <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer</span></code> al panel <span class="guilabel">Capas</span>. Esta capa tiene el atributo id del destino más cercano para cada punto de origen. Ahora podemos crear una visualización eje-radios usando esta capa. Busque el algoritmo <span class="menuselection">Análisis de vector ‣ Unir por líneas (líneas de eje)</span>. Clic-derecho para iniciarlo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1714.png" class="align-center" src="../../_images/1714.png" />
+<div><img alt="../../_images/1715.png" class="align-center" src="../../_images/1715.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">destination_points</span></code> como la <span class="guilabel">Capa de ejes</span> y <code class="docutils literal notranslate"><span class="pre">OBJECTID</span></code> como el <span class="guilabel">Campo ID de ejes</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer`</span> <span class="pre">como</span> <span class="pre">la</span> <span class="pre">:guilabel:`Capa</span> <span class="pre">de</span> <span class="pre">radios`</span> <span class="pre">y</span> <span class="pre">``destination_id</span></code> como el <span class="guilabel">Campo ID de radios</span>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1812.png" class="align-center" src="../../_images/1812.png" />
+<div><img alt="../../_images/1813.png" class="align-center" src="../../_images/1813.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Una vez que termine el proces, se agregará una nueva capa <code class="docutils literal notranslate"><span class="pre">Hub</span> <span class="pre">lines</span></code> al panel <span class="guilabel">Capas</span>. Esta capa muestra las línea que conectan cada origen con el destino más cercano.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1911.png" class="align-center" src="../../_images/1911.png" />
+<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
 <li><p>Note que a pesar de que las líneas que conectan el origen y el destino son rectas, el destino fue encontrado usando la distancia a lo largo de la red. Será una visualización más útil mostrar la ruta más corta real entre cada origen-destino. Al momento, no existe una manera fácil para general la ruta más corta entre múltiples pares origen-destino de la manera como generamos la matriz de distancia. Pero demostraré una manera para usar algo de script python para generar esta visualización. Primero, ejecutemos el algoritmo de la ruta más corta en 1 par. Localice el algoritmo <span class="menuselection">QNEAT3 ‣ Enrutamiento ‣ Ruta más corta (punto a punto)</span> e inícielo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
+<div><img alt="../../_images/209.png" class="align-center" src="../../_images/209.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
 <li><p>En el diálogo <span class="guilabel">Ruta más corta (Punto a Punto)</span>, seleccione <code class="docutils literal notranslate"><span class="pre">Street_Centerlines</span></code> como la <span class="guilabel">Capa vectorial que representa la red</span>. Mantenga la <span class="guilabel">Tipo de ruta a calcular</span> como <code class="docutils literal notranslate"><span class="pre">Más</span> <span class="pre">corto</span></code>. A continuación, necesitamos escoger un punto de inicio y final. Puede hacer clic en el botón <span class="guilabel">…</span> junto a <span class="guilabel">Punto de inicio</span> y clic en el punto de origen en el lienzo. De forma similar, seleccione el punto destino como el <span class="guilabel">Punto final</span>. Expanda la sección <span class="guilabel">Parámetros avanzados</span>. Elija <code class="docutils literal notranslate"><span class="pre">DIRECTIONA</span></code> como el <span class="guilabel">Campo de sentido</span>. Ingrese <code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> como el <span class="guilabel">Valor para sentido de avance</span> y <code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> como el <span class="guilabel">Valor para dirección hacia atrás</span>. Mantenga las otras opciones en sus valores predeterminados y clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2114.png" class="align-center" src="../../_images/2114.png" />
+<div><img alt="../../_images/2115.png" class="align-center" src="../../_images/2115.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>Una nueva capa <code class="docutils literal notranslate"><span class="pre">Shortes</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> se agregará al panel <span class="guilabel">Capas</span>. Verá que esta ruta sigue la red en vez de conectar el origen y destino con una línea recta. La razón que ejecutamos el algoritmo en 1 para es para identificar fácilemente los valores parámetro que podemos usar en nuestro script. Seleccione ambos <code class="docutils literal notranslate"><span class="pre">Hub</span> <span class="pre">lines</span></code> y <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>, clic-derecho y seleccione <span class="guilabel">Quitar capa</span>. Clic el botón <span class="guilabel">Historia</span> en la <span class="guilabel">Caja de herramientas Procesos</span>.</p></li>
@@ -438,25 +438,25 @@ from &#39;Output OD Matrix&#39; group by origin_id
 <li><p>Elija el algoritmo más arriba y verá el comando completo mostrado en el panel abajo. Copie el comando y clic en <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2310.png" class="align-center" src="../../_images/2310.png" />
+<div><img alt="../../_images/2312.png" class="align-center" src="../../_images/2312.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
 <li><p>Vaya a <span class="menuselection">Complementos ‣ Consola de Python</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/248.png" class="align-center" src="../../_images/248.png" />
+<div><img alt="../../_images/2410.png" class="align-center" src="../../_images/2410.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
 <li><p>Clic el botón <span class="guilabel">Mostrar Editor</span> en la <span class="guilabel">Consola de Python</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/256.png" class="align-center" src="../../_images/256.png" />
+<div><img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
 <li><p>En la ventana de editor, copie/pegue el siguiente script. Este script usa los valores de parámetro de la historia de procesamiento que vimos más antes. Clic en el botón <span class="guilabel">Ejecutar Script</span> para iniciar la ejecución.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
+<div><img alt="../../_images/267.png" class="align-center" src="../../_images/267.png" />
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">origin_layer</span> <span class="o">=</span>  <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">mapLayersByName</span><span class="p">(</span><span class="s1">&#39;origin_points&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">destination_layer</span> <span class="o">=</span>  <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">mapLayersByName</span><span class="p">(</span><span class="s1">&#39;destination_points&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">matrix</span> <span class="o">=</span>  <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">mapLayersByName</span><span class="p">(</span><span class="s1">&#39;nearest_destinations&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -494,7 +494,7 @@ from &#39;Output OD Matrix&#39; group by origin_id
 <li><p>Este script tomará unos pocos minutos para ejecutarse. Una vez terminado, verá 9 nuevas capas llamadas <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>. Fusionemos estas rutas en una sola capa. Encuentre el algoritmo <span class="menuselection">Vector general ‣ Fusionar capas vector</span> e inícielo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/276.png" class="align-center" src="../../_images/276.png" />
+<div><img alt="../../_images/277.png" class="align-center" src="../../_images/277.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
 <li><p>Seleccione todas las 9 <code class="docutils literal notranslate"><span class="pre">capa</span> <span class="pre">Ruta</span> <span class="pre">Más</span> <span class="pre">Corta</span></code> como <span class="guilabel">Capas de entrada</span>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
@@ -506,7 +506,7 @@ from &#39;Output OD Matrix&#39; group by origin_id
 <li><p>Se creará una nueva capa <code class="docutils literal notranslate"><span class="pre">Merged</span></code> que contendrá la ruta más corta entre nuestros orígenes y destinos.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/295.png" class="align-center" src="../../_images/295.png" />
+<div><img alt="../../_images/296.png" class="align-center" src="../../_images/296.png" />
 </div></blockquote>
 </div>
 </div>
@@ -533,7 +533,7 @@ from &#39;Output OD Matrix&#39; group by origin_id
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en ene. 07, 2021.<br/>
+      Actualizado por última vez en ene. 26, 2021.<br/>
       Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>

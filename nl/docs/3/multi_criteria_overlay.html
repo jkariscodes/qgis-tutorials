@@ -289,61 +289,61 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Blader naar het gedownloade bestand <code class="docutils literal notranslate"><span class="pre">assam.gpkg</span></code> in QGIS Browser. Vergroot het en sleep elk van de 5 individuele gegevenslagen naar het kaartvenster. U zult de lagen <code class="docutils literal notranslate"><span class="pre">boundary</span></code>, <code class="docutils literal notranslate"><span class="pre">roads</span></code>, <code class="docutils literal notranslate"><span class="pre">protected_regions</span></code>, <code class="docutils literal notranslate"><span class="pre">water_polygons</span></code> en <code class="docutils literal notranslate"><span class="pre">water_polylines</span></code> zien geladen in het paneel <span class="guilabel">Lagen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/190.png" class="align-center" src="../../_images/190.png" />
+<div><img alt="../../_images/199.png" class="align-center" src="../../_images/199.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>De eerste stap in de overlay-analyse, is om elke gegevenslaag te converteren naar een raster. Een belangrijke overweging is dat alle rasters hetzelfde bereik moeten hebben. We zullen de laag <code class="docutils literal notranslate"><span class="pre">boundary</span></code> gebruiken als het bereik voor alle rasters. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>. Zoek naar en lokaliseer het algoritme <span class="menuselection">GDAL ‣ Vector conversie ‣ Rasteriseren (vector naar raster)`</span>. Dubbelklik er op om het te starten.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/238.png" class="align-center" src="../../_images/238.png" />
+<div><img alt="../../_images/240.png" class="align-center" src="../../_images/240.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>In het dialoogvenbster <span class="guilabel">Rasteriseren (vector naar raster)</span>, selecteer <code class="docutils literal notranslate"><span class="pre">roads</span></code> als de <span class="guilabel">Invoerlaag</span>. We willen een uitvoerraster maken met een pixelwaarde van 1 waar een weg is en 0 waar geen wegen zijn. Voer <code class="docutils literal notranslate"><span class="pre">1</span></code> in als de <span class="guilabel">Een vaste waarde om te branden</span>. De invoerlagen zijn in een geprojecteerd CRS met meters als de eenheid. Selecteer <code class="docutils literal notranslate"><span class="pre">Eenheden</span> <span class="pre">voor</span> <span class="pre">geoverwijzingen</span></code> als de <span class="guilabel">Eenheden grootte uitvoerraster</span>. We zullen de resolutie van het uitvoerraster instellen op 15 meters. Selecteer <code class="docutils literal notranslate"><span class="pre">15</span></code> voor zowel <span class="guilabel">Breedte/Horizontale resolutie</span> als <span class="guilabel">Hoogte/Verticale resolutie</span>. Klik vervolgens op de knop <span class="guilabel">…</span> naast <span class="guilabel">Bereik uitvoer</span> en selecteer <code class="docutils literal notranslate"><span class="pre">boundary</span></code> voor <span class="guilabel">Bereik gebruiken van</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/329.png" class="align-center" src="../../_images/329.png" />
+<div><img alt="../../_images/330.png" class="align-center" src="../../_images/330.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Scroll verder naar beneden en klik op de pijlknop in <span class="guilabel">Wijs een specifieke waarde Geen data toe aan de uitvoerbanden</span>. Dat veld zou nu moeten worden ingesteld op <code class="docutils literal notranslate"><span class="pre">Niet</span> <span class="pre">bepaald</span></code>. Dit is belangrijk omdat wanneer Rasterberekeningen (die we later zullen gebruiken) een pixel tegenkomt met een waarde Geen data in enige laag, stelt het ook de uitvoer in op Geen data, wat resulteert in een verkeerde uitvoer. Stel het uitvoerraster <span class="guilabel">Gerasteriseerd</span> in als <code class="docutils literal notranslate"><span class="pre">raster_roads.tif</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/415.png" class="align-center" src="../../_images/415.png" />
+<div><img alt="../../_images/416.png" class="align-center" src="../../_images/416.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Once the processing finishes, you will see a new layer <span class="guilabel">raster_roads</span> loaded in the <span class="guilabel">Layers</span> panel. The default styling will show pixels with roads as white and others as black. We want to convert other 4 vector layers to rasters as well. Rather than running the rasterize algorithm one-by-one, we can use the built-in batch-processing functionality to convert them all at once. See <a class="reference internal" href="batch_processing.html"><span class="doc">Massa verwerken met behulp van Framework Processing (QGIS 3)</span></a> tutorial to learn more about batch processing. Right-click the <code class="docutils literal notranslate"><span class="pre">Rasterize</span> <span class="pre">(vector</span> <span class="pre">to</span> <span class="pre">raster)</span></code> algorithm and select <span class="guilabel">Execute as Batch Process</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/515.png" class="align-center" src="../../_images/515.png" />
+<div><img alt="../../_images/516.png" class="align-center" src="../../_images/516.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Klik, in het dialoogvenster <span class="guilabel">Batch-processing</span>, op de knop <span class="guilabel">…</span> op de eerste regel van de kolom <span class="guilabel">Invoerlaag</span>. Selecteer de lagen <code class="docutils literal notranslate"><span class="pre">boundary</span></code>, <code class="docutils literal notranslate"><span class="pre">protected_regions</span></code>, <code class="docutils literal notranslate"><span class="pre">water_polygons</span></code> en <code class="docutils literal notranslate"><span class="pre">water_polylines</span></code> en klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/615.png" class="align-center" src="../../_images/615.png" />
+<div><img alt="../../_images/616.png" class="align-center" src="../../_images/616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>Vul de parameters in met dezelfde waarden als die we gebruikten voor de laag roads. Gebruik, na het vullen van de eerste regel van de parameter, de knop <span class="menuselection">Autom. vullen ‣ Naar beneden vullen</span> om dezelfde waarde voor alle lagen toe te voegen.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/714.png" class="align-center" src="../../_images/714.png" />
+<div><img alt="../../_images/715.png" class="align-center" src="../../_images/715.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>In de laatste kolom <span class="guilabel">Gerasteriseerd</span>, klik op de knop <span class="guilabel">…</span> op de eerste regel. Selecteer <code class="docutils literal notranslate"><span class="pre">Vullen</span> <span class="pre">met</span> <span class="pre">parameterwaarden</span></code> als de <span class="guilabel">Modus Automatisch vullen</span> en <code class="docutils literal notranslate"><span class="pre">Invoerlaag</span></code> als de <span class="guilabel">Parameter om te gebruiken</span>. Klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/814.png" class="align-center" src="../../_images/814.png" />
+<div><img alt="../../_images/815.png" class="align-center" src="../../_images/815.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>Blader naar een map op uw computer en noem de laag <code class="docutils literal notranslate"><span class="pre">raster_</span></code>. De interface voor Batch verwerken zal de naam automatisch compleet maken met de naam van de laag en alle regels vullen. Zorg er voor dat het vak <span class="guilabel">Lagen laden bij voltooien</span> is geselecteerd en klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/914.png" class="align-center" src="../../_images/914.png" />
+<div><img alt="../../_images/915.png" class="align-center" src="../../_images/915.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>Als de verwerking eenmaal is voltooid zult u 4 nieuwe rasterlagen hebben geladen in het paneel <span class="guilabel">Lagen</span>. U zult hebben opgemerkt dat we nu 2 watergerelateerde lagen hebben - die beide water weergeven. We kunnen ze samenvoegen oméén enkele laag te hebben die watergebieden in de regio weergeeft. Zoek naar en lokaliseer het algoritme <span class="menuselection">Raster analyse ‣ Raster calculator</span> in de Toolbox van Processing. Dubbelklik er op om het te starten.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1014.png" class="align-center" src="../../_images/1014.png" />
+<div><img alt="../../_images/1015.png" class="align-center" src="../../_images/1015.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Voer de volgende expressie in het vak <span class="guilabel">Expressie</span> in. U kunt klikken op de toepasselijke laag in het vak <span class="guilabel">Lagen</span> om de laagnamen automatisch in te voegen. Deze expressie betekent dat we de pixelwaarden in de eerste band van de beide waterrasters bij elkaar willen optellen. Klik op de knop <span class="guilabel">…</span> naast <span class="guilabel">Reference layer(s)</span> en selecteer <code class="docutils literal notranslate"><span class="pre">raster_water_polygons</span></code> als de verwijzingslaag. Noem de uitvoer <code class="docutils literal notranslate"><span class="pre">raster_water_merged.tif</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
@@ -352,13 +352,13 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;raster_water_polygons@1&quot; + &quot;raster_water_polylines@1&quot;
 </pre></div>
 </div>
-<img alt="../../_images/1118.png" class="align-center" src="../../_images/1118.png" />
+<img alt="../../_images/1119.png" class="align-center" src="../../_images/1119.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Het resulterende samengevoegde raster zal pixels hebben met de waarde 1 voor alle gebieden met water. Maar het zal u opvallen dat er sommige regio’s zijn waar zowel een waterpolygoon als een waterpolylijn was. Die gebieden zullen pixels hebben met de waarde 2 - wat niet juist is. We kunnen dit repareren met een eenvoudige expressie. Open het algoritme <span class="menuselection">Raster analyse ‣ Raster calculator</span> opnieuw.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1215.png" class="align-center" src="../../_images/1215.png" />
+<div><img alt="../../_images/1216.png" class="align-center" src="../../_images/1216.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Voer de volgende expressie in die de waarde 1 zal toewijzen als de expressie overeenkomt en 0 als dat niet zo is. Klik op de knop <span class="guilabel">…</span> naast <span class="guilabel">Reference layer(s)</span> en selecteer <code class="docutils literal notranslate"><span class="pre">raster_water_merged</span></code>. Noem de uitvoer <code class="docutils literal notranslate"><span class="pre">raster_water_.tif</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
@@ -367,25 +367,25 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;raster_water_merged@1&quot; &gt; 0
 </pre></div>
 </div>
-<img alt="../../_images/1314.png" class="align-center" src="../../_images/1314.png" />
+<img alt="../../_images/1315.png" class="align-center" src="../../_images/1315.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>De resulterende laag <code class="docutils literal notranslate"><span class="pre">raster_water</span></code> heeft nu pixels met alleen de waarden 0 en 1.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1413.png" class="align-center" src="../../_images/1413.png" />
+<div><img alt="../../_images/1414.png" class="align-center" src="../../_images/1414.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>Nu we lagen hebben die pixels voor wegen en water weergeven, kunnen we rasters voor nabijheid maken. Deze zijn ook wel bekend als Euclidische afstanden - waar elke pixel in het uitvoerraster de afstand naar de dichtstbijzijnde pixel in de invoerlaag weergeeft. Dit resulterende raster kan dan worden gebruikt om geschikte gebieden te bepalen die binnen een bepaalde afstand vanaf de invoer liggen. Zoek naar en lokaliseer het algoritme <span class="menuselection">GDAL ‣ Raster analyse ‣ Proximity (raster afstand)</span>. Dubbelklik er op om het te starten.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1512.png" class="align-center" src="../../_images/1512.png" />
+<div><img alt="../../_images/1513.png" class="align-center" src="../../_images/1513.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Selecteer, in het dialoogvenster <span class="guilabel">Proximity (raster afstand)</span>, <code class="docutils literal notranslate"><span class="pre">raster_roads</span></code> als de <span class="guilabel">Invoerlaag</span>. Kies <code class="docutils literal notranslate"><span class="pre">Coördinaten</span> <span class="pre">met</span> <span class="pre">geoverwijzingen</span></code> als de <span class="guilabel">Afstandseenheden</span>. Omdat de invoerlagen in een geprojecteerd CRS staan met meters als de eenheden, voer <code class="docutils literal notranslate"><span class="pre">5000</span></code> (5 kilometers) in als de <span class="guilabel">De maximale afstand die moet worden gegenereerd</span>. Zorg er voor dat de waarde voor <span class="guilabel">Waarde Geen gegevens om te gebruiken voor het doel-nabijheidsraster</span> is <code class="docutils literal notranslate"><span class="pre">Niet</span> <span class="pre">bepaald</span></code>. Noem het uitvoerbestand <code class="docutils literal notranslate"><span class="pre">roads_proximity.tif</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1611.png" class="align-center" src="../../_images/1611.png" />
+<div><img alt="../../_images/1612.png" class="align-center" src="../../_images/1612.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
@@ -395,19 +395,19 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Als de verwerking is voltooid zal een nieuwe laag <code class="docutils literal notranslate"><span class="pre">roads_proximity</span></code> zijn toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Laten we, om het beter te visualiseren, de standaard opmaak wijzigen. Klik op de knop <span class="guilabel">Paneel Laag opmaken openen</span> in het paneel <span class="guilabel">Lagen</span>. Wijzig de waarde <span class="guilabel">Max</span> onder <span class="guilabel">Kleurovergang</span> naar <code class="docutils literal notranslate"><span class="pre">5000</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1712.png" class="align-center" src="../../_images/1712.png" />
+<div><img alt="../../_images/1713.png" class="align-center" src="../../_images/1713.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Herhaal het algoritme <span class="guilabel">Proximity (raster afstand)</span> voor de laag <code class="docutils literal notranslate"><span class="pre">raster_water</span></code> met dezelfde parameters en noem de uitvoer <code class="docutils literal notranslate"><span class="pre">water_proximity.tif</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1810.png" class="align-center" src="../../_images/1810.png" />
+<div><img alt="../../_images/1811.png" class="align-center" src="../../_images/1811.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Als de verwerking is voltooid kunt u dezelfde opmaak als eerder toepassen om de resultaten beter te visualiseren. Als u willekeurig in het resulterende raster klikt, zult u zien dat het een continuüm is van waarden tussen 0 en 5000. We moeten, om dit raster te kunnen gebruiken in de overlay-analyse, het eerst opnieuw classificeren om afzonderlijke waarden te maken. Open het algoritme  <span class="menuselection">Raster analyse ‣ Raster calculator</span> opnieuw.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
+<div><img alt="../../_images/1910.png" class="align-center" src="../../_images/1910.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
 <li><p>We willen een hogere score geven aan pixels die dichterbij wegen liggen. Dus laten we het volgens schema gebruiken.</p></li>
@@ -420,14 +420,14 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>100*(&quot;roads_proximity@1&quot;&lt;=1000) + 50*(&quot;roads_proximity@1&quot;&gt;1000)*(&quot;roads_proximity@1&quot;&lt;=5000) + 10*(&quot;roads_proximity@1&quot;&gt;5000)
 </pre></div>
 </div>
-<img alt="../../_images/207.png" class="align-center" src="../../_images/207.png" />
+<img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
 </li>
 </ul>
 <ol class="arabic simple" start="21">
 <li><p>Once the re-classification process finishes, a new layer <code class="docutils literal notranslate"><span class="pre">roads_reclass</span></code> will be added to the <span class="guilabel">Layers</span> panel. This layer has only 3 different values, 10, 50 and 100 indicating relative suitability of the pixels with regards to distance from roads. Open <span class="menuselection">Raster analysis ‣ Raster calculator</span> algorithm again.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2113.png" class="align-center" src="../../_images/2113.png" />
+<div><img alt="../../_images/2114.png" class="align-center" src="../../_images/2114.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>Herhaal het proces voor opnieuw classificeren voor de laag <code class="docutils literal notranslate"><span class="pre">water_proximity</span></code>. Hier zal het schema zijn omgedraaid, waarbij pixels die verder van water af liggen een hogere score zullen hebben.</p></li>
@@ -450,7 +450,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(&quot;roads_reclass@1&quot; + &quot;water_reclass@1&quot;)*(&quot;raster_protected_regions@1&quot;  !=  1 )*&quot;raster_boundary@1&quot;
 </pre></div>
 </div>
-<img alt="../../_images/239.png" class="align-center" src="../../_images/239.png" />
+<img alt="../../_images/2311.png" class="align-center" src="../../_images/2311.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
@@ -460,25 +460,25 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Als de verwerking is voltooid, zal de resulterende raster <code class="docutils literal notranslate"><span class="pre">overlay</span></code> worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. De pixelwaarden in dit raster liggen tussen 0 en 200 - waar 0 het minst geschikte en 200 het meest geschikte gebied voor ontwikkeling is. Klik op de knop <span class="guilabel">Paneel Laag opmaken openen</span> in het paneel <span class="guilabel">Lagen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/246.png" class="align-center" src="../../_images/246.png" />
+<div><img alt="../../_images/247.png" class="align-center" src="../../_images/247.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
 <li><p>Selecteer de renderer <code class="docutils literal notranslate"><span class="pre">enkelbands_pseudocolor</span></code> en het kleurverloop <code class="docutils literal notranslate"><span class="pre">Spectral</span></code>. Klik op <span class="guilabel">Classificeren</span> om het kleurverloop toe te passen op het raster.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/255.png" class="align-center" src="../../_images/255.png" />
+<div><img alt="../../_images/256.png" class="align-center" src="../../_images/256.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
 <li><p>Klik op de standaard labelwaarden naast elke kleur en voer een toepasselijk label in. De labels zullen ook als Legenda verschijnen onder de laag <code class="docutils literal notranslate"><span class="pre">overlay</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/265.png" class="align-center" src="../../_images/265.png" />
+<div><img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
 <li><p>Rasterlagen zijn rechthoekige rasters. We willen pixels buiten de grenzen van de staat verbergen. Een gemakkelijke manier om dat te bereiken is het toepassen van een <code class="docutils literal notranslate"><span class="pre">Geïnverteerde</span> <span class="pre">polygonen</span></code> gerenderd op de vector boundary-laag. Scroll naar beneden in het paneel <span class="guilabel">Lagen</span> en lokaliseer de laag <code class="docutils literal notranslate"><span class="pre">boundary</span></code>. Selecteer <code class="docutils literal notranslate"><span class="pre">Geïnverteerde</span> <span class="pre">polygonen</span></code> als de renderer en laat de andere opties standaard.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/275.png" class="align-center" src="../../_images/275.png" />
+<div><img alt="../../_images/276.png" class="align-center" src="../../_images/276.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
 <li><p>Hij moet bovenaan de inhoudsopgave staan om het effect van de renderer weer te geven. Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">boundary</span></code> en selecteer <span class="guilabel">Verplaats naar bovenste</span>.</p></li>
@@ -490,7 +490,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <li><p>Selecteer de laag en het kaartvenster zou moeten bijwerken om het raster <code class="docutils literal notranslate"><span class="pre">overlay</span></code> weer te geven, geclipt tot de laag <code class="docutils literal notranslate"><span class="pre">boundary</span></code>. Dit is de uiteindelijk uitvoer die gebieden weergeeft binnen de staat die geschikt zijn voor ontwikkeling.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/294.png" class="align-center" src="../../_images/294.png" />
+<div><img alt="../../_images/295.png" class="align-center" src="../../_images/295.png" />
 </div></blockquote>
 </div>
 </div>
@@ -517,7 +517,7 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op jan. 07, 2021.<br/>
+      Laatste aanpassing op jan. 26, 2021.<br/>
       Aangemaakt met <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
