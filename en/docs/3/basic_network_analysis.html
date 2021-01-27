@@ -159,8 +159,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<p>I have several full-length QGIS courses that are now completely free for self-study. 
-Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Course Materials</a>.</p>
+<p>Check out more QGIS learning materials, including free full-length QGIS courses from <a href="https://spatialthoughts.com/resources" target="_blank">Spatial Thoughts Academy</a>.</p>
 
 <hr>
 <!-- EmailOctopus Form -->
@@ -258,10 +257,10 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 
   <div class="section" id="basic-network-visualization-and-routing-qgis3">
 <h1>Basic Network Visualization and Routing (QGIS3)<a class="headerlink" href="#basic-network-visualization-and-routing-qgis3" title="Permalink to this headline">¶</a></h1>
-<p>Creating, visualizing, and managing networks is an important part of GIS. Many types of physical infrastructure such as roads, railways, utilities can be modeled as networks with lines and nodes - with properties attached to them. In this tutorial, we will learn how road networks are commonly modeled and apply some styling techniques to visualize the routing properties. We will also use QGIS3’s built-in tools for network analysis that to find shortest path between 2 points along the network.</p>
+<p>Creating, visualizing, and managing networks is an important part of GIS. Many types of physical infrastructure such as roads, railways, utilities can be modeled as networks with lines and nodes - with properties attached to them. In this tutorial, we will learn how road networks are commonly modeled and apply some styling techniques to visualize the routing properties. We will also use QGIS3’s built-in tools for network analysis that to find the shortest path between 2 points along with the network.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
-<p>We will take a layer of road centerlines for Washington DC, visualize the connectivity and build a network to find shortest path between any 2 points in the city.</p>
+<p>We will take a layer of roadway block for Washington DC, visualize the connectivity and build a network to find shortest path between any 2 points in the city.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -272,23 +271,23 @@ Check out the <a href="https://courses.spatialthoughts.com/" target="_blank">Cou
 <div class="section" id="get-the-data">
 <h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
 <p>District of Columbia government freely shares hundreds of datasets on the <a class="reference external" href="https://opendata.dc.gov/">Open Data Catalog</a>.</p>
-<p>Download the <a class="reference external" href="https://opendata.dc.gov/datasets/street-centerlines">Street Centerlines</a> shared by DCGISopendata data as a shapefile.</p>
+<p>Download the <a class="reference external" href="https://opendata.dc.gov/datasets/roadway-block">Roadway Block</a> shared by DCGISopendata data as a shapefile.</p>
 <img alt="../../_images/data1.png" class="align-center" src="../../_images/data1.png" />
 <p>For convenience, you may directly download a copy of the datasets from the
 links below:</p>
-<p><a class="reference external" href="http://www.qgistutorials.com/downloads/Street_Centerlines.zip">Street_Centerlines.zip</a></p>
+<p><a class="reference external" href="http://www.qgistutorials.com/downloads/Roadway_Block-shp.zip">Roadway_Block-shp.zip</a></p>
 <p>Data Source: <a class="reference internal" href="../credits.html#dcopendata" id="id1"><span>[DCOPENDATA]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Locate the downloaded <code class="docutils literal notranslate"><span class="pre">Street_Centerlines.zip</span></code> file in the <span class="guilabel">Browser</span> panel. Expand it and drag the <code class="docutils literal notranslate"><span class="pre">Street_Centerlines.shp</span></code> file to the canvas.</p></li>
+<li><p>Locate the downloaded <code class="docutils literal notranslate"><span class="pre">Roadway_Block-shp.zip</span></code> file in the <span class="guilabel">Browser</span> panel. Expand it and drag the <code class="docutils literal notranslate"><span class="pre">Roadway_Block.shp</span></code> file to the canvas.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/113.png" class="align-center" src="../../_images/113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>You will see a new line layer called <code class="docutils literal notranslate"><span class="pre">Street_Centerlines</span></code> added to the <span class="guilabel">Layers</span> panel. This layer represents each road in Washington DC. Select the <span class="guilabel">Identify</span> tool in the <span class="guilabel">Attributes Toolbar</span>. Click on any road segment to see what attributes are attached to it. There are standard attributes like road name, type etc. there is an attribute called <code class="docutils literal notranslate"><span class="pre">DIRECTIONA</span></code>. This is an import attribute for routing as it specifies whether the segment is two-way or one-way. It contains 4 different values. <code class="docutils literal notranslate"><span class="pre">Two</span> <span class="pre">Way</span></code> for two-way streets. <code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> for one-way streets where the traffic is allowed in the direction of the line (start-point to end-point) and <code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> for one-way streets where the traffic flows in the opposite direction of the line. There is also <code class="docutils literal notranslate"><span class="pre">Unknown</span></code> value where we will assume two-way traffic. We will now use the information in that attribute to display an arrow on streets that are one-way.</p></li>
+<li><p>You will see a new line layer called <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> added to the <span class="guilabel">Layers</span> panel. This layer represents each road in Washington DC. Select the <span class="guilabel">Identify</span> tool in the <span class="guilabel">Attributes Toolbar</span>. Click on any road segment to see what attributes are attached to it. There are standard attributes like Route-name, Road-type etc. there is an attribute called <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code>. This is an import attribute for routing as it specifies whether the segment is two-way or one-way. It contains 4 different values. <code class="docutils literal notranslate"><span class="pre">BD</span></code> (Both Directions) for two-way streets. <code class="docutils literal notranslate"><span class="pre">OB</span></code>  (Out Bound) for one-way streets where the traffic is allowed in the direction of the line (start-point to end-point) and <code class="docutils literal notranslate"><span class="pre">IB</span></code> (In Bound) for one-way streets where the traffic flows in the opposite direction of the line. There is also <code class="docutils literal notranslate"><span class="pre">??</span></code> value where we will assume two-way traffic. We will now use the information in that attribute to display an arrow on one-way streets.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/210.png" class="align-center" src="../../_images/210.png" />
@@ -312,7 +311,7 @@ links below:</p>
 <div><img alt="../../_images/53.png" class="align-center" src="../../_images/53.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>In the <span class="guilabel">Expression string builder</span> dialog, expand the <span class="guilabel">Fields and Values</span> section in the middle-panel. Select <code class="docutils literal notranslate"><span class="pre">DIRECTIONA</span></code> attribute and click <span class="guilabel">All Unique</span> in the right-hand panel. The 4 values that we discussed earlier will appear. Having these values here as a reference helps when building the expression. Also, you can double-click on any value to add them to the expression.</p></li>
+<li><p>In the <span class="guilabel">Expression string builder</span> dialog, expand the <span class="guilabel">Fields and Values</span> section in the middle-panel. Select the <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> attribute and click <span class="guilabel">All Unique</span> in the right-hand panel. The 4 values that we discussed earlier will appear. Having these values here as a reference helps when building the expression. Also, you can double-click on any value to add them to the expression.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/63.png" class="align-center" src="../../_images/63.png" />
@@ -321,7 +320,7 @@ links below:</p>
 <li><p>The goal is to create an expression that selects all one-way streets. Enter the following expression and click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;DIRECTIONA&quot; = &#39;One way (Against digitizing direction)&#39; OR  &quot;DIRECTIONA&quot; =&#39;One Way (Digitizing direction)&#39;
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;SUMMARYDIR&quot; in (&#39;IB&#39;, &#39;OB&#39;)
 </pre></div>
 </div>
 <img alt="../../_images/73.png" class="align-center" src="../../_images/73.png" />
@@ -351,21 +350,16 @@ links below:</p>
 <div><img alt="../../_images/114.png" class="align-center" src="../../_images/114.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>We can put a conditional expression that returns different rotation value depending on the one-way direction. A simple 0 or 180 degree rotation works to account for the direction, but it works only for horizontal lines. To align the arrow-head perpendicular to all the lines - we need to account for the angle of the line in the expression as well. The <code class="docutils literal notranslate"><span class="pre">angle_at_vertex</span></code> function helps us find the angle and use it in the expression. Enter the following expression and click <span class="guilabel">OK</span>.</p></li>
+<li><p>We can put a conditional expression that returns different rotation values depending on the one-way direction. A 180° degree rotation for the road with opposite direction will make the direction perfect, In this, we will make the Roads with <code class="docutils literal notranslate"><span class="pre">IB</span></code> attribute rotate 180° hence all roads will have the correct traffic flow direction. Enter the following expression and click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CASE
-  WHEN &quot;DIRECTIONA&quot; =  &#39;One Way (Digitizing direction)&#39;
-    THEN angle_at_vertex($geometry, 1) - 90
-  WHEN &quot;DIRECTIONA&quot; =  &#39;One way (Against digitizing direction)&#39;
-    THEN angle_at_vertex($geometry, 1) - 90 + 180
-END
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( &quot;SUMMARYDIR&quot; = &#39;IB&#39;, 180, 0)
 </pre></div>
 </div>
 <img alt="../../_images/123.png" class="align-center" src="../../_images/123.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>Now you will see the arrow-heads aligned to the correct road direction and angle. To keep the style uncluttered, we are choosing to display arrows only on one-way streets. Unlabeled streets are assumed to be two-way. Now that we have the network styled correctly, we can do some analysis. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
+<li><p>Now you will see the arrow-heads aligned to the correct road direction. To keep the style uncluttered, we are choosing to display arrows only on one-way streets. Unlabeled streets are assumed to be two-way. Now that we have the network styled correctly, we can do some analysis. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/133.png" class="align-center" src="../../_images/133.png" />
@@ -377,19 +371,19 @@ END
 <div><img alt="../../_images/143.png" class="align-center" src="../../_images/143.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>In the <span class="guilabel">Shortest Path (Point to Point)</span> dialog, select <code class="docutils literal notranslate"><span class="pre">Street_Centerlines</span></code> as the <span class="guilabel">Vector layer representing network</span>.  Keep the <span class="guilabel">Path type to calculate</span> as <code class="docutils literal notranslate"><span class="pre">Shortest</span></code>. Next we need to pick a start and end point. You can click the <span class="guilabel">…</span> button and click on any point on the network in the canvas. If you want to replicate the results in this tutorial, you can enter <code class="docutils literal notranslate"><span class="pre">-76.99730092166396,38.887624846748984</span></code> as the <span class="guilabel">Start point</span> and <code class="docutils literal notranslate"><span class="pre">-76.99154831062152,38.89151000569929</span></code> as the <span class="guilabel">End point</span>. Expand the <span class="guilabel">Advanced parameter</span> section. Choose <code class="docutils literal notranslate"><span class="pre">DIRECTIONA</span></code> as the <span class="guilabel">Direction field</span>. You must be familiar with the one-way direction values for forward and backward traffic flow. Enter <code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">Way</span> <span class="pre">(Digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for forward direction</span> and <code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">way</span> <span class="pre">(Against</span> <span class="pre">digitizing</span> <span class="pre">direction)</span></code> as the <span class="guilabel">Value for backward direction</span>. Keep other options to their default values and click <span class="guilabel">Run</span>.</p></li>
+<li><p>In the <span class="guilabel">Shortest Path (Point to Point)</span> dialog, select <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> as the <span class="guilabel">Vector layer representing network</span>.  Keep the <span class="guilabel">Path type to calculate</span> as <code class="docutils literal notranslate"><span class="pre">Shortest</span></code>. Next, we need to pick a start and endpoint. You can click the <span class="guilabel">…</span> button and click on any point on the network in the canvas. If you want to replicate the results in this tutorial, you can enter <code class="docutils literal notranslate"><span class="pre">-76.99730092166396,38.887624846748984</span></code> as the <span class="guilabel">Start point</span> and <code class="docutils literal notranslate"><span class="pre">-76.99154831062152,38.89151000569929</span></code> as the <span class="guilabel">End point</span>. Expand the <span class="guilabel">Advanced parameter</span> section. Choose <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> as the <span class="guilabel">Direction field</span>. You must be familiar with the one-way direction values for the forward and backward traffic flow. Enter <code class="docutils literal notranslate"><span class="pre">OB</span></code> as the <span class="guilabel">Value for the forward direction</span> and <code class="docutils literal notranslate"><span class="pre">IB</span></code> as the <span class="guilabel">Value for the backward direction</span>. Keep other options to their default values and click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/153.png" class="align-center" src="../../_images/153.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>The algorithm will use the geometry of the layer and provided parameters to build a network graph. This graph is then used to find the shortest path between the start and end points. Once the algorithm finishes, you will see a new layer <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">path</span></code> added to the <span class="guilabel">Layers</span> panel that shows the shortest path between start and end points.</p></li>
+<li><p>The algorithm will use the geometry of the layer and provided parameters to build a network graph. This graph is then used to find the shortest path between the start and endpoints. Once the algorithm finishes, you will see a new layer <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">path</span></code> added to the <span class="guilabel">Layers</span> panel that shows the shortest path between start and endpoints.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/163.png" class="align-center" src="../../_images/163.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>You will see that there are many possible paths between start and end points. But given the constraints of the network - such as one-ways, the result is the shortest possible path. It is always a good idea to validate your analysis and assumptions. One easy way to validate it is to use a third-party mapping service to see if their results match with the ones we derived. Here is the shortest path <a class="reference external" href="https://goo.gl/maps/XwTXTkvuaCuteocr8">suggested by Google Maps</a> between the same start and end points. As you can see the recommended shortest route matches exactly with our results - validating our analysis.</p></li>
+<li><p>You will see that there are many possible paths between start and endpoints. But given the constraints of the network - such as one-ways, the result is the shortest possible path. It is always a good idea to validate your analysis and assumptions. One easy way to validate it is to use a third-party mapping service to see if their results match with the ones we derived. Here is the shortest path <a class="reference external" href="https://goo.gl/maps/XwTXTkvuaCuteocr8">suggested by Google Maps</a> between the same start and endpoints. As you can see the recommended shortest route matches exactly with our results - validating our analysis.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/173.png" class="align-center" src="../../_images/173.png" />
@@ -419,7 +413,7 @@ END
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Last updated on Jan 26, 2021.<br/>
+      Last updated on Jan 27, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
