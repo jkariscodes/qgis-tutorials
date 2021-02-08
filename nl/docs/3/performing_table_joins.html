@@ -261,7 +261,7 @@
 <p>Niet elke gegevensset die u wilt gebruiken komt in een ruimtelijke indeling. Vaak komen de gegevens als een tabel of een werkblad en zou u het moeten koppelen met uw bestaande ruimtelijke gegevens om in uw analyses te kunnen gebruiken. Deze bewerking staat bekend als een <strong>Table Join</strong> en wordt uitgevoerd met het algoritme voor processing <code class="docutils literal notranslate"><span class="pre">Join</span> <span class="pre">attributes</span> <span class="pre">by</span> <span class="pre">field</span> <span class="pre">value</span></code>.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will use a shapefile of census tracts for California and population data table from US Census Bureau to create a population density map for california.</p>
+<p>We zullen een Shapefile gebruiken met bevolkingsgegevens voor Californië en gegevens over de bevolking van het US Census Bureau om een bevolkingskaart voor Californië te maken.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
@@ -367,7 +367,7 @@
 <div><img alt="../../_images/1419.png" class="align-center" src="../../_images/1419.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>U zult een nieuwe laag <code class="docutils literal notranslate"><span class="pre">Samengevoegde</span> <span class="pre">laag</span></code> zien geladen in het paneel <span class="guilabel">Lagen</span>. Op dit punt zijn de velden uit het CSV-bestand gekoppeld aan de laag census tracts. U kunt voor nu de <span class="guilabel">Processing Toolbox</span> sluiten. Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">Samengevoegde</span> <span class="pre">laag</span></code> en selecteer <span class="guilabel">Attributentabel openen</span>.</p></li>
+<li><p>U zult een nieuwe laag <code class="docutils literal notranslate"><span class="pre">joined</span></code> zien geladen in het paneel <span class="guilabel">Lagen</span>. Op dit punt zijn de velden uit het CSV-bestand gekoppeld aan de laag census tracts. U kunt voor nu de <span class="guilabel">Processing Toolbox</span> sluiten. Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">joined</span></code> en selecteer <span class="guilabel">Attributentabel openen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1518.png" class="align-center" src="../../_images/1518.png" />
@@ -379,23 +379,23 @@
 <div><img alt="../../_images/1617.png" class="align-center" src="../../_images/1617.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>Now that we have the population data in the census tracts layer, we can style it to create a visualization of population density distribution. Select the <code class="docutils literal notranslate"><span class="pre">joined</span></code> layer and click the <span class="guilabel">Open the Layer Styling Panel</span> button.</p></li>
+<li><p>Nu we de gegevens voor de bevolking in de laag census tracts hebben, kunnen we die opmaken om een visualisatie te maken van de verdeling van de dichtheid van de bevolking. Selecteer de laag <code class="docutils literal notranslate"><span class="pre">joined</span></code> en klik op de knop <span class="guilabel">Paneel Laag opmaken openen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1718.png" class="align-center" src="../../_images/1718.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li><p>In the <span class="guilabel">Layer Styling</span> panel, select <code class="docutils literal notranslate"><span class="pre">Graduated</span></code> from the drop-down menu. As we are looking to create a population density map, we want to assign different color to each census tract feature based on the population density. We have the population in the <strong>HD01_VD01</strong> field, but we don’t have population density in any fields to select as the <span class="guilabel">Value</span>. Fortunately, QGIS allows us to input an expression here. Click <span class="guilabel">Expression</span> button.</p></li>
+<li><p>Selecteer, in het paneel <span class="guilabel">Laag opmaken</span>, <code class="docutils literal notranslate"><span class="pre">Gradueel</span></code> uit het keuzemenu. Omdat we een kaart willen maken met de gegevens van de bevolking, willen we verschillende kleuren toewijzen aan elk object census tract, gebaseerd on de schatting van de bevolking. We hebben de bevolking in het veld <strong>HD01_VD01</strong>, maar we hebben geen dichtheid van de bevolking in enig veld om te selecteren als de <span class="guilabel">Waarde</span>. Gelukkig laat QGIS ons hier een expressie invoeren. Klik op de knop <span class="guilabel">Expressie</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1816.png" class="align-center" src="../../_images/1816.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
-<p>When creating a thematic (choropleth) map such as this, it is important to normalize the values you are mapping. Mapping total counts per polygon is not correct. It is important to normalize the values dividing by the area. If you are displaying totals such as crime, you can normalize them by diving by total population, thus mapping crime rate and not crime. <a class="reference external" href="https://en.wikipedia.org/wiki/Choropleth_map#Normalization">Learn more</a></p>
+<p>Bij het maken van een thematische (choroplethische) kaart zoals deze, is het belangrijk om de waarden die u in kaart brengt te normaliseren. In kaart brengen van totale aantallen per polygoon is niet juist. Het is belangrijk de waarden te normaliseren door ze te delen door het gebied. Wanneer u totalen weergeeft, zoals criminaliteit, kunt u ze normaliseren door ze te delen door de totale bevolking, dus het in kaart brengen van de hoeveelheid criminaliteit en niet de criminaliteit. <a class="reference external" href="https://en.wikipedia.org/wiki/Choropleth_map#Normalization">Leer meer op</a></p>
 </div>
 <ol class="arabic simple" start="19">
-<li><p>Enter the following expression to calculate the population density. <code class="docutils literal notranslate"><span class="pre">$area</span></code> calculates the area of the feature in square meters. We then convert it to square miles and calculate the population density with the formula <em>Population/Area</em>. Click <span class="guilabel">OK</span>.</p></li>
+<li><p>Voer de volgende expressie in om de dichtheid van de bevolking te berekenen. <code class="docutils literal notranslate"><span class="pre">$area</span></code> berekent het gebied van het object in vierkante meters. We converteren het dan naar vierkante mijlen en berekenen de dichtheid van de bevolking met de formule <em>Population/Area</em>. Klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>&quot;HD01_VD01&quot;/ (0.386*$area/1e6)
@@ -404,19 +404,19 @@
 <img alt="../../_images/1914.png" class="align-center" src="../../_images/1914.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li><p>Back in the <span class="guilabel">Layer Styling Panel</span>, choose a color ramp of your choice and click <span class="guilabel">Classify</span>. You can adjust the class ranges to be more appropriate to the region.</p></li>
+<li><p>Terug in het <span class="guilabel">paneel Laag opmaken</span>, kies een kleurverloop van uw keuze en klik op <span class="guilabel">Classificeren</span>. U kunt de bereiken van de klassen aanpassen om beter te passen bij de regio.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2010.png" class="align-center" src="../../_images/2010.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li><p>The visualization feels a bit cluttered because of the polygon borders. Click on the dropdown next to <span class="guilabel">Symbol</span>. Select <span class="guilabel">Simple fill</span> and check <span class="guilabel">Transparent stroke</span>.</p></li>
+<li><p>De visualisatie voelt een beetje onoverzichtelijk vanwege de randen van de polygonen borders. Klik op de keuzelijst naast <span class="guilabel">Symbool</span>. Selecteer <span class="guilabel">Standaard vulling</span> en selecteer <span class="guilabel">Transparante vulling</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2116.png" class="align-center" src="../../_images/2116.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li><p>Now we have a nice looking information visualization of population density in California.</p></li>
+<li><p>Nu hebben we een net uitziende informatieve visualisatie van de dichtheid van de bevolking in Californië.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2213.png" class="align-center" src="../../_images/2213.png" />
@@ -446,7 +446,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op feb. 05, 2021.<br/>
+      Laatste aanpassing op feb. 08, 2021.<br/>
       Aangemaakt met <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>

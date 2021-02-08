@@ -258,10 +258,10 @@
 
   <div class="section" id="basic-network-visualization-and-routing-qgis3">
 <h1>Basis netwerk visualisatie en routeren (QGIS3)<a class="headerlink" href="#basic-network-visualization-and-routing-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Creating, visualizing, and managing networks is an important part of GIS. Many types of physical infrastructure such as roads, railways, utilities can be modeled as networks with lines and nodes - with properties attached to them. In this tutorial, we will learn how road networks are commonly modeled and apply some styling techniques to visualize the routing properties. We will also use QGIS3’s built-in tools for network analysis that to find the shortest path between 2 points along with the network.</p>
+<p>Netwerken maken, visualiseren en beheren is een belangrijk deel van GIS. Veel typen fysieke infrastructuur, zoals wegen, spoorwegen, nutsvoorzieningen, kunnen worden gemodelleerd als netwerken met lijnen en knopen - met daaraan gekoppelde eigenschappen. In deze handleiding zullen we leren hoe netwerken van wegen normaal gesproken worden gemodelleerd en het toepassen van enkele technieken voor opmaken om de eigenschappen voor routeren te visualiseren. We zullen ook de ingebouwde gereedschappen voor netwerkanalyses in QGIS3 gebruiken om het kortste pad te zoeken naar 2 punten langs het netwerk.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will take a layer of roadway block for Washington DC, visualize the connectivity and build a network to find shortest path between any 2 points in the city.</p>
+<p>We zullen een laag nemen met een blok van wegen voor Washington DC, de verbindingen visualiseren en een netwerk bouwen om het kortste pad te zoeken tussen 2 willekeurige punten in de stad.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
@@ -272,7 +272,7 @@
 <div class="section" id="get-the-data">
 <h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
 <p>De overheid van het district of Columbia deelt gratis honderden gegevenssets in de <a class="reference external" href="https://opendata.dc.gov/">Open Data Catalog</a>.</p>
-<p>Download the <a class="reference external" href="https://opendata.dc.gov/datasets/roadway-block">Roadway Block</a> shared by DCGISopendata data as a shapefile.</p>
+<p>Download de <a class="reference external" href="https://opendata.dc.gov/datasets/roadway-block">Roadway Block</a> gedeeld door DCGISopendata als een Shapefile.</p>
 <img alt="../../_images/data1.png" class="align-center" src="../../_images/data1.png" />
 <p>Voor het gemak kunt u direct een kopie van de gegevensset downloaden vanaf de link hieronder:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Roadway_Block-shp.zip">Roadway_Block-shp.zip</a></p>
@@ -281,13 +281,13 @@
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Locate the downloaded <code class="docutils literal notranslate"><span class="pre">Roadway_Block-shp.zip</span></code> file in the <span class="guilabel">Browser</span> panel. Expand it and drag the <code class="docutils literal notranslate"><span class="pre">Roadway_Block.shp</span></code> file to the canvas.</p></li>
+<li><p>Zoek in  het paneel <span class="guilabel">Browser</span> naar het bestand <code class="docutils literal notranslate"><span class="pre">Roadway_Block-shp.zip</span></code>. Vergroot het en sleep het bestand <code class="docutils literal notranslate"><span class="pre">Roadway_Block-shp</span></code> naar het kaartvenster.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/113.png" class="align-center" src="../../_images/113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>You will see a new line layer called <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> added to the <span class="guilabel">Layers</span> panel. This layer represents each road in Washington DC. Select the <span class="guilabel">Identify</span> tool in the <span class="guilabel">Attributes Toolbar</span>. Click on any road segment to see what attributes are attached to it. There are standard attributes like Route-name, Road-type etc. there is an attribute called <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code>. This is an import attribute for routing as it specifies whether the segment is two-way or one-way. It contains 4 different values. <code class="docutils literal notranslate"><span class="pre">BD</span></code> (Both Directions) for two-way streets. <code class="docutils literal notranslate"><span class="pre">OB</span></code>  (Out Bound) for one-way streets where the traffic is allowed in the direction of the line (start-point to end-point) and <code class="docutils literal notranslate"><span class="pre">IB</span></code> (In Bound) for one-way streets where the traffic flows in the opposite direction of the line. There is also <code class="docutils literal notranslate"><span class="pre">??</span></code> value where we will assume two-way traffic. We will now use the information in that attribute to display an arrow on one-way streets.</p></li>
+<li><p>U zult een nieuwe lijnenlaag, genaamd <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code>, zien toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Deze laag geeft elke weg weer in Washington DC. Selecteer het gereedschap <span class="guilabel">Objecten identificeren</span> op de <span class="guilabel">werkbalk Attributen</span>. Klik op een willekeurig wegsegment om te zien welke attributen daaraan zijn gekoppeld. Er zijn standaard attributen zoals de naam van de route, type route etc., er is ook een attribuut, genaamd <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code>. Dit is een belangrijk attribuut om te importeren voor routeren omdat het specifieert of het segment voor twee richtingen of voor één richting is. Het bevat 4 verschillende waarden. <code class="docutils literal notranslate"><span class="pre">BD</span></code> voor straten met twee richtingen. <code class="docutils literal notranslate"><span class="pre">OB</span></code> (Out Bound) voor straten met eenrichtingsverkeer, waar het verkeer is toegestaan in de richting van de lijn (beginpunt naar eindpunt) en <code class="docutils literal notranslate"><span class="pre">IB</span></code> (In Bound) voor straten met eenrichtingsverkeer, waar het verkeer in de tegengestelde richting van de lijn gaat. Er is ook een waarde <code class="docutils literal notranslate"><span class="pre">??</span></code> waarvoor we zullen aannemen dat daar verkeer in twee richtingen is toegestaan. We zullen nu de informatie in dat attribuut gebruiken om een pijl weer te geven op wegen met eenrichtingsverkeer.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/210.png" class="align-center" src="../../_images/210.png" />
@@ -311,7 +311,7 @@
 <div><img alt="../../_images/53.png" class="align-center" src="../../_images/53.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>In the <span class="guilabel">Expression string builder</span> dialog, expand the <span class="guilabel">Fields and Values</span> section in the middle-panel. Select the <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> attribute and click <span class="guilabel">All Unique</span> in the right-hand panel. The 4 values that we discussed earlier will appear. Having these values here as a reference helps when building the expression. Also, you can double-click on any value to add them to the expression.</p></li>
+<li><p>In het dialoogvenster <span class="guilabel">Expressie-string bouwer</span>, vergroot het gedeelte <span class="guilabel">Velden en waarden</span> in het middenpaneel. Selecteer het attribuut <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> en klik op <span class="guilabel">Alle unieke</span> in het paneel aan de rechterkant. De 4 waarden die we eerder hebben besproken verschijnen. Het hier hebben van deze waarden als een verwijzing helpt bij het bouwen van de expressie. Ook kunt u dubbelklikken op een waarde om die toe te voegen aan de expressie.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/63.png" class="align-center" src="../../_images/63.png" />
@@ -350,7 +350,7 @@
 <div><img alt="../../_images/114.png" class="align-center" src="../../_images/114.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>We can put a conditional expression that returns different rotation values depending on the one-way direction. A 180° degree rotation for the road with opposite direction will make the direction perfect, In this, we will make the Roads with <code class="docutils literal notranslate"><span class="pre">IB</span></code> attribute rotate 180° hence all roads will have the correct traffic flow direction. Enter the following expression and click <span class="guilabel">OK</span>.</p></li>
+<li><p>We kunnen een expressie met voorwaarden invullen die verschillende waarden voor de rotatie teruggeven, afhankelijk van de richting voor eenrichtingsverkeer. Een rotatie van 180° graden voor de weg met tegengestelde richting zal de richting perfect maken. Hierin zullen we de wegen met het attribuut <code class="docutils literal notranslate"><span class="pre">IB</span></code>  180° roteren, zodat alle wegen de juiste richting voor de verkeersstroom hebben. Voer de volgende expressie in en klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( &quot;SUMMARYDIR&quot; = &#39;IB&#39;, 180, 0)
@@ -359,7 +359,7 @@
 <img alt="../../_images/123.png" class="align-center" src="../../_images/123.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>Now you will see the arrow-heads aligned to the correct road direction. To keep the style uncluttered, we are choosing to display arrows only on one-way streets. Unlabeled streets are assumed to be two-way. Now that we have the network styled correctly, we can do some analysis. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
+<li><p>Nu zult u zien dat de pijlpunten zijn uitgelijnd op de juiste richting van de weg. We kiezen er voor om de pijlpunten alleen weer te geven op de wegen met eenrichtingsverkeer om de stijl niet te druk te maken. Niet gelabelde straten worden geacht wegen met tweerichtingsverkeer te zijn. Nu we het netwerk juist hebben opgemaakt, kunnen we enkele analyses uitvoeren. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/133.png" class="align-center" src="../../_images/133.png" />
@@ -371,19 +371,19 @@
 <div><img alt="../../_images/143.png" class="align-center" src="../../_images/143.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>In the <span class="guilabel">Shortest Path (Point to Point)</span> dialog, select <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> as the <span class="guilabel">Vector layer representing network</span>.  Keep the <span class="guilabel">Path type to calculate</span> as <code class="docutils literal notranslate"><span class="pre">Shortest</span></code>. Next, we need to pick a start and endpoint. You can click the <span class="guilabel">…</span> button and click on any point on the network in the canvas. If you want to replicate the results in this tutorial, you can enter <code class="docutils literal notranslate"><span class="pre">-76.99730092166396,38.887624846748984</span></code> as the <span class="guilabel">Start point</span> and <code class="docutils literal notranslate"><span class="pre">-76.99154831062152,38.89151000569929</span></code> as the <span class="guilabel">End point</span>. Expand the <span class="guilabel">Advanced parameter</span> section. Choose <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> as the <span class="guilabel">Direction field</span>. You must be familiar with the one-way direction values for the forward and backward traffic flow. Enter <code class="docutils literal notranslate"><span class="pre">OB</span></code> as the <span class="guilabel">Value for the forward direction</span> and <code class="docutils literal notranslate"><span class="pre">IB</span></code> as the <span class="guilabel">Value for the backward direction</span>. Keep other options to their default values and click <span class="guilabel">Run</span>.</p></li>
+<li><p>Selecteer, in het dialoogvenster <span class="guilabel">Kortste pad (punt naar punt)</span>, <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> als de <span class="guilabel">Vectorlaag die netwerk weergeeft</span>.  Behoud het <span class="guilabel">Te berekenen type pad</span> als <code class="docutils literal notranslate"><span class="pre">Kortste</span></code>. Vervolgens dienen we een begin- en eindpunt te kiezen. U kunt op de knop <span class="guilabel">…</span> klikken en op een willekeurig punt in het kaartvenster klikken. Als u de resultaten voor deze handleiding wilt repliceren, kunt u <code class="docutils literal notranslate"><span class="pre">-76.99730092166396,38.887624846748984</span></code> als het <span class="guilabel">Startpunt</span> invoeren en <code class="docutils literal notranslate"><span class="pre">-76.99154831062152,38.89151000569929</span></code> als het <span class="guilabel">Eindpunt</span>. Vergroot het gedeelte <span class="guilabel">Gevorderde parameters</span>. Kies <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> als het <span class="guilabel">Richtingsveld</span>. U moet bekend zijn met de waarden voor één richting voor de voorwaartse en achterwaartse verkeersstromen. Voer <code class="docutils literal notranslate"><span class="pre">OB</span></code> in als de <span class="guilabel">Waarde voor voorwaartse richting</span> en <code class="docutils literal notranslate"><span class="pre">IB</span></code> als de <span class="guilabel">Waarde voor achterwaartse richting</span>. Laat de andere waarden op hun standaard waarden staan en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/153.png" class="align-center" src="../../_images/153.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>The algorithm will use the geometry of the layer and provided parameters to build a network graph. This graph is then used to find the shortest path between the start and endpoints. Once the algorithm finishes, you will see a new layer <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">path</span></code> added to the <span class="guilabel">Layers</span> panel that shows the shortest path between start and endpoints.</p></li>
+<li><p>Het algoritme zal de geometrie van de laag en de opgegeven parameters gebruiken om een grafiek voor het netwerk te bouwen. Deze grafiek wordt dan gebruikt om het kortste pad te zoeken tussen begin- en eindpunten. Als het algoritme is voltooid zult u een nieuwe laag <code class="docutils literal notranslate"><span class="pre">Kortste</span> <span class="pre">pad</span></code> zien toegevoegd aan het paneel <span class="guilabel">Lagen</span> die het kortste pad weergeeft tussen start- en eindpunten.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/163.png" class="align-center" src="../../_images/163.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>You will see that there are many possible paths between start and endpoints. But given the constraints of the network - such as one-ways, the result is the shortest possible path. It is always a good idea to validate your analysis and assumptions. One easy way to validate it is to use a third-party mapping service to see if their results match with the ones we derived. Here is the shortest path <a class="reference external" href="https://goo.gl/maps/XwTXTkvuaCuteocr8">suggested by Google Maps</a> between the same start and endpoints. As you can see the recommended shortest route matches exactly with our results - validating our analysis.</p></li>
+<li><p>U zult zien dat er veel mogelijke paden zijn tussen start- en eindpunten. Maar gegeven de beperkingen van het netwerk - zoals eenrichtingswegen, is het resultaat het kortst mogelijke pad. Het is altijd een goed idee om uw analyse en veronderstellingen te valideren. Een eenvoudige manier om het te valideren is om een derde partij service voor in kaart brengen te gebruiken om te zien of hun resultaten overeenkomen met die welke wij hebben berekend. Hier is het kortste pad <a class="reference external" href="https://goo.gl/maps/XwTXTkvuaCuteocr8">voorgesteld door Google Maps</a> tussen dezelfde start- en eindpunten. Zoals u kunt zien komt de aanbevolen kortste route exact overeen met onze resultaten - wat onze analyse valideert.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/173.png" class="align-center" src="../../_images/173.png" />
@@ -413,7 +413,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op feb. 05, 2021.<br/>
+      Laatste aanpassing op feb. 08, 2021.<br/>
       Aangemaakt met <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
