@@ -282,55 +282,55 @@
 <ol class="arabic simple">
 <li><p>Pertama kita akan melewati proses pembersihan shapfelie secara manual untuk melihat command yang akan kita gunakan pada skript phyton. Luncurkan QGIS dan akses <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector Layer</span>.</p></li>
 </ol>
-<img alt="../_images/1193.png" class="align-center" src="../_images/1193.png" />
+<img alt="../_images/1195.png" class="align-center" src="../_images/1195.png" />
 <ol class="arabic simple" start="2">
 <li><p>Jelajah folder yang berisi shapefile yang belum di unzip dan pilih file <code class="docutils literal notranslate"><span class="pre">roads.shp</span></code> dan klik <span class="guilabel">Open</span>.</p></li>
 </ol>
-<img alt="../_images/2149.png" class="align-center" src="../_images/2149.png" />
+<img alt="../_images/2151.png" class="align-center" src="../_images/2151.png" />
 <ol class="arabic simple" start="3">
 <li><p>Pertama kita harus mere-proyeksi layer jalan ke sebuah CRS terproyeksi. Ini akan membuat kita menggunakan <em>meters</em> sebagai unit saat melakukan analisis bukan derajat. Buka <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
-<img alt="../_images/386.png" class="align-center" src="../_images/386.png" />
+<img alt="../_images/387.png" class="align-center" src="../_images/387.png" />
 <ol class="arabic simple" start="4">
 <li><p>Caru tool <span class="guilabel">Reproject layer</span> . Dobel-klik untuk meluncurkan dialog.</p></li>
 </ol>
-<img alt="../_images/461.png" class="align-center" src="../_images/461.png" />
+<img alt="../_images/462.png" class="align-center" src="../_images/462.png" />
 <ol class="arabic simple" start="5">
 <li><p>Pada dialog <span class="guilabel">Reproject layer</span> , pilih layer <code class="docutils literal notranslate"><span class="pre">roads</span></code> sebagai <span class="guilabel">Input layer</span> .Kita akan menggunakan CRS  <code class="docutils literal notranslate"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code>  untuk <span class="guilabel">Target CRS</span> . Klik <span class="guilabel">Run</span>.</p></li>
 </ol>
-<img alt="../_images/562.png" class="align-center" src="../_images/562.png" />
+<img alt="../_images/563.png" class="align-center" src="../_images/563.png" />
 <ol class="arabic simple" start="6">
 <li><p>Ketika proses selesai, anda akan melihat layer yang terproyeksi terbuka di QGIS. Akses <span class="menuselection">Processing ‣ History and Log..</span>.</p></li>
 </ol>
-<img alt="../_images/659.png" class="align-center" src="../_images/659.png" />
+<img alt="../_images/660.png" class="align-center" src="../_images/660.png" />
 <ol class="arabic simple" start="7">
 <li><p>Pada dialog <span class="guilabel">History and Log</span> , telusuri folder <span class="guilabel">Algorithm</span>  dan pilih entry terakhir. Anda akan melihat command pemrosessan penuh pada panel bawah. Perhatikan bahwa command ini untuk digunakan pada skript kita.</p></li>
 </ol>
-<img alt="../_images/758.png" class="align-center" src="../_images/758.png" />
+<img alt="../_images/759.png" class="align-center" src="../_images/759.png" />
 <ol class="arabic simple" start="8">
 <li><p>Kembali ke jendela utama QGIS, klik tombol <span class="guilabel">CRS</span> di sudut bawah kanan.</p></li>
 </ol>
-<img alt="../_images/856.png" class="align-center" src="../_images/856.png" />
+<img alt="../_images/857.png" class="align-center" src="../_images/857.png" />
 <ol class="arabic simple" start="9">
 <li><p>Pada dialog <span class="guilabel">Project Properties | CRS</span>  , beri tanda cek pada <span class="guilabel">Enable on-the-fly CRS transformation</span> dan pilih <code class="docutils literal notranslate"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> sebagai CRS. Ini akan memastikan bahwa layer original dan layar terproyeksi akan terbaris secara benar.</p></li>
 </ol>
-<img alt="../_images/955.png" class="align-center" src="../_images/955.png" />
+<img alt="../_images/956.png" class="align-center" src="../_images/956.png" />
 <ol class="arabic simple" start="10">
 <li><p>Sekarang kita akan menjalankan operasi pembersihan. GRASS memiliki sebuah set ampuh alat pembersihan topologi . Ini tersedia di QGIS lewat algoritma <code class="docutils literal notranslate"><span class="pre">v.clean</span></code> . Cari algoritma ini di <span class="guilabel">Processing Toolbox</span> dan dobel-klik untuk meluncurkan dialog.</p></li>
 </ol>
-<img alt="../_images/1054.png" class="align-center" src="../_images/1054.png" />
+<img alt="../_images/1055.png" class="align-center" src="../_images/1055.png" />
 <ol class="arabic simple" start="11">
 <li><p>Anda dapat membaca lebih dalam tentang berbagai tool dan opsi pada tab <span class="guilabel">Help</span> . Untuk tutorial kali ini, kita akan menggunakan tool <code class="docutils literal notranslate"><span class="pre">snap</span></code> to menghapus vertices duplikat yang berada pada rentang 1 meter satu sama lain. Pilih <code class="docutils literal notranslate"><span class="pre">Reprojected</span> <span class="pre">layer</span></code> sebagai <span class="guilabel">Layer to clean</span> . Pilih <code class="docutils literal notranslate"><span class="pre">snap</span></code> sebagai <span class="guilabel">Cleaning tool</span> . Masukkan  <code class="docutils literal notranslate"><span class="pre">1.00</span></code> sebagai <span class="guilabel">Threshold</span> . Biarkan field yang lain kosong dan klik <span class="guilabel">Run</span>.</p></li>
 </ol>
-<img alt="../_images/1194.png" class="align-center" src="../_images/1194.png" />
+<img alt="../_images/1196.png" class="align-center" src="../_images/1196.png" />
 <ol class="arabic simple" start="12">
 <li><p>Ketika proses selesai, anda akan melihat 2 layer baru ditambahkan ke QGIS. <code class="docutils literal notranslate"><span class="pre">Cleaned</span> <span class="pre">vector</span> <span class="pre">layer</span></code> adalah layer dengan error topologi yang sudah dikoreski. Anda juga akan memiliki sebuah <code class="docutils literal notranslate"><span class="pre">Errors</span> <span class="pre">layer</span></code> yang akan menandai fitur yang digantikan. Anda dapat menggunakan layer error sebagai panduan dan zoom ini untuk melihat vertices yang terhapus-</p></li>
 </ol>
-<img alt="../_images/1254.png" class="align-center" src="../_images/1254.png" />
+<img alt="../_images/1255.png" class="align-center" src="../_images/1255.png" />
 <ol class="arabic simple" start="13">
 <li><p>Akses dialog <span class="menuselection">Processing ‣ History and Log</span> dan perhatikan command pemrosessan penuh untuk penggunaan dimasa yang akan datang.</p></li>
 </ol>
-<img alt="../_images/1352.png" class="align-center" src="../_images/1352.png" />
+<img alt="../_images/1353.png" class="align-center" src="../_images/1353.png" />
 <ol class="arabic simple" start="14">
 <li><p>Sekarang kita siap untuk melakukan coding Lihat  bagian xxx pada tutorial xxx untuk instruksi untuk mensetting teks editor anda atau IDE. Untuk menjalankan skrip python tunggal menggunakan QGIS, kita harus menset beragam opsi konfigurasi. Cara yang baik untuk menjalankan skrip tunggal adalah dengan meluncurkan mereke lewat sebuah file xxx . File ini pertama akan mengatur opsi konfigurasi dengan benar dan kemudian memanggil skript python. Buat sebuah file baru bernama xxx dan masukkan teks berikut. Ubah nilai berdasarkan konfigurasi QGIS anda. Jangan lupa untuk mengganti username dengan username anda pada path yang ada di skript python. Path dalam file ini akan sama dengan sistem anda jika anda menginstall QGIS lewat xx .Simpan file pada desktop anda</p></li>
 </ol>
@@ -355,7 +355,7 @@ python c:\Users\Ujaval\Desktop\download_and_clean.py
 pause
 </pre></div>
 </div>
-<img alt="../_images/1451.png" class="align-center" src="../_images/1451.png" />
+<img alt="../_images/1452.png" class="align-center" src="../_images/1452.png" />
 <ol class="arabic simple" start="15">
 <li><p>Membuat sebuah file python yang baru dan masukkan kode berikut. Beri nama <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code> dan simpan pada desktop anda</p></li>
 </ol>
@@ -363,11 +363,11 @@ pause
 <span class="nb">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1549.png" class="align-center" src="../_images/1549.png" />
+<img alt="../_images/1550.png" class="align-center" src="../_images/1550.png" />
 <ol class="arabic simple" start="16">
 <li><p>Pindah ke Desktop anda dan cari lokasi ikon <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> . Dobel-klik untuk meluncurkan jendela window yang baru dan jalankan skrip. Jika anda melihat <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code> tercetak di jendela command, konfigurasi dan pengaturan bekerja dengan baik. Jika anda melihat error atau tidak melihat teks, periksa file <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> anda dan pastikan semua path cocok dengan lokasi file pada sistem anda.</p></li>
 </ol>
-<img alt="../_images/1645.png" class="align-center" src="../_images/1645.png" />
+<img alt="../_images/1646.png" class="align-center" src="../_images/1646.png" />
 <ol class="arabic simple" start="17">
 <li><p>Kembali pada editor teks anda , modifikasi skrip <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code> untuk menambah kode berikut. Ini adalah kode bootstrap untuk meluncurkan QGIS. Ini tidak diperlukan jika anda menjalankan skrip di QGIS. Tapi karena kita menjalankannya di luar QGIS, kita perlu menmbah ini di awal. Pastikan anda mengganti username dengan username anda. Setelah melakukan perubahan, simpan file dan jalankan <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> kembali. Jika anda melihat <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code> tercetak, anda sudah siap untuk menambah logika pemrossean pada skrip.</p></li>
 </ol>
@@ -390,7 +390,7 @@ pause
 <span class="nb">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1741.png" class="align-center" src="../_images/1741.png" />
+<img alt="../_images/1742.png" class="align-center" src="../_images/1742.png" />
 <ol class="arabic simple" start="18">
 <li><p>Panggil kembali command processing yang pertama yang tadi kita simpan dari log. Ini adalah command untuk mereproyeksi sebuah layer. Salin command ke skrip anda dan tambahkan kode tambahan sebagai berikut. Perhatikan bahwa command pemrossesan memberikan path dari layer output sebagai dictionary. Ke akan menyimpan ini sebagai nilai <code class="docutils literal notranslate"><span class="pre">ret</span></code> dan mencetak path le layer yang terproyeksi.</p></li>
 </ol>
@@ -401,11 +401,11 @@ pause
 <span class="nb">print</span> <span class="n">output</span>
 </pre></div>
 </div>
-<img alt="../_images/1840.png" class="align-center" src="../_images/1840.png" />
+<img alt="../_images/1841.png" class="align-center" src="../_images/1841.png" />
 <ol class="arabic simple" start="19">
 <li><p>Jalankan skrip lewat <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> dan anda akan melihat path ke layer terproyeksi yang baru.</p></li>
 </ol>
-<img alt="../_images/1935.png" class="align-center" src="../_images/1935.png" />
+<img alt="../_images/1936.png" class="align-center" src="../_images/1936.png" />
 <ol class="arabic simple" start="20">
 <li><p>Sekarang tamahkan kode untuk membersihkan topologi. Sejak ini adalah output akhir kita, kita akan menambahkan path file output kita pada 2 argument terakhir untuk algoritma <code class="docutils literal notranslate"><span class="pre">grass.v.clean</span></code> . Jika anda membiarkan ini kosong, output akan tercipta di sebuah direktori sementara atau temporer.</p></li>
 </ol>
@@ -420,7 +420,7 @@ pause
                   <span class="s1">&#39;C:\Users</span><span class="se">\\</span><span class="s1">Ujaval</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">errors.shp&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/2027.png" class="align-center" src="../_images/2027.png" />
+<img alt="../_images/2028.png" class="align-center" src="../_images/2028.png" />
 <ol class="arabic simple" start="21">
 <li><p>Jalankan skrip dan akan melihat 2 shapefile naru yang tercipta pada Desktop anda. Selesaikan bagian pemrosesan pada skrip. Mari tambahkan kode untuk mengunduh data dari website asli dan mengunzip file secara otomatis. Kita juga akan menyimpan path untuk mengunzip file dengan sebuah variabel yang dapat kita kirim ke algoritma pemrosesan nantinya. Kita akan perlu mengimpor sejumlah modul tambahan untuk melakukan ini, (Lihat bagian akhir tutorial ini untuk melihat skrip utuh dengan semua perubahan)</p></li>
 </ol>
@@ -445,11 +445,11 @@ pause
                 <span class="n">roads_shp_path</span> <span class="o">=</span> <span class="n">file_path</span>
 </pre></div>
 </div>
-<img alt="../_images/2150.png" class="align-center" src="../_images/2150.png" />
+<img alt="../_images/2152.png" class="align-center" src="../_images/2152.png" />
 <ol class="arabic simple" start="22">
 <li><p>Jalankan skrip yang sudah lengkap. Setiap anda menjalankan skrip, sebuah kopian asli dari data akan terunduh dan diproses.</p></li>
 </ol>
-<img alt="../_images/2227.png" class="align-center" src="../_images/2227.png" />
+<img alt="../_images/2228.png" class="align-center" src="../_images/2228.png" />
 <ol class="arabic simple" start="23">
 <li><p>Untuk mengotomatisasi dalam menjalankan skrip ini secara harian. Kita dapat menggunakan <code class="docutils literal notranslate"><span class="pre">Task</span> <span class="pre">Scheduler</span></code> pada Windows. Luncurkan Task Scheduler dan klik <span class="guilabel">Create Basic Task</span>.</p></li>
 </ol>
@@ -457,19 +457,19 @@ pause
 <p class="admonition-title">Catatan</p>
 <p>Pengguna Linux dan Mac dapat menggunakan cron jobs untuk penjadwalan tugas atau schedule task.</p>
 </div>
-<img alt="../_images/2325.png" class="align-center" src="../_images/2325.png" />
+<img alt="../_images/2326.png" class="align-center" src="../_images/2326.png" />
 <ol class="arabic simple" start="24">
 <li><p>Beri nama task atau tugas dengan <code class="docutils literal notranslate"><span class="pre">Daily</span> <span class="pre">Download</span> <span class="pre">and</span> <span class="pre">Cleanup</span></code> dan klik <span class="guilabel">Next</span>.</p></li>
 </ol>
-<img alt="../_images/2423.png" class="align-center" src="../_images/2423.png" />
+<img alt="../_images/2424.png" class="align-center" src="../_images/2424.png" />
 <ol class="arabic simple" start="25">
 <li><p>Pilih <code class="docutils literal notranslate"><span class="pre">Daily</span></code> as the <span class="guilabel">Trigger</span> untuk <span class="guilabel">Trigger</span> dan klik <span class="guilabel">Next</span></p></li>
 </ol>
-<img alt="../_images/2520.png" class="align-center" src="../_images/2520.png" />
+<img alt="../_images/2521.png" class="align-center" src="../_images/2521.png" />
 <ol class="arabic simple" start="26">
 <li><p>Tentukan waktu sesuai dengan pilihan anda dan klik <span class="guilabel">Next</span>.</p></li>
 </ol>
-<img alt="../_images/2618.png" class="align-center" src="../_images/2618.png" />
+<img alt="../_images/2619.png" class="align-center" src="../_images/2619.png" />
 <ol class="arabic simple" start="27">
 <li><p>Pilih <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">a</span> <span class="pre">program</span></code> sebagai <span class="guilabel">Action</span> dan klik <span class="guilabel">Next</span>.</p></li>
 </ol>
@@ -568,7 +568,7 @@ pause
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Mar 06, 2021.<br/>
+      Terakhir diperbarui pada Mar 10, 2021.<br/>
       Dibuat menggunakan <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
