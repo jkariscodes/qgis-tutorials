@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Realización de uniones de tabla (PyQGIS) &#8212; QGIS Tutorials and Tips</title>
+    <title>Realizar Uniones de Tabla (PyQGIS) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/raster_mosaicing_and_clipping.html">Mosaicar y Recortar Ráster (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Trabajar con Datos de Terreno</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Trabajando con datos WMS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/working_with_projections.html">Working with Projections (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/working_with_projections.html">Trabajar con Proyecciones (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferenciar Hojas Topografícas y Mapas Escaneados (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferenciar Imágenes Aéreas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalizar Datos del Mapa</a></li>
@@ -104,10 +104,10 @@
 <li class="toctree-l1"><a class="reference internal" href="3/custom_python_functions.html">Usando Funciones de Expresión Python Personalizadas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_python_scripts.html">Escribir Scripts Python para el Marco de Procesamiento (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_qgis_jobs.html">Ejecutar y Programar Trabajos de Procesamiento QGIS</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Realización de uniones de tabla (PyQGIS)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Realizar Uniones de Tabla (PyQGIS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="web_mapping_with_qgis2web.html">Mapeo web con QGIS2Web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_basemaps_with_qtiles.html">Creando Mapas Base con QTiles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Uso de complementos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Uso de Complementos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloading_osm_data.html">Buscando y descargando datos de OpenStreetMap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="learning_resources.html">Recursos de aprendizaje QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Créditos de los Conjuntos de Datos</a></li>
@@ -257,30 +257,30 @@
       
 
   <div class="section" id="performing-table-joins-pyqgis">
-<h1>Realización de uniones de tabla (PyQGIS)<a class="headerlink" href="#performing-table-joins-pyqgis" title="Enlazar permanentemente con este título">¶</a></h1>
+<h1>Realizar Uniones de Tabla (PyQGIS)<a class="headerlink" href="#performing-table-joins-pyqgis" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>Este tutorial muestra como usar script Python en QGIS (PyQGIS) para realizar una unión de tablas y aplicar un estilo graduado a la capa resultante. Este tutorial replica los pasos del tutorial <a class="reference internal" href="performing_table_joins.html"><span class="doc">Realización de uniones de tabla</span></a> usando sólo script python.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Por favor refiérase al tutorial <a class="reference internal" href="performing_table_joins.html"><span class="doc">Realización de uniones de tabla</span></a> para la vista general.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Otras habilidades que aprenderá.<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li><p>Cargando capas comprimidas en QGIS mediante Python.</p></li>
-<li><p>Usando QgsGraduatedSymbolRendererV2 para aplicar un estilo graduado a la capa vectorial.</p></li>
+<li><p>Cargar capas comprimidas en QGIS mediante Python.</p></li>
+<li><p>Usar QgsGraduatedSymbolRendererV2 para aplicar un estilo graduado a la capa vectorial.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Descargue los siguientes archivos a su computadora.</p>
-<p><a href="#id1"><span class="problematic" id="id2">`</span></a>tl_2013_06_tract.zip <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
-<p><a href="#id1"><span class="problematic" id="id2">`</span></a>ca_tracts_pop.csv <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
-<p><a href="#id1"><span class="problematic" id="id2">`</span></a>ca_tracts_pop.csvt <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p><a class="reference external" href="http://www.qgistutorials.com/downloads/tl_2013_06_tract.zip">tl_2013_06_tract.zip</a></p>
+<p><a class="reference external" href="http://www.qgistutorials.com/downloads/ca_tracts_pop.csv">ca_tracts_pop.csv</a></p>
+<p><a class="reference external" href="http://www.qgistutorials.com/downloads/ca_tracts_pop.csvt">ca_tracts_pop.csvt</a></p>
 <p>Fuente de Datos <a class="reference internal" href="credits.html#tiger" id="id1"><span>[TIGER]</span></a> <a class="reference internal" href="credits.html#uscensus" id="id2"><span>[USCENSUS]</span></a></p>
 </div>
 <div class="section" id="procedure">
-<h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Puedes escribir los siguientes comandos en la <span class="guilabel">Console Python</span> o el <a href="#id1"><span class="problematic" id="id2">:guilabeSl:`Editor`</span></a> incorporado en QGIS.</p>
+<h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Puede escribir los siguientes comandos en la <span class="guilabel">Consola Python</span> o el <span class="guilabel">Editor</span> incorporado en QGIS.</p>
 <ol class="arabic simple">
 <li><p>Cargue el archivo shape. El archivo Zonas Censales es una archivo zip que contiene el archivo shape. A pesar de que podemos descomprimirlo y cargar el archivo shape, el proveedor OGR tiene la habilidad para cargar el archivo zip directamente mediante un Sistema de Archivo Virtual. Agregando  <code class="docutils literal notranslate"><span class="pre">/vsizip/</span></code> en la ruta, podemos acceder al archivo shape contenido en el archivo zip.</p></li>
 </ol>
@@ -295,7 +295,7 @@
 </div>
 <img alt="../_images/1186.png" class="align-center" src="../_images/1186.png" />
 <ol class="arabic simple" start="2">
-<li><p>Cargue el archivo CSV. Como el archivo CS no contiene ningún dato espacial, lo cargaremos como una tabla usado el proveedor <a href="#id1"><span class="problematic" id="id2">``</span></a>delimitedtext`.`</p></li>
+<li><p>Cargue el archivo CSV. Como el archivo CSV no contiene ningún dato espacial, lo cargaremos como una tabla usado el proveedor <a href="#id1"><span class="problematic" id="id2">``</span></a>delimitedtext`.`</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csv_uri</span> <span class="o">=</span> <span class="s1">&#39;file:///C:/Users/Ujaval/Downloads/ca_tracts_pop.csv?delimiter=,&#39;</span>
 <span class="n">csv</span> <span class="o">=</span> <span class="n">QgsVectorLayer</span><span class="p">(</span><span class="n">csv_uri</span><span class="p">,</span> <span class="s1">&#39;ca_tracts_pop&#39;</span><span class="p">,</span> <span class="s1">&#39;delimitedtext&#39;</span><span class="p">)</span>
@@ -304,7 +304,7 @@
 </div>
 <img alt="../_images/2143.png" class="align-center" src="../_images/2143.png" />
 <ol class="arabic simple" start="3">
-<li><p>Cree la tabla de unión. Las uniones de tabla son realizadas en QGIS usando el objeto <code class="docutils literal notranslate"><span class="pre">QgsVectorJoinInfo</span></code>. Necesitamos especificar el campo <code class="docutils literal notranslate"><span class="pre">GEO.id2</span></code> de la capa CSV como el <span class="guilabel">Campo de Unión</span> y el campo <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> de la capa archivo shape como el <span class="guilabel">Campo Destino</span>. Una vez que ejecutas el código siguiente, la capa archivo shape tendrá atributos adicionales unidos a la capa csv.</p></li>
+<li><p>Cree la tabla de unión. Las uniones de tabla son realizadas en QGIS usando el objeto <code class="docutils literal notranslate"><span class="pre">QgsVectorJoinInfo</span></code>. Necesitamos especificar el campo <code class="docutils literal notranslate"><span class="pre">GEO.id2</span></code> de la capa CSV como el <span class="guilabel">Campo de Unión</span> y el campo <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> de la capa archivo shape como el <span class="guilabel">Campo Destino</span>. Una vez que ejecuta el código siguiente, la capa archivo shape tendrá atributos adicionales unidos a la capa csv.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -489,7 +489,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en mar. 19, 2021.<br/>
+      Actualizado por última vez en mar. 27, 2021.<br/>
       Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
