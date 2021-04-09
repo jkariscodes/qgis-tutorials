@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Werken met projecties (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Working with Projections (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -75,7 +75,7 @@
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Rasters mozaïeken en clippen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Werken met gegevens over het terrein</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Werken met gegevens van WMS</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Werken met projecties (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with Projections (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Topobladen en gescande kaarten voorzien van geoverwijzingen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Geo-verwijzingen voor satellietbeelden (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Kaartgegevens digitaliseren</a></li>
@@ -257,41 +257,51 @@
       
 
   <div class="section" id="working-with-projections-qgis3">
-<h1>Werken met projecties (QGIS3)<a class="headerlink" href="#working-with-projections-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Kaartprojecties - of Coördinaten Referentie Systeem (CRS) - veroorzaken vaak veel frustratie bij het werken met gegevens voor GIS.  Maar het juiste begrip van de concepten en toegang tot de juiste gereedschappen zullen het veel makkelijker maken met projecties te werken. In deze handleiding zullen we verkennen hoe projecties werken in QGIS en leren over beschikbare gereedschappen voor vector- en rasterlagen.</p>
+<h1>Working with Projections (QGIS3)<a class="headerlink" href="#working-with-projections-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>Map projections - or Coordinate Reference System (CRS) - often cause a lot of
+frustration when working with GIS data.  But a proper understanding of the
+concepts and access to the right tools will make it much easier to deal with
+projections. In this tutorial, we will explore how projections work in QGIS and learn about tools available for vector and rasters data layers.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>De taak is om gegevenslagen van verschillende projecties opnieuw te projecteren en over elkaar te leggen in QGIS.</p>
+<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>The task is to re-project selected features of a layer and overlay data layers of different projections together in QGIS.</p>
 </div>
 <div class="section" id="get-the-data">
-<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p>Natural Earth heeft <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/">Admin 0 - Countries</a> gegevensset. Download de <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">countries</a></p>
-<p><a class="reference external" href="https://www.ordnancesurvey.co.uk/">UK’s Ordnance Survey</a> verschaft open gegevens om te downloaden. Download het <a class="reference external" href="https://www.ordnancesurvey.co.uk/opendatadownload/products.html">MiniScale raster product</a> voor Groot-Brittannië en pak die uit in een map op uw computer.</p>
-<p>Voor het gemak kunt u direct een kopie van beide gegevenssets downloaden vanaf de link hieronder:</p>
+<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p>Natural Earth has <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/">Admin 0 - Countries</a>
+dataset. Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">countries</a></p>
+<p><a class="reference external" href="https://www.ordnancesurvey.co.uk/">UK’s Ordnance Survey</a> provides open data
+for download. Download the <a class="reference external" href="https://www.ordnancesurvey.co.uk/opendatadownload/products.html">MiniScale raster product</a> for Great
+Britain and extract it to a folder on your computer.</p>
+<p>For convenience, you may directly download a copy of the dataset from the link
+below:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">ne_10m_admin_0_countries.zip</a></p>
-<p><a class="reference external" href="http://www.qgistutorials.com/downloads/minisc_gb.zip">minisc_gb.zip</a> (Bevat alleen de bestanden die nodig zijn voor deze handleiding)</p>
-<p>Gegevensbronnen: <a class="reference internal" href="../credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a> <a class="reference internal" href="../credits.html#osopendata" id="id2"><span>[OSOPENDATA]</span></a></p>
+<p><a class="reference external" href="http://www.qgistutorials.com/downloads/minisc_gb.zip">minisc_gb.zip</a> (Contains only the files
+required for this tutorial)</p>
+<p>Data Sources: <a class="reference internal" href="../credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a> <a class="reference internal" href="../credits.html#osopendata" id="id2"><span>[OSOPENDATA]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Open QGIS. Ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Vectorlaag toevoegen…</span>.</p></li>
+<li><p>Open QGIS. Go to <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector
+Layer…</span>.</p></li>
 </ol>
 <img alt="../../_images/1139.png" class="align-center" src="../../_images/1139.png" />
 <ol class="arabic simple" start="2">
-<li><p>Klik op <span class="guilabel">…</span> naast <span class="guilabel">Bron</span>, blader naar het gedownloade bestand <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.zip</span></code> en klik op <span class="guilabel">Openen</span>.</p></li>
+<li><p>Click on <span class="guilabel">…</span> next to <span class="guilabel">Source</span>, Browse to the downloaded <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.shp</span></code> file and click
+<span class="guilabel">Add</span>.</p></li>
 </ol>
 <img alt="../../_images/298.png" class="align-center" src="../../_images/298.png" />
 <ol class="arabic simple" start="3">
-<li><p>Onder in het venster van QGIS zult u het label <span class="guilabel">Coördinaat</span> zien. Wanneer u uw cursor over de kaart beweegt, laat het u de X- en Y-coördinaten van die locatie zien. In de rechter benedenhoek zult u zien <span class="guilabel">EPSG:4326</span>. Dat is de code voor het huidige CRS (projectie) voor het project - ook bekend als het <strong>project-CRS</strong>.</p></li>
+<li><p>At the bottom of QGIS window, you will notice the label <span class="guilabel">Coordinate</span>. As you move your cursor over the map, it will show you the X and Y coordinates at that location. At the bottom-right corner you will see <span class="guilabel">EPSG:4326</span>. This is the code for the current CRS (Projection) for the project - also known as the <strong>Project CRS</strong>.</p></li>
 </ol>
 <img alt="../../_images/350.png" class="align-center" src="../../_images/350.png" />
 <ol class="arabic simple" start="4">
-<li><p>We kunnen de metadata bekijken om de projectie van een laag te bepalen. Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> en selecteer <span class="guilabel">Eigenschappen</span>.</p></li>
+<li><p>To determine a layer’s projection, we can look into the metadata. Right click on <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> layer and select <span class="guilabel">Properties</span>.</p></li>
 </ol>
 <img alt="../../_images/432.png" class="align-center" src="../../_images/432.png" />
 <ol class="arabic simple" start="5">
-<li><p>Schakel naar de tab <span class="guilabel">Informatie</span> in het dialoogvenster <span class="guilabel">Laageigenschappen</span>. Vergroot het gedeelte <span class="guilabel">Informatie van provider</span>. Onderin ziet u de definitie voor de projectie onder <span class="guilabel">CRS</span>.</p></li>
+<li><p>Switch to the <span class="guilabel">Information</span> tab in the <span class="guilabel">Layer Properties</span> dialog. Expand the <span class="guilabel">Information from provider</span> section. At the bottom, you will see the name of the projection under <span class="guilabel">CRS</span>.</p></li>
 </ol>
 <img alt="../../_images/532.png" class="align-center" src="../../_images/532.png" />
 <ol class="arabic simple" start="6">
@@ -299,47 +309,47 @@
 </ol>
 <img alt="../../_images/631.png" class="align-center" src="../../_images/631.png" />
 <ol class="arabic simple" start="7">
-<li><p>Zoek en lokaliseer het algoritme <span class="menuselection">Vector algemeen ‣ Laag opnieuw projecteren</span> in de Toolbox van Processing.</p></li>
+<li><p>Search for and locate the <span class="menuselection">Vector General ‣ Reproject layer</span> algorithm in Processing toolbox.</p></li>
 </ol>
 <img alt="../../_images/731.png" class="align-center" src="../../_images/731.png" />
 <ol class="arabic simple" start="8">
-<li><p>Selecteer <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> als de <span class="guilabel">Invoerlaag</span>, selecteer <span class="guilabel">Alleen geselecteerde objecten</span> en klik op het pictogram van de globe naast <span class="guilabel">Doel-CRS</span>, zoek en selecteer <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span> <span class="pre">-</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code>. In <span class="guilabel">Opnieuw geprojecteerd</span>, kies de <code class="docutils literal notranslate"><span class="pre">…</span></code> en klik op <span class="guilabel">Save to a file</span>. Kies nu de map en voer als naam in <code class="docutils literal notranslate"><span class="pre">united_kingdom.gkpg</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> as the <span class="guilabel">Input layer</span>, check <span class="guilabel">Selected features only</span> then click on the globe icon next to <span class="guilabel">Target CRS</span>, search and select <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span> <span class="pre">-</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code>. In <span class="guilabel">Reprojected</span>, choose the <code class="docutils literal notranslate"><span class="pre">...</span></code>  and click <span class="guilabel">Save to a file</span>. Now choose the directory and enter the name as <code class="docutils literal notranslate"><span class="pre">united_kingdom.gkpg</span></code> and click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <img alt="../../_images/830.png" class="align-center" src="../../_images/830.png" />
 <ol class="arabic simple" start="9">
-<li><p>Een nieuwe laag <code class="docutils literal notranslate"><span class="pre">united_kingdom</span></code> zal verschijnen in het <span class="guilabel">paneel Lagen</span>. Zoals u ziet lijnen de beide lagen nog steeds exact op elkaar uit - hoewel zij zelfs in verschillende CRS-en staan. Dit komt omdat QGIS <a class="reference external" href="https://docs.qgis.org/testing/nl/docs/user_manual/working_with_projections/working_with_projections.html?highlight=otf#project-coordinate-reference-systems">Directe (OTF) CRS transformatie gebruiken</a> ondersteunt. Wat betekent dat elke keer als een CRS van een laag niet overeenkomt met het project-CRS, het automatisch zal worden getransformeerd naar het project-CRS, zodat het correct kan worden weergegeven. Laten we nu het project-CRS instellen zodat het overeenkomt met het laag-CRS van de nieuw gemaakte laag <code class="docutils literal notranslate"><span class="pre">united_kingdom</span></code>. Verwijder de laag <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> en klik met rechts op de laag  <code class="docutils literal notranslate"><span class="pre">united_kingdom</span></code> en kies <span class="menuselection">Laag-CRS ‣ Project CRS van laag overnemen</span>.</p></li>
+<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">united_kingdom</span></code> will appear on the <span class="guilabel">Layer Panel</span>. As you see, both the layers still line up exactly with each other - even though they are in different CRSs. This is because QGIS supports <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_projections/working_with_projections.html?highlight=otf#project-coordinate-reference-systems">On-The-Fly (OTF) CRS transformation</a>. Which means that whenever a layer’s CRS doesn’t match the Project CRS, it will automatically be transformed to the Project CRS so it can be displayed correctly. Now let’s set the Project CRS to match the newly created <code class="docutils literal notranslate"><span class="pre">united_kingdom</span></code> Layer’s CRS. Remove the <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> layer and, right click on the <code class="docutils literal notranslate"><span class="pre">united_kingdom</span></code> layer <span class="menuselection">Layer CRS ‣ Set Project CRS from Layer</span>.</p></li>
 </ol>
 <img alt="../../_images/931.png" class="align-center" src="../../_images/931.png" />
 <ol class="arabic simple" start="10">
-<li><p>U zult zien dat het project-CRS is bijgewerkt naar <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span></code>.</p></li>
+<li><p>You will see the Project CRS is updated to <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span></code>.</p></li>
 </ol>
 <img alt="../../_images/1029.png" class="align-center" src="../../_images/1029.png" />
 <ol class="arabic simple" start="11">
-<li><p>Laten we nu een rasterlaag toevoegen. Ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Rasterlaag toevoegen…</span>.</p></li>
+<li><p>Now let’s add a Raster layer. Go to <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer…</span>.</p></li>
 </ol>
 <img alt="../../_images/1140.png" class="align-center" src="../../_images/1140.png" />
 <ol class="arabic simple" start="12">
 <li><p>Click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> next to <span class="guilabel">Source</span>, select the layer <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R23.tif</span></code>. Click <span class="guilabel">Add</span>.</p></li>
 </ol>
-<img alt="../../_images/1231.png" class="align-center" src="../../_images/1231.png" />
+<img alt="../../_images/1232.png" class="align-center" src="../../_images/1232.png" />
 <ol class="arabic simple" start="13">
-<li><p>Nu is een nieuwe laag <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R23</span></code> toegevoegd aan het kaartvenster.</p></li>
+<li><p>Now a new layer <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R23</span></code> is added to the canvas.</p></li>
 </ol>
-<img alt="../../_images/1330.png" class="align-center" src="../../_images/1330.png" />
+<img alt="../../_images/1331.png" class="align-center" src="../../_images/1331.png" />
 <ol class="arabic simple" start="14">
-<li><p>Wijzig, om beide lagen zichtbaar te maken, de volgorde van de lagen door <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R23</span></code> tot onder in het paneel <span class="guilabel">Lagen</span> te slepen.</p></li>
+<li><p>To make both layers visible, switch the order of the layer by dragging the <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R23</span></code> to the bottom in the <span class="guilabel">Layers</span> panel.</p></li>
 </ol>
 <img alt="../../_images/1429.png" class="align-center" src="../../_images/1429.png" />
 <ol class="arabic simple" start="15">
-<li><p>Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R23</span></code> en klik op <span class="guilabel">Eigenschappen</span>.</p></li>
+<li><p>Right-click on the <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R23</span></code> layer and click on <span class="guilabel">Properties</span>.</p></li>
 </ol>
 <img alt="../../_images/1528.png" class="align-center" src="../../_images/1528.png" />
 <ol class="arabic simple" start="16">
-<li><p>In de <span class="guilabel">Laageigenschappen</span>, schakel naar <span class="guilabel">Informatie</span>, het <span class="guilabel">CRS</span> is <code class="docutils literal notranslate"><span class="pre">EPS:27700</span> <span class="pre">-</span> <span class="pre">OSBG</span> <span class="pre">1935</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span> <span class="pre">-</span> <span class="pre">Geprojecteerd</span></code>. Dit bevestigt dat het CRS van de rasterlaag hetzelfde is als het project-CRS.</p></li>
+<li><p>In the <span class="guilabel">Layer Properties</span>, switch to <span class="guilabel">Information</span>, the <span class="guilabel">CRS</span> is <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span> <span class="pre">-</span> <span class="pre">OSBG</span> <span class="pre">1935</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span> <span class="pre">-</span> <span class="pre">Projected</span></code>. This confirms that the raster layer’s CRS is the same as the Project CRS.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
-<p>Wanneer u een rasterlaag opnieuw wilt projecteren, kunt u het algoritme <span class="menuselection">GDAL ‣ Rasterprojecties ‣ Warp (opnieuw projecteren)</span> in de Toolbox van Processing gebruiken.</p>
+<p>If you want to re-project a raster layer, you can use  <span class="menuselection">GDAL ‣ Raster projections ‣ Warp (reproject)</span> algorithm in Processing toolbox.</p>
 </div>
 <img alt="../../_images/1625.png" class="align-center" src="../../_images/1625.png" />
 </div>
@@ -367,7 +377,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op mrt. 27, 2021.<br/>
+      Laatste aanpassing op apr. 09, 2021.<br/>
       Aangemaakt met <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
