@@ -266,7 +266,8 @@
 <div class="section" id="other-skills-you-will-learn">
 <h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanen untuk headline ini">¶</a></h3>
 <ul class="simple">
-<li><p>How to delete a column (i.e. field) from a vector layer.</p></li>
+<li><p>Access all layer(Raster and vector) from Python console and print their names.</p></li>
+<li><p>Merge diffrent layer into single layer using Python script.</p></li>
 </ul>
 </div>
 </div>
@@ -283,7 +284,7 @@
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Link permanen untuk headline ini">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Unzip the <code class="docutils literal notranslate"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil.zip</span></code> file. Locate the <code class="docutils literal notranslate"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil</span></code> folder in the QGIS Browser and expand it. The folder contains 12 individual layers for each month. Hold the <kbd class="kbd docutils literal notranslate">Ctrl</kbd> key and select the <code class="docutils literal notranslate"><span class="pre">.bil</span></code> files for all 12 months. Once selected, drag them to the canvas.</p></li>
+<li><p>Locate the <code class="docutils literal notranslate"><span class="pre">PRISM_ppt_stable_4kmM3_2017_all_bil.zip</span></code> folder in the QGIS Browser and expand it. The folder contains 12 individual layers for each month. Hold the <kbd class="kbd docutils literal notranslate">Ctrl</kbd> key and select the <code class="docutils literal notranslate"><span class="pre">.bil</span></code> files for all 12 months. Once selected, drag them to the canvas.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1106.png" class="align-center" src="../../_images/1106.png" />
@@ -299,15 +300,11 @@
 <div><img alt="../../_images/268.png" class="align-center" src="../../_images/268.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Next, unzip the <code class="docutils literal notranslate"><span class="pre">Zip_Codes.zip</span></code> file and extract the shapefile to a folder. Locate the <code class="docutils literal notranslate"><span class="pre">Zip_Codes</span></code> folder and expand it. Drag the <code class="docutils literal notranslate"><span class="pre">Zip_Codes.shp</span></code> file to the canvas.</p></li>
+<li><p>Next, locate the <code class="docutils literal notranslate"><span class="pre">Zip_Codes.zip</span></code> folder and expand it. Drag the <code class="docutils literal notranslate"><span class="pre">Zip_Codes.shp</span></code> file to the canvas.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/339.png" class="align-center" src="../../_images/339.png" />
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Catatan</p>
-<p>The unzip step is important because the Zonal Statistics algorithm works by adding a new field to the layer. If the layer is zipped, QGIS cannot update the layer.</p>
-</div>
 <ol class="arabic simple" start="4">
 <li><p>Right-click the <code class="docutils literal notranslate"><span class="pre">Zip_Codes</span></code> layer and select <span class="guilabel">Zoom to Layer</span>. You will see the zip code polygons for the city of seattle and neighboring areas.</p></li>
 </ol>
@@ -321,7 +318,7 @@
 <div><img alt="../../_images/523.png" class="align-center" src="../../_images/523.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>The algorithm to sample a raster layer using vector polygons is known as <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">statistics</span></code>. Search for the algorithm in the <span class="guilabel">Processing Toolbox</span>. Select the algorithm and hover your mouse over it. You will see a tooltip with the text <em>Algorithm ID: 'native:zonalstatistics'</em>. Note this id which will be needed  to call this algorithm via the Python API. Double-click the <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span></code> algorithm to launch it.</p></li>
+<li><p>The algorithm to sample a raster layer using vector polygons is known as <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">statistics</span></code>. Search for the algorithm in the <span class="guilabel">Processing Toolbox</span>. Select the algorithm and hover your mouse over it. You will see a tooltip with the text <em>Algorithm ID: 'native:zonalstatisticsfb'</em>. Note this id which will be needed  to call this algorithm via the Python API. Double-click the <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span></code> algorithm to launch it.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/623.png" class="align-center" src="../../_images/623.png" />
@@ -351,7 +348,7 @@
 <div><img alt="../../_images/1022.png" class="align-center" src="../../_images/1022.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Click on the <span class="guilabel">show editor</span> button. This will open the python editor were a bunch of python code can be written and executed with a single click of a button.</p></li>
+<li><p>Click on the <span class="guilabel">show editor</span> button. This will open the python editor where a bunch of python code can be written and executed with a single click of a button.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1126.png" class="align-center" src="../../_images/1126.png" />
@@ -368,7 +365,49 @@
 <img alt="../../_images/1223.png" class="align-center" src="../../_images/1223.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>Now, lets calculate <code class="docutils literal notranslate"><span class="pre">Mean</span></code> across all months and create an single layer by adding 12 columns for each month (i.e) <code class="docutils literal notranslate"><span class="pre">01_mean</span></code> for January, <code class="docutils literal notranslate"><span class="pre">02_mean</span></code> for February and so on. This can be achieved by custom prefixing. So, for adding a custom prefix, we need to look at the layer name and extract a substring representing the month number. Enter the following code to iterate over all raster layers, extract the custom prefix and run the <code class="docutils literal notranslate"><span class="pre">native:zonalstatisticsfb</span></code> algorithm using it.</p></li>
+<li><p>Now, let's calculate the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> for one month and create an output layer. In the below code <span class="guilabel">break</span> is used to exit the loop after the first execution, by this we can calculate the mean for January month.</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">layerTreeRoot</span><span class="p">()</span>
+
+<span class="n">input_layer</span> <span class="o">=</span> <span class="s1">&#39;Zip_Codes&#39;</span>
+<span class="n">result_layer</span> <span class="o">=</span> <span class="n">input_layer</span>
+<span class="n">unique_field</span> <span class="o">=</span> <span class="s1">&#39;OBJECTID&#39;</span>
+
+<span class="c1"># Iterate through all raster layers</span>
+<span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span><span class="p">():</span>
+  <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;PRISM&#39;</span><span class="p">):</span>
+    <span class="c1"># Run Zonal Stats algorithm</span>
+
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">()[</span><span class="o">-</span><span class="mi">6</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;INPUT_RASTER&#39;</span><span class="p">:</span> <span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span>
+        <span class="s1">&#39;RASTER_BAND&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;INPUT&#39;</span><span class="p">:</span> <span class="n">input_layer</span><span class="p">,</span>
+        <span class="s1">&#39;COLUMN_PREFIX&#39;</span><span class="p">:</span> <span class="n">prefix</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;STATISTICS&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+        <span class="s1">&#39;OUTPUT&#39;</span><span class="p">:</span> <span class="s1">&#39;memory:&#39;</span>
+        <span class="p">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;native:zonalstatisticsfb&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="n">result_layer</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;OUTPUT&#39;</span><span class="p">]</span>
+    <span class="c1"># Breaking out of loop to demonstrate the zonalstatistics algorithm.</span>
+    <span class="k">break</span>
+
+<span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">addMapLayer</span><span class="p">(</span><span class="n">result_layer</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/1322.png" class="align-center" src="../../_images/1322.png" />
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Catatan</p>
+<p>You can also run a QGIS Processing algorithm via Python using the <cite>processing.runAndLoadResults()</cite> function instead of <cite>processing.run()</cite> as shown above - which will load the result to QGIS canvas directly.</p>
+</div>
+<ol class="arabic simple" start="14">
+<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">output</span></code> will be added to the canvas, right-click on the layer and select <span class="guilabel">Open Attribute Table</span>. <span class="guilabel">01_mean</span> represents one month mean, likewise the above algorithm will produce 12 new layers if executed without the break.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/1421.png" class="align-center" src="../../_images/1421.png" />
+</div></blockquote>
+<ol class="arabic simple" start="15">
+<li><p>Now lets add code to merge all the months mean, and create an single output layer from it. Enter the following code to iterate over all raster layers, extract the custom prefix and run the <code class="docutils literal notranslate"><span class="pre">native:joinattributestable</span></code> algorithm to create an single layer containing all months mean.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">layerTreeRoot</span><span class="p">()</span>
@@ -400,30 +439,26 @@
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;native:joinattributestable&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
-<span class="c1"># At the end of each iteration, update the result layer to the</span>
-<span class="c1"># newly processed layer, so we keep adding new fields to the same layer</span>
-<span class="n">result_layer</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;OUTPUT&#39;</span><span class="p">]</span>
+    <span class="c1"># At the end of each iteration, update the result layer to the</span>
+    <span class="c1"># newly processed layer, so we keep adding new fields to the same layer</span>
+    <span class="n">result_layer</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;OUTPUT&#39;</span><span class="p">]</span>
 
 <span class="n">QgsProject</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">addMapLayer</span><span class="p">(</span><span class="n">result_layer</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/1322.png" class="align-center" src="../../_images/1322.png" />
-<div class="admonition note">
-<p class="admonition-title">Catatan</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">native:zonalstatisticsfb</span></code> will produce new layers for each month by aggregating each month <strong>mean</strong> as new  layer. But to get an single layer by combaining it, we need to join all the new layers by using <code class="docutils literal notranslate"><span class="pre">native:joinattributestable</span></code>.</p>
-</div>
+<img alt="../../_images/1520.png" class="align-center" src="../../_images/1520.png" />
 </div></blockquote>
-<ol class="arabic simple" start="14">
+<ol class="arabic simple" start="16">
 <li><p>Once the processing finishes, a new layer <code class="docutils literal notranslate"><span class="pre">output</span></code> will be added to canvas, right-click on the layer and select <span class="guilabel">Open Attribute Table</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1421.png" class="align-center" src="../../_images/1421.png" />
+<div><img alt="../../_images/1619.png" class="align-center" src="../../_images/1619.png" />
 </div></blockquote>
-<ol class="arabic simple" start="15">
+<ol class="arabic simple" start="17">
 <li><p>You will see 12 new columns added to the table with custom prefixes and mean precipitation values extracted from the raster layers.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1520.png" class="align-center" src="../../_images/1520.png" />
+<div><img alt="../../_images/1720.png" class="align-center" src="../../_images/1720.png" />
 </div></blockquote>
 </div>
 </div>
