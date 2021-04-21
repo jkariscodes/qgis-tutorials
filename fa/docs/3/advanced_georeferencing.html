@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html lang="fa">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>زمین مرجع کردن عکس هوایی (QGIS) &#8212; QGIS Tutorials and Tips</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="search" title="جستجو" href="../../search.html" />
+    <link rel="next" title="Digitizing Map Data" href="../digitizing_basics.html" />
+    <link rel="prev" title="زمین مرجع کردن نقشه شیت توپوگرافی اسکن شده (QGIS3)" href="georeferencing_basics.html" />
+
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B1WQ7B80XJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B1WQ7B80XJ');
+</script>
+
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
+          QGIS Tutorials and Tips</a>
+        <span class="navbar-text navbar-version pull-left"><b>v1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Tutorials List <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">مقدمه</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making_a_map.html">Making a Map (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">محاسبه طول خط و آمار (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Working with Terrain Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">کار با  داده های WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">کار با پروژکشن</a></li>
+<li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">زمین مرجع کردن نقشه  شیت توپوگرافی اسکن شده (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">زمین مرجع کردن عکس هوایی (QGIS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitizing Map Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">اجرای اتصال مکانی (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">درون یابی داده های نقطه ای</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">گردش کار خودکار با استفاده از مدل پردازش (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automating Map Creation with Print Layout Atlas (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_criteria_overlay.html">تحلیل همپوشانی چندمعیار­ه (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">کاربرد QGIS Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">شروع برنامه نویسی پایتون (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">ساخت پلاگین پایتون (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_python_plugin.html">Building a Processing Plugin (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_python_functions.html">استفاده از بیان توابع عبارتی پایتون (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Writing Python Scripts for Processing Framework (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">اجرا و برنامه ریزی پردازش وظیفه ای در QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Performing Table Joins (PyQGIS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_mapping_with_qgis2web.html">تهیه نقشه وب با  QGIS2Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../creating_basemaps_with_qtiles.html">Creating Basemaps with QTiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_plugins.html">استفاده از پلاگین Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downloading_osm_data.html">Searching and Downloading OpenStreetMap Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../learning_resources.html">منابع آموزشی QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Data Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../batch_processing.html">Batch Processing using Processing Framework (QGIS2)</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="georeferencing_basics.html" title="Previous Chapter: زمین مرجع کردن نقشه شیت توپوگرافی اسکن شده (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; زمین مرجع کرد...</span>
+    </a>
+  </li>
+  <li>
+    <a href="../digitizing_basics.html" title="Next Chapter: Digitizing Map Data"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Digitizing Map Data &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+
+            
+
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><h4>Author</h4>
+<p>Ujaval Gandhi</p>
+<a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
+<hr>
+<p>Check out more QGIS learning materials, including free full-length QGIS courses from <a href="https://spatialthoughts.com/resources" target="_blank">Spatial Thoughts Academy</a>.</p>
+
+<hr>
+<!-- EmailOctopus Form -->
+
+<link rel="stylesheet"
+      href="https://emailoctopus.com/bundles/emailoctopuslist/css/1.6/form.css"
+>
+<div class="emailoctopus-form-wrapper emailoctopus-form-default null"
+     style="font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(26, 26, 26);"
+>
+  <p class="emailoctopus-heading">
+    Subscribe to my list
+  </p>
+  <p class="emailoctopus-success-message">
+  </p>
+  <p class="emailoctopus-error-message">
+  </p>
+  <form action="https://emailoctopus.com/lists/7325d131-1dbb-11eb-a3d0-06b4694bee2a/members/embedded/1.3/add"
+        method="post"
+        data-message-success="Thanks for subscribing!"
+        data-message-missing-email-address="Your email address is required."
+        data-message-invalid-email-address="Your email address looks incorrect, please try again."
+        data-message-bot-submission-error="This doesn't look like a human submission."
+        data-message-consent-required="Please check the checkbox to indicate your consent."
+        data-message-invalid-parameters-error="This form has missing or invalid fields."
+        data-message-unknown-error="Sorry, an unknown error has occurred. Please try again later."
+        class="emailoctopus-form"
+  >
+    <div class="emailoctopus-form-row">
+      <label for="field_0">
+        Email address
+      </label>
+      <input id="field_0"
+             name="field_0"
+             type="email"
+             placeholder
+             required="required"
+      >
+    </div>
+    <div aria-hidden="true"
+         class="emailoctopus-form-row-hp"
+    >
+      <input type="text"
+             name="hpc4b27b6e-eb38-11e9-be00-06b4694bee2a"
+             tabindex="-1"
+             autocomplete="nope"
+      >
+    </div>
+    <div class="emailoctopus-form-row-subscribe">
+      <input type="hidden"
+             name="successRedirectUrl"
+      >
+      <button type="submit"
+              style="background-color: rgb(224, 224, 224); color: rgb(0, 0, 0); font-family: inherit;"
+      >
+        Subscribe
+      </button>
+    </div>
+  </form>
+</div>
+<script src="https://emailoctopus.com/bundles/emailoctopuslist/js/1.6/form-embed.js">
+</script>
+
+<hr>
+
+
+<h4>Change Language</h4>
+<form role="form" class="sidebar-form sidebar-left">
+<select id="languages" class="form-control select-mini">
+  <option value="en">English</option>
+  <option value="zh_TW">Chinese (Taiwan)</option>
+  <option value="nl">Dutch</option>
+  <option value="fi_FI">Finnish</option>
+  <option value="fr">French</option>
+  <option value="de">German</option>
+  <option value="el">Greek</option>
+  <option value="id">Indonesian</option>
+  <option value="it">Italian</option>
+  <option value="ko">Korean</option>
+  <option value="pt_BR">Portuguese</option>
+  <option value="ro">Romanian</option>
+  <option value="ru">Russian</option>
+  <option value="sl">Slovenian</option>
+  <option value="es">Spanish</option>
+  <option value="th">Thai</option>
+  <option value="tr">Turkish</option>
+  <option value="uk">Ukrainian</option>
+  <option value="vi">Vietnamese</option>
+</select>
+</form>
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+
+  <div class="section" id="georeferencing-aerial-imagery-qgis3">
+<h1>زمین مرجع کردن عکس هوایی (QGIS)<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="لینک ثابت به این سر مقاله">¶</a></h1>
+<p>در  آموزش زمین مرجع (ژئورفرنس) نقشه اسکن شده:doc:<cite>georeferencing_basics</cite>،  فرایند کلی زمین مرجع کردن در QGIS بیان شده است. این روش شامل قرائت مختصات نقشه اسکن شده و واردکردن آن‌ها به‌صورت دستی به‌عنوان نقاط کنترل بود. در بسیاری از مواقع ممکن است مختصات روی نقشه خود چاپ‌نشده باشد، یا لازم باشد ارجاع تصویر به یک تصویر صورت گیرد. در این صورت، می‌توانید از منبع داده زمین مرجع شده دیگری به‌عنوان ورودی استفاده کنید. در این آموزش، شما می‌آموزید که چگونه از منابع داده موجود باز در فرایند زمین مرجع استفاده کنید.</p>
+<div class="section" id="overview-of-the-task">
+<h2>نمای کلی تمرین<a class="headerlink" href="#overview-of-the-task" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<p>ما یک عکس گرفته شده با بالون با استفاده از مختصات مرجع OpenStreetMap زمین مرجع خواهیم کرد.</p>
+<div class="section" id="other-skills-you-will-learn">
+<h3>سایر مهارتهایی که یاد خواهید گرفت<a class="headerlink" href="#other-skills-you-will-learn" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<ul class="simple">
+<li><p>دانلود تصویر با تفکیک مکانی بالا در حوزه عمومی</p></li>
+<li><p>استفاده از  لایه های موزاییکی XYZ به عنوان نقشه پایه</p></li>
+<li><p>استفاده از پلاگین جستجوی مکانی OSM Place Search در QGIS</p></li>
+<li><p>تنظیم مقدار ارزش بدون داده  برای یک لایه</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="get-the-data">
+<h2>اخذ داده<a class="headerlink" href="#get-the-data" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<p>در این آموزش، ما از تصاویر برداشت شده توسط بالون آزمایشگاه عمومی <a href="#id1"><span class="problematic" id="id2">`</span></a>The Public Laboratory &lt;<a class="reference external" href="http://publiclaboratory.org/archive">http://publiclaboratory.org/archive</a>&gt;`_استفاده خواهیم کرد. آنها نسخه های زمین مرجع شده این تصاویر را نیز در دسترس قرار می دهند ، اما ما یک تصویر JPG زمین مرجع نشده را دانلود می کنیم و فرایند زمین مرجع کردن آن را در QGIS اجرا خواهیم کرد.</p>
+<p>عکس پارک میدان واشنگتن، نیویورک  &lt;<a class="reference external" href="http://">http://</a> publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01&gt;`_ با فرمت JPG را بارگیری کنید. می‌توانید بر روی آن کلیک راست کرده و برای ذخیره، گزینه Save link as را انتخاب کنید.</p>
+<p>برای راحتی کار، می‌توانید مستقیماً یک کپی از مجموعه داده را از لینک زیر بارگیری کنید:</p>
+<p><a class="reference external" href="https://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
+</div>
+<div class="section" id="procedure">
+<h2>مراحل<a class="headerlink" href="#procedure" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<ol class="arabic simple">
+<li><p>We will use a basemap from OpenStreetMap to capture the coordinates for georeferencing. QGIS3 comes with  built-in support for tile layers. These are commonly known as 'XYZ' layers since they are made using individual map tiles for each zoom level (z) on a x,y coordinate grid. You can find the <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> layer under <span class="guilabel">XYZ Tiles</span> in the <span class="guilabel">Browser Panel</span>. Drag the layer to the main canvas. Once loaded, note the Coordinate Reference System (CRS) for this layer in the bottom-right corder. It is set as <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>. This is important because the coordinates we infer from this layer during georeferencing will be in this CRS.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>وبگاه <a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">this page</a> برای  کسب اطلاعات در موردXYZ  و چگونگی افزودن سایر لایه های پایه بیشتر نکاه کنید.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>تصویری که مورداستفاده قرارگرفته مرتبط به منطقه پارک میدان واشنگتن در نیویورک <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code> است؛ می‌توان با زوم کردن/ رفتن به آن منطقه، این پارک را در نقشه نمایش داد؛ اما این روش کمی دست و پاگیر است و ممکن است عملی نباشد. یک روش آسان­تر استفاده از افزونه`OSM Place Search`` برای جستجوی مکان دقیق است. نصب پلاگین از طریق <span class="menuselection">Plugins ‣ Manage and install plugins ‣ All</span> ممکن است؛ اگر این افزونه را در نتایج جستجو مشاهده نمی‌کنید، مطمئن شوید که این مورد:guilabel:<cite>Also show experimental plugins</cite>  را علامت زده ­اید، تا در بخش تنظیمات افزونه‌های آزمایشی نشان داده شود. برای اطلاعات بیشتر در مورداستفاده از پلاگین­ها به  :doc:<a href="#id1"><span class="problematic" id="id2">`</span></a>../using_plugins`برویید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>پس از نصب افزونه، صفحه جدیدی به نام <span class="guilabel">OSM Place Search...`خواهید داشت. در کادرمحاوره‌ای نام Name عبارت ``Washington Square Park``جستجو کنید و کلیک:guilabel:</span>-&gt;`کنید. مشاهده خواهید کرد که نام مکان‌های منطبق در پانل نتایج ظاهر می‌شود. نتیجه صحیح را انتخاب کنید و روی دکمه :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Zoom`بزرگنمایی کلیک کنید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/3.png" class="align-center" src="../../_images/3.png" />
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>You will see the map that is familiar and contains the landmarks that we can identify from the image. You may close the <span class="guilabel">OSM Place Search</span> panel now. If you need it again, you can open it from <span class="menuselection">View ‣ Panels ‣ OSM Place Search</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/4.png" class="align-center" src="../../_images/4.png" />
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Now it is time to start georeferencing. Launch the <strong>Georeferencer</strong> from <span class="menuselection">Raster ‣ Georeferencer ‣ Georeferencer</span>. If you do not see that menu item, you will need to enable the <span class="guilabel">Georeferencer GDAL</span> plugin from <span class="menuselection">Plugins ‣ Manage and install Plugins ‣ Installed</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/5.png" class="align-center" src="../../_images/5.png" />
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>در پنجره  <span class="guilabel">Georeferencer</span> ، به منوی  <span class="menuselection">File ‣ Open Raster</span> بروید. به محل مسیر فایل JPG بارگیری شده بروید و  :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Open`را کلیک کنید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/6.png" class="align-center" src="../../_images/6.png" />
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p>در صفحه بعدی، از شما خواسته می‌شود که سیستم مرجع مختصات (CRS) داده رستر انتخاب کنید؛ فرمت تصویر ما یک فایل JPEG ساده است و هیچ سیستم مختصات مرجعی ندارد؛ بنابراین، می‌توانید برای لغو دکمه :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Cancel`را کلیک کنید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/7.png" class="align-center" src="../../_images/7.png" />
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p>Before we start adding Ground Control Points (GCP), we need to define the Transformation Settings. Go to <span class="menuselection">Settings ‣ Transformation settings</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/8.png" class="align-center" src="../../_images/8.png" />
+</div></blockquote>
+<ol class="arabic simple" start="9">
+<li><p>In the <span class="guilabel">Transformation settings</span> dialog, choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> to learn about different transofrmation types and their uses. As noted earlier, our basemap is in <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code> CRS, so set that as the <span class="guilabel">Target CRS</span>. You can leave the <span class="guilabel">Output raster</span> name to the default and choose <code class="docutils literal notranslate"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Check the <span class="guilabel">Use 0 for transparency when needed</span>. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. CLick <span class="guilabel">OK</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/9.png" class="align-center" src="../../_images/9.png" />
+</div></blockquote>
+<ol class="arabic simple" start="10">
+<li><p>Now click on the <span class="guilabel">Add Point</span> button on the toolbar and select an easily identifiable location on the image. Corners, intersections, poles etc. make good control points.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/10.png" class="align-center" src="../../_images/10.png" />
+</div></blockquote>
+<ol class="arabic simple" start="11">
+<li><p>هنگامی‌که بر روی تصویر در مکان یک  نقطه کنترل کلیک می نمایید، یک پنجره بازشو ظاهر می‌گردد که از شما می‌خواهد مختصات نقشه را وارد کنید. ولی شما روی دکمه <span class="guilabel">From map canvas</span> کلیک کنید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/11.png" class="align-center" src="../../_images/11.png" />
+</div></blockquote>
+<ol class="arabic simple" start="12">
+<li><p>موقعیت دقیق همان مکان را در لایه مرجع پیدا کنید و در آن نقطه کلیک کنید. با کلیک شما مختصات روی نقشه به‌طور خودکار نوشته می‌شوند، با کلیک بر دکمه OK تأیید کنید. به همین ترتیب، حداقل6 نقطه  در عکس هوایی را انتخاب کنید و مختصات آن‌ها را از لایه مرجع اضافه کنید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/12.png" class="align-center" src="../../_images/12.png" />
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>نکته: هنگام انتخاب GCP در موقعیت یک ساختمان، همیشه قسمت پایین ساختمان را انتخاب کنید. در بسیاری از عکس‌های هوایی و تصاویر ماهواره‌ای، ساختمان‌های مایل هستند، بنابراین انتخاب یک نقطه در قسمت سقف خطاهایی جابجایی را ایجاد می‌کند.</p>
+</div>
+<ol class="arabic simple" start="13">
+<li><p>هنگامی‌که  حداقل تعداد نقاط موردنیاز GCPs برای تبدیل شما اضافه‌شده‌اند، متوجه خواهید شد که ارزش‌های خطا در جهت طول <code class="docutils literal notranslate"><span class="pre">dX</span></code>،  در جهت عرض``dY``و باقی مانده <code class="docutils literal notranslate"><span class="pre">Residual</span></code> نمایش داده می‌شوند. اگر نقطه کنترل GCP خاصی دارای مقادیر خطای زیاد غیرمعمول داشته باشد، این معمولاً به معنای خطای انسانی هنگام ورود مقادیر مختصات است؛ بنابراین، می‌توانید آن GCP را حذف نموده و دوباره برداشت کنید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
+</div></blockquote>
+<ol class="arabic simple" start="14">
+<li><p>هنگامی‌که از صحت GCP ها مطمئن شدید، به منوی  :menuselection:<a href="#id1"><span class="problematic" id="id2">`</span></a>File --&gt; Start georeferencing`بروید. با این کار فرایند تبدیل ارجاع تصویر بر اساسGCP و ایجاد رستر نهایی شروع می‌شود</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/14.png" class="align-center" src="../../_images/14.png" />
+</div></blockquote>
+<ol class="arabic simple" start="15">
+<li><p>پس از اتمام روند ، لایه ارجاع داده شده را در QGIS بارگذاری می کنید. اگر همه چیز خوب پیش برود ، می بینید که به خوبی با نقشه پایه همپوشانی دارد.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
+</div></blockquote>
+<ol class="arabic simple" start="16">
+<li><p>برای نمایش بهتر لایه خروجی، بیایید مرز سفید را حذف کنیم. روی لایه تصویر کلیک راست کرده و گزینه  :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Properties`را انتخاب کنید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
+</div></blockquote>
+<ol class="arabic simple" start="17">
+<li><p>به تب شفافیت Transparency بروید. پس از اضافه کردن عدد 255 به‌عنوان ارزش بدون داده  در کادرمحاوره‌ای Additional no data value، بر دکمه  :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>OK`کلیک کنید.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>تصاویر 8 بیتی (بایتی) دارای ارزش پیکسلی در دامنه 0-255 هستند، عدد صفر  به رنگ سیاه و 255 به رنگ سفید نمایش داده می ­شود.</p>
+</div>
+<ol class="arabic simple" start="18">
+<li><p>اکنون خواهید دید که تصویر ارجاع داده شده شما به خوبی روی لایه پایه قرار گرفته است.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
+</div></blockquote>
+</div>
+</div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Ujaval Gandhi.<br/>
+      . آوریل 21, 2021  آخرین بروز رسانی در<br/>
+      . <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 ایجاد شده با<br/>
+    </p>
+  </div>
+</footer>
+<div class="container">
+  <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+<!-- Twitter Button -->
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Disqus comments widget -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'qgistutorials'; // required: replace example with your forum shortname
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  }());
+</script>
+
+<script type="text/javascript">
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<!-- Script fpr language switching. Largely adapted from https://github.com/pcav/faunalia-website -->
+<script>
+    var currentPage = 'docs/3/advanced_georeferencing.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    $(document).ready(function(){
+
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is a index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave 
+
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('You hit an error, please report back to us.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+
+  </body>
+</html>
