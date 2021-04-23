@@ -259,22 +259,22 @@
 
   <div class="section" id="working-with-attributes-qgis3">
 <h1>Trabajando con atributos (QGIS3)<a class="headerlink" href="#working-with-attributes-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Los datos SIG tienen dos partes - características (features) y atributos. Los atributos son datos estructurados sobre cada característica. Este tutorial muestra cómo ver los atributos de cada capa vectorial SIG y hacer consultas básicas sobre los mismos en QGIS.</p>
+<p>Los datos SIG tienen dos partes - objetos espaciales (features) y atributos. Los atributos son datos estructurados sobre cada característica. Este tutorial muestra cómo ver los atributos de cada capa vectorial SIG y hacer consultas básicas sobre los mismos en QGIS.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Resumen de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>The dataset for this tutorial contains information about populated places of the world. The task is to query and find all the capital cities in the World that have a population greater than 1 million and save the resulting subset as a GeoJSON file.</p>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los conjuntos de datos para este tutorial contienen información de centros poblados de todo el mundo. La tarea es buscar y encontrar todas las ciudades capitales del mundo que tengan una población mayor a 1 millón y guardar el subconjunto resultante como un archivo GeoJSON</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Otras habilidades que aprenderá.<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li><p>Seleccionar entidades de una capa usando expresiones.</p></li>
-<li><p>Usando la barra de herramientas <span class="guilabel">Atributos</span></p></li>
-<li><p>Exporting selected features in a layer.</p></li>
+<li><p>Seleccionar objetos espaciales de una capa usando expresiones.</p></li>
+<li><p>Usar la barra de herramientas <span class="guilabel">Atributos</span></p></li>
+<li><p>Exportar objetos espaciales seleccionados en una capa.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Natural Earth provides a <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Populated Places</a> dataset. Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">simple (less columns) dataset</a>.</p>
+<p>Natural Earth provee un conjunto de datos  <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Centros Poblados</a>. Descargue el <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">conjunto de datos simple (menos columnas)</a></p>
 <p>Para su comodidad, puede descargar directamente una copia de los conjuntos de datos del enlace abajo:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/ne_10m_populated_places_simple.zip">ne_10m_populated_places_simple.zip</a></p>
 <p>Fuente de Datos <a class="reference internal" href="../credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
@@ -282,23 +282,23 @@
 <div class="section" id="procedure">
 <h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Ubique el archivo <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.zip</span></code> en el Navegador QGIS y expándalo. Seleccione el archivo <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.shp</span></code> y arrástrelo a la pantalla.</p></li>
+<li><p>Ubique el archivo <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.zip</span></code> en el Navegador QGIS y expándalo. Seleccione el archivo <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.shp</span></code> y arrástrelo al lienzo.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1137.png" class="align-center" src="../../_images/1137.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Una nueva capa <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> será ahora cargada en QGIS y verá varios puntos que representan los lugares poblados del mundo. La vista predeterminada en la pantalla QGIS muestra la geometría de la capa SIG. Cada punto también tiene asociado atributos. Veámoslos. Ubique la <span class="guilabel">Barra de Herramientas de Atributos</span>. Esta barra de herramientas contiene varias herramientas útil para inspeccionar, ver, seleccionar, y modificar atributos de una capa.</p></li>
+<li><p>Una nueva capa <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> será ahora cargada en QGIS y verá varios puntos que representan los lugares poblados del mundo. La vista predeterminada en el lienzo QGIS muestra la geometría de la capa SIG. Cada punto también tiene asociado atributos. Veámoslos. Ubique la <span class="guilabel">Barra de Herramientas de Atributos</span>. Esta barra de herramientas contiene varias herramientas útil para inspeccionar, ver, seleccionar, y modificar atributos de una capa.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/297.png" class="align-center" src="../../_images/297.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>If you do not see the toolbar, you can enable it from <span class="menuselection">View ‣ Toolbars ‣ Attributes Toolbar</span>.</p>
+<p>Si no ve la barra de herramientas, puede habilitarla desde <span class="menuselection">Vista ‣ Barras de Herramientas ‣ Barra de Herramienta de Atributos</span></p>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Clic en el botón <span class="guilabel">Identificar</span>. Una vez que la herramienta es seleccionada, clic sobre cualquier punto en la pantalla. Los aributos asociados de ese punto serán mostrados en el nuevo panel <span class="guilabel">Resultados de Identificar</span>. Una vez esté listo explorando atributos de diferentes puntos, puede hacer clic en el botón <span class="guilabel">Cerrar</span>.</p></li>
+<li><p>Clic en el botón <span class="guilabel">Identificar</span>. Una vez que la herramienta esté seleccionada, clic sobre cualquier punto en el lienzo. Los atributos asociados de ese punto serán mostrados en el nuevo panel <span class="guilabel">Resultados de Identificar</span>. Una vez esté listo explorando atributos de diferentes puntos, puede hacer clic en el botón <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/349.png" class="align-center" src="../../_images/349.png" />
@@ -316,13 +316,13 @@
 <div><img alt="../../_images/531.png" class="align-center" src="../../_images/531.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Ahora estamos listos para realizar nuestra consulta sobre estos atributos. QGIS usa expresiones similares a SQL para realizar consultas. Clic en el botón  <span class="guilabel">Seleccionar entidades usando una expresión</span>.</p></li>
+<li><p>Ahora estamos listos para realizar nuestra consulta sobre estos atributos. QGIS usa expresiones similares a SQL para realizar consultas. Clic en el botón  <span class="guilabel">Seleccionar objetos espaciales usando una expresión</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/630.png" class="align-center" src="../../_images/630.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>En la ventana <span class="guilabel">Seleccionar por Expresión</span>, expanda la sección <span class="guilabel">Campos y Valores</span> y haga doble-clic a la etiqueta <code class="docutils literal notranslate"><span class="pre">pop_max</span></code>. Notará que es agregada a la sección expresión abajo. Si no está seguro acerca de los valores de campo, puede hacer clic en <span class="guilabel">Cargar todos los valores únicos</span> para ver valores de atributos existen en el conjunto de datos. Para este ejercicio, estamos buscando encontrar todas las entidades que tienen una población mayor a un millón. Así que complete la expresión como está abajo y clic en <span class="guilabel">Seleccionar Entidades</span> y luego en <span class="guilabel">Cerrar</span>.</p></li>
+<li><p>En la ventana <span class="guilabel">Seleccionar por Expresión</span>, expanda la sección <span class="guilabel">Campos y Valores</span> y haga doble-clic a la etiqueta <code class="docutils literal notranslate"><span class="pre">pop_max</span></code>. Notará que es agregada a la sección expresión abajo. Si no está seguro acerca de los valores de campo, puede hacer clic en <span class="guilabel">Cargar todos los valores únicos</span> para ver valores de atributos existen en el conjunto de datos. Para este ejercicio, estamos buscando encontrar todas los objetos espaciales que tienen una población mayor a un millón. Así que complete la expresión como está abajo y clic en <span class="guilabel">Seleccionar Objetos Espaciales</span> y luego en <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;pop_max&quot; &gt; 1000000
@@ -335,25 +335,25 @@
 <p>En el motor de Expresión QGIS, el texto con comillas dobles se refiere a un campo y el texto con comillas simples se refiere a un valor de cadena de texto.</p>
 </div>
 <ol class="arabic simple" start="8">
-<li><p>Notará que algunas filas en la tabla de atributos están ahora seleccionadas. La ventana de etiqueta también cambia y muestra el conteo de entidades seleccionadas.</p></li>
+<li><p>Notará que algunas filas en la tabla de atributos están ahora seleccionadas. La ventana de etiqueta también cambia y muestra el conteo de objetos espaciales seleccionados.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/829.png" class="align-center" src="../../_images/829.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>Cierre la ventana de la tabla de atributos y retorne a la ventana principal de QGIS. Notará que un subconjunto de puntos está ahora representado en amarillo. Esto es el resultado de nuestra consulta y los puntos seleccionados son aqueelos que tiene un valor de atributo <code class="docutils literal notranslate"><span class="pre">pop_max</span></code> mayor a <code class="docutils literal notranslate"><span class="pre">1000000</span></code>.</p></li>
+<li><p>Cierre la ventana de la tabla de atributos y retorne a la ventana principal de QGIS. Notará que un subconjunto de puntos está ahora representado en amarillo. Esto es el resultado de nuestra consulta y los puntos seleccionados son aquellos que tiene un valor de atributo <code class="docutils literal notranslate"><span class="pre">pop_max</span></code> mayor a <code class="docutils literal notranslate"><span class="pre">1000000</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/930.png" class="align-center" src="../../_images/930.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>Actualicemos nuestra consulta para incluir una condición que el lugar debería ser también una capital además de tener una población mayor a 1 millón. Para obtener rápidamente el editor de expresión, puede usar el botón <span class="guilabel">Seleccionar Entidades por Expresión</span> en la <span class="guilabel">Barra de Herramientas de Atributos</span>.</p></li>
+<li><p>Actualicemos nuestra consulta para incluir una condición que el lugar debería ser también una capital además de tener una población mayor a 1 millón. Para obtener rápidamente el editor de expresión, puede usar el botón <span class="guilabel">Seleccionar Objetos Espaciales por Expresión</span> en la <span class="guilabel">Barra de Herramientas de Atributos</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1028.png" class="align-center" src="../../_images/1028.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>The field containing data about capitals is <strong>adm0cap</strong>. The value <code class="docutils literal notranslate"><span class="pre">1</span></code> indicates that the place is a capital. We can add this criteria to our previous expression using the <em>and</em> operator. Enter the expression as below and click <span class="guilabel">Select Features</span> and then <span class="guilabel">Close</span>.</p></li>
+<li><p>El campo que contiene el dato acerca de capitales es <strong>adm0cap</strong>. El valor <code class="docutils literal notranslate"><span class="pre">1</span></code> indica que el lugar es una capital. Podemos agregar este criterio a nuestra expresión previa usando el operador <em>and</em>. Ingrese la expresión como está abajo y clic en <span class="guilabel">Seleccionar objetos espaciales</span> y luego <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;pop_max&quot; &gt; 1000000 and &quot;adm0cap&quot; = 1
@@ -368,7 +368,7 @@
 <div><img alt="../../_images/1231.png" class="align-center" src="../../_images/1231.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>Ahora exportaremos las entidades seleccionadas como una nueva capa. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code>  y vaya a <span class="menuselection">Exportar ‣ Guardar las Entidades Seleccionadas Como…</span></p></li>
+<li><p>Ahora exportaremos los objetos espaciales seleccionados como una nueva capa. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code>  y vaya a <span class="menuselection">Exportar ‣ Guardar los Objetos Espaciales Seleccionados Como…</span></p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1330.png" class="align-center" src="../../_images/1330.png" />
@@ -416,7 +416,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en abr. 21, 2021.<br/>
+      Actualizado por última vez en abr. 23, 2021.<br/>
       Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
