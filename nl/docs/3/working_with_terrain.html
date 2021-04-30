@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Working with Terrain Data (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Werken met gegevens over het terrein (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -73,7 +73,7 @@
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Rasters mozaïeken en clippen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Werken met gegevens over het terrein</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Werken met gegevens van WMS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Working with Projections (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Werken met projecties (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Topobladen en gescande kaarten voorzien van geoverwijzingen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Geo-verwijzingen voor satellietbeelden (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Kaartgegevens digitaliseren</a></li>
@@ -248,171 +248,141 @@
       
 
   <div class="section" id="working-with-terrain-data-qgis3">
-<h1>Working with Terrain Data (QGIS3)<a class="headerlink" href="#working-with-terrain-data-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Terrain or elevation data is useful for many GIS analyses, and it is often used
-in maps. QGIS3 has good terrain processing capabilities built-in. In this
-tutorial, we will work through the steps to generate various products from
-elevation data such as hillshade and contour.</p>
+<h1>Werken met gegevens over het terrein (QGIS3)<a class="headerlink" href="#working-with-terrain-data-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>Terrein- of hoogtegegevens zijn nuttig voor vele analyses in GIS en wordt vaak gebruikt in kaarten. QGIS3 heeft goede ingebouwde mogelijkheden voor het verwerken van gegevens over het terrein. In deze handleiding zullen we door de stappen gaan om verschillende product te genereren uit hoogtegegevens, zoals heuvels met schaduw en contouren.</p>
 <div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>The task is to create contours and a hillshade map for area around Mt. Everest.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>De taak is om contouren en kaart met heuvels met schaduw te maken voor het gebied rondom Mt. Everest.</p>
 <div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
-<li><p>Searching and downloading freely available terrain data.</p></li>
-<li><p>Exporting a vector layer as KML and viewing it in Google Earth.</p></li>
-<li><p>Smoothing of contour lines.</p></li>
+<li><p>Zoeken en downloaden van gratis beschikbare terreingegevens.</p></li>
+<li><p>Een vectorlaag als KML exporteren en bekijken in Google Earth.</p></li>
+<li><p>Glad maken van contorulijnen</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p>We will be working with GMTED2010 dataset from USGS. This data can be
-downloaded from the <a class="reference external" href="https://earthexplorer.usgs.gov/">USGS Earthexplorer</a> site. <a class="reference external" href="https://eros.usgs.gov/#/Find_Data/Products_and_Data_Available/GMTED2010">GMTED (Global Multi-resolution
-Terrain Elevation Data)</a> is a global terrain dataset that is the newer version
-of GTOPO30 dataset.</p>
-<p>Here is how to search and download the revelant data from USGS Earthexplorer.</p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen werken met de gegevensset GMTED2010 van USGS. Deze gegevens kunnen worden gedownload vanaf de site <a class="reference external" href="https://earthexplorer.usgs.gov/">USGS Earthexplorer</a>. <a class="reference external" href="https://eros.usgs.gov/#/Find_Data/Products_and_Data_Available/GMTED2010">GMTED (Global Multi-resolution Terrain Elevation Data)</a> is een globale terrein gegevensset die de nieuwere versie is van de gegevensset GTOPO30.</p>
+<p>Hier staat hoe de relevante gegevens van USGS Earthexplorer te zoeken en te downloaden.</p>
 <ol class="arabic simple">
-<li><p>Go to the <a class="reference external" href="http://earthexplorer.usgs.gov/">USGS Earthexplorer</a> . In the
-<span class="guilabel">Search Criteria</span> tab, click on <span class="guilabel">World Features</span>. In <span class="guilabel">Feature Name</span> enter <code class="docutils literal notranslate"><span class="pre">Everest</span></code>, in <span class="guilabel">Country</span> enter <code class="docutils literal notranslate"><span class="pre">NEPAL</span></code>, click on <span class="guilabel">Show</span>. This will display a table with the location information. Select <cite>Everest</cite> under <span class="guilabel">Placename</span>.</p></li>
+<li><p>Ga naar <a class="reference external" href="https://earthexplorer.usgs.gov/">USGS Earthexplorer</a> . Op de tab <span class="guilabel">Search Criteria</span>, klik op <span class="guilabel">World Features</span>. Voer in <span class="guilabel">Feature Name</span> <code class="docutils literal notranslate"><span class="pre">Everest</span></code> in, voer in <span class="guilabel">Country</span> <code class="docutils literal notranslate"><span class="pre">NEPAL</span></code> in, klik op <span class="guilabel">Show</span>. Dit zal een tabel weergeven met informatie over de locatie. Selecteer <cite>Everest</cite> onder <span class="guilabel">Placename</span>.</p></li>
 </ol>
 <img alt="../../_images/1141.png" class="align-center" src="../../_images/1141.png" />
 <ol class="arabic simple" start="2">
-<li><p>Now the canvas will move to <cite>Mt. Everest</cite> location. Click on <span class="guilabel">Data Sets</span>.</p></li>
+<li><p>Het kaartvenster zal zich verplaatsen naar de locatie <cite>Mt. Everest</cite>. Klik op <span class="guilabel">Data Sets</span>.</p></li>
 </ol>
 <img alt="../../_images/299.png" class="align-center" src="../../_images/299.png" />
 <ol class="arabic simple" start="3">
-<li><p>Expand the <span class="guilabel">Digital Elevation</span> group, and check <span class="guilabel">GMTED2010</span>. Click on <span class="guilabel">Results</span>.</p></li>
+<li><p>Vergroot de groep <span class="guilabel">Digital Elevation</span> en selecteer <span class="guilabel">GMTED2010</span>. Klik op <span class="guilabel">Results</span>.</p></li>
 </ol>
 <img alt="../../_images/353.png" class="align-center" src="../../_images/353.png" />
 <ol class="arabic simple" start="4">
-<li><p>Click the <span class="guilabel">Download Options</span> button.</p></li>
+<li><p>Klik op de knop <span class="guilabel">Download Options</span>.</p></li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Waarschuwing</p>
-<p>You will have to log in to the site at this point. You can create a free account if you do not have one.</p>
+<p>Op dit punt zult u moeten inloggen op de site. U kunt een gratis account aanmaken als u er nog geen hebt.</p>
 </div>
 <img alt="../../_images/433.png" class="align-center" src="../../_images/433.png" />
 <ol class="arabic simple" start="5">
-<li><p>Select the <span class="guilabel">30 ARC SEC</span> option and click <span class="guilabel">Download</span>.</p></li>
+<li><p>Selecteer de optie <span class="guilabel">30 ARC SEC</span> en klik op <span class="guilabel">Download</span>.</p></li>
 </ol>
 <img alt="../../_images/533.png" class="align-center" src="../../_images/533.png" />
-<p>You will now have a file named <cite>GMTED2010N10E060_300.zip</cite>. Elevation data is
-distributed in various raster formats such as ASC, BIL, GeoTiff, etc.
-QGIS supports a wide <a class="reference external" href="https://www.gdal.org/formats_list.html">variety of raster formats</a> via the GDAL library. The GMTED
-data comes as GeoTiff files which are contained in this zip archive.</p>
-<p>For convenience, you can download a copy of the data directly from below.</p>
+<p>U zult nu een bestand hebben dat is genaamd <cite>GMTED2010N10E060_300.zip</cite>. Hoogtegegevens worden gedistribueerd in verschillende rasterindelingen, zoals ASC, BIL, GeoTiff etc. QGIS ondersteunt een grote <a class="reference external" href="https://www.gdal.org/formats_list.html">variëteit aan rasterindelingen</a> via de bibliotheek GDAL. De gegevens GMTED komen als GeoTiff-bestanden die zijn opgenomen in dit zip-archief.</p>
+<p>Gemakshalve kunt u een kopie van de gegevens direct downloaden vanaf de koppeling hieronder.</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/GMTED2010N10E060_300.zip">GMTED2010N10E060_300.zip</a></p>
-<p>Data Source: <a class="reference internal" href="../credits.html#gmted2010" id="id2"><span>[GMTED2010]</span></a></p>
+<p>Gegevensbron <a class="reference internal" href="../credits.html#gmted2010" id="id2"><span>[GMTED2010]</span></a></p>
 </div>
 <div class="section" id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple" start="6">
-<li><p>Open <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer</span>.</p></li>
+<li><p>Open <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Rasterlaag toevoegen</span>.</p></li>
 </ol>
 <img alt="../../_images/632.png" class="align-center" src="../../_images/632.png" />
 <ol class="arabic simple" start="7">
-<li><p>Click on the <cite>…</cite> under <span class="guilabel">Source</span>, search and select the file named <cite>10n060e_20101117_gmted_mea300.tif</cite>.</p></li>
+<li><p>Klik op de <cite>…</cite> onder <span class="guilabel">Bron</span>, zoek en selecteer het bestand genaamd <cite>10n060e_20101117_gmted_mea300.tif</cite>.</p></li>
 </ol>
 <img alt="../../_images/732.png" class="align-center" src="../../_images/732.png" />
 <ol class="arabic simple" start="8">
-<li><p>You will see the terrain data rendered in the QGIS Canvas. Each pixel in the
-terrain raster represents the average elevation in meters at that location.
-The dark pixels represent areas with low altitude and lighter pixels
-represent areas with high altitude.</p></li>
+<li><p>U zult de terreingegevens zien worden gerenderd in het kaartvenster van QGIS. Elke pixel in het raster van het terrein staat voor de gemiddelde hoogte in meters op die locatie. De donkere pixels vertegenwoordigen gebieden met lage hoogte en lichtere pixels vertegenwoordigen gebieden van grote hoogte.</p></li>
 </ol>
 <img alt="../../_images/831.png" class="align-center" src="../../_images/831.png" />
 <ol class="arabic simple" start="9">
-<li><p>Let’s find our area of interest. From <a class="reference external" href="https://en.wikipedia.org/wiki/Mount_Everest">Wikipedia</a>,
-we find that the coordinates for our area of interest - Mt. Everest - is located
-at the coordinates 27.9881° N, 86.9253° E. Note that QGIS
-uses the coordinates in (X, Y) format, so you must use the coordinates as
-(Longitude, Latitude). Paste <cite>86.9253,27.9881</cite> these at the bottom of the QGIS
-window where it says <span class="guilabel">Coordinate</span> and press Enter. The viewport will be
-centered at this coordinate. To zoom in, Enter <cite>1:1000000</cite> in the <span class="guilabel">Scale</span> field
-and press Enter. You will see the viewport zoom to the area around the
-Himalayas.</p></li>
+<li><p>Laten we ons interessegebied eens opzoeken. Van <a class="reference external" href="https://en.wikipedia.org/wiki/Mount_Everest">Wikipedia</a>, leren we dat de coördinaten voor ons interessegebied - Mt. Everest - is gesitueerd op de coördinaten 27.9881° N, 86.9253° E. Onthoud dat QGIS de coördinaten gebruikt in de indeling (X,Y) , dus u moet de coördinaten gebruiken als (Longitude, Latitude). Plak deze <cite>86.9253,27.9881</cite> onder in het venster van QGIS waar staat <span class="guilabel">Coördinaat</span> en druk op Enter. De weergave zal worden gecentreerd op dit coördinaat. Voer <cite>1:1000000</cite> in het veld <span class="guilabel">Schaal</span> in en druk op Enter om in te zoomen. U zult zien dat de weergave zoomt naar het gebied rondom de Himalaya.</p></li>
 </ol>
 <img alt="../../_images/932.png" class="align-center" src="../../_images/932.png" />
 <ol class="arabic simple" start="10">
-<li><p>We will now crop the raster to this area of interest. Search for Clip in <span class="guilabel">Processing Toolbox</span>. Select the <code class="docutils literal notranslate"><span class="pre">Clip</span> <span class="pre">Raster</span> <span class="pre">by</span> <span class="pre">extent</span></code> under GDAL algorithms.</p></li>
+<li><p>We zullen nu het raster bijsnijden tot dit interessegebied. Zoek naar Clip in <span class="guilabel">Toolbox van Processing</span>. Selecteer het algoritme <code class="docutils literal notranslate"><span class="pre">Raster</span> <span class="pre">op</span> <span class="pre">bereik</span> <span class="pre">clippen</span></code> onder de algoritmes van GDAL.</p></li>
 </ol>
 <img alt="../../_images/1030.png" class="align-center" src="../../_images/1030.png" />
 <ol class="arabic simple" start="11">
-<li><p>In the <span class="guilabel">Clip Raster by Extent</span> window, select <code class="docutils literal notranslate"><span class="pre">10n060e_20101117_gmted_mea300</span></code> as <span class="guilabel">Input Layer</span>, click <code class="docutils literal notranslate"><span class="pre">...</span></code> in <span class="guilabel">Clipping extent</span> and select <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">Map</span> <span class="pre">canvas</span> <span class="pre">extent</span></code>, click <code class="docutils literal notranslate"><span class="pre">...</span></code> in <span class="guilabel">Clipped (extent)</span> and enter the name as <code class="docutils literal notranslate"><span class="pre">mt_everest.tif</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>In het venster <span class="guilabel">Raster op bereik clippen</span>, selecteer <code class="docutils literal notranslate"><span class="pre">10n060e_20101117_gmted_mea300</span></code> als <span class="guilabel">Invoerlaag</span>, klik op <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Bereik clippen</span> en selecteer <code class="docutils literal notranslate"><span class="pre">Bereik</span> <span class="pre">kaartvenster</span> <span class="pre">gebruiken</span></code>, klik op <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Geclipt  (bereik)</span> en voer als naam in <code class="docutils literal notranslate"><span class="pre">mt_everest.tif</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <img alt="../../_images/1142.png" class="align-center" src="../../_images/1142.png" />
 <ol class="arabic simple" start="12">
-<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">mt_everest</span></code> will appear in the canvas. Search for Hill in <span class="guilabel">Processing Toolbox</span>. Select the <code class="docutils literal notranslate"><span class="pre">Hillshade</span></code> algorithm under GDAL algorithms.</p></li>
+<li><p>Een nieuwe laag <code class="docutils literal notranslate"><span class="pre">mt_everest</span></code> zal verschijnen in het kaartvenster. Zoek naar Hill in <span class="guilabel">Toolbox van Processing</span>. Selecteer het algoritme <code class="docutils literal notranslate"><span class="pre">Schaduw</span> <span class="pre">voor</span> <span class="pre">heuvels</span></code> onder de algoritmes van GDAL.</p></li>
 </ol>
 <img alt="../../_images/1233.png" class="align-center" src="../../_images/1233.png" />
 <ol class="arabic simple" start="13">
-<li><p>In the <span class="guilabel">Hillshade</span> window, select <code class="docutils literal notranslate"><span class="pre">mt_everest</span></code> as <span class="guilabel">Elevation Layer</span>, enter <code class="docutils literal notranslate"><span class="pre">315.000</span></code> in <span class="guilabel">Azimuth (horizontal angle)</span>, enter <code class="docutils literal notranslate"><span class="pre">45.000</span></code> in <span class="guilabel">Vertical angle</span>. Click <code class="docutils literal notranslate"><span class="pre">...</span></code> in <span class="guilabel">Hillshade</span> and enter the name as <code class="docutils literal notranslate"><span class="pre">mt_everest_hillshade.tif</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>In het venster <span class="guilabel">Hillshade</span>, selecteer <code class="docutils literal notranslate"><span class="pre">mt_everest</span></code> als <span class="guilabel">Invoerlaag</span>,  voer <code class="docutils literal notranslate"><span class="pre">315.000</span></code> in bij <span class="guilabel">Azimut van het licht (horizontale hoek)</span>, voer <code class="docutils literal notranslate"><span class="pre">45.000</span></code> in bij <span class="guilabel">Hellingshoek van het licht</span>. Klik op <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Schaduw voor heuvels</span> en voer de naam in als <code class="docutils literal notranslate"><span class="pre">mt_everest_hillshade.tif</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <img alt="../../_images/1332.png" class="align-center" src="../../_images/1332.png" />
 <ol class="arabic simple" start="14">
-<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">mt_everest_hillshade</span></code> will appear in the canvas.</p></li>
+<li><p>Een nieuwe laag <code class="docutils literal notranslate"><span class="pre">mt_everest_hillshade</span></code> zal in het kaartvenster verschijnen.</p></li>
 </ol>
 <img alt="../../_images/1430.png" class="align-center" src="../../_images/1430.png" />
 <ol class="arabic simple" start="15">
-<li><p>Search for Contour in <span class="guilabel">Processing Toolbox</span>. Select the <code class="docutils literal notranslate"><span class="pre">Contour</span></code> algorithm under GDAL algorithms.</p></li>
+<li><p>Zoek naar Contour in <span class="guilabel">Toolbox van Processing</span>. Selecteer het algoritme <code class="docutils literal notranslate"><span class="pre">Contour</span></code> onder de algoritmes van GDAL.</p></li>
 </ol>
 <img alt="../../_images/1529.png" class="align-center" src="../../_images/1529.png" />
 <ol class="arabic simple" start="16">
-<li><p>In the <span class="guilabel">Contour</span> window, select <code class="docutils literal notranslate"><span class="pre">mt_everest</span></code> as <span class="guilabel">Input Layer</span>,  enter <code class="docutils literal notranslate"><span class="pre">250</span></code> in <span class="guilabel">Interval between contour lines</span>. Click <code class="docutils literal notranslate"><span class="pre">...</span></code> in <span class="guilabel">Contours</span> and enter the name as <code class="docutils literal notranslate"><span class="pre">mt_everest_contour.gkpg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>In het venster <span class="guilabel">Contour</span>, selecteer <code class="docutils literal notranslate"><span class="pre">mt_everest</span></code> als <span class="guilabel">Input layer</span>, voer <code class="docutils literal notranslate"><span class="pre">250</span></code> in bij <span class="guilabel">Interval between contour lines</span>. Klik op <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Contouren</span> en voer de naam in als <code class="docutils literal notranslate"><span class="pre">mt_everest_contour.gkpg</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <img alt="../../_images/1627.png" class="align-center" src="../../_images/1627.png" />
 <ol class="arabic simple" start="17">
-<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">mt_everest_contour</span></code> will appear in the canvas. Right-click on the layer and click <span class="guilabel">Open Attribute Table</span>.</p></li>
+<li><p>Een nieuwe laag <code class="docutils literal notranslate"><span class="pre">mt_everest_contour</span></code> zal in het kaartvenster verschijnen. Klik met rechts op de laag en klik op <span class="guilabel">Attributentabel openen</span>.</p></li>
 </ol>
 <img alt="../../_images/1725.png" class="align-center" src="../../_images/1725.png" />
 <ol class="arabic simple" start="18">
-<li><p>You will see that each line feature has an attribute named <span class="guilabel">ELEV</span>.
-This is the height in meters that each line represents. Click on the column header
-a couple of times to sort the values in descending order. Here you will
-find the line representing the highest elevation in our data, i.e. Mt.
-Everest.</p></li>
+<li><p>U zult zien dat elk lijnobject een attribuut genaamd <span class="guilabel">ELEV</span> heeft. Dat is de hoogte in meters die elke lijn vertegenwoordigt. Klik een aantal malen op de kolomkop om de waarden in aflopende volgorde te sorteren. Hier zult u de lijn vinden die de grootste hoogte in onze gegevens vertegenwoordigt, d.i. Mount Everest.</p></li>
 </ol>
 <img alt="../../_images/1822.png" class="align-center" src="../../_images/1822.png" />
 <ol class="arabic simple" start="19">
-<li><p>Select the top row, and click on the <span class="guilabel">Zoom to selection</span>
-button.</p></li>
+<li><p>Selecteer de bovenste rij en klik op de knop <span class="guilabel">Zoom naar de geselecteerde rijen</span>.</p></li>
 </ol>
 <img alt="../../_images/1919.png" class="align-center" src="../../_images/1919.png" />
 <ol class="arabic simple" start="20">
-<li><p>Switch to the main QGIS window. You will see the selected contour line
-highlighted in yellow. This is the area of the highest elevation in our dataset.</p></li>
+<li><p>Schakel naar het hoofdvenster van QGIS. U zult de geselecteerde contour zien, geaccentueerd in geel. Dat is het gebied van de grootste hoogte in onze gegevensset.</p></li>
 </ol>
 <img alt="../../_images/2014.png" class="align-center" src="../../_images/2014.png" />
 <ol class="arabic simple" start="21">
-<li><p>Search for Smooth in <span class="guilabel">Processing Toolbox</span>. Select the <code class="docutils literal notranslate"><span class="pre">Smooth</span></code> under Vector geometry.</p></li>
+<li><p>Zoek naar Smooth in <span class="guilabel">Toolbox van Processing</span>. Selecteer het algoritme <code class="docutils literal notranslate"><span class="pre">Afgevlakt</span></code> onder Vector geometrie.</p></li>
 </ol>
 <img alt="../../_images/2120.png" class="align-center" src="../../_images/2120.png" />
 <ol class="arabic simple" start="22">
-<li><p>In the <span class="guilabel">Smooth</span> window, select <code class="docutils literal notranslate"><span class="pre">mt_everest_contour</span></code> as <span class="guilabel">Input Layer</span>,  enter <code class="docutils literal notranslate"><span class="pre">5</span></code> in <span class="guilabel">Iterations</span>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>In het venster <span class="guilabel">Afgevlakt</span>, selecteer <code class="docutils literal notranslate"><span class="pre">mt_everest_contour</span></code> als <span class="guilabel">Invoerlaag</span>, voer <code class="docutils literal notranslate"><span class="pre">5</span></code> in bij <span class="guilabel">Doorlopen</span>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Waarschuwing</p>
-<p>The smoothing algorithm works by adding extra vertices along the lines. As you increase the number of iterations, the number of vertices in the contour lines increase by a large amount. So be careful in using higher number of iterations. You can reduce the file size of the output by exporting it as a shapefile and simplifying the results using <a class="reference external" href="https://mapshaper.org/">Mapshaper</a>.</p>
+<p>Het algoritme voor afvlakken werkt door het toevoegen van extra punten langs de lijnen. Als u het aantal doorlopen verhoogt, zal het aantal punten in de contourlijnen met een grote hoeveelheid toenemen. Wees dus voorzichtig met het gebruiken van een groter aantal doorlopen. U kunt de bestandsgrootte van de uitvoer verkleinen door het te exporteren als een Shapefile en de resultaten vereenvoudigen met <a class="reference external" href="https://mapshaper.org/">Mapshaper</a>.</p>
 </div>
 <img alt="../../_images/2217.png" class="align-center" src="../../_images/2217.png" />
 <ol class="arabic simple" start="23">
-<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Smoothed</span></code> will appear in the canvas. This layer will have more smooth edges compared to the <code class="docutils literal notranslate"><span class="pre">mt_everest_contour</span></code> layer.</p></li>
+<li><p>Een nieuwe laag <code class="docutils literal notranslate"><span class="pre">Afgevlakt</span></code> zal in het kaartvenster verschijnen. Deze laag zal meer gladdere randen hebben, in vergelijking met de laag <code class="docutils literal notranslate"><span class="pre">mt_everest_contour</span></code>.</p></li>
 </ol>
 <img alt="../../_images/2315.png" class="align-center" src="../../_images/2315.png" />
 <ol class="arabic simple" start="24">
-<li><p>You can also visualize your contour layer and verify your analysis
-by exporting the contours layer as KML and viewing it in Google Earth.
-Right click on the smoothed layer, select <span class="menuselection">Export ‣ Save Feature As…</span>.</p></li>
+<li><p>U kunt ook uw contourenlaag visualiseren en uw analyse verifiëren door de contourenlaag te exporteren als KML en dat te bekijken in Google Earth. Klik met rechts op de contourenlaag, selecteer <span class="menuselection">Exporteren ‣ Objecten opslaan als…</span>.</p></li>
 </ol>
 <img alt="../../_images/2413.png" class="align-center" src="../../_images/2413.png" />
 <ol class="arabic simple" start="25">
-<li><p>Select <span class="guilabel">Keyhole Markup Language [KML]</span> as the
-<span class="guilabel">Format</span>. Click <code class="docutils literal notranslate"><span class="pre">...</span></code> in <span class="guilabel">File name</span> and enter the name as <code class="docutils literal notranslate"><span class="pre">contour_smoothed.kml</span></code>. Click <span class="guilabel">OK</span>.</p></li>
+<li><p>Selecteer <span class="guilabel">Keyhole Markup Language [KML]</span> als het <span class="guilabel">Indeling</span>. Klik op <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Bestandsnaam</span>, noem uw uitvoer <code class="docutils literal notranslate"><span class="pre">contour_smoothed.kml</span></code>. Klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
 <img alt="../../_images/2512.png" class="align-center" src="../../_images/2512.png" />
 <ol class="arabic simple" start="26">
-<li><p>Browse to the output file on your disk and double-click on it to open Google Earth Pro.</p></li>
+<li><p>Blader naar het uitvoerbestand op uw schijf en dubbelklik erop om Google Earth Pro te openen.</p></li>
 </ol>
 <img alt="../../_images/2611.png" class="align-center" src="../../_images/2611.png" />
 </div>
@@ -440,7 +410,7 @@ Right click on the smoothed layer, select <span class="menuselection">Export ‣
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op apr. 23, 2021.<br/>
+      Laatste aanpassing op apr. 30, 2021.<br/>
       Aangemaakt met <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>

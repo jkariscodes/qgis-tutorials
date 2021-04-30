@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculating Line Lengths and Statistics (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Çizgi Uzunluklarının ve İstatistiklerinin Hesaplanması (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -70,7 +70,7 @@
 <li class="toctree-l1"><a class="reference internal" href="working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="importing_spreadsheets_csv.html">Importing Spreadsheets or CSV files (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic_vector_styling.html">Basic Vector Styling (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Calculating Line Lengths and Statistics (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Çizgi Uzunluklarının ve İstatistiklerinin Hesaplanması (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Working with Terrain Data</a></li>
@@ -258,29 +258,29 @@
       
 
   <div class="section" id="calculating-line-lengths-and-statistics-qgis3">
-<h1>Calculating Line Lengths and Statistics (QGIS3)<a class="headerlink" href="#calculating-line-lengths-and-statistics-qgis3" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
-<p>QGIS, objelerin uzunluk, alan ve çevrelerini hesaplamak üzere yerleşik çeşitli fonksiyon ve algoritmalara sahiptir. bu kılavuzda “Geometri Özniteliği Ekle” aracını kullanarak objelerin uzunluklarını gösteren bir sütunun nasıl eklenebileceği gösterilmektedir.</p>
+<h1>Çizgi Uzunluklarının ve İstatistiklerinin Hesaplanması (QGIS3)<a class="headerlink" href="#calculating-line-lengths-and-statistics-qgis3" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
+<p>QGIS, detayın geometrisine dayalı olarak uzunluk, alan, çevre vb. gibi çeşitli nitelikleri hesaplamak için yerleşik fonksiyon ve algoritmalara sahiptir. Bu eğitim, her detayın uzunluğunu temsil eden değeri içeren bir sütun eklemek için <strong>Geometri öznitelikleri ekle</strong> aracının nasıl kullanılacağını gösterecektir. .</p>
 <div class="section" id="overview-of-the-task">
-<h2>Göreve Genel Bakış<a class="headerlink" href="#overview-of-the-task" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>Kuzey Amerika’daki demiryolu hatlarının şekil çizgilerini kullanarak Amerika Birleşik Devletleri’ndeki demir yollarının toplam uzunluğunu hesaplayacağız.</p>
+<h2>Ödeve genel bakış<a class="headerlink" href="#overview-of-the-task" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Kuzey Amerika’daki demiryollarının ait verilen çoklu çizgi  katmanını kullanarak, Birleşik Devletler’deki demiryollarının toplam uzunluğunu belirleyeceğiz.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Öğreneceğiniz diğer beceriler<a class="headerlink" href="#other-skills-you-will-learn" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
 <ul class="simple">
-<li><p>İfadeleri kullanarak objeleri filtreleme</p></li>
-<li><p><span class="guilabel">Statistics</span> panelini kullanarak sütunlarda istatistik hesaplama ve izleme</p></li>
+<li><p>İfadeleri kullanarak detayları filtreleme</p></li>
+<li><p>Sütunlardaki istatistikleri hesaplamak ve görüntülemek için :guilabel:’İstatistikler’ panelini kullanma.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="get-the-data">
 <h2>Veriyi elde edin<a class="headerlink" href="#get-the-data" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p><a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/railroads/">Natural Earth sayfasında</a> açık demir yolu veri seti yayınlamakta.</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>Natural Earth &lt;<a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/railroads/">http://www.naturalearthdata.com/downloads/10m-cultural-vectors/railroads/</a>&gt; “_ kamuya açık bir demiryolu veri setine sahiptir.</p>
 <p>Portaldan <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_railroads_north_america.zip">North America supplement</a> zip dosyasını indirin.</p>
-<p>Kolaylık sağlamak için, aşağıdaki bağlantıdan doğrudan veri setlerinin bir kopyasını indirebilirsiniz:</p>
+<p>Kolaylık sağlamak için, veri setinin bir kopyasını doğrudan aşağıdaki bağlantıdan indirebilirsiniz:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/ne_10m_railroads_north_america.zip">ne_10m_railroads_north_america..zip</a></p>
 <p>Veri Kaynağı : <a class="reference internal" href="../credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
 </div>
 <div class="section" id="procedure">
-<h2>İşlem Basamakları<a class="headerlink" href="#procedure" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<h2>Prosedür<a class="headerlink" href="#procedure" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
 <ol class="arabic simple">
 <li><p><span class="guilabel">Browser</span> panelini kullanarak indirdiğiniz <code class="docutils literal notranslate"><span class="pre">ne_10m_railroads_north_america.zip</span></code> dosyasını bulun ve genişletin. <code class="docutils literal notranslate"><span class="pre">ne_10m_railroads_north_america.shp</span></code> dosyasını kanvasa sürükleyin.</p></li>
 </ol>
@@ -294,7 +294,7 @@
 <div><img alt="../../_images/218.png" class="align-center" src="../../_images/218.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Search for and locate the <span class="menuselection">Vector geometry ‣ Add geometry attributes</span> algorithm. Double-click to launch it.</p></li>
+<li><p>‘Menü seçimi:’Vektör geometrisi -&gt; Geometri öznitelikleri ekle’ algoritmasını arayın ve bulun. Başlatmak için çift tıklayın.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/316.png" class="align-center" src="../../_images/316.png" />
@@ -307,17 +307,17 @@
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>If your input layer is in a <em>Projected CRS</em>, you may choose <code class="docutils literal notranslate"><span class="pre">Layer</span> <span class="pre">CRS</span></code> option for calculation. Local or Regional projected coordinate systems are designed to minimize distortions over their region of interest, so are more accurate for such computation.</p>
+<p>Giriş katmanınız <em>Projeksiyonlandırılmış KRS</em> içindeyse, hesaplama için “Katman KRS’’ seçeneğini seçebilirsiniz. Yerel veya Bölgesel projeksiyonlandırılmış koordinat sistemleri, ilgi bölgelerinde bozulmaları en aza indirecek şekilde tasarlanmış olup; bu tür hesaplamalar için daha doğrudur.</p>
 </div>
 <ol class="arabic simple" start="5">
-<li><p>You will see a new layer <code class="docutils literal notranslate"><span class="pre">Added</span> <span class="pre">geom</span> <span class="pre">info</span></code> loaded in the <span class="guilabel">Layers</span> panel. This is a copy of the input layer with a new column added for distance. Right-click the <code class="docutils literal notranslate"><span class="pre">Added</span> <span class="pre">geom</span> <span class="pre">info</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</p></li>
+<li><p><span class="guilabel">Katmanlar</span> panelinde yeni bir <a href="#id1"><span class="problematic" id="id2">`</span></a>Geom bilgisi eklendi’ katmanının yüklendiğini göreceksiniz. Bu, mesafe için yeni bir sütun eklenmiş girdi katmanının bir kopyasıdır. <a href="#id3"><span class="problematic" id="id4">``</span></a>Geom bilgisi eklendi’’ katmanına sağ tıklayın ve :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Öznitelik Tablosunu Aç`ı seçin.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/57.png" class="align-center" src="../../_images/57.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>The <em>Add Geometry Attribute</em> tool adds different set of attributes depending on whether the input layer is points, lines or polygons. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#add-geometry-attributes">QGIS documentation</a> for more details.</p>
+<p><em>Geometri Özniteliği Ekle</em> aracı, girdi katmanının nokta, çizgi veya çokgen olmasına bağlı olarak farklı öznitelik kümeleri ekler. Daha fazla ayrıntı için <a href="#id1"><span class="problematic" id="id2">`</span></a>QGIS belgelerine &lt;<a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#add-geometry-attributes">https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#add-geometry-attributes</a>&gt;’ _ bakın.</p>
 </div>
 <ol class="arabic simple" start="6">
 <li><p>In the <span class="guilabel">Attribute Table</span>, you will see a new column called <strong>distance</strong>. This contains the length of each line feature in <em>meters</em>. Also note that the <strong>sov_a3</strong> attribute which contains the country code for each feature. Close the <span class="guilabel">Attribute Table</span> window.</p></li>
@@ -326,13 +326,13 @@
 <div><img alt="../../_images/67.png" class="align-center" src="../../_images/67.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Now that we have lengths of individual railroad line segments, we can add them up to find the total length of railroads. But as the problem statement demands we need total railroad length in the United States, we must use only the segments contained within USA. We can use the country code value in the <strong>sov_a3</strong> column to filter the layer. Right-click the <code class="docutils literal notranslate"><span class="pre">Added</span> <span class="pre">geom</span> <span class="pre">info</span></code> layer and select <span class="guilabel">Filter</span>.</p></li>
+<li><p>Artık tek tek demiryolu hattı segmentlerinin uzunluklarına sahip olduğumuza göre, toplam demiryollarının uzunluğunu bulmak için bunları toplayabiliriz. Ancak problem tanımının gerektirdiği gibi, Amerika Birleşik Devletleri’nde toplam demiryolu uzunluğuna ihtiyacımız var, sadece ABD’de bulunan bölümleri kullanmalıyız. Katmanı filtrelemek için <strong>sov_a3</strong> sütunundaki ülke kodu değerini kullanabiliriz. <a href="#id1"><span class="problematic" id="id2">``</span></a>Geom bilgisi eklendi’’ katmanına sağ tıklayın ve :guilabel: <a href="#id3"><span class="problematic" id="id4">`</span></a>Filtre`yi seçin.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/77.png" class="align-center" src="../../_images/77.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>In the <span class="guilabel">Query Builder</span> dialog, enter the following expression and click <span class="guilabel">OK</span>.</p></li>
+<li><p>:guilabel:’Sorgu Oluşturucu’ iletişim kutusuna aşağıdaki ifadeyi girin ve :guilabel:’Tamam’ seçeneğini tıklayın.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;sov_a3&quot; = &#39;USA&#39;
@@ -341,25 +341,25 @@
 <img alt="../../_images/87.png" class="align-center" src="../../_images/87.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>You will see a <span class="guilabel">Filter</span> icon appear next to the <code class="docutils literal notranslate"><span class="pre">Added</span> <span class="pre">geom</span> <span class="pre">info</span></code> layer in the <span class="guilabel">Layers</span> panel indicating that a filter is applied to the layer. You can also visually confirm that the layer now contains line segments only for United States. Now we are ready to calculate the sum. Click the <span class="guilabel">Show statistical summary</span> button on the <span class="guilabel">Attributes Toolbar</span>.</p></li>
+<li><p>:guilabel:’Katmanlar’ panelindeki “Geom bilgisi eklendi’’ katmanının yanında katmana bir filtre uygulandığını belirten bir :guilabel:’Filtre’ simgesi göreceksiniz. Ayrıca, katmanın artık yalnızca Amerika Birleşik Devletleri için çizgi segmentleri içerdiğini görsel olarak da onaylayabilirsiniz. Şimdi toplamı hesaplamaya hazırız. :guilabel:’Öznitelikler Araç Çubuğu’ndaki :guilabel:’İstatistiksel özeti göster’ düğmesine tıklayın.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/97.png" class="align-center" src="../../_images/97.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>A new <span class="guilabel">Statistics</span> panel will open. Select <code class="docutils literal notranslate"><span class="pre">Added</span> <span class="pre">geom</span> <span class="pre">info</span></code> layer and <code class="docutils literal notranslate"><span class="pre">length</span></code> column.</p></li>
+<li><p>Yeni :guilabel: “İstatistikler” paneli açılacaktır. “Geom bilgisi eklendi’’ katmanını ve <a href="#id1"><span class="problematic" id="id2">``</span></a>uzunluk’’ sütununu seçin.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/107.png" class="align-center" src="../../_images/107.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>You will see various statistics displayed in the panel. The unit of the statistics is the same as the units of <code class="docutils literal notranslate"><span class="pre">length</span></code> column -  <strong>meters</strong>. Let’s change the computation to use <strong>kilometers</strong> instead. Click the <span class="guilabel">Expression</span> icon next to the fields drop-down menu in the <span class="guilabel">Statistics</span> panel.</p></li>
+<li><p>Panelde görüntülenen çeşitli istatistikler göreceksiniz. İstatistiğin birimi “uzunluk” sütununun birimleriyle aynıdır - <strong>metre</strong>. Hesaplamayı bunun yerine <strong>kilometre</strong> kullanacak şekilde değiştirelim. :guilabel:’İstatistikler’ panelindeki alanlar açılır menüsünün yanındaki :guilabel:’İfade’ simgesine tıklayın.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1111.png" class="align-center" src="../../_images/1111.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>Enter the following expression in the <span class="guilabel">Expression Dialog</span> that converts the length to kilometers.</p></li>
+<li><p>Uzunluğu kilometreye dönüştüren :guilabel:’İfade Diyaloğu’ na aşağıdaki ifadeyi girin.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>length / 1000
@@ -368,7 +368,7 @@
 <img alt="../../_images/127.png" class="align-center" src="../../_images/127.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>The <span class="guilabel">Sum</span> value displayed is the total length of railroads in USA.</p></li>
+<li><p>Görüntülenen :guilabel:’Toplam’ değeri, ABD’deki demiryollarının toplam uzunluğudur.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/137.png" class="align-center" src="../../_images/137.png" />
@@ -398,7 +398,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Son güncelleme: Nis 23, 2021.<br/>
+      Son güncelleme: Nis 30, 2021.<br/>
       <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1 kullanılarak oluşturuldu.<br/>
     </p>
   </div>

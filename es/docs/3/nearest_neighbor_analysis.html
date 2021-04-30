@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Análisis del vecino más cercano (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Análisis del Vecino Más Cercano (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -76,7 +76,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Trabajar con Datos de Terreno</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../working_with_wms.html">Trabajar con Datos WMS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Trabajar con Proyecciones (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferenciar Hojas Topografícas y Mapas Escaneados (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferenciar Hojas Topográficas y Mapas Escaneados (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferenciar Imágenes Aéreas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitalizar Datos del Mapa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizar Uniones de Tablas (QGIS3)</a></li>
@@ -85,7 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Análisis del vecino más cercano (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpolar Datos Punto</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Procesamiento por Lotes usando el Marco de Procesamiento (QGIS3)</a></li>
@@ -258,11 +258,11 @@
       
 
   <div class="section" id="nearest-neighbor-analysis-qgis3">
-<h1>Análisis del vecino más cercano (QGIS3)<a class="headerlink" href="#nearest-neighbor-analysis-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>El SIG es muy útil para analizar la relación espacial entre entidades. Uno de los análisis es descubrir qué entidades están más cerca a una entidad dada. Hay múltiples maneras para hacer este análisis en QGIS. En este tutorial, exploraremos la <strong>Distancia al centro más cercano</strong> y las herramientas de <strong>Matriz de distancia</strong> para llevar a cabo el análisis del vecino más cercano.</p>
+<h1>Análisis del Vecino Más Cercano (QGIS3)<a class="headerlink" href="#nearest-neighbor-analysis-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>El SIG es muy útil para analizar la relación espacial entre objetos espaciales. Uno de los análisis es descubrir qué objetos espaciales están más cerca a un objeto espacial dado. Hay múltiples maneras para hacer este análisis en QGIS. En este tutorial, exploraremos la <strong>Distancia al centro más cercano</strong> y las herramientas de <strong>Matriz de distancia</strong> para llevar a cabo el análisis del vecino más cercano.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Dadas las ubicaicaciones de todos los sismos significativos conocidos, descubrir los centros poblados más cercanos para cada ubicación donde ocurrió un sismo.</p>
+<p>Dadas las ubicaciones de todos los sismos significativos conocidos, descubrir los centros poblados más cercanos para cada ubicación donde ocurrió un sismo.</p>
 <div class="section" id="other-skills-you-will-learn">
 <h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
@@ -274,7 +274,7 @@
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Usaremos la <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Base de datos de Sismos Significativos</a> del National Geophysical Data Center de NOAA como nuestra capa que representa todos los sismos principales. Descargue los <a class="reference external" href="https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">datos de sismo delimitados por tabulación</a>.</p>
 <p>Natural Earth tiene un agradable conjunto de datos de <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Centros Poblados</a>. Descargue el <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">conjunto de datos simple (menos columnas)</a>.</p>
-<p>Para su comodidad, puedes descargar directamente una copia de ambos conjuntos de datos desde los enlaces abajo:</p>
+<p>Para su comodidad, puede descargar directamente una copia de ambos conjuntos de datos desde los enlaces abajo:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/ne_10m_populated_places_simple.zip">ne_10m_populated_places_simple.zip</a></p>
 <p>Fuentes de Datos: <a class="reference internal" href="../credits.html#ngdc" id="id1"><span>[NGDC]</span></a> <a class="reference internal" href="../credits.html#naturalearth" id="id2"><span>[NATURALEARTH]</span></a></p>
@@ -324,29 +324,29 @@
 <div><img alt="../../_images/717.png" class="align-center" src="../../_images/717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Verá una nueva capa llamada <code class="docutils literal notranslate"><span class="pre">Geometría</span> <span class="pre">no</span> <span class="pre">nulas</span></code> cargada en el panel <span class="guilabel">Capas</span>. Usaremos esta capa en vez de la capa <code class="docutils literal notranslate"><span class="pre">signif</span></code> original en el análisis posterior. Desmarque la capa <code class="docutils literal notranslate"><span class="pre">signif</span></code> en el panel <span class="guilabel">Capas</span> para ocultarla. Ahora es momento de realizar un análisis de vecino más cercano. Busque y ubique la herramienta <span class="menuselection">Análisis vectorial ‣ Distancia al hub más cercano (línea a hub)</span>. Doble-clic para iniciarla.</p></li>
+<li><p>Verá una nueva capa llamada <code class="docutils literal notranslate"><span class="pre">Geometrías</span> <span class="pre">no</span> <span class="pre">nulas</span></code> cargada en el panel <span class="guilabel">Capas</span>. Usaremos esta capa en vez de la capa <code class="docutils literal notranslate"><span class="pre">signif</span></code> original en el análisis posterior. Desmarque la capa <code class="docutils literal notranslate"><span class="pre">signif</span></code> en el panel <span class="guilabel">Capas</span> para ocultarla. Ahora es momento de realizar un análisis de vecino más cercano. Busque y ubique la herramienta <span class="menuselection">Análisis de vector ‣ Distancia al eje más próximo (línea a eje)</span>. Doble-clic para iniciarla.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/817.png" class="align-center" src="../../_images/817.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Si necesita una capa punto como salida, en vez de ello use la herramienta <em>Distancia al hub más cercano (puntos)</em>.</p>
+<p>Si necesita una capa punto como salida, en vez de ello use la herramienta <em>Distancia al eje más próximo (puntos)</em>.</p>
 </div>
 <ol class="arabic simple" start="9">
-<li><p>En el diálogo <span class="guilabel">Distancia al Hub Más Cercano (Línea a Hub)</span>, seleccione <code class="docutils literal notranslate"><span class="pre">Geometrías</span> <span class="pre">no</span> <span class="pre">nulas</span></code> como la <span class="guilabel">Capa de puntos fuente</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> como la <span class="guilabel">Capa de hubs destino</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">name</span></code> como el <span class="guilabel">Atributo de nombre de capa hub</span>. La herramienta también calculará la distancia en línea recta entre el centro poblado y el sismo más cercano. Defina <code class="docutils literal notranslate"><span class="pre">Kilómetros</span></code> como la <span class="guilabel">Unidad de medida</span>. Clic en <span class="guilabel">Ejecutar</span>. Una vez finalice el procesamiento, clic en <span class="guilabel">Cerrar</span>.</p></li>
+<li><p>En el diálogo <span class="guilabel">Distancia al Eje Más Próximo (Línea a Eje)</span>, seleccione <code class="docutils literal notranslate"><span class="pre">Geometrías</span> <span class="pre">no</span> <span class="pre">nulas</span></code> como la <span class="guilabel">Capa de puntos fuente</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> como la <span class="guilabel">Capa de eje destino</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">name</span></code> como el <span class="guilabel">Atributo de nombre de capa eje</span>. La herramienta también calculará la distancia en línea recta entre el centro poblado y el sismo más cercano. Defina <code class="docutils literal notranslate"><span class="pre">Kilómetros</span></code> como la <span class="guilabel">Unidad de medida</span>. Clic en <span class="guilabel">Ejecutar</span>. Una vez finalice el procesamiento, clic en <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/917.png" class="align-center" src="../../_images/917.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>De vuelta en la ventana principal QGIS, verá una nueva capa línea llamada <code class="docutils literal notranslate"><span class="pre">Distancia</span> <span class="pre">hub</span></code> cargada en el panel <span class="guilabel">Capas</span>. Esta capa tiene objetos espaciales línea que conectan cada punto sismo con el centro poblado más cercano. Clic-derecho a la capa <code class="docutils literal notranslate"><span class="pre">Distancia</span> <span class="pre">hub</span></code> y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>.</p></li>
+<li><p>De vuelta en la ventana principal QGIS, verá una nueva capa línea llamada <code class="docutils literal notranslate"><span class="pre">Distancia</span> <span class="pre">eje</span></code> cargada en el panel <span class="guilabel">Capas</span>. Esta capa tiene objetos espaciales línea que conectan cada punto sismo con el centro poblado más cercano. Clic-derecho a la capa <code class="docutils literal notranslate"><span class="pre">Distancia</span> <span class="pre">eje</span></code> y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1017.png" class="align-center" src="../../_images/1017.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Deslice hacia la derechia a las últimas columnas y verá 2 nuevos atributos llamados <strong>HubName</strong> y <strong>HubDist</strong> agregados a los objetos originales de sismos. Este es el nombre de la distancia al vecino más cercano de la capa de centros poblados.</p></li>
+<li><p>Deslice hacia la derecha a las últimas columnas y verá 2 nuevos atributos llamados <strong>HubName</strong> y <strong>HubDist</strong> agregados a los objetos originales de sismos. Este es el nombre de la distancia al vecino más cercano de la capa de centros poblados.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1121.png" class="align-center" src="../../_images/1121.png" />
@@ -427,7 +427,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en abr. 23, 2021.<br/>
+      Actualizado por última vez en abr. 30, 2021.<br/>
       Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.1.<br/>
     </p>
   </div>
