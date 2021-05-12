@@ -12,8 +12,6 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="search" title="Пошук" href="../search.html" />
-    <link rel="next" title="Working with Projections (QGIS3)" href="3/working_with_projections.html" />
-    <link rel="prev" title="Робота з даними рельєфу" href="working_with_terrain.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -68,7 +66,7 @@
      href="../index.html">Tutorials List <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Вступ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Working with Attributes (QGIS3)</a></li>
@@ -78,7 +76,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Робота з даними рельєфу</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Робота з даними WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/working_with_wms.html">Working with WMS Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/working_with_projections.html">Working with Projections (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Georeferencing Aerial Imagery (QGIS3)</a></li>
@@ -124,14 +122,6 @@
             
               
                 
-  <li>
-    <a href="working_with_terrain.html" title="Previous Chapter: Робота з даними рельєфу"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Робота з дани...</span>
-    </a>
-  </li>
-  <li>
-    <a href="3/working_with_projections.html" title="Next Chapter: Working with Projections (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Working with ... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -263,6 +253,10 @@
 
   <div class="section" id="working-with-wms-data">
 <h1>Робота з даними WMS<a class="headerlink" href="#working-with-wms-data" title="Постійне посилання на цей заголовок">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Попередження</p>
+<p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/working_with_wms.html"><span class="doc">Working with WMS Data (QGIS3)</span></a></p>
+</div>
 <p>Часто вам потрібні допоміжні шари еталонних даних для вашої базової карти або зобразити ваш результат у контексті інших даних. Багато організацій публікують набори даних в інтернеті, які можна легко використати в ГІС. Популярним стандартом публікування мап в інтернеті є стандарт, який називається <strong>WMS (Web Map Service)</strong>. Це найкращий вибір для використання еталонних шарів, оскільки ви отримуєте доступ до багатих наборів даних у вашій ГІС системі без клопоту завантаження і стилізації даних.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Огляд завдання<a class="headerlink" href="#overview-of-the-task" title="Постійне посилання на цей заголовок">¶</a></h2>
@@ -274,19 +268,19 @@
 <ol class="arabic simple">
 <li><p>Відкрийте QGIS і перейдіть у меню <span class="menuselection">Layer ‣ Add WMS Layer…</span>.</p></li>
 </ol>
-<img alt="../_images/1207.png" class="align-center" src="../_images/1207.png" />
+<img alt="../_images/1208.png" class="align-center" src="../_images/1208.png" />
 <ol class="arabic simple" start="2">
 <li><p>На вкладці <span class="guilabel">Шари</span>, натисніть кнопку <span class="guilabel">Новий</span>.</p></li>
 </ol>
-<img alt="../_images/2167.png" class="align-center" src="../_images/2167.png" />
+<img alt="../_images/2168.png" class="align-center" src="../_images/2168.png" />
 <ol class="arabic simple" start="3">
 <li><p>Дайте назву вашому з’єднанню. Це не є назвою шару, а є назвою сервісу до якого звертається шар із даними WMS. Один сервіс може зазвичай пропонує декілька шарів, які можна додати в ваш проект. Адреса URL, за якою необхідно звернутися до WMS шару називається <em>GetCapabilities</em>. При доступі до серверу WMS із цим параметром в полі адреси URL, він поверне сам список доступних шарів із різними метаданими. В такому випадку, назвіть таке з’єднання як <code class="docutils literal notranslate"><span class="pre">MRDATA</span> <span class="pre">USGS</span></code>, а в якості адреси GetCapabilities задайте <code class="docutils literal notranslate"><span class="pre">http://mrdata.usgs.gov/services/ca?request=getcapabilities&amp;service=WMS&amp;version=1.1.1&amp;</span></code>. Натисніть <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/397.png" class="align-center" src="../_images/397.png" />
+<img alt="../_images/398.png" class="align-center" src="../_images/398.png" />
 <ol class="arabic simple" start="4">
 <li><p>Далі, натисніть кнопку <span class="guilabel">Connect</span> для отримання списку доступних шарів. Ви помітите різні ідентифікатори ID вказані для кожного шару. ID <code class="docutils literal notranslate"><span class="pre">0</span></code> означає, що ви отримаєте мапу з усіма шарами. Якщо вам не потрібні усі шари, ви можете розгорнути список натиснувши іконку <span class="guilabel">+</span> і вибрати шар, який вас цікавить. Виберіть шар <code class="docutils literal notranslate"><span class="pre">0</span></code> для даного уроку.</p></li>
 </ol>
-<img alt="../_images/472.png" class="align-center" src="../_images/472.png" />
+<img alt="../_images/473.png" class="align-center" src="../_images/473.png" />
 <ol class="arabic" start="5">
 <li><p>У групі <span class="guilabel">Image encoding</span>, вам необхідно вибрати формат зображення. Формат зображення має велике значення, і ваш вибір залежить від вашої конкретної задачі використання. Ось деякі поради:</p>
 <ul class="simple">
@@ -298,19 +292,19 @@
 <p>Для цього уроку, виберіть <span class="guilabel">JPEG</span> в якості формату. Змініть назву шару в полі <span class="guilabel">Layer name</span>, якщо бажаєте і натисніть кнопку <span class="guilabel">Додати</span>.</p>
 </li>
 </ol>
-<img alt="../_images/573.png" class="align-center" src="../_images/573.png" />
+<img alt="../_images/574.png" class="align-center" src="../_images/574.png" />
 <ol class="arabic simple" start="6">
 <li><p>Ви побачите шар, що завантажено в QGIS. Ви можете збільшувати/прокручувати його як і будь-який інший шар. Сервіс WMS працює так, що кожен раз як ви збільшуєте/прокручуєте, застосування посилає координати вашої області видимості на сервер і сервер створює зображення для даної області і повертає до клієнту. Тому буде деяка затримка перш ніж ви побачите зображення для даної області після того як ви здійснили збільшення. Також, оскільки дані які ви бачите є зображенням, ви не можете запросити атрибути як для звичайного векторного/растрового шару.</p></li>
 </ol>
-<img alt="../_images/670.png" class="align-center" src="../_images/670.png" />
+<img alt="../_images/671.png" class="align-center" src="../_images/671.png" />
 <ol class="arabic simple" start="7">
 <li><p>Однак, ви можете бачити метадані про цей шар. Натисніть правою кнопкою миші на шар і виберіть <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/769.png" class="align-center" src="../_images/769.png" />
+<img alt="../_images/770.png" class="align-center" src="../_images/770.png" />
 <ol class="arabic simple" start="8">
 <li><p>Ви помітите що діалогове вікно <span class="guilabel">Properties</span> виглядає інакше і має менше вкладок. Ви можете перейти до вкладки  <span class="guilabel">Metadata</span> і дізнатися більше про сервіс WMS і його шари.</p></li>
 </ol>
-<img alt="../_images/867.png" class="align-center" src="../_images/867.png" />
+<img alt="../_images/868.png" class="align-center" src="../_images/868.png" />
 </div>
 </div>
 

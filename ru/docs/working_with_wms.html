@@ -13,8 +13,6 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/translations.js"></script>
     <link rel="search" title="Поиск" href="../search.html" />
-    <link rel="next" title="Working with Projections (QGIS3)" href="3/working_with_projections.html" />
-    <link rel="prev" title="Работа с цифровой моделью рельефа" href="working_with_terrain.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -69,7 +67,7 @@
      href="../index.html">Tutorials List <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Введение</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/making_a_map.html">Making a Map (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/working_with_attributes.html">Работа с атрибутами (QGIS3)</a></li>
@@ -79,7 +77,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/raster_styling_and_analysis.html">Basic Raster Styling and Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/raster_mosaicing_and_clipping.html">Raster Mosaicing and Clipping (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Работа с цифровой моделью рельефа</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Работа с данными WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/working_with_wms.html">Working with WMS Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/working_with_projections.html">Working with Projections (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/georeferencing_basics.html">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_georeferencing.html">Пространственная привязка космических снимков (QGIS3)</a></li>
@@ -125,14 +123,6 @@
             
               
                 
-  <li>
-    <a href="working_with_terrain.html" title="Previous Chapter: Работа с цифровой моделью рельефа"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Работа с цифр...</span>
-    </a>
-  </li>
-  <li>
-    <a href="3/working_with_projections.html" title="Next Chapter: Working with Projections (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Working with ... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -264,6 +254,10 @@
 
   <div class="section" id="working-with-wms-data">
 <h1>Работа с данными WMS<a class="headerlink" href="#working-with-wms-data" title="Ссылка на этот заголовок">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Предупреждение</p>
+<p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/working_with_wms.html"><span class="doc">Working with WMS Data (QGIS3)</span></a></p>
+</div>
 <p>Часто вам нужны слои данных привязки для базовой карты или отображения результатов в контексте других данных. Многие организации публикуют в интернете наборы данных, которые могут быть легко использованы в ГИС. Популярный стандарт для публикации карт в Интернете, называется <strong>WMS (Web Map Service)</strong>. Это лучший выбор для использования слоев привязки, так как вы получаете доступ к обширным наборам данных в ГИС без необходимости загружать или настраивать стиль отображения данных.</p>
 <div class="section" id="overview-of-the-task">
 <h2>Обзор задачи<a class="headerlink" href="#overview-of-the-task" title="Ссылка на этот заголовок">¶</a></h2>
@@ -275,19 +269,19 @@
 <ol class="arabic simple">
 <li><p>Откройте QGIS и перейдите к меню <span class="menuselection">Layer ‣ Add WMS Layer…</span>.</p></li>
 </ol>
-<img alt="../_images/1207.png" class="align-center" src="../_images/1207.png" />
+<img alt="../_images/1208.png" class="align-center" src="../_images/1208.png" />
 <ol class="arabic simple" start="2">
 <li><p>Во вкладке <span class="guilabel">Layers</span> нажмите на кнопку <span class="guilabel">New</span>.</p></li>
 </ol>
-<img alt="../_images/2167.png" class="align-center" src="../_images/2167.png" />
+<img alt="../_images/2168.png" class="align-center" src="../_images/2168.png" />
 <ol class="arabic simple" start="3">
 <li><p>Озаглавьте ваше соединение. Это не имя слоя, а имя сервиса, который предоставляет слой WMS. Обычно один сервис предлагает несколько слоев, которые можно добавить к вашему проекту. Адрес, который нужен, чтобы получить доступ к слою WMS, называется <em>GetCapabilities</em>. При доступе к серверу WMS с помощью этого параметра в строке адреса, он возвращает список имеющихся слоев с различными метаданными. В данном случае назовите соединение <code class="docutils literal notranslate"><span class="pre">MRDATA</span> <span class="pre">USGS</span></code> и введите в строку GetCapabilities URL как <code class="docutils literal notranslate"><span class="pre">http://mrdata.usgs.gov/services/ca?request=getcapabilities&amp;service=WMS&amp;version=1.1.1&amp;</span></code>.  Нажмите <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/397.png" class="align-center" src="../_images/397.png" />
+<img alt="../_images/398.png" class="align-center" src="../_images/398.png" />
 <ol class="arabic simple" start="4">
 <li><p>Затем нажмите на кнопку <span class="guilabel">Connect</span>  чтобы получить список имеющихся слоев. Вы заметите, что напротив слоев перечислены различные идентификаторы. Идентификатор <code class="docutils literal notranslate"><span class="pre">0</span></code> означает, что вы добавите на карту все слои. Если вам нужны не все слои, вы можете раскрыть список, нажав на  <span class="guilabel">+</span> и выбрав интересующий слой. Для этого урока выберите слой <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
 </ol>
-<img alt="../_images/472.png" class="align-center" src="../_images/472.png" />
+<img alt="../_images/473.png" class="align-center" src="../_images/473.png" />
 <ol class="arabic" start="5">
 <li><p>В разделе <span class="guilabel">Image encoding</span> вам нужно выбрать формат изображения. Формат изображения имеет большое значение, и ваш выбор зависит от конкретного случая использования. Вот несколько советов.</p>
 <ul class="simple">
@@ -299,19 +293,19 @@
 <p>Для этого урока выберите формат <span class="guilabel">JPEG</span>. Изменение <span class="guilabel">Layer name</span>, если хотите, и нажмите <span class="guilabel">Add</span>.</p>
 </li>
 </ol>
-<img alt="../_images/573.png" class="align-center" src="../_images/573.png" />
+<img alt="../_images/574.png" class="align-center" src="../_images/574.png" />
 <ol class="arabic simple" start="6">
 <li><p>Вы увидите, что слой загружен в QGIS. Вы можете масштабировать/перемещать его, как и любой другой слой. WMS работает так: каждый раз, когда вы масштабируете/перемещаете слой, он посылает координаты вашей области просмотра на сервер, и сервер создает изображение для этой области и возвращает его клиенту. Так что будет некоторая задержка, прежде чем вы увидите изображение для области после приближения. Кроме того, поскольку данные, которые Вы видите, являются изображением, нет никакого способа, чтобы запросить атрибуты, как в обычном векторном слое или снимке.</p></li>
 </ol>
-<img alt="../_images/670.png" class="align-center" src="../_images/670.png" />
+<img alt="../_images/671.png" class="align-center" src="../_images/671.png" />
 <ol class="arabic simple" start="7">
 <li><p>Можно, однако,посмотреть некоторые метаданные о слое. Щелкните правой кнопкой мыши на слое и выберите <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/769.png" class="align-center" src="../_images/769.png" />
+<img alt="../_images/770.png" class="align-center" src="../_images/770.png" />
 <ol class="arabic simple" start="8">
 <li><p>Вы заметите, что диалоговое окно <span class="guilabel">Properties</span> выглядит по-другому и имеет меньше вкладок. Вы можете перейти на вкладку <span class="guilabel">Metadata</span>, чтобы узнать больше об сервисе WMS и слоях.</p></li>
 </ol>
-<img alt="../_images/867.png" class="align-center" src="../_images/867.png" />
+<img alt="../_images/868.png" class="align-center" src="../_images/868.png" />
 </div>
 </div>
 
