@@ -3,11 +3,12 @@
 <html lang="uk">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Building a Processing Plugin (QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -261,16 +262,16 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="building-a-processing-plugin-qgis3">
+  <section id="building-a-processing-plugin-qgis3">
 <h1>Building a Processing Plugin (QGIS3)<a class="headerlink" href="#building-a-processing-plugin-qgis3" title="Постійне посилання на цей заголовок">¶</a></h1>
 <p>In the previous tutorial <a class="reference internal" href="building_a_python_plugin.html"><span class="doc">Building a Python Plugin (QGIS3)</span></a>, you learnt how to create a python plugin - including the user interface and custom logic for processing the data. While these type of plugins are useful, it puts the burden of designing the user interface on the plugin author. This results in each plugin having different ways to interact with it - which is confusing to the users. Also, regular plugins do not interact with another parts of QGIS. For example, you cannot use the plugin functionality from another algorithm. If the plugin that you want to write is primarily for analysis, and the user interaction that you want is limited to letting the user pick inputs and outputs, there is a much easier and preferred way to write plugins using the Processing Framework. It removes the need for you to design the user interface - simplifying the process. The built-in processing library creates a standard processing interface depending on your inputs that looks and behaves just like any other processing algorithm in QGIS. It also seamlessly integrates with rest of the Processing framework - so your plugin algorithms can be used in batch processing, graphical modeler, called from python console etc.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Overview of the Task<a class="headerlink" href="#overview-of-the-task" title="Постійне посилання на цей заголовок">¶</a></h2>
 <p>We will re-implement a simple plugin from the tutorial  <a class="reference internal" href="building_a_python_plugin.html"><span class="doc">Building a Python Plugin (QGIS3)</span></a> as a processing plugin. It will result in a new processing provider called <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code> and an algorithm <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code> that will allow users to pick a vector layer and write its attributes to a CSV file.</p>
-</div>
-<div class="section" id="get-the-tools">
+</section>
+<section id="get-the-tools">
 <h2>Get the Tools<a class="headerlink" href="#get-the-tools" title="Постійне посилання на цей заголовок">¶</a></h2>
-<div class="section" id="a-text-editor-or-a-python-ide">
+<section id="a-text-editor-or-a-python-ide">
 <h3>A Text Editor or a Python IDE<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Постійне посилання на цей заголовок">¶</a></h3>
 <p>Any kind of software development requires a good text editor. If you already have a favorite text editor or an IDE (Integrated Development Environment), you may use it for this tutorial. Otherwise, each platform offers a wide variety of free or paid options for text editors. Choose the one that fits your needs.</p>
 <p>This tutorial uses Notepad++ editor on Windows.</p>
@@ -281,21 +282,21 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <p class="admonition-title">Примітка</p>
 <p>If you are using Notepad++, makes sure to go to <span class="menuselection">Settings ‣ Preferences ‣ Tab Settings</span> and enable <span class="guilabel">Replace by space</span>. Python is very sensitive about whitespace and this setting will ensure tabs and spaces are treated properly.</p>
 </div>
-</div>
-<div class="section" id="plugin-builder-plugin">
+</section>
+<section id="plugin-builder-plugin">
 <h3>Plugin Builder plugin<a class="headerlink" href="#plugin-builder-plugin" title="Постійне посилання на цей заголовок">¶</a></h3>
 <p>There is a helpful QGIS plugin named <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> which creates all the necessary files and the boilerplate code for a plugin. Find and install the <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> plugin. See <a class="reference internal" href="../using_plugins.html"><span class="doc">Використання додатків</span></a> for more details on how to install plugins.</p>
-</div>
-<div class="section" id="plugins-reloader-plugin">
+</section>
+<section id="plugins-reloader-plugin">
 <h3>Plugins Reloader plugin<a class="headerlink" href="#plugins-reloader-plugin" title="Постійне посилання на цей заголовок">¶</a></h3>
 <p>This is another helper plugin which allows iterative development of plugins. Using this plugin, you can change your plugin code and have it reflected in QGIS without having to restart QGIS every time. Find and install the <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Reloader</span></code> plugin. See <a class="reference internal" href="../using_plugins.html"><span class="doc">Використання додатків</span></a> for more details on how to install plugins.</p>
 <div class="admonition note">
 <p class="admonition-title">Примітка</p>
 <p>Plugin Reloader is an experimental plugin. Make sure you have checked <span class="guilabel">Show also experimental plugins</span> in <span class="guilabel">Plugin Manager</span> settings if you cannot find it.</p>
 </div>
-</div>
-</div>
-<div class="section" id="procedure">
+</section>
+</section>
+<section id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Постійне посилання на цей заголовок">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Open QGIS. Go to <span class="menuselection">Plugins ‣ Plugin Builder ‣ Plugin Builder</span>.</p></li>
@@ -994,8 +995,8 @@ upload it to the QGIS plugin repository.</p>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -1020,7 +1021,7 @@ upload it to the QGIS plugin repository.</p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Востаннє оновлено трав. 20, 2021.<br/>
-      Створено з використанням <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

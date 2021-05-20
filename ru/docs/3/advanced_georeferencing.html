@@ -3,11 +3,12 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Пространственная привязка космических снимков (QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -262,13 +263,13 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="georeferencing-aerial-imagery-qgis3">
+  <section id="georeferencing-aerial-imagery-qgis3">
 <h1>Пространственная привязка космических снимков (QGIS3)<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="Ссылка на этот заголовок">¶</a></h1>
 <p>В уроке <a class="reference internal" href="georeferencing_basics.html"><span class="doc">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</span></a> рассмотрен основной процесс пространственной привязки изображений в QGIS3. Этот способ предполагает считывание координат с отсканированной карты и их ручной ввод в качестве контрольных точек. Часто бывает необходимо привязать некартографическое изображение, или же карту, не имеющую напечатанных на ней координат. В этих случаях необходимо использовать для ввода координат иной источник, имеющий привязку. В этом уроке вы узнаете, как использовать открытые источники данных в процессе координатной привязки.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Обзор задачи<a class="headerlink" href="#overview-of-the-task" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Мы привяжем аэроснимок высокого разрешения с использованием координат из OpenStreetMap.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Также вы научитесь<a class="headerlink" href="#other-skills-you-will-learn" title="Ссылка на этот заголовок">¶</a></h3>
 <ul class="simple">
 <li><p>Загружать общедоступные снимки сверхвысокого разрешения.</p></li>
@@ -276,16 +277,16 @@
 <li><p>Использовать модуль OSM Place Search в QGIS.</p></li>
 <li><p>Устанавливать пользовательское значение no-data для слоя.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Получение данных<a class="headerlink" href="#get-the-data" title="Ссылка на этот заголовок">¶</a></h2>
 <p>В этом уроке мы будем использовать снимки, полученные с воздушных змеев и шаров, собранные <a class="reference external" href="http://publiclaboratory.org/archive">The Public Laboratory</a>. На портале доступны привязанные версии изображений, но мы загрузим непривязанные изображения в формате JPG и привяжем их в QGIS. Если вам нравятся предоставленные снимки, вы можете <a class="reference external" href="http://google-latlong.blogspot.in/2012/04/balloon-and-kite-imagery-in-google.html">посмотреть больше снимков</a> в Google Планета Земля.</p>
 <p>Загрузите JPG изображение <a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">Вашингтон-Сквер-парка в Нью-Йорке</a>. Вы можете щелкнуть правой кнопкой мыши на кнопке JPG и выбрать <span class="guilabel">Сохранить ссылку как…</span>.</p>
 <p>Вы можете напрямую скачать копию набора данных, пройдя по ссылке ниже:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>Порядок действий<a class="headerlink" href="#procedure" title="Ссылка на этот заголовок">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Мы будем снимать координаты для привязки, используя картографическую подложку OpenStreetMap. QGIS3 имеет встроенную поддержку тайловых слоев, которые также называют «XYZ-слоями», поскольку состоят из отдельных фрагментов (тайлов), каждый из которых описывается тремя числами - координатами его местоположения (X, Y) и масштабом (Z). Слой OpenStreetMap может быть загружен из <span class="guilabel">Панели Браузера</span>, группа <span class="guilabel">XYZ Tiles</span>, для чего его необходимо перетащить в область карты. После загрузки слоя обратите внимание на систему координат и проекцию, которые указаны в правом нижнем углу окна приложения. Для слоя OpenStreetMap установлена проекция <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>. Важно помнить о данном параметре, поскольку координаты, которые мы снимем с карты в процессе привязки, будут именно в этой проекции.</p></li>
@@ -407,8 +408,8 @@
 <blockquote>
 <div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -433,7 +434,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Обновлено: мая 20, 2021.<br/>
-      Создано с помощью <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

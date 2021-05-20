@@ -3,11 +3,12 @@
 <html lang="el">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Αυτόματη δημιουργία χάρτη χρησιμοποιώντας την Σύνθεση Εκτύπωσης Ατλαντα &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,26 +253,26 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="automating-map-creation-with-print-composer-atlas">
+  <section id="automating-map-creation-with-print-composer-atlas">
 <h1>Αυτόματη δημιουργία χάρτη χρησιμοποιώντας την Σύνθεση Εκτύπωσης Ατλαντα<a class="headerlink" href="#automating-map-creation-with-print-composer-atlas" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Προειδοποίηση</p>
 <p>A new version of this tutorial is available at <a class="reference internal" href="3/automating_map_creation.html"><span class="doc">Automating Map Creation with Print Layout Atlas (QGIS3)</span></a></p>
 </div>
 <p>Αν ο οργανισμός σας δημοσιεύει εκτυπωμένους ή ψηφιακούς χάρτες, θα χρειάζεται να δημιουργείτε πολλούς χάρτες με βάση το ίδιο πρότυπο - συνήθως ένα για κάθε διοικητική μονάδα ή περιοχή μελέτης. Η δημιουργία αυτών των χαρτών χειροκίνητα μπορεί να πάρει πολύ χρόνο και αν θέλετε να τους ανανεώνετε τακτικά, μπορεί να μετατραπεί σε αγγαρεία. Tο QGIS έχει ένα εργαλείο που λέγεται «Άτλαντας» το οποίο μπορεί να σας βοηθήσει να δημιουργήσετε ένα πρότυπο χάρτη και να δημοσιεύσετε εύκολα μεγάλο αριθμό χαρτών για διαφορετικές περιοχές. Αν δεν είστε οικείοι με τα βασικά χαρακτηριστικά του Συνθέτη Εκτύπωσης, παρακαλώ διαβάστε την άσκηση <a class="reference internal" href="making_a_map.html"><span class="doc">Δημιουργία ενός χάρτη</span></a>.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Επισκόπηση του έργου<a class="headerlink" href="#overview-of-the-task" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <p>Αυτή η άσκηση θα σας δείξει πως να δημιουργήσετε χάρτες για υγρότοπους για κάθε δημοτικό διαμέρισμα στην πολιτεία της Χαβάη.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Άλλες δεξιότητες που θα μάθετε<a class="headerlink" href="#other-skills-you-will-learn" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h3>
 <ul class="simple">
 <li><p>Πως να χρησιμοποιείσετε τον επεξεργαστή μορφορποίησης «Ανεστραμμένα πολύγωνα» για να γεμίσετε περιοχές έξω από τα πολύγωνα.</p></li>
 <li><p>Πως να χρησιμοποιήσετε κώδικα στον επεξεργαστή μορφοποίησης <code class="docutils literal notranslate"><span class="pre">Rule</span> <span class="pre">Based</span></code> για να δείξετε μόνο το τρέχον χαρακτηριστικό στον Άτλαντα.</p></li>
 <li><p>Εφαρμόστε εντολές για να δημιουργήσετε δυναμικές ετικέτες στην Σύνθεση Εκτύπωσης.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Πάρτε τα δεδομένα<a class="headerlink" href="#get-the-data" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <p>Θα χρησιμοποιήσουμε τα <a class="reference external" href="http://planning.hawaii.gov/gis/download-gis-data/">GIS Data Layers</a> από το  <a class="reference external" href="http://planning.hawaii.gov/">State of Hawaii - Office of Planning</a></p>
 <p>Κατεβάστε το στρώμα <a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip">Υγρότοποι</a> από την κατηγορία Βιολογία και Οικολογία.</p>
@@ -280,8 +281,8 @@
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/HI_Wetlands.shp.zip">HI_Wetlands.shp.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/county10.shp.zip">county10.shp.zip</a></p>
 <p>Πηγή δεδομένων <a class="reference internal" href="credits.html#hawaii" id="id1"><span>[HAWAII]</span></a></p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>Διαδικασία<a class="headerlink" href="#procedure" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Ανοίξτε το QGIS. Μετάβαση σε: menuselection: <cite>Layer -&gt; Layer Προσθήκη -&gt; Προσθήκη Vector Layer..</cite></p></li>
@@ -435,8 +436,8 @@
 <img alt="../_images/35_3.jpg" class="align-center" src="../_images/35_3.jpg" />
 <img alt="../_images/35_4.jpg" class="align-center" src="../_images/35_4.jpg" />
 <img alt="../_images/35_5.jpg" class="align-center" src="../_images/35_5.jpg" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -461,7 +462,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Τελευταία ενημέρωση στις Μαΐ 20, 2021.<br/>
-      Δημιουργήθηκε με το <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

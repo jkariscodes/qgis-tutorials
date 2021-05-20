@@ -3,11 +3,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Building a Python Plugin (QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -261,20 +262,20 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="building-a-python-plugin-qgis3">
+  <section id="building-a-python-plugin-qgis3">
 <h1>Building a Python Plugin (QGIS3)<a class="headerlink" href="#building-a-python-plugin-qgis3" title="Permalink to this headline">¶</a></h1>
 <p>Plugins are a great way to extend the functionality of QGIS. You can write plugins using Python that can range from adding a simple button to sohpisticated toolkits. This tutorial will outline the process involved in setting up your development environment, designing the user interface for a plugin and writing code to interact with QGIS. Please review the <a class="reference internal" href="getting_started_with_pyqgis.html"><span class="doc">Getting Started With Python Programming (QGIS3)</span></a> tutorial to get familiar with the basics.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you are building a new plugin, I strongly recommend building a Processing Plugin instead of the GUI plugin described in this tutorial. See  <a class="reference internal" href="processing_python_plugin.html"><span class="doc">Building a Processing Plugin (QGIS3)</span></a> for details.</p>
 </div>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Overview of the Task<a class="headerlink" href="#overview-of-the-task" title="Permalink to this headline">¶</a></h2>
 <p>We will develop a simple plugin called <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code> that will allow users to pick a vector layer and write its attributes to a CSV file.</p>
-</div>
-<div class="section" id="get-the-tools">
+</section>
+<section id="get-the-tools">
 <h2>Get the Tools<a class="headerlink" href="#get-the-tools" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="qt-creator">
+<section id="qt-creator">
 <h3>Qt Creator<a class="headerlink" href="#qt-creator" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://www.qt.io/">Qt</a> is a software development framework that is used to develop applications that run on Windows, Mac, Linux as well as various mobile operating systems. QGIS itself is written using the Qt framework. For plugin development, we will use an application called <a class="reference external" href="https://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Creator</a> to design the interface for our plugin.</p>
 <p>Download and install the Qt Creator installer from <a class="reference external" href="https://www.qt.io/offline-installers">Qt Offline Installers</a>. Make sure you select <strong>Qt Creator</strong> on the download page. Note that you will have to create a free Qt account to install the package.</p>
@@ -283,8 +284,8 @@
 <p>OSGeo4w installer for QGIS on Windows include a copy of <strong>Qt Designer</strong> program which is a lightweight version of <strong>Qt Creator</strong> and perfectly suitable for building plugins. You may skip downloading Qt Creator and use it instead from <span class="menuselection">C:\OSGeo4W64\bin\qgis-designer</span>.</p>
 </div>
 <img alt="../../_images/setup1.png" class="align-center" src="../../_images/setup1.png" />
-</div>
-<div class="section" id="python-bindings-for-qt">
+</section>
+<section id="python-bindings-for-qt">
 <h3>Python Bindings for Qt<a class="headerlink" href="#python-bindings-for-qt" title="Permalink to this headline">¶</a></h3>
 <p>Since we are developing the plugin in Python, we need to install the python
 bindings for Qt. The method for installing these will depend on the platform
@@ -318,8 +319,8 @@ pyrcc5 -o resources.py resources.qrc
 <p class="admonition-title">Note</p>
 <p>You may find that QGIS has already installed this package.</p>
 </div>
-</div>
-<div class="section" id="a-text-editor-or-a-python-ide">
+</section>
+<section id="a-text-editor-or-a-python-ide">
 <h3>A Text Editor or a Python IDE<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Permalink to this headline">¶</a></h3>
 <p>Any kind of software development requires a good text editor. If you already have a favorite text editor or an IDE (Integrated Development Environment), you may use it for this tutorial. Otherwise, each platform offers a wide variety of free or paid options for text editors. Choose the one that fits your needs.</p>
 <p>This tutorial uses Notepad++ editor on Windows.</p>
@@ -330,21 +331,21 @@ Download and install the <a class="reference external" href="https://notepad-plu
 <p class="admonition-title">Note</p>
 <p>If you are using Notepad++, makes sure to go to <span class="menuselection">Settings ‣ Preferences ‣ Tab Settings</span> and enable <span class="guilabel">Replace by space</span>. Python is very sensitive about whitespace and this setting will ensure tabs and spaces are treated properly.</p>
 </div>
-</div>
-<div class="section" id="plugin-builder-plugin">
+</section>
+<section id="plugin-builder-plugin">
 <h3>Plugin Builder plugin<a class="headerlink" href="#plugin-builder-plugin" title="Permalink to this headline">¶</a></h3>
 <p>There is a helpful QGIS plugin named <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> which creates all the necessary files and the boilerplate code for a plugin. Find and install the <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> plugin. See <a class="reference internal" href="../using_plugins.html"><span class="doc">Using Plugins</span></a> for more details on how to install plugins.</p>
-</div>
-<div class="section" id="plugins-reloader-plugin">
+</section>
+<section id="plugins-reloader-plugin">
 <h3>Plugins Reloader plugin<a class="headerlink" href="#plugins-reloader-plugin" title="Permalink to this headline">¶</a></h3>
 <p>This is another helper plugin which allows iterative development of plugins. Using this plugin, you can change your plugin code and have it reflected in QGIS without having to restart QGIS every time. Find and install the <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Reloader</span></code> plugin. See <a class="reference internal" href="../using_plugins.html"><span class="doc">Using Plugins</span></a> for more details on how to install plugins.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Plugin Reloader is an experimental plugin. Make sure you have checked <span class="guilabel">Show also experimental plugins</span> in <span class="guilabel">Plugin Manager</span> settings if you cannot find it.</p>
 </div>
-</div>
-</div>
-<div class="section" id="procedure">
+</section>
+</section>
+<section id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Open QGIS. Go to <span class="menuselection">Plugins ‣ Plugin Builder ‣ Plugin Builder</span>.</p></li>
@@ -846,8 +847,8 @@ upload it to the QGIS plugin repository.</p>
             <span class="n">level</span><span class="o">=</span><span class="n">Qgis</span><span class="o">.</span><span class="n">Success</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -872,7 +873,7 @@ upload it to the QGIS plugin repository.</p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Last updated on May 20, 2021.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

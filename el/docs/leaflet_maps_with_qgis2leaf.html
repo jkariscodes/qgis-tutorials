@@ -3,11 +3,12 @@
 <html lang="el">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Leaflet Διαδικτυακοί Χάρτες με το qgis2leaf &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,7 +253,7 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="leaflet-web-maps-with-qgis2leaf">
+  <section id="leaflet-web-maps-with-qgis2leaf">
 <h1>Leaflet Διαδικτυακοί Χάρτες με το qgis2leaf<a class="headerlink" href="#leaflet-web-maps-with-qgis2leaf" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Προειδοποίηση</p>
@@ -262,24 +263,24 @@ this plugin is folded into a new plugin called <strong>qgis2web</strong>.</p>
 this tutorial.</p>
 </div>
 <p>Το Leaflet είναι μια δημοφιλής, ανοικτού κώδικα βιβλιοθήκη Javascript για την κατασκευή εφαρμογών διαδικτυακών χαρτών. Το πρόσθετο <strong>qgis2leaf</strong> παρέχει έναν απλό τρόπο εξαγωγής του QGIS χάρτη σας, σε έναν λειτουργικό διαδικτυακό χάρτη βασισμένο σε  leaflet. Αυτό το πρόσθετο είναι ένας χρήσιμος τρόπος, για να ξεκινήσετε με τους διαδικτυακούς χάρτες και να δημιουργήσετε έναν διαδραστικό διαδικτυακό χάρτη από τα στατικά GIS επίπεδα δεδομένων σας.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Επισκόπηση εργασίας<a class="headerlink" href="#overview-of-the-task" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <p>Θα δημιουργήσουμε έναν leaflet διαδικτυακό χάρτη των αεροδρομίων σε όλον τον κόσμο.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Άλλες δεξιότητες που θα μάθετε<a class="headerlink" href="#other-skills-you-will-learn" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h3>
 <ul class="simple">
 <li><p>Χρήση της δήλωσης SQL <code class="docutils literal notranslate"><span class="pre">CASE</span></code> στο Field Calculator, για τη δημιουργία νέων πεδίων τιμών, βασισμένες  σε διαφορετικές συνθήκες.</p></li>
 <li><p>Εντοπισμός και χρήση προσαρμοσμένων SVG εικονιδίων στο QGIS.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Λήψη δεδομένων<a class="headerlink" href="#get-the-data" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <p>Θα χρησιμοποιήσουμε το σύνολο δεδομένων <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/airports/">Airports</a> από το Natural Earth.</p>
 <p>Κατεβάστε το <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">Airports shapefile</a>.</p>
 <p>Πηγή Δεδομένων <a class="reference internal" href="credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>Διαδικασία<a class="headerlink" href="#procedure" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Εγκαταστήστε το πρόσθετο <code class="docutils literal notranslate"><span class="pre">qgis2leaf</span></code> πηγαίνοντας  στο <span class="menuselection">Plugins ‣ Manage and Install Plugin</span>. Σημειώστε ότι το πρόσθετο είναι προς το παρόν μαρκαρισμένο ως <strong>experimental</strong>, οπότε θα πρέπει να τσεκάρετε το <span class="guilabel">Show also experimental plugins</span> στις Ρυθμίσεις Πρόσθετων. (See <a class="reference internal" href="using_plugins.html"><span class="doc">Χρησιμοποιώντας Πρόσθετες Λειτουργίες</span></a> για περισσότερες πληροφορίες σχετικά με την εγκατάσταση πρόσθετων στο QGIS)</p></li>
@@ -432,8 +433,8 @@ live interactive map created for this tutorial.</p>
 <iframe
 src="http://spatialthoughts.github.io/qgis2leaf-maps/airports_with_custom_popup/"
 width="100%" height="600px"></iframe>
-</div></div>
-</div>
+</div></section>
+</section>
 
 
 
@@ -458,7 +459,7 @@ width="100%" height="600px"></iframe>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Τελευταία ενημέρωση στις Μαΐ 20, 2021.<br/>
-      Δημιουργήθηκε με το <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

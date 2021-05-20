@@ -3,11 +3,12 @@
 <html lang="nl">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Een plug-in in Python bouwen &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,25 +253,25 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="building-a-python-plugin">
+  <section id="building-a-python-plugin">
 <h1>Een plug-in in Python bouwen<a class="headerlink" href="#building-a-python-plugin" title="Permalink naar deze titel">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Waarschuwing</p>
 <p>Een nieuwe versie van deze handleiding is beschikbaar op <a class="reference internal" href="3/building_a_python_plugin.html"><span class="doc">Een plug-in in Python bouwen (QGIS3)</span></a></p>
 </div>
 <p>Plug-ins zijn een fantastische manier om de functionaliteit van QGIS uit te breiden. U kunt plug-ins schrijven met behulp van Python die kunnen variëren van het toevoegen van een eenvoudige knop tot gesofisticeerde gereedschappen. Deze handleiding zal een overzicht van het proces geven voor het instellen van uw ontwikkelomgeving, de interface voor een plug-in ontwerpen en code schrijven voor interactie met QGIS. Bekijk de handleiding <a class="reference internal" href="getting_started_with_pyqgis.html"><span class="doc">Beginnen met programmeren in Python</span></a> om bekend te raken met de basisbeginselen.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
 <p>We zullen een eenvoudige plug-in ontwikkelen, genaamd <code class="docutils literal notranslate"><span class="pre">Attributen</span> <span class="pre">opslaan</span></code> die gebruikers in staat zal stellen een vectorlaag uit te zoeken en de attributen daarvan weg te schrijven naar een CSV-bestand.</p>
-</div>
-<div class="section" id="get-the-tools">
+</section>
+<section id="get-the-tools">
 <h2>De gereedschappen ophalen<a class="headerlink" href="#get-the-tools" title="Permalink naar deze titel">¶</a></h2>
-<div class="section" id="qt-creator">
+<section id="qt-creator">
 <h3>Qt Creator<a class="headerlink" href="#qt-creator" title="Permalink naar deze titel">¶</a></h3>
 <p><a class="reference external" href="http://www.qt.io/">Qt</a> is een framework voor softwareontwikkeling dat is gebruikt om toepassingen te ontwikkelen die kunnen worden uitgevoerd op Windows, Mac, Linux als ook op verschillende mobiele besturingssystemen. QGIS zelf is geschreven met behulp van het framework Qt. Voor de ontwikkeling van plug-ins zullen we een toepassing gebruiken, genaamd <a class="reference external" href="http://doc.qt.io/qtcreator/index.html">Qt Creator</a> om de interface voor onze plug-in te ontwerpen.</p>
 <p>Download en installeer de software van Qt Creator vanaf <a class="reference external" href="http://sourceforge.net/projects/qtcreator.mirror/files/latest/download">SourgeForge</a></p>
-</div>
-<div class="section" id="python-bindings-for-qt">
+</section>
+<section id="python-bindings-for-qt">
 <h3>Python Bindings voor Qt<a class="headerlink" href="#python-bindings-for-qt" title="Permalink naar deze titel">¶</a></h3>
 <p>Omdat we de plug-in ontwikkelen in Python, moeten we de Python bindings voor Qt installeren. De methode voor het installeren hiervan is afhankelijk van het platform dat u gebruikt. Voor het bouwen van plug-ins hebben het gereedschap voor de opdrachtregel <code class="docutils literal notranslate"><span class="pre">pyrcc4</span></code> nodig.</p>
 <p><strong>Windows</strong></p>
@@ -285,8 +286,8 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-qt4
 </pre></div>
 </div>
-</div>
-<div class="section" id="a-text-editor-or-a-python-ide">
+</section>
+<section id="a-text-editor-or-a-python-ide">
 <h3>Een tekstbewerker of een Python IDE<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Permalink naar deze titel">¶</a></h3>
 <p>Elke soort softwareontwikkeling vereist een goede tekstbewerker. Als u al een favoriete tekstbewerker of een IDE (Integrated Development Environment) heeft, zou u die kunnen gebruiken voor deze handleiding. Anders biedt elk platform een grote variëteit van gratis of betaalde opties voor tekstbewerkers. Kies er een die aan uw wensen voldoet.</p>
 <p>Deze handleiding gebruikt de bewerker Notepad++ op Windows.</p>
@@ -296,21 +297,21 @@
 <p class="admonition-title">Notitie</p>
 <p>Indien u Notepad++ gebruikt, zorg er dan voor dat <span class="guilabel">Omzetten in spaties</span> is geselecteerd in  <span class="menuselection">Instellingen ‣ Voorkeuren ‣ Tabs</span>. Python is bijzonde rgevoelig voor witruimte en deze instelling zal er voor zorgen dat tabs en spaties op de juiste manier worden behandeld.</p>
 </div>
-</div>
-<div class="section" id="plugin-builder-plugin">
+</section>
+<section id="plugin-builder-plugin">
 <h3>plug-in Plugin Builder<a class="headerlink" href="#plugin-builder-plugin" title="Permalink naar deze titel">¶</a></h3>
 <p>Er is een nuttige plug-in voor QGIS, genaamd <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code> die alle noodzakelijke bestanden en onderliggende code voor een plug-in maakt. Zoek en installeer de plug-in <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>. Bekijk <a class="reference internal" href="using_plugins.html"><span class="doc">Plug-ins gebruiken</span></a> voor meer details over hoe plug-ins te installeren.</p>
-</div>
-<div class="section" id="plugins-reloader-plugin">
+</section>
+<section id="plugins-reloader-plugin">
 <h3>plug-in Plugins Reloader<a class="headerlink" href="#plugins-reloader-plugin" title="Permalink naar deze titel">¶</a></h3>
 <p>Dit is een andere nuttige hulpplug-in die het iteratief ontwikkelen van plug-ins mogelijk maakt. Met behulp van deze plug-in kunt u de code voor uw plug-in wijzigen en die hebben gereflecteerd in QGIS zonder dat u QGIS elke keer opnieuw moet starten. Zoek en installeer de plug-in <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Reloader</span></code>. Bekijk <a class="reference internal" href="using_plugins.html"><span class="doc">Plug-ins gebruiken</span></a> voor meer details over hoe plug-ins te installeren.</p>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
 <p>Plugin Reloader is een experimentele plug-in. Zorg er voor dat u ook <span class="guilabel">Ook de experimentele plugins tonen</span> in de instellingen van <span class="guilabel">Plug-ins installeren en beheren</span> te selecteren, als u hem niet kunt vinden.</p>
 </div>
-</div>
-</div>
-<div class="section" id="procedure">
+</section>
+</section>
+<section id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Open QGIS. Ga naar <span class="menuselection">Plug-ins ‣ Plugin Builder ‣ Plugin Builder</span>.</p></li>
@@ -698,8 +699,8 @@
             <span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -724,7 +725,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Laatste aanpassing op mei 20, 2021.<br/>
-      Aangemaakt met <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

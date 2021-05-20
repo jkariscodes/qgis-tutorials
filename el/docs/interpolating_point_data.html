@@ -3,11 +3,12 @@
 <html lang="el">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Παρεμβάλλοντας τα σημεία δεδομένων &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -262,26 +263,26 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="interpolating-point-data">
+  <section id="interpolating-point-data">
 <h1>Παρεμβάλλοντας τα σημεία δεδομένων<a class="headerlink" href="#interpolating-point-data" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Προειδοποίηση</p>
 <p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/interpolating_point_data.html"><span class="doc">Interpolating Point Data (QGIS3)</span></a></p>
 </div>
 <p>Η παρεμβολή είναι μια συχνά χρησιμοποιούμενη GIS τεχνική για να δημιουργήσεις συνεχόμενη επιφάνεια από διακριτά σημεία. Πολλά φαινόμενα του πραγματικού κόσμου είναι συνεχόμενα – οι ανυψώσεις, το έδαφος, η θερμοκρασία κτλ. Εάν θελήσουμε να μοντελοποιήσουμε αυτές τις επιφάνειες για ανάλυση, είναι απίθανο να πάρουμε μετρήσεις από ολόκληρη την επιφάνεια. Συνεπώς, το πεδίο των μετρήσεων επιλέγεται από ποικίλα σημεία κατά μήκος της επιφάνειας και οι ενδιάμεσες τιμές συμπεραίνονται από μια διαδικασία που ονομάζεται “παρεμβολή”. Στο QGIS, η παρεμβολή κατορθώνεται χρησιμοποιώντας  το ενσωματωμένο “interpolation plugin”</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Επισκόπηση του έργου<a class="headerlink" href="#overview-of-the-task" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <p>Θα πάρουμε μετρήσεις του βάθους πεδίου για μια λίμνη Arlington στο Τέξας και θα δημιουργήσουμε μια ανύψωση ανάγλυφου χάρτης και τα περιγράμματα από τις μετρήσεις αυτές.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Άλλες δεξιότητες που θα μάθετε<a class="headerlink" href="#other-skills-you-will-learn" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h3>
 <ul class="simple">
 <li><p>Δημιουργία περιγραμμάτων από σημειακά δεδομένα.</p></li>
 <li><p>Εφαρμογή μάσκας σε τιμές χωρίς δεδομένα από ένα στρώμα ράστερ.</p></li>
 <li><p>Προσθήκη ετικετών σε ένα διανυσματικό στρώμα</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Πάρτε τα δεδομένα<a class="headerlink" href="#get-the-data" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <p>Texas Water Development Board provides the <a class="reference external" href="http://www.twdb.texas.gov/surfacewater/surveys/completed/list/index.asp">shapefiles for completed lake
 surveys</a>.</p>
@@ -289,8 +290,8 @@ surveys</a>.</p>
 <p>Για ευκολία, μπορείτε να μεταφορτώσετε απευθείας ένα αντίγραφο και από τις δύο δέσμες στοιχείων από τις παρακάτω συνδέσεις.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Shapefiles.zip">Shapefiles.zip</a></p>
 <p>Πηγές δεδομένων: [TWDB] _</p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>Διαδικασία<a class="headerlink" href="#procedure" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Ανοίξτε το QGIS. Μετάβαση σε: menuselection: <cite>Layer -&gt; Layer Προσθήκη -&gt; Προσθήκη Vector Layer..</cite></p></li>
@@ -376,8 +377,8 @@ surveys</a>.</p>
 <li><p>Θα δείτε ότι κάθε γραμμή του περιγράμματος είναι κατάλληλα επισημασμένοι ανάλογα με το υψόμετρο κατά μήκος της γραμμής.</p></li>
 </ol>
 <img alt="../_images/2020.png" class="align-center" src="../_images/2020.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -402,7 +403,7 @@ surveys</a>.</p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Τελευταία ενημέρωση στις Μαΐ 20, 2021.<br/>
-      Δημιουργήθηκε με το <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

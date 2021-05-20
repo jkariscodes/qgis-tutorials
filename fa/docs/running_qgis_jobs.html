@@ -3,11 +3,12 @@
 <html lang="fa">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>اجرا و برنامه ریزی پردازش وظیفه ای در QGIS &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -262,8 +263,8 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="running-and-scheduling-qgis-processing-jobs">
-<h1>اجرا و برنامه ریزی پردازش وظیفه ای در QGIS<a class="headerlink" href="#running-and-scheduling-qgis-processing-jobs" title="لینک ثابت به این سر مقاله">¶</a></h1>
+  <section id="running-and-scheduling-qgis-processing-jobs">
+<h1>اجرا و برنامه ریزی پردازش وظیفه ای در QGIS<a class="headerlink" href="#running-and-scheduling-qgis-processing-jobs" title="پیوند ثابت به این سر مقاله">¶</a></h1>
 <p>You can automate a lot of tasks in QGIS using Python scripting (PyQGIS) and the
 Processing Framework. Most of the time, you would run these scripts manually
 while QGIS is open. While that is helpful, many times you need a way to run
@@ -271,26 +272,26 @@ this jobs via the command-line and without needing to open QGIS. Fortunately,
 you can write standalone python scripts that use QGIS libraries and can be run
 via the command-line. In this tutorial, we will learn how to write and
 schedule a job that uses the QGIS Processing framework.</p>
-<div class="section" id="overview-of-the-task">
-<h2>نمای کلی تمرین<a class="headerlink" href="#overview-of-the-task" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>نمای کلی تمرین<a class="headerlink" href="#overview-of-the-task" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p>بیایید بگوییم ما در حال اجرای عملیات بر روی برخی از تجزیه و تحلیل ها با استفاده ازلایه های برداری با فرمت shapefile یک منطقه هستیم. این لایه های برداری  به صورت روزانه به روز می شوند و ما همیشه به جدیدترین فایل نیاز داریم. اما قبل از اینکه بتوانیم از این فایلها استفاده کنیم ، باید داده ها را  ویرایش کنیم. ما می توانیم یک  وظیفه QGIS تعریف کنیم که این فرآیند را به طور خودکار انجام دهد و روزانه آن را اجرا کند. بنابراین شما می توانید جدیدترین فایلهای ویرایش شده را برای کار عملیات داشته باشید. ما یک اسکریپت مستقل پایتون خواهیم نوشت که یک لایه برداری را بارگیری می کند و عملیات ویرایش کردن توپولوژیک را به صورت روزانه انجام می دهد.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>مهارت های دیگری که خواهید آموخت<a class="headerlink" href="#other-skills-you-will-learn" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>مهارت های دیگری که خواهید آموخت<a class="headerlink" href="#other-skills-you-will-learn" title="پیوند ثابت به این سر مقاله">¶</a></h3>
 <ul class="simple">
 <li><p>بارگیری و باز کردن فایل ها با استفاده از پایتون.</p></li>
 <li><p>اجرا وپردازش برنامه با PyQGIS.</p></li>
 <li><p>رفع خطاهای توپولوژیکی در یک لایه برداری.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>اخذ داده<a class="headerlink" href="#get-the-data" title="لینک ثابت به این سر مقاله">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>اخذ داده<a class="headerlink" href="#get-the-data" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p>` پایگاه دادهژئوفابریک  Geofabrik &lt;<a class="reference external" href="http://www.geofabrik.de/">http://www.geofabrik.de/</a>&gt;`_ داده های برداری <a class="reference external" href="http://www.openstreetmap.org/">OpenStreetMap</a>  فراهم می کند.</p>
 <p>ما در اینجا  از لایه برداری فیجی &lt;<a class="reference external" href="http://download.geofabrik.de/australia-oceania.html">http://download.geofabrik.de/australia-oceania.html</a>&gt;`_  برای این تمرین استفاده خواهیم نمود.  فایل های زیپ شده   <a class="reference external" href="http://download.geofabrik.de/australia-oceania/fiji-latest.shp.zip">fiji-latest.shp.zip</a>  بارگیری نماییدو فایل زیپ شده را باز نمایید و آن در یک مسیر پوشه مناسب قرار دهید.</p>
 <p>منابع داده  <a class="reference internal" href="credits.html#geofabrik" id="id1"><span>[GEOFABRIK]</span></a></p>
-</div>
-<div class="section" id="procedure">
-<h2>مراحل کاری<a class="headerlink" href="#procedure" title="لینک ثابت به این سر مقاله">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>مراحل کاری<a class="headerlink" href="#procedure" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <ol class="arabic simple">
 <li><p>ابتدا فرایند ویرایش لایه برداری را به صورت دستی اجرا خواهیم کرد تا دستوراتی را که در اسکریپت پایتون استفاده خواهیم کرد، یادکنیم. QGIS را راه اندازی کرده و به  منوی <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector Layer</span>  بروید.</p></li>
 </ol>
@@ -601,8 +602,8 @@ copy of cleaned data everyday.</p></li>
 <span class="nb">print</span> <span class="s1">&#39;Success&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -626,8 +627,8 @@ copy of cleaned data everyday.</p></li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      . مهٔ 20, 2021  آخرین بروز رسانی در<br/>
-      . <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 ایجاد شده با<br/>
+      آخرین بروز رسانی در مهٔ 20, 2021 .<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

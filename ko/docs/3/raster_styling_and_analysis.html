@@ -3,11 +3,12 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>기본 래스터 스타일링 및 분석(QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -262,30 +263,30 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="basic-raster-styling-and-analysis-qgis3">
-<h1>기본 래스터 스타일링 및 분석(QGIS3)<a class="headerlink" href="#basic-raster-styling-and-analysis-qgis3" title="제목 주소">¶</a></h1>
+  <section id="basic-raster-styling-and-analysis-qgis3">
+<h1>기본 래스터 스타일링 및 분석(QGIS3)<a class="headerlink" href="#basic-raster-styling-and-analysis-qgis3" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <p>많은 과학적 관찰과 연구는 래스터 데이터셋을 생산합니다. 래스터는 특정 값을 할당하는 픽셀 그리드입니다. 이러한 값에 대해 수학적인 연산을 함으로써 우리는 흥미로운 분석을 할 수 있습니다. QGIS에는 래스터 계산기를 통해 할 수 있는 몇 가지 기본적인 분석 기능이 내장되어 있습니다. 이 지침에서는 래스터 계산기가 제공하는 스타일링 래스터 및 기능성에 사용할 수 있는 옵션에 대해 살펴보겠습니다.</p>
-<div class="section" id="overview-of-the-task">
-<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>2000년과 2010년 사이 세계 인구 변화에 대한 지도를 만들기 위해 인구 그리드 데이터를 사용할 것입니다.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>다른 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>다른 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="이 표제에 대한 퍼머링크">¶</a></h3>
 <ul class="simple">
 <li><p>레이어들 간에 스타일을 복사/붙여 넣는 방법</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>데이터 가져오기<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>데이터 가져오기<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>컬럼비아 대학의 GPW(Grided Population of the World) v4 &lt;<a class="reference external" href="https://sedac.ciesin.columbia.edu/data/collection/gpw-v4">https://sedac.ciesin.columbia.edu/data/collection/gpw-v4</a>&gt; 데이터셋을 사용할 것입니다. 구체적으로 GeoTiFF 형식 2.5도 속성(Degree Minute resolution)의 2000년과 2010년 사이 지구 전체 인구수 &lt;<a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download">https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download</a>&gt;가 필요합니다. 데이터를 다운로드하려면 무료 지구 데이터 계정&lt;<a class="reference external" href="https://urs.earthdata.nasa.gov/home">https://urs.earthdata.nasa.gov/home</a>&gt;이 필요합니다.</p>
 <img alt="../../_images/data16.png" class="align-center" src="../../_images/data16.png" />
 <p>아래 링크에서 이번예제에 사용되는 샘플파일을 쉽게 내려받을 수 있습니다:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</a></p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</a></p>
 <p>데이터 출처 <a class="reference internal" href="../credits.html#gpw4" id="id1"><span>[GPW4]</span></a></p>
-</div>
-<div class="section" id="procedure">
-<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>과정<a class="headerlink" href="#procedure" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <ol class="arabic simple">
 <li><p>QGIS를 열고 브라우저 패널에서 다운로드한 파일을 찾으십시오. gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip 파일을 압축해제하십시오. gpw-v4-population-count-rev11_2000_2pt5_min.tif 파일을 캔버스로 끌어다 놓습니다.</p></li>
 </ol>
@@ -380,13 +381,13 @@
 <div><img alt="../../_images/1525.png" class="align-center" src="../../_images/1525.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>이것은 좋은 시각화 방법이지만 해석하기 쉽지는 않습니다. 《감소》, 《유지》, 《성장》, 《고성장》 등 4가지 분류로 더 나은 지도를 만들어봅시다. 클래스가 있는 표로 스크롤하십시오. 〈Shift〉 키를 누르고 (모든) 행을 선택합니다. 〈선택한 행 제거〉 버튼을 클릭합니다.</p></li>
+<li><p>이것은 좋은 시각화 방법이지만 해석하기 쉽지는 않습니다. “감소”, “유지”, “성장”, “고성장” 등 4가지 분류로 더 나은 지도를 만들어봅시다. 클래스가 있는 표로 스크롤하십시오. ‘Shift’ 키를 누르고 (모든) 행을 선택합니다. ‘선택한 행 제거’ 버튼을 클릭합니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1623.png" class="align-center" src="../../_images/1623.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>〈보간’을 《불연속》으로 변경합니다. 이제 색 지도를 수동으로 만들 것입니다. 〈수동으로 값 추가〉 버튼을 클릭합니다. 값을 두 번 클릭하여 《-100》으로 입력하고 《Decline》을 〈라벨’로 입력합니다. 색상을 두 번 클릭하여 이 범주에는 파란색을 적용합니다. 색상 맵이 작동하여 입력된 값보다 낮은 모든 값에 해당 항목의 색상이 부여될 것입니다. 이제 캔버스는 감소하는 인구 변화를 가진 지역만 보여줄 것입니다.</p></li>
+<li><p>‘보간’을 “불연속”으로 변경합니다. 이제 색 지도를 수동으로 만들 것입니다. ‘수동으로 값 추가’ 버튼을 클릭합니다. 값을 두 번 클릭하여 “-100”으로 입력하고 “Decline”을 ‘라벨’로 입력합니다. 색상을 두 번 클릭하여 이 범주에는 파란색을 적용합니다. 색상 맵이 작동하여 입력된 값보다 낮은 모든 값에 해당 항목의 색상이 부여될 것입니다. 이제 캔버스는 감소하는 인구 변화를 가진 지역만 보여줄 것입니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1724.png" class="align-center" src="../../_images/1724.png" />
@@ -403,8 +404,8 @@
 <blockquote>
 <div><img alt="../../_images/1918.png" class="align-center" src="../../_images/1918.png" />
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -429,7 +430,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       최종 업데이트: 5월 20, 2021<br/>
-      <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 버전으로 생성되었습니다.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

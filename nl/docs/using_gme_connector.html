@@ -3,11 +3,12 @@
 <html lang="nl">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Google Maps Engine Connector gebruiken voor QGIS &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,7 +253,7 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="using-google-maps-engine-connector-for-qgis">
+  <section id="using-google-maps-engine-connector-for-qgis">
 <h1>Google Maps Engine Connector gebruiken voor QGIS<a class="headerlink" href="#using-google-maps-engine-connector-for-qgis" title="Permalink naar deze titel">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Waarschuwing</p>
@@ -263,17 +264,17 @@
 <p class="admonition-title">Notitie</p>
 <p>Disclaimer: Ik ben de auteur van de Google Maps Engine Connector en momenteel lid van het team van Google Maps.</p>
 </div>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
 <p>We zullen een lijnenlaag nemen die de fietsroutes in San Francisco weergeeft en die uploaden naar Google Maps Engine met behulp van de plug-in. Als de laag eenmaal is opgemaakt en een kaart is gemaakt, zullen we die kaart toevoegen aan QGIS als een WMS-laag.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
 <li><p>De Google Developer Console gebruiken om een nieuw project in te stellen voor het gebruiken van Google API’s.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
 <p><a class="reference external" href="https://data.sfgov.org/">San Francisco Data</a> is een uitstekende bron voor open gegevens van San Francisco.</p>
 <ol class="arabic simple">
@@ -281,8 +282,8 @@
 </ol>
 <img alt="../_images/1202.png" class="align-center" src="../_images/1202.png" />
 <p>Gegevensbron: <a class="reference internal" href="credits.html#sfmta" id="id1"><span>[SFMTA]</span></a></p>
-</div>
-<div class="section" id="create-a-google-maps-engine-account">
+</section>
+<section id="create-a-google-maps-engine-account">
 <h2>Een account voor Google Maps Engine maken<a class="headerlink" href="#create-a-google-maps-engine-account" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple" start="2">
 <li><p>U kunt een gratis probeer-account voor  Google Maps Engine aanvragen. Het probeer-account is een volledig functionerende Maps Engine instance met beperkte quota voor opslag. Bezoek <a class="reference external" href="http://www.google.com/enterprise/mapsearth/products/mapsengine.html">Google Maps Engine homepage</a> en klik op de link <span class="guilabel">Get started with a free account</span>.</p></li>
@@ -292,8 +293,8 @@
 <li><p>U zult zich moeten inschrijven met uw Google-account. Indien u uw e-mail van uw werk wilt gebruiken, kunt u ook een nieuw account voor Google maken met uw e-mail van uw werk. Eenmaal ingelogd zult u het scherm <span class="guilabel">Create a Maps Engine Project</span> zien. Voer een <span class="guilabel">Project Name</span> in die uw account zal identificeren bij het gebruiken van Google Maps Engine. Accepteer de voorwaarden en klik op de knop <span class="guilabel">Accept and create</span>.</p></li>
 </ol>
 <img alt="../_images/392.png" class="align-center" src="../_images/392.png" />
-</div>
-<div class="section" id="create-a-google-developer-console-project">
+</section>
+<section id="create-a-google-developer-console-project">
 <h2>Een Google Developer Console project maken<a class="headerlink" href="#create-a-google-developer-console-project" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple" start="4">
 <li><p>De Google Maps Engine Connector gebruikt de <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Maps</span> <span class="pre">Engine</span> <span class="pre">API</span></code> om toegang te krijgen tot de in uw account opgeslagen gegevens. U zult speciale toegangsvoorwaarden moeten verkrijgen die de plug-in zal gebruiken om programmatisch toegang tot uw gegevens te kunnen krijgen. Bezoek <a class="reference external" href="https://console.developers.google.com/">Google Developer Console</a> en klik op <span class="guilabel">Create Project</span>. Voer <code class="docutils literal notranslate"><span class="pre">GME</span> <span class="pre">Connector</span> <span class="pre">for</span> <span class="pre">QGIS</span> <span class="pre">API</span></code> in als de <span class="guilabel">PROJECT NAME</span> en <code class="docutils literal notranslate"><span class="pre">gme-qgis-api</span></code> als de <span class="guilabel">PROJECT ID</span>. Deze namen zijn slechts suggesties - u kunt elke naam en ID gebruiken die u wilt.</p></li>
@@ -434,8 +435,8 @@
 <iframe
 src="https://mapsengine.google.com/13476080153727555143-08887688179650036554-4/widget/in_iframe"
 width="100%" height="600px"></iframe>
-</div></div>
-</div>
+</div></section>
+</section>
 
 
 
@@ -460,7 +461,7 @@ width="100%" height="600px"></iframe>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Laatste aanpassing op mei 20, 2021.<br/>
-      Aangemaakt met <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

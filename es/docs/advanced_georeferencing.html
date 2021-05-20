@@ -3,11 +3,12 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Georeferenciación de imágenes aéreas &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,17 +253,17 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="georeferencing-aerial-imagery">
+  <section id="georeferencing-aerial-imagery">
 <h1>Georeferenciación de imágenes aéreas<a class="headerlink" href="#georeferencing-aerial-imagery" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Advertencia</p>
 <p>Este tutorial está ahora obsoleto. Una versión nueva y actualizada está disponible en <a class="reference internal" href="3/advanced_georeferencing.html"><span class="doc">Georeferenciar Imágenes Aéreas (QGIS3)</span></a></p>
 </div>
 <p>En el tutorial: doc: <cite>georeferencing_basics</cite> cubrimos el proceso básico de georreferenciación en QGIS. Ese método implica leer las coordenadas del mapa escaneado e ingresarlas manualmente. Sin embargo, en ocasiones, es posible que las coordenadas no estén impresas en el mapa que se está intentando georeferenciar. En este caso, se puede usar otra fuente de datos georreferenciados. En este tutorial aprenderá a utilizar fuentes de datos abiertos existentes en el proceso de georreferenciación.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Información general del projecto<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Vamos a georeferenciar una imágen de alta resolución de globo usando coordenadas de referencia de OpenStreetMap</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Otras habilidades que aprenderás<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
 <li><p>¿Cómo bajar imágenes de súper alta resolución de dominio público?</p></li>
@@ -271,9 +272,9 @@
 <li><p>Por medio de una capa ya georeferenciada para ingresar puntos GCP en la herramienta Georeferenciador.</p></li>
 <li><p>Establecer un valor personalizado sin-datos para una capa.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>In this tutorial, we will be using some gorgeous kite and balloon imagery
 collected by <a class="reference external" href="http://publiclaboratory.org/archive">The Public Laboratory</a>.
@@ -284,8 +285,8 @@ georeferencing it in QGIS.  If you like the imagery they provide, you can
 <p>Baje la imágen JPG  <a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">Washington Square Park, New York</a>. Puede hacer click derecho en el botón <span class="guilabel">Save link as…</span>.</p>
 <p>Para su comodidad, puede descargar directamente una copia del conjunto de datos del siguiente enlace:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>Procedmiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Para este tutorial, estaremos usando la capa OpenStreetMap como nuestra capa de referencia. Instalaremos el complemento OpenLayers desde <span class="menuselection">Complementos ‣ Administrar e Instalar Complementos ‣ Obtener más</span>. Vea <a class="reference internal" href="using_plugins.html"><span class="doc">Uso de Complementos</span></a> para más información sobre el uso de complementos en QGIS.</p></li>
@@ -312,7 +313,7 @@ georeferencing it in QGIS.  If you like the imagery they provide, you can
 </div>
 <img alt="../_images/536.png" class="align-center" src="../_images/536.png" />
 <ol class="arabic simple" start="6">
-<li><p>Una vez que has verificado que la herramienta cs2cs existe en tu sistema, es tiempo de convertir las coordenadas Latitud y Longitud a Mercator. La manera que esta herramienta funciona es que necesitas especificar un SRC  <span class="guilabel">fuente</span> y <span class="guilabel">destino</span>. La definición de SRC podría ser una <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">cadena PROJ4</a> o un <a class="reference external" href="http://www.epsg-registry.org/">código EPSG</a>. Debido a que ya sabemos el código EPSG para nuestro SRC de entrada y salida, los usaremos. La manera más simple de usar la herramienta es proveer las coordenadas de entrada en la misma línea de comando. Note que la herramienta acepta coordenadas en el orden <cite>X Y</cite>, por lo que tenemos que ingresar <cite>Longitud Latitud</cite>. Ingrese el siguiente comando en la terminar y presione Intro (Enter). Note que necesitamos asociar las comillas dobles («) con una barra hacia atrás (\). Una vez presione intro, verá la herramienta procesar las coordenadas e imprimirá la salida de coordenadas X Y en SRC EPSG 3857.</p></li>
+<li><p>Una vez que has verificado que la herramienta cs2cs existe en tu sistema, es tiempo de convertir las coordenadas Latitud y Longitud a Mercator. La manera que esta herramienta funciona es que necesitas especificar un SRC  <span class="guilabel">fuente</span> y <span class="guilabel">destino</span>. La definición de SRC podría ser una <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">cadena PROJ4</a> o un <a class="reference external" href="http://www.epsg-registry.org/">código EPSG</a>. Debido a que ya sabemos el código EPSG para nuestro SRC de entrada y salida, los usaremos. La manera más simple de usar la herramienta es proveer las coordenadas de entrada en la misma línea de comando. Note que la herramienta acepta coordenadas en el orden <cite>X Y</cite>, por lo que tenemos que ingresar <cite>Longitud Latitud</cite>. Ingrese el siguiente comando en la terminar y presione Intro (Enter). Note que necesitamos asociar las comillas dobles (») con una barra hacia atrás (\). Una vez presione intro, verá la herramienta procesar las coordenadas e imprimirá la salida de coordenadas X Y en SRC EPSG 3857.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo &quot;-73d59&#39;51\&quot; 40d43&#39;51\&quot;&quot; | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 
@@ -376,8 +377,8 @@ georeferencing it in QGIS.  If you like the imagery they provide, you can
 <li><p>Ahora verás tu imagen georeferenciada sobrepuesta sobre la capa base.</p></li>
 </ol>
 <img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -402,7 +403,7 @@ georeferencing it in QGIS.  If you like the imagery they provide, you can
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Actualizado por última vez en may. 20, 2021.<br/>
-      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

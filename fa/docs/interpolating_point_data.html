@@ -3,11 +3,12 @@
 <html lang="fa">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>درون یابی داده های نقطه ای &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -262,35 +263,35 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="interpolating-point-data">
-<h1>درون یابی داده های نقطه ای<a class="headerlink" href="#interpolating-point-data" title="لینک ثابت به این سر مقاله">¶</a></h1>
+  <section id="interpolating-point-data">
+<h1>درون یابی داده های نقطه ای<a class="headerlink" href="#interpolating-point-data" title="پیوند ثابت به این سر مقاله">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">هشدار</p>
 <p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/interpolating_point_data.html"><span class="doc">Interpolating Point Data (QGIS3)</span></a></p>
 </div>
 <p>درون‌یابی یک روش معمول GIS برای ایجاد یک سطح پیوسته از نقاط گسسته است. بسیاری از پدیده‌های دنیای واقعی پیوسته هستند - ارتفاعات، دمای سطح زمین، خصوصیات خاک و غیره. اگر بخواهیم این سطوح را برای تجزیه‌وتحلیل مدل کنیم، اندازه‌گیری در تمامی سطح زمین لازم است که امری غیرممکن است. ازاین‌رو، اندازه‌گیری‌های میدانی (نمونه‌برداری) در نقاط مختلف سطح زمین انجام می‌گیرد و مقادیر میانی توسط فرایندی به نام «درون‌یابی» برآورد می‌شود. درQGIS، با استفاده از ابزار داخلی Interpolation از جعبه‌ابزار Processing، درون‌یابی اجرا می‌شود.</p>
-<div class="section" id="overview-of-the-task">
-<h2>رئوس مطالب<a class="headerlink" href="#overview-of-the-task" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>رئوس مطالب<a class="headerlink" href="#overview-of-the-task" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p>ما اندازه گیری های عمق میدانی را برای یک دریاچه آرلینگتون در تگزاس انجام خواهیم داد و یک نقشه ناهمواری و خطوط منحنی تراز از این اندازه گیری ها ایجاد خواهیم کرد.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>آنچه شما یاد خواهید گرفت<a class="headerlink" href="#other-skills-you-will-learn" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>آنچه شما یاد خواهید گرفت<a class="headerlink" href="#other-skills-you-will-learn" title="پیوند ثابت به این سر مقاله">¶</a></h3>
 <ul class="simple">
 <li><p>ایجاد منحنی تراز از داده نقطه ای</p></li>
 <li><p>ماسک نمودن ارزش های گم شده از یک لایه رستری</p></li>
 <li><p>افزودن برچسب به لایه برداری</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>دریافت داده<a class="headerlink" href="#get-the-data" title="لینک ثابت به این سر مقاله">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>دریافت داده<a class="headerlink" href="#get-the-data" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p>دفرت توسعه منابع آب تگزاس  شیب فایل های  نقشه برداری کامل دریاچه را تهیه می کند.&lt;<a class="reference external" href="http://www.twdb.texas.gov/surfacewater/surveys/completed/list/index.asp">http://www.twdb.texas.gov/surfacewater/surveys/completed/list/index.asp</a>&gt;`_</p>
 <p>شیب فایل های مورخ 2007-12 برای دریاچه آرلینکتن را دونلود نمایید  &lt;<a class="reference external" href="http://www.twdb.texas.gov/hydro_survey/Arlington/2007-12/Shapefiles.zip">http://www.twdb.texas.gov/hydro_survey/Arlington/2007-12/Shapefiles.zip</a>&gt;`_ .</p>
 <p>برای راحتی کار، شما می توانید بطور مستقیم نمونه داده ها مورد استفاده در این راهنما را از لینک زیر دریافت نمایید.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/Shapefiles.zip">Shapefiles.zip</a></p>
 <p>منابع داده ها : <a class="reference internal" href="credits.html#twdb" id="id1"><span>[TWDB]</span></a></p>
-</div>
-<div class="section" id="procedure">
-<h2>مراحل<a class="headerlink" href="#procedure" title="لینک ثابت به این سر مقاله">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>مراحل<a class="headerlink" href="#procedure" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <ol class="arabic simple">
 <li><p>QGIS را باز کنید. برویید به  منوی
 <span class="menuselection">Layer ‣ Add Layer ‣ Add Vector Layer..</span></p></li>
@@ -384,8 +385,8 @@ interpolation.</p></li>
 <li><p>شما خواهید دید که هر خط منحنی تراز به طور مناسب با ارتفاع در امتداد خط برچسب گذاری می شود.</p></li>
 </ol>
 <img alt="../_images/2020.png" class="align-center" src="../_images/2020.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -409,8 +410,8 @@ interpolation.</p></li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      . مهٔ 20, 2021  آخرین بروز رسانی در<br/>
-      . <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 ایجاد شده با<br/>
+      آخرین بروز رسانی در مهٔ 20, 2021 .<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

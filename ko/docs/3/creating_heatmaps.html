@@ -3,11 +3,12 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>열지도 만들기 (QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -262,72 +263,72 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="creating-heatmaps-qgis3">
-<h1>열지도 만들기 (QGIS3)<a class="headerlink" href="#creating-heatmaps-qgis3" title="제목 주소">¶</a></h1>
+  <section id="creating-heatmaps-qgis3">
+<h1>열지도 만들기 (QGIS3)<a class="headerlink" href="#creating-heatmaps-qgis3" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <p>열지도는 밀도 포인트 정보에 대해서 시각화하는데 중요한 도구입니다. 열지도는 사용하는 데이터에 대한 정보의 밀도를 결정하는데 유용한 보간법입니다. 열지도는 보통 범죄정보, 교통 사고, 주택밀집도 등 시각화 하는데 사용됩니다. QGIS의 점 레이어 스타일도구에서 열지도를 표현할 수 있고 점 레이어를 통해 레스터를 만들 수 있는 <strong>열지도(케널 밀도 추정)</strong> 알고리즘도 있습니다.</p>
-<div class="section" id="overview-of-the-task">
-<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>UK Surrey의 범죄위치 데이터를 활용하여 범죄율이 높은 지역의 열지도를 만들것입니다.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>이 예제에서 필요한 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>이 예제에서 필요한 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="이 표제에 대한 퍼머링크">¶</a></h3>
 <ul class="simple">
 <li><p>가상필드사용하기 및 적절하게 표현하기</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p><a class="reference external" href="https://data.police.uk">data.police.uk</a> 는 도로에 따른 범죄, 결과 등 관련 정보를 CSV 형태로 제공합니다. <a href="#id2"><span class="problematic" id="id3">`Surrey Police https://data.police.uk/data/&gt;`_</span></a> 정보를 내려받아서 묶여있는 파일을 풀어서 CSV파일을 얻습니다.</p>
 <p>아래 링크에서 다음 데이터를 손쉽게 내려받을 수 있습니다:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/2019-02-surrey-street.csv">2019-02-surrey-street.csv</a></p>
 <p>정보 출처 <a class="reference internal" href="../credits.html#policeuk" id="id1"><span>[POLICEUK]</span></a></p>
-</div>
-<div class="section" id="procedure">
-<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>과정<a class="headerlink" href="#procedure" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <ol class="arabic simple">
-<li><p>오픈스트리트맵에서 기본지도를 열어준 다음 CSV파일을 열어줍니다. 〈데이터 소스 관리자’를 열어주세요.</p></li>
+<li><p>오픈스트리트맵에서 기본지도를 열어준 다음 CSV파일을 열어줍니다. ‘데이터 소스 관리자’를 열어주세요.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/128.png" class="align-center" src="../../_images/128.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>왼편 패널에서 〈탐색기’창을 누른후 〈XYZ Tiles’에서 〈OpenStreetMap’을 찾습니다. 그리고 오른쪽 마우스클릭한 후 〈캔버스에 선택한 레이어(들)추가’를 눌러 QGIS레이어를 생성합니다.</p></li>
+<li><p>왼편 패널에서 ‘탐색기’창을 누른후 ‘XYZ Tiles’에서 ‘OpenStreetMap’을 찾습니다. 그리고 오른쪽 마우스클릭한 후 ‘캔버스에 선택한 레이어(들)추가’를 눌러 QGIS레이어를 생성합니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/219.png" class="align-center" src="../../_images/219.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>〈구분자로 분리된 텍스트’항목으로 갑니다. 이곳에서 CSV파일 형태로 구성된 범죄 정보를 넣어줄 예정입니다. 〈…〉을 누른 후 〈파일명’에 내려받았던  <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street.csv</span></code> 을 넣으세요. Geometry Definition항목에서 《X 필드》와 《Y 필드》는 에 관련한 내용으로 《경도》와 《위도》로 나타내게 됩니다. <cite>Geometry CRS`는  ``EPSG:4326 - WGS 84`</cite> 로 설정합니다. 예시데이터 항목에 속성이 알맞게 들어가는지 확인 후 추가 및 닫기합니다.</p></li>
+<li><p>‘구분자로 분리된 텍스트’항목으로 갑니다. 이곳에서 CSV파일 형태로 구성된 범죄 정보를 넣어줄 예정입니다. ‘…’을 누른 후 ‘파일명’에 내려받았던  <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street.csv</span></code> 을 넣으세요. Geometry Definition항목에서 “X 필드”와 “Y 필드”는 에 관련한 내용으로 “경도”와 “위도”로 나타내게 됩니다. <cite>Geometry CRS`는  ``EPSG:4326 - WGS 84`</cite> 로 설정합니다. 예시데이터 항목에 속성이 알맞게 들어가는지 확인 후 추가 및 닫기합니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/317.png" class="align-center" src="../../_images/317.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>레이어 패널에 내려받은 두가지 레이어가 있습니다- 《오픈스트리트맵》과  <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code>. <a href="#id1"><span class="problematic" id="id2">`</span></a>2019-02-surrey-street``레이어를 오른쪽 클릭 한 후 〈레이어로 확대/축소’를 합니다.</p></li>
+<li><p>레이어 패널에 내려받은 두가지 레이어가 있습니다- “오픈스트리트맵”과  <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code>. <a href="#id1"><span class="problematic" id="id2">`</span></a>2019-02-surrey-street``레이어를 오른쪽 클릭 한 후 ‘레이어로 확대/축소’를 합니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/48.png" class="align-center" src="../../_images/48.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>범죄 사고 점 정보를 오픈스트리트 맵을 기본으로 하는 지도에 올려서 봅니다. 정보를 둘러보시죠. 정보의 밀집정도가 높아 어디가 범죄율이 높은지 찾아내기 힘듭니다. 이런 경우에 열지도 시각화를 통해 쉽게 찾아낼 수 있습니다. <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> 레이어를 활성화 시킨후 〈오픈레이어 스타일링 도구’를 눌러줍시다.</p></li>
+<li><p>범죄 사고 점 정보를 오픈스트리트 맵을 기본으로 하는 지도에 올려서 봅니다. 정보를 둘러보시죠. 정보의 밀집정도가 높아 어디가 범죄율이 높은지 찾아내기 힘듭니다. 이런 경우에 열지도 시각화를 통해 쉽게 찾아낼 수 있습니다. <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> 레이어를 활성화 시킨후 ‘오픈레이어 스타일링 도구’를 눌러줍시다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/58.png" class="align-center" src="../../_images/58.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>렌더링 드롭박스에서 《열지도》를 고릅니다. 〈레이어 스타일 패널’은 캔버스에서 내가 변경해준 값에 대해 어떻게 변화했는지 캔버스에서 바로 확인할 수 있도록 고안되었습니다.  이 레이어는 현재 그레이스케일의 형태로 보여집니다.</p></li>
+<li><p>렌더링 드롭박스에서 “열지도”를 고릅니다. ‘레이어 스타일 패널’은 캔버스에서 내가 변경해준 값에 대해 어떻게 변화했는지 캔버스에서 바로 확인할 수 있도록 고안되었습니다.  이 레이어는 현재 그레이스케일의 형태로 보여집니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/68.png" class="align-center" src="../../_images/68.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>열지도는 보통 높은 밀도의 점 벡터들이 있는 구간에 《열》형태로 노랑-빨강 또는 흰-빨강의 색상표로 사용됩니다. 〈색상표’를 누른 후 《Reds》를 사용합니다.</p></li>
+<li><p>열지도는 보통 높은 밀도의 점 벡터들이 있는 구간에 “열”형태로 노랑-빨강 또는 흰-빨강의 색상표로 사용됩니다. ‘색상표’를 누른 후 “Reds”를 사용합니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/78.png" class="align-center" src="../../_images/78.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>그 다음 〈반지름’값을 설정해줍니다. 이 값은 개별의 점 정보 주변에 얼마나 영향을 미치는지 설정할 수 있습니다. 정보유형에 따라서 이 값이 의미하는 바는 다릅니다. 우리가 예제로 사용하고있는 정보에서는,  반경 5km내에서 범죄 사고가 영향을 미친다고 가정합시다. 오른쪽 제일 아래 프로젝트 좌표정보가 <code class="docutils literal notranslate"><span class="pre">EPSG:</span> <span class="pre">3857``인지</span> <span class="pre">확인합니다.</span> <span class="pre">이</span> <span class="pre">좌표계의</span> <span class="pre">기본</span> <span class="pre">단위는</span> <span class="pre">'미터'임으로,</span> <span class="pre">반지름</span> <span class="pre">항목에</span> <span class="pre">&quot;5000&quot;을</span> <span class="pre">입력합니다.</span> <span class="pre">다른</span> <span class="pre">파라미터는</span> <span class="pre">`Kernel</span> <span class="pre">shape`인데</span> <span class="pre">숨겨져있는</span> <span class="pre">항목입니다.</span> <span class="pre">이것은</span> <span class="pre">주어진</span> <span class="pre">반지름에</span> <span class="pre">대해서</span> <span class="pre">얼만큼</span> <span class="pre">퍼져나갈지</span> <span class="pre">결정하는</span> <span class="pre">함수값입니다.</span> <span class="pre">열지도</span> <span class="pre">렌더링은</span> <span class="pre">&quot;4차&quot;함수를</span> <span class="pre">계산식에서</span> <span class="pre">사용합니다.</span> <span class="pre">Kernel</span> <span class="pre">모양은</span> <span class="pre">보통</span> <span class="pre">``Triangular</span></code>, <code class="docutils literal notranslate"><span class="pre">Uniform</span></code>, <a href="#id1"><span class="problematic" id="id2">``</span></a>Triweight》 그리고 <a href="#id3"><span class="problematic" id="id4">`</span></a>Epanechnikov``의 형태의 함수를 사용하기도 합니다. 〈&lt;<a class="reference external" href="https://www.geodose.com/2017/11/qgis-heatmap-using-kernel-density.html">https://www.geodose.com/2017/11/qgis-heatmap-using-kernel-density.html</a>&gt;〉 이곳에서 열지도와 Kernel shape에 따른 적절한 반지름값 정보를 더 확인하실 수 있습니다.</p></li>
+<li><p>그 다음 ‘반지름’값을 설정해줍니다. 이 값은 개별의 점 정보 주변에 얼마나 영향을 미치는지 설정할 수 있습니다. 정보유형에 따라서 이 값이 의미하는 바는 다릅니다. 우리가 예제로 사용하고있는 정보에서는,  반경 5km내에서 범죄 사고가 영향을 미친다고 가정합시다. 오른쪽 제일 아래 프로젝트 좌표정보가 <code class="docutils literal notranslate"><span class="pre">EPSG:</span> <span class="pre">3857``인지</span> <span class="pre">확인합니다.</span> <span class="pre">이</span> <span class="pre">좌표계의</span> <span class="pre">기본</span> <span class="pre">단위는</span> <span class="pre">'미터'임으로,</span> <span class="pre">반지름</span> <span class="pre">항목에</span> <span class="pre">&quot;5000&quot;을</span> <span class="pre">입력합니다.</span> <span class="pre">다른</span> <span class="pre">파라미터는</span> <span class="pre">`Kernel</span> <span class="pre">shape`인데</span> <span class="pre">숨겨져있는</span> <span class="pre">항목입니다.</span> <span class="pre">이것은</span> <span class="pre">주어진</span> <span class="pre">반지름에</span> <span class="pre">대해서</span> <span class="pre">얼만큼</span> <span class="pre">퍼져나갈지</span> <span class="pre">결정하는</span> <span class="pre">함수값입니다.</span> <span class="pre">열지도</span> <span class="pre">렌더링은</span> <span class="pre">&quot;4차&quot;함수를</span> <span class="pre">계산식에서</span> <span class="pre">사용합니다.</span> <span class="pre">Kernel</span> <span class="pre">모양은</span> <span class="pre">보통</span> <span class="pre">``Triangular</span></code>, <code class="docutils literal notranslate"><span class="pre">Uniform</span></code>, <a href="#id1"><span class="problematic" id="id2">``</span></a>Triweight” 그리고 <a href="#id3"><span class="problematic" id="id4">`</span></a>Epanechnikov``의 형태의 함수를 사용하기도 합니다. ‘&lt;<a class="reference external" href="https://www.geodose.com/2017/11/qgis-heatmap-using-kernel-density.html">https://www.geodose.com/2017/11/qgis-heatmap-using-kernel-density.html</a>&gt;’ 이곳에서 열지도와 Kernel shape에 따른 적절한 반지름값 정보를 더 확인하실 수 있습니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/88.png" class="align-center" src="../../_images/88.png" />
@@ -339,19 +340,19 @@
 <div><img alt="../../_images/98.png" class="align-center" src="../../_images/98.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>여러종류의 분석에서, 점의 밀도를 고려하는 것만으로도 충분합니다. 하지만 가끔씩, 개별 점에 대해서 중요도를 다르게 주고 싶을 때도 있습니다. 열지도에서 강도사건보다 더 심각한 범죄가 영향이 크다는 것을 설정할수 있습니다. 한 지역의 점의 정보는 다양하게 분석될 수 있습니다. 이렇게, 개별 점 정보를 <a href="#id1"><span class="problematic" id="id2">**</span></a>가중치**를 설정하여 다른 의미를 부여해 줄 수 있습니다. 가중치 필드를 생성하여 열지도를 더 발전시켜봅시다. <a href="#id3"><span class="problematic" id="id4">``</span></a>2019-02-surrey-street``레이어를 오른쪽 클릭 후 〈속성 테이블 열기’를 합니다.</p></li>
+<li><p>여러종류의 분석에서, 점의 밀도를 고려하는 것만으로도 충분합니다. 하지만 가끔씩, 개별 점에 대해서 중요도를 다르게 주고 싶을 때도 있습니다. 열지도에서 강도사건보다 더 심각한 범죄가 영향이 크다는 것을 설정할수 있습니다. 한 지역의 점의 정보는 다양하게 분석될 수 있습니다. 이렇게, 개별 점 정보를 <a href="#id1"><span class="problematic" id="id2">**</span></a>가중치**를 설정하여 다른 의미를 부여해 줄 수 있습니다. 가중치 필드를 생성하여 열지도를 더 발전시켜봅시다. <a href="#id3"><span class="problematic" id="id4">``</span></a>2019-02-surrey-street``레이어를 오른쪽 클릭 후 ‘속성 테이블 열기’를 합니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/108.png" class="align-center" src="../../_images/108.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>테이블 필드 중에서 범죄 유형을 구분한 《Crime type》을 확인할 수 있습니다. 다른 범죄 유형에 따라 높은 가중치를 주어 분류해봅시다.</p></li>
+<li><p>테이블 필드 중에서 범죄 유형을 구분한 “Crime type”을 확인할 수 있습니다. 다른 범죄 유형에 따라 높은 가중치를 주어 분류해봅시다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1112.png" class="align-center" src="../../_images/1112.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>〈필드계산기’를 열어봅시다.</p></li>
+<li><p>‘필드계산기’를 열어봅시다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/129.png" class="align-center" src="../../_images/129.png" />
@@ -376,7 +377,7 @@ END
 <div><img alt="../../_images/147.png" class="align-center" src="../../_images/147.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>레이어 스타일 패널에 돌아가서, 가중치 부여 항목에서 《weight》를 설정해줍니다.</p></li>
+<li><p>레이어 스타일 패널에 돌아가서, 가중치 부여 항목에서 “weight”를 설정해줍니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/157.png" class="align-center" src="../../_images/157.png" />
@@ -400,7 +401,7 @@ END
 <div><img alt="../../_images/185.png" class="align-center" src="../../_images/185.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li><p>레이어 재투영에서 〈좌표계 선택’을 눌러준 후 <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code> 이 좌표계를 설정합니다. 이 좌표계는 영국과 알맞은 좌표계입니다. 확인을 누릅니다.</p></li>
+<li><p>레이어 재투영에서 ‘좌표계 선택’을 눌러준 후 <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code> 이 좌표계를 설정합니다. 이 좌표계는 영국과 알맞은 좌표계입니다. 확인을 누릅니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/195.png" class="align-center" src="../../_images/195.png" />
@@ -412,39 +413,39 @@ END
 <div><img alt="../../_images/204.png" class="align-center" src="../../_images/204.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li><p>공간처리툴박스에서 〈보간법 –&gt; 열지도(커널 밀집도 평가)〉를 누릅니다.</p></li>
+<li><p>공간처리툴박스에서 ‘보간법 –&gt; 열지도(커널 밀집도 평가)’를 누릅니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2110.png" class="align-center" src="../../_images/2110.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li><p>열지도(커널 밀집도 평가) 창에서, 앞에서 진행해왔던 정보값을 동일하게 적용할 것입니다. 반지름은 5000 미터로 설정한 후, 가중치 부여는 《weight》 항목을 설정하고 X,Y의 픽셀 크기는 50미터로 설정합니다. 그리고 Kernel shape는 4차로 설정한 후 확인합니다.</p></li>
+<li><p>열지도(커널 밀집도 평가) 창에서, 앞에서 진행해왔던 정보값을 동일하게 적용할 것입니다. 반지름은 5000 미터로 설정한 후, 가중치 부여는 “weight” 항목을 설정하고 X,Y의 픽셀 크기는 50미터로 설정합니다. 그리고 Kernel shape는 4차로 설정한 후 확인합니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/225.png" class="align-center" src="../../_images/225.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>〈필드값을 반지름으로’라는 항목은 각 개별 점에 대해서 다양한 반지름 값을 부여할 경우 사용합니다. 〈가중치 부여’와 함께 사용하여 얼마나 개별 점이 영향을 주는지 사용할 수 있습니다.</p>
+<p>‘필드값을 반지름으로’라는 항목은 각 개별 점에 대해서 다양한 반지름 값을 부여할 경우 사용합니다. ‘가중치 부여’와 함께 사용하여 얼마나 개별 점이 영향을 주는지 사용할 수 있습니다.</p>
 </div>
 <ol class="arabic simple" start="23">
-<li><p>과정이 끝났다면, 새로운 레스터 레이어가 《결과물》로 나타나있을 것입니다. 기본으로 설정되어 표시되는 시각자료는 〈단일 밴드 그레이’로 매우 멋스럽지 못합니다. 레스터 스타일 패널을 들어가줍시다.</p></li>
+<li><p>과정이 끝났다면, 새로운 레스터 레이어가 “결과물”로 나타나있을 것입니다. 기본으로 설정되어 표시되는 시각자료는 ‘단일 밴드 그레이’로 매우 멋스럽지 못합니다. 레스터 스타일 패널을 들어가줍시다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/233.png" class="align-center" src="../../_images/233.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li><p>《단일 밴드 유사색상》으로 변경해준 후 《Reds》로 색상도를 변경합니다. 이제 레이어가 앞에서 했었던 열지도 시각화처럼 보이네요.</p></li>
+<li><p>“단일 밴드 유사색상”으로 변경해준 후 “Reds”로 색상도를 변경합니다. 이제 레이어가 앞에서 했었던 열지도 시각화처럼 보이네요.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/244.png" class="align-center" src="../../_images/244.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>《결과물》레이어는 <a href="#id1"><span class="problematic" id="id2">``</span></a>2019-02-surrey-street``레이어와 다릅니다. 열지도 렌더링에서 열지도 레이어를 표현 시 문제점은 범례를 사용할 수 없습니다. 범례를 사용하여 열지도를 표현하고 싶다면,  범례를 추가하여 〈새 조판만들기’를 하십시오. 레스터로 만들어진 열지도 만들기는 이러한 경우에 사용할 수 있습니다.</p>
+<p>“결과물”레이어는 <a href="#id1"><span class="problematic" id="id2">``</span></a>2019-02-surrey-street``레이어와 다릅니다. 열지도 렌더링에서 열지도 레이어를 표현 시 문제점은 범례를 사용할 수 없습니다. 범례를 사용하여 열지도를 표현하고 싶다면,  범례를 추가하여 ‘새 조판만들기’를 하십시오. 레스터로 만들어진 열지도 만들기는 이러한 경우에 사용할 수 있습니다.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -469,7 +470,7 @@ END
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       최종 업데이트: 5월 20, 2021<br/>
-      <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 버전으로 생성되었습니다.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

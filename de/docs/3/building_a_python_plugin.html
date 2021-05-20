@@ -3,11 +3,12 @@
 <html lang="de">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Ein Python Plugin erstellen (QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -262,20 +263,20 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="building-a-python-plugin-qgis3">
+  <section id="building-a-python-plugin-qgis3">
 <h1>Ein Python Plugin erstellen (QGIS3)<a class="headerlink" href="#building-a-python-plugin-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
 <p>Erweiterungen sind ein großartiger Weg, um die Funktionalität von QGIS zu erweitern. Man kann mit Python Erweiterungen schreiben, die einen einfachen Knopf hinzufügen oder auch ausgefeilte Werkzeuge erstellen. Diese Anleitung umreißt den Ablauf zum Aufsetzen der Entwicklungsumgebung, zum Entwurf einer Benutzeroberfläche der Erweiterung und zum Schreiben von Programmcode zur Interaktion mit QGIS. Um sich mit den Grundlagen vertraut zu machen, ist es sinnvoll sich noch einmal folgende Anleitung anzusehen: <a class="reference internal" href="getting_started_with_pyqgis.html"><span class="doc">Mit der Pythonprogrammierung loslegen (QGIS3)</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
 <p>If you are building a new plugin, I strongly recommend building a Processing Plugin instead of the GUI plugin described in this tutorial. See  <a class="reference internal" href="processing_python_plugin.html"><span class="doc">Ein Verarbeitungsplugin erstellen (QGIS3)</span></a> for details.</p>
 </div>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Wir werden ein einfaches Plugin mit dem Namen <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code> erstellen, das es dem Nutzer erlaubt, einen Vektor-Layer auszuwählen und seine Attribute in einer CSV-Datei zu sichern.</p>
-</div>
-<div class="section" id="get-the-tools">
+</section>
+<section id="get-the-tools">
 <h2>Die Werkzeuge beschaffen<a class="headerlink" href="#get-the-tools" title="Link zu dieser Überschrift">¶</a></h2>
-<div class="section" id="qt-creator">
+<section id="qt-creator">
 <h3>Qt Creator<a class="headerlink" href="#qt-creator" title="Link zu dieser Überschrift">¶</a></h3>
 <p><a class="reference external" href="http://www.qt.io/">Qt</a> ist ein Anwendungsframework, das zur Entwicklung von Anwendungen unter Windows, Mac, Linux und verschiedenen mobilen Betriebssystemen genutzt wird. QGIS selbst wird unter Nutzung des Qt-Frameworks entwickelt. Bei der Entwicklung unserer Erweiterung werden wir zur Gestaltung der Benutzerschnittstelle eine Anwendung mit dem Namen <a class="reference external" href="https://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Creator</a> verwenden.</p>
 <p>Lade Qt Creator von folgender Adresse herunter <a class="reference external" href="https://www.qt.io/offline-installers">Qt Offline Installers</a> und installiere es. Denke daran <strong>Qt Creator</strong> unter download auszuwählen. Beachte, dass du ein freies Qt Konto vor der Installation erstellen musst.</p>
@@ -284,8 +285,8 @@
 <p>Die Installationsverwaltung für Windows OSGeo4w enthält eine Kopie von  <strong>Qt Designer</strong>, einer vereinfachten Version von <strong>Qt Creator</strong>, die perfekt zur Erstellung von Erweiterungen geeignet ist. Wenn man QT Designer von <span class="menuselection">C:\OSGeo4W64\bin\qgis-designer</span> verwendet, muss man Qt Creator nicht herunterladen.</p>
 </div>
 <img alt="../../_images/setup1.png" class="align-center" src="../../_images/setup1.png" />
-</div>
-<div class="section" id="python-bindings-for-qt">
+</section>
+<section id="python-bindings-for-qt">
 <h3>Python Bindings für Qt<a class="headerlink" href="#python-bindings-for-qt" title="Link zu dieser Überschrift">¶</a></h3>
 <p>Da wir die Erweiterung in Python entwickeln, benötigen wir die Python Bindings für Qt. Das Verfahren zur Installation der Bindings hängt von der verwendeten Plattform ab. Um Erweiterungen zu erstellen, benötigen wir das Kommandozeilentool <code class="docutils literal notranslate"><span class="pre">pyrcc5</span></code>.</p>
 <p><strong>Windows</strong></p>
@@ -317,8 +318,8 @@ pyrcc5 -o resources.py resources.qrc
 <p class="admonition-title">Bemerkung</p>
 <p>Unter Umständen wurde das Paket schon vorher mit QGIS installiert.</p>
 </div>
-</div>
-<div class="section" id="a-text-editor-or-a-python-ide">
+</section>
+<section id="a-text-editor-or-a-python-ide">
 <h3>Ein Texteditor oder eine Python IDE<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Link zu dieser Überschrift">¶</a></h3>
 <p>Jede Art von Softwareentwicklung erfordert einen guten Texteditor. Wenn man schon einen Lieblingstexteditor oder eine IDE (Integrated Development Environment - Softwareentwicklungsumgebung) hat, kann man sie hier verwenden. Ansonsten bieten alle Plattformen eine Vielzahl  an freien oder kommerziellen Möglichkeiten für einen Texteditor. Wähle den Editor entsprechend deiner Erfordernisse aus.</p>
 <p>In dieser Anleitung wird der Editor Notepad++ für Windows verwendet.</p>
@@ -328,21 +329,21 @@ pyrcc5 -o resources.py resources.qrc
 <p class="admonition-title">Bemerkung</p>
 <p>Wenn man Notepad++ verwendet, muss man darauf achten, dass unter <span class="menuselection">Einstellungen ‣ Optionen ‣ Tabulator Einstellungen</span> die Einstellung <span class="guilabel">Durch Leerzeichen ersetzen</span> gewählt ist. Python ist sehr  empfindlich bezüglich Leerzeichen und diese Einstellung stellt sicher, dass Tabulator und Leerzeichen richtig ausgewertet werden.</p>
 </div>
-</div>
-<div class="section" id="plugin-builder-plugin">
+</section>
+<section id="plugin-builder-plugin">
 <h3>Plugin Builder Erweiterung<a class="headerlink" href="#plugin-builder-plugin" title="Link zu dieser Überschrift">¶</a></h3>
 <p>Es gibt eine nützliche QGIS Erweiterung <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>, die alle notwendigen Dateien und  eine Vorlage des Programmcodes für die Erweiterung erstellt. Finde und installiere die Erweiterung <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>. Unter <a class="reference internal" href="../using_plugins.html"><span class="doc">Verwenden von Erweiterungen</span></a> findet man weitere Details zur Installation von Erweiterungen.</p>
-</div>
-<div class="section" id="plugins-reloader-plugin">
+</section>
+<section id="plugins-reloader-plugin">
 <h3>Plugins Reloader Erweiterung<a class="headerlink" href="#plugins-reloader-plugin" title="Link zu dieser Überschrift">¶</a></h3>
 <p>Dies ist eine andere Erweiterung, die die schrittweise Entwicklung von Erweiterungen ermöglicht. Mit Hilfe dieser Erweiterung kann man den Programmcode der Erweiterung ändern und die Auswirkung in QGIS sehen, ohne QGIS jedes Mal neu starten zu müssen. Finde und installiere die Erweiterung <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Reloader</span></code>. Unter <a class="reference internal" href="../using_plugins.html"><span class="doc">Verwenden von Erweiterungen</span></a> findet man weitere Details zur Installation von Erweiterungen.</p>
 <div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
 <p>Plugin Reloader ist eine experimentelle Erweiterung. Man muss die Einstellung <span class="guilabel">Auch experimentelle Erweiterungen anzeigen</span> unter <span class="guilabel">Erweiterungen</span> zu aktivieren.</p>
 </div>
-</div>
-</div>
-<div class="section" id="procedure">
+</section>
+</section>
+<section id="procedure">
 <h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Öffne QGIS. Gehe zu <span class="menuselection">Erweiterungen ‣ Plugin Builder ‣ Plugin Builder</span>.</p></li>
@@ -843,8 +844,8 @@ pyrcc5 -o resources.py resources.qrc
             <span class="n">level</span><span class="o">=</span><span class="n">Qgis</span><span class="o">.</span><span class="n">Success</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -869,7 +870,7 @@ pyrcc5 -o resources.py resources.qrc
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Zuletzt aktualisiert am Mai 20, 2021.<br/>
-      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 erstellt.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

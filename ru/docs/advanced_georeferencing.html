@@ -3,11 +3,12 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Привязка аэрофотоснимков &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,17 +253,17 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="georeferencing-aerial-imagery">
+  <section id="georeferencing-aerial-imagery">
 <h1>Привязка аэрофотоснимков<a class="headerlink" href="#georeferencing-aerial-imagery" title="Ссылка на этот заголовок">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Предупреждение</p>
 <p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/advanced_georeferencing.html"><span class="doc">Пространственная привязка космических снимков (QGIS3)</span></a></p>
 </div>
 <p>В учебнике <span class="xref std std-doc">Основы Привязки</span> мы рассмотрели основной процесс географической привязки в QGIS. Этот метод включает чтение координат с Вашей отсканированной карты и его ручной ввод. Но часто у Вас не будет координат на карте, либо Вы захотите привязать изображение. В этом случае Вы можете использовать другой источник привязки в качестве входных данных. В этом уроке Вы узнаете, как использовать существующие открытые источники данных в процессе привязки.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Обзор задачи<a class="headerlink" href="#overview-of-the-task" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Мы привяжем воздушный снимок высокого разрешения к местоположению, используя опорные координаты из OpenStreetMap.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Вы научитесь также<a class="headerlink" href="#other-skills-you-will-learn" title="Ссылка на этот заголовок">¶</a></h3>
 <ul class="simple">
 <li><p>загружать общедоступные снимки с очень высоким разрешением;</p></li>
@@ -271,16 +272,16 @@
 <li><p>использовать существующий слой с геопривязкой для добавления опорных точек;</p></li>
 <li><p>устанавливать пользовательское пустое значение для слоя.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Получение данных<a class="headerlink" href="#get-the-data" title="Ссылка на этот заголовок">¶</a></h2>
 <p>В этом уроке мы будем использовать великолепные снимки с воздушных змеев и шаров, сделанных <a class="reference external" href="http://publiclaboratory.org/archive">Общественной лабораторией</a>. Они также делают привязанные версии изображений, но мы возьмём непривязанное JPG изображение и пройдём процесс привязки в QGIS. Если вам нравятся предоставленные снимки, вы можете <a class="reference external" href="http://google-latlong.blogspot.in/2012/04/balloon-and-kite-imagery-in-google.html">посмотреть больше снимков</a> в Google Планета Земля.</p>
 <p>Загрузите JPG изображение <a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">Вашингтон-Сквер-парка в Нью-Йорке</a>. Вы можете щелкнуть правой кнопкой мыши на кнопке JPG и выбрать <span class="guilabel">Сохранить ссылку как…</span>.</p>
 <p>Для удобства, вы можете скачать копию набора данных по этой ссылке:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>Методика<a class="headerlink" href="#procedure" title="Ссылка на этот заголовок">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Для этого урока мы будем использовать слой OpenStreetMap в качестве опорного слоя. Установите модуль OpenLayers из меню <span class="menuselection">Модули ‣ Управление модулями…</span>. См. <a class="reference internal" href="using_plugins.html"><span class="doc">Использование модулей расширения</span></a> для получения дополнительной информации об использовании модулей в QGIS.</p></li>
@@ -307,7 +308,7 @@
 </div>
 <img alt="../_images/536.png" class="align-center" src="../_images/536.png" />
 <ol class="arabic simple" start="6">
-<li><p>После того, как вы убедились, что инструмент cs2cs существует в вашей системе, пора конвертировать широту и долготу в координаты Mercator. Для работы этого инструмента вам нужно указать <span class="guilabel">исходную</span> и <span class="guilabel">целевую</span> СОК. СОК может быть записана как <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">строка PROJ4</a> или <a class="reference external" href="http://www.epsg-registry.org/">EPSG код</a>. Так как мы уже знаем код EPSG для наших СОК, мы будем использовать второй вариант. Самый простой способ использовать инструмент - ввести координаты прямо в командную строку. Обратите внимание, что инструмент принимает координаты в порядке <cite>XY</cite>, поэтому мы должны ввести <cite>Долготу Широту</cite>. Введите следующую команду в терминале и нажмите Ввод. Обратите внимание, что мы должны избегать кавычки («) и обратную косую черту (\). После того, как Вы нажмёте Ввод, Вы увидите, как cs2cs обработает координаты и выдаст координаты в СОК EPSG 3857.</p></li>
+<li><p>После того, как вы убедились, что инструмент cs2cs существует в вашей системе, пора конвертировать широту и долготу в координаты Mercator. Для работы этого инструмента вам нужно указать <span class="guilabel">исходную</span> и <span class="guilabel">целевую</span> СОК. СОК может быть записана как <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">строка PROJ4</a> или <a class="reference external" href="http://www.epsg-registry.org/">EPSG код</a>. Так как мы уже знаем код EPSG для наших СОК, мы будем использовать второй вариант. Самый простой способ использовать инструмент - ввести координаты прямо в командную строку. Обратите внимание, что инструмент принимает координаты в порядке <cite>XY</cite>, поэтому мы должны ввести <cite>Долготу Широту</cite>. Введите следующую команду в терминале и нажмите Ввод. Обратите внимание, что мы должны избегать кавычки (») и обратную косую черту (\). После того, как Вы нажмёте Ввод, Вы увидите, как cs2cs обработает координаты и выдаст координаты в СОК EPSG 3857.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo &quot;-73d59&#39;51\&quot; 40d43&#39;51\&quot;&quot; | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 
@@ -371,8 +372,8 @@
 <li><p>Теперь Вы будете видеть ваше геопривязанное изображение поверх основного слоя.</p></li>
 </ol>
 <img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -397,7 +398,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Обновлено: мая 20, 2021.<br/>
-      Создано с помощью <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

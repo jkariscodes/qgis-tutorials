@@ -3,11 +3,12 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>항공사진 지오레퍼런싱 (QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -262,33 +263,33 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="georeferencing-aerial-imagery-qgis3">
-<h1>항공사진 지오레퍼런싱 (QGIS3)<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="제목 주소">¶</a></h1>
+  <section id="georeferencing-aerial-imagery-qgis3">
+<h1>항공사진 지오레퍼런싱 (QGIS3)<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <p>QGIS 예제 :doc:<a href="#id1"><span class="problematic" id="id2">`</span></a>Georeferencing Topo Sheets and Scanned Maps`에서 지오레퍼런시 기본 과정을 살펴보았습니다. 거기서는 스캔된 지도에서 좌표를 읽어내고 수작업으로 좌표를 입력하는 방법이 포함되어 있습니다. 많은 경우 지도에 인쇄된 좌표가 없음에도 이미지에 지오레퍼런싱을 합니다. 그 경우 다른 지오레퍼런스 자료를 입력자료로 사용할 수 있습니다. 이 예제에서는 지오레퍼런싱 과정에서 기존의 오픈 데이터 소스를 어떻게 사용하는 지를 배우게 될 것입니다.</p>
-<div class="section" id="overview-of-the-task">
-<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>풍선을 이용해 찍은 고화질 영상을 오픈스트리트맵의 레퍼런스 좌표를 이용하여 지오레퍼런스합니다.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>배워야 할 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>배워야 할 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="이 표제에 대한 퍼머링크">¶</a></h3>
 <ul class="simple">
 <li><p>초고화질 공공 도메인 영상을 다운로드합니다.</p></li>
 <li><p>XYZ 타일 레이어를 베이스맵으로 활용하기</p></li>
 <li><p>QGIS에서 OSM 장소 검색 플러그인을 사용합니다.</p></li>
 <li><p>데이터값이 없는 레이어를 세팅 합니다.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>이 튜토리얼에서는`The Public Laboratory &lt;<a class="reference external" href="http://publiclaboratory.org/archive">http://publiclaboratory.org/archive</a>&gt;`_에서 수집 한 연과 풍선으로 찍은 사진을 사용합니다. 그것들은  지리 참조 버전의 사진을 사용할 수있게 만들지 만, 지리 참조되지 않은 JPG 이미지를 다운로드하여 QGIS에서 지리 참조 프로세스를 진행합니다.</p>
 <p>뉴욕의 워싱턴 스퀘어 파크 <a href="#id1"><span class="problematic" id="id2">`</span></a>Washington Square Park, New York &lt;<a class="reference external" href="http://">http://</a> publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01&gt;`_의 JPG 이미지를 다운로드합니다. 마우스 오른쪽 버튼을 클릭하여 JPG버튼을 클릭하고 다른 링크로 저장  :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>Save link as…`을 선택합니다.</p>
 <p>아래링크를 통해 편리하게 데이터 세트를 내려받을 수 있습니다.</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
-</div>
-<div class="section" id="procedure">
-<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>과정<a class="headerlink" href="#procedure" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <ol class="arabic simple">
-<li><p>OpenStreetMap의베이스 맵을 사용하여 지리 참조를위한 좌표를 캡처합니다. QGIS3는 타일 레이어를 기본적으로 지원합니다. x, y 좌표 격자의 각 확대 / 축소 수준 (z)에 대해 개별 맵 타일을 사용하여 만들어 지므로 일반적으로 〈XYZ’레이어라고합니다. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>브라우저 패널`의 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>XYZ Tiles 아래에서``OpenStreetMap 〈〉레이어를 찾을 수 있습니다. 레이어를 기본 캔버스로 드래그하십시오. 일단로드되면 오른쪽 아래 코더에서이 레이어의 좌표계 (CRS)를 확인하십시오. <a href="#id5"><span class="problematic" id="id6">``</span></a>EPSG 3857 Pseudo Mercator 〈〉로 설정되어 있습니다. 지리 참조 중에이 레이어에서 추론하는 좌표가이 CRS에 있기 때문에 이것은 중요합니다.</p></li>
+<li><p>OpenStreetMap의베이스 맵을 사용하여 지리 참조를위한 좌표를 캡처합니다. QGIS3는 타일 레이어를 기본적으로 지원합니다. x, y 좌표 격자의 각 확대 / 축소 수준 (z)에 대해 개별 맵 타일을 사용하여 만들어 지므로 일반적으로 ‘XYZ’레이어라고합니다. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>브라우저 패널`의 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>XYZ Tiles 아래에서``OpenStreetMap ‘’레이어를 찾을 수 있습니다. 레이어를 기본 캔버스로 드래그하십시오. 일단로드되면 오른쪽 아래 코더에서이 레이어의 좌표계 (CRS)를 확인하십시오. <a href="#id5"><span class="problematic" id="id6">``</span></a>EPSG 3857 Pseudo Mercator ‘’로 설정되어 있습니다. 지리 참조 중에이 레이어에서 추론하는 좌표가이 CRS에 있기 때문에 이것은 중요합니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
@@ -298,13 +299,13 @@
 <p>XYZ 레이어 및 QGIS에 다른베이스 맵을 추가하는 방법에 대한 자세한 내용은`이 페이지 &lt;<a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/</a>&gt;`_를 참조하십시오.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>우리가 지리 참조하는 이미지는``Washington Square Park, New York 〈〉입니다. 지도에서이 공원을 확대 / 축소 / 확대 할 수 있습니다. 그러나 이는 성가 시며 실용적이지 않을 수 있습니다. 더 쉬운 방법은 OSM (OpenStreetMap) 장소 검색 플러그인을 사용하여 정확한 위치를 검색하는 것입니다. : menuselection :<cite>Plugins-&gt; 플러그인 관리 및 설치-&gt; All에서``OSM Place Search 〈〉플러그인을 설치하십시오. 검색 결과에이 플러그인이 보이지 않으면 : guilabel :`Settings</cite> 아래에서 : guilabel :<cite>또한 실험용 플러그인 표시`를 선택했는지 확인하십시오. QGIS에서 플러그인 사용에 대한 자세한 내용은 : doc :</cite>../ using_plugins`를 참조하십시오.</p></li>
+<li><p>우리가 지리 참조하는 이미지는``Washington Square Park, New York ‘’입니다. 지도에서이 공원을 확대 / 축소 / 확대 할 수 있습니다. 그러나 이는 성가 시며 실용적이지 않을 수 있습니다. 더 쉬운 방법은 OSM (OpenStreetMap) 장소 검색 플러그인을 사용하여 정확한 위치를 검색하는 것입니다. : menuselection :<cite>Plugins-&gt; 플러그인 관리 및 설치-&gt; All에서``OSM Place Search ‘’플러그인을 설치하십시오. 검색 결과에이 플러그인이 보이지 않으면 : guilabel :`Settings</cite> 아래에서 : guilabel :<cite>또한 실험용 플러그인 표시`를 선택했는지 확인하십시오. QGIS에서 플러그인 사용에 대한 자세한 내용은 : doc :</cite>../ using_plugins`를 참조하십시오.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>플러그인이 설치되면 : guilabel :<cite>OSM Place Search …`라는 새 패널이 표시됩니다. : guilabel :`Name contains..</cite> 상자에서``Washington Square Park 〈〉를 검색하고 : guilabel :<cite>-&gt;`를 클릭하십시오. 일치하는 장소 이름이 결과 패널에 나타납니다. 올바른 결과를 선택하고 : guilabel :`Zoom</cite> 버튼을 클릭하십시오.</p></li>
+<li><p>플러그인이 설치되면 : guilabel :<cite>OSM Place Search …`라는 새 패널이 표시됩니다. : guilabel :`Name contains..</cite> 상자에서``Washington Square Park ‘’를 검색하고 : guilabel :<cite>-&gt;`를 클릭하십시오. 일치하는 장소 이름이 결과 패널에 나타납니다. 올바른 결과를 선택하고 : guilabel :`Zoom</cite> 버튼을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/3.png" class="align-center" src="../../_images/3.png" />
@@ -340,7 +341,7 @@
 <div><img alt="../../_images/8.png" class="align-center" src="../../_images/8.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>: guilabel :<cite>Transformation settings</cite> 대화 상자에서 : guilabel :<cite>Transformation type`을``Polynomial 2 〈〉로 선택하십시오. 서로 다른 트랜스 포메이션 유형과 사용법에 대해서는 QGIS 설명서 &lt;https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms&gt;`_를 참조하십시오. 앞에서 언급했듯이베이스 맵은``EPSG 3857 Pseudo Mercator 〈〉CRS에 있으므로 : guilabel :`Target CRS`로 설정하십시오. : guilabel :`Output raster</cite> 이름을 기본값으로두고 : guilabel :<cite>Compression`으로``LZW 〈〉를 선택할 수 있습니다. : guilabel :`필요한 경우 투명도를 0으로 설정하십시오 〈를 확인하십시오. : guilabel :`로드시 QGIS에로드`옵션이 선택되어 있는지 확인하십시오. 클릭 : guilabel :`OK</cite>.</p></li>
+<li><p>: guilabel :<cite>Transformation settings</cite> 대화 상자에서 : guilabel :<cite>Transformation type`을``Polynomial 2 ‘’로 선택하십시오. 서로 다른 트랜스 포메이션 유형과 사용법에 대해서는 QGIS 설명서 &lt;https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms&gt;`_를 참조하십시오. 앞에서 언급했듯이베이스 맵은``EPSG 3857 Pseudo Mercator ‘’CRS에 있으므로 : guilabel :`Target CRS`로 설정하십시오. : guilabel :`Output raster</cite> 이름을 기본값으로두고 : guilabel :<cite>Compression`으로``LZW ‘’를 선택할 수 있습니다. : guilabel :`필요한 경우 투명도를 0으로 설정하십시오 ‘를 확인하십시오. : guilabel :`로드시 QGIS에로드`옵션이 선택되어 있는지 확인하십시오. 클릭 : guilabel :`OK</cite>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/9.png" class="align-center" src="../../_images/9.png" />
@@ -368,7 +369,7 @@
 <p>팁 : 건물에서 GCP를 선택할 때는 항상 건물의 바닥을 선택하십시오. 많은 항공 및 위성 이미지에는 건물이 기울어 져 있으므로 옥상에서 지점을 선택하면 오류가 발생합니다.</p>
 </div>
 <ol class="arabic simple" start="13">
-<li><p>변환에 필요한 최소 포인트 수를 추가하면 GCP에 0이 아닌``dX 〈〉,``dY 〈〉및``잔여 〈〉오류 값이 있음을 알 수 있습니다. 특정 GCP의 오류 값이 비정상적으로 높은 경우 이는 일반적으로 좌표 값을 입력 할 때 발생하는 인적 오류를 의미합니다. 따라서 해당 GCP를 삭제하고 다시 캡처 할 수 있습니다.</p></li>
+<li><p>변환에 필요한 최소 포인트 수를 추가하면 GCP에 0이 아닌``dX ‘’,``dY ‘’및``잔여 ‘’오류 값이 있음을 알 수 있습니다. 특정 GCP의 오류 값이 비정상적으로 높은 경우 이는 일반적으로 좌표 값을 입력 할 때 발생하는 인적 오류를 의미합니다. 따라서 해당 GCP를 삭제하고 다시 캡처 할 수 있습니다.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
@@ -392,7 +393,7 @@
 <div><img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>: guilabel :<cite>Transparency</cite> 탭으로 전환하십시오. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Additional no data value`로``255 〈〉를 추가하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p></li>
+<li><p>: guilabel :<cite>Transparency</cite> 탭으로 전환하십시오. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Additional no data value`로``255 ‘’를 추가하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
@@ -407,8 +408,8 @@
 <blockquote>
 <div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -433,7 +434,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       최종 업데이트: 5월 20, 2021<br/>
-      <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 버전으로 생성되었습니다.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

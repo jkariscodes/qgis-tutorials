@@ -3,11 +3,12 @@
 <html lang="de">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Ein Verarbeitungsplugin erstellen (QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -262,16 +263,16 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="building-a-processing-plugin-qgis3">
+  <section id="building-a-processing-plugin-qgis3">
 <h1>Ein Verarbeitungsplugin erstellen (QGIS3)<a class="headerlink" href="#building-a-processing-plugin-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
 <p>Im letzten Tutorial <a class="reference internal" href="building_a_python_plugin.html"><span class="doc">Ein Python Plugin erstellen (QGIS3)</span></a> haben wir die Erstellung eines Python Plugins erlernt. Wir haben eine Nutzerschnittstelle erstellt und angepassten Code zur Verarbeitung der Daten verwendet. Obwohl diese Art von Plugins nützlich sind, fällt für den Autor die Last der Erstellung der Benutzerschnittstelle an. Es kann für den Nutzer verwirrend sein, da sich der Aufbau der Plugins immer unterscheiden kann. Außerdem interagieren normale Plugins nicht mit anderen Teilen von QGIS. So kann man z.B. die Plugin-Funktionalität von anderen Algorithmen nicht nutzen. Wenn z.B. das Plugin, das wir erstellen wollen vorrangig zu Analysezwecken gedacht ist und die Benutzerschnittstelle nur aus der Wahl von Eingabe- und Ausgabedatei besteht, gibt es einen einfacheren und vorzuziehenden Weg der Erstellung eines Plugins mit Hilfe der Verarbeitungswerkzeuge. Damit entfällt die Erstellung der Benutzerschnittstelle. Die eingebaute Verarbeitungsbibliothek erstellt eine Standardverarbeitungsschnittstelle in Abhängigkeit von den Eingaben, die genauso wie jedes andere Verarbeitungswerkzeug in QGIS aussieht und sich verhält. Das Plugin integriert sich auch nahtlos in die vorhandenen Verarbeitungswerkzeuge. Der Plugin-Algorithmus kann mit der Stapelverarbeitung, der grafischen Modellierung, dem Aufruf aus der Python Konsole usw. verwendet werden.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Wir werden ein einfaches Plugin aus dem Tutorial <a class="reference internal" href="building_a_python_plugin.html"><span class="doc">Ein Python Plugin erstellen (QGIS3)</span></a> als Verarbeitungswerkzeug umfunktionieren. Als Resultat erhalten wir eine neuen Verarbeitungsanbieter <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code> und einen Algorithmus <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code>, der dem Nutzer erlaubt, einen Vektorlayer zu wählen und seine Attribute in eine CSV-Datei zu schreiben.</p>
-</div>
-<div class="section" id="get-the-tools">
+</section>
+<section id="get-the-tools">
 <h2>Die Werkzeuge beschaffen<a class="headerlink" href="#get-the-tools" title="Link zu dieser Überschrift">¶</a></h2>
-<div class="section" id="a-text-editor-or-a-python-ide">
+<section id="a-text-editor-or-a-python-ide">
 <h3>Ein Texteditor oder eine Python IDE<a class="headerlink" href="#a-text-editor-or-a-python-ide" title="Link zu dieser Überschrift">¶</a></h3>
 <p>Jede Art von Softwareentwicklung erfordert einen guten Texteditor. Wenn man schon einen Lieblingstexteditor oder eine IDE (Integrated Development Environment - Softwareentwicklungsumgebung) hat, kann man sie hier verwenden. Ansonsten bieten alle Plattformen eine Vielzahl  an freien oder kommerziellen Möglichkeiten für einen Texteditor. Wähle den Editor entsprechend der Erfordernisse aus.</p>
 <p>In dieser Anleitung wird der Editor Notepad++ für Windows verwendet.</p>
@@ -281,21 +282,21 @@
 <p class="admonition-title">Bemerkung</p>
 <p>Wenn man Notepad++ verwendet, muss man darauf achten, dass unter <span class="menuselection">Einstellungen ‣ Optionen ‣ Tabulator Einstellungen</span> die Einstellung <span class="guilabel">Durch Leerzeichen ersetzen</span> gewählt ist. Python ist sehr  empfindlich bezüglich Leerzeichen und diese Einstellung stellt sicher, dass Tabulator und Leerzeichen richtig ausgewertet werden.</p>
 </div>
-</div>
-<div class="section" id="plugin-builder-plugin">
+</section>
+<section id="plugin-builder-plugin">
 <h3>Plugin Builder Erweiterung<a class="headerlink" href="#plugin-builder-plugin" title="Link zu dieser Überschrift">¶</a></h3>
 <p>Es gibt eine nützliche QGIS Erweiterung <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>, die alle notwendigen Dateien und  eine Vorlage des Programmcodes für die Erweiterung erstellt. Finde und installiere die Erweiterung <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Builder</span></code>. Unter <a class="reference internal" href="../using_plugins.html"><span class="doc">Verwenden von Erweiterungen</span></a> findet man weitere Details zur Installation von Erweiterungen.</p>
-</div>
-<div class="section" id="plugins-reloader-plugin">
+</section>
+<section id="plugins-reloader-plugin">
 <h3>Plugins Reloader plugin<a class="headerlink" href="#plugins-reloader-plugin" title="Link zu dieser Überschrift">¶</a></h3>
 <p>Dies ist eine andere Erweiterung, die die schrittweise Entwicklung von Erweiterungen ermöglicht. Mit Hilfe dieser Erweiterung kann man den Programmcode der Erweiterung ändern und die Auswirkung in QGIS sehen, ohne QGIS jedes Mal neu starten zu müssen. Finde und installiere die Erweiterung <code class="docutils literal notranslate"><span class="pre">Plugin</span> <span class="pre">Reloader</span></code>. Unter <a class="reference internal" href="../using_plugins.html"><span class="doc">Verwenden von Erweiterungen</span></a> findet man weitere Details zur Installation von Erweiterungen.</p>
 <div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
 <p>Plugin Reloader ist eine experimentelle Erweiterung. Man muss die Einstellung <span class="guilabel">Auch experimentelle Erweiterungen anzeigen</span> unter <span class="guilabel">Erweiterungen</span> zu aktivieren.</p>
 </div>
-</div>
-</div>
-<div class="section" id="procedure">
+</section>
+</section>
+<section id="procedure">
 <h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Öffne QGIS. Gehe zu <span class="menuselection">Erweiterungen ‣ Plugin Builder ‣ Plugin Builder</span>.</p></li>
@@ -993,8 +994,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -1019,7 +1020,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Zuletzt aktualisiert am Mai 20, 2021.<br/>
-      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 erstellt.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

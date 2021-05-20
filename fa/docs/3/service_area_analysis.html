@@ -3,11 +3,12 @@
 <html lang="fa">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Service Area Analysis using Openrouteservice (QGIS3) &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -262,30 +263,30 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="service-area-analysis-using-openrouteservice-qgis3">
-<h1>Service Area Analysis using Openrouteservice (QGIS3)<a class="headerlink" href="#service-area-analysis-using-openrouteservice-qgis3" title="لینک ثابت به این سر مقاله">¶</a></h1>
+  <section id="service-area-analysis-using-openrouteservice-qgis3">
+<h1>Service Area Analysis using Openrouteservice (QGIS3)<a class="headerlink" href="#service-area-analysis-using-openrouteservice-qgis3" title="پیوند ثابت به این سر مقاله">¶</a></h1>
 <p>Service area analysis is useful in evaluating accessibility of locations. Given locations of fire stations, hospitals, public transit stations etc. you can use such analysis to identify what areas can be served from these locations by either amount of distance traveled or by time taken. Till recently, such analysis was difficult using open-source tools and data. But now we have access to a global street network using OpenStreetMap (OSM) and free web-services such as Openrouteservice (ORS) that can perform complex routing tasks using OpenStreetMap (OSM) data. In this tutorial, we will use the <strong>ORS Tools Plugin</strong> to perform service area analysis in QGIS.</p>
-<div class="section" id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p>We will use metro rail station data for Kochi, India to determine areas that are within 15-minutes of walking distance.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="پیوند ثابت به این سر مقاله">¶</a></h3>
 <ul class="simple">
 <li><p>How to load General Transit Feed Specification (GTFS) transit feed data in QGIS.</p></li>
 <li><p>How to convert sequential point data to line tracks using the <em>Points to Path</em> tool.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="لینک ثابت به این سر مقاله">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>Get the data<a class="headerlink" href="#get-the-data" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p><a class="reference external" href="https://kochimetro.org">Kochi Metro Rail Limited (KMRL)</a> provides open data for the Kochi Metro Rail Project in <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">Global Transit Feed Specification (GTFS-static)</a> format. Request for data download by visiting the <a class="reference external" href="https://kochimetro.org/open-data/">Open Data</a> page.</p>
 <p>For convenience, you may directly download a copy of the datasets from the
 links below:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/KMRL-Open-Data.zip">KMRL-Open-Data.zip</a></p>
 <p>Data Source <a class="reference internal" href="../credits.html#kmrl" id="id1"><span>[KMRL]</span></a></p>
-</div>
-<div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="لینک ثابت به این سر مقاله">¶</a></h2>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p><a class="reference external" href="https://openrouteservice.org/">Openrouteservice API</a> provides routing algorithms that work on free geographic data from OpenStreetMap. It is a free web-based service that can be accessed via a QGIS plugin. While the service is free, it requires you to sign-up and get an API key. The API key is used to prevent abuse and enforce limits on usage.</p>
 <ol class="arabic simple">
 <li><p>Visit <a class="reference external" href="https://openrouteservice.org/dev/#/signup">Openrouteservice Sign Up</a> page and create an account. Once your account is activated, visit your <a class="reference external" href="https://openrouteservice.org/dev/#/home">Dashboard</a> and request a token. Select <code class="docutils literal notranslate"><span class="pre">Free</span></code> as the <span class="guilabel">Token type</span> and enter <code class="docutils literal notranslate"><span class="pre">ORS</span> <span class="pre">Tools</span> <span class="pre">QGIS</span></code> as the <span class="guilabel">Token name</span>. Click <span class="guilabel">CREATE TOKEN</span>.</p></li>
@@ -317,9 +318,9 @@ links below:</p>
 <blockquote>
 <div><img alt="../../_images/setup5.png" class="align-center" src="../../_images/setup5.png" />
 </div></blockquote>
-</div>
-<div class="section" id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="لینک ثابت به این سر مقاله">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Unzip the downloaded <code class="docutils literal notranslate"><span class="pre">KMRL-Open-Data.zip</span></code> file to a folder on your computer. You will notice that the unzipped directory contains many text files. Each file contains data for a different aspect of the transit system. The format of the files and their uses are described in <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">GTFS Reference</a>. Out of all the files, 2 files contains geospatial data and is of interest to us. The file <code class="docutils literal notranslate"><span class="pre">shapes.txt</span></code> contains points that describe a physical path that the vehicle takes, and the file <code class="docutils literal notranslate"><span class="pre">stops.txt</span></code> contains the location of each transit stop. Both of these are CSV files that can be imported into QGIS. Click the <span class="guilabel">Open Data Source Manager</span> button.</p></li>
 </ol>
@@ -412,8 +413,8 @@ links below:</p>
 <p class="admonition-title">توجه</p>
 <p>This is a simple example of how a service area analysis for a public transportation project can be done in QGIS. A more comprehensive service-area analysis for the metro system would include other modes of transport. We could include feeder buses, nearby bus stops and routes serving those bus stops to expand the analysis. We may also include travel by other modes such as car and taxi.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -437,8 +438,8 @@ links below:</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      . مهٔ 20, 2021  آخرین بروز رسانی در<br/>
-      . <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 ایجاد شده با<br/>
+      آخرین بروز رسانی در مهٔ 20, 2021 .<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

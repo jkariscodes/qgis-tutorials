@@ -3,11 +3,12 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Image aérienne géoréférencée &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,17 +253,17 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="georeferencing-aerial-imagery">
+  <section id="georeferencing-aerial-imagery">
 <h1>Image aérienne géoréférencée<a class="headerlink" href="#georeferencing-aerial-imagery" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
 <p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/advanced_georeferencing.html"><span class="doc">Géoréférencer des images aériennes (QGIS3)</span></a></p>
 </div>
 <p>Dans le tutorial :doc:”georeferencing_basics” nous avons aborde les principes de base du georeferencement dans QGIS. Cette méthode consiste a lire les coordonnées inscrites sur la carte scannée et a les reporter manuellement dans le logiciel. Cependant, dans beaucoup de cas les cartes utilisées ne contiennent pas de coordonnées spatiales. Dans ce cas, il faudra utiliser une autre source de données pour le georeferencement. Ce tutorial vous apprend comment utiliser les sources open data existantes pour mener a bien ce procédé de georeferencement.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Description de l’exercice<a class="headerlink" href="#overview-of-the-task" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Nous allons georeferencer une image haute-resolution en s’appuyant sur les coordonnees d’OpenStreetMap.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Autres compétences abordées<a class="headerlink" href="#other-skills-you-will-learn" title="Lien permanent vers ce titre">¶</a></h3>
 <ul class="simple">
 <li><p>Télécharger des images haute-résolution en accès libre.</p></li>
@@ -271,16 +272,16 @@
 <li><p>Utiliser un calque georeference pour intégrer des point GCP dans l’outil de georeferencement.</p></li>
 <li><p>Définir des valeurs sans donnes pour un calque.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Obtenir les données<a class="headerlink" href="#get-the-data" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Dans ce tutorial nous allons utiliser quelques magnifiques images issues de “The Public Laboratory &lt;<a class="reference external" href="http://publiclaboratory.org/archive">http://publiclaboratory.org/archive</a>&gt;`_. Les versions géolocalisees de leurs images sont aussi disponibles mais nous allons ici télécharger une image non localisée pour effectuer la manipulation dans QGIS. Si vous aimez les images utilisées, vous pouvez les retrouver également sur Google Earth &lt;<a class="reference external" href="http://google-latlong.blogspot.in/2012/04/">http://google-latlong.blogspot.in/2012/04/</a> balloon-and-kite-imagery-in-google.html&gt;`_.</p>
 <p>Téléchargez l’image JPG de “Washington Square Park, New York &lt;<a class="reference external" href="http://">http://</a> publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01&gt;`_. Vous pouvez double-cliquer sur le bouton JPG puis sélectionner <span class="guilabel">Save link as…</span>.</p>
 <p>Par soucis de simplicité, vous pouvez télécharger une copie des jeux de données depuis les liens ci-dessous :</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>Procédure<a class="headerlink" href="#procedure" title="Lien permanent vers ce titre">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Pour ce tutorial pour nous allons utiliser le calque OpenStreetMap en tant que calque de reference. Installez le plugin OpenLayers depuis <span class="menuselection">Plugins ‣ Manage and install plugins ‣ Get more</span>. Voir <a class="reference internal" href="using_plugins.html"><span class="doc">Using Plugins</span></a> pour plus d’informations sur l’utilisation des plgins QGIS.</p></li>
@@ -310,7 +311,7 @@ Si vous êtes sous Windows, ouvrez une fenêtre de commandes et tapez « cs2cs�
 </div>
 <img alt="../_images/536.png" class="align-center" src="../_images/536.png" />
 <ol class="arabic simple" start="6">
-<li><p>Maintenant que vous avez vérifie la présence de l’outil cs2cs dans votre système, il est temps de transformer ces chiffres en coordonnées Mercator. Afin d’utiliser l’outil cs2cs vous devrez spécifier un <span class="guilabel">source</span> et une <span class="guilabel">destination</span> SCR. La définition du SCR peut être un <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 string</a>  ou un <a class="reference external" href="http://www.epsg-registry.org/">EPSG code</a>. Nous allons nous appuyer ici sur le code ESPG que nous connaissons grâce aux données d’entree/sortie du SRC. Le moyen le plus simple est d’inscrire les coordonnes directement dans la ligne de commande. Les coordonnées doivent être inscrites selon l’ordre “X Y”, soit “Longitude Latitude”. Entrez la commande suivante dans la fenêtre puis appuyez sur Entrée. Il est possible de remplacer les guillemets (« ) par un double (\). Après avoir valide avec Entrée, vous verrez apparaitre les coordonnes X Y en ESPG 3857 SRC.</p></li>
+<li><p>Maintenant que vous avez vérifie la présence de l’outil cs2cs dans votre système, il est temps de transformer ces chiffres en coordonnées Mercator. Afin d’utiliser l’outil cs2cs vous devrez spécifier un <span class="guilabel">source</span> et une <span class="guilabel">destination</span> SCR. La définition du SCR peut être un <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 string</a>  ou un <a class="reference external" href="http://www.epsg-registry.org/">EPSG code</a>. Nous allons nous appuyer ici sur le code ESPG que nous connaissons grâce aux données d’entree/sortie du SRC. Le moyen le plus simple est d’inscrire les coordonnes directement dans la ligne de commande. Les coordonnées doivent être inscrites selon l’ordre “X Y”, soit “Longitude Latitude”. Entrez la commande suivante dans la fenêtre puis appuyez sur Entrée. Il est possible de remplacer les guillemets ( ») par un double (\). Après avoir valide avec Entrée, vous verrez apparaitre les coordonnes X Y en ESPG 3857 SRC.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo &quot;-73d59&#39;51\&quot; 40d43&#39;51\&quot;&quot; | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 
@@ -376,8 +377,8 @@ Entrez 0 dans <span class="guilabel">No data value</span>. Aussi, dans <span cla
 <li><p>Votre image est maintenant parfaitement superposée a la couche de base.</p></li>
 </ol>
 <img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -402,7 +403,7 @@ Entrez 0 dans <span class="guilabel">No data value</span>. Aussi, dans <span cla
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Mis à jour le mai 20, 2021.<br/>
-      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

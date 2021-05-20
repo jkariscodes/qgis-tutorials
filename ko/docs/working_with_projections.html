@@ -3,11 +3,12 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>투영 작업 &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,27 +253,27 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="working-with-projections">
-<h1>투영 작업<a class="headerlink" href="#working-with-projections" title="제목 주소">¶</a></h1>
+  <section id="working-with-projections">
+<h1>투영 작업<a class="headerlink" href="#working-with-projections" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">경고</p>
 <p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/working_with_projections.html"><span class="doc">Working with Projections (QGIS3)</span></a></p>
 </div>
 <p>지도 투영법 또는 좌표 참조 시스템 (CRS)- GIS 데이터로 작업 할 때 문제가 많이 발생합니다. 하지만 개념에 대한 충분히 이해하고 올바른 도구를 활용하면 쉽게 투영 작업을 할 수 있습니다. 이번 예제에서는 QGIS에서 투영 작업을 하는 방식을 살펴보고 벡터 및 래스터에 사용할 수 있는 도구, 특히 벡터 및 래스터 데이터를 다시 투영하여 즉시 재투영을 수행하고 투영없이 데이터에 투영을 할당하는 방법에 대해 알아봅니다.</p>
-<div class="section" id="overview-of-the-task">
-<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>이 작업은 QGIS에서 투영 할 데이터에 다른 레이어를 함께 다시 투영하여 오버레이하는 것입니다.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>기타 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>기타 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="이 표제에 대한 퍼머링크">¶</a></h3>
 <ul class="simple">
-<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>.tfw 〈〉파일을 사용하여 래스터를 지리 참조하십시오.</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>.tfw ‘’파일을 사용하여 래스터를 지리 참조하십시오.</p></li>
 <li><p>선택한 피처를 레이어에서 새 레이어로 저장하는 방법.</p></li>
 <li><p>QGIS에서 레이어의 메타 데이터 정보를 보는 방법.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>Natural Earth는 <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/">Admin 0 - Countries</a> 데이터셋을 가지고 있습니다. <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/">countries &lt;http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip&gt;`_를 다운로드 합니다.
 Natural Earth has `Admin 0 - Countries</a> dataset. Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">countries</a></p>
 <p>영국의 Ordnance Survey  &lt;<a class="reference external" href="https://www.ordnancesurvey.co.uk/">https://www.ordnancesurvey.co.uk/</a>&gt;에서는 공개 데이터를 다운로드 할 수 있습니다. &lt;<a class="reference external" href="https://www.ordnancesurvey.co.uk/opendatadownload/products.html">https://www.ordnancesurvey.co.uk/opendatadownload/products.html</a>&gt;에서 영국용 MiniScale 래스터 제품을 다운로드하여 컴퓨터의 폴더에 압축을 푸십시오.</p>
@@ -281,13 +282,13 @@ Natural Earth has `Admin 0 - Countries</a> dataset. Download the <a class="refer
 <p>데이터 세트를 다운로드 하려면 개인 정보를 입력해야 합니다.</p>
 </div>
 <p>손쉽게 데이터셋을 아래 링크로에서 바로 다운로드하실 수 있습니다.</p>
-<p>&lt;<a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip</a>&gt;에서 <a href="#id1"><span class="problematic" id="id2">`</span></a>ne_10m_admin_0_countries.zip 〈을 다운받으십시오.</p>
+<p>&lt;<a class="reference external" href="http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip">http://www.qgistutorials.com/downloads/ne_10m_admin_0_countries.zip</a>&gt;에서 <a href="#id1"><span class="problematic" id="id2">`</span></a>ne_10m_admin_0_countries.zip ‘을 다운받으십시오.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/minisc_gb.zip">minisc_gb.zip</a> (Contains only the files
 required for this tutorial)</p>
 <p>데이터소스: <a class="reference internal" href="credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a> <a class="reference internal" href="credits.html#osopendata" id="id2"><span>[OSOPENDATA]</span></a></p>
-</div>
-<div class="section" id="procedure">
-<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>과정<a class="headerlink" href="#procedure" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <ol class="arabic simple">
 <li><p>GIS를 구동시키고 메뉴 레이어 –&gt; 레이어 추가 –&gt; 벡터 레이어 추가로 갑니다.</p></li>
 </ol>
@@ -305,7 +306,7 @@ required for this tutorial)</p>
 </ol>
 <img alt="../_images/472.png" class="align-center" src="../_images/472.png" />
 <ol class="arabic simple" start="5">
-<li><p>〈레이어 속성 대화 상자’에서 〈메타 데이터 탭’으로 전환하십시오. 〈속성〉 섹션을 펼치십시오. 맨 아래에는 〈레이어 공간 참조 시스템’에 투영에 대한 정의가 표시됩니다. 이 정의는 PROJ.4 형식입니다.  &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/PROJ.4">https://en.wikipedia.org/wiki/PROJ.4</a>&gt;`_.</p></li>
+<li><p>‘레이어 속성 대화 상자’에서 ‘메타 데이터 탭’으로 전환하십시오. ‘속성’ 섹션을 펼치십시오. 맨 아래에는 ‘레이어 공간 참조 시스템’에 투영에 대한 정의가 표시됩니다. 이 정의는 PROJ.4 형식입니다.  &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/PROJ.4">https://en.wikipedia.org/wiki/PROJ.4</a>&gt;`_.</p></li>
 </ol>
 <img alt="../_images/573.png" class="align-center" src="../_images/573.png" />
 <ol class="arabic simple" start="6">
@@ -341,7 +342,7 @@ required for this tutorial)</p>
 </ol>
 <img alt="../_images/1265.png" class="align-center" src="../_images/1265.png" />
 <ol class="arabic simple" start="13">
-<li><p>옵션 대화 상자에서 CRS 탭으로 전환하십시오. 레이어의 CRS가 다른 경우 기본값은 〈즉석에서’자동 투영 재투영입니다. 이는 QGIS가 다른 CRS를 가진 레이어를 로드한 것을 감지하면 자동으로 다시 공통 CRS로 다시 투영하여 서로  정렬되도록 합니다. 확인을 클릭하십시오.</p></li>
+<li><p>옵션 대화 상자에서 CRS 탭으로 전환하십시오. 레이어의 CRS가 다른 경우 기본값은 ‘즉석에서’자동 투영 재투영입니다. 이는 QGIS가 다른 CRS를 가진 레이어를 로드한 것을 감지하면 자동으로 다시 공통 CRS로 다시 투영하여 서로  정렬되도록 합니다. 확인을 클릭하십시오.</p></li>
 </ol>
 <img alt="../_images/1363.png" class="align-center" src="../_images/1363.png" />
 <ol class="arabic simple" start="14">
@@ -349,7 +350,7 @@ required for this tutorial)</p>
 </ol>
 <img alt="../_images/1461.png" class="align-center" src="../_images/1461.png" />
 <ol class="arabic simple" start="15">
-<li><p>프로젝트 속성 다이알로그의 좌표계 <cite>CRS`탭에서 〈실시간〉 좌표계 변환 활성화 `Enable on-the-fly CRS transformation</cite> 옆에 있는 박스를 체크해제 합니다. <a href="#id1"><span class="problematic" id="id2">`</span></a>OK`를 클릭합니다.</p></li>
+<li><p>프로젝트 속성 다이알로그의 좌표계 <cite>CRS`탭에서 ‘실시간’ 좌표계 변환 활성화 `Enable on-the-fly CRS transformation</cite> 옆에 있는 박스를 체크해제 합니다. <a href="#id1"><span class="problematic" id="id2">`</span></a>OK`를 클릭합니다.</p></li>
 </ol>
 <img alt="../_images/1558.png" class="align-center" src="../_images/1558.png" />
 <ol class="arabic simple" start="16">
@@ -361,7 +362,7 @@ different now. Right-click the <code class="docutils literal notranslate"><span 
 </ol>
 <img alt="../_images/1655.png" class="align-center" src="../_images/1655.png" />
 <ol class="arabic simple" start="17">
-<li><p>이제 선택한 투영에 미국이 표시됩니다. ne_10m_admin_0_countries의 요소은 united_states 레이어와 다른 좌표 공간에 있으므로 캔버스에 나타나지 않습니다. 프로젝트 속성 대화 상자로 돌아가서 〈즉석에서’CRS 변환 활성화 옵션을 켭니다. 예제의 나머지 부분은 이 상태에서 진행하겠습니다.</p></li>
+<li><p>이제 선택한 투영에 미국이 표시됩니다. ne_10m_admin_0_countries의 요소은 united_states 레이어와 다른 좌표 공간에 있으므로 캔버스에 나타나지 않습니다. 프로젝트 속성 대화 상자로 돌아가서 ‘즉석에서’CRS 변환 활성화 옵션을 켭니다. 예제의 나머지 부분은 이 상태에서 진행하겠습니다.</p></li>
 </ol>
 <img alt="../_images/1750.png" class="align-center" src="../_images/1750.png" />
 <ol class="arabic simple" start="18">
@@ -393,7 +394,7 @@ Line 6: F: y-coordinate of the center of the upper left pixel
 </ol>
 <img alt="../_images/2233.png" class="align-center" src="../_images/2233.png" />
 <ol class="arabic simple" start="23">
-<li><p>병기 파일은 영국의 National Grid Projection에서 가져온 것입니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>좌표 참조 시스템 선택기 〈〉대화 상자에서``영국 국가 〈〉를 검색하고``OSGB 1936 / 영국 국가 그리드 (EPSG : 27700) 〈〉CRS를 선택하십시오. 〈확인’을 클릭하십시오.</p></li>
+<li><p>병기 파일은 영국의 National Grid Projection에서 가져온 것입니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>좌표 참조 시스템 선택기 ‘’대화 상자에서``영국 국가 ‘’를 검색하고``OSGB 1936 / 영국 국가 그리드 (EPSG : 27700) ‘’CRS를 선택하십시오. ‘확인’을 클릭하십시오.</p></li>
 </ol>
 <img alt="../_images/2330.png" class="align-center" src="../_images/2330.png" />
 <ol class="arabic simple" start="24">
@@ -404,8 +405,8 @@ Line 6: F: y-coordinate of the center of the upper left pixel
 <li><p>이어서 ne_10m_admin_0_countries 벡터 레이어 위에 래스터 레이어가 겹쳐져 있습니다. EPSG : 4326을 사용하여 OTF를 활성화 했으므로 <a href="#id5"><span class="problematic" id="id6">MiniScale_</span></a> (standard) _R17 레이어가 EPSG : 4326으로 동적으로 재 투영되고 다른 레이어와 동일한 좌표 공간에 표시됩니다.</p></li>
 </ol>
 <img alt="../_images/2524.png" class="align-center" src="../_images/2524.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -430,7 +431,7 @@ Line 6: F: y-coordinate of the center of the upper left pixel
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       최종 업데이트: 5월 20, 2021<br/>
-      <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 버전으로 생성되었습니다.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

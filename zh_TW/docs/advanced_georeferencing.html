@@ -3,11 +3,12 @@
 <html lang="zh_TW">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>為空照圖進行空間對位 &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,17 +253,17 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="georeferencing-aerial-imagery">
+  <section id="georeferencing-aerial-imagery">
 <h1>為空照圖進行空間對位<a class="headerlink" href="#georeferencing-aerial-imagery" title="本標題的永久連結">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>本教學已經過時，如需閱讀新的版本請前往 <a class="reference internal" href="3/advanced_georeferencing.html"><span class="doc">為空照圖進行空間對位 (QGIS3)</span></a>。</p>
 </div>
 <p>在<a class="reference internal" href="georeferencing_basics.html"><span class="doc">為紙本地圖進行空間對位</span></a>教學中，我們介紹了一種 QGIS 中進行空間對位的方法。這種方法可運用在掃描版地圖上，我們可以尋找地圖上的座標點當作控制點。但有的時候，地圖上會沒有這種網格點，又或是你要為影像進行空間對位，這方法也行不通。在這種情況下，我們可以使用其他的空間對位資料來源來當作輸入。本教學中，我們會學習如何在空間對位的操作中使用這些開放的資料來源。</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>內容說明<a class="headerlink" href="#overview-of-the-task" title="本標題的永久連結">¶</a></h2>
 <p>我們要使用高解析度的氣球影像（Balloon-imagery），以 OpenStreetMap 的參考座標進行空間對位。</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>你還會學到這些<a class="headerlink" href="#other-skills-you-will-learn" title="本標題的永久連結">¶</a></h3>
 <ul class="simple">
 <li><p>下載超高解析度的公領域影像資料</p></li>
@@ -271,17 +272,17 @@
 <li><p>使用手邊已經過空間對位的圖層，提供空間對位時的控制點座標資訊</p></li>
 <li><p>為某圖層自訂「無資料值」（No-data Value）</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>取得資料<a class="headerlink" href="#get-the-data" title="本標題的永久連結">¶</a></h2>
 <p>本教學中，我們要使用 <a class="reference external" href="http://publiclaboratory.org/archive">The Public Laboratory</a> 收集的一系列絕美的氣球、風箏空拍影像。他們其實也有釋出空間對位過的版本，不過為了練習，我們在這裡要下載的是未經空間對位的 JPG 檔，然後再於 QGIS 中進行空間對位。如果你喜歡他們提供的影像，可以在 <a class="reference external" href="http://google-latlong.blogspot.in/2012/04/balloon-and-kite-imagery-in-google.html">Google Earth</a> 中進一步探索。</p>
 <p>下載<a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">紐約市 Washington Square Park</a> 的 JPG 影像。你可以直接在 JPG 的按鈕上按右鍵然後選 <span class="guilabel">Save link as…</span>。</p>
 <p>為了方便起見，你也可以直接用下面的連結下載：</p>
 <p>UNTRANSLATED STRING
 <a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>操作流程<a class="headerlink" href="#procedure" title="本標題的永久連結">¶</a></h2>
 <ol class="arabic simple">
 <li><p>本教學會使用開放街圖來當作參考圖層。請到 <span class="menuselection">附加元件 ‣ 管理與安裝附加元件</span> 中安裝 OpenLayers Plugin。有關在 QGIS 中如何使用附加元件，可參考 <a class="reference internal" href="using_plugins.html"><span class="doc">使用附加元件</span></a>。</p></li>
@@ -308,7 +309,7 @@
 </div>
 <img alt="../_images/536.png" class="align-center" src="../_images/536.png" />
 <ol class="arabic simple" start="6">
-<li><p>確定 cs2cs 指令有安裝在系統中後，就可以著手來把經緯度座標轉換成麥卡托座標。使用這個工具時，必須要指定<span class="guilabel">初始</span>和<span class="guilabel">目標</span>的 CRS，指定的方法可以為 <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 字串</a>或是 <a class="reference external" href="http://www.epsg-registry.org/">EPSG 代碼</a>。因為我們已經知道目標圖層的 CRS，所以直接使用後者即可。此指令最簡單的使用方法是直接在命令列中輸入座標，這個指令讀入座標的順序是 <cite>X Y</cite>，所以我們要輸入的是「<cite>經度 緯度</cite>」。輸入如下所示的指令並按下 Enter 鍵（指令中的反斜線 () 是雙引號 (「) 的逃脫字符。在某些終端機版本中，不用加上逃脫字符和字串前後的雙引號）。完成之後，可以看到螢幕上會顯示 EPSG 3857 座標系統的 X Y 座標。</p></li>
+<li><p>確定 cs2cs 指令有安裝在系統中後，就可以著手來把經緯度座標轉換成麥卡托座標。使用這個工具時，必須要指定<span class="guilabel">初始</span>和<span class="guilabel">目標</span>的 CRS，指定的方法可以為 <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 字串</a>或是 <a class="reference external" href="http://www.epsg-registry.org/">EPSG 代碼</a>。因為我們已經知道目標圖層的 CRS，所以直接使用後者即可。此指令最簡單的使用方法是直接在命令列中輸入座標，這個指令讀入座標的順序是 <cite>X Y</cite>，所以我們要輸入的是「<cite>經度 緯度</cite>」。輸入如下所示的指令並按下 Enter 鍵（指令中的反斜線 () 是雙引號 (」) 的逃脫字符。在某些終端機版本中，不用加上逃脫字符和字串前後的雙引號）。完成之後，可以看到螢幕上會顯示 EPSG 3857 座標系統的 X Y 座標。</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo &quot;-73d59&#39;51\&quot; 40d43&#39;51\&quot;&quot; | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 
@@ -372,8 +373,8 @@
 <li><p>現在，影像看起來就很漂亮的疊在地圖上了。</p></li>
 </ol>
 <img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -398,7 +399,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       最後更新於 5月 20, 2021。<br/>
-      使用 <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 創建。<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

@@ -3,11 +3,12 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Print Composer Atlas를 활용한 지도 생성 자동화 &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,27 +253,27 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="automating-map-creation-with-print-composer-atlas">
-<h1>Print Composer Atlas를 활용한 지도 생성 자동화<a class="headerlink" href="#automating-map-creation-with-print-composer-atlas" title="제목 주소">¶</a></h1>
+  <section id="automating-map-creation-with-print-composer-atlas">
+<h1>Print Composer Atlas를 활용한 지도 생성 자동화<a class="headerlink" href="#automating-map-creation-with-print-composer-atlas" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">경고</p>
 <p>이 튜토리얼은 새로운 버전에서 사용이 가능합니다.</p>
 </div>
-<p>당신이 어느 그룹에서 인쇄 또는 온라인지도를 게시하는 경우 대개 동일한 템플릿으로 여러지도를 만들어야합니다 (보통 각 관리 단위 또는 관심 지역마다 하나씩). 이 맵을 수동으로 작성하는 데 시간이 오래 걸릴 수 있으며 정기적으로 맵을 업데이트하려는 경우 집안일이 될 수 있습니다. QGIS에는``Atlas 〈〉라는 도구가있어 맵 템플릿을 만들고 여러 지역에 대해 많은 수의 맵을 쉽게 게시 할 수 있습니다. Print Composer의 기본 사항에 익숙하지 않은 경우 : doc :<cite>making_a_map</cite> 자습서를 참조하십시오.</p>
-<div class="section" id="overview-of-the-task">
-<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<p>당신이 어느 그룹에서 인쇄 또는 온라인지도를 게시하는 경우 대개 동일한 템플릿으로 여러지도를 만들어야합니다 (보통 각 관리 단위 또는 관심 지역마다 하나씩). 이 맵을 수동으로 작성하는 데 시간이 오래 걸릴 수 있으며 정기적으로 맵을 업데이트하려는 경우 집안일이 될 수 있습니다. QGIS에는``Atlas ‘’라는 도구가있어 맵 템플릿을 만들고 여러 지역에 대해 많은 수의 맵을 쉽게 게시 할 수 있습니다. Print Composer의 기본 사항에 익숙하지 않은 경우 : doc :<cite>making_a_map</cite> 자습서를 참조하십시오.</p>
+<section id="overview-of-the-task">
+<h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>이 튜토리얼은 하와이 주에서 각 카운티에 대한 습지지도를 작성하는 방법을 보여줍니다.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>배워야 할 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>배워야 할 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="이 표제에 대한 퍼머링크">¶</a></h3>
 <ul class="simple">
-<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>거꾸로 된 다각형 〈〉스타일 렌더러를 사용하여 다각형 외부의 영역을 채우는 방법</p></li>
-<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>규칙 기반 〈〉스타일 렌더러에서 표현식을 사용하여 Atlas의 현재 기능 만 표시하는 방법</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>거꾸로 된 다각형 ‘’스타일 렌더러를 사용하여 다각형 외부의 영역을 채우는 방법</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>규칙 기반 ‘’스타일 렌더러에서 표현식을 사용하여 Atlas의 현재 기능 만 표시하는 방법</p></li>
 <li><p>Print Composer에서 표현식을 적용하여 동적 레이블을 작성하십시오.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p><a href="#id2"><span class="problematic" id="id3">`하와이 주-계획 실 &lt;http://planning.hawaii.gov/의`GIS 데이터 레이어 &lt;http://planning.hawaii.gov/gis/download-gis-data/&gt;`_를 사용합니다. &gt;`_</span></a></p>
 <p>Biologic and Ecologic 범주에서`Wetlands &lt;<a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip">http://files.hawaii.gov/dbedt/op/gis/data/HI_Wetlands.shp.zip</a>&gt;`_ 레이어를 다운로드하십시오.</p>
 <p>Cultural and Demographic 카테고리에서`Census County Boundaries 2010 &lt;<a class="reference external" href="http://files.hawaii.gov/dbedt/op/gis/data/county10.shp.zip">http://files.hawaii.gov/dbedt/op/gis/data/county10.shp.zip</a>&gt;`_ 레이어를 다운로드하십시오.</p>
@@ -280,23 +281,23 @@
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/HI_Wetlands.shp.zip">HI_Wetlands.shp.zip</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/county10.shp.zip">county10.shp.zip</a></p>
 <p>Data Source <a class="reference internal" href="credits.html#hawaii" id="id1"><span>[HAWAII]</span></a></p>
-</div>
-<div class="section" id="procedure">
-<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>과정<a class="headerlink" href="#procedure" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <ol class="arabic simple">
 <li><p>QGIS를 시작하고 : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer-&gt; Add Layer-&gt; Add Vector Layer`로 이동합니다.</p></li>
 </ol>
 <img alt="../_images/1149.png" class="align-center" src="../_images/1149.png" />
 <ol class="arabic simple" start="2">
-<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>HI_Wetlands.shp.zip 〈〉파일을 찾아 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Open`을 클릭하십시오.</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>HI_Wetlands.shp.zip ‘’파일을 찾아 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Open`을 클릭하십시오.</p></li>
 </ol>
 <img alt="../_images/2103.png" class="align-center" src="../_images/2103.png" />
 <ol class="arabic simple" start="3">
-<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>HI_Wetlands_Poly 〈〉레이어를 선택하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>HI_Wetlands_Poly ‘’레이어를 선택하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p></li>
 </ol>
 <img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
 <ol class="arabic simple" start="4">
-<li><p>하와이 전체의 습지를 나타내는 다각형이 표시됩니다. 주의 각 카운티마다 별도의 습지지도를 만들고자하므로 카운티 경계 레이어가 필요합니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer-&gt; Add Layer-&gt; Add Vector Layer`로 이동하여``county10.shp.zip 〈〉파일을 찾습니다. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>열기`를 클릭하십시오.</p></li>
+<li><p>하와이 전체의 습지를 나타내는 다각형이 표시됩니다. 주의 각 카운티마다 별도의 습지지도를 만들고자하므로 카운티 경계 레이어가 필요합니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer-&gt; Add Layer-&gt; Add Vector Layer`로 이동하여``county10.shp.zip ‘’파일을 찾습니다. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>열기`를 클릭하십시오.</p></li>
 </ol>
 <img alt="../_images/437.png" class="align-center" src="../_images/437.png" />
 <ol class="arabic simple" start="5">
@@ -316,11 +317,11 @@
 </ol>
 <img alt="../_images/835.png" class="align-center" src="../_images/835.png" />
 <ol class="arabic simple" start="9">
-<li><p>: guilabel :<cite>Item Properties</cite> 탭에서 아래로 스크롤하여 : guilabel :<cite>Controlled by atlas</cite> 상자를 확인하십시오. 작곡가는이 항목에 표시되는지도의 범위가``아틀라스 〈〉도구에 의해 결정됨을 나타냅니다.</p></li>
+<li><p>: guilabel :<cite>Item Properties</cite> 탭에서 아래로 스크롤하여 : guilabel :<cite>Controlled by atlas</cite> 상자를 확인하십시오. 작곡가는이 항목에 표시되는지도의 범위가``아틀라스 ‘’도구에 의해 결정됨을 나타냅니다.</p></li>
 </ol>
 <img alt="../_images/936.png" class="align-center" src="../_images/936.png" />
 <ol class="arabic simple" start="10">
-<li><p>: guilabel :<cite>Atlas generation</cite> 탭으로 전환하십시오. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>아틀라스 생성`상자를 확인하십시오. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Coverage layer`로``county10 〈〉을 선택하십시오. 이것은``county10 〈〉레이어의 모든 다각형 피처에 대해 각각 1 개의 맵을 만들려고 함을 나타냅니다. 지형지 물 자체가지도에 표시되지 않도록 : guilabel :<a href="#id5"><span class="problematic" id="id6">`</span></a>숨겨진 적용 범위 계층`을 확인할 수도 있습니다.</p></li>
+<li><p>: guilabel :<cite>Atlas generation</cite> 탭으로 전환하십시오. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>아틀라스 생성`상자를 확인하십시오. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Coverage layer`로``county10 ‘’을 선택하십시오. 이것은``county10 ‘’레이어의 모든 다각형 피처에 대해 각각 1 개의 맵을 만들려고 함을 나타냅니다. 지형지 물 자체가지도에 표시되지 않도록 : guilabel :<a href="#id5"><span class="problematic" id="id6">`</span></a>숨겨진 적용 범위 계층`을 확인할 수도 있습니다.</p></li>
 </ol>
 <img alt="../_images/1034.png" class="align-center" src="../_images/1034.png" />
 <ol class="arabic simple" start="11">
@@ -348,7 +349,7 @@
 </ol>
 <img alt="../_images/1631.png" class="align-center" src="../_images/1631.png" />
 <ol class="arabic simple" start="17">
-<li><p>맵의 레이블은 적용 범위 계층의 속성을 사용할 수 있습니다 .``concat 〈〉기능은 여러 텍스트 항목을 단일 텍스트 항목으로 결합하는 데 사용됩니다. 이 경우``county10 〈〉레이어의``NAME10 〈〉속성 값을``County of 〈〉텍스트와 결합합니다. 아래와 같은 표현식을 추가하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>OK`를 클릭하십시오.</p></li>
+<li><p>맵의 레이블은 적용 범위 계층의 속성을 사용할 수 있습니다 .``concat ‘’기능은 여러 텍스트 항목을 단일 텍스트 항목으로 결합하는 데 사용됩니다. 이 경우``county10 ‘’레이어의``NAME10 ‘’속성 값을``County of ‘’텍스트와 결합합니다. 아래와 같은 표현식을 추가하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>OK`를 클릭하십시오.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>concat(&#39;County of &#39;, &quot;NAME10&quot;)
 </pre></div>
@@ -358,7 +359,7 @@
 </ol>
 <img alt="../_images/1826.png" class="align-center" src="../_images/1826.png" />
 <ol class="arabic simple" start="19">
-<li><p>다른 레이블을 추가하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>주요 속성`아래에``습지 맵 〈〉을 입력하십시오. 여기에는 표현이 없으므로이 텍스트는 모든지도에서 동일하게 유지됩니다.</p></li>
+<li><p>다른 레이블을 추가하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>주요 속성`아래에``습지 맵 ‘’을 입력하십시오. 여기에는 표현이 없으므로이 텍스트는 모든지도에서 동일하게 유지됩니다.</p></li>
 </ol>
 <img alt="../_images/1922.png" class="align-center" src="../_images/1922.png" />
 <ol class="arabic simple" start="20">
@@ -366,7 +367,7 @@
 </ol>
 <img alt="../_images/2016.png" class="align-center" src="../_images/2016.png" />
 <ol class="arabic simple" start="21">
-<li><p>메인 QGIS 창으로 전환하십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>county10 〈〉레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Properties`를 선택하십시오.</p></li>
+<li><p>메인 QGIS 창으로 전환하십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>county10 ‘’레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Properties`를 선택하십시오.</p></li>
 </ol>
 <img alt="../_images/2121.png" class="align-center" src="../_images/2121.png" />
 <ol class="arabic simple" start="22">
@@ -378,7 +379,7 @@
 </ol>
 <img alt="../_images/2316.png" class="align-center" src="../_images/2316.png" />
 <ol class="arabic simple" start="24">
-<li><p>그래도 한 가지 문제가 있습니다. 커버리지 레이어 경계 외부에 있지만 여전히 보이는 맵 영역을 볼 수 있습니다. Atlas는 다른 기능을 자동으로 숨기지 않기 때문입니다. 이는 경우에 따라 유용 할 수 있지만, 목적 상지도가 생성되는 카운티의 습지 만 표시하려고합니다. 이 문제를 해결하려면 메인 QGIS 창으로 돌아가서``county10 〈〉레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Properties`를 선택하십시오.</p></li>
+<li><p>그래도 한 가지 문제가 있습니다. 커버리지 레이어 경계 외부에 있지만 여전히 보이는 맵 영역을 볼 수 있습니다. Atlas는 다른 기능을 자동으로 숨기지 않기 때문입니다. 이는 경우에 따라 유용 할 수 있지만, 목적 상지도가 생성되는 카운티의 습지 만 표시하려고합니다. 이 문제를 해결하려면 메인 QGIS 창으로 돌아가서``county10 ‘’레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Properties`를 선택하십시오.</p></li>
 </ol>
 <img alt="../_images/2414.png" class="align-center" src="../_images/2414.png" />
 <ol class="arabic simple" start="25">
@@ -390,7 +391,7 @@
 </ol>
 <img alt="../_images/2612.png" class="align-center" src="../_images/2612.png" />
 <ol class="arabic simple" start="27">
-<li><p>: guilabel :<cite>Expression string builder`에서 : guilabel :`Atlas</cite> 기능 그룹을 펼치십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>$ atlasfeatureid 〈〉기능은 현재 선택된 기능을 반환합니다. 현재 선택된 Atlas 기능 만 선택하는 표현식을 구성합니다. 아래와 같이 표현식을 입력하십시오.</p></li>
+<li><p>: guilabel :<cite>Expression string builder`에서 : guilabel :`Atlas</cite> 기능 그룹을 펼치십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>$ atlasfeatureid ‘’기능은 현재 선택된 기능을 반환합니다. 현재 선택된 Atlas 기능 만 선택하는 표현식을 구성합니다. 아래와 같이 표현식을 입력하십시오.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$id = $atlasfeatureid
 </pre></div>
@@ -401,11 +402,11 @@
 </ol>
 <img alt="../_images/2810.png" class="align-center" src="../_images/2810.png" />
 <ol class="arabic simple" start="29">
-<li><p>이제 현재 날짜를 표시하기 위해 다른 동적 레이블을 추가합니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layout-&gt; Add Label`으로 이동하여지도에서 영역을 선택하십시오. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>표현식 삽입 〈버튼을 클릭하십시오.</p></li>
+<li><p>이제 현재 날짜를 표시하기 위해 다른 동적 레이블을 추가합니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Layout-&gt; Add Label`으로 이동하여지도에서 영역을 선택하십시오. : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>표현식 삽입 ‘버튼을 클릭하십시오.</p></li>
 </ol>
 <img alt="../_images/2910.png" class="align-center" src="../_images/2910.png" />
 <ol class="arabic simple" start="30">
-<li><p>: guilabel :<cite>Date and Time</cite> 기능 그룹을 확장하면``$ now 〈〉기능을 찾을 수 있습니다. 현재 시스템 시간이 유지됩니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>todate ()``함수는 이것을 날짜 문자열로 변환합니다. 아래와 같이 표현식을 입력하십시오.</p></li>
+<li><p>: guilabel :<cite>Date and Time</cite> 기능 그룹을 확장하면``$ now ‘’기능을 찾을 수 있습니다. 현재 시스템 시간이 유지됩니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>todate ()``함수는 이것을 날짜 문자열로 변환합니다. 아래와 같이 표현식을 입력하십시오.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>concat(&#39;Created on: &#39;, todate($now))
 </pre></div>
@@ -435,8 +436,8 @@
 <img alt="../_images/35_3.jpg" class="align-center" src="../_images/35_3.jpg" />
 <img alt="../_images/35_4.jpg" class="align-center" src="../_images/35_4.jpg" />
 <img alt="../_images/35_5.jpg" class="align-center" src="../_images/35_5.jpg" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -461,7 +462,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       최종 업데이트: 5월 20, 2021<br/>
-      <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 버전으로 생성되었습니다.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

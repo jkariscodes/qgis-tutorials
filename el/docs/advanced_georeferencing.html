@@ -3,11 +3,12 @@
 <html lang="el">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Γεω-αναφορά Αεροφωτογραφιών &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,17 +253,17 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="georeferencing-aerial-imagery">
+  <section id="georeferencing-aerial-imagery">
 <h1>Γεω-αναφορά Αεροφωτογραφιών<a class="headerlink" href="#georeferencing-aerial-imagery" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Προειδοποίηση</p>
 <p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/advanced_georeferencing.html"><span class="doc">Georeferencing Aerial Imagery (QGIS3)</span></a></p>
 </div>
 <p>Σε αυτό το tutorial <a class="reference internal" href="georeferencing_basics.html"><span class="doc">Γεω-αναφορά Τοπογραφικών Φύλλων και Σαρωμένων Χαρτών</span></a> καλύψαμε τη βασική διαδικασία της γεω-αναφοράς στο QGIS. Αυτή η μέθοδος περιελάμβανε την ανάγνωση των συντεταγμένων από τους σαρωμένους σας χάρτες και την χειροκίνητη εισαγωγή τους. Πολλές φορές όμως, μπορεί να μην έχετε τις συντεταγμένες εκτυπωμένες στον χάρτη σας ή να προσπαθείτε να κάνετε γεω-αναφορά μιας εικόνας. Σε αυτήν την περίπτωση, μπορείτε να χρησιμοποιήσετε άλλη πηγή γεω-αναφοράς δεδομένων ως εισαγωγή. Σε αυτό το tutorial, θα μάθετε πως να χρησιμοποιείτε ήδη υπάρχουσες πηγές δεδομένων στη διαδικασία γεω-αναφοράς σας.</p>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Επισκόπηση εργασίας<a class="headerlink" href="#overview-of-the-task" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <p>Θα κάνουμε γεω-αναφορά balloon εικόνας, υψηλής ανάλυσης, με τη χρήση συντεταγμένων αναφοράς από το  OpenStreetMap.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Άλλες δεξιότητες που θα μάθετε<a class="headerlink" href="#other-skills-you-will-learn" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h3>
 <ul class="simple">
 <li><p>Λήψη εικόνας υψηλής ανάλυσης δημοσίου τομέα.</p></li>
@@ -271,17 +272,17 @@
 <li><p>Χρήση ενός επιπέδου στο οποίο ήδη έχει γίνει γεω-αναφορά, για να εισάγουμε GCP σημεία στο εργαλείο Georeferencer.</p></li>
 <li><p>Τοποθέτηση μια τιμής χωρίς δεδομένα για ένα επίπεδο.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Λήψη δεδομένων<a class="headerlink" href="#get-the-data" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <p>Σε αυτό το tutorial, θα χρησιμοποιήσουμε κάποιες υπέροχες εικόνες χαρταετού και μπαλονιού, οι οποίες συλλέχθηκαν από το <a class="reference external" href="http://publiclaboratory.org/archive">The Public Laboratory</a>. Επίσης, έχουν διαθέσιμες τις εκδόσεις των γεω-αναφορών των εικόνων, αλλά εμείς θα κατεβάσουμε μια JPG εικόνα στην οποία δεν έχει γίνει γεω-αναφορά και θα προχωρήσουμε με τη διαδικασία της γεω-αναφοράς στο QGIS. Αν σας αρέσει η συλλογή εικόνων που προσφέρουν, μπορείτε να την εξερευνήσετε στο &lt;<a class="reference external" href="http://google-latlong.blogspot.in/2012/04/">http://google-latlong.blogspot.in/2012/04/</a> balloon-and-kite-imagery-in-google.html&gt;`_ στο Google Earth επίσης.</p>
 <p>Κατεβάστε την JPG εικόνα <a class="reference external" href="http://publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01">Washington Square Park, New York</a>. Μπορείτε να κάνετε δεξί κλικ πάνω στο κουμπί JPG και να επιλέξετε <span class="guilabel">Save link as…</span>.</p>
 <p>For convenience, you may directly download a copy of the dataset from the link
 below:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
-</div>
-<div class="section" id="procedure">
+</section>
+<section id="procedure">
 <h2>Διαδικασία<a class="headerlink" href="#procedure" title="Μόνιμος σύνδεσμος σε αυτήν την κεφαλίδα">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Για αυτό το tutorial, θα χρησιμοποιήσουμε το επίπεδο OpenStreetMap ως το επίπεδο αναφοράς μας. Εγκαταστήστε το πρόσθετο OpenLayers από το <span class="menuselection">Plugins ‣ Manage and install plugins ‣ Get more</span>. Δείτε <a class="reference internal" href="using_plugins.html"><span class="doc">Χρησιμοποιώντας Πρόσθετες Λειτουργίες</span></a> για περισσότερες πληροφορίες σχετικά με τη χρήση των πρόσθετων στο QGIS.</p></li>
@@ -308,7 +309,7 @@ below:</p>
 </div>
 <img alt="../_images/536.png" class="align-center" src="../_images/536.png" />
 <ol class="arabic simple" start="6">
-<li><p>Μόλις βεβαιωθείτε ότι το εργαλείο cs2cs υπάρχει στο σύστημα σας, ήρθε η ώρα να μετατρέψουμε το Γεωγραφικό Πλάτος και Μήκος σε Mercator συντεταγμένες. Ο τρόπος με τον οποίο δουλεύει αυτό το εργαλείο, είναι ότι πρέπει να διευκρινίσετε ένα <span class="guilabel">source</span> και <span class="guilabel">destination</span> CRS. Ο CRS ορισμός μπορεί να είναι ένα <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 string</a> ή ένα <a class="reference external" href="http://www.epsg-registry.org/">EPSG code</a>. Εφόσον ήδη γνωρίζουμε τον EPSG κωδικό για το εισαγόμενο και εξαγόμενο CRS, θα χρησιμοποιήσουμε αυτό. Ο πιο απλός τρόπος για να χρησιμοποιήσετε το εργαλείο, είναι να εισάγετε τις συντεταγμένες στην ίδια τη γραμμή εντολών. Σημειώστε ότι το εργαλείο δέχεται συντεταγμένες  με τη σειρά <cite>X Y</cite>, οπότε πρέπει να εισάγουμε <cite>Longitude Latitude</cite>. Εισάγετε την εντολή που ακολουθεί στο τερματικό και πατήστε Enter. Σημειώστε ότι πρέπει να αλλάξουμε τα εισαγωγικά («) με καθέτους (\). Μόλις πατήσετε enter, θα δείτε το εργαλείο να επεξεργάζεται τις συντεταγμένες και να εκτυπώνει τις X Y συντεταγμένες σε EPSG 3857 CRS.</p></li>
+<li><p>Μόλις βεβαιωθείτε ότι το εργαλείο cs2cs υπάρχει στο σύστημα σας, ήρθε η ώρα να μετατρέψουμε το Γεωγραφικό Πλάτος και Μήκος σε Mercator συντεταγμένες. Ο τρόπος με τον οποίο δουλεύει αυτό το εργαλείο, είναι ότι πρέπει να διευκρινίσετε ένα <span class="guilabel">source</span> και <span class="guilabel">destination</span> CRS. Ο CRS ορισμός μπορεί να είναι ένα <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 string</a> ή ένα <a class="reference external" href="http://www.epsg-registry.org/">EPSG code</a>. Εφόσον ήδη γνωρίζουμε τον EPSG κωδικό για το εισαγόμενο και εξαγόμενο CRS, θα χρησιμοποιήσουμε αυτό. Ο πιο απλός τρόπος για να χρησιμοποιήσετε το εργαλείο, είναι να εισάγετε τις συντεταγμένες στην ίδια τη γραμμή εντολών. Σημειώστε ότι το εργαλείο δέχεται συντεταγμένες  με τη σειρά <cite>X Y</cite>, οπότε πρέπει να εισάγουμε <cite>Longitude Latitude</cite>. Εισάγετε την εντολή που ακολουθεί στο τερματικό και πατήστε Enter. Σημειώστε ότι πρέπει να αλλάξουμε τα εισαγωγικά (») με καθέτους (\). Μόλις πατήσετε enter, θα δείτε το εργαλείο να επεξεργάζεται τις συντεταγμένες και να εκτυπώνει τις X Y συντεταγμένες σε EPSG 3857 CRS.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo &quot;-73d59&#39;51\&quot; 40d43&#39;51\&quot;&quot; | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 
@@ -372,8 +373,8 @@ below:</p>
 <li><p>Τώρα θα δείτε τη εικόνα στην οποία κάνατε γεω-αναφορά, να εμφανίζεται όμορφα πάνω στο επίπεδο βάσης.</p></li>
 </ol>
 <img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -398,7 +399,7 @@ below:</p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Τελευταία ενημέρωση στις Μαΐ 20, 2021.<br/>
-      Δημιουργήθηκε με το <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

@@ -3,11 +3,12 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>항공사진 지오레퍼런싱 &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,18 +253,18 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="georeferencing-aerial-imagery">
-<h1>항공사진 지오레퍼런싱<a class="headerlink" href="#georeferencing-aerial-imagery" title="제목 주소">¶</a></h1>
+  <section id="georeferencing-aerial-imagery">
+<h1>항공사진 지오레퍼런싱<a class="headerlink" href="#georeferencing-aerial-imagery" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">경고</p>
 <p>This tutorial is now obsolete. A new and updated version is available at <a class="reference internal" href="3/advanced_georeferencing.html"><span class="doc">항공사진 지오레퍼런싱 (QGIS3)</span></a></p>
 </div>
 <p>QGIS 예제 :doc:<a href="#id1"><span class="problematic" id="id2">`</span></a>Georeferencing Topo Sheets and Scanned Maps`에서 지오레퍼런시 기본 과정을 살펴보았습니다. 거기서는 스캔된 지도에서 좌표를 읽어내고 수작업으로 좌표를 입력하는 방법이 포함되어 있습니다. 많은 경우 지도에 인쇄된 좌표가 없음에도 이미지에 지오레퍼런싱을 합니다. 그 경우 다른 지오레퍼런스 자료를 입력자료로 사용할 수 있습니다. 이 예제에서는 지오레퍼런싱 과정에서 기존의 오픈 데이터 소스를 어떻게 사용하는 지를 배우게 될 것입니다.</p>
-<div class="section" id="overview-of-the-task">
-<h2>과업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>과업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>풍선을 이용해 찍은 고화질 영상을 오픈스트리트맵의 레퍼런스 좌표를 이용하여 지오레퍼런스합니다.</p>
-<div class="section" id="other-skills-you-will-learn">
-<h3>기타 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="제목 주소">¶</a></h3>
+<section id="other-skills-you-will-learn">
+<h3>기타 스킬<a class="headerlink" href="#other-skills-you-will-learn" title="이 표제에 대한 퍼머링크">¶</a></h3>
 <ul class="simple">
 <li><p>초고화질 공공 도메인 영상을 다운로드합니다.</p></li>
 <li><p>QGIS에서 오픈레이어 플러그인을 사용합니다.</p></li>
@@ -271,17 +272,17 @@
 <li><p>지오레퍼런스툴에서 GCP 포인트를 입력한 기존 지오레퍼런스 레이어를 사용합니다.</p></li>
 <li><p>데이터값이 없는 레이어를 세팅 합니다.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
-<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+</section>
+</section>
+<section id="get-the-data">
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>이 예제에서는  <a class="reference external" href="http://publiclaboratory.org/archive">The Public Laboratory</a>.에서 멋진 연과 풍선을 이용해 찍은 이미지를 사용할 것입니다. The Public Laboratory에서는 사용가능한 지오레퍼런스된 이미지를 만들지만 여기서는 지오레펀스되지 않은 JPG 이미지를 다운로드 할 것이고 QGIS에서 지오레퍼런싱 과정을 거칠 것입니다. The Public Laboratory가 제공하는 이미지가 좋다면 구글어스에서 탐색 <a class="reference external" href="http://google-latlong.blogspot.in/2012/04/balloon-and-kite-imagery-in-google.html">explore it</a> 할 수 있습니다.</p>
 <p>뉴욕의 워싱턴 스퀘어 파크 <a href="#id1"><span class="problematic" id="id2">`</span></a>Washington Square Park, New York &lt;<a class="reference external" href="http://">http://</a> publiclaboratory.org/map/washington-square-park-new-york-new-york/2012-10-01&gt;`_의 JPG 이미지를 다운로드합니다. 마우스 오른쪽 버튼을 클릭하여 JPG버튼을 클릭하고 다른 링크로 저장  :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>Save link as…`을 선택합니다.</p>
 <p>편리하게도, 데이터셋을 아래 링크로에서 바로 다운로드하실 수 있습니다.</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/newyorkcity-washingtonsquarepark.jpg">newyorkcity-washingtonsquarepark.jpg</a></p>
-</div>
-<div class="section" id="procedure">
-<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>과정<a class="headerlink" href="#procedure" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <ol class="arabic simple">
 <li><p>이 예제에서는 레퍼런스 레이어로 오픈스트리트맵을 사용할 것입니다. 메뉴에서 플러그인 –&gt; 플러그인 관리 및 설치 –&gt; 설치되지 않음  <span class="menuselection">Plugins ‣ Manage and install plugins ‣ Get more</span> 에서 오픈레이어 플러그인을 설치합니다. QGIS에서 플러그인 사용에 대한 추가 정보는 :doc:<a href="#id1"><span class="problematic" id="id2">`</span></a>using_plugins`를 보시기 바랍니다.</p></li>
 </ol>
@@ -307,7 +308,7 @@
 </div>
 <img alt="../_images/536.png" class="align-center" src="../_images/536.png" />
 <ol class="arabic simple" start="6">
-<li><p>일단 cs2cs 툴이 시스템에 있는 것을 확인했다면 경도와 위도를 메카토르 좌표로 변경할 때입니다. 이 툴을 사용하는 방법은 소스 <span class="guilabel">source`와 목표 :guilabel:`destination</span> CRS 를  명기하는 것입니다. CRS의 정의는 <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 string</a>  혹은  <cite>EPSG code &lt;http://www.epsg-registry.org/&gt;`_가 될 것입니다. 이미 입력 및 출력 CRS에 대한 EPSG 코드를 알고 있으므로 이것을 이용할 것입니다. 툴을 가장 쉽게 이용하는 방법은 커맨드 라인에 좌표를 직접 입력하는 것입니다. 주목할 점은 툴이 `X Y</cite> 순서로 좌표를 받아들인다는 것입니다. 그래서 〈위도 경도’를 입력할 필요가 있습니다. 터미널에 다음의 명령을 입력하고 엔터를 칩니다. 알아둘 것은 인용부호 (《)는 역슬래쉬 ()로 회피할 수 있습니다. 일단 엔터를 치면 툴은 좌표 작업을 수행하고 EPSG 3857 CRS에서 X Y 좌표를 표시해 줍니다.</p></li>
+<li><p>일단 cs2cs 툴이 시스템에 있는 것을 확인했다면 경도와 위도를 메카토르 좌표로 변경할 때입니다. 이 툴을 사용하는 방법은 소스 <span class="guilabel">source`와 목표 :guilabel:`destination</span> CRS 를  명기하는 것입니다. CRS의 정의는 <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 string</a>  혹은  <cite>EPSG code &lt;http://www.epsg-registry.org/&gt;`_가 될 것입니다. 이미 입력 및 출력 CRS에 대한 EPSG 코드를 알고 있으므로 이것을 이용할 것입니다. 툴을 가장 쉽게 이용하는 방법은 커맨드 라인에 좌표를 직접 입력하는 것입니다. 주목할 점은 툴이 `X Y</cite> 순서로 좌표를 받아들인다는 것입니다. 그래서 ‘위도 경도’를 입력할 필요가 있습니다. 터미널에 다음의 명령을 입력하고 엔터를 칩니다. 알아둘 것은 인용부호 (“)는 역슬래쉬 ()로 회피할 수 있습니다. 일단 엔터를 치면 툴은 좌표 작업을 수행하고 EPSG 3857 CRS에서 X Y 좌표를 표시해 줍니다.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo &quot;-73d59&#39;51\&quot; 40d43&#39;51\&quot;&quot; | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 
@@ -371,8 +372,8 @@
 <li><p>이제 베이스 레이어 위에 지오레퍼런스된 멋진 이미지가 중첩된 것을 볼 수 있을 것입니다.</p></li>
 </ol>
 <img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -397,7 +398,7 @@
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       최종 업데이트: 5월 20, 2021<br/>
-      <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 버전으로 생성되었습니다.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

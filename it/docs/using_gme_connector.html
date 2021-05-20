@@ -3,11 +3,12 @@
 <html lang="it">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Usare il Google Maps Engine Connector con QGIS &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,7 +253,7 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="using-google-maps-engine-connector-for-qgis">
+  <section id="using-google-maps-engine-connector-for-qgis">
 <h1>Usare il Google Maps Engine Connector con QGIS<a class="headerlink" href="#using-google-maps-engine-connector-for-qgis" title="Link a questa intestazione">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Avvertimento</p>
@@ -265,17 +266,17 @@ Connector will continue to work till 29 January, 2016.</p>
 <p class="admonition-title">Nota</p>
 <p>Audofè: Sono l’autore del Google Maps Engine Connector e attualmente faccio parte del team di Google Maps.</p>
 </div>
-<div class="section" id="overview-of-the-task">
+<section id="overview-of-the-task">
 <h2>Descrizione dell’esercizio<a class="headerlink" href="#overview-of-the-task" title="Link a questa intestazione">¶</a></h2>
 <p>Scaricheremo un layer lineare che descrive le piste ciclabili nel territorio di di San Francisco e lo caricheremo dal Motore di Google Maps usando il plugin. Una volta che avremo tematizzato il layer creato  la mappa aggiungeremo questa mappa a QGIS come fosse un layer WMS.</p>
-<div class="section" id="other-skills-you-will-learn">
+<section id="other-skills-you-will-learn">
 <h3>Altri aspetti che avremo modo di apprendere nel corso dell’esercizio<a class="headerlink" href="#other-skills-you-will-learn" title="Link a questa intestazione">¶</a></h3>
 <ul class="simple">
 <li><p>Usare la Google Developer Console per predisporre un nuovo progetto usando le API di Google.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-the-data">
+</section>
+</section>
+<section id="get-the-data">
 <h2>Ottenere i dati necessari<a class="headerlink" href="#get-the-data" title="Link a questa intestazione">¶</a></h2>
 <p><a class="reference external" href="https://data.sfgov.org/">San Francisco Data</a>  è una fonte straordinaria per gli open data che interessano la città di San Francisco.</p>
 <ol class="arabic simple">
@@ -283,8 +284,8 @@ Connector will continue to work till 29 January, 2016.</p>
 </ol>
 <img alt="../_images/1202.png" class="align-center" src="../_images/1202.png" />
 <p>Fonte Dati <a class="reference internal" href="credits.html#sfmta" id="id1"><span>[SFMTA]</span></a></p>
-</div>
-<div class="section" id="create-a-google-maps-engine-account">
+</section>
+<section id="create-a-google-maps-engine-account">
 <h2>Creare un account per accedere al Google Maps Engine<a class="headerlink" href="#create-a-google-maps-engine-account" title="Link a questa intestazione">¶</a></h2>
 <ol class="arabic simple" start="2">
 <li><p>Dovete fare l’iscrizione per un account di prova gratuito al Google Maps Engine. L’account gratuito di prova consente un accesso completo a tutte le funzioni dell’Engine ma con un quantitativo limitato di risorse da utilizzare.
@@ -295,8 +296,8 @@ Visitate  la  <a class="reference external" href="http://www.google.com/enterpri
 <li><p>Dovrete compilare il vostro account Google. Se siete soliti lavorare con la posta elettronica di Google potete creare un nuovo Google account con il vostro indirizzo di posta elettronica. Una volta iscritti, vedrete la schermata del  <span class="guilabel">Create a Maps Engine Project</span>. Inserite un nome del progetto che servirà a identificare il vostro account quando usate Google Map Engine. Accettate i termini e fate click sui pulsanti guilabel:<cite>Accetta e crea</cite>.</p></li>
 </ol>
 <img alt="../_images/392.png" class="align-center" src="../_images/392.png" />
-</div>
-<div class="section" id="create-a-google-developer-console-project">
+</section>
+<section id="create-a-google-developer-console-project">
 <h2>Creare un progetto dalla Google Developer Console<a class="headerlink" href="#create-a-google-developer-console-project" title="Link a questa intestazione">¶</a></h2>
 <ol class="arabic simple" start="4">
 <li><p>Il Google Maps Engine Connector usa le <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Maps</span> <span class="pre">Engine</span> <span class="pre">API</span></code>  per accedere ai dati depositati nel vostro account. Avrete bisogno di ottenere credenziali speciali affinché il plugin possa avere accesso ai vostri dati in modo sistematico. Visitate la   <a class="reference external" href="https://console.developers.google.com/">Google Developer Console</a> e fate click su <span class="guilabel">Create Project</span>. Inserite il <code class="docutils literal notranslate"><span class="pre">GME</span> <span class="pre">Connector</span> <span class="pre">for</span> <span class="pre">QGIS</span> <span class="pre">API</span></code> come  <span class="guilabel">PROJECT NAME</span>  e <code class="docutils literal notranslate"><span class="pre">gme-qgis-api</span></code> come the <span class="guilabel">PROJECT ID</span>. Questi nomi sono puramente indicativi, potete usare i nomi che preferite.</p></li>
@@ -441,8 +442,8 @@ Fate click sull’icona <span class="guilabel">WMS Overlay</span>  della toolbar
 <iframe
 src="https://mapsengine.google.com/13476080153727555143-08887688179650036554-4/widget/in_iframe"
 width="100%" height="600px"></iframe>
-</div></div>
-</div>
+</div></section>
+</section>
 
 
 
@@ -467,7 +468,7 @@ width="100%" height="600px"></iframe>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       Ultimo aggiornamento mag 20, 2021.<br/>
-      Creato con <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

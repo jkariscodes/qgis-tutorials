@@ -3,11 +3,12 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>처리 모델러로 복잡한 작업흐름도 만들기 &#8212; QGIS Tutorials and Tips</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -252,19 +253,19 @@
     <div class="body col-md-9 content" role="main">
       
 
-  <div class="section" id="automating-complex-workflows-using-processing-modeler">
-<h1>처리 모델러로 복잡한 작업흐름도 만들기<a class="headerlink" href="#automating-complex-workflows-using-processing-modeler" title="제목 주소">¶</a></h1>
+  <section id="automating-complex-workflows-using-processing-modeler">
+<h1>처리 모델러로 복잡한 작업흐름도 만들기<a class="headerlink" href="#automating-complex-workflows-using-processing-modeler" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">경고</p>
 <p>A new version of this tutorial is available at <a class="reference internal" href="3/processing_graphical_modeler.html"><span class="doc">프로세싱 모델러를 사용하여 복잡한 작업흐름 자동화하기(QGIS3)</span></a></p>
 </div>
 <p>GIS 작업흐름도는 전형적으로 많은 단계를 포함합니다. 각 단계는 중간 결과물을 만들어 내고 이것은 다음 단계에 사용됩니다. 만약 입력 데이터가 바뀌거나 매개변수를 바꾸고 싶다면 전체 처리 과정을 일일히 다시 분석해야 할 필요가 있습니다. 다행이도,  QGIS는 시각적 모델러가 기본적으로 포함되어 있어 작업흐름도를 정의할 수 있고 한번에 구동시킬 수 있습니다. 대량의 입력 데이터도 일괄처리로써 작업흐름도를 구동시킬수도 있습니다.</p>
-<div class="section" id="overview-of-the-task">
-<h2>과업 개요<a class="headerlink" href="#overview-of-the-task" title="제목 주소">¶</a></h2>
+<section id="overview-of-the-task">
+<h2>과업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>이 예제에서는 토지이용이 분류된 래스터 데이터에서 특정 클래스 지역을 추출하는 모델을 어떻게 만드는지 보여줍니다.</p>
-</div>
-<div class="section" id="get-the-data">
-<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="제목 주소">¶</a></h2>
+</section>
+<section id="get-the-data">
+<h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>We will use the <a class="reference external" href="http://www.landcover.org/data/lc/">Global Mosaics of the standard MODIS land cover type data
 product</a> from <a class="reference external" href="http://www.landcover.org/">Global Land Cover
 Facility (GLCF)</a> as an example.</p>
@@ -277,9 +278,9 @@ below if you wish to work on this tutorial:</p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/LC_hd_global_2001.tif.gz">LC_hd_global_2001.tif.gz</a></p>
 <p><a class="reference external" href="http://www.qgistutorials.com/downloads/LC_hd_global_2012.tif.gz">LC_hd_global_2012.tif.gz</a></p>
 <p>데이터 출처 <a class="reference internal" href="credits.html#glcf-modis" id="id1"><span>[GLCF_MODIS]</span></a></p>
-</div>
-<div class="section" id="procedure">
-<h2>과정<a class="headerlink" href="#procedure" title="제목 주소">¶</a></h2>
+</section>
+<section id="procedure">
+<h2>과정<a class="headerlink" href="#procedure" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>이 예제의 작업 흐름도는 다음 단계로 진행됩니다.</p>
 <ul class="simple">
 <li><p>토지피복 래스터 입력에는 <a href="#id1"><span class="problematic" id="id2">``</span></a>Majority Filter``알고리즘을 적용합니다. 이것은 고립된 픽셀을 제거함으로써 결과물의 무의미한 정보를 제거합니다.</p></li>
@@ -332,7 +333,7 @@ and out in the model canvas.</p>
 </div>
 <img alt="../_images/659.png" class="align-center" src="../_images/659.png" />
 <ol class="arabic simple" start="7">
-<li><p>입력레이어 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Input layer`에서 값으로  〈Filtered Grid〉 from 알고리즘 〈Majority Filter’를 선택하십시오. 확인 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`을 누르십시오.</p></li>
+<li><p>입력레이어 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Input layer`에서 값으로  ‘Filtered Grid’ from 알고리즘 ‘Majority Filter’를 선택하십시오. 확인 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`을 누르십시오.</p></li>
 </ol>
 <img alt="../_images/758.png" class="align-center" src="../_images/758.png" />
 <ol class="arabic simple" start="8">
@@ -340,7 +341,7 @@ and out in the model canvas.</p>
 </ol>
 <img alt="../_images/856.png" class="align-center" src="../_images/856.png" />
 <ol class="arabic simple" start="9">
-<li><p>:guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Input Layer`로 〈Vectorized〉 from 알고리즘 〈Polygonize (raster to vector)을 선택합니다. 경작지를 나타내는 픽셀을 추출하려는 것입니다. 이 클래스와 일치하는 픽셀값은 12입니다.  (<a href="#id3"><span class="problematic" id="id4">`</span></a>Code Values &lt;<a class="reference external" href="http://www.landcover.org/data/lc/">http://www.landcover.org/data/lc/</a>&gt;`_를 보십시오.) :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Selection attribute`로 <a href="#id7"><span class="problematic" id="id8">``</span></a>DN``을, 값 :guilabel:<a href="#id9"><span class="problematic" id="id10">`</span></a>value`으로 <a href="#id11"><span class="problematic" id="id12">``</span></a>12``를입력합니다. 이 작업의 출력물이 최종 결과물이 될 것이므로 출력물에 이름을 붙일 필요가 있습니다. 출력 :guilabel:<a href="#id13"><span class="problematic" id="id14">`</span></a>Output`에  <a href="#id15"><span class="problematic" id="id16">``</span></a>vectorized class``라고 입력합니다.</p></li>
+<li><p>:guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Input Layer`로 ‘Vectorized’ from 알고리즘 ‘Polygonize (raster to vector)을 선택합니다. 경작지를 나타내는 픽셀을 추출하려는 것입니다. 이 클래스와 일치하는 픽셀값은 12입니다.  (<a href="#id3"><span class="problematic" id="id4">`</span></a>Code Values &lt;<a class="reference external" href="http://www.landcover.org/data/lc/">http://www.landcover.org/data/lc/</a>&gt;`_를 보십시오.) :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Selection attribute`로 <a href="#id7"><span class="problematic" id="id8">``</span></a>DN``을, 값 :guilabel:<a href="#id9"><span class="problematic" id="id10">`</span></a>value`으로 <a href="#id11"><span class="problematic" id="id12">``</span></a>12``를입력합니다. 이 작업의 출력물이 최종 결과물이 될 것이므로 출력물에 이름을 붙일 필요가 있습니다. 출력 :guilabel:<a href="#id13"><span class="problematic" id="id14">`</span></a>Output`에  <a href="#id15"><span class="problematic" id="id16">``</span></a>vectorized class``라고 입력합니다.</p></li>
 </ol>
 <img alt="../_images/955.png" class="align-center" src="../_images/955.png" />
 <ol class="arabic simple" start="10">
@@ -461,8 +462,8 @@ directory location will depend on the platform as follows: (Replace
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/home/username/.qgis2/processing/models/
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -487,7 +488,7 @@ directory location will depend on the platform as follows: (Replace
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
       최종 업데이트: 5월 20, 2021<br/>
-      <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 버전으로 생성되었습니다.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>
