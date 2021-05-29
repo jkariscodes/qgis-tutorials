@@ -14,7 +14,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="Suche" href="../../search.html" />
-    <link rel="next" title="Using the QGIS Browser" href="../using_qgis_browser.html" />
+    <link rel="next" title="Calculating Areal Mean Rainfall (QGIS3)" href="areal_mean_rainfall.html" />
     <link rel="prev" title="Lokalisierung der am nächsten gelegenen Einrichtung mit einer Quelle-Ziel-Matrix (QGIS3)" href="origin_destination_matrix.html" />
 
 <meta charset='utf-8'>
@@ -101,8 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Einfache Netzwerkvisualisierung und Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Lokalisierung der am nächsten gelegenen Einrichtung mit einer Quelle-Ziel-Matrix (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Einzugsgebietsanalyse mit dem Openrouteservice (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../using_qgis_browser.html">Using the QGIS Browser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../open_bil_bip_bsq_files.html">Open BIL, BIP or BSQ files in QGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Mit der Pythonprogrammierung loslegen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Verarbeitungsroutinen mit Python ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Ein Python Plugin erstellen (QGIS3)</a></li>
@@ -131,7 +130,7 @@
     </a>
   </li>
   <li>
-    <a href="../using_qgis_browser.html" title="Next Chapter: Using the QGIS Browser"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Using the QGI... &raquo;</span>
+    <a href="areal_mean_rainfall.html" title="Next Chapter: Calculating Areal Mean Rainfall (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Calculating A... &raquo;</span>
     </a>
   </li>
               
@@ -324,19 +323,19 @@
 <li><p>Entpacke die heruntergeladenen Daten <code class="docutils literal notranslate"><span class="pre">KMRL-Open-Data.zip</span></code> in ein lokales Verzeichnis. Jede Datei enthält Daten für verschiedene Teile des Verkehrssystems. Das Dateiformat und die Verwendung der einzelnen Dateien ist unter <a class="reference external" href="https://developers.google.com/transit/gtfs/reference/">GTFS Reference</a> beschrieben. Die für uns interessanten 2 Dateien enthalten räumliche Daten. Die Datei <code class="docutils literal notranslate"><span class="pre">shapes.txt</span></code> enthält Punkte die den Pfad eines Fahrzeuges beschreiben und die Datei <code class="docutils literal notranslate"><span class="pre">stops.txt</span></code> enthält den Standpunkt der Haltestellen. Beide CSV-Dateien können nach QGIS importiert werden. Klicke auf den Knopf <span class="guilabel">Datenquellenverwaltung öffnen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1135.png" class="align-center" src="../../_images/1135.png" />
+<div><img alt="../../_images/1136.png" class="align-center" src="../../_images/1136.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Im Dialogfenster <span class="guilabel">Data Source Manager</span> gehen wir zum Feld <span class="guilabel">Getrennte Texte</span>. Klicke auf den Knopf <span class="guilabel">…</span> neben <span class="guilabel">Dateiname</span> und öffne die Datei <code class="docutils literal notranslate"><span class="pre">shapes.txt</span></code>. Wähle <code class="docutils literal notranslate"><span class="pre">CSV</span> <span class="pre">(comma</span> <span class="pre">separated</span> <span class="pre">values)</span></code> als <span class="guilabel">Dateiformat</span>. Das <span class="guilabel">X-Feld</span> und das <span class="guilabel">Y-Feld</span> sollten automatisch gefüllt sein. Klicke auf <span class="guilabel">Hinzufügen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/290.png" class="align-center" src="../../_images/290.png" />
+<div><img alt="../../_images/2101.png" class="align-center" src="../../_images/2101.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Klicke nocheinmal auf den Knopf <span class="guilabel">…</span> und wähle die Datei <code class="docutils literal notranslate"><span class="pre">stops.txt</span></code>. Klicke auf <span class="guilabel">Hinzufügen</span> und danach auf <span class="guilabel">Schließen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/348.png" class="align-center" src="../../_images/348.png" />
+<div><img alt="../../_images/349.png" class="align-center" src="../../_images/349.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Wir sehen 2 neue Layer <code class="docutils literal notranslate"><span class="pre">stops</span></code> und <code class="docutils literal notranslate"><span class="pre">shapes</span></code>, die im <span class="guilabel">Layer</span> Bereich angezeigt werden. Wir werden jetzt den <code class="docutils literal notranslate"><span class="pre">shapes</span></code> Punktlayer in einen Linienlayer konvertieren. Er repräsentiert den Verlauf der U-Bahnlinie. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p></li>
@@ -382,31 +381,31 @@
 <li><p>Nach Beendigung der Berechnung sehen wir einen neuen Layer <code class="docutils literal notranslate"><span class="pre">Isochrones</span></code>, der im <span class="guilabel">Layer</span> Bereich geladen wurde. Zu jedem Punkt wurde ein Polygon erzeugt, dass das Gebiet in 15-minütiger fussläufiger Reichweite darstellt. Um das Ergebnis im Kontext mit den zur Erstellung verwendeten Quelldaten zu sehen, fügen wir eine OpenStreetMap Basiskarte hinzu. Wir scrollen im <span class="guilabel">Browser</span> Bereich nach unten und ziehen <span class="menuselection">XYZ Tiles ‣ OpenStreetMap</span> in den Arbeitsbereich.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1027.png" class="align-center" src="../../_images/1027.png" />
+<div><img alt="../../_images/1028.png" class="align-center" src="../../_images/1028.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Ein neuer Layer <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> wird im <span class="guilabel">Layer</span> Bereich angezeigt. Ziehe den Layer im Layerbereich ganz nach unten. Wir können hinein- und hinauszoomen, um zu sehen, ob das Ergebnis zum Straßennetzwerk passt. Wir sehen, dass die Polygone nicht kreisförmig sind, da die Reisezeit entlang der Straßen berechnet wird. In Regionen mit wenigen Straßen wird eine kleinere Fläche ausgewiesen.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1136.png" class="align-center" src="../../_images/1136.png" />
+<div><img alt="../../_images/1137.png" class="align-center" src="../../_images/1137.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Um das Einzugsgebiet zu berechnen, müssen wir eine letzte Arbeit ausführen. Wir fügen die einzelnen isochron-Polygone zu einem Polygon zusammen, das die erreichbare Fläche repräsentiert. Suche das Tool <span class="menuselection">Vektorgeometrie ‣ Auflösen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1230.png" class="align-center" src="../../_images/1230.png" />
+<div><img alt="../../_images/1231.png" class="align-center" src="../../_images/1231.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Wähle <code class="docutils literal notranslate"><span class="pre">Isochrones</span></code> als <span class="guilabel">Eingabelayer</span> und klicke auf <span class="guilabel">Starte</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1329.png" class="align-center" src="../../_images/1329.png" />
+<div><img alt="../../_images/1330.png" class="align-center" src="../../_images/1330.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Nach Fertigstellen der Berechnung wird ein neuer Layer <code class="docutils literal notranslate"><span class="pre">Aufgelöst</span></code> im <span class="guilabel">Layer</span> Bereich angezeigt. Dieses Polygon repräsentiert die Fläche, die mit einem 15-minütigen Fußweg von der U-Bahn aus erreichbar ist.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1427.png" class="align-center" src="../../_images/1427.png" />
+<div><img alt="../../_images/1428.png" class="align-center" src="../../_images/1428.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
@@ -437,7 +436,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Mai 21, 2021.<br/>
+      Zuletzt aktualisiert am Mai 29, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
