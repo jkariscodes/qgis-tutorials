@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Calculating Areal Mean Rainfall (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Calcular la Precipitación Media de Área (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -101,7 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Visualización y Enrutamiento Básico de Red (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Localizando la Instalación Más Cercana con Matriz Origen-Destino (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Análisis de Área de Servicio usando Openrouteservice (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Calculating Areal Mean Rainfall (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Calcular la Precipitación Media de Área (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Iniciándote con la Programación Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Ejecutar Algoritmos de Procesamiento vía Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Construyendo un Complemento Python (QGIS3)</a></li>
@@ -263,139 +263,138 @@
       
 
   <section id="calculating-areal-mean-rainfall-qgis3">
-<h1>Calculating Areal Mean Rainfall (QGIS3)<a class="headerlink" href="#calculating-areal-mean-rainfall-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Calculation of water balance, flood modeling, runoff forecasting, climate studies etc. often need the average depth of rainfall in a hydrological basin as an input. This estimation is called Areal Precipitation or Areal Mean Rainfall (AMR).</p>
-<p>AMR calculation can be done using rain gauge data. By using the rain gauge location and observed precipitation, one can estimate the average precipitation at a given location by using any of the following techniques:</p>
+<h1>Calcular la Precipitación Media de Área (QGIS3)<a class="headerlink" href="#calculating-areal-mean-rainfall-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Calculation of water balance, flood modeling, runoff forecasting, climate studies etc. often need the average depth of rainfall in a hydrological basin as an input - which is also called Areal Precipitation or Areal Mean Rainfall (AMR).</p>
+<p>El cálculo de la PMA puede realizarse usando datos de pluviómetro. Usando la ubicación del pluviómetro y la precipitación observada, se puede estimar la precipitación promedio un una ubicación dada usando cualquiera de las técnicas siguientes:</p>
 <ol class="arabic simple">
-<li><p><strong>Arithmetic Average</strong>: One can simply take an average of all the observed values. This method assumes that the rainfall field is homogeneous and that the rain gauge observations are independent and give equal weight to all rain gauges.</p></li>
-<li><p><strong>Thiessen Polygon</strong>: This method divides the area using Thiessen polygons with the assumption that rainfall is homogeneous within the coverage area of each station. This method is also called an area-weighted average. These assumptions are fine for low-lying or flat terrain, but not suitable for mountainous terrain.</p></li>
-<li><p><strong>Iso-hyetal Method</strong>: This interpolation technique calculates Isohyets - lines joining equal precipitation. It assumes that rainfall between 2 isohyets is homogeneous. This method is suitable when the rain-gauge network is dense.</p></li>
-<li><p><strong>Distance Weighting/Gridded</strong> - This is an interpolation technique where a raster grid is created and a value for each pixel is estimated based on the distance to stations. Once the grid points have all been estimated they are summed and the sum is divided by the number of grid cells to obtain the areal mean precipitation.</p></li>
-<li><p><strong>Geostatistical Methods</strong>: Rainfall is strongly influenced by local factors - such as elevation. Using multivariate regression or Kriging techniques, one can account for spatial autocorrelation and can achieve better accuracy. These methods are suited when the distribution of the rain gauge station is uniform and dense.</p></li>
+<li><p><strong>Media Aritmética</strong>: Se puede simplemente tomar un promedio de todos los valores observados. Este método asume que el campo de lluvias es homogéneo y que las observaciones de pluviómetro son independientes y da peso igual a todos los pluviómetros.</p></li>
+<li><p><strong>Polígono de Thiessen</strong>: Este método divide el área usando polígonos de Thiessen con la suposición de que la precipitación es homogénea dentro del área de cobertura de cada estación. Este método también es llamado una media ponderada por área. Estas suposiciones son buenas para terreno bajo o plano, pero no son apropiadas para terreno montañoso.</p></li>
+<li><p><strong>Método Isoyético</strong>: Esta técnica de interpolación calcula Isoyetas - líneas que unen precipitación igual. Asume que la lluvia entre 2 isoyetas es homogénea. Este método es adecuado cuando la red de pluviómetros es densa.</p></li>
+<li><p><strong>Ponderación/Cuadriculado de Distancia</strong> - Esta es una técnica de interpolación donde un grid ráster es creado y un valor para cada píxel es estimado en base a la distancia a las estaciones. Una vez que todos los puntos grid han sido estimados, ellos son sumados y la suma es dividida por el número de celdas grid para obtener la precipitación media de área.</p></li>
+<li><p><strong>Métodos Geoestadísticos</strong>: La lluvia es influenciada fuertemente por factores locales - como la elevación. Usando técnicas de regresión multivariada o Kriging, se puede tomar en cuenta la autocorrelación espacial y puede alcanzar mejor exactitud. Estos métodos son apropiados cuando la distribución de las estaciones pluviómetro es uniforme y densa.</p></li>
 </ol>
-<p>In this tutorial, we will learn the QGIS workflow to calculate Areal Mean Rainfall using the <strong>Thiessen Polygon</strong> method.</p>
+<p>En este tutorial aprenderemos el flujo de trabajo QGIS para calcular Precipitación Media de Área, usando el método <strong>Polígono Thiessen</strong>.</p>
 <section id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>In this tutorial, we will take the precipitation measured by the Global Historical
-Climatology Network (GHCN) stations and compute Areal Mean Rainfall in each Hydrological basin in the state of Florida.</p>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En este tutorial, tomaremos la precipitación medida por las estaciones de la Red Histórica Global de Climatología (GHCN) y calcularemos la Precipitación Media de Área en cada cuenca hidrológica en el estado de Florida.</p>
 </section>
 <section id="other-skills-you-will-learn">
-<h2>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h2>
 <ul class="simple">
-<li><p>How to remove data with Null values.</p></li>
-<li><p>How to fix invalid geometries in a layer.</p></li>
-<li><p>How to check your Processing History and re-run a tool with the same parameters.</p></li>
-<li><p>How to dissolve polygons and summarize statistics.</p></li>
-<li><p>How to use only selected features in Processing algorithms.</p></li>
+<li><p>Cómo quitar datos con valores Nulos.</p></li>
+<li><p>Cómo corregir geometrías no válidas en una capa.</p></li>
+<li><p>Cómo revisar su Historia de Procesamiento y volver a ejecutar una herramienta con los mismos parámetros.</p></li>
+<li><p>Cómo disolver polígonos y resumir estadísticas.</p></li>
+<li><p>Cómo usar solo objetos espaciales seleccionados en algoritmos de Procesamiento.</p></li>
 </ul>
 </section>
 <section id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will use <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/">NOAA Climate data</a> , <a class="reference external" href="https://www.hydrosheds.org/">HydroSHEDS</a> and <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">US Census Bureau Cartographic Boundary</a> data layers.</p>
+<h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Usaremos las capas de datos <a href="#id1"><span class="problematic" id="id2">`</span></a>NOAA Climate data <a href="#id3"><span class="problematic" id="id4">`</span></a>_ , <a href="#id5"><span class="problematic" id="id6">`</span></a>HydroSHEDS <a href="#id7"><span class="problematic" id="id8">`</span></a>_ y <a href="#id9"><span class="problematic" id="id10">`</span></a>US Census Bureau Cartographic Boundary <a href="#id11"><span class="problematic" id="id12">`</span></a>_.</p>
 <section id="station-wise-precipitation">
-<h3>Station-wise Precipitation<a class="headerlink" href="#station-wise-precipitation" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Precipitación por Estación<a class="headerlink" href="#station-wise-precipitation" title="Enlazar permanentemente con este título">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Go to <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/">NOAA Climate data</a> website. Click on the Search tool.</p></li>
+<li><p>Vaya al sitio web <a href="#id1"><span class="problematic" id="id2">`</span></a>NOAA Climate data <a href="#id3"><span class="problematic" id="id4">`</span></a>_. Clic en la herramienta Search.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd01.png" class="align-center" src="../../_images/cd01.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">Global</span> <span class="pre">Summary</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">Month</span></code> in <span class="guilabel">Select weather Observation Type/Dataset</span>, then in <span class="guilabel">Select Date Range</span> choose July 2020, in <span class="guilabel">Search For</span> select <code class="docutils literal notranslate"><span class="pre">States</span></code>, in <span class="guilabel">Enter a Search Term</span>  type <code class="docutils literal notranslate"><span class="pre">Florida</span></code>. Click <span class="guilabel">Search</span>.</p></li>
+<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">Global</span> <span class="pre">Summary</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">Month</span></code> en <span class="guilabel">Select weather Observation Type/Dataset</span>, luego en <span class="guilabel">Select Date Range</span> elija Julio 2020, en <span class="guilabel">Search For</span> seleccione <code class="docutils literal notranslate"><span class="pre">States</span></code>, en <span class="guilabel">Enter a Search Term</span> escriba <code class="docutils literal notranslate"><span class="pre">Florida</span></code>. Clic <span class="guilabel">Search</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd02.png" class="align-center" src="../../_images/cd02.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Click <span class="guilabel">Add To Cart</span>, in items click <span class="guilabel">View Items</span>.</p></li>
+<li><p>Clic <span class="guilabel">Add To Cart</span>. En elementos, clic  <span class="guilabel">View Items</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd03.png" class="align-center" src="../../_images/cd03.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Switch to <span class="guilabel">Custom Global Summary of the Month CSV</span>, click <span class="guilabel">Continue</span>.</p></li>
+<li><p>Cámbiese a <span class="guilabel">Custom Global Summary of the Month CSV</span>. Clic en <span class="guilabel">Continuar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd04.png" class="align-center" src="../../_images/cd04.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Check the <span class="guilabel">Geographic Locations</span> and in <span class="guilabel">Select data types for custom output</span> expand <code class="docutils literal notranslate"><span class="pre">Precipitation</span></code> select <code class="docutils literal notranslate"><span class="pre">Precipitation</span> <span class="pre">(PRCP)</span></code>. Click <span class="guilabel">Continue</span>.</p></li>
+<li><p>Marque <span class="guilabel">Geographic Locations</span> y en <span class="guilabel">Select data types for custom output</span>, expanda <code class="docutils literal notranslate"><span class="pre">Precipitation`,</span> <span class="pre">seleccione</span> <span class="pre">``Precipitation</span> <span class="pre">(PRCP)</span></code>. Clic <span class="guilabel">Continue</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd05.png" class="align-center" src="../../_images/cd05.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Enter the mail address and click <span class="guilabel">SUBMIT ORDER</span> to Download the data.</p></li>
+<li><p>Ingrese la dirección de correo y clic <span class="guilabel">SUBMIT ORDER</span> para descargar los datos.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd06.png" class="align-center" src="../../_images/cd06.png" />
 </div></blockquote>
 </section>
 <section id="hydrological-basins">
-<h3>Hydrological Basins<a class="headerlink" href="#hydrological-basins" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Cuencas Hidrológicas<a class="headerlink" href="#hydrological-basins" title="Enlazar permanentemente con este título">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Go-to <a class="reference external" href="https://www.hydrosheds.org/">HydroSHEDS website</a> and click <span class="guilabel">Download</span>.</p></li>
+<li><p>Vaya al <cite>sitio web HydroSHEDS `_ y clic :guilabel:`Download</cite>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/hydrosheds1.png" class="align-center" src="../../_images/hydrosheds1.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Select <span class="menuselection">HydroBASINS ‣ North America and Caribbean ‣ hybas_na_lev06_v1c.zip</span></p></li>
+<li><p>Seleccione <span class="menuselection">HydroBASINS ‣ North America and Caribbean ‣ hybas_na_lev06_v1c.zip</span></p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/hydrosheds2.png" class="align-center" src="../../_images/hydrosheds2.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Enter the mail address and click <span class="guilabel">Submit Request</span> to Download the data.</p></li>
+<li><p>Ingrese la dirección de correo y clic <span class="guilabel">Submit Request</span> para descargar los datos.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/hydrosheds3.png" class="align-center" src="../../_images/hydrosheds3.png" />
 </div></blockquote>
 </section>
 <section id="state-boundaries">
-<h3>State Boundaries<a class="headerlink" href="#state-boundaries" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Visit the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">Cartographic Boundary Files - Shapefile</a> page. Download the <code class="docutils literal notranslate"><span class="pre">cb_2018_us_state_500k.zip</span></code> file from the <em>States</em> section.</p>
-<p>For convenience, you may directly download a copy of all the datasets from the links below:</p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/florida_2020_07_prcp.csv">florida_2020_07_prcp</a></p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/hybas_na_lev06_v1c.zip">hybas_na_lev06_v1c</a></p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/cb_2018_us_state_500k.zip">cb_2018_us_state_500k</a></p>
-<p>Data Sources: <a class="reference internal" href="../credits.html#ghcn" id="id2"><span>[GHCN]</span></a>, <a class="reference internal" href="../credits.html#hydrosheds" id="id3"><span>[HYDROSHEDS]</span></a>, <a class="reference internal" href="../credits.html#id1" id="id4"><span>[USCENSUS]</span></a></p>
+<h3>Límites de Estado<a class="headerlink" href="#state-boundaries" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Visite la página <cite>Cartographic Boundary Files - Shapefile `_. Descargue el archivo ``cb_2018_us_state_500k.zip`</cite> de la sección <em>States</em> .</p>
+<p>Para su comodidad, puede descargar directamente una copia de todos los conjuntos de datos de los enlaces abajo:</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>florida_2020_07_prcp <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>hybas_na_lev06_v1c <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>cb_2018_us_state_500k <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p>Fuentes de datos: <a class="reference internal" href="../credits.html#ghcn" id="id2"><span>[GHCN]</span></a>, <a class="reference internal" href="../credits.html#hydrosheds" id="id3"><span>[HYDROSHEDS]</span></a>, <a class="reference internal" href="../credits.html#id1" id="id4"><span>[USCENSUS]</span></a></p>
 </section>
 </section>
 <section id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Open QGIS and click on the <span class="guilabel">Open Data Source Manager</span>.</p></li>
+<li><p>Abra QGIS y clic en <span class="guilabel">Abrir Administrador de Fuentes de datos</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/01.png" src="../../_images/01.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, switch to <span class="guilabel">Delimited Text</span>. Click on the <code class="docutils literal notranslate"><span class="pre">…</span></code>  in <span class="guilabel">File name</span> then browse and select the <code class="docutils literal notranslate"><span class="pre">florida_2020_07_prcp.csv</span></code></p></li>
+<li><p>En la caja de diálogo <span class="guilabel">Administrador de Fuentes de datos</span>, cambie a <span class="guilabel">Texto delimitado</span>. Clic en <code class="docutils literal notranslate"><span class="pre">...</span></code> en <span class="guilabel">Nombre de archivo</span>, luego explore y seleccione <code class="docutils literal notranslate"><span class="pre">florida_2020_07_prcp.csv</span></code></p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/02.png" src="../../_images/02.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Now, under <span class="guilabel">Geometry Definition</span> choose <span class="guilabel">Point coordinates</span>, <span class="guilabel">X field</span> and <span class="guilabel">Y field</span> should be <span class="guilabel">Longitude</span> and <span class="guilabel">Latitude</span> respectively. Choose the <span class="guilabel">Geometry CRS</span> as <span class="guilabel">EPSG 4326 - WGS 84</span>. Click <span class="guilabel">Add</span>.</p></li>
+<li><p>Ahora, bajo <span class="guilabel">Definición de geometría</span>, elija <span class="guilabel">Coordenadas puntos</span>. <span class="guilabel">Campo X</span> y <span class="guilabel">Campo Y</span> deberían ser <span class="guilabel">Longitud</span> y <span class="guilabel">Latitud</span>, respectivamente. Elija el <span class="guilabel">SRC geometría</span> como <span class="guilabel">EPSG 4326 - WGS 84</span>. Clic <span class="guilabel">Añadir</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/03.png" src="../../_images/03.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Now a new point layer will be added, click on the <span class="guilabel">Open Attribute Table</span> icon.</p></li>
+<li><p>Ahora se añadirá una nueva capa punto. Clic en el icono <span class="guilabel">Abrir Tabla de atributo</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/04.png" src="../../_images/04.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>In the Attribute table the field <span class="guilabel">PRCP</span> represents the amount of precipitation in the station during the July 2020. Also, this data is recorded in <em>inches</em>.  Note there are few <code class="docutils literal notranslate"><span class="pre">Null</span></code> values which can cause problems during calculation. Sort the PRCP column, and you would see there is only a small fraction of the dataset is Null. We will now remove the stations with Null values.</p></li>
+<li><p>En la Tabla de atributos, el campo <span class="guilabel">PRCP</span> representa la cantidad de precipitación en la estación durante julio 2020. También, estos datos son registrados en <em>pulgadas</em>. Note que hay unos pocos valores <code class="docutils literal notranslate"><span class="pre">Nulo</span></code> que pueden causar problemas durante el cálculo. Ordene la columna PRCP, y verá que hay una pequeña fracción del conjunto de datos que es Nulo. Ahora vamos a quitar las estaciones con valores Nulos.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/05.png" src="../../_images/05.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Open the Processing Toolbox by going to <span class="menuselection">Processing ‣ Toolbox</span>, and search and locate the <span class="menuselection">Vector selection ‣ Extract by attribute</span> algorithm.</p></li>
+<li><p>Abra la Caja de Herramientas Procesos yendo a <span class="menuselection">Procesos ‣ Caja de herramientas</span>, y busque y localice el algoritmo <span class="menuselection">Selección vectoial ‣ Extraer por atributo</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/06.png" src="../../_images/06.png" />
@@ -582,7 +581,7 @@ Climatology Network (GHCN) stations and compute Areal Mean Rainfall in each Hydr
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en may. 29, 2021.<br/>
+      Actualizado por última vez en jun. 02, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Calculating Areal Mean Rainfall (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Berekenen gemiddelde regenval voor gebied (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -101,7 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basis netwerk visualisatie en routeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Dichtstbijzijnde faciliteit zoeken met Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Analyse Servicegebied met Openrouteservice (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Calculating Areal Mean Rainfall (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Berekenen gemiddelde regenval voor gebied (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Beginnen met programmeren in Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Algoritmes van Processing uitvoeren via Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="building_a_python_plugin.html">Een plug-in in Python bouwen (QGIS3)</a></li>
@@ -263,145 +263,144 @@
       
 
   <section id="calculating-areal-mean-rainfall-qgis3">
-<h1>Calculating Areal Mean Rainfall (QGIS3)<a class="headerlink" href="#calculating-areal-mean-rainfall-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Calculation of water balance, flood modeling, runoff forecasting, climate studies etc. often need the average depth of rainfall in a hydrological basin as an input. This estimation is called Areal Precipitation or Areal Mean Rainfall (AMR).</p>
-<p>AMR calculation can be done using rain gauge data. By using the rain gauge location and observed precipitation, one can estimate the average precipitation at a given location by using any of the following techniques:</p>
+<h1>Berekenen gemiddelde regenval voor gebied (QGIS3)<a class="headerlink" href="#calculating-areal-mean-rainfall-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>Calculation of water balance, flood modeling, runoff forecasting, climate studies etc. often need the average depth of rainfall in a hydrological basin as an input - which is also called Areal Precipitation or Areal Mean Rainfall (AMR).</p>
+<p>Berekenen van AMR kan worden gedaan met gegevens betreffende metingen van de regenval. Door de locatie van de meting van de regenval en de gemeten neerslag te gebruiken, kan men de gemiddelde neerslag op een bepaalde locatie schatten met een van de volgende technieken:</p>
 <ol class="arabic simple">
-<li><p><strong>Arithmetic Average</strong>: One can simply take an average of all the observed values. This method assumes that the rainfall field is homogeneous and that the rain gauge observations are independent and give equal weight to all rain gauges.</p></li>
-<li><p><strong>Thiessen Polygon</strong>: This method divides the area using Thiessen polygons with the assumption that rainfall is homogeneous within the coverage area of each station. This method is also called an area-weighted average. These assumptions are fine for low-lying or flat terrain, but not suitable for mountainous terrain.</p></li>
-<li><p><strong>Iso-hyetal Method</strong>: This interpolation technique calculates Isohyets - lines joining equal precipitation. It assumes that rainfall between 2 isohyets is homogeneous. This method is suitable when the rain-gauge network is dense.</p></li>
-<li><p><strong>Distance Weighting/Gridded</strong> - This is an interpolation technique where a raster grid is created and a value for each pixel is estimated based on the distance to stations. Once the grid points have all been estimated they are summed and the sum is divided by the number of grid cells to obtain the areal mean precipitation.</p></li>
-<li><p><strong>Geostatistical Methods</strong>: Rainfall is strongly influenced by local factors - such as elevation. Using multivariate regression or Kriging techniques, one can account for spatial autocorrelation and can achieve better accuracy. These methods are suited when the distribution of the rain gauge station is uniform and dense.</p></li>
+<li><p><strong>Rekenkundig gemiddelde</strong>: Men kan eenvoudigweg een gemiddelde nemen van alle gemeten waarden. Deze methode gaat ervan uit dat het veld voor de regenval homogeen is en dat de gemeten observaties van de neerslag onafhankelijk zijn en een gelijk gewicht aan alle metingen voor de neerslag geven.</p></li>
+<li><p><strong>Thiessen-polygoon</strong>: Deze methode verdeelt het gebied in Thiessen-polygonen met de aanname dat de neerslag homogeen is binnen het bedekkingsgebied van elk station. Deze methode wordt ook wel een gebiedsgewogen gemiddelde genoemd. Deze aannames zijn prima voor laaggelegen of vlak terrein, maar niet geschikt voor bergachtig terrein.</p></li>
+<li><p><strong>Iso-hyetale methode</strong>: Deze techniek voor interpolatie berekent Isohyets - lijnen met gelijke neerslag. Het gaat ervan uit dat de neerslag tussen 2 isohyets homogeen is. Deze methode is geschikt als het netwerk voor de metingen van de neerslag dicht is.</p></li>
+<li><p><strong>Afstand gewogen/raster</strong> - Dit is een techniek voor interpolatie waar een raster wordt gemaakt en een waarde voor elke pixel wordt berekend, gebaseerd op de afstand tot stations. Als de rasterpunten eenmaal allemaal zijn geschat, worden zij bij elkaar opgeteld en de som wordt gedeeld door het aantal rastercellen om de gemiddelde neerslag voor het gebied te verkrijgen.</p></li>
+<li><p><strong>Geostatistische methoden</strong>: Regenval wordt strek beïnvloed door lokale factoren - zoals hoogte. Met technieken voor multivariate regressie of Kriging, kan men rekening houden met ruimtelijke autocorrelatie en een betere nauwkeurigheid bereiken. Deze methoden zijn geschikt als de verdeling van de meetstations voor de neerslag uniform en dicht is.</p></li>
 </ol>
-<p>In this tutorial, we will learn the QGIS workflow to calculate Areal Mean Rainfall using the <strong>Thiessen Polygon</strong> method.</p>
+<p>In deze handleiding zullen we de werkstroom voor QGIS leren om de Areal Mean Rainfall te berekenen met de methode <strong>Thiessen-polygoon</strong>.</p>
 <section id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>In this tutorial, we will take the precipitation measured by the Global Historical
-Climatology Network (GHCN) stations and compute Areal Mean Rainfall in each Hydrological basin in the state of Florida.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>In deze handleiding zullen we de gemeten neerslag gebruiken van de stations van het Global Historical Climatology Network (GHCN) en de Areal Mean Rainfall berekenen in elk hydrologisch bassin in de staat Florida.</p>
 </section>
 <section id="other-skills-you-will-learn">
-<h2>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h2>
+<h2>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h2>
 <ul class="simple">
-<li><p>How to remove data with Null values.</p></li>
-<li><p>How to fix invalid geometries in a layer.</p></li>
-<li><p>How to check your Processing History and re-run a tool with the same parameters.</p></li>
-<li><p>How to dissolve polygons and summarize statistics.</p></li>
-<li><p>How to use only selected features in Processing algorithms.</p></li>
+<li><p>Hoe gegevens met waarde Null te verwijderen.</p></li>
+<li><p>Hoe ongeldige geometrieën in een laag te repareren.</p></li>
+<li><p>Hoe uw geschiedenis van Processing te controleren en een gereedschap opnieuw uit te voeren met dezelfde parameters.</p></li>
+<li><p>Hoe polygonen te ontbinden en overzichten van statistieken te maken.</p></li>
+<li><p>Hoe alleen geselecteerde objecten te gebruiken in algoritmes van Processing.</p></li>
 </ul>
 </section>
 <section id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p>We will use <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/">NOAA Climate data</a> , <a class="reference external" href="https://www.hydrosheds.org/">HydroSHEDS</a> and <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">US Census Bureau Cartographic Boundary</a> data layers.</p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen de gegevenslagen <a href="#id1"><span class="problematic" id="id2">`</span></a>NOAA Climate data <a href="#id3"><span class="problematic" id="id4">`</span></a>_ , <a href="#id5"><span class="problematic" id="id6">`</span></a>HydroSHEDS <a href="#id7"><span class="problematic" id="id8">`</span></a>_ en <a href="#id9"><span class="problematic" id="id10">`</span></a>US Census Bureau Cartographic Boundary <a href="#id11"><span class="problematic" id="id12">`</span></a>_ gebruiken.</p>
 <section id="station-wise-precipitation">
-<h3>Station-wise Precipitation<a class="headerlink" href="#station-wise-precipitation" title="Permalink naar deze titel">¶</a></h3>
+<h3>Stationsgewijze neerslag<a class="headerlink" href="#station-wise-precipitation" title="Permalink naar deze titel">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Go to <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/">NOAA Climate data</a> website. Click on the Search tool.</p></li>
+<li><p>Ga naar de website <a href="#id1"><span class="problematic" id="id2">`</span></a>NOAA Climate data <a href="#id3"><span class="problematic" id="id4">`</span></a>_. Klik op Search Tool.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd01.png" class="align-center" src="../../_images/cd01.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">Global</span> <span class="pre">Summary</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">Month</span></code> in <span class="guilabel">Select weather Observation Type/Dataset</span>, then in <span class="guilabel">Select Date Range</span> choose July 2020, in <span class="guilabel">Search For</span> select <code class="docutils literal notranslate"><span class="pre">States</span></code>, in <span class="guilabel">Enter a Search Term</span>  type <code class="docutils literal notranslate"><span class="pre">Florida</span></code>. Click <span class="guilabel">Search</span>.</p></li>
+<li><p>Selecteer <code class="docutils literal notranslate"><span class="pre">Global</span> <span class="pre">Summary</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">Month</span></code> in <span class="guilabel">Select weather Observation Type/Dataset</span>, en dan in <span class="guilabel">Select Date Range</span> kies July 2020, in <span class="guilabel">Search For</span> selecteer <code class="docutils literal notranslate"><span class="pre">States</span></code>, in <span class="guilabel">Enter a Search Term</span>  typ <code class="docutils literal notranslate"><span class="pre">Florida</span></code>. Klik op <span class="guilabel">Search</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd02.png" class="align-center" src="../../_images/cd02.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Click <span class="guilabel">Add To Cart</span>, in items click <span class="guilabel">View Items</span>.</p></li>
+<li><p>Klik op <span class="guilabel">Add To Cart</span>, in items klik op <span class="guilabel">View Items</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd03.png" class="align-center" src="../../_images/cd03.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Switch to <span class="guilabel">Custom Global Summary of the Month CSV</span>, click <span class="guilabel">Continue</span>.</p></li>
+<li><p>Schakel naar <span class="guilabel">Custom Global Summary of the Month CSV</span>, klik op <span class="guilabel">Continue</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd04.png" class="align-center" src="../../_images/cd04.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Check the <span class="guilabel">Geographic Locations</span> and in <span class="guilabel">Select data types for custom output</span> expand <code class="docutils literal notranslate"><span class="pre">Precipitation</span></code> select <code class="docutils literal notranslate"><span class="pre">Precipitation</span> <span class="pre">(PRCP)</span></code>. Click <span class="guilabel">Continue</span>.</p></li>
+<li><p>Selecteer de <span class="guilabel">Geographic Locations</span> en vergroot in <span class="guilabel">Select data types for custom output</span> <code class="docutils literal notranslate"><span class="pre">Precipitation</span></code> en selecteer <code class="docutils literal notranslate"><span class="pre">Precipitation</span> <span class="pre">(PRCP)</span></code>. Klik op <span class="guilabel">Continue</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd05.png" class="align-center" src="../../_images/cd05.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Enter the mail address and click <span class="guilabel">SUBMIT ORDER</span> to Download the data.</p></li>
+<li><p>Voer het e-mailadres in en klik op <span class="guilabel">SUBMIT ORDER</span> om de gegevens te kunnen downloaden.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd06.png" class="align-center" src="../../_images/cd06.png" />
 </div></blockquote>
 </section>
 <section id="hydrological-basins">
-<h3>Hydrological Basins<a class="headerlink" href="#hydrological-basins" title="Permalink naar deze titel">¶</a></h3>
+<h3>Hydrologische bassins<a class="headerlink" href="#hydrological-basins" title="Permalink naar deze titel">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Go-to <a class="reference external" href="https://www.hydrosheds.org/">HydroSHEDS website</a> and click <span class="guilabel">Download</span>.</p></li>
+<li><p>Ga naar de <cite>website HydroSHEDS `_ en klik op :guilabel:`Download</cite>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/hydrosheds1.png" class="align-center" src="../../_images/hydrosheds1.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Select <span class="menuselection">HydroBASINS ‣ North America and Caribbean ‣ hybas_na_lev06_v1c.zip</span></p></li>
+<li><p>Selecteer <span class="menuselection">HydroBASINS ‣ Standard ‣ North America and Caribbean ‣ hybas_na_lev06_v1c.zip</span></p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/hydrosheds2.png" class="align-center" src="../../_images/hydrosheds2.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Enter the mail address and click <span class="guilabel">Submit Request</span> to Download the data.</p></li>
+<li><p>Voer het e-mailadres in en klik op <span class="guilabel">Submit Request</span> om de gegevens te kunnen downloaden.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/hydrosheds3.png" class="align-center" src="../../_images/hydrosheds3.png" />
 </div></blockquote>
 </section>
 <section id="state-boundaries">
-<h3>State Boundaries<a class="headerlink" href="#state-boundaries" title="Permalink naar deze titel">¶</a></h3>
-<p>Visit the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">Cartographic Boundary Files - Shapefile</a> page. Download the <code class="docutils literal notranslate"><span class="pre">cb_2018_us_state_500k.zip</span></code> file from the <em>States</em> section.</p>
-<p>For convenience, you may directly download a copy of all the datasets from the links below:</p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/florida_2020_07_prcp.csv">florida_2020_07_prcp</a></p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/hybas_na_lev06_v1c.zip">hybas_na_lev06_v1c</a></p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/cb_2018_us_state_500k.zip">cb_2018_us_state_500k</a></p>
-<p>Data Sources: <a class="reference internal" href="../credits.html#ghcn" id="id2"><span>[GHCN]</span></a>, <a class="reference internal" href="../credits.html#hydrosheds" id="id3"><span>[HYDROSHEDS]</span></a>, <a class="reference internal" href="../credits.html#id1" id="id4"><span>[USCENSUS]</span></a></p>
+<h3>Staatsgrenzen<a class="headerlink" href="#state-boundaries" title="Permalink naar deze titel">¶</a></h3>
+<p>Bezoek de pagina <cite>Cartographic Boundary Files - Shapefile `_. Download het bestand ``cb_2018_us_state_500k.zip`</cite> uit het gedeelte <em>States</em>.</p>
+<p>Voor het gemak kunt u direct een kopie van alle gegevenssets downloaden vanaf de links hieronder:</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>florida_2020_07_prcp <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>hybas_na_lev06_v1c <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>cb_2018_us_state_500k <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p>Gegevensbronnen: <a class="reference internal" href="../credits.html#ghcn" id="id2"><span>[GHCN]</span></a>, <a class="reference internal" href="../credits.html#hydrosheds" id="id3"><span>[HYDROSHEDS]</span></a>, <a class="reference internal" href="../credits.html#id1" id="id4"><span>[USCENSUS]</span></a></p>
 </section>
 </section>
 <section id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Open QGIS and click on the <span class="guilabel">Open Data Source Manager</span>.</p></li>
+<li><p>Open QGIS en klik op <span class="guilabel">Databronnen beheren openen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/01.png" src="../../_images/01.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, switch to <span class="guilabel">Delimited Text</span>. Click on the <code class="docutils literal notranslate"><span class="pre">…</span></code>  in <span class="guilabel">File name</span> then browse and select the <code class="docutils literal notranslate"><span class="pre">florida_2020_07_prcp.csv</span></code></p></li>
+<li><p>Schakel, in het dialoogvenster van <span class="guilabel">Databronnen beheren</span>, naar <span class="guilabel">Tekengescheiden tekst</span>. Klik op de <code class="docutils literal notranslate"><span class="pre">…</span></code>  in <span class="guilabel">Bestandsnaam</span> en blader dan en selecteer het bestand <code class="docutils literal notranslate"><span class="pre">florida_2020_07_prcp.csv</span></code></p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/02.png" src="../../_images/02.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Now, under <span class="guilabel">Geometry Definition</span> choose <span class="guilabel">Point coordinates</span>, <span class="guilabel">X field</span> and <span class="guilabel">Y field</span> should be <span class="guilabel">Longitude</span> and <span class="guilabel">Latitude</span> respectively. Choose the <span class="guilabel">Geometry CRS</span> as <span class="guilabel">EPSG 4326 - WGS 84</span>. Click <span class="guilabel">Add</span>.</p></li>
+<li><p>Kies nu, onder <span class="guilabel">Geometrie definitie</span> <span class="guilabel">Punt coördinaten</span>, <span class="guilabel">X-veld</span> en <span class="guilabel">Y-veld</span> zouden respectievelijk <span class="guilabel">Longitude</span> en <span class="guilabel">Latitude</span> moeten zijn. Kies het <span class="guilabel">Geometrie CRS</span> als <span class="guilabel">EPSG 4326 - WGS 84</span>. Klik op <span class="guilabel">Toevoegen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/03.png" src="../../_images/03.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Now a new point layer will be added, click on the <span class="guilabel">Open Attribute Table</span> icon.</p></li>
+<li><p>Nu zal een nieuwe puntenlaag worden toegevoegd, klik op het pictogram <span class="guilabel">Attributentabel openen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/04.png" src="../../_images/04.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>In the Attribute table the field <span class="guilabel">PRCP</span> represents the amount of precipitation in the station during the July 2020. Also, this data is recorded in <em>inches</em>.  Note there are few <code class="docutils literal notranslate"><span class="pre">Null</span></code> values which can cause problems during calculation. Sort the PRCP column, and you would see there is only a small fraction of the dataset is Null. We will now remove the stations with Null values.</p></li>
+<li><p>In de Attributentabel geeft het veld <span class="guilabel">PRCP</span> de hoeveelheid neerslag voor het station weer gedurende de maand juli 2020. Daarnaast, deze gegevens zijn opgenomen in <em>inches</em>.  Merk op dat er enkele waarden <code class="docutils literal notranslate"><span class="pre">Null</span></code> zijn die problemen zouden kunnen veroorzaken bij het berekenen. Sorteer de kolom PRCP, en u zul;t zien dat slechts een klein gedeelte van de gegevensset Null is. We zullen nu de stations met waarden Null verwijderen.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/05.png" src="../../_images/05.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Open the Processing Toolbox by going to <span class="menuselection">Processing ‣ Toolbox</span>, and search and locate the <span class="menuselection">Vector selection ‣ Extract by attribute</span> algorithm.</p></li>
+<li><p>Open de Toolbox van Processing door te gaan naar <span class="menuselection">Processing ‣ Toolbox</span>, en zoek en lokaliseer het algoritme <span class="menuselection">Vector selectie ‣ Uitnemen op attribuut</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/06.png" src="../../_images/06.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>In the <span class="guilabel">Extract by Attribute</span> dialog box, Select the <span class="guilabel">Input layer</span> as <code class="docutils literal notranslate"><span class="pre">florida_2020_07_prcp</span></code>, then choose <code class="docutils literal notranslate"><span class="pre">PRCP</span></code> in <span class="guilabel">Selection attribute</span>, then <code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span> <span class="pre">null</span></code> in <span class="guilabel">Operator</span>. Click on the <code class="docutils literal notranslate"><span class="pre">…</span></code> next to <span class="guilabel">Extracted(attribute)</span>, choose <span class="guilabel">Save to File…</span>, enter the layer name as <code class="docutils literal notranslate"><span class="pre">precipitation_filtered.gpkg</span></code> and click <span class="guilabel">Run</span>.</p></li>
+<li><p>Selecteer, in het dialoogvenster van <span class="guilabel">Uitnemen op attribuut</span>, de <span class="guilabel">Invoerlaag</span> als <code class="docutils literal notranslate"><span class="pre">florida_2020_07_prcp</span></code>, en kies dan <code class="docutils literal notranslate"><span class="pre">PRCP</span></code> in <span class="guilabel">Attribuut selecteren</span>, dan <code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">niet</span> <span class="pre">null</span></code> in <span class="guilabel">Operator</span>. Klik op de <code class="docutils literal notranslate"><span class="pre">…</span></code> naast <span class="guilabel">Uitgenomen (attribuut)</span>, kies:guilabel:<cite>Opslaan als bestand…</cite>, voer de laagnaam in als <code class="docutils literal notranslate"><span class="pre">precipitation_filtered.gpkg</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/07.png" src="../../_images/07.png" />
@@ -423,7 +422,7 @@ Climatology Network (GHCN) stations and compute Areal Mean Rainfall in each Hydr
 <p>Thiessen polygons represent the area of influence around each point. Every polygon defines the area which is closer to a particular station than any other station. This means the precipitation at any point is assumed to be the same as the nearest station.</p>
 </div>
 <ol class="arabic simple" start="10">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">precipitation_filtered</span></code> as the <span class="guilabel">Input layer</span>. Since we do not have data for any rain-gauge stations outside the basin boundary, we can add some buffer area. Enter <code class="docutils literal notranslate"><span class="pre">15</span></code> as the <span class="guilabel">Buffer region (% of extent)</span>. Click on the <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Voronoi polygons</span> and select <span class="guilabel">Save to File…</span>, then enter the name as <code class="docutils literal notranslate"><span class="pre">thiessen_polygons.gpkg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Selecteer <code class="docutils literal notranslate"><span class="pre">precipitation_filtered</span></code> als de <span class="guilabel">Invoerlaag</span>. Omdat we geen gegevens hebben voor een meting van neerslag buiten de grenzen voor de bassins, kunnen we een gebied als buffer toevoegen. Voer <code class="docutils literal notranslate"><span class="pre">15</span></code> in als de <span class="guilabel">Bufferregio (% van bereik)</span>. Klik op de <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Voronoi-polygonen</span> en selecteer <span class="guilabel">Opslaan als bestand…</span>, en voer dan de naam in als <code class="docutils literal notranslate"><span class="pre">thiessen_polygons.gpkg</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/102.png" src="../../_images/102.png" />
@@ -435,13 +434,13 @@ Climatology Network (GHCN) stations and compute Areal Mean Rainfall in each Hydr
 <div><img alt="../../_images/112.png" src="../../_images/112.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>The states layer is in a different CRS than the <em>Project CRS</em>. You will get a prompt with different options for transforming this CRS to the Project CRS. In <span class="guilabel">Select Transformation</span> Dialog box, you can choose the default transformation and click <span class="guilabel">OK</span>.</p></li>
+<li><p>De laag met de staten heeft een ander CRS dan het <em>Project CRS</em>. U zult een venster zien met verschillende opties voor transformeren van dit CRS naar het Project CRS. In het dialoogvenster <span class="guilabel">Transformatie selecteren</span> kunt u de standaard transformatie kiezen en op <span class="guilabel">OK</span> klikken.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/122.png" src="../../_images/122.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>We will now clip the <code class="docutils literal notranslate"><span class="pre">thiessen</span> <span class="pre">polygons</span></code> layer to the Florida state boundary. Click on the  <span class="guilabel">Select Feature by area or Single Click icon</span> and click over Florida state.</p></li>
+<li><p>We zullen nu de laag <code class="docutils literal notranslate"><span class="pre">thiessen_polygons</span></code> clippen tot de grenzen van de staat Florida. Klik op het pictogram  <span class="guilabel">Object(en) selecteren</span> en klik op de staat Florida.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/132.png" src="../../_images/132.png" />
@@ -453,91 +452,91 @@ Climatology Network (GHCN) stations and compute Areal Mean Rainfall in each Hydr
 <div><img alt="../../_images/142.png" src="../../_images/142.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>In the <span class="guilabel">Clip</span> dialog box, select the <span class="guilabel">Input layer</span> as <code class="docutils literal notranslate"><span class="pre">thiessen_polygon</span></code>, in the <span class="guilabel">Overlay layer</span> select the <code class="docutils literal notranslate"><span class="pre">cb_2018_us_state_500K</span> <span class="pre">layer</span></code> and check the <span class="guilabel">Selected features only</span> checkbox, then click on the <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Clipped</span> and select <span class="guilabel">Save to File…</span> , then enter the name as <code class="docutils literal notranslate"><span class="pre">thiessen_polygon_clipped.gpkg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Selecteer, in het dialoogvenster van <span class="guilabel">Clippen</span>, de <span class="guilabel">Invoerlaag</span> als <code class="docutils literal notranslate"><span class="pre">thiessen_polygons</span></code>, selecteer in de <span class="guilabel">Overleglaag</span> de laag <code class="docutils literal notranslate"><span class="pre">cb_2018_us_state_500K</span></code> en selecteer het keuzevak <span class="guilabel">Alleen geselecteerde objecten</span>, klik dan op de <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Geclipt</span> en selecteer <span class="guilabel">Opslaan naar bestand…</span> , voer dan de naam in als <code class="docutils literal notranslate"><span class="pre">thiessen_polygons_clipped.gpkg</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/152.png" src="../../_images/152.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>The clipped thiessen polygon layer <code class="docutils literal notranslate"><span class="pre">thiessen_polygon_clipped</span></code> will be added to the canvas. Turn-off the visibility of all other layers. As our task is to calculate average rainfall over each basin, we will now load the polygons representing basins. Locate the <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c.shp</span></code> layer from the <span class="guilabel">Browser</span> and add it to the canvas.</p></li>
+<li><p>De geclipte laag van thiessen-polygons <code class="docutils literal notranslate"><span class="pre">thiessen_polygons_clipped</span></code> zal worden toegevoegd aan het kaartvenster, Schakel de zichtbaarheid van alle andere lagen uit. Omdat het onze taak is om de gemiddelde neerslag voor elk bassin te berekenen, zullen we nu de polygonen laden die de bassins weergeven. Lokaliseer de laag <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c.shp</span></code> vanuit de <span class="guilabel">Browser</span> en voeg die toe aan het kaartvenster.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/162.png" src="../../_images/162.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>You will notice that each basin is covered by many thiessen polygons and each polygon spans multiple basins. To visualise this <span class="guilabel">Open layer styling panel</span> icon and change the <span class="guilabel">Opacity</span> to <code class="docutils literal notranslate"><span class="pre">75%</span></code>. We will now intersect both the layers to cut the thiessen polygons to the boundary of each basin.</p></li>
+<li><p>U zult zien dat elk bassin wordt bedekt door veel Thiessen-polygonen en elke polygoon strekt zich uit over meerdere bassins. Klik, om dit te visualiseren, op het pictogram <span class="guilabel">Paneel Laag opmaken openen</span> en wijzig de <span class="guilabel">Doorzichtbaarheid</span> naar``75%``. We zullen nu de beide lagen mt elkaar kruisen om de Thiessen-polygonen bij te snijden tot de grens van elk bassin.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/172.png" src="../../_images/172.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li><p>Open the Processing Toolbox by going to <span class="menuselection">Processing ‣ Toolbox</span>, and search and locate the <span class="menuselection">Vector overlay ‣  Intersection</span> algorithm.</p></li>
+<li><p>Open de Toolbox van Processing door te gaan naar <span class="menuselection">Processing ‣ Toolbox</span>, en zoek en lokaliseer het algoritme <span class="menuselection">Vector op elkaar leggen ‣ Kruising</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/181.png" src="../../_images/181.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li><p>In the <span class="guilabel">Intersection</span> dialog box, select the <span class="guilabel">Input layer</span> as <code class="docutils literal notranslate"><span class="pre">thessen_polygon_clipped</span></code> and <span class="guilabel">Overlay layer</span> as <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c</span></code>, then click on the <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Clipped</span> and select <span class="guilabel">Save to File…</span> , then enter the name as <code class="docutils literal notranslate"><span class="pre">thiessen_polygon_basin.gpkg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Selecteer, in het dialoogvenster van <span class="guilabel">Kruising</span>, de <span class="guilabel">Invoerlaag</span> als <code class="docutils literal notranslate"><span class="pre">thiessen_polygons_clipped</span></code> en <span class="guilabel">Overleglaag</span> als <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c</span></code>, klik dan op de <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Kruising</span> en selecteer <span class="guilabel">Opslaan als bestand…</span> , en voer dan de naam in als <code class="docutils literal notranslate"><span class="pre">thiessen_polygons_basin.gpkg</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/191.png" src="../../_images/191.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li><p>The execution will fail with an error message <em>has invalid geometry. Please fix the geometry or change the Processing setting to the “Ignore invalid input features” option.</em>. You can learn more about this error in the <a class="reference internal" href="handling_invalid_geometries.html"><span class="doc">Ongeldige geometrieën afhandelen (QGIS3)</span></a> tutorial.</p></li>
+<li><p>De uitvoering zal mislukken met het foutbericht <em>heeft een ongeldige geometrie en is overgeslagen. Repareer de geometrie of wijzig de instelling van Processing naar de optie “Ongeldige invoerobjecten negeren”.</em>. U kunt meer te weten komen over deze fout in de handleiding <a class="reference internal" href="handling_invalid_geometries.html"><span class="doc">Ongeldige geometrieën afhandelen (QGIS3)</span></a>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/20.png" src="../../_images/20.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li><p>To fix the geometries, open the Processing Toolbox by going to <span class="menuselection">Processing ‣ Toolbox</span>, and search and locate the <span class="menuselection">Vector geometry ‣ Fix geometries</span>.</p></li>
+<li><p>Open, om de geometrieën te repareren, de Toolbox van Processing door te gaan naar <span class="menuselection">Processing ‣ Toolbox</span>, en te zoeken naar en te lokaliseren het algoritme <span class="menuselection">Vector geometrie ‣ Geometrieën repareren</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/211.png" src="../../_images/211.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li><p>In the <span class="guilabel">Fix Geometries</span> dialog box select the <span class="guilabel">Input layer</span> as <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c</span></code> and click on <code class="docutils literal notranslate"><span class="pre">…</span></code> on <span class="guilabel">Fixed geometries</span> and select the <span class="guilabel">Save to File</span>, enter the file name as <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c_fixed.gpkg</span></code> and click <span class="guilabel">Run</span>.</p></li>
+<li><p>Selecteer, in het dialoogvenster <span class="guilabel">Geometrieën repareren</span>, de <span class="guilabel">Invoerlaag</span> als <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c</span></code> en klik op <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Gerepareerde geometrieën</span> en selecteer <span class="guilabel">Opslaan als bestand…</span>, voer de bestandsnaam in als <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c_fixed.gpkg</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/22.png" src="../../_images/22.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
-<li><p>Now a new layer will be added to canvas. We can now try the intersection again. Instead of running the tool from scratch and filling all the parameters, we can retrieve the pre-filled dialog from <em>Processing History</em> and modify only the Overlay layer. Click <span class="menuselection">Processing ‣ History</span>.</p></li>
+<li><p>Nu wordt een nieuwe laag toegevoegd aan het kaartvenster. We kunnen nu Kruising opnieuw proberen. In plaats van het gereedschap vanaf nul opnieuw te beginnen en alle parameters opnieuw in te vullen, kunnen we het eerder ingevulde dialoogvenster terughalen uit <em>Geschiedenis van Processing</em> en alleen de Overleglaag aanpassen. Klik op <span class="menuselection">Processing ‣ Geschiedenis</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/23.png" src="../../_images/23.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li><p>Double-click on the <em>native:interaction</em> algorithm from the list.</p></li>
+<li><p>Dubbelklik op het algoritme <em>native:intersection</em> uit de lijst.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/24.png" src="../../_images/24.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
-<li><p>Change the <span class="guilabel">Overlay layer</span> to <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c_fixed</span></code> and click <span class="guilabel">Run</span>.</p></li>
+<li><p>Wijzig de <span class="guilabel">Overleglaag</span> naar <code class="docutils literal notranslate"><span class="pre">hybas_na_lev06_v1c_fixed</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/25.png" src="../../_images/25.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
-<li><p>Now a new layer will be loaded, and you can see the <code class="docutils literal notranslate"><span class="pre">thiessen_polygon_basin</span></code> is clipped based on the basin boundary.</p></li>
+<li><p>Nu zal een nieuwe laag worden geladen en u kunt zien dat de laag <code class="docutils literal notranslate"><span class="pre">thiessen_polygons_basin</span></code> is geclipt, gebaseerd op de grenzen van de bassins.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/26.png" src="../../_images/26.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
-<li><p>Now, let’s calculate the average rainfall value from the thiessen polygons for each basin. This is done using the <code class="docutils literal notranslate"><span class="pre">Aggregate</span></code> tool which allows us to dissolve individual polygons while calculating statistics on the attribute values. Now, open the Processing Toolbox by going to <span class="menuselection">Processing ‣ Toolbox</span>, and search and locate the <span class="menuselection">Vector geometry ‣ Aggregate</span>.</p></li>
+<li><p>Laten we nu de waarde voor de gemiddelde neerslag berekenen uit de Thiessen-polygonen voor elk bassin. Dit wordt gedaan met het gereedschap <code class="docutils literal notranslate"><span class="pre">Samenvoegen</span></code> dat het voor ons mogelijk maakt individuele polygonen te ontbinden terwijl we statistieken berekenen over de waarden van de attributen. Open nu de Toolbox van Processing door te gaan naar <span class="menuselection">Processing ‣ Toolbox</span>, en zoek en lokaliseer het algoritme <span class="menuselection">Vector geometrie ‣ Samenvoegen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/27.png" src="../../_images/27.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
-<li><p>In the <span class="guilabel">Aggregate</span> dialog box choose <span class="guilabel">Input layer</span> as <code class="docutils literal notranslate"><span class="pre">thiessen_polygon_basin</span></code>, select all fields except <code class="docutils literal notranslate"><span class="pre">PRCP</span></code> and <code class="docutils literal notranslate"><span class="pre">HYBAS_ID</span></code> and click <span class="guilabel">Delete selected field</span>.</p></li>
+<li><p>Kies, in het dialoogvenster van <span class="guilabel">Samenvoegen</span>,  <code class="docutils literal notranslate"><span class="pre">thiessen_polygons_basin</span></code> als <span class="guilabel">Invoerlaag</span>, selecteer alle velden, behalve <code class="docutils literal notranslate"><span class="pre">PRCP</span></code> en <code class="docutils literal notranslate"><span class="pre">HYBAS_ID</span></code>, en klik op <span class="guilabel">Geselecteerd veld verwijderen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/28.png" src="../../_images/28.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
-<li><p>In <span class="guilabel">Group by expression</span> select <code class="docutils literal notranslate"><span class="pre">HYBAS_ID</span></code>. This means that the tool will dissolve all polygons that have the same value of <code class="docutils literal notranslate"><span class="pre">HYBAS_ID</span></code>. In our case, these will be all thiessen polygons falling a basin. In the <span class="guilabel">Aggregates</span> section, we can configure how different field values will be aggregated from all polygons that gets dissolved. For <span class="guilabel">PRCP</span>, click on the <span class="guilabel">expression</span> button to enter the below expression. The expression calculates the area-weighted fraction for each polygon. Set the <span class="guilabel">Aggregate Function</span> to <code class="docutils literal notranslate"><span class="pre">sum</span></code>, which will sum up all the area-weighted fractions resulting in the area-weighted mean. For <span class="guilabel">HYBAS_ID</span>, change the <span class="guilabel">Aggregate Function</span> to <code class="docutils literal notranslate"><span class="pre">first_value</span></code>. Since we are grouping all thiessen polygons by their HYBAS_ID, all the values will be the same and the <em>first_value</em> function will use the attribute value from the first polygon in each basin. Click on <code class="docutils literal notranslate"><span class="pre">…</span></code> on <span class="guilabel">Aggregated</span> and select the <span class="guilabel">Save to File</span>, enter the file name as <code class="docutils literal notranslate"><span class="pre">areal_mean_rainfall.gpkg</span></code> and click <span class="guilabel">Run</span>.</p></li>
+<li><p>In <span class="guilabel">Groeperen op expressie</span> selecteer <code class="docutils literal notranslate"><span class="pre">HYBAS_ID</span></code>. Dit betekent dat het gereedschap alle polygonen zal ontbinden die dezelfde waarde voor <code class="docutils literal notranslate"><span class="pre">HYBAS_ID</span></code> hebben. In ons geval zullen dit alle Thiessen-polygonen zijn die vallen binnen één bassin. In het gedeelte <span class="guilabel">Samenvoegen</span> kunnen we configureren hoe verschillende veldwaarden zullen worden samengevoegd uit alle polygonen die zullen worden ontbonden. Voor <span class="guilabel">PRCP</span>, klik op de knop <span class="guilabel">Expressie</span> om de expressie hieronder in te voeren. De expressie berekent het gebiedsgewogen gedeelte voor elke polygoon. Stel de <span class="guilabel">Functie Samenvoegen</span> in op <code class="docutils literal notranslate"><span class="pre">sum</span></code>, wat alle gebiedsgewogen gedeelten bij elkaar zal optellen, hetgeen zal resulteren in het gebiedsgewogen gemiddelde. Voor <span class="guilabel">HYBAS_ID</span>, wijzig de <span class="guilabel">Functie Samenvoegen</span> naar <code class="docutils literal notranslate"><span class="pre">first_value</span></code>. Omdat we alle Thiessen-polygonen groeperen op hun HYBAS_ID, zullen alle waarden hetzelfde zijn en de functie <em>first_value</em> zal de eerste attribuutwaarde uit de eerste polygoon in elk bassin gebruiken. Klik op <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Samengevoegd</span> en selecteer <span class="guilabel">Opslaan als bestand…</span>, voer de bestandsnaam in als <code class="docutils literal notranslate"><span class="pre">areal_mean_rainfall.gpkg</span></code> en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(PRCP * $area) / sum($area)
@@ -546,13 +545,13 @@ Climatology Network (GHCN) stations and compute Areal Mean Rainfall in each Hydr
 <img alt="../../_images/29.png" src="../../_images/29.png" />
 </div></blockquote>
 <ol class="arabic simple" start="30">
-<li><p>A new layer will be added to canvas, lets open the Attribute table to explore. Click on the <span class="guilabel">Open Attribute Tabel</span> icon.</p></li>
+<li><p>Een nieuwe laag zal worden toegevoegd aan het kaartvenster. Laten we de Attributentabel openen om die te verkennen. Klik op het pictogram <span class="guilabel">Attributentabel openen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/30.png" src="../../_images/30.png" />
 </div></blockquote>
 <ol class="arabic simple" start="31">
-<li><p>The field <span class="guilabel">PRCP</span> contains the areal mean rainfall for each basin in inches.</p></li>
+<li><p>Het veld <span class="guilabel">PRCP</span> bevat de gemiddelde neerslag voor het gebied voor elk bassin in inches.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/311.png" src="../../_images/311.png" />
@@ -582,7 +581,7 @@ Climatology Network (GHCN) stations and compute Areal Mean Rainfall in each Hydr
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op mei 29, 2021.<br/>
+      Laatste aanpassing op jun. 02, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
