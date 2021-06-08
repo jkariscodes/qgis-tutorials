@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Web Mapping with QGIS2Web (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Mapeo Web con QGIS2Web (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -110,7 +110,7 @@
 <li class="toctree-l1"><a class="reference internal" href="processing_python_scripts.html">Escribir Scripts Python para el Marco de Procesamiento (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../running_qgis_jobs.html">Ejecutar y Programar Trabajos de Procesamiento QGIS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../performing_table_joins_pyqgis.html">Realizar Uniones de Tabla (PyQGIS)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Web Mapping with QGIS2Web (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mapeo Web con QGIS2Web (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../creating_basemaps_with_qtiles.html">Creando Mapas Base con QTiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_plugins.html">Usar Complementos (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../downloading_osm_data.html">Buscando y descargando datos de OpenStreetMap</a></li>
@@ -263,83 +263,77 @@
       
 
   <section id="web-mapping-with-qgis2web-qgis3">
-<h1>Web Mapping with QGIS2Web (QGIS3)<a class="headerlink" href="#web-mapping-with-qgis2web-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Web mapping is a great medium to publish your GIS data to the web and make it accessible to other users. Creating a web map is a very different process than creating one in a GIS. GIS users are typically aren’t web programmers and it presents a challenge when one needs to create a web map that is of the same quality as a map creating in a GIS. Fortunately, there are tools available to easily translate your work in QGIS to web maps. In this tutorial, you will learn how to use the <strong>QGIS2Web</strong> plugin to create a web map using OpenLayers or Leaflet libraries from your QGIS project.</p>
+<h1>Mapeo Web con QGIS2Web (QGIS3)<a class="headerlink" href="#web-mapping-with-qgis2web-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>El mapeo web es un medio genial de publicar sus datos SIG a la web y hacerlos accesibles a otros usuarios. Crear un mapa web es un proceso muy diferente que crear uno en un SIG. Los usuarios SIG no son típicamente programadores web y ello presenta un desafío cuando uno necesita crear un mapa web que es de la misma calidad que un mapa creado en un SIG. Afortunadamente, hay disponibles herramientas que traducen fácilmente su trabajo en QGIS a mapas web. En este tutorial, aprenderemos como usar el complemento <strong>QGIS2Web</strong> para crear un mapa web usando librerías OpenLayers o Leaflet de su proyecto QGIS.</p>
 <section id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will create a leaflet web map of the world’s airports.</p>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Crearemos un mapa web leaflet de los aeropuertos del mundo.</p>
 <section id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li><p>How to use Edit Widgets in QGIS to hide certain fields and set custom types.</p></li>
-<li><p>How to create a virtual field using Field Calculator.</p></li>
+<li><p>Como usar Editar Widgets en QGIS para esconder ciertos campos y establecer tipos personalizados.</p></li>
+<li><p>Como crear un campo virtual usando la Calculadora de Campo.</p></li>
 </ul>
 </section>
 </section>
 <section id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will use the <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/airports/">Airports</a>
-dataset from Natural Earth.</p>
-<p>Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_airports.zip">Airports shapefile</a>.</p>
-<p>For convenience, you may directly download a copy of the datasets from the links
-below:</p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/ne_10m_airports.zip">ne_10m_airports.zip</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
+<h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Usaremos los el conjunto de datos  <a href="#id1"><span class="problematic" id="id2">`</span></a>Aeropuertos <a href="#id3"><span class="problematic" id="id4">`</span></a>_ de Natural Earth.</p>
+<p>Descargue el  <a href="#id1"><span class="problematic" id="id2">`</span></a>archivo shape Aeropuertos <a href="#id3"><span class="problematic" id="id4">`</span></a>_.</p>
+<p>Para su comodidad, puede descargar directamente una copia de los conjuntos de datos de los enlaces abajo:</p>
+<p><a href="#id1"><span class="problematic" id="id2">`</span></a>ne_10m_airports.zip <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p>Fuente de Datos <a class="reference internal" href="../credits.html#naturalearth" id="id1"><span>[NATURALEARTH]</span></a></p>
 </section>
 <section id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Open QGIS. Using the <span class="guilabel">Browser</span> panel, navigate to the folder containing the downloaded file. Expand the <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.zip</span></code> file and drag the <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.shp</span></code> into the canvas.</p></li>
+<li><p>Abra QGIS. Usando el panel <span class="guilabel">Explorador</span>, navegue a la carpeta que contiene el archivo descargado. Expanda el archivo <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.zip</span></code> y arrástrelo al lienzo.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1138.png" class="align-center" src="../../_images/1138.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Now a new layer will be loaded in the canvas, we will now create a map in QGIS that looks and behaves just like we would
-like in the web map. The plugin <code class="docutils literal notranslate"><span class="pre">qgis2web</span></code> will use replicate the QGIS settings and automatically create the web map without us knowing about web
-mapping libraries. When a user clicks on an airport marker, we want an info-window to display useful information about the airport. This information
-is already present in the attribute table of the <code class="docutils literal notranslate"><span class="pre">ne_10m_airports</span></code> layers. Right-click on the <code class="docutils literal notranslate"><span class="pre">ne_10m_airports</span></code> layer and select
-<span class="guilabel">Properties</span>.</p></li>
+<li><p>Ahora se cargará una nueva capa en el lienzo. Crearemos un mapa en QGIS que se parece y se comporta justo como quisiéramos en el mapa web. El complemento <code class="docutils literal notranslate"><span class="pre">qgis2web</span></code>  replicará la configuración QGIS y creará automáticamente el mapa web si que sepamos sobre las librerías de mapeo web. Cuando un usuario hace clic en un marcador de aeropuerto, queremos una ventana de información que muestre información útil acerca del aeropuerto. Esta información ya está presente en la tabla de atributos de la capa <code class="docutils literal notranslate"><span class="pre">ne_10m_airports</span></code>. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">ne_10m_airports</span></code> y seleccione <span class="guilabel">Propiedades</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2102.png" class="align-center" src="../../_images/2102.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>In the <span class="guilabel">Layer Properties</span> dialog box, switch to <span class="guilabel">Attributes Form</span>. You will notice all the fields name of the layer.</p></li>
+<li><p>En la caja de diálogo <span class="guilabel">Propiedades de capa</span>, cambie a <span class="guilabel">Formulario de atributos</span>. Notará todos los nombres de campo de la capa.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/350.png" class="align-center" src="../../_images/350.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>All fields aren’t relevant to the user, so fields <strong>except</strong> <em>name</em>, <em>iata_code</em>, <em>type</em>, and <em>Wikipedia</em> are turned off by clicking on the field and change the <span class="guilabel">Widget Type</span> to <code class="docutils literal notranslate"><span class="pre">Hidden</span></code>.</p></li>
+<li><p>Todos los campos no son relevantes al usuario, por lo que los campos <strong>except</strong> <em>name</em>, <em>iata_code</em>, <em>type</em>, y <em>Wikipedia</em> son desactivados haciendo clic en el campo y cambiando el <span class="guilabel">Tipo de widget</span> a <code class="docutils literal notranslate"><span class="pre">Hidden</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/431.png" class="align-center" src="../../_images/431.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>In the <em>wikipedia</em> field check the <code class="docutils literal notranslate"><span class="pre">Multiline</span></code> and <code class="docutils literal notranslate"><span class="pre">HTML</span></code> so that the link present in this field will be rendered as a hyperlink for the user. After setting the respective Widget Type for each field, click <span class="guilabel">OK</span>.</p></li>
+<li><p>En el campo <em>wikipedia</em>, marque <code class="docutils literal notranslate"><span class="pre">Multiline</span></code> y <code class="docutils literal notranslate"><span class="pre">HTML</span></code> de manera que el enlace presente en este campo sea representado como un hiperlance para el usuario. Después de definir el Tipo de Widget respectivo para cada campo, clic <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <img alt="../../_images/531.png" class="align-center" src="../../_images/531.png" />
 <ol class="arabic simple" start="6">
-<li><p>Click on the <span class="guilabel">Identify Features</span> button in the toolbar.</p></li>
+<li><p>Clic el botón <span class="guilabel">Identificar objetos espaciales</span> de la barra de herramientas.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/630.png" class="align-center" src="../../_images/630.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Click on a point, this will fetch the details of the airport in that location, only the <em>type</em>, <em>name</em>, <em>iata_code</em> and <em>wikipedia</em> fields are displayed as other fields are hidden. Also, wikipedia field is highlighted as hyperlink.</p></li>
+<li><p>Clic en un punto. Esto irá a buscar los detalles del aeropuerto en esa ubicación. Sólo los campos <em>type</em>, <em>name</em>, <em>iata_code</em> y <em>wikipedia</em> son mostrados ya que los otros campos están ocultos. También, el campo wikipedia es resaltado como hiperenlace.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/730.png" class="align-center" src="../../_images/730.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>The values in the field <em>type</em> can be a bit more informative. Let’s create a new field called <em>class</em> and add the word Airport after each entry in type field. (i.e) an entry as major will become a <em>Major Airport</em>.</p></li>
+<li><p>Los valores en el campo <em>type</em> pueden ser un poco más informativos. Creemos un nuevo campo llamado <em>class</em> y agreguemos la palabra Aeropuerto después de cada entrada en el campo type. (i.e.) una entrada como principal se volverá un <em>Aeropuerto Principal</em>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/829.png" class="align-center" src="../../_images/829.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>Enter the <span class="guilabel">Output field name</span> as <code class="docutils literal notranslate"><span class="pre">class</span></code>, choose <code class="docutils literal notranslate"><span class="pre">Text(String)</span></code> in <span class="guilabel">Output field type</span>. The layer field <code class="docutils literal notranslate"><span class="pre">type</span></code> contains values such as <code class="docutils literal notranslate"><span class="pre">small</span></code>, <code class="docutils literal notranslate"><span class="pre">mid</span></code>, <code class="docutils literal notranslate"><span class="pre">large</span></code> etc. We can add an expression to change the case of the words to sentence case and append the word <em>airport</em> for better readability. Enter the following expression in the <span class="guilabel">Expression</span> box and click <span class="guilabel">OK</span>.</p></li>
+<li><p>Ingrese el <span class="guilabel">Nombre de campo de salida</span> como <code class="docutils literal notranslate"><span class="pre">class</span></code>, elija <code class="docutils literal notranslate"><span class="pre">Texto(Cadena)</span></code> en <span class="guilabel">Tipo de campo de salida</span>. El <code class="docutils literal notranslate"><span class="pre">tipo</span></code> de campo de capa contiene valores como <code class="docutils literal notranslate"><span class="pre">small</span></code>, <code class="docutils literal notranslate"><span class="pre">mid</span></code>, <code class="docutils literal notranslate"><span class="pre">large</span></code>, etc. Podemos añadir una expresión para cambiar las palabras a estilo de oración y adjuntar la palabra <em>aeropuerto</em> para mayor legibilidad. Ingrese la siguiente expresión en la caja <span class="guilabel">Expresión</span> y clic <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>concat( title(&quot;type&quot;), &#39; Airport&#39;)
@@ -349,128 +343,124 @@ is already present in the attribute table of the <code class="docutils literal n
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>You can also use concatenation <code class="docutils literal notranslate"><span class="pre">||</span></code> operator to join strings. The expression can be re-written as <code class="docutils literal notranslate"><span class="pre">(title(&quot;type&quot;)</span> <span class="pre">||</span> <span class="pre">'</span> <span class="pre">Airport')</span></code></p>
+<p>También puede usar el operador concatenación <code class="docutils literal notranslate"><span class="pre">||`</span> <span class="pre">para</span> <span class="pre">unir</span> <span class="pre">cadenas.</span> <span class="pre">La</span> <span class="pre">expresión</span> <span class="pre">puede</span> <span class="pre">ser</span> <span class="pre">reescrita</span> <span class="pre">como</span> <span class="pre">``(title(&quot;type&quot;)</span> <span class="pre">||</span> <span class="pre">'</span> <span class="pre">Airport')</span></code></p>
 </div>
 <ol class="arabic simple" start="10">
-<li><p>Now we have a better looking field for airport type, we no longer need the <em>type</em> field. Right-click on the layer and select <span class="guilabel">Properties</span>, switch to  <span class="guilabel">Attributes Form</span> and turn off the <em>type</em> field by switching the <span class="guilabel">Widget Type</span> to <code class="docutils literal notranslate"><span class="pre">Hidden</span></code>. Click <span class="guilabel">OK</span>.</p></li>
+<li><p>Ahora tenemos un campo que se ve mejor para el tipo de aeropuerto. Ya no necesitamos el campo <em>type</em>. Clic-derecho en la capa y seleccione <span class="guilabel">Propiedades</span>. Cambie a <span class="guilabel">Formulario de atributos</span> y desactive el campo <em>type</em> cambiando el <span class="guilabel">Tipo de widget</span> a <code class="docutils literal notranslate"><span class="pre">Oculto</span></code>. Clic <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1029.png" class="align-center" src="../../_images/1029.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Now use <span class="guilabel">Identify Features</span> tool and select an airport, you will see a new field <em>class</em> with the category of airport nicely formatted and the <em>type</em> field is removed.</p></li>
+<li><p>Ahora use la herramienta <span class="guilabel">Identificar objetos espaciales</span> y seleccione un aeropuerto. Verá un nuevo campo <em>class</em> con la categoría de aeropuerto formateada agradablemente y el campo <em>type</em> quitado.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1139.png" class="align-center" src="../../_images/1139.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>Now let’s style the layer, click on <span class="guilabel">Open the Layer styling Panel</span> icon and change the <span class="guilabel">Type</span> to <code class="docutils literal notranslate"><span class="pre">Categorized</span></code>, in <span class="guilabel">Value</span> select <code class="docutils literal notranslate"><span class="pre">class</span></code> and click <span class="guilabel">Classify</span>.</p></li>
+<li><p>Ahora démosle estilo a la capa. Clic en el icono <span class="guilabel">Abrir el panel de estilo de capa</span> y cambie  el <span class="guilabel">Tipo</span> a <code class="docutils literal notranslate"><span class="pre">Categorizado</span></code>. En <span class="guilabel">Valor</span>, seleccione <code class="docutils literal notranslate"><span class="pre">class</span></code> y clic <span class="guilabel">Clasificar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1232.png" class="align-center" src="../../_images/1232.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>You will see different colored circle gets assigned to a different type of airport. For this tutorial, we will restrict the map to civilian airports. Hold the <kbd class="kbd docutils literal notranslate">Ctrl</kbd> key and select all categories for military airports. Once selected, click <span class="guilabel">Delete</span>.</p></li>
+<li><p>Verá que círculos con diferentes colores son asignados a diferentes tipos de aeropuerto. Para este tutorial, vamos a restringir el mapa a aeropuertos civiles. Mantenga presionada la tecla <kbd class="kbd docutils literal notranslate">Ctrl</kbd> y seleccione todas las categorías para aeropuertos militares. Una vez seleccionadas, clic en <span class="guilabel">Eliminar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1331.png" class="align-center" src="../../_images/1331.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>Apart from assigning different color to the category, we can change the size of the symbol to visually help our users distinguish different types of airports. Double-click on the symbol icon in <code class="docutils literal notranslate"><span class="pre">Major</span> <span class="pre">Airport</span></code> to change the size.</p></li>
+<li><p>Aparte de asignar un color diferente a la categoría, podemos cambiar el tamaño del símbolo para ayudar visualmente a nuestros usuarios a distinguir tipos diferentes de aeropuertos. Doble-clic en el icono de símbolo en <code class="docutils literal notranslate"><span class="pre">Major</span> <span class="pre">Airport</span></code> para cambiar el tamaño.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1429.png" class="align-center" src="../../_images/1429.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>Set the <span class="guilabel">Size</span> to <code class="docutils literal notranslate"><span class="pre">4</span></code> , now follow the above step to set the size of <code class="docutils literal notranslate"><span class="pre">Mid</span> <span class="pre">Airport</span></code> as <code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">Small</span> <span class="pre">Airport</span></code> as <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p>Defina el <span class="guilabel">Tamaño</span> como <code class="docutils literal notranslate"><span class="pre">4</span></code>. Ahora siga el paso de arriba para definir el tamaño de <code class="docutils literal notranslate"><span class="pre">Mid</span> <span class="pre">Airport`</span> <span class="pre">como</span> <span class="pre">``3</span></code> y <code class="docutils literal notranslate"><span class="pre">Small</span> <span class="pre">Airport</span></code> como <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1528.png" class="align-center" src="../../_images/1528.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>Let’s add a base layer for Geo-referencing, <code class="docutils literal notranslate"><span class="pre">Stamen</span> <span class="pre">Watercolor</span></code> would be a nice background map for this project, to add the layer select <span class="menuselection">Web ‣ QuickMapServices ‣ Stamen ‣ Stamen Watercolor</span>. To know more about this plugin visit <a class="reference internal" href="using_plugins.html"><span class="doc">Usar Complementos (QGIS3)</span></a> tutorials.</p></li>
+<li><p>Agreguemos una capa base para la georeferenciación. <code class="docutils literal notranslate"><span class="pre">Stamen</span> <span class="pre">Watercolor</span></code> será un mapa de fondo agradable para este proyecto. Para agregar la capa, seleccione <span class="menuselection">Web ‣ QuickMapServices ‣ Stamen ‣ Stamen Watercolor</span>. Para saber más acerca de este complemento, visite los tutoriales visit <a class="reference internal" href="using_plugins.html"><span class="doc">Usar Complementos (QGIS3)</span></a>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1626.png" class="align-center" src="../../_images/1626.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>Our map is now ready. This is a good time to save our work. Click on the <span class="guilabel">Save Project</span> icon in toolbar and Enter <code class="docutils literal notranslate"><span class="pre">Airports</span></code> as the name of the project.</p></li>
+<li><p>Ahora nuestro mapa está listo. Este es un buen momento para guardar nuestro trabajo. Clic en el icono <span class="guilabel">Guardar proyecto</span> e Ingrese <code class="docutils literal notranslate"><span class="pre">Aeropuertos</span></code> como el nombre del proyecto.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1726.png" class="align-center" src="../../_images/1726.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li><p>Now we are ready to export our project to a web map. Install the
-<strong>qgis2web</strong> plugin by going to <span class="menuselection">Plugins ‣ Manage and
-Install Plugin</span> (See <a class="reference internal" href="using_plugins.html"><span class="doc">Usar Complementos (QGIS3)</span></a> for more details on installing
-plugins in QGIS). Once the plugin is installed, go to <span class="menuselection">Web ‣ qgis2web ‣
-Create a web map</span>.</p></li>
+<li><p>Ahora estamos listos para exportar nuestro proyecto como un mapa web. Instale el complemento <strong>qgis2web</strong> yendo a <span class="menuselection">Complementos ‣ Administrar e Instalar Complemento</span> (Vea <a class="reference internal" href="using_plugins.html"><span class="doc">Usar Complementos (QGIS3)</span></a> para más detalles sobre la instalación de complementos en QGIS). Una vez que el complemento esté instalado, vaya a <span class="menuselection">Web ‣ qgis2web ‣ Crear un mapa web</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1823.png" class="align-center" src="../../_images/1823.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li><p>Now <span class="guilabel">Export to web map</span> dialog box will appear. This is the primary console for customizing the web layout of your web map. The left-hand panel contains all the configuration options. You can change any setting and preview the updates on the right side by clicking the <span class="guilabel">Update preview</span>. The plugin can export the map using many different web mapping libraries. For this tutorial, we will use the <a class="reference external" href="https://leafletjs.com/">Leaflet</a> library. Make sure you have selected the <span class="guilabel">Leaflet</span> option at the bottom.</p></li>
+<li><p>Ahora aparecerá la caja de diálogo <span class="guilabel">Exportar a mapa web</span>. Esta es la consola principal para personalizar el diseño web de su mapa web. El panel a la izquierda contiene todas las opciones de configuración. Puede cambiar cualquier preferencia y previsualizar las actualizaciones a la derecho haciendo clic en <span class="guilabel">Actualizar previsualización</span>. El complemento puede exportar el mapa usando muchas librerías diferentes de mapeo web. Para este tutorial, usaremos la librería <cite>Leaflet `_. Asegúrese que ha seleccionado la opción :guilabel:`Leaflet</cite> abajo.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1920.png" class="align-center" src="../../_images/1920.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
-<li><p>Now lets change the <span class="guilabel">Popup fields</span> of <span class="guilabel">ne_10m_airport</span> layer, change all the fields to <code class="docutils literal notranslate"><span class="pre">inline</span> <span class="pre">label</span></code>, this will give a better view while inspecting the feature in map.</p></li>
+<li><p>Ahora cambiemos los <span class="guilabel">Campos emergentes</span> de la capa <span class="guilabel">ne_10 m_airport</span>. Cambie todos los campos a <code class="docutils literal notranslate"><span class="pre">inline</span> <span class="pre">label</span></code>. Esto dará una mejor vista cuando se inspeccione el objeto espacial en el mapa.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2015.png" class="align-center" src="../../_images/2015.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
-<li><p>Now switch to the <span class="guilabel">Appearance</span> tab. Check the following boxes - <span class="guilabel">Add address search</span>, <span class="guilabel">Geolocate user</span>, <span class="guilabel">Highlight on hover</span>. In <span class="guilabel">Add layer list:</span> choose <code class="docutils literal notranslate"><span class="pre">Collapsed</span></code>. For <span class="guilabel">Layer search</span> choose <code class="docutils literal notranslate"><span class="pre">ne_10m_airport:</span> <span class="pre">iata_code</span></code> field. This option adds a search box where the user to search for an airport with its code. Once made all the changes, click <span class="guilabel">Update preview</span>.</p></li>
+<li><p>Ahora, cambie a la pestaña <span class="guilabel">Apariencia</span>. Marque las siguientes casillas - <span class="guilabel">Añadir búsqueda de dirección</span>, <span class="guilabel">Geolocalizar usuario</span>, <span class="guilabel">Resaltar al pasar por encima</span>. En <span class="guilabel">Añadir lista de capa:</span> elija <code class="docutils literal notranslate"><span class="pre">Colapsado</span></code>. Para <span class="guilabel">Búsqueda de capa</span> elija el campo <code class="docutils literal notranslate"><span class="pre">ne_10m_airport:</span> <span class="pre">iata_code</span></code>. Esta opción añade una caja de búsqueda donde el usuario puede buscar un aeropuerto por su código. Una vez hechos todos los cambios, clic <span class="guilabel">Actualizar previsualización</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2120.png" class="align-center" src="../../_images/2120.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li><p>Now, let’s check the features added to the map, click on the <span class="guilabel">Find</span> (binocular) icon and type <code class="docutils literal notranslate"><span class="pre">DXB</span></code> and press enter, this will center the map to <em>Dubai international airport</em>.</p></li>
+<li><p>Ahora, revisemos los objetos espaciales añadidos al mapa. Clic sobre el icono <span class="guilabel">Encontrar</span> (binocular) e ingrese <code class="docutils literal notranslate"><span class="pre">DXB</span></code> y presione intro. Esto centrará el mapa en el <em>Aeropuerto internacional Dubai</em>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2218.png" class="align-center" src="../../_images/2218.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
-<li><p>Click on the airport icon to explore the information about the airport.</p></li>
+<li><p>Clic en el icono aeropuerto para explorar la información acerca del aeropuerto.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2315.png" class="align-center" src="../../_images/2315.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li><p>Click the <span class="guilabel">Search</span> (Magnifying glass) icon, and search for <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">york</span></code> and press enter.</p></li>
+<li><p>Clic el icono <span class="guilabel">Buscar</span> (lupa), y busque <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">york</span></code> y presione intro.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2414.png" class="align-center" src="../../_images/2414.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
-<li><p>Now the map will be centered to new your city, you can try for any place/address to get the location, this location is retrieved using by  <strong>geocoding</strong> the address.  We will also add a measure too to get the linear distance between any given points in the web map. In <span class="guilabel">Measure tool</span> choose <code class="docutils literal notranslate"><span class="pre">Metric</span></code>. Click <span class="guilabel">Update preview</span>.</p></li>
+<li><p>Ahora el mapa estará centrado en la ciudad de Nueva York. Puede intentar cualquier lugar/dirección para obtener la ubicación. Esta ubicación es recuperada usando la <strong>geocodificación</strong> de la dirección. También vamos a añadir una medida también para obtener la distancia lineal entre dos puntos cualquiera dados en el mapa web. En la <span class="guilabel">herramienta de medida</span>, elija <code class="docutils literal notranslate"><span class="pre">Métrico</span></code>. Clic <span class="guilabel">Actualizar previsualización</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2513.png" class="align-center" src="../../_images/2513.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
-<li><p>Now lets measure the linear distance in SI units, between <em>EWR</em> and <em>JFK</em> airports. Click on the <span class="guilabel">Measure</span> (ruler) icon and select <span class="guilabel">Create a new measurement</span>. Then, click over the airports once the point is chosen, the latitude and longitude of the point are captured and used to compute the distance, now the distance is displayed in <em>meters</em>.</p></li>
+<li><p>Ahora midamos la distancia lineal en unidades SI, entre los aeropuertos <em>EWR</em> y <em>JFK</em> en el icono <span class="guilabel">Medida</span> (regla) y seleccione <span class="guilabel">Crear una nueva medida</span>. Luego, clic sobre los aeropuertos. Una vez que el punto es elegido, la latitud y longitud del punto son capturados y usados para calcular la distancia. Ahora la distancia es mostrada en <em>metros</em>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2611.png" class="align-center" src="../../_images/2611.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
-<li><p>Switch to the <span class="guilabel">Export</span> tab and check the <span class="guilabel">Minify GeoJSON files</span> box. This reduces the size of the resulting file. Click on the <span class="guilabel">…</span> next to <span class="guilabel">Exporter</span>.</p></li>
+<li><p>Cambie a la pestaña <span class="guilabel">Exportar</span> y marque la casilla <span class="guilabel">Reducir archivos GeoJSON</span>. Esto reduce el tamaño del archivo resultante. Clic en <span class="guilabel">…</span> junto a <span class="guilabel">Exportador</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2711.png" class="align-center" src="../../_images/2711.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
-<li><p>Choose the desired location (folder) of export and click <span class="guilabel">Select Folder</span>, then click <span class="guilabel">Export</span> button.</p></li>
+<li><p>Elija la ubicación (carpeta) deseada de exportación y clic <span class="guilabel">Seleccionar carpeta</span>. Luego, clic el botón <span class="guilabel">Exportar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2810.png" class="align-center" src="../../_images/2810.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
-<li><p>Now all <em>properties</em>, <em>styling</em>, and <em>customized options</em> are exported in a self-contained folder. Upon successful completion, a link will appear in the Progress popup dialog box, click on the link to open the file location.</p></li>
+<li><p>Ahora todas las <em>propiedades</em>, <em>estilo</em>, y <em>opciones personalizadas</em> son exportadas en una carpeta autocontenida. Cuando se complete exitosamente, aparecerá un enlace en la caja de diálogo emergente Progreso. Clic en el enlace para abrir la ubicación del archivo.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/2910.png" class="align-center" src="../../_images/2910.png" />
@@ -523,7 +513,7 @@ Create a web map</span>.</p></li>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en jun. 03, 2021.<br/>
+      Actualizado por última vez en jun. 08, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
