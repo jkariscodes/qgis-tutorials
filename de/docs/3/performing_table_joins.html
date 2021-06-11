@@ -15,7 +15,7 @@
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="Suche" href="../../search.html" />
     <link rel="next" title="Räumliche Verbindungen erstellen (QGIS3)" href="performing_spatial_joins.html" />
-    <link rel="prev" title="Digitizing Map Data" href="../digitizing_basics.html" />
+    <link rel="prev" title="Digitizing Map Data (QGIS3)" href="digitizing_basics.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -79,12 +79,12 @@
 <li class="toctree-l1"><a class="reference internal" href="calculating_line_lengths.html">Berechnung der Länge von Linien und Statistiken (QGSI3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_styling_and_analysis.html">Einfache Visualisierung und Analyse von Rasterdaten (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="raster_mosaicing_and_clipping.html">Erstellen und Zuschneiden eines Raster-Mosaiks (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../working_with_terrain.html">Working with Terrain Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_terrain.html">Working with Terrain Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_wms.html">Working with WMS Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_projections.html">Working with Projections (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="georeferencing_basics.html">Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_georeferencing.html">Georeferenzierung von Luftbildern (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../digitizing_basics.html">Digitizing Map Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tabellen verbinden (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Räumliche Verbindungen erstellen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps erstellen (QGIS3)</a></li>
@@ -93,7 +93,8 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Räumliche Abfragen ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nächster Nachbar Analyse (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Stichproben aus Rasterdaten mit Hilfe von Punkten und Polygonen (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../interpolating_point_data.html">Interpolating Point Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Stapelverarbeitung mit dem Processing Framework (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Komplexe Arbeitsabläufe mit Hilfe der Verarbeitungsmodellierung (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automatisierung der Kartenerstellung mit dem Drucklayout Atlas (QGIS3)</a></li>
@@ -125,7 +126,7 @@
               
                 
   <li>
-    <a href="../digitizing_basics.html" title="Previous Chapter: Digitizing Map Data"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Digitizing Map Data</span>
+    <a href="digitizing_basics.html" title="Previous Chapter: Digitizing Map Data (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Digitizing Ma...</span>
     </a>
   </li>
   <li>
@@ -279,7 +280,7 @@
 <h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Das <a class="reference external" href="https://www.census.gov/en.html">US Census Bureau</a> bietet <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">TIGER/Line Shapedateien</a> an. Wir können auf der <a class="reference external" href="https://www2.census.gov/geo/tiger/TIGER2018/">FTP Seite</a> eine Shapedatei der Teilgebiete der Bevölkerungszählung Kaliforniens herunterladen. Wir laden die Datei <a class="reference external" href="https://www2.census.gov/geo/tiger/TIGER2018/TRACT/tl_2018_06_tract.zip">Census Tracts for California</a> herunter.</p>
 <p><a class="reference external" href="http://factfinder2.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t">American FactFinder</a> ist ein Verzeichnis aller Daten der Bevölkerungszählungen der USA. Wir nutzen <cite>Advanced Search</cite> und suchen nach <cite>Topic - Basic Count/Estimate</cite> und <cite>Geographies - All Census Tracts in California</cite>, um eine angepasste CSV-Datei zu erstellen und herunterzuladen. Diese Anleitung nutzt die Daten <code class="docutils literal notranslate"><span class="pre">TOTAL</span> <span class="pre">POPULATION</span> <span class="pre">|</span> <span class="pre">2017</span> <span class="pre">ACS</span> <span class="pre">5-year</span> <span class="pre">estimates</span></code>.</p>
-<img alt="../../_images/data13.png" class="align-center" src="../../_images/data13.png" />
+<img alt="../../_images/data14.png" class="align-center" src="../../_images/data14.png" />
 <p>Der Einfachheit halber, können wir eine Kopie beider Datensätze unter folgenden links herunterladen:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/tl_2018_06_tract.zip">tl_2018_06_tract.zip</a></p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/ACS_17_5YR_B01003.zip">ACS_17_5YR_B01003.zip</a></p>
@@ -451,7 +452,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Juni 10, 2021.<br/>
+      Zuletzt aktualisiert am Juni 11, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
