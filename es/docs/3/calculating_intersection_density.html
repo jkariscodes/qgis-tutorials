@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Calculating Street Intersection Density (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Calcular Densidad de Intersección de Calle (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -94,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Calculating Street Intersection Density (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Procesamiento por Lotes usando el Marco de Procesamiento (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automatizar Flujos de Trabajo Complejos usando el Modelador de Procesos (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automatización de la creación de mapas con el Atlas de diseñador de impresiones  (QGIS3)</a></li>
@@ -263,68 +263,68 @@
       
 
   <section id="calculating-street-intersection-density-qgis3">
-<h1>Calculating Street Intersection Density (QGIS3)<a class="headerlink" href="#calculating-street-intersection-density-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Street intersection density is a useful measure of network connectivity. One can extract and aggregate street intersections over a regular grid to calculate the density. This analysis is commonly used in transportation design as well as urban planning to determine walkability of neighborhoods. With the availability of global street network dataset from OpenStreetMap and QGIS, we can easily calculate and visualize intersection density for any region of the world.</p>
+<h1>Calcular Densidad de Intersección de Calle (QGIS3)<a class="headerlink" href="#calculating-street-intersection-density-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>La densidad de intersección de calle es una medida útil de conectividad de red. Se puede extraer y agregar las intersecciones de calle a lo largo de una cuadrícula regular para calcular la densidad. Este análisis es comúnmente usado en diseño de transporte así como en planificación urbana para determinar caminabilidad de barrios. Con la disponibilidad de un conjunto de datos global de red de calles de OpenStreetMap y QGIS, podemos fácilmente calcular y visualizar densidad de intersección para cualquier región del mundo.</p>
 <section id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>In this tutorial, we will take OpenStreetMap road network data and calculate the street intersection density for the city of Chennai in India.</p>
 <section id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
-<li><p>How to download OpenStreetMap data as shapefiles and clip it to your area of interest.</p></li>
-<li><p>How to create grids in QGIS.</p></li>
+<li><p>Cómo descargar datos OpenStreetMap como archivos shape y recortarlos a su área de interés.</p></li>
+<li><p>Cómo crear cuadrículas en QGIS</p></li>
 </ul>
 </section>
 </section>
 <section id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>We will use the data from <a class="reference external" href="https://opencity.in/">opencities</a> to get the city boundary for Chennai and, then the road network data from <a class="reference external" href="https://download.geofabrik.de/">OpenStreetMap Data Extracts</a> for India.</p>
+<h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Usaremos los datos de <a class="reference external" href="https://opencity.in/">opencities</a> para conseguir los límites de ciudad para Chennai y, luego los datos de red de caminos de <a class="reference external" href="https://download.geofabrik.de/">Extractos de Datos OpenStreetMap</a> para la India.</p>
 <section id="download-the-city-boundary">
-<h3>Download the City Boundary<a class="headerlink" href="#download-the-city-boundary" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Descargar el Límite de Ciudad<a class="headerlink" href="#download-the-city-boundary" title="Enlazar permanentemente con este título">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Visit the <a class="reference external" href="https://opencity.in/">opencity</a> website, then search for “Chennai wards map”.</p></li>
+<li><p>Visite el sitio web <a class="reference external" href="https://opencity.in/">opencity</a>, luego busque “Chennai wards map”.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data11.png" class="align-center" src="../../_images/data11.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Click on the first link and download the data in KML format. A layer <code class="docutils literal notranslate"><span class="pre">Chennai-wards-2011.kml</span></code> will be downloaded.</p></li>
+<li><p>Clic en el primer enlace y descargue los datos en formato KML. Se descargará una capa <code class="docutils literal notranslate"><span class="pre">Chennai-wards-2011.kml</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data2.png" class="align-center" src="../../_images/data2.png" />
 </div></blockquote>
 </section>
 <section id="download-the-road-network">
-<h3>Download the Road Network<a class="headerlink" href="#download-the-road-network" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Descargar la Red de Caminos<a class="headerlink" href="#download-the-road-network" title="Enlazar permanentemente con este título">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Visit the <a class="reference external" href="https://download.geofabrik.de/">OpenStreetMap Data Extracts download</a> server by GEOFABRIK. For this tutorial, we need the data for the city of Chennai in India. Click <span class="guilabel">Asia</span>.</p></li>
+<li><p>Visite el servidor <a class="reference external" href="https://download.geofabrik.de/">OpenStreetMap Data Extracts download</a> de GEOFABRIK. Para este tutorial necesitaremos los datos para la ciudad de Chennai en India. Clic <span class="guilabel">Asia</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data3.png" class="align-center" src="../../_images/data3.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Now in <span class="guilabel">sub-regions</span>, select <span class="guilabel">India</span>.</p></li>
+<li><p>Ahora en <span class="guilabel">sub-regions</span>, seleccione <span class="guilabel">India</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data4.png" class="align-center" src="../../_images/data4.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">india-latest-free.shp.zip</span></code> is the file we are looking for click it to download, this data can be downloaded in other formats also as per requirement.</p></li>
+<li><p>El archivo <code class="docutils literal notranslate"><span class="pre">india-latest-free.shp.zip</span></code> es el que estamos buscando. Clic en él para descargarlo. Estos datos pueden ser descargados en otros formatos también, a pedido.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data5.png" class="align-center" src="../../_images/data5.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>This is a large download containing an extract of data for the entire country. Unzip the <code class="docutils literal notranslate"><span class="pre">india-latest-free.shp.zip</span></code>. You will get many shapefile layers.</p></li>
+<li><p>Esta es una descarga grande que contiene un extracto de datos para todo el país. Descomprima <code class="docutils literal notranslate"><span class="pre">india-latest-free.shp.zip</span></code>. Obtendrá muchas capas de archivos shape.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data6.png" class="align-center" src="../../_images/data6.png" />
 </div></blockquote>
 </section>
 <section id="clip-the-road-network-to-the-city-boundary">
-<h3>Clip the Road Network to the City Boundary<a class="headerlink" href="#clip-the-road-network-to-the-city-boundary" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Corte la Red de Caminos al Límite de Ciudad<a class="headerlink" href="#clip-the-road-network-to-the-city-boundary" title="Enlazar permanentemente con este título">¶</a></h3>
 <ol class="arabic simple">
-<li><p>We will now clip the country-level roads layer to our area of interest. Open QGIS, and drag and drop the <code class="docutils literal notranslate"><span class="pre">Chennai-wards-2011.kml</span></code>.</p></li>
+<li><p>Ahora vamos a cortar la capa de caminos de nivel de país a nuestra área de interés. Abra QGIS, y arrastre y suelte <code class="docutils literal notranslate"><span class="pre">Chennai-wards-2011.kml</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data7.png" class="align-center" src="../../_images/data7.png" />
@@ -336,13 +336,13 @@
 <div><img alt="../../_images/data8.png" class="align-center" src="../../_images/data8.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>In the <span class="guilabel">Input layer</span> select the <code class="docutils literal notranslate"><span class="pre">…</span></code> and click on <span class="guilabel">Browse for Layer…</span></p></li>
+<li><p>En la <span class="guilabel">Capa de entrada</span> seleccione <code class="docutils literal notranslate"><span class="pre">...</span></code> y clic en <span class="guilabel">Explorar la capa..</span></p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data9.png" class="align-center" src="../../_images/data9.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Navigate to the directory where you downloaded the OpenStreetMap data and select <code class="docutils literal notranslate"><span class="pre">gis_osm_roads_free_1.shp</span></code>. In the <span class="guilabel">Overlay layer</span> choose  <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Wards</span> <span class="pre">from</span> <span class="pre">Oct</span> <span class="pre">2011</span></code>. Then click  <code class="docutils literal notranslate"><span class="pre">…</span></code> in <span class="guilabel">Clipped</span> and select <span class="guilabel">Save to File…</span>, browse to a folder where you want to save the results, enter the name as <code class="docutils literal notranslate"><span class="pre">chennai_roads.gpkg</span></code>, and click <span class="guilabel">Run</span>.</p></li>
+<li><p>Navegue al directorio donde descargó los datos OpenStreetMap y seleccione <code class="docutils literal notranslate"><span class="pre">gis_osm_roads_free_1.shp</span></code>. En la <span class="guilabel">Capa de superposición</span> elija <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Wards</span> <span class="pre">from</span> <span class="pre">Oct</span> <span class="pre">2011</span></code>. Luego clic <code class="docutils literal notranslate"><span class="pre">...</span></code> en <span class="guilabel">Clipped</span> y seleccione <span class="guilabel">Guardar a archivo…</span>. Explore una carpeta donde quiere guardar los resultados, ingrese el nombre <code class="docutils literal notranslate"><span class="pre">chennai_roads.gpkg</span></code>, y clic <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data10.png" class="align-center" src="../../_images/data10.png" />
@@ -353,16 +353,16 @@
 <blockquote>
 <div><img alt="../../_images/data111.png" class="align-center" src="../../_images/data111.png" />
 </div></blockquote>
-<p>For convenience, you may directly download a copy of the clipped dataset from the link below:</p>
+<p>Para su comodidad, puede descargar directamente una copia del conjunto de datos cortado del enlace de abajo:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.qgistutorials.com/downloads/Chennai_Wards_2011.kml">chennai_wards_2011.kml</a></p></li>
 <li><p><a class="reference external" href="https://www.qgistutorials.com/downloads/chennai_roads.gpkg">chennai_roads.gpkg</a></p></li>
 </ul>
-<p>Data source: <a class="reference internal" href="../credits.html#opencities" id="id1"><span>[OPENCITIES]</span></a> <a class="reference internal" href="../credits.html#geofabrik" id="id2"><span>[GEOFABRIK]</span></a></p>
+<p>Fuente de datos: <a class="reference internal" href="../credits.html#opencities" id="id1"><span>[OPENCITIES]</span></a> <a class="reference internal" href="../credits.html#geofabrik" id="id2"><span>[GEOFABRIK]</span></a></p>
 </section>
 </section>
 <section id="procedure">
-<h2>Procedure<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Now both layers used for the calculation will be available, if you have downloaded the data, then locate the <code class="docutils literal notranslate"><span class="pre">Chennai-Wards-2011.kml</span></code> and <code class="docutils literal notranslate"><span class="pre">chennai_roads.gpkg</span></code> in <span class="guilabel">Browser</span>, then drag and drop them on the canvas.</p></li>
 </ol>
@@ -370,7 +370,7 @@
 <div><img alt="../../_images/image1.png" class="align-center" src="../../_images/image1.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>The first task is to extract the road intersections. This can be done using the built-in Line intersections tool. Let’s test this on a small subset first to see if the results are satisfactory. Select the roads layer, and use the <span class="guilabel">Select features by Area</span> tool to draw a rectangle and select a few roads.</p></li>
+<li><p>La primera tarea es extraer las intersecciones de caminos. Esto puede hacerse usando la herramienta incorporada Intersección de líneas. Probemos esto primero en un pequeño subconjunto para ver si los resultados son satisfactorios. Seleccione la capa de caminos y use la herramienta <span class="guilabel">Seleccionar objetos espaciales por Área</span> para dibujar un rectángulo y seleccione unos pocos caminos.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image2.png" class="align-center" src="../../_images/image2.png" />
@@ -382,13 +382,13 @@
 <div><img alt="../../_images/image3.png" class="align-center" src="../../_images/image3.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">chennai_roads</span></code> as both <span class="guilabel">Input layer</span> and <span class="guilabel">Intersect layer</span>. Make sure to check the <span class="guilabel">Selected features only</span>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">chennai_roads</span></code> tanto para <span class="guilabel">Capa de entrada</span> como <span class="guilabel">Capa de intersección</span>. Asegúrese de marcar la casilla <span class="guilabel">Objetos seleccionados solamente</span>. Clic <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image4.png" class="align-center" src="../../_images/image4.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Intersections</span></code> will be added. You will notice that while most intersection points are correct, there are some false positives. This is because the algorithm considers intersections of each line segment as a valid intersection. But for our analysis, we need to extract only the intersections when 2 or more streets intersect.</p></li>
+<li><p>Se agregará una nueva capa <code class="docutils literal notranslate"><span class="pre">Intersections</span></code>. Notará que mientras la mayoría de los puntos de intersección son correctos, hay algunos falsos positivos. Esto se debe a que el algoritmo considera como válidas las intersecciones de cada segmento de línea. Pero para nuestro análisis, necesitamos extraer sólo las intersecciones cuando 2 o más calles intersectan.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image5.png" class="align-center" src="../../_images/image5.png" />
@@ -400,13 +400,13 @@
 <div><img alt="../../_images/image6.png" class="align-center" src="../../_images/image6.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">chennai_roads</span></code> as the <span class="guilabel">Input layer</span>. Enter the Dissolved output layer name as <code class="docutils literal notranslate"><span class="pre">roads_dissolved.gpkg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">chennai_roads</span></code> como la <span class="guilabel">Capa de entrada</span>. Ingrese <code class="docutils literal notranslate"><span class="pre">roads_dissolved.gpkg</span></code> para el nombre de la capa disuelta de salida. Clic <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image7.png" class="align-center" src="../../_images/image7.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>The resulting layer <code class="docutils literal notranslate"><span class="pre">roads_dissolved</span></code> has all the road segments merged into a single feature.</p></li>
+<li><p>La capa resultante <code class="docutils literal notranslate"><span class="pre">roads_dissolved</span></code> tiene todos los segmentos de camino unidos en un solo objeto espacial.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image8.png" class="align-center" src="../../_images/image8.png" />
@@ -424,14 +424,14 @@
 <div><img alt="../../_images/image10.png" class="align-center" src="../../_images/image10.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">roads_singleparts</span></code> as both the <span class="guilabel">Input layer</span> and the <span class="guilabel">Intersect layer</span>. Name the <span class="guilabel">Intersections</span> output layer as <code class="docutils literal notranslate"><span class="pre">roads_line_intersections.gpkg</span></code>. Click Run.</p></li>
+<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">roads_singleparts</span></code> tanto como <span class="guilabel">Capa de entrada</span> y <span class="guilabel">Capa de intersección</span>. A la capa de salida <span class="guilabel">Intersecciones</span>, dele el nombre <code class="docutils literal notranslate"><span class="pre">roads_line_intersections.gpkg</span></code>. Clic Ejecutar.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image11.png" class="align-center" src="../../_images/image11.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>This is a computationally intensive operation and may take a long time depending on your computer processing capacity.</p>
+<p>Esta es una operación computacionalmente intensiva y podría tomar un largo tiempo dependiendo de la capacidad de procesamiento de su computadora.</p>
 </div>
 <ol class="arabic simple" start="12">
 <li><p>The resulting layer <code class="docutils literal notranslate"><span class="pre">roads_line_intersections</span></code> now has all intersections correctly identified. But it is still not perfect. Use the <span class="guilabel">Select features by Area tool</span> and select any intersection. You will see that at each intersection there are few duplicate points from adjacent segments. If we use this layer for further analysis, it will result in an inflated number of intersections. Let’s remove duplicates, open the Processing Toolbox and locate the <span class="menuselection">Vector general ‣ Delete duplicate geometries</span> algorithm. Select <code class="docutils literal notranslate"><span class="pre">roads_line_intersections</span></code> as the <span class="guilabel">Input layer</span> and enter <code class="docutils literal notranslate"><span class="pre">road_intersections.gpkg</span></code> as the <span class="guilabel">Cleaned</span> output layer. Click <span class="guilabel">Run</span>.</p></li>
@@ -452,13 +452,13 @@
 <div><img alt="../../_images/image14.png" class="align-center" src="../../_images/image14.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">road_intersections</span></code> as the <span class="guilabel">Input layer</span>. Search by clicking the <span class="guilabel">globe</span> icon next to <span class="guilabel">Target CRS</span> and select <code class="docutils literal notranslate"><span class="pre">EPSG:32664</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span> <span class="pre">/</span> <span class="pre">UTM</span> <span class="pre">zone</span> <span class="pre">44N</span></code>. This is a CRS based on the WGS84 datum for the <em>UTM Zone 44N</em>. Enter the <span class="guilabel">Reprojected</span> output layer as <code class="docutils literal notranslate"><span class="pre">road_intersections_reprojected.gpkg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">road_intersections</span></code> como la <span class="guilabel">Capa de entrada</span>. Busque haciendo clic en el icono <span class="guilabel">globo</span> junto a <span class="guilabel">SRC Destino</span> y seleccione <code class="docutils literal notranslate"><span class="pre">EPSG:32664</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span> <span class="pre">/</span> <span class="pre">UTM</span> <span class="pre">zone</span> <span class="pre">44N</span></code>. Esta es el SRC basado en el datum WG84 para la <em>Zona UTM 44N</em>. Ingrese para la capa de salida <span class="guilabel">Reproyectado</span> el nombre <code class="docutils literal notranslate"><span class="pre">road_intersections_reprojected.gpkg</span></code>. Clic <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image15.png" class="align-center" src="../../_images/image15.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>Once the processing finishes and the <code class="docutils literal notranslate"><span class="pre">road_intersections_reprojected</span></code> layer is added, right-click and select Layer <span class="menuselection">CRS ‣ Set Project CRS from Layer</span>. And remove the <code class="docutils literal notranslate"><span class="pre">road_intersections</span></code> layer.</p></li>
+<li><p>Una vez que termine el procesamiento y sea agregada la capa <code class="docutils literal notranslate"><span class="pre">road_intersections_reprojected</span></code>, clic-derecho y seleccione <span class="menuselection">SRC ‣ Definir SRC de Proyecto a partir de capa</span>. Y quite la capa <code class="docutils literal notranslate"><span class="pre">road_intersections</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image16.png" class="align-center" src="../../_images/image16.png" />
@@ -470,13 +470,13 @@
 <div><img alt="../../_images/image17.png" class="align-center" src="../../_images/image17.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
-<li><p>Select <span class="guilabel">Grid</span> type as <span class="guilabel">Rectangle (Polygon)</span>. Click the  <code class="docutils literal notranslate"><span class="pre">...</span></code>  button in <span class="guilabel">Grid extent</span> and select <span class="menuselection">Calculate from Layer ‣ road_intersections_reprojected</span>.</p></li>
+<li><p>Seleccione el tipo de <span class="guilabel">Cuadrícula</span> como <span class="guilabel">Rectángulo (Polígono)</span>. Clic el botón <code class="docutils literal notranslate"><span class="pre">...</span></code> en <span class="guilabel">Extensión de cuadrícula</span> y seleccione <span class="menuselection">Calcular desde capa ‣ road_intersections_reprojected</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image18.png" class="align-center" src="../../_images/image18.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
-<li><p>Select the Project CRS as the Grid CRS. We want to create a grid of 1km x 1km, so set both <span class="guilabel">Horizontal spacing</span> and <span class="guilabel">Vertical spacing</span> as <code class="docutils literal notranslate"><span class="pre">1000</span></code> meters. Save the <span class="guilabel">Grid</span> output layer as <code class="docutils literal notranslate"><span class="pre">grid.gpkg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Seleccione el SRC de Proyecto como el SRC de la Cuadrícula. Queremos crear una cuadrícula de 1km x 1km, por lo que defina tanto el <span class="guilabel">Espaciado horizontal</span> como el <span class="guilabel">Espaciado vertical</span> como <code class="docutils literal notranslate"><span class="pre">1000</span></code> metros. Guarde la capa de salida <span class="guilabel">Cuadrícula</span> como <code class="docutils literal notranslate"><span class="pre">grid.gpkg</span></code>. Clic <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image19.png" class="align-center" src="../../_images/image19.png" />
@@ -494,25 +494,25 @@
 <div><img alt="../../_images/image21.png" class="align-center" src="../../_images/image21.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
-<li><p>Open the Processing Toolbox and locate the <span class="menuselection">Vector analysis ‣ Count points in polygon</span> algorithm.</p></li>
+<li><p>Abra la Caja de herramientas Procesos y localice el algoritmo <span class="menuselection">Análisis de vector ‣ Contar puntos en un polígono</span></p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image22.png" class="align-center" src="../../_images/image22.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">grid</span></code> as the <span class="guilabel">Polygon layer</span> and <code class="docutils literal notranslate"><span class="pre">road_intersections_reprojected</span></code> as the <span class="guilabel">Points layer</span>. Save the <span class="guilabel">Count</span> output layer as <code class="docutils literal notranslate"><span class="pre">grid_count.gpkg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">grid</span></code> como la <span class="guilabel">Capa polígono</span> y <code class="docutils literal notranslate"><span class="pre">road_intersections_reprojected</span></code> como la <span class="guilabel">Capa de puntos</span>. Guarde la capa de salida <span class="guilabel">Conteo</span> como <code class="docutils literal notranslate"><span class="pre">grid_count.gpkg</span></code>. Clic <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image23.png" class="align-center" src="../../_images/image23.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
-<li><p>The resulting layer <code class="docutils literal notranslate"><span class="pre">grid_count</span></code> will have an attribute <span class="guilabel">NUMPOINTS</span> which contains the number of intersection points within each grid. There are many grids with 0 points. It will help our analysis and visualization to remove grid polygons that contain no intersections. Open the Processing Toolbox and locate the <span class="menuselection">Vector selection ‣ Extract by attribute</span> algorithm.</p></li>
+<li><p>La capa resultante <code class="docutils literal notranslate"><span class="pre">grid_count</span></code> tendrá un atributo <span class="guilabel">NUMPOINTS</span> que contiene el número de puntos de intersección dentro de cada cuadrícula. Hay muchas cuadrículas con 0 puntos. Ayudará a nuestro análisis y visualización quitar polígonos de cuadrícula que no contienen intersecciones. Abra la Caja de herramientas Procesos y localice el algoritmo <span class="menuselection">Selección vectorial ‣ Extraer por atributo</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image24.png" class="align-center" src="../../_images/image24.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">grid_count</span></code> as the <span class="guilabel">Input layer</span>, then select <code class="docutils literal notranslate"><span class="pre">NUMPOINTS</span></code> in <span class="guilabel">Selection attribute</span>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> in <span class="guilabel">Operator</span> and enter <code class="docutils literal notranslate"><span class="pre">0</span></code> as the <span class="guilabel">Value</span>. Save the <span class="guilabel">Extracted (attribute)</span> output layer as <code class="docutils literal notranslate"><span class="pre">grid_counts_chennai.gpkg</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">grid_count</span></code> como la <span class="guilabel">Capa de entrada</span>, luego seleccione <code class="docutils literal notranslate"><span class="pre">NUMPOINTS</span></code> como <span class="guilabel">Atributo de selección</span>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> en <span class="guilabel">Operador</span> e ingrese <code class="docutils literal notranslate"><span class="pre">0</span></code> como el <span class="guilabel">Valor</span>. Guarde la capa de salida <span class="guilabel">Extraído (atributo)</span> como <code class="docutils literal notranslate"><span class="pre">grid_counts_chennai.gpkg</span></code>. Clic <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image25.png" class="align-center" src="../../_images/image25.png" />
@@ -536,7 +536,7 @@
 <div><img alt="../../_images/image28.png" class="align-center" src="../../_images/image28.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
-<li><p>Let’s style this layer to view the density of each grid, select the <code class="docutils literal notranslate"><span class="pre">road_intersection_density</span></code> layer and click <span class="guilabel">Open the Layer Styling Panel</span>. Select <span class="guilabel">Graduated</span> renderer, and in <span class="guilabel">Values</span> select <span class="guilabel">Intersection Density</span>, a <span class="guilabel">Color ramp</span> of your choice, set the <span class="guilabel">classes</span> to <code class="docutils literal notranslate"><span class="pre">7</span></code> and click <span class="guilabel">Classify</span>.</p></li>
+<li><p>Démosle estilo a esta capa para ver la densidad de cada cuadrícula. Seleccione la capa <code class="docutils literal notranslate"><span class="pre">road_intersection_density</span></code> y clic <span class="guilabel">Abrir el panel de estilo de capa</span>. Seleccione el representador <span class="guilabel">Graduado</span>, y en <span class="guilabel">Valores</span>, seleccione <span class="guilabel">Intersection Density</span>, una <span class="guilabel">Rampa de colores</span> de su gusto. Defina <span class="guilabel">Clases</span> como <code class="docutils literal notranslate"><span class="pre">7</span></code> y clic <span class="guilabel">Clasificar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/image29.png" class="align-center" src="../../_images/image29.png" />
@@ -572,7 +572,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en jun. 18, 2021.<br/>
+      Actualizado por última vez en jun. 30, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

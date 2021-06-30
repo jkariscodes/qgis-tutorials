@@ -94,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Procesamiento por Lotes usando el Marco de Procesamiento (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_graphical_modeler.html">Automatizar Flujos de Trabajo Complejos usando el Modelador de Procesos (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="automating_map_creation.html">Automatización de la creación de mapas con el Atlas de diseñador de impresiones  (QGIS3)</a></li>
@@ -267,11 +267,11 @@
 <p>El cálculo del balance hídrico, modelado de inundación, pronóstico de escorrentía, estudios de clima, etc. a menudo necesitan la profundidad media de precipitación en una cuenca hidrológica como una entrada - que también es llamada Precipitación de Área o Precipitación Media de Área (PMA).</p>
 <p>El cálculo de la PMA puede realizarse usando datos de pluviómetro. Usando la ubicación del pluviómetro y la precipitación observada, se puede estimar la precipitación promedio un una ubicación dada usando cualquiera de las técnicas siguientes:</p>
 <ol class="arabic simple">
-<li><p><strong>Media Aritmética</strong>: Se puede simplemente tomar un promedio de todos los valores observados. Este método asume que el campo de lluvias es homogéneo y que las observaciones de pluviómetro son independientes y da peso igual a todos los pluviómetros.</p></li>
-<li><p><strong>Polígono de Thiessen</strong>: Este método divide el área usando polígonos de Thiessen con la suposición de que la precipitación es homogénea dentro del área de cobertura de cada estación. Este método también es llamado una media ponderada por área. Estas suposiciones son buenas para terreno bajo o plano, pero no son apropiadas para terreno montañoso.</p></li>
+<li><p><strong>Media Aritmética</strong>: Se puede simplemente tomar un promedio de todos los valores observados. Este método asume que el campo de lluvia es homogéneo y que las observaciones de pluviómetro son independientes y dan peso igual a todos los pluviómetros.</p></li>
+<li><p><strong>Polígono de Thiessen</strong>: Este método divide el área usando polígonos de Thiessen con el supuesto de que la precipitación es homogénea dentro del área de cobertura de cada estación. Este método también es llamado una media ponderada por área. Estas suposiciones son buenas para terreno bajo o plano, pero no son apropiadas para terreno montañoso.</p></li>
 <li><p><strong>Método Isoyético</strong>: Esta técnica de interpolación calcula Isoyetas - líneas que unen precipitación igual. Asume que la lluvia entre 2 isoyetas es homogénea. Este método es adecuado cuando la red de pluviómetros es densa.</p></li>
-<li><p><strong>Ponderación/Cuadriculado de Distancia</strong> - Esta es una técnica de interpolación donde un grid ráster es creado y un valor para cada píxel es estimado en base a la distancia a las estaciones. Una vez que todos los puntos grid han sido estimados, ellos son sumados y la suma es dividida por el número de celdas grid para obtener la precipitación media de área.</p></li>
-<li><p><strong>Métodos Geoestadísticos</strong>: La lluvia es influenciada fuertemente por factores locales - como la elevación. Usando técnicas de regresión multivariada o Kriging, se puede tomar en cuenta la autocorrelación espacial y puede alcanzar mejor exactitud. Estos métodos son apropiados cuando la distribución de las estaciones pluviómetro es uniforme y densa.</p></li>
+<li><p><strong>Ponderación/Cuadriculado de Distancia</strong> - Esta es una técnica de interpolación donde una cuadrícula ráster es creado y un valor para cada píxel es estimado en base a la distancia a las estaciones. Una vez que todos los puntos grid han sido estimados, ellos son sumados y la suma es dividida por el número de celdas cuadrícula para obtener la precipitación media de área.</p></li>
+<li><p><strong>Métodos Geoestadísticos</strong>: La lluvia es influenciada fuertemente por factores locales - como la elevación. Usando técnicas de regresión multivariada o Kriging, se puede tomar en cuenta la autocorrelación espacial y puede alcanzar mejor exactitud. Estos métodos son apropiados cuando la distribución de las estaciones pluviométricas es uniforme y densa.</p></li>
 </ol>
 <p>En este tutorial aprenderemos el flujo de trabajo QGIS para calcular Precipitación Media de Área, usando el método <strong>Polígono Thiessen</strong>.</p>
 <section id="overview-of-the-task">
@@ -284,17 +284,17 @@
 <li><p>Cómo quitar datos con valores Nulos.</p></li>
 <li><p>Cómo corregir geometrías no válidas en una capa.</p></li>
 <li><p>Cómo revisar su Historia de Procesamiento y volver a ejecutar una herramienta con los mismos parámetros.</p></li>
-<li><p>Cómo disolver polígonos y resumir estadísticas.</p></li>
+<li><p>Cómo disolver polígonos y resumir en estadísticas.</p></li>
 <li><p>Cómo usar solo objetos espaciales seleccionados en algoritmos de Procesamiento.</p></li>
 </ul>
 </section>
 <section id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Usaremos las capas de datos <a href="#id1"><span class="problematic" id="id2">`</span></a>NOAA Climate data <a href="#id3"><span class="problematic" id="id4">`</span></a>_ , <a href="#id5"><span class="problematic" id="id6">`</span></a>HydroSHEDS <a href="#id7"><span class="problematic" id="id8">`</span></a>_ y <a href="#id9"><span class="problematic" id="id10">`</span></a>US Census Bureau Cartographic Boundary <a href="#id11"><span class="problematic" id="id12">`</span></a>_.</p>
+<p>Usaremos las capas de datos <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/">NOAA Climate data</a> , <a class="reference external" href="https://www.hydrosheds.org/">HydroSHEDS</a> y <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">US Census Bureau Cartographic Boundary</a>.</p>
 <section id="station-wise-precipitation">
 <h3>Precipitación por Estación<a class="headerlink" href="#station-wise-precipitation" title="Enlazar permanentemente con este título">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Vaya al sitio web <a href="#id1"><span class="problematic" id="id2">`</span></a>NOAA Climate data <a href="#id3"><span class="problematic" id="id4">`</span></a>_. Clic en la herramienta Search.</p></li>
+<li><p>Vaya al sitio web <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/">NOAA Climate data</a>. Clic en la herramienta Search.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/cd01.png" class="align-center" src="../../_images/cd01.png" />
@@ -333,7 +333,7 @@
 <section id="hydrological-basins">
 <h3>Cuencas Hidrológicas<a class="headerlink" href="#hydrological-basins" title="Enlazar permanentemente con este título">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Vaya al <cite>sitio web HydroSHEDS `_ y clic :guilabel:`Download</cite>.</p></li>
+<li><p>Vaya al <a class="reference external" href="https://www.hydrosheds.org/">sitio web HydroSHEDS</a> y clic <span class="guilabel">Download</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/hydrosheds1.png" class="align-center" src="../../_images/hydrosheds1.png" />
@@ -353,11 +353,11 @@
 </section>
 <section id="state-boundaries">
 <h3>Límites de Estado<a class="headerlink" href="#state-boundaries" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Visite la página <cite>Cartographic Boundary Files - Shapefile `_. Descargue el archivo ``cb_2018_us_state_500k.zip`</cite> de la sección <em>States</em> .</p>
+<p>Visite la página <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">Cartographic Boundary Files - Shapefile</a>. Descargue el archivo <code class="docutils literal notranslate"><span class="pre">cb_2018_us_state_500k.zip</span></code> de la sección <em>States</em> .</p>
 <p>Para su comodidad, puede descargar directamente una copia de todos los conjuntos de datos de los enlaces abajo:</p>
-<p><a href="#id1"><span class="problematic" id="id2">`</span></a>florida_2020_07_prcp <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
-<p><a href="#id1"><span class="problematic" id="id2">`</span></a>hybas_na_lev06_v1c <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
-<p><a href="#id1"><span class="problematic" id="id2">`</span></a>cb_2018_us_state_500k <a href="#id3"><span class="problematic" id="id4">`</span></a>_</p>
+<p><a class="reference external" href="https://www.qgistutorials.com/downloads/florida_2020_07_prcp.csv">florida_2020_07_prcp</a></p>
+<p><a class="reference external" href="https://www.qgistutorials.com/downloads/hybas_na_lev06_v1c.zip">hybas_na_lev06_v1c</a></p>
+<p><a class="reference external" href="https://www.qgistutorials.com/downloads/cb_2018_us_state_500k.zip">cb_2018_us_state_500k</a></p>
 <p>Fuentes de datos: <a class="reference internal" href="../credits.html#ghcn" id="id2"><span>[GHCN]</span></a>, <a class="reference internal" href="../credits.html#hydrosheds" id="id3"><span>[HYDROSHEDS]</span></a>, <a class="reference internal" href="../credits.html#id1" id="id4"><span>[USCENSUS]</span></a></p>
 </section>
 </section>
@@ -394,7 +394,7 @@
 <div><img alt="../../_images/05.png" src="../../_images/05.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Abra la Caja de Herramientas Procesos yendo a <span class="menuselection">Procesos ‣ Caja de herramientas</span>, y busque y localice el algoritmo <span class="menuselection">Selección vectoial ‣ Extraer por atributo</span>.</p></li>
+<li><p>Abra la Caja de Herramientas Procesos yendo a <span class="menuselection">Procesos ‣ Caja de herramientas</span>, y busque y localice el algoritmo <span class="menuselection">Selección vectorial ‣ Extraer por atributo</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/06.png" src="../../_images/06.png" />
@@ -406,7 +406,7 @@
 <div><img alt="../../_images/07.png" src="../../_images/07.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Ahora es agregada una nueva capa al lienzo. Desactive la capa antigua y podrá ver que las estaciones con valores Nulos ha sido quitada.</p></li>
+<li><p>Ahora es agregada una nueva capa al lienzo. Desactive la capa antigua y podrá ver que las estaciones con valores Nulos han sido quitadas.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/08.png" src="../../_images/08.png" />
@@ -581,7 +581,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en jun. 18, 2021.<br/>
+      Actualizado por última vez en jun. 30, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
