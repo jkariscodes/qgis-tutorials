@@ -319,7 +319,7 @@
 <ol class="arabic simple" start="2">
 <li><p>Você vai ver o  <span class="guilabel">QGIS Plugin Builder</span>  com um formulário. Você pode preencher o formulário com detalhes relativos ao nosso complemento. A <span class="guilabel">Class name</span>  será o nome da classe Python contendo a lógica do plugin. Esta será também o nome da pasta que contém todos os arquivos do plugin. Digite <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> como o nome da classe. A <span class="guilabel">Plugin name</span> é o nome sob o qual o seu plugin será exibido no <span class="guilabel">Gerenciador de complementos</span>. Digite o nome como <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code>. Adicione uma descrição no campo  <span class="guilabel">Description</span>. O <span class="guilabel">Module name</span> será o nome do arquivo python principal para o plugin. Inseri-lo como <code class="docutils literal notranslate"><span class="pre">save_attributes</span></code>. Deixe os números de versão como estão. A <span class="guilabel">Text for menu item</span>  de menu será como os usuários vão encontrar o seu plugin no menu do QGIS. Inseri-lo como <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span> <span class="pre">as</span> <span class="pre">CSV</span></code>. Digite seu nome e endereço de e-mail nos campos apropriados. O campo <span class="guilabel">Menu</span>  vai decidir onde seu complemento será adicionado no QGIS. O nosso complemento é para dados vetoriais, selecione <code class="docutils literal notranslate"><span class="pre">Vector</span></code>. Verifique a caixa <span class="guilabel">Flag the plugin as experimental</span> na parte inferior. Clique em <span class="guilabel">OK`</span>.</p></li>
 </ol>
-<img alt="../_images/2124.png" class="align-center" src="../_images/2124.png" />
+<img alt="../_images/2123.png" class="align-center" src="../_images/2123.png" />
 <ol class="arabic simple" start="3">
 <li><p>Em seguida, você será solicitado a escolher um diretório para o seu plugin. Você precisa navegar para a pasta de complementos python do QGIS no seu computador e selecionar <span class="guilabel">Select Folder</span>. Normalmente, o diretório <code class="docutils literal notranslate"><span class="pre">.qgis2/</span></code> está localizado em seu diretório pessoal. O local da pasta <code class="docutils literal notranslate"><span class="pre">plugin</span></code> vai depender de sua plataforma como segue: (Substitua <code class="docutils literal notranslate"><span class="pre">username</span></code> com o seu nome de login)</p></li>
 </ol>
@@ -389,19 +389,19 @@
 <ol class="arabic simple" start="15">
 <li><p>Salve este arquivo, vá para  <span class="menuselection">File ‣ Save save_attributes_dialog_base.ui</span>. Observe que o nome do objeto da caixa de combinação é <code class="docutils literal notranslate"><span class="pre">comboBox</span></code>. Para interagir com este objeto usando o código python, teremos que se referir a ele por este nome.</p></li>
 </ol>
-<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
+<img alt="../_images/1536.png" class="align-center" src="../_images/1536.png" />
 <ol class="arabic simple" start="16">
 <li><p>Vamos recarregar nosso complemento para que possamos ver as mudanças na janela de diálogo. vá para <span class="menuselection">Plugin ‣ Plugin Reloader ‣ Choose a plugin to be reloaded</span>.</p></li>
 </ol>
-<img alt="../_images/1635.png" class="align-center" src="../_images/1635.png" />
+<img alt="../_images/1634.png" class="align-center" src="../_images/1634.png" />
 <ol class="arabic simple" start="17">
 <li><p>Selecione <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> no`diálogo  <span class="guilabel">Configure Plugin reloader</span>.</p></li>
 </ol>
-<img alt="../_images/1732.png" class="align-center" src="../_images/1732.png" />
+<img alt="../_images/1731.png" class="align-center" src="../_images/1731.png" />
 <ol class="arabic simple" start="18">
 <li><p>Agora clique no botão <span class="guilabel">Save Attributes as CSV</span>. Você verá a caixa de diálogo recém-projetada.</p></li>
 </ol>
-<img alt="../_images/1830.png" class="align-center" src="../_images/1830.png" />
+<img alt="../_images/1829.png" class="align-center" src="../_images/1829.png" />
 <ol class="arabic simple" start="19">
 <li><p>Vamos adicionar alguma lógica para o complemento que irá preencher a caixa de combinação com as camadas carregadas no QGIS. Vá para o diretório do complemento e carregue o arquivo <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> em um editor de texto. Role para baixo e encontre ométodo <code class="docutils literal notranslate"><span class="pre">run(self)</span></code>. Este método será chamado quando você clica no botão da barra de ferramentas ou seleciona o item de menu do complemento. Adicione o seguinte código no início do método. Este código obtém as camadas carregadas no QGIS e as adiciona para o objeto <code class="docutils literal notranslate"><span class="pre">comboBox</span></code> a partir do diálogo plugin.</p></li>
 </ol>
@@ -412,19 +412,19 @@
      <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">comboBox</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="n">layer_list</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/1924.png" class="align-center" src="../_images/1924.png" />
+<img alt="../_images/1923.png" class="align-center" src="../_images/1923.png" />
 <ol class="arabic simple" start="20">
 <li><p>Volte na janela principal do QGIS, recarregue o complemento, vá para  <span class="menuselection">Plugins ‣ Plugin Reloader ‣ Reload plugin: SaveAttributes</span>. Alternativamente, você pode pressionar <kbd class="kbd docutils literal notranslate">F5</kbd>. Para testar essa nova funcionalidade, é preciso carregar algumas camadas no QGIS. Depois de carregar alguns dados, inicie o plugin, vá para <span class="menuselection">Vector ‣ Save Attributes ‣ Save Attributes as CSV</span>.</p></li>
 </ol>
-<img alt="../_images/2018.png" class="align-center" src="../_images/2018.png" />
+<img alt="../_images/2017.png" class="align-center" src="../_images/2017.png" />
 <ol class="arabic simple" start="21">
 <li><p>Você vai ver que a nossa caixa de combinação é agora preenchida com os nomes das camadas que estão carregadas no QGIS.</p></li>
 </ol>
-<img alt="../_images/2125.png" class="align-center" src="../_images/2125.png" />
+<img alt="../_images/2124.png" class="align-center" src="../_images/2124.png" />
 <ol class="arabic simple" start="22">
 <li><p>Vamos adicionar outros elementos de interface de usuário restantes. Alterne de volta para o <code class="docutils literal notranslate"><span class="pre">Qt</span> <span class="pre">Creator</span></code> e carregue o arquivo <code class="docutils literal notranslate"><span class="pre">save_attributes_dialog_base.ui</span></code>. Adicione um <code class="docutils literal notranslate"><span class="pre">Label</span></code> <span class="guilabel">Display Widget</span> e altere o texto para <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">output</span> <span class="pre">file</span></code>. Adicionar um <code class="docutils literal notranslate"><span class="pre">LineEdit</span></code> tipo <span class="guilabel">Input Widget</span> que irá mostrar o caminho do arquivo de saída que o usuário escolheu. Em seguida, adicione um <code class="docutils literal notranslate"><span class="pre">Push</span> <span class="pre">Button</span></code> tipo <span class="guilabel">Button</span>  e mude o rótulo do botão para <code class="docutils literal notranslate"><span class="pre">...</span></code>. Observe os nomes de objeto dos widgets que teremos de usar para interagir com eles. Salve o arquivo.</p></li>
 </ol>
-<img alt="../_images/2221.png" class="align-center" src="../_images/2221.png" />
+<img alt="../_images/2220.png" class="align-center" src="../_images/2220.png" />
 <ol class="arabic simple" start="23">
 <li><p>Vamos agora adicionar o código python para abrir um navegador de arquivos quando o usuário clicar no botão <code class="docutils literal notranslate"><span class="pre">...</span></code> e mostrar o caminho selecionado no widget. Abra o arquivo <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> em um editor de texto. Adicione <code class="docutils literal notranslate"><span class="pre">QFileDialog</span></code> à nossa lista de importações no topo do arquivo.</p></li>
 </ol>
@@ -445,7 +445,7 @@
 <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">pushButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select_output_file</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/2516.png" class="align-center" src="../_images/2516.png" />
+<img alt="../_images/2515.png" class="align-center" src="../_images/2515.png" />
 <ol class="arabic simple" start="26">
 <li><p>Volte no QGIS, recarregue o plugin e abra odiálogo <span class="guilabel">Save Attributes`</span>. Se tudo correu bem, você será capaz de clicar no botão <code class="docutils literal notranslate"><span class="pre">...</span></code> e selecionar um arquivo de texto de saída do seu disco.</p></li>
 </ol>
@@ -722,7 +722,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Última atualização em set. 04, 2021.<br/>
+      Última atualização em out. 30, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

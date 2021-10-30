@@ -312,7 +312,7 @@
 <li><p>Zoek vervolgens naar het bestand <code class="docutils literal notranslate"><span class="pre">Address_Points.zip</span></code>, vergroot het en voeg het bestand <code class="docutils literal notranslate"><span class="pre">Address_Points.shp</span></code> toe. U zult heel veel punten zien in de stad. Elke punt geeft een geldig adres weer. We zullen nu 1000 willekeurige punten selecteren. Deze techniek wordt random sampling (willekeurige monsterneming) genoemd. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
+<div><img alt="../../_images/258.png" class="align-center" src="../../_images/258.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Zoek en lokaliseer het algoritme <span class="menuselection">Vector selectie ‣ Willekeurig uitnemen</span>.</p></li>
@@ -398,49 +398,49 @@ from input1 group by origin_id
 <li><p>Een nieuwe virtuele laag <code class="docutils literal notranslate"><span class="pre">SQL-uitvoer</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Deze laag bevat de resultaten van onze analyse. Het dichtstbijzijnde centrum voor geestelijke gezondheid voor elk van de 1000 punten van origine. Laten we eens een paar verschillende manieren proberen om deze resultaten te visualiseren en te valideren.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
+<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Laten we, om dit te valideren, het Kortste pad bouwen. Het punt <em>(OBJECTID_1 = 853046)</em> is visueel gelegen nabij het gezondheidscentrum <em>(OBJECTID = 3)</em>, maar vanuit de SQL-query is het verbonden met het gezondsheidscentrum <em>(OBJECTID = 9)</em>. Laten we dit valideren door de feitelijke afstand te zoeken tussen deze twee origines en bestemming. Laten we eerst het algoritme Korste pad uitoeren op 1 paar. Zoek naar het algoritme <span class="menuselection">QNEAT3 ‣ Routing ‣ Shortest path (point to point)</span> en start het.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1616.png" class="align-center" src="../../_images/1616.png" />
+<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Selecteer <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> als de <span class="guilabel">Network layer</span>. We  dienen een begin- en eindpunt te kiezen. U kunt klikken op de knop <span class="guilabel">…</span> naast het <span class="guilabel">Start point</span> en klik op het punt van origine <em>(OBJECTID_1 = 853046)</em> in het kaartvenster. Selecteer op dezelfde manier het bestemmingspunt <em>(OBJECTID = 3)</em> als het <span class="guilabel">End point</span>.  Behoud het <span class="guilabel">Optimization Criterion</span> als <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">(distance</span> <span class="pre">optimization)</span></code>. Vergroot het gedeelte <span class="guilabel">Gevorderde parameters</span>. Kies <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> als het <span class="guilabel">Direction field</span>. Voer <code class="docutils literal notranslate"><span class="pre">OB</span></code> in als de <span class="guilabel">Value for forward direction</span> en <code class="docutils literal notranslate"><span class="pre">IB</span></code> als de <span class="guilabel">Value for backward direction</span>. Stel de <span class="guilabel">Topology tolerance</span> in als <code class="docutils literal notranslate"><span class="pre">0.000015</span></code>. Laat de andere waarden op hun standaardwaarden staan en klik op <span class="guilabel">Uitvoeren</span>. Wijzig nu het bestemmingspunt naar <em>(OBJECTID = 9)</em> in <span class="guilabel">End point</span> en klik op <span class="guilabel">Uitvoeren</span></p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
+<div><img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Twee nieuwe lagen <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> zullen worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. U zult zien dat hoewel het bestemmingspunt <em>(OBJECTID = 9)</em> visueel dichter bij het punt van origine is, de feitelijke afstand langer is dan vergeleken met het bestemmingspunt <em>(OBJECTID = 3)</em>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
+<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Onthoud dat hoewel de lijnen het punt van origine en de bestemming verbinden met een rechte lijn, de bestemming werd gevonden met de afstand langs het netwerk. Het zal veel nuttiger zijn als de visualisatie het feitelijke kortste pad weergeeft tussen elk punt van origine en bestemming. Vanaf hier is er geen eenvoudige manier om het kortste pad te maken tussen meerdere paren origine-bestemming op de manier waarop we de afstandsmatrix hebben gemaakt. Maar ik zal een manier demonstreren om wat scripten voor Python te gebruiken om deze visualisatie te maken. Laten we eerst het algoritme voor het kortste pad uitvoeren op 1 paar. Zoek naar het algoritme <span class="menuselection">QNEAT3 ‣ Routing ‣ Shortest path (point to point)</span> en start het.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1914.png" class="align-center" src="../../_images/1914.png" />
+<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
 <li><p>Selecteer, in het dialoogvenster <span class="guilabel">Shortest Path (Point to Point)</span>, <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> als de <span class="guilabel">Network layer</span>. Behoud het <span class="guilabel">Optimization criterion</span> als <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">(distance</span> <span class="pre">optimization)</span></code>. Vervolgens dienen we een begin- en eindpunt te kiezen. U kunt op de knop <span class="guilabel">…</span> klikken naast <span class="guilabel">Start point</span> en op het punt van origine in het kaartvenster klikken. Selecteer op dezelfde manier het bestemmingspunt als het <span class="guilabel">End point</span>. Vergroot het gedeelte <span class="guilabel">Gevorderde parameters</span>. Kies <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> als het <span class="guilabel">Direction field</span>. Voer <code class="docutils literal notranslate"><span class="pre">OB</span></code> in als de <span class="guilabel">Value for forward direction</span> en <code class="docutils literal notranslate"><span class="pre">IB</span></code> als de <span class="guilabel">Value for backward direction</span>.  Voer in <span class="guilabel">Topology tollerance</span> in <code class="docutils literal notranslate"><span class="pre">0.000015</span></code>. Laat de andere waarden op hun standaardwaarden staan en klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2011.png" class="align-center" src="../../_images/2011.png" />
+<div><img alt="../../_images/2010.png" class="align-center" src="../../_images/2010.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
 <li><p>Een nieuwe laag <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. U zult zien dat dit pad het netwerk volgt in plaats van het punt van origine en bestemming te verbinden met een rechte lijn. De reden dat we het algoritme uitvoerden op 1 paar is om eenvoudig de waarden voor de parameters te identificeren die we in ons script kunnen gebruiken. Selecteer <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code>, klik met rechts en selecteer <span class="guilabel">Laag verwijderen</span>. Klik op de knop <span class="guilabel">Geschiedenis</span> in de <span class="guilabel">Toolbox van Processing</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2116.png" class="align-center" src="../../_images/2116.png" />
+<div><img alt="../../_images/2115.png" class="align-center" src="../../_images/2115.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>Selecteer, in het dialoogvenster <span class="guilabel">Geschiedenis</span>, de laatste opdracht (opdracht die is gebruikt voor Shortest path). Deze opdracht geeft alle parameters en hun waarden weer die we hebben gebruikt. We kunnen nu deze waarden gebruiken en ze in een script zetten dat ons in staat stelt deze opdracht uit te voeren op veel paren origine-bestemming. Klik op <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2214.png" class="align-center" src="../../_images/2214.png" />
+<div><img alt="../../_images/2213.png" class="align-center" src="../../_images/2213.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
 <li><p>Klik, in de <span class="guilabel">Toolbox van Processing</span>, op de knop <span class="guilabel">Scripts</span> en selecteer <span class="guilabel">Nieuw script maken</span>.</p></li>
@@ -579,7 +579,7 @@ from input1 group by origin_id
 <li><p>Nu kunnen we het script testen. Selecteer een aantal verbindingen uit de laag <code class="docutils literal notranslate"><span class="pre">SQL-uitvoer</span></code> waarvoor u de feitelijke routes wilt hebben berekend. In de <span class="guilabel">Toolbox van Processing</span> zal een nieuwe keuzelijst <span class="guilabel">Scripts</span> worden toegevoegd. Klik er op en selecteer <code class="docutils literal notranslate"><span class="pre">Get</span> <span class="pre">Routes</span> <span class="pre">from</span> <span class="pre">Matrix</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2510.png" class="align-center" src="../../_images/2510.png" />
+<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
@@ -622,7 +622,7 @@ from input1 group by origin_id
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op sep. 04, 2021.<br/>
+      Laatste aanpassing op okt. 30, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

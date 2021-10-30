@@ -300,7 +300,7 @@
 <li><p>First step in the overlay analysis, is to convert each data layer to raster. An important consideration is that all rasters must be of the same extent. We will use the <code class="docutils literal notranslate"><span class="pre">boundary</span></code> layer as the extent for all the rasters. Go to <span class="menuselection">Processing ‣ Toolbox</span>. Search for and locate the <span class="menuselection">GDAL ‣ Vector conversion ‣ Rasterize (vector to raster)`</span> algorithm. Double-click to launch it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/250.png" class="align-center" src="../../_images/250.png" />
+<div><img alt="../../_images/249.png" class="align-center" src="../../_images/249.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>In the <span class="guilabel">Rasterize (vector to raster)</span> dialog, select <code class="docutils literal notranslate"><span class="pre">roads</span></code> as the <span class="guilabel">Input layer</span>. We want to create an output raster where pixel values are 1 where there is a road and 0 where there are no roads. Enter <code class="docutils literal notranslate"><span class="pre">1</span></code> as the <span class="guilabel">A fixed value to burn</span>. The input layers are in a projected CRS with meters are the unit. Select <code class="docutils literal notranslate"><span class="pre">Geoferenced</span> <span class="pre">units</span></code> as the <span class="guilabel">Output raster size units</span>. We will set the resolution of the output raster to be 15 meters. Select <code class="docutils literal notranslate"><span class="pre">15</span></code> as both <span class="guilabel">Width/Horizontal resolution</span> and <span class="guilabel">Height/Vertical resolution</span>. Next, click the <span class="guilabel">…</span> button next to <span class="guilabel">Output extent</span> and select <code class="docutils literal notranslate"><span class="pre">boundary</span></code> for <span class="guilabel">Use extent for</span>.</p></li>
@@ -384,13 +384,13 @@
 <li><p>Now that we have layers representing road and water pixels, we can generate proximity rasters. These are also known as Euclidean distances - where each pixel in the output raster represents the distance to the nearest pixel in the input raster. This resulting raster can be then used to determine suitable areas which are within certain distance from the input. Search for and locate the <span class="menuselection">GDAL ‣ Raster analysis ‣ Proximity (raster distance)</span> algorithm. Double-click to launch it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1515.png" class="align-center" src="../../_images/1515.png" />
+<div><img alt="../../_images/1514.png" class="align-center" src="../../_images/1514.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>In the <span class="guilabel">Proximity (Raster Distance)</span> dialog, select <code class="docutils literal notranslate"><span class="pre">raster_roads</span></code> as the <span class="guilabel">Input layer</span>. Choose <code class="docutils literal notranslate"><span class="pre">Georeferenced</span> <span class="pre">coordinates</span></code> as the <span class="guilabel">Distance units</span>. As the input layers are in a projected CRS with meters as the units, enter <code class="docutils literal notranslate"><span class="pre">5000</span></code> (5 kilometers) as the <span class="guilabel">Maximum distance to be generated</span>. Make sure the <span class="guilabel">Nodata value to use for the destination proximity raster</span> value is <code class="docutils literal notranslate"><span class="pre">Not</span> <span class="pre">set</span></code>. Name the output file as <code class="docutils literal notranslate"><span class="pre">roads_proximity.tif</span></code> and click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1614.png" class="align-center" src="../../_images/1614.png" />
+<div><img alt="../../_images/1613.png" class="align-center" src="../../_images/1613.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Opomba</p>
@@ -400,19 +400,19 @@
 <li><p>Once the processing is over, a new layer <code class="docutils literal notranslate"><span class="pre">roads_proximity</span></code> will be added to the <span class="guilabel">Layers</span> panel. To visualize it better, let’s change the default styling. Click the <span class="guilabel">Open the Layer Styling panel</span> button in the <span class="guilabel">Layers</span> panel. Change the <span class="guilabel">Max</span> value to <code class="docutils literal notranslate"><span class="pre">5000</span></code> under <span class="guilabel">Color gradient</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1715.png" class="align-center" src="../../_images/1715.png" />
+<div><img alt="../../_images/1714.png" class="align-center" src="../../_images/1714.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Repeat the <span class="guilabel">Proximity (Raster Distance)</span> algorithm for the <code class="docutils literal notranslate"><span class="pre">raster_water</span></code> layer with same parameters and name the output <code class="docutils literal notranslate"><span class="pre">water_proximity.tif</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1813.png" class="align-center" src="../../_images/1813.png" />
+<div><img alt="../../_images/1812.png" class="align-center" src="../../_images/1812.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Once the processing finishes, you can apply the similar styling as before to visualize the results better. If you click around the resulting raster, you will see that it is a continuum of values from 0 to 5000. To use this raster in overlay analysis ,we must first re-classify it to create discrete values. Open <span class="menuselection">Raster analysis ‣ Raster calculator</span> algorithm again.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
+<div><img alt="../../_images/1911.png" class="align-center" src="../../_images/1911.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
 <li><p>We want to give higher score to pixels that are near to roads. So let’s use the following scheme.</p></li>
@@ -425,14 +425,14 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>100*(&quot;roads_proximity@1&quot;&lt;=1000) + 50*(&quot;roads_proximity@1&quot;&gt;1000)*(&quot;roads_proximity@1&quot;&lt;=5000) + 10*(&quot;roads_proximity@1&quot;&gt;5000)
 </pre></div>
 </div>
-<img alt="../../_images/2010.png" class="align-center" src="../../_images/2010.png" />
+<img alt="../../_images/209.png" class="align-center" src="../../_images/209.png" />
 </li>
 </ul>
 <ol class="arabic simple" start="21">
 <li><p>Once the re-classification process finishes, a new layer <code class="docutils literal notranslate"><span class="pre">roads_reclass</span></code> will be added to the <span class="guilabel">Layers</span> panel. This layer has only 3 different values, 10, 50 and 100 indicating relative suitability of the pixels with regards to distance from roads. Open <span class="menuselection">Raster analysis ‣ Raster calculator</span> algorithm again.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2115.png" class="align-center" src="../../_images/2115.png" />
+<div><img alt="../../_images/2114.png" class="align-center" src="../../_images/2114.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>Repeat the re-classification process for the <code class="docutils literal notranslate"><span class="pre">water_proximity</span></code> layer. Here the scheme will be reverse, where pixels that are further away from water shall have higher score.</p></li>
@@ -445,7 +445,7 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>100*(&quot;water_proximity@1&quot;&gt;5000) + 50*(&quot;water_proximity@1&quot;&gt;1000)*(&quot;water_proximity@1&quot;&lt;=5000) + 10*(&quot;water_proximity@1&quot;&lt;1000)
 </pre></div>
 </div>
-<img alt="../../_images/2213.png" class="align-center" src="../../_images/2213.png" />
+<img alt="../../_images/2212.png" class="align-center" src="../../_images/2212.png" />
 </li>
 </ul>
 <ol class="arabic simple" start="23">
@@ -522,7 +522,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno sep. 04, 2021.<br/>
+      Zadnjič posodobljeno okt. 30, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

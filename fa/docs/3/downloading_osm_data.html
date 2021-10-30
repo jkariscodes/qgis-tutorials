@@ -254,33 +254,33 @@
 
   <section id="searching-and-downloading-openstreetmap-data-qgis3">
 <h1>حستجو و دانلود داده های OpenStreetMap  (QGIS3)<a class="headerlink" href="#searching-and-downloading-openstreetmap-data-qgis3" title="پیوند ثابت به این سر مقاله">¶</a></h1>
-<p>دریافت داده های با کیفیت بالا برای هر عملیات GIS ضروری است. یک منبع عالی برای داده های آزاد و دارای مجوز آزاد ،<a class="reference external" href="http://www.openstreetmap.org/">OpenStreetMap(OSM)</a> است. پایگاه داده OSM از انواع داده های برداری تشکیل شده است - خیابان ها ، داده های محلی ، چندضلعی های ساختمان ، مرزهای سیاسی و غیره. دسترسی به داده های OSM در فرمت GIS در QGIS از طریق پلاگین <em>QuickOSM*</em> امکان پذیر است. این آموزش روند جستجو ، بارگیری و استفاده از این افزونه را توضیح می دهد.</p>
+<p>Getting high quality data is essential for any GIS task. One great resource for free and openly licensed data is <a class="reference external" href="http://www.openstreetmap.org/">OpenStreetMap(OSM)</a> . The OSM database consists of all types of mapping data - streets, local data, building polygons, administrative boundaries etc. Getting access to OSM data in a GIS format in QGIS is possible via the <em>QuickOSM</em> plugin. This tutorial explains the process for searching, downloading and using this plugin.</p>
 <section id="overview-of-the-task">
 <h2>نمای کلی تمرین<a class="headerlink" href="#overview-of-the-task" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p>ما مکان های همه بارها و میخانه ها در لندن را از پایگاه داده OpenStreetMap استخراج خواهیم کرد و آن را به عنوان یک لایه برداری ذخیره خواهیم کرد.</p>
 <section id="other-skills-you-will-learn">
 <h3>آنچه شما یاد خواهید گرفت<a class="headerlink" href="#other-skills-you-will-learn" title="پیوند ثابت به این سر مقاله">¶</a></h3>
 <ul class="simple">
-<li><p>نحوه ادغام چندین لایه برداری</p></li>
+<li><p>How to chain multiple queries in QuickOSM plugin.</p></li>
 </ul>
 </section>
 </section>
 <section id="procedure">
 <h2>مراحل<a class="headerlink" href="#procedure" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <ol class="arabic simple">
-<li><p>پلاگین ** QuickOSM ** را از پایگاه رسمی افزونه QGIS Official Plugin Repositoryجستجو و نصب کنید. برای راهنمایی در مورد بارگیری افزونه ها به: <a class="reference internal" href="../using_plugins.html"><span class="doc">استفاده از پلاگین Plugins</span></a> مراجعه کنید. توجه داشته باشید که هنگام نوشتن این آموزش ، این افزونه به عنوان * آزمایشی * <em>Experimental</em> علامت گذاری شده است ، بنابراین اطمینان حاصل کنید که &quot;نمایش پلاگین های آزمایشی&quot; <a href="#id1"><span class="problematic" id="id2">``</span></a>Show also experimental plugins` را نیز در بخش  تنظیمات <span class="guilabel">Settings</span>   در کادر محاوره ای guilabel:<cite>Plugins</cite>  بررسی کنید تا بتوانید آن را نصب کنید.</p></li>
+<li><p>Search and install the <strong>QuickOSM</strong> plugin from the QGIS Official Plugin Repository. See <a class="reference internal" href="../using_plugins.html"><span class="doc">استفاده از پلاگین Plugins</span></a> for instructions on downloading plugins. Make sure you have the checkbox selected. Click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/150.png" class="align-center" src="../../_images/150.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>وقتی نصب شود. پلاگین را از  launch the plugin from <span class="menuselection">Vector ‣ QuickOSM -&gt; QuickOSM...</span> اچرا نمایید.</p></li>
+<li><p>Once installed, launch the plugin from <span class="menuselection">Vector ‣ QuickOSM ‣ QuickOSM...</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/230.png" class="align-center" src="../../_images/230.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>در  تب  «پرس و جو سریع» <span class="guilabel">Quick query</span>  ، می توانید فیلتر را برای انتخاب زیر مجموعه تنظیم کنید. خصوصیات توصیفی عارضه های نقشه در پایگاه داده OSM به عنوان کلمه کلیدی <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tags">Tags</a>. ذخیره می شوند. Tag ها با یک کلید و یک مقدار نشان داده می شوند. کلید یک موضوع است و مقدار یک فرم خاص است. برای مشاهده لیست جامع Tags  برای انواع مختلف <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Map_Features">this page</a>  مراجعه کنید. بارها با اتگ <cite>amenity:bar`</cite> و میکده ها با تگ  <code class="docutils literal notranslate"><span class="pre">amenity:pub</span></code> نشان داده می شوند. ابتدا بارها را استخراج می کنیم. &quot;amenity&quot; را به عنوان <span class="guilabel">Key</span> از منوی کشویی انتخاب کنید.</p></li>
+<li><p>In the <span class="guilabel">Quick query</span> tab, you can set a filter to select a subset. The attributes of the map features in the OSM database are stored as <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tags">Tags</a>. Tags are represented with a key and a value. The key is a topic and a value is a specific form. See the OSM <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Map_Features">Map Features</a> wiki page for a comprehensive list of tags for various types of features. Bars are represented using the tag <code class="docutils literal notranslate"><span class="pre">amenity:bar</span></code> and pubs with the tag <code class="docutils literal notranslate"><span class="pre">amenity:pub</span></code>. We will first extract the bars. Select <code class="docutils literal notranslate"><span class="pre">amenity</span></code> as the <span class="guilabel">Key</span> from the drop-down menu.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/325.png" class="align-center" src="../../_images/325.png" />
@@ -292,138 +292,64 @@
 <div><img alt="../../_images/410.png" class="align-center" src="../../_images/410.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>برای محدود کردن جستجو در محدوده شهر ، &quot;London&quot; را به عنوان: <span class="guilabel">In</span>  وارد کنید.</p></li>
+<li><p>We can chain multiple queries in the latest version (v2.0.0 +) of the QuickOSM plugin. Click on the plus button next query selection bar will appear. Click on the first selection box where we can get option <code class="docutils literal notranslate"><span class="pre">And</span></code> and <code class="docutils literal notranslate"><span class="pre">Or</span></code>. <span class="guilabel">And</span> will select only feature which is true for all queries. <span class="guilabel">Or</span> will select all features which are true for any of the queries. Click <code class="docutils literal notranslate"><span class="pre">Or</span></code> to select both bar and pub features.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/511.png" class="align-center" src="../../_images/511.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>بخش  <span class="guilabel">Advanced</span> را باز کنید. در مدل داده OSM ، عارضه ها با استفاده از <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Elements">گره ها ، راه ها و روابط `nodes, ways and relations</a>  نشان داده می شوند. از آنجا که به عارضه های نقطه ای علاقه مند هستیم ، می توانید فقط``Node``  و <code class="docutils literal notranslate"><span class="pre">Points</span></code>  را انتخاب کنید. کلیک کنید: برای اجرای پرس و جو بر روی  <span class="guilabel">Run query</span> کلیک نمایید.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">amenity</span></code> as the <span class="guilabel">Key</span> from the drop-down menu. Then select <code class="docutils literal notranslate"><span class="pre">pub</span></code> from the <span class="guilabel">Value</span> drop-down menu.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/611.png" class="align-center" src="../../_images/611.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>این افزونه با استفاده از <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Overpass_API">Overpass API</a> از پایگاه داده OpenStreetMap پرس و جو کرده و داده ها را به یک لایه برداری QGIS تبدیل می کند.</p></li>
+<li><p>برای محدود کردن جستجو در محدوده شهر ، &quot;London&quot; را به عنوان: <span class="guilabel">In</span>  وارد کنید.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/711.png" class="align-center" src="../../_images/711.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>پس از اتمام درخواست ، به پنجره اصلی QGIS بروید. یک لایه جدید به نام <code class="docutils literal notranslate"><span class="pre">amenity_bar_london</span></code> خواهید دید که به پنل <span class="guilabel">Layers</span> اضافه شده است. پنچره اصلی محل بارهایی را که استخراج شده اند نشان می دهد.</p></li>
+<li><p>بخش  <span class="guilabel">Advanced</span> را باز کنید. در مدل داده OSM ، عارضه ها با استفاده از <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Elements">گره ها ، راه ها و روابط `nodes, ways and relations</a>  نشان داده می شوند. از آنجا که به عارضه های نقطه ای علاقه مند هستیم ، می توانید فقط``Node``  و <code class="docutils literal notranslate"><span class="pre">Points</span></code>  را انتخاب کنید. کلیک کنید: برای اجرای پرس و جو بر روی  <span class="guilabel">Run query</span> کلیک نمایید.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/811.png" class="align-center" src="../../_images/811.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>به پنجره  <span class="guilabel">QuickOSM</span> برگردید و پرس و جو را ویرایش کنید تا میکده   <code class="docutils literal notranslate"><span class="pre">pub</span></code> را به عنوان :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Value`انتخاب کنید. جهت اجرای پرس و جو بر روی :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>Run query`کلیک کنید.</p></li>
+<li><p>Once the query finishes, switch to the main QGIS window. You will see a new layer called <code class="docutils literal notranslate"><span class="pre">amenity_bar_amenity_pub_London</span></code> added to the <span class="guilabel">Layers</span> panel. The canvas will show the locations of the bars and pubs that were extracted.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/911.png" class="align-center" src="../../_images/911.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>این بار افزونه تمام نقاط برچسب زده شده با <code class="docutils literal notranslate"><span class="pre">amenity:pub</span></code> را از پایگاه داده OSM  می گیرد.</p></li>
+<li><p>Open the Attribute table of the layer. There are <code class="docutils literal notranslate"><span class="pre">2091</span></code> features. The column <span class="guilabel">amenity</span> contains the category whether the feature is <code class="docutils literal notranslate"><span class="pre">pub</span></code> or <code class="docutils literal notranslate"><span class="pre">bar</span></code>. Using this categorical column, lets style our layer.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1012.png" class="align-center" src="../../_images/1012.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>پس از اتمام درخواست ، یک لایه جدید``amenity_pub_london`` به پنل <span class="guilabel">Layers</span> اضافه می شود. اکنون 2 لایه برداری داریم. اینها لایه ها حافظه موقت هستند که پس از خروج از QGIS از بین می روند. بیایید اینها را در یک لایه برداری جدا کرده و در دیسک ذخیره کنیم. رفتن به منوی جعبه ابزار <span class="menuselection">Processing ‣ Toolbox</span>. برویید.</p></li>
+<li><p>Click on the <span class="guilabel">Open the Layer Styling panel</span> icon, select <code class="docutils literal notranslate"><span class="pre">Categorized</span></code> then in <span class="guilabel">Value</span> select <code class="docutils literal notranslate"><span class="pre">amenity</span></code> then click <span class="guilabel">Classify</span>. Now the layer will be styled with 2 color featuring both <code class="docutils literal notranslate"><span class="pre">bars</span></code> and <code class="docutils literal notranslate"><span class="pre">pubs</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1115.png" class="align-center" src="../../_images/1115.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>ابزار از منوی   <span class="menuselection">Vector general ‣ Merge vector layers</span>  را جستجو وپیدا کنید. برای راه اندازی آن دوبار کلیک کنید.</p></li>
+<li><p>Now right-click on the layer, <span class="menuselection">Export ‣ Save Feature As...</span> to export the layer as GeoPackage.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1213.png" class="align-center" src="../../_images/1213.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>در کادرمحاوره ای   <span class="guilabel">Merge Vector Layers</span>  روی دکمه guilabel:<cite>...</cite>  کنار:guilabel:<cite>Input layers</cite> کلیک کنید. هر دو لایه``amenity_bar_london`` و <code class="docutils literal notranslate"><span class="pre">amenity_pub_london</span></code> ا انتخاب کنید. بر روی دکمه  :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>OK`کلیک کنید.</p></li>
+<li><p>In the <span class="guilabel">Save Vector Layer as...</span> dialog box, in <span class="guilabel">Format</span> Choose <code class="docutils literal notranslate"><span class="pre">GeoPackage</span></code>,  in <span class="guilabel">File name</span> click <code class="docutils literal notranslate"><span class="pre">...</span></code> and browse to the directory where you want to save the data and name the output <code class="docutils literal notranslate"><span class="pre">longon.gpkg</span></code>. In <span class="guilabel">Layer name</span> enter <code class="docutils literal notranslate"><span class="pre">bar_and_pubs</span></code>. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1312.png" class="align-center" src="../../_images/1312.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>بر روی دکمه <span class="guilabel">...</span>  در کنار  <span class="guilabel">Merged</span>  کلیک نموده و جهت ذخیره <span class="guilabel">Save to GeoPackage</span> را انتخاب نمایید.</p></li>
+<li><p>Now a GeoPackage layer <code class="docutils literal notranslate"><span class="pre">london_bar_and_pubs</span></code> will be added to the canvas.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1411.png" class="align-center" src="../../_images/1411.png" />
-</div></blockquote>
-<ol class="arabic simple" start="15">
-<li><p>به دایرکتوری بروید که می خواهید داده ها را ذخیره کنید و نام خروجی را <a href="#id1"><span class="problematic" id="id2">``</span></a>longon.gpkg``بگذارید.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
-</div></blockquote>
-<ol class="arabic simple" start="16">
-<li><p>عبارت <code class="docutils literal notranslate"><span class="pre">bars_and_pubs</span></code> به عنوان نام لایه  <span class="guilabel">Layer name</span> وارد کنید.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
-</div></blockquote>
-<ol class="arabic simple" start="17">
-<li><p>بر دکمه <span class="guilabel">Run</span>  کلیک شود تا فرایند اجرا شود.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
-</div></blockquote>
-<ol class="arabic simple" start="18">
-<li><p>پس از پایان پردازش ، یک لایه جدید &quot;bars_and_pubs&quot; مشاهده می کنید که در فهرست لایه ها   <span class="guilabel">Layers</span>  اضافه شده است. شما خواهید دید که این لایه اتحاد کلیه عارضه های هر دو لایه قبلی دارد. روی لایه &quot;bars_and_pubs&quot; راست کلیک کرده و گزینه:guilabel:<cite>Open Attribute Table</cite> را انتخاب کنید.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
-</div></blockquote>
-<ol class="arabic simple" start="19">
-<li><p>در:  جدول توصبفی  <span class="guilabel">Attribute Table</span> خواهید دید که این لایه حاوی هر دو نوع میکده و بار به همراه نام این موسسات و سایر عارضه ها است.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
-</div></blockquote>
-<ol class="arabic simple" start="20">
-<li><p>ما به هدف استخراج مکانهای بارها و میکده ها  در لندن رسیده ایم. برای بدست آوردن داده های مربوطه و ادغام آنها مجبور شدیم 2 پرس و جو جداگانه انجام دهیم. این برای کار ما خوب است ، اما شما ممکن است در شرایطی باشید که باید یک پرس و جو پیچیده انجام دهید تا مجموعه داده های مناسب پروژه خود را بدست آورید. خوشبختانه ، افزونه QuickOSM راهی برای نوشتن و اجرای نمایش داده های سفارشی فراهم می کند. بیایید ببینیم که چگونه می توانیم برای وظیفه موجود یک پرسش بنویسیم به پنجره:guilabel:<cite>QuickOSM</cite>  بروید و روی <span class="guilabel">Show query</span> کلیک کنید.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/207.png" class="align-center" src="../../_images/207.png" />
-</div></blockquote>
-<ol class="arabic simple" start="21">
-<li><p>این افزونه  «پرس و جو»  <span class="guilabel">Query</span>  تغییر می کند. بخش <span class="guilabel">Overpass query</span> s پرس جوی را نشان می دهد که براساس ورودی کاربر ایجادشده است. این قسمت قابل ویرایش است و می توان هر پرسشی را وارد کرد. قالب پرس و جو در  <a href="#id1"><span class="problematic" id="id2">`</span></a>Overpass Query Language (QL) &lt;<a class="reference external" href="https://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide">https://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide</a>&gt;`_است. برای هدف ما ، بخشی را بین1 ...  برچسب XML انتخاب کرده و آن را کپی کنید.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/2112.png" class="align-center" src="../../_images/2112.png" />
-</div></blockquote>
-<ol class="arabic simple" start="22">
-<li><p>آن را بعد از بخش جستجوی موجود جایگذاری کنید و مقدار را از <code class="docutils literal notranslate"><span class="pre">pub</span></code> به <code class="docutils literal notranslate"><span class="pre">bar</span></code> تغییر دهید. در زیر سوالی کامل آورده شده است که مقادیر موجود در هر یک از برچسب ها را در یک جستجوی واحد دریافت می کند.  جهت اجرای پرس و جو بر <span class="guilabel">Run query</span> کلیک کنید</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;osm-script output=&quot;xml&quot; timeout=&quot;25&quot;&gt;
-&lt;id-query {{geocodeArea:London}} into=&quot;area_0&quot;/&gt;
-&lt;union&gt;
-    &lt;query type=&quot;node&quot;&gt;
-        &lt;has-kv k=&quot;amenity&quot; v=&quot;pub&quot;/&gt;
-        &lt;area-query from=&quot;area_0&quot;/&gt;
-    &lt;/query&gt;
-    &lt;query type=&quot;node&quot;&gt;
-        &lt;has-kv k=&quot;amenity&quot; v=&quot;bar&quot;/&gt;
-        &lt;area-query from=&quot;area_0&quot;/&gt;
-    &lt;/query&gt;
-&lt;/union&gt;
-&lt;union&gt;
-    &lt;item/&gt;
-    &lt;recurse type=&quot;down&quot;/&gt;
-&lt;/union&gt;
-&lt;print mode=&quot;body&quot;/&gt;
-&lt;/osm-script&gt;
-</pre></div>
-</div>
-<img alt="../../_images/2210.png" class="align-center" src="../../_images/2210.png" />
-</div></blockquote>
-<ol class="arabic simple" start="23">
-<li><p>پس از اتمام درخواست ، یک لایه جدید <code class="docutils literal notranslate"><span class="pre">OsmQuery</span></code> مشاهده می کنید که به پنل لایه ها <span class="guilabel">Layers</span> اضافه شده است. این لایه شامل نقاطی است که نمایانگر بارها و میکده ها در لندن هستند.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/236.png" class="align-center" src="../../_images/236.png" />
 </div></blockquote>
 </section>
 </section>
@@ -450,7 +376,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      آخرین بروز رسانی در سپتامبر 04, 2021 .<br/>
+      آخرین بروز رسانی در اکتبر 30, 2021 .<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
