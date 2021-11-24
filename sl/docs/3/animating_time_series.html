@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
@@ -296,19 +297,19 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <li><p>In the QGIS Browser Panel, locate the directory where you saved your downloaded data. Expand the <code class="docutils literal notranslate"><span class="pre">ne_10m_land.zip</span></code> and select the <code class="docutils literal notranslate"><span class="pre">ne_10m_land.shp</span></code> layer. Drag the layer to the canvas. Next, locate the <code class="docutils literal notranslate"><span class="pre">ASAM_shp.zip</span></code> file. Expand it and select the <code class="docutils literal notranslate"><span class="pre">asam_data_download/ASAM_events.shp</span></code> layer and drag it on to the canvas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/19.png" class="align-center" src="../../_images/19.png" />
+<div><img alt="../../_images/110.png" class="align-center" src="../../_images/110.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Once the layer is loaded, you can see the individual points representing incidents of piracy locations. There are thousands of incidents and it is difficult to determine with more piracy. Rather than individual points, a better way to visualize this data is through a heatmap. Select the <code class="docutils literal notranslate"><span class="pre">ASAM_events</span></code> layers and click the <span class="guilabel">Open the layer Styling Panel</span> button in the <span class="guilabel">Layers</span> panel. Click the <code class="docutils literal notranslate"><span class="pre">Single</span> <span class="pre">symbol</span></code> drop-down.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/21.png" class="align-center" src="../../_images/21.png" />
+<div><img alt="../../_images/26.png" class="align-center" src="../../_images/26.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>In the renderer selection drop-down, select <code class="docutils literal notranslate"><span class="pre">Heatmap</span></code> renderer. Next, select the <code class="docutils literal notranslate"><span class="pre">Viridis</span></code> color ramp from the <span class="guilabel">Color ramp</span> selector.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/31.png" class="align-center" src="../../_images/31.png" />
+<div><img alt="../../_images/35.png" class="align-center" src="../../_images/35.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Adjust the <span class="guilabel">Radius</span> value to <code class="docutils literal notranslate"><span class="pre">5.0</span></code>. At the bottom, expand the <span class="guilabel">Layer Rendering</span> section and adjust the <span class="guilabel">Opacity</span> to <code class="docutils literal notranslate"><span class="pre">75.0%</span></code>. This gives a nice visual effect of the hotspots with the land layer below.</p></li>
@@ -350,7 +351,7 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <li><p>Now you are ready to preview the animation. Set the <span class="guilabel">Step</span> as <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">Year</span></code> then click the <span class="guilabel">Play</span> button to start the animation.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/101.png" class="align-center" src="../../_images/101.png" />
+<div><img alt="../../_images/102.png" class="align-center" src="../../_images/102.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Opomba</p>
@@ -360,7 +361,7 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <li><p>It would be helpful to also display a label showing the current time frame on the map. We can do that using the built in Title decoration. Go to <span class="menuselection">View ‣ Decorations ‣ Title Label</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/111.png" class="align-center" src="../../_images/111.png" />
+<div><img alt="../../_images/112.png" class="align-center" src="../../_images/112.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Click the checkbox to enable it and click <code class="docutils literal notranslate"><span class="pre">Insert</span> <span class="pre">an</span> <span class="pre">Expression</span></code> button and enter the following expression to display the year. Here the variable <code class="docutils literal notranslate"><span class="pre">&#64;map_start_time</span></code> contains the timestamp of the current time slice being displayed. So we can use that timestamp and format it to display year of occurrence. See the <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/functions_list.html#format-date">QGIS Documentation</a> for details on various supported formatting options for the timestamp.</p></li>
@@ -369,37 +370,37 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>format_date(@map_start_time, &#39;yyyy&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/121.png" class="align-center" src="../../_images/121.png" />
+<img alt="../../_images/122.png" class="align-center" src="../../_images/122.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Select <span class="guilabel">font size</span> as <code class="docutils literal notranslate"><span class="pre">25</span></code>, set <span class="guilabel">background bar colour</span> as <code class="docutils literal notranslate"><span class="pre">White</span></code> and set the transparency to <code class="docutils literal notranslate"><span class="pre">50%</span></code>. In <span class="guilabel">Placement</span> choose <code class="docutils literal notranslate"><span class="pre">Bottom</span> <span class="pre">Right</span></code>. Now click Ok.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/131.png" class="align-center" src="../../_images/131.png" />
+<div><img alt="../../_images/132.png" class="align-center" src="../../_images/132.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Once the parameters are set accordingly, the year will display as shown. To export these as images and convert them as GIF select the <code class="docutils literal notranslate"><span class="pre">Export</span> <span class="pre">Animation</span></code> (save icon) in the Temporal control window.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/141.png" class="align-center" src="../../_images/141.png" />
+<div><img alt="../../_images/142.png" class="align-center" src="../../_images/142.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>Click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> <span class="guilabel">Output directory</span> to choose the directory at which the images will be saved.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/151.png" class="align-center" src="../../_images/151.png" />
+<div><img alt="../../_images/152.png" class="align-center" src="../../_images/152.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Under the <span class="guilabel">Extent</span> select the <span class="menuselection">Calculate from Layer ‣ ne_10_land</span> layer. Click Save.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/161.png" class="align-center" src="../../_images/161.png" />
+<div><img alt="../../_images/162.png" class="align-center" src="../../_images/162.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Once the export finishes, you will see PNG images for each year (total 18 images) in the output directory.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/171.png" class="align-center" src="../../_images/171.png" />
+<div><img alt="../../_images/172.png" class="align-center" src="../../_images/172.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Now let’s create an animated GIF from these images. There are many options for creating animations from individual image frames. I like <a class="reference external" href="https://ezgif.com/maker">ezgif</a> for an easy and online tool. Visit the site and click <span class="guilabel">Choose Files</span> and select all the .png files. Once selected, click the <span class="guilabel">Upload and make a GIF!</span> button. Once created, you can download the GIF using the <span class="guilabel">Save</span> button.</p></li>
@@ -432,7 +433,7 @@ layers. Download the <a class="reference external" href="https://www.naturaleart
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zadnjič posodobljeno okt. 30, 2021.<br/>
+      Zadnjič posodobljeno nov. 24, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

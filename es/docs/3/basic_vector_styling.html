@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Procesamiento por Lotes usando el Marco de Procesamiento (QGIS3)</a></li>
@@ -290,7 +291,7 @@
 <li><p>Descomprima ambos conjuntos de datos en una carpeta en su computadora. En el Panel del Explorador QGIS, localice el directorio donde extrajo los datos. Expanda la carpeta <code class="docutils literal notranslate"><span class="pre">ne_10m_land</span></code> y selecciones la capa <code class="docutils literal notranslate"><span class="pre">ne_10m_land.shp</span></code>. Arrastre la capa a la pantalla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/116.png" class="align-center" src="../../_images/116.png" />
+<div><img alt="../../_images/118.png" class="align-center" src="../../_images/118.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Verá una nueva capa <code class="docutils literal notranslate"><span class="pre">ne_10m_land</span></code> agregada al panel <span class="guilabel">Capas</span>. La base de datos global de plantas de energía viene como un archivo CSV, por lo que necesitamos importarlo. Clic en el botón <span class="guilabel">Abrir el Administrador de Fuente de Datos</span> en la <span class="guilabel">Barra de Herramientas Fuente de Datos</span>. También puede usar el atajo de teclado <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd>.</p></li>
@@ -351,25 +352,25 @@
 <li><p>La capa <code class="docutils literal notranslate"><span class="pre">global_power_plant_database</span></code> contiene un atributo que indica el combustible principal usado en cada planta de energía. Podemos crear un estilo donde cada tipo único de combustible sea mostrado en un color diferente. Seleccione <a href="#id1"><span class="problematic" id="id2">``</span></a>primary_fuel``como la <span class="guilabel">Columna</span>. Clic <span class="guilabel">Clasificar</span>. Verá que aparecen múltiples categorías y que la representación del mapa cambia como corresponde.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/105.png" class="align-center" src="../../_images/105.png" />
+<div><img alt="../../_images/106.png" class="align-center" src="../../_images/106.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Mientras una vista Categorizada es útil, esta capa contiene demasiadas categorías para poder interpretar el mapa significativamente. Un mejor enfoque sería agrupar cierto tipo de categorías de combustible y reducir el número de clases. Intentemos crear 3 categorías - <strong>Combustible renovable</strong>, <strong>Combustible no-renovable</strong> y <strong>Otro</strong>. Seleccione el representador <code class="docutils literal notranslate"><span class="pre">Basado</span> <span class="pre">en</span> <span class="pre">regla</span></code>. Seleccione todas menos una regla manteniendo la telc <kbd class="kbd docutils literal notranslate">Ctrl</kbd> presionada y haciendo clic en cada fila. Una vez seleccionada, clic el botón <span class="guilabel">Quitar reglas seleccionadas</span> para borrarlas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/117.png" class="align-center" src="../../_images/117.png" />
+<div><img alt="../../_images/119.png" class="align-center" src="../../_images/119.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Seleccione la regla restante y clic <span class="guilabel">Editar la regla actual</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/125.png" class="align-center" src="../../_images/125.png" />
+<div><img alt="../../_images/126.png" class="align-center" src="../../_images/126.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Ingrese <code class="docutils literal notranslate"><span class="pre">Combustible</span> <span class="pre">renovable</span></code> como la <span class="guilabel">Etiqueta</span>. Clic el botón <span class="guilabel">Expresión</span> junto a <span class="guilabel">Filtro</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/135.png" class="align-center" src="../../_images/135.png" />
+<div><img alt="../../_images/136.png" class="align-center" src="../../_images/136.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>En el diálogo <span class="guilabel">Constructor de Cadena de Expresión</span>, ingrese la siguiente expresión y clic en <span class="guilabel">Aceptar</span>. Aquí estamos agrupando múltiples categorías de energía renovable en una sola categoría.</p></li>
@@ -378,7 +379,7 @@
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;primary_fuel&quot; IN (&#39;Biomass&#39;, &#39;Geothermal&#39;, &#39;Hydro&#39;, &#39;Solar&#39;, &#39;Wind&#39;, &#39;Storage&#39;, &#39;Wave and Tidal&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/145.png" class="align-center" src="../../_images/145.png" />
+<img alt="../../_images/146.png" class="align-center" src="../../_images/146.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -388,25 +389,25 @@
 <li><p>Deslice hacia abajo y clic <span class="guilabel">Marcador simple</span>. Elija un <span class="guilabel">Color de relleno</span> apropiado. Una vez listo, clic el botón <span class="guilabel">Atrás</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/155.png" class="align-center" src="../../_images/155.png" />
+<div><img alt="../../_images/156.png" class="align-center" src="../../_images/156.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Verá que se aplica una sola regla a la capa para la categoría <span class="guilabel">Combustible renovable</span>. Clic-derecho la fila y elija <span class="guilabel">Copiar</span>. Clic-derecho de nuevo y elija <span class="guilabel">Pegar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/165.png" class="align-center" src="../../_images/165.png" />
+<div><img alt="../../_images/166.png" class="align-center" src="../../_images/166.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Una copia de la regla existente será agregada. Selecciona la fila recientemente agregada y clic <span class="guilabel">Editar regla actual</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/175.png" class="align-center" src="../../_images/175.png" />
+<div><img alt="../../_images/176.png" class="align-center" src="../../_images/176.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Ingrese <code class="docutils literal notranslate"><span class="pre">Combustible</span> <span class="pre">no-renovable</span></code> como la <span class="guilabel">Etiqueta</span>. Clic el botón <span class="guilabel">Expresión</span> junto a <span class="guilabel">Filtro</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/183.png" class="align-center" src="../../_images/183.png" />
+<div><img alt="../../_images/184.png" class="align-center" src="../../_images/184.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>En el diálogo <span class="guilabel">Constructor de Cadena de Expresión</span>, ingrese la siguiente expresión y clic en <span class="guilabel">Aceptar</span>.</p></li>
@@ -423,7 +424,7 @@
 <li><p>Deslice hacia abajo y clic <span class="guilabel">Marcador simple</span>. Elija un <span class="guilabel">Color de relleno</span> apropiado. Una vez listo, clic el botón <span class="guilabel">Atrás</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/202.png" class="align-center" src="../../_images/202.png" />
+<div><img alt="../../_images/203.png" class="align-center" src="../../_images/203.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
 <li><p>Repita el proceso de Copiado/Pegado y agregue una tercera regla. Selecciónela y clic en <span class="guilabel">Editar regla actual</span>.</p></li>
@@ -435,19 +436,19 @@
 <li><p>Ingrese <code class="docutils literal notranslate"><span class="pre">Otro</span></code> como la <span class="guilabel">Etiqueta</span>. Elija <span class="guilabel">Sino - Capturar todos los otros objetos espaciales</span> en vez de <span class="guilabel">Filtro</span>. Esto asegurará que cualquier categoría no considerada en las 2 reglas previas recibirá un estilo con esta regla. Deslice hacia abajo y clic <span class="guilabel">Marcador simple</span>. Elija un <span class="guilabel">Color de relleno</span> apropiado. Una vez listo, clic en el botón <span class="guilabel">Atrás</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/222.png" class="align-center" src="../../_images/222.png" />
+<div><img alt="../../_images/223.png" class="align-center" src="../../_images/223.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
 <li><p>La recategorización ahora está completa. Tendrá una vista más limpia que muestra la distribución de las fuentes de combustible renovable vs. no-renovable usada por las plantas de energía y su distribución a través del país. Esto sin embargo no da una figura completa. Podemos agregar otra variable al estilo. En vez de mostrar todos los marcadores con tamaño uniforme, podemos mostrar los tamaños proporcionales a la capacidad de generación de energía de cada planta. Esta técnica de cartografía es llamada <em>Mapeo multivariado</em>. Clic-derecho a la regla <code class="docutils literal notranslate"><span class="pre">Combustible</span> <span class="pre">renovable</span></code> y seleccione <span class="guilabel">Cambiar de Tamaño</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/232.png" class="align-center" src="../../_images/232.png" />
+<div><img alt="../../_images/233.png" class="align-center" src="../../_images/233.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
 <li><p>Clic en el botón <span class="guilabel">Desautorización definida por dato</span> junto a <span class="guilabel">Tamaño</span>. Seleccione <span class="guilabel">Editar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/242.png" class="align-center" src="../../_images/242.png" />
+<div><img alt="../../_images/243.png" class="align-center" src="../../_images/243.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
 <li><p>Como la capacidad de generación varía bastante a lo largo de conjunto de dato, una manera efectiva de obtener un rango pequeño de tamaño es usar la función <code class="docutils literal notranslate"><span class="pre">log10</span></code>. Puede experimentar con diferentes expresiones para llegar a lo que funciona mejor para su visualización preferida. Ingrese la siguiente expresión clic en <span class="guilabel">Aceptar</span>.</p></li>
@@ -456,25 +457,25 @@
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>log10(&quot;capacity_mw&quot;) + 1
 </pre></div>
 </div>
-<img alt="../../_images/252.png" class="align-center" src="../../_images/252.png" />
+<img alt="../../_images/253.png" class="align-center" src="../../_images/253.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
 <li><p>Repita el mismo proceso para otras reglas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/262.png" class="align-center" src="../../_images/262.png" />
+<div><img alt="../../_images/263.png" class="align-center" src="../../_images/263.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
 <li><p>Una vez satisfecho, puede cerrar <span class="guilabel">Panel de Estilo de Capa</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/272.png" class="align-center" src="../../_images/272.png" />
+<div><img alt="../../_images/273.png" class="align-center" src="../../_images/273.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
 <li><p>Mirando nuestra visualización final, puede ver inmediatamente los patrones en el conjunto de datos. Por ejemplo, sobre Europa hay más plantas de energía que usan fuentes de energía renovable, pero son de menor capacidad  que las plantas que usan fuentes de energía no-renovable.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/282.png" class="align-center" src="../../_images/282.png" />
+<div><img alt="../../_images/283.png" class="align-center" src="../../_images/283.png" />
 </div></blockquote>
 </section>
 </section>
@@ -501,7 +502,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en oct. 30, 2021.<br/>
+      Actualizado por última vez en nov. 24, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Utilizzare le interrogazioni spaziali (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Campionare i dati di un raster usando punti o poligoni (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
@@ -290,7 +291,7 @@
 <li><p>Estrarre i dataset dal file compresso in una cartella. Nel QGIS Panello Browser, andate nella cartella con i dati. Aprire la cartella <code class="docutils literal notranslate"><span class="pre">ne_10m_land</span></code> e selezionare il livello <code class="docutils literal notranslate"><span class="pre">ne_10m_land.shp</span></code> . Aggiungete alla vista questo livello (doppio click o trascinate sulla vista).</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/116.png" class="align-center" src="../../_images/116.png" />
+<div><img alt="../../_images/118.png" class="align-center" src="../../_images/118.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>You will get a new layer <code class="docutils literal notranslate"><span class="pre">ne_10m_land</span></code> added to the <span class="guilabel">Layers</span> panel. The global power plant database comes as a CSV file, so we will need to import it. Click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You can also use <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> keyboard shortcut.</p></li>
@@ -351,25 +352,25 @@
 <li><p>Il livello <code class="docutils literal notranslate"><span class="pre">global_power_plant_database</span></code> contiene, nella tabella attributi, una colonna con informazioni che riguardano quale fonte energetica utilizzano. Possiamo tematizzare in modo da visualizzare un colore diverso per ogni fonte energetica. Selezionare <code class="docutils literal notranslate"><span class="pre">primary_fuel</span></code> come <span class="guilabel">Column</span>. Cliccare <span class="guilabel">Classify</span>. Vedrete tutte le categorie trovate apparire in legenda, ed i colori della mappa disegnata cambiare.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/105.png" class="align-center" src="../../_images/105.png" />
+<div><img alt="../../_images/106.png" class="align-center" src="../../_images/106.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Una tematizzazione categoriazzata è utile ma questo livello contiene tante valori diversi di fonti energetiche, quindi è poco efficate visualizzare tutte. Un approccio migliore è quello di ridurre le categorie, raggruppandole alcune classi. Proviamo a creare 3 categorie - <strong>Renewable fuel</strong>, <strong>Non-renewable fuel</strong> e <strong>Altro</strong>. Selezionate la tematizzazione <code class="docutils literal notranslate"><span class="pre">Rule-based</span></code> - ovvero che si basa su regole. Seleziona tutto tranne una regola tenendo premuto il il tasto <kbd class="kbd docutils literal notranslate">Ctrl</kbd> e selezionando tutte le righe. Una volta selezionata, cliccate il pulsante <span class="guilabel">Remove selected rules</span> e scaricatele.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/117.png" class="align-center" src="../../_images/117.png" />
+<div><img alt="../../_images/119.png" class="align-center" src="../../_images/119.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Selezionare la regola rimasta e cliccare  <span class="guilabel">Edit current rule</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/125.png" class="align-center" src="../../_images/125.png" />
+<div><img alt="../../_images/126.png" class="align-center" src="../../_images/126.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Inserire <code class="docutils literal notranslate"><span class="pre">Renewable</span> <span class="pre">fuel</span></code> come <span class="guilabel">Label</span>. Cliccare il pulsante <span class="guilabel">Expression</span> vicino <span class="guilabel">Filter</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/135.png" class="align-center" src="../../_images/135.png" />
+<div><img alt="../../_images/136.png" class="align-center" src="../../_images/136.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Nella finestra di dialogo <span class="guilabel">Expression String Builder</span>, inserisci la regola seguente e clicca <span class="guilabel">OK</span>. Qui stiamo usando un’espressione SQL per raggruppare più categorie in una singola categoria.</p></li>
@@ -378,7 +379,7 @@
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;primary_fuel&quot; IN (&#39;Biomass&#39;, &#39;Geothermal&#39;, &#39;Hydro&#39;, &#39;Solar&#39;, &#39;Wind&#39;, &#39;Storage&#39;, &#39;Wave and Tidal&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/145.png" class="align-center" src="../../_images/145.png" />
+<img alt="../../_images/146.png" class="align-center" src="../../_images/146.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -388,25 +389,25 @@
 <li><p>Spostati in basso e clicca <span class="guilabel">Simple marker</span>. Scegli un colore appropriato  <span class="guilabel">Fill color</span>. Una volta finito clicca il pulsante <span class="guilabel">Back</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/155.png" class="align-center" src="../../_images/155.png" />
+<div><img alt="../../_images/156.png" class="align-center" src="../../_images/156.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Vedrete una regola singola utilizzata al livello per la categoria <span class="guilabel">Renewable fuel</span>. Tasto destro del mouse sulla riga e scegli <span class="guilabel">Copy</span>. Tasto destro del mouse e scegli <span class="guilabel">Paste</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/165.png" class="align-center" src="../../_images/165.png" />
+<div><img alt="../../_images/166.png" class="align-center" src="../../_images/166.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Selezionare la regola rimasta e cliccare  <span class="guilabel">Edit current rule</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/175.png" class="align-center" src="../../_images/175.png" />
+<div><img alt="../../_images/176.png" class="align-center" src="../../_images/176.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Inserire <code class="docutils literal notranslate"><span class="pre">Non-Renewable</span> <span class="pre">fuel</span></code> come <span class="guilabel">Label</span>. Cliccare il pulsante <span class="guilabel">Expression</span> vicino <span class="guilabel">Filter</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/183.png" class="align-center" src="../../_images/183.png" />
+<div><img alt="../../_images/184.png" class="align-center" src="../../_images/184.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Nella finestra di dialogo <span class="guilabel">Expression String Builder</span> inserisci la seguente espressione e clicca <span class="guilabel">OK</span>.</p></li>
@@ -423,7 +424,7 @@
 <li><p>Spostati in basso e clicca <span class="guilabel">Simple marker</span>. Scegli un colore appropriato  <span class="guilabel">Fill color</span>. Una volta finito clicca il pulsante <span class="guilabel">Back</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/202.png" class="align-center" src="../../_images/202.png" />
+<div><img alt="../../_images/203.png" class="align-center" src="../../_images/203.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
 <li><p>Ripeti il procedimento Copia/Incolla per aggiungere una terza regola. Selezionala e clicca <span class="guilabel">Edit current rule</span>.</p></li>
@@ -435,19 +436,19 @@
 <li><p>Inserisci  <code class="docutils literal notranslate"><span class="pre">Altro</span></code> come <span class="guilabel">Label</span>. Scegli <span class="guilabel">Else - Catch all for other features</span> invece di  <span class="guilabel">Filter</span>. Questo assicura che qualsiasi categoria non inclusa nella due regole precedenti venga disegnata con lo stile scelto con questa regola.  Spostati in basso e clicca <span class="guilabel">Simple marker</span>. Scegli un colore adeguato <span class="guilabel">Fill color</span>. Una volta fatto seleziona il pulsante <span class="guilabel">Back</span> .</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/222.png" class="align-center" src="../../_images/222.png" />
+<div><img alt="../../_images/223.png" class="align-center" src="../../_images/223.png" />
 </div></blockquote>
 <ol class="arabic simple" start="23">
 <li><p>The re-categorization is complete now. You will see a much cleaner view that shows the distribution of renewable vs. non-renewable fuel sources used by power plants and their distribution across countries. This however doesn’t give a complete picture. We can add another variable to the styling. Rather than displaying all markers with uniform size, we can show the sizes proportional to the power generation capacity of each plant. This cartography technique is called <em>Multivariate mapping</em>. Right-click the <code class="docutils literal notranslate"><span class="pre">Renewable</span> <span class="pre">fuel</span></code> rule and select <span class="guilabel">Change Size</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/232.png" class="align-center" src="../../_images/232.png" />
+<div><img alt="../../_images/233.png" class="align-center" src="../../_images/233.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
 <li><p>Clicca il pulsante  <span class="guilabel">Data defined override</span> vicino a <span class="guilabel">Size</span>. Seleziona <span class="guilabel">Edit</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/242.png" class="align-center" src="../../_images/242.png" />
+<div><img alt="../../_images/243.png" class="align-center" src="../../_images/243.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
 <li><p>Siccome la forbice di prodittività di energia è molto ampio, per limitare la corrispettiva dimensione si può usare una scala log10, con la funzione  <code class="docutils literal notranslate"><span class="pre">log10</span></code> . Inserisci la seguente regola e clicca  <span class="guilabel">OK</span>.</p></li>
@@ -456,25 +457,25 @@
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>log10(&quot;capacity_mw&quot;) + 1
 </pre></div>
 </div>
-<img alt="../../_images/252.png" class="align-center" src="../../_images/252.png" />
+<img alt="../../_images/253.png" class="align-center" src="../../_images/253.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
 <li><p>Ripetere la stessa operazione per le altre regole.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/262.png" class="align-center" src="../../_images/262.png" />
+<div><img alt="../../_images/263.png" class="align-center" src="../../_images/263.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
 <li><p>Se soddisfatti, chiudere il pannello <span class="guilabel">Layer Styling panel</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/272.png" class="align-center" src="../../_images/272.png" />
+<div><img alt="../../_images/273.png" class="align-center" src="../../_images/273.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
 <li><p>Dalla mappa vedere chiaramente delle informazioni. Ad esempio, sull’Europa ci sono più centrali che usano risorse rinnovabili, ma hanno tutte una bassa capacità di produrre energia rispetto a quelle che usano energia non-rinnovabile.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/282.png" class="align-center" src="../../_images/282.png" />
+<div><img alt="../../_images/283.png" class="align-center" src="../../_images/283.png" />
 </div></blockquote>
 </section>
 </section>
@@ -501,7 +502,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento ott 30, 2021.<br/>
+      Ultimo aggiornamento nov 24, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

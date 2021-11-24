@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Procesamiento por Lotes usando el Marco de Procesamiento (QGIS3)</a></li>
@@ -290,19 +291,19 @@
 <li><p>Ubique el archivo descargado <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.zip</span></code> en el panel <span class="guilabel">Navegador</span> y expándalo. Arrastre el archivo <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.shp</span></code> a la pantalla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Verá cargada una nueva capa <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> en el panel <span class="guilabel">Capas</span>. Esta capa contiene los puntos que representan centros poblados. Ahora cargaremos la capa de sismos. Esta capa viene como un archivo texto <em>Valores Separados por Tabulaciones (TSV)</em>. Para cargar este archivo, clic el botón <span class="guilabel">Abrir Administrador de Fuente de Datos</span> en la <span class="guilabel">Barra de Herramientas de Fuente de Datos</span>. También puede usar el atajo de teclado <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/250.png" class="align-center" src="../../_images/250.png" />
+<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Clic el botón <span class="guilabel">…</span> junto a <span class="guilabel">Nombre de archivo</span> y navegue al archivo``signif.txt`` descargado. Una vez cargado, los campos <span class="guilabel">Formato de Archivo</span> y <span class="guilabel">Definición de Geometría</span> deberían autollenarse con los valores correctos. Clic en <span class="guilabel">Añadir</span> seguido por <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/335.png" class="align-center" src="../../_images/335.png" />
+<div><img alt="../../_images/336.png" class="align-center" src="../../_images/336.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Haga un acercamiento y explore ambos conjuntos de datos. Cada punto amarillo representa la ubicación de un sismo significativo y cada punto rojo representa la ubicación de un centro poblado. Nuestra meta es descubrir el punto más cercano de la capa centros poblados para cada punto de la capa sismos.</p></li>
@@ -348,25 +349,25 @@
 <li><p>De vuelta en la ventana principal QGIS, verá una nueva capa línea llamada <code class="docutils literal notranslate"><span class="pre">Distancia</span> <span class="pre">eje</span></code> cargada en el panel <span class="guilabel">Capas</span>. Esta capa tiene objetos espaciales línea que conectan cada punto sismo con el centro poblado más cercano. Clic-derecho a la capa <code class="docutils literal notranslate"><span class="pre">Distancia</span> <span class="pre">eje</span></code> y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1018.png" class="align-center" src="../../_images/1018.png" />
+<div><img alt="../../_images/1019.png" class="align-center" src="../../_images/1019.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Deslice hacia la derecha a las últimas columnas y verá 2 nuevos atributos llamados <strong>HubName</strong> y <strong>HubDist</strong> agregados a los objetos originales de sismos. Este es el nombre de la distancia al vecino más cercano de la capa de centros poblados.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1121.png" class="align-center" src="../../_images/1121.png" />
+<div><img alt="../../_images/1122.png" class="align-center" src="../../_images/1122.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Nuestro análisis está completo. Podemos ahora explorar otra herramienta que también puede hacer un análisis similar. <strong>Matriz de Distancia</strong> es una herramienta poderosa que le permite no sólo calcular distancia al punto más cercano, sino a todos los puntos de otra capa. Podemos usar este método como una alternativa a la herramienta <em>Distancia al eje más cercano</em>. Desmarque la capa <code class="docutils literal notranslate"><span class="pre">Hub</span> <span class="pre">distance</span></code> para esconderla. Busque y localice la herramienta <span class="menuselection">Análisis de vector ‣ Matriz de distancia</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1219.png" class="align-center" src="../../_images/1219.png" />
+<div><img alt="../../_images/1220.png" class="align-center" src="../../_images/1220.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>En el diálogo <span class="guilabel">Matriz de distancia</span>, defina <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> para la <span class="guilabel">Capa de puntos de entrada</span> y <code class="docutils literal notranslate"><span class="pre">I_D</span></code> como el <span class="guilabel">Campo ID único de entrada</span>. Defina <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> como la <span class="guilabel">Capa de puntos objetivo</span> y <code class="docutils literal notranslate"><span class="pre">name</span></code> como el <span class="guilabel">Campo ID único objetivo</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">Matriz</span> <span class="pre">de</span> <span class="pre">distancia</span> <span class="pre">lineal</span> <span class="pre">(N*k</span> <span class="pre">x</span> <span class="pre">3)</span></code> como el <span class="guilabel">Tipo de matriz de salida</span>. La clave aquí es definir el parámetro <span class="guilabel">Usar sólo los puntos objetivos más cercanos (k)</span> como <code class="docutils literal notranslate"><span class="pre">1</span></code> - que le dará sólo el vecino más cercano en la salida. Clic en <span class="guilabel">Ejecutar</span> para iniciar el cálculo de la matriz. Una vez que termine el procesamiento, clic en <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1318.png" class="align-center" src="../../_images/1318.png" />
+<div><img alt="../../_images/1319.png" class="align-center" src="../../_images/1319.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Una vez que termine el procesamiento, se cargará una nueva capa llamada <code class="docutils literal notranslate"><span class="pre">Distance</span> <span class="pre">matrix</span></code>. Note que la salida de esta herramienta es una capa que contiene geometrías <em>MultiPunto</em>. Cada objeto contiene 2 puntos - fuente y objetivo. Abra la <span class="guilabel">Tabla de atributos</span> para la capa. Verá que cada objeto tiene atributos que mapean el sismo de su centro poblado más cercano. Note que la distancia aquí está en la unidades SRC de la capa (grados).</p></li>
@@ -378,13 +379,13 @@
 <li><p>En este punto, puede guardar sus resultados en el formato de su elección haciendo clic-derecho en la capa y seleccionando <span class="menuselection">Exportar ‣ Guardar Objetos Como</span>. Si quiere visualizar mejor los resultados, podemos fácilmente crear una representación eje-radios a partir de la geometría de objetos. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">Distance</span> <span class="pre">matrix</span></code> y seleccione <span class="guilabel">Propiedades</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1515.png" class="align-center" src="../../_images/1515.png" />
+<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>En el diálogo <span class="guilabel">Propiedades</span>, cámbiese a la pestaña <span class="guilabel">Simbología</span>. Clic en el sub-representador <code class="docutils literal notranslate"><span class="pre">Marcador</span> <span class="pre">simple</span></code> y seleccione <code class="docutils literal notranslate"><span class="pre">Generador</span> <span class="pre">de</span> <span class="pre">geometría</span></code> como el <span class="guilabel">Tipo de capa de símbolo</span>. Defina <code class="docutils literal notranslate"><span class="pre">LineString</span> <span class="pre">/</span> <span class="pre">MultiLineString</span></code> como el <span class="guilabel">Tipo de geometría</span>. Clic el botón <span class="guilabel">Expresión</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1614.png" class="align-center" src="../../_images/1614.png" />
+<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Aquí podemos ingresar una expresión para crear una geometría línea a partir de 2 puntos dentro de cada geometría fuente multi-punto. Ingrese la siguiente expresión.</p></li>
@@ -393,19 +394,19 @@
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make_line(point_n( $geometry, 1), point_n( $geometry, 2))
 </pre></div>
 </div>
-<img alt="../../_images/1715.png" class="align-center" src="../../_images/1715.png" />
+<img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>De vuelta en la pestaña <span class="guilabel">Simbología</span>, defina el estilo de la línea según su gusto y clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1813.png" class="align-center" src="../../_images/1813.png" />
+<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Verá ahora la capa <code class="docutils literal notranslate"><span class="pre">Distance</span> <span class="pre">matrix</span></code> representada con líneas en vez de puntos. Note que no tuvimos que crear una nueva capa para esta visualización. La capa todavía contiene geometrías MultiPunto, pero es representada dinámicamente como líneas en base a la expresión.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
+<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 </section>
 </section>
@@ -432,7 +433,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en oct. 30, 2021.<br/>
+      Actualizado por última vez en nov. 24, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

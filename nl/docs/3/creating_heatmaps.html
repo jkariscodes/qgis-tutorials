@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Ruimtelijke query’s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Dichtheid van straatkruisingen berekenen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Massa verwerken met behulp van Framework Processing (QGIS 3)</a></li>
@@ -288,13 +289,13 @@
 <li><p>We zullen eerst een laag voor de basiskaart laden vanaf OpenStreetMap en dan de gegevens in CSV importeren. Klik op de knop <span class="guilabel">Databronnen beheren openen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/130.png" class="align-center" src="../../_images/130.png" />
+<div><img alt="../../_images/140.png" class="align-center" src="../../_images/140.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Selecteer de tab <span class="guilabel">Browser</span> in het paneel aan de linkerkant en zoek naar de laag <span class="guilabel">OpenStreetMap</span> onder <span class="guilabel">XYZ Tiles</span>. Klik met rechts en selecteer <span class="guilabel">Laag aan project toevoegen</span> om deze laag toe te voegen in QGIS.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/225.png" class="align-center" src="../../_images/225.png" />
+<div><img alt="../../_images/226.png" class="align-center" src="../../_images/226.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Schakel naar de tab <span class="guilabel">Tekengescheiden tekst</span>. Hier zullen we de gegevens over de criminaliteit importeren die worden aangeboden als een tekstbestand in de indeling CSV. Klik op de knop <span class="guilabel">…</span> naast <span class="guilabel">Bestandsnaam</span> en blader naar het gedownloade bestand <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street.csv</span></code>. Het <span class="guilabel">X-veld</span> en <span class="guilabel">Y-veld</span> in het gedeelte <span class="guilabel">Geometrie definitie</span> zouden automatisch moeten worden gevuld met de kolommen <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> en <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. Het <span class="guilabel">Geometrie CRS</span> zou moeten blijven staan op de standaard definitie <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code>. Zorg er voor dat de gegevens er goed uitzien in het paneel <span class="guilabel">Voorbeeldgegevens</span> er goed uitzien en klik op <span class="guilabel">Toevoegen</span>, gevolgd door <span class="guilabel">Close</span>.</p></li>
@@ -342,19 +343,19 @@
 <li><p>Voor veel types analyses is het slechts overwegen van de dichtheid van punten goed genoeg. Maar soms zou u een verschillende belangrijkheid aan elk punt willen geven. Een meer gewelddadiger misdrijf zou meer invloed moeten hebben op de heatmap van de uitvoer dan een straatroof. Soortgelijk zou een punt soms meerdere waarnemingen op één enkele locatie weergeven waarmee in de analyse rekening moet worden gehouden. U kunt, om dat te doen, een optioneel numeriek veld <strong>weging</strong> opgeven dat een waarde specificeert voor elk punt. Laten we een veld voor weging toevoegen en dat gebruiken om de heatmap te verbeteren. Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> en selecteer <span class="guilabel">Attributentabel openen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/109.png" class="align-center" src="../../_images/109.png" />
+<div><img alt="../../_images/1010.png" class="align-center" src="../../_images/1010.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>U zult een tekstveld zien, genaamd <code class="docutils literal notranslate"><span class="pre">Crime</span> <span class="pre">type</span></code>, in de invoergegevens dat het type misdaad beschrijft. We kunnen dat gebruiken om de verschillende types misdrijven te categoriseren en een hoger gewicht toekennen aan meer gewelddadiger misdaden.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1112.png" class="align-center" src="../../_images/1112.png" />
+<div><img alt="../../_images/1113.png" class="align-center" src="../../_images/1113.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Klik op de knop <span class="guilabel">Open veldberekening</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1210.png" class="align-center" src="../../_images/1210.png" />
+<div><img alt="../../_images/1211.png" class="align-center" src="../../_images/1211.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>We zullen nu een formule invoeren die het veld <code class="docutils literal notranslate"><span class="pre">Crime</span> <span class="pre">type</span></code> gebruikt en de waarde voor de weging bepaalt. QGIS heeft een handige manier om dergelijke berekende velden toe te voegen met behulp van <em>Virtuele velden</em>. Het virtuele veld wordt opgeslagen in het project van QGIS en past de brongegevens niet aan. Het wordt ook dynamisch berekend en kan overal elders in QGIS worden gebruikt, net als elke andere waarde van een attribuut. Voer <code class="docutils literal notranslate"><span class="pre">weging</span></code> in als de <span class="guilabel">Naam voor veld</span> en stel het <span class="guilabel">Type voor veld</span> in op <code class="docutils literal notranslate"><span class="pre">Geheel</span> <span class="pre">getal</span> <span class="pre">(integer)</span></code>. Voer de volgende expressie in in het veld <span class="guilabel">Expressie</span>. Hier gebruiken we het argument <strong>CASE</strong> om verschillende waarden toe te wijzen onder verschillende voorwaarden. Klik op <span class="guilabel">OK</span>.</p></li>
@@ -367,37 +368,37 @@ ELSE 1
 END
 </pre></div>
 </div>
-<img alt="../../_images/139.png" class="align-center" src="../../_images/139.png" />
+<img alt="../../_images/1310.png" class="align-center" src="../../_images/1310.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Een nieuw attribuut zal worden toegevoegd voor elk object met de van toepassing zijnde waarde voor de weging.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/148.png" class="align-center" src="../../_images/148.png" />
+<div><img alt="../../_images/149.png" class="align-center" src="../../_images/149.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>Klik, terug in het paneel <span class="guilabel">Laag opmaken</span>, op het keuzemenu voor <span class="guilabel">Punten wegen op</span> en selecteer het nieuw toegevoegde veld <code class="docutils literal notranslate"><span class="pre">Weging</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/158.png" class="align-center" src="../../_images/158.png" />
+<div><img alt="../../_images/159.png" class="align-center" src="../../_images/159.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>U zult het renderen van de heatmap wijzigen om rekening te houden met de parameter voor de weging. Sluit het paneel <span class="guilabel">Laag opmaken</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/167.png" class="align-center" src="../../_images/167.png" />
+<div><img alt="../../_images/168.png" class="align-center" src="../../_images/168.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Wanneer u de visualisatie met de heatmap dient op te slaan als een permanente rasterlaag of de heatmap wilt aanpassen met gevorderde opties zoals verschillende kernels of dynamische straal, kunt u de <strong>Heatmap (Kernel Density Estimation)</strong> uit de Processing Toolbox gebruiken. We zullen dit algoritme nu gaan gebruiken. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/178.png" class="align-center" src="../../_images/178.png" />
+<div><img alt="../../_images/179.png" class="align-center" src="../../_images/179.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Voor we de heatmap kunnen maken, dienen we de brongegevens opnieuw te projecteren naar een geprojecteerd CRS. Het is niet juist om een geografisch CRS te gebruiken, omdat afstand een belangrijke rol in het berekenen van de heatmap speelt. Zoek naar het algoritme <span class="menuselection">Vector algemeen ‣ Laag opnieuw projecteren</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/186.png" class="align-center" src="../../_images/186.png" />
+<div><img alt="../../_images/187.png" class="align-center" src="../../_images/187.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Klik, in het dialoogvenster <span class="guilabel">Laag opnieuw projecteren</span>, op de knop <span class="guilabel">CRS selecteren</span> voor <span class="guilabel">Doel CRS</span>. Zoek en selecteer het CRS <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code>. Dit geprojecteerde CRS is een goede keuze voor gegevens in het VK. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
@@ -409,7 +410,7 @@ END
 <li><p>Een nieuwe laag, genaamd <code class="docutils literal notranslate"><span class="pre">Opnieuw</span> <span class="pre">geprojecteerd</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Deselecteer het vak naast de oude laag <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> om die te verbergen.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/205.png" class="align-center" src="../../_images/205.png" />
+<div><img alt="../../_images/206.png" class="align-center" src="../../_images/206.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
 <li><p>Zoek naar het algoritme <span class="menuselection">Interpolatie ‣ Heatmap (Schatting dichtheid kernel KDE)</span>.</p></li>
@@ -421,7 +422,7 @@ END
 <li><p>In het dialoogvenster <span class="guilabel">Heatmap (Kernel Density Estimation)</span> zullen we dezelfde parameters als eerder gebruiken. Selecteer <span class="guilabel">Straal</span> als <code class="docutils literal notranslate"><span class="pre">5000</span></code> meters en <span class="guilabel">Weight from field</span> as <code class="docutils literal notranslate"><span class="pre">Weging</span></code>. Stel <span class="guilabel">Grootte pixel X</span> en <span class="guilabel">Grootte pixel Y</span> in op <code class="docutils literal notranslate"><span class="pre">50</span></code> meters. Laat de <span class="guilabel">Kernel shape</span> staan op de standaard waarde <code class="docutils literal notranslate"><span class="pre">Vierdegraads</span></code>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/226.png" class="align-center" src="../../_images/226.png" />
+<div><img alt="../../_images/227.png" class="align-center" src="../../_images/227.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
@@ -431,13 +432,13 @@ END
 <li><p>Als de verwerking is voltooid zal een nieuwe rasterlaag, genaamd  <code class="docutils literal notranslate"><span class="pre">HEATMAP</span></code> worden geladen. De standaard visualisatie is uitermate lelijk omdat het de renderer <code class="docutils literal notranslate"><span class="pre">Enkelbands</span> <span class="pre">grijs</span></code> gebruikt. Klik op de knop <span class="guilabel">Paneel Laag opmaken openen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/234.png" class="align-center" src="../../_images/234.png" />
+<div><img alt="../../_images/235.png" class="align-center" src="../../_images/235.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
 <li><p>Wijzig de renderer naar <code class="docutils literal notranslate"><span class="pre">Enkelbands</span> <span class="pre">pseudokleur</span></code> en selecteer het kleurverloop <code class="docutils literal notranslate"><span class="pre">Reds</span></code>. De laag ziet er nu uit zoals de visualisatie met de heatmap die we eerder hebben gemaakt.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/245.png" class="align-center" src="../../_images/245.png" />
+<div><img alt="../../_images/246.png" class="align-center" src="../../_images/246.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
@@ -468,7 +469,7 @@ END
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Laatste aanpassing op okt. 30, 2021.<br/>
+      Laatste aanpassing op nov. 24, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

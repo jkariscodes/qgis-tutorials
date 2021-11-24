@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="batch_processing.html">Batch Processing using Processing Framework (QGIS3)</a></li>
@@ -348,7 +349,7 @@ pyrcc5 -o resources.py resources.qrc
 <li><p>Open QGIS. Go to <span class="menuselection">Plugins ‣ Plugin Builder ‣ Plugin Builder</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/120.png" class="align-center" src="../../_images/120.png" />
+<div><img alt="../../_images/128.png" class="align-center" src="../../_images/128.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>You will see the <span class="guilabel">QGIS Plugin Builder</span> dialog with a form. You can fill the form with details relating to our plugin. The <span class="guilabel">Class name</span> will be the name of the Python Class containing the logic of the plugin. This will also be the name of the folder containing all the plugin files. Enter <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> as the class name. The <span class="guilabel">Plugin name</span> is the name under which your plugin will appear in the    <span class="guilabel">Plugin Manager</span>. Enter the name as <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code>. Add a description in the <span class="guilabel">Description</span> field. The <span class="guilabel">Module name</span> will be the name of the main python file for the plugin. Enter it as <code class="docutils literal notranslate"><span class="pre">save_attributes</span></code>. Leave the version numbers as they are and enter your name and email address in the appropriate fields. Click <span class="guilabel">Next</span>.</p></li>
@@ -425,37 +426,37 @@ pyrcc5 -o resources.py resources.qrc
 <li><p>Plugins in QGIS are stored in a special folder. We must copy our plugin directory to that folder before it can be used. In QGIS, locate your current profile folder by going to <span class="menuselection">Settings ‣ User Profiles ‣ Open Active Profile Folder</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/107.png" class="align-center" src="../../_images/107.png" />
+<div><img alt="../../_images/108.png" class="align-center" src="../../_images/108.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>In the profile folder, copy the plugin folder to <span class="menuselection">python ‣ plugins</span> subfolder.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1110.png" class="align-center" src="../../_images/1110.png" />
+<div><img alt="../../_images/1111.png" class="align-center" src="../../_images/1111.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Now we are ready to have a first look at the brand new plugin we created. Close QGIS and launch it again. Go to <span class="menuselection">Plugins ‣ Manage and Install plugins</span> and enable the <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code> plugin in the    <span class="guilabel">Installed</span> tab.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/127.png" class="align-center" src="../../_images/127.png" />
+<div><img alt="../../_images/129.png" class="align-center" src="../../_images/129.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>You will notice that there is a new icon in the plugin toolbar and a new menu entry under <span class="menuselection">Vector ‣ Save Attributes ‣ Save Attributes as CSV`</span>. Select it to launch the plugin dialog.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/137.png" class="align-center" src="../../_images/137.png" />
+<div><img alt="../../_images/138.png" class="align-center" src="../../_images/138.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>You will notice a new blank dialog named <span class="guilabel">Save Attributes</span>. Close this dialog.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/147.png" class="align-center" src="../../_images/147.png" />
+<div><img alt="../../_images/148.png" class="align-center" src="../../_images/148.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>We will now design our dialog box and add some user interface elements to it. Open the <code class="docutils literal notranslate"><span class="pre">Qt</span> <span class="pre">Creator</span></code> program and go to <span class="menuselection">File ‣ Open File or Project</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/157.png" class="align-center" src="../../_images/157.png" />
+<div><img alt="../../_images/158.png" class="align-center" src="../../_images/158.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Browse to the plugin directory and select the <code class="docutils literal notranslate"><span class="pre">save_attributes_dialog_base.ui</span></code> file. Click <span class="guilabel">Open</span>.</p></li>
@@ -471,13 +472,13 @@ pyrcc5 -o resources.py resources.qrc
 <li><p>You will see the blank dialog from the plugin. You can drag-and-drop elements from the left-hand panel on the dialog. We will add a <span class="guilabel">Combo Box</span> type of <span class="guilabel">Input Widgets</span>. Drag it to the plugin dialog.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/177.png" class="align-center" src="../../_images/177.png" />
+<div><img alt="../../_images/178.png" class="align-center" src="../../_images/178.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Resize the combo box and adjust its size. Now drag a <span class="guilabel">Label</span> type <span class="guilabel">Display Widget</span> on the dialog.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/185.png" class="align-center" src="../../_images/185.png" />
+<div><img alt="../../_images/186.png" class="align-center" src="../../_images/186.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Click on the label text and enter <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">a</span> <span class="pre">layer</span></code>.</p></li>
@@ -489,7 +490,7 @@ pyrcc5 -o resources.py resources.qrc
 <li><p>Save this file by going to <span class="menuselection">File ‣ Save save_attributes_dialog_base.ui</span>. Note the name of the combo box object is <code class="docutils literal notranslate"><span class="pre">comboBox</span></code>. To interact with this object using python code, we will have to refer to it by this name.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/204.png" class="align-center" src="../../_images/204.png" />
+<div><img alt="../../_images/205.png" class="align-center" src="../../_images/205.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
 <li><p>Let’s reload our plugin so we can see the changes in the dialog window. Go to <span class="menuselection">Plugin ‣ Plugin Reloader ‣ Choose a plugin to be reloaded</span>. Select <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> in the <span class="guilabel">Configure Plugin reloader</span> dialog.</p></li>
@@ -501,7 +502,7 @@ pyrcc5 -o resources.py resources.qrc
 <li><p>Click the <span class="guilabel">Reload plugin</span> button to load the latest version of the plugin. Click the <span class="guilabel">Save Attributes as CSV</span> button to open the newly designed dialog box.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/224.png" class="align-center" src="../../_images/224.png" />
+<div><img alt="../../_images/225.png" class="align-center" src="../../_images/225.png" />
 </div></blockquote>
 <ol class="arabic" start="23">
 <li><p>Let’s add some logic to the plugin that will populate the combo box with the layers loaded in QGIS. Go to the plugin directory and load the file <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> in a text editor.  First, insert at the top of the file with the other imports:</p>
@@ -527,19 +528,19 @@ pyrcc5 -o resources.py resources.qrc
 <li><p>Back in the main QGIS window, reload the plugin by clicking on the <span class="guilabel">Reload plugin</span> button. To test this new functionality, we must load some layers in QGIS. After you have loaded some layers, launch the plugin by going to <span class="menuselection">Vector ‣ Save Attributes ‣ Save Attributes as CSV</span>. You will see that our combo box is now populated with the layer names that are loaded in QGIS.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/244.png" class="align-center" src="../../_images/244.png" />
+<div><img alt="../../_images/245.png" class="align-center" src="../../_images/245.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
 <li><p>Let’s add the remaining user interface elements. Switch back to Qt Creator and load the <code class="docutils literal notranslate"><span class="pre">save_attributes_dialog_base.ui</span></code> file. Add a <code class="docutils literal notranslate"><span class="pre">Label</span></code>     <span class="guilabel">Display Widget</span> and change the text to <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">output</span> <span class="pre">file</span></code>.     Add a <code class="docutils literal notranslate"><span class="pre">LineEdit</span></code> type <span class="guilabel">Input Widget</span> that will show the output     file path that the user has chosen. Next, add a <code class="docutils literal notranslate"><span class="pre">Push</span> <span class="pre">Button</span></code> type     <span class="guilabel">Button</span> and change the button label to <code class="docutils literal notranslate"><span class="pre">...</span></code>. Note the object     names of the widgets that we will have to use to interact with them. Save     the file.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/254.png" class="align-center" src="../../_images/254.png" />
+<div><img alt="../../_images/255.png" class="align-center" src="../../_images/255.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
 <li><p>We will now add python code to open a file browser when the user clicks the <code class="docutils literal notranslate"><span class="pre">...</span></code> push button and show the select path in the line edit widget. Open     the <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> file in a text editor. Add <code class="docutils literal notranslate"><span class="pre">QFileDialog</span></code> to     <code class="docutils literal notranslate"><span class="pre">QtWidgets</span></code> list of imports at the top of the file.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/264.png" class="align-center" src="../../_images/264.png" />
+<div><img alt="../../_images/265.png" class="align-center" src="../../_images/265.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
 <li><p>Add a new method called <code class="docutils literal notranslate"><span class="pre">select_output_file</span></code> with the following code.     This code will open a file browser and populate the line edit widget with     the path of the file that the user chose. Note, how <code class="docutils literal notranslate"><span class="pre">getSaveFileName</span></code>     returns a tuple with the filename and the filter used.</p></li>
@@ -551,7 +552,7 @@ pyrcc5 -o resources.py resources.qrc
   <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/274.png" class="align-center" src="../../_images/274.png" />
+<img alt="../../_images/275.png" class="align-center" src="../../_images/275.png" />
 </div></blockquote>
 <ol class="arabic simple" start="28">
 <li><p>Now we need to add code so that when the <cite>…</cite> button is clicked,     <code class="docutils literal notranslate"><span class="pre">select_output_file</span></code> method is called. Scroll down to the <code class="docutils literal notranslate"><span class="pre">run</span></code> method and add the following line in the block where the dialog is initialized. This code will connect the <code class="docutils literal notranslate"><span class="pre">select_output_file</span></code> method to the <code class="docutils literal notranslate"><span class="pre">clicked</span></code> signal of the push button widget.</p></li>
@@ -560,13 +561,13 @@ pyrcc5 -o resources.py resources.qrc
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">pushButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select_output_file</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/284.png" class="align-center" src="../../_images/284.png" />
+<img alt="../../_images/285.png" class="align-center" src="../../_images/285.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
 <li><p>Back in QGIS, reload the plugin and run it. If all went fine, you will be able to click the <code class="docutils literal notranslate"><span class="pre">...</span></code> button and select an output text file from your disk.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/293.png" class="align-center" src="../../_images/293.png" />
+<div><img alt="../../_images/294.png" class="align-center" src="../../_images/294.png" />
 </div></blockquote>
 <ol class="arabic" start="30">
 <li><p>When you click <span class="guilabel">OK</span> on the plugin dialog, nothing happens. That  is because we have not added the logic to pull attribute information from the layer and write it to the text file. We now have all the pieces in place to do just that. Find the place in the <code class="docutils literal notranslate"><span class="pre">run</span></code> method where it says <code class="docutils literal notranslate"><span class="pre">pass</span></code>. Replace it with the code below. The explanation for this code can be found in <a class="reference internal" href="getting_started_with_pyqgis.html"><span class="doc">Getting Started With Python Programming (QGIS3)</span></a>.</p>
@@ -584,7 +585,7 @@ pyrcc5 -o resources.py resources.qrc
     <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/303.png" class="align-center" src="../../_images/303.png" />
+<img alt="../../_images/304.png" class="align-center" src="../../_images/304.png" />
 </li>
 <li><p>We have one last thing to add. When the operation finishes successfully, we should indicate the same to the user. The preferred way to give notifications to the user in QGIS is via the <code class="docutils literal notranslate"><span class="pre">self.iface.messageBar().pushMessage()</span></code> method. Add <code class="docutils literal notranslate"><span class="pre">Qgis</span></code> to <code class="docutils literal notranslate"><span class="pre">qgis.core</span></code> list of imports at the top of the file and add the code below at the end of the <code class="docutils literal notranslate"><span class="pre">run</span></code> method.</p></li>
 </ol>
@@ -869,7 +870,7 @@ upload it to the QGIS plugin repository.</p>
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Última atualização em out. 30, 2021.<br/>
+      Última atualização em nov. 24, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
