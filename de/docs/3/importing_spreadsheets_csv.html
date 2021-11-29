@@ -265,48 +265,79 @@
 
   <section id="importing-spreadsheets-or-csv-files-qgis3">
 <h1>Import von Tabellenblättern oder CSV-Dateien (QGIS3)<a class="headerlink" href="#importing-spreadsheets-or-csv-files-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Häufig liegen GIS Daten in einer Tabelle oder einem Excel Arbeitsblatt vor. Ebenso, wenn Sie eine Liste mit lat/long Koordinaten haben, können Sie diese leicht in Ihr GIS Projekt importieren.</p>
+<p>Many times the GIS data comes in a table or in a spreadsheet. QGIS allows you to import structured text files with coordinates as a vector layer. This tutorial shows how you can use the <strong>Data Source Manager</strong> to import <strong>Delimited Text</strong> files.</p>
 <section id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
-<p>Wir werden eine Textdatei mit Daten von Erdbeben in QGIS importieren.</p>
+<p>We will be importing a text file with earthquake locations in the tab-separated values (TSV) format to QGIS and create a points layer.</p>
 </section>
 <section id="get-the-data">
 <h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
-<p>Das NOAA’s National Geophysical Data Center erstellt einen großartigen Datensatz aller signifkanten Erdbeben seit 2150 v. Chr. <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Finde mehr heraus.</a></p>
-<p>Lade folgende Textdatei herunter: <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">Significant Earthquake Database</a>.</p>
-<p>Der Einfachheit halber können wir beide Datensätze unter folgenden links herunterladen:</p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
-<p>Datenquelle <a class="reference internal" href="../credits.html#ngdc" id="id1"><span>[NGDC]</span></a></p>
+<ol class="arabic simple">
+<li><p>For this tutorial we will download a dataset of earthquakes between 1900-2000 from NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Visit the NOAA NCEI portal</a> and enter <span class="guilabel">Min</span> as <code class="docutils literal notranslate"><span class="pre">1900</span></code> and <span class="guilabel">Max</span> as <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  This will return all earthquake incidents that occurred and were recorded by NOAA between those years. For other specific results, you can filter with different parameters. Click <span class="guilabel">Search</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>As a result, we got <em>2585</em> earthquake incidents. Click on the <span class="guilabel">Download TSV</span> icon.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
+</div></blockquote>
+<p>For convenience, you may directly download a copy of the above datasets from the link below:</p>
+<p><a class="reference external" href="https://www.qgistutorials.com/downloads/earthquakes-2021-11-25_14-31-59_+0530.tsv">earthquakes_2021_11_25_14_31_59_0530.tsv</a></p>
+<p>Data Source <a class="reference internal" href="../credits.html#ncei" id="id1"><span>[NCEI]</span></a></p>
 </section>
 <section id="procedure">
 <h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Untersuche die in Tabellenform vorliegende Datenquelle. Um diese Daten in QGIS zu importieren, müssen wir die Datei als Text abspeichern. Die Datei muss mindestens 2 Spalten mit X- und Y-Koordinaten enthalten. Wenn die Daten aus einer Tabellenkalkulation stammen, nutzen wir die Funktion „Speichern unter“, um im Format <cite>Trennzeichen-getrennt</cite> oder <cite>Comma Separated Values (CSV)</cite> zu speichern. Nachdem wir die Daten auf diese Weise exportiert haben, können wir sie in einem Texteditor wie Notepad öffnen und ansehen. Im Fall der Datenbank der signifikanten Erdbeben liegen die Daten schon im Textformat vor. Sie enthalten die Breiten- und Längengrade der Erdbebenzentren und weitere dazu gehörende Attribute. Wir sehen, dass die Felder durch eine Tabulatur getrennt sind.</p></li>
+<li><p>Examine your tabular data source. The downloaded earthquake database contains the <code class="docutils literal notranslate"><span class="pre">Latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> fields indicating the location of the earthquake epicenter and other related attributes. We will use these fields to import the file as a point layer. Open the data in a text editor such as Notepad/TextMate to view the contents. You will see that a TAB separates each field.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/199.png" class="align-center" src="../../_images/199.png" />
-</div></blockquote>
-<ol class="arabic simple" start="2">
-<li><p>QGIS3 verwendet einen vereinheitlichten Datenmanager, der das Laden aller unterstützten Datenformate erlaubt. Klicke auf den Knopf <span class="guilabel">Datenquellenverwaltung öffnen</span> in der  <span class="guilabel">Datenquellenverwaltungsleiste</span>. Man kann auch die Tastenkombination <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> verwenden.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/240.png" class="align-center" src="../../_images/240.png" />
-</div></blockquote>
-<ol class="arabic simple" start="3">
-<li><p>Gehe zum Bereich <span class="guilabel">Getrennte Texte</span>. Klicke auf den Knopf <span class="guilabel">…</span> neben <span class="guilabel">Dateiname</span> und gebe den Pfad zu der heruntergeladenen Textdatei an. Wähle unter <span class="guilabel">Dateiformat</span> den Punkt <span class="guilabel">Benutzerdefiniert</span> und setze den Haken bei <span class="guilabel">Tabulator</span>. Der Bereich <span class="guilabel">Geometriedefinition</span> wird automatisch gefüllt, wenn die passenden X- und Y-Koordinatenfelder gefunden werden. In unserem Fall sind das <code class="docutils literal notranslate"><span class="pre">LONGITUDE</span></code> und <code class="docutils literal notranslate"><span class="pre">LATITUDE</span></code>. Es kann sein, dass man die Koordinatenfelder ändern muss, wenn der Import-Dialog eine falsche Auswahl trifft. Wir können das Feld <span class="guilabel">Geometrie KBS</span> auf der Voreinstellung <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">WGS84</span></code> belassen. Bei Dateien in einem anderen KBS, kann dieses hier eingetragen werden. Klicke auf <span class="guilabel">OK</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/329.png" class="align-center" src="../../_images/329.png" />
+<div><img alt="../../_images/012.png" class="align-center" src="../../_images/012.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
-<p>Man kann X- und Y-Koordinaten leicht verwechseln. Die geographische Breite gibt die Position eines Punktes in Nord-Süd-Richtung an, es ist also die <strong>Y</strong>-Koordinate. Analog bestimmt die geographische Länge die Position eines Punkte in Ost-West-Richtung, entspricht also der <strong>Y</strong>-Koordinate.</p>
+<p>If you have a spreadsheet, use <cite>Save As</cite> function in your program to save it as a <cite>Tab Delimited File</cite> or a <cite>Comma Separated Values (CSV)</cite> file.</p>
 </div>
-<ol class="arabic simple" start="4">
-<li><p>Wir sehen nun, dass die Daten in QGIS importiert wurden. Sie werden im Arbeitsbereich als Layer <code class="docutils literal notranslate"><span class="pre">signif</span></code> angezeigt.</p></li>
+<ol class="arabic simple" start="2">
+<li><p>QGIS comes with a unified data manager that allows you to load all the various supported data formats. Click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You may also use <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> keyboard shortcut.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/414.png" class="align-center" src="../../_images/414.png" />
+<div><img alt="../../_images/022.png" class="align-center" src="../../_images/022.png" />
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, switch to the <span class="guilabel">Delimited Text</span> tab. Click the <span class="guilabel">…</span> button next to the <span class="guilabel">File name</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/032.png" class="align-center" src="../../_images/032.png" />
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Depending upon the operating system, you may or may not view the file at the downloaded location. In File formats, switch to <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">files</span> <span class="pre">(*;</span> <span class="pre">*.*)</span></code> to view the <em>tsv</em> file.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/042.png" class="align-center" src="../../_images/042.png" />
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Now you will see the downloaded file. Select that and click <span class="guilabel">Open</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/052.png" class="align-center" src="../../_images/052.png" />
+</div></blockquote>
+<ol class="arabic" start="6">
+<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, the path to file will be available in <span class="guilabel">File Name</span>. Change the <span class="guilabel">Layer name</span> to <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code>. In the <span class="guilabel">File format</span> section, select <span class="guilabel">Custom delimiters</span> and check <span class="guilabel">Tab</span>. In the <span class="guilabel">Geometry definition</span> section, choose <span class="guilabel">Point coordinates</span>. By default <span class="guilabel">X field</span> and <span class="guilabel">Y field</span>  values will be auto-populated if it finds a suitable name field in the input. In our case, they are <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. You may change it if the import selects the wrong fields. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> CRS. If your file contains coordinates in a different CRS, you could select the appropriate CRS here. Click <span class="guilabel">Add</span>.</p>
+<img alt="../../_images/062.png" class="align-center" src="../../_images/062.png" />
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>It is easy to get confused between X and Y coordinates. Latitude specifies the north-south position of a point and hence it is a <strong>Y</strong> coordinate. Similarly Longitude specifies the east-west position of a point and it is a <strong>X</strong> coordinate.</p>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>You will now see that the data will be imported and displayed in the QGIS canvas as a new layer called <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code> with CRS <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/072.png" class="align-center" src="../../_images/072.png" />
 </div></blockquote>
 </section>
 </section>
@@ -333,7 +364,7 @@
     </p>
     <p>
         &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Nov. 25, 2021.<br/>
+      Zuletzt aktualisiert am Nov. 29, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
