@@ -166,71 +166,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<p>Want to learn QGIS in a structured way? Check out <a href="https://spatialthoughts.com/" target="_blank">Spatial Thoughts Academy</a> for more learning materials and instructor-led online programs with QGIS.org certification.</p>
-
-<hr>
-<!-- EmailOctopus Form -->
-
-<link rel="stylesheet"
-      href="https://emailoctopus.com/bundles/emailoctopuslist/css/1.6/form.css"
->
-<div class="emailoctopus-form-wrapper emailoctopus-form-default null"
-     style="font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(26, 26, 26);"
->
-  <p class="emailoctopus-heading">
-    Subscribe to my newsletter
-  </p>
-  <p class="emailoctopus-success-message">
-  </p>
-  <p class="emailoctopus-error-message">
-  </p>
-  <form action="https://emailoctopus.com/lists/7325d131-1dbb-11eb-a3d0-06b4694bee2a/members/embedded/1.3/add"
-        method="post"
-        data-message-success="Thanks for subscribing!"
-        data-message-missing-email-address="Your email address is required."
-        data-message-invalid-email-address="Your email address looks incorrect, please try again."
-        data-message-bot-submission-error="This doesn't look like a human submission."
-        data-message-consent-required="Please check the checkbox to indicate your consent."
-        data-message-invalid-parameters-error="This form has missing or invalid fields."
-        data-message-unknown-error="Sorry, an unknown error has occurred. Please try again later."
-        class="emailoctopus-form"
-  >
-    <div class="emailoctopus-form-row">
-      <label for="field_0">
-        Email address
-      </label>
-      <input id="field_0"
-             name="field_0"
-             type="email"
-             placeholder
-             required="required"
-      >
-    </div>
-    <div aria-hidden="true"
-         class="emailoctopus-form-row-hp"
-    >
-      <input type="text"
-             name="hpc4b27b6e-eb38-11e9-be00-06b4694bee2a"
-             tabindex="-1"
-             autocomplete="nope"
-      >
-    </div>
-    <div class="emailoctopus-form-row-subscribe">
-      <input type="hidden"
-             name="successRedirectUrl"
-      >
-      <button type="submit"
-              style="background-color: rgb(224, 224, 224); color: rgb(0, 0, 0); font-family: inherit;"
-      >
-        Subscribe
-      </button>
-    </div>
-  </form>
-</div>
-<script src="https://emailoctopus.com/bundles/emailoctopuslist/js/1.6/form-embed.js">
-</script>
-
-<hr>
+<p>Want to learn QGIS in a structured way? Check out <a href="https://spatialthoughts.com/" target="_blank">Spatial Thoughts</a> for more learning materials and instructor-led online programs with QGIS.org certification.</p>
 
 
 <h4>Change Language</h4>
@@ -265,23 +201,28 @@
 
   <section id="nearest-neighbor-analysis-qgis3">
 <h1>최근린 분석(QGIS3)<a class="headerlink" href="#nearest-neighbor-analysis-qgis3" title="이 표제에 대한 퍼머링크">¶</a></h1>
-<p>GIS는 피처 간의 공간 관계를 분석하는 데 매우 유용합니다. 그러한 분석 중 하나는 주어진 기능에 가장 가까운 기능을 찾는 것입니다. QGIS에서이 분석을 수행하는 방법에는 여러 가지가 있습니다. 이 자습서에서는 ** 가장 가까운 허브까지의 거리 ** 및 ** 거리 매트릭스 ** 도구를 탐색하여 가장 가까운 이웃 분석을 수행합니다.</p>
+<p>GIS is very useful in analyzing spatial relationship between features. One such analysis is finding out which features are closest to a given feature. There are multiple ways to do this analysis in QGIS. You can do a spatial join using the <strong>Join Attributes by Nearest</strong> or get the distances to all features from another layer using the <strong>Distance Matrix</strong> tool from the Processing Toolbox.  In this tutorial, we will explore a tool named <strong>Distance to nearest hub</strong> from the Processing Toolbox that can not only find the distance to the closest feature but join it with a line to it for visualizing the results.</p>
 <section id="overview-of-the-task">
 <h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
-<p>이미 알려져 있는 주요 지진발생 위치가 주어지면 지진이 발생한 곳에서 가장 가깝게 인구가 밀집한 지역을 찾습니다.</p>
-<section id="other-skills-you-will-learn">
-<h3>이 예제에서 필요한 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="이 표제에 대한 퍼머링크">¶</a></h3>
-<ul class="simple">
-<li><p>Use the <em>Geometry Generator</em> renderer to dynamically create lines from a multipoint layer.</p></li>
-</ul>
-</section>
+<p>Given the locations of all known earthquakes between years 1900 and 2000, find out the nearest populated place for each location where the earthquake happened.</p>
 </section>
 <section id="get-the-data">
 <h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
-<p>우리는 NOAA의 국가 지구 물리학 데이터 센터의`지진 지진 데이터베이스 &lt;<a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1</a>&gt;`_를 모든 주요 지진을 나타내는 계층으로 사용합니다. <a href="#id1"><span class="problematic" id="id2">`</span></a>탭으로 구분 된 지진 데이터 &lt;<a class="reference external" href="https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt</a>&gt;`_를 다운로드하십시오.</p>
+<ol class="arabic simple">
+<li><p>For this tutorial we will download a dataset of earthquakes between 1900-2000 from NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Visit the NOAA NCEI portal</a> and enter <span class="guilabel">Min</span> as <code class="docutils literal notranslate"><span class="pre">1900</span></code> and <span class="guilabel">Max</span> as <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  This will return all earthquake incidents that occurred and were recorded by NOAA between those years. For other specific results, you can filter with different parameters. Click <span class="guilabel">Search</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>As a result, we got <em>2585</em> earthquake incidents. Click on the <span class="guilabel">Download TSV</span> icon.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
+</div></blockquote>
 <p>Natural Earth는 훌륭한 인구밀집지역 <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Populated Places</a> 데이터베이스를 가지고 있습니다. 단순 데이터셋`simple (less columns) dataset &lt;<a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip</a>&gt;`_을 다운 받으십시오.</p>
 <p>용이하게 하기 위해 두가지 데이터셋을 아래 링크로부터 바로 다운로드할 수 있습니다.</p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
+<p><a class="reference external" href="https://www.qgistutorials.com/downloads/earthquakes-2021-11-25_14-31-59_+0530.tsv">earthquakes_2021_11_25_14_31_59_+0530.tsv</a></p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/ne_10m_populated_places_simple.zip">ne_10m_populated_places_simple.zip</a></p>
 <p>Data Sources: <a class="reference internal" href="../credits.html#ncei" id="id1"><span>[NCEI]</span></a> <a class="reference internal" href="../credits.html#naturalearth" id="id2"><span>[NATURALEARTH]</span></a></p>
 </section>
@@ -291,122 +232,89 @@
 <li><p>: guilabel :<cite>Browser</cite> 패널에서 다운로드 한``ne_10m_populated_places_simple.zip ‘’파일을 찾아 확장하십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>ne_10m_populated_places_simple.shp ‘’파일을 캔버스로 드래그하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/013.png" class="align-center" src="../../_images/013.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>: guilabel :<cite>Layers</cite> 패널에 새로운 레이어``ne_10m_populated_places_simple ‘’이로드 된 것을 볼 수 있습니다. 이 레이어에는 채워진 장소를 나타내는 점이 포함됩니다. 이제 지진 레이어를로드하겠습니다. 이 계층은 * TSV (Tab Serepated Values) * 텍스트 파일로 제공됩니다. 이 파일을 불러 오려면 : guilabel :<cite>데이터 소스 도구 모음`에서 : guilabel :`데이터 소스 관리자 열기`버튼을 클릭하십시오. : kbd :`Ctrl + L</cite> 단축키를 사용할 수도 있습니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
+<div><img alt="../../_images/023.png" class="align-center" src="../../_images/023.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>: guilabel :<cite>파일 이름 ‘옆에있는 : guilabel :</cite>…`버튼을 클릭하고 다운로드 한``signif.txt’ ‘파일을 찾습니다. 일단로드되면 : guilabel :<cite>File Format</cite> 및 : guilabel :<cite>Geometry Definition</cite> 필드가 올바른 값으로 자동 채워 져야합니다. : guilabel :<cite>Add</cite> 다음에 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Close`를 클릭하십시오.</p></li>
+<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, select <span class="guilabel">Delimited Text</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/335.png" class="align-center" src="../../_images/335.png" />
+<div><img alt="../../_images/033.png" class="align-center" src="../../_images/033.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>두 데이터 세트를 둘러보고 탐색하십시오. 각 노란색 점은 심각한 지진의 위치를 나타내고 각 빨간색 점은 인구가 많은 장소의 위치를 나타냅니다. 우리의 목표는 지진 층의 각 지점에 대해 인구 밀집 지역에서 가장 가까운 지점을 찾는 것입니다.</p></li>
+<li><p>Click the <span class="guilabel">…</span> button next to <span class="guilabel">File name</span> and browse to the downloaded <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530.tsv</span></code> file. Depending upon the operating system, you may not see the file at the downloaded directory. If that is the case, switch to <span class="guilabel">All files (*; .)</span> in the <span class="guilabel">Choose a Delimited Text File to Open</span> dialog. Once opened, select  <span class="guilabel">Custom delimiters</span> in the <span class="guilabel">File format</span> section, and check <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. In the <span class="guilabel">Geometry definition</span> section, choose <span class="guilabel">Point coordinates</span>. By default <span class="guilabel">X field</span> and <span class="guilabel">Y field</span>  values will be auto-populated with the appropriate fields in the input. In our case, they are <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> CRS. If your file contains coordinates in a different CRS, you could select the appropriate CRS here. Click <span class="guilabel">Add</span> followed by <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/417.png" class="align-center" src="../../_images/417.png" />
+<div><img alt="../../_images/043.png" class="align-center" src="../../_images/043.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>분석을 수행하기 전에 입력을 정리해야합니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>signif ‘’레이어에는 유효한 지오메트리가없는 많은 레코드가 포함됩니다. 이 레코드는 ** NULL ** 형상으로 가져 왔습니다. 먼저이 레코드를 제거하겠습니다. : menuselection :<a href="#id3"><span class="problematic" id="id4">`</span></a>Processing-&gt; Toolbox`로 이동하십시오.</p></li>
+<li><p>Zoom around and explore both datasets. Each red point represents the location of an earthquake incidence, and each green point represents the location of a populated place. Our goal is to find out the nearest point from the populated places layer for each of the points in the earthquake layer. Let’s inspect the Attribute table of the earthquakes layer. Select the layer and click on <span class="guilabel">Open Attribute Table</span> icon in <span class="guilabel">Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/518.png" class="align-center" src="../../_images/518.png" />
+<div><img alt="../../_images/053.png" class="align-center" src="../../_images/053.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>: menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Vector geometry-&gt; null geometry 제거`도구를 검색하고 찾습니다. 시작하려면 두 번 클릭하십시오.</p></li>
+<li><p>There are <code class="docutils literal notranslate"><span class="pre">2586</span></code> features, but the data contains few entries with no latitude or longitude infomation. We have to remove that before proceeding further. Close the Attribute Table.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/618.png" class="align-center" src="../../_images/618.png" />
+<div><img alt="../../_images/063.png" class="align-center" src="../../_images/063.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>: guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Input layer`로``signif ‘’를 선택하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Run`을 클릭하십시오. 처리가 끝나면 : guilabel :<a href="#id5"><span class="problematic" id="id6">`</span></a>Close`를 클릭하십시오.</p></li>
+<li><p>Go to <span class="menuselection">Processing ‣ Toolbox ‣ Vector geometry ‣ Remove null geometries</span> tool. Double-click to open it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/717.png" class="align-center" src="../../_images/717.png" />
+<div><img alt="../../_images/073.png" class="align-center" src="../../_images/073.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>: guilabel :<cite>Layers</cite> 패널에로드 된``Non null geometry ‘’라는 새로운 레이어가 표시됩니다. 추가 분석에서 원래``signif ‘’레이어 대신이 레이어를 사용합니다. : guilabel :<cite>Layers</cite> 패널에서``signif ‘’레이어를 선택 취소하여 숨 깁니다. 이제 가장 가까운 이웃 분석을 수행 할 차례입니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>벡터 분석-&gt; 가장 가까운 허브까지의 거리 (라인-허브) 도구를 찾아서 찾습니다. 시작하려면 두 번 클릭하십시오.</p></li>
+<li><p>In the <span class="guilabel">Remove Null Geometries</span> dialog box, Select <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530</span></code> as the <span class="guilabel">Input layer</span> and check the <span class="guilabel">Also remove empty geometries</span>. Click <span class="guilabel">Run</span>. Once the processing finishes, click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/817.png" class="align-center" src="../../_images/817.png" />
+<div><img alt="../../_images/082.png" class="align-center" src="../../_images/082.png" />
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">참고</p>
-<p>출력으로 포인트 레이어가 필요한 경우 * 가장 가까운 허브까지의 거리 * 도구를 대신 사용하십시오.</p>
-</div>
 <ol class="arabic simple" start="9">
-<li><p>: guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>가장 가까운 허브까지의 거리 (Line to Hub)`대화 상자에서 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Source points layer`로``Null null geometry ‘’를 선택하십시오. : guilabel :<a href="#id5"><span class="problematic" id="id6">`</span></a>Distination hubs layer ‘로``ne_10m_populated_places_simple’ ‘을 선택하십시오. : guilabel :<a href="#id7"><span class="problematic" id="id8">`</span></a>Hub layer name attribute`로``name ‘’을 선택하십시오. 이 도구는 또한 채워진 장소와 가장 가까운 지진 사이의 직선 거리를 계산합니다. <a href="#id9"><span class="problematic" id="id10">``</span></a>Kilometers ‘’를 : guilabel :<a href="#id11"><span class="problematic" id="id12">`</span></a>Measurement unit`으로 설정하십시오. : guilabel :<a href="#id13"><span class="problematic" id="id14">`</span></a>Run`을 클릭하십시오. 처리가 끝나면 : guilabel :<a href="#id15"><span class="problematic" id="id16">`</span></a>Close`를 클릭하십시오.</p></li>
+<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> will be added to the <span class="guilabel">Layers</span> panel. For analysis we will use this layer instead of the original layer. Un-check the <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530</span></code> layer in the <span class="guilabel">Layers</span> panel to hide it. Select the <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> layer and click the <span class="guilabel">Open Attribute Table</span> button from the <span class="guilabel">Attributes Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/917.png" class="align-center" src="../../_images/917.png" />
+<div><img alt="../../_images/092.png" class="align-center" src="../../_images/092.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>메인 QGIS 창으로 돌아가서 : guilabel :<cite>Layers</cite> 패널에``허브 거리 ‘’라는 새로운 선 레이어가 나타납니다. 이 레이어에는 각 지진 지점을 가장 가까운 인구 밀집 지역에 연결하는 선 피쳐가 있습니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>허브 거리 ‘’레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>속성 테이블 열기`를 선택하십시오.</p></li>
+<li><p>You will see a lower count for total features as all rows with empty latitude and longitude values were removed. Close the attribute table.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1019.png" class="align-center" src="../../_images/1019.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>마지막 열로 오른쪽으로 스크롤하면 ** HubName ** 및 ** HubDist <a href="#id1"><span class="problematic" id="id2">**</span></a>라는 두 가지 새로운 속성이 원래 지진 기능에 추가 된 것을 볼 수 있습니다. 이것은 채워진 장소 레이어에서 가장 가까운 이웃까지의 거리입니다.</p></li>
+<li><p>Now it is time to perform the nearest neighbor analysis. Search and locate the <span class="menuselection">Processing ‣ Toolbox ‣ Vector analysis ‣ Distance to nearest hub (line to hub)</span> tool. Double-click to launch it.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1122.png" class="align-center" src="../../_images/1122.png" />
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p>We can also add a point layer as output, use the <em>Distance to nearest hub (points)</em> tool for that.</p>
+</div>
 <ol class="arabic simple" start="12">
-<li><p>우리의 분석이 완료되었습니다. 이제 유사한 분석을 수행 할 수있는 다른 도구를 탐색 할 수 있습니다. ** 거리 매트릭스 <a href="#id1"><span class="problematic" id="id2">**</span></a>는 가장 가까운 점까지의 거리뿐만 아니라 다른 레이어의 모든 점까지의 거리를 계산할 수있는 강력한 도구입니다. 이 방법을 * 가장 가까운 허브까지의 거리 * 도구 대신 사용할 수 있습니다. <a href="#id3"><span class="problematic" id="id4">``</span></a>허브 거리 ‘’레이어를 선택 취소하여 숨 깁니다. : menuselection :<cite>Vector analysis-&gt; Distance matrix</cite> 도구를 검색하고 찾습니다.</p></li>
+<li><p>In the <span class="guilabel">Distance to Nearest Hub (Line to Hub)</span> dialog box, select <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code>  as the <span class="guilabel">Source points layer</span>. Select <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> as the <span class="guilabel">Destination hubs layer</span>. Select <code class="docutils literal notranslate"><span class="pre">name</span></code> as the <span class="guilabel">Hub layer name attribute</span>. The tool will also compute the straight-line distance between the populated place and the nearest earthquake. Set <code class="docutils literal notranslate"><span class="pre">Kilometers</span></code> as the <span class="guilabel">Measurement unit</span>. Click on <code class="docutils literal notranslate"><span class="pre">...</span></code>  in <span class="guilabel">Hub Distance</span> and click <span class="guilabel">Save to File…</span> to save the file as <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city.gpkg</span></code> . Click <span class="guilabel">Run</span>.  Once the processing finishes, click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1220.png" class="align-center" src="../../_images/1220.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>: guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Distance matrix ‘대화 상자에서``Non null geometry’ ‘를 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>Input point laeyer`로,``I_D’ ‘를 : guilabel :<a href="#id5"><span class="problematic" id="id6">`</span></a>Input unique ID 필드로 설정하십시오. <a href="#id7"><span class="problematic" id="id8">``</span></a>ne_10m_populated_places_simple ‘’을 : guilabel :<a href="#id9"><span class="problematic" id="id10">`</span></a>Target point layer`로,``name ‘’을 : guilabel :<a href="#id11"><span class="problematic" id="id12">`</span></a>Target unique ID 필드로 설정하십시오. : guilabel :<a href="#id13"><span class="problematic" id="id14">`</span></a>Output matrix type`으로``Linear (N * k x 3) distance matrix ‘’를 선택하십시오. 여기서 핵심은 : guilabel :<a href="#id15"><span class="problematic" id="id16">`</span></a>가장 가까운 (k) 대상 포인트 만 사용 ‘매개 변수를``1’ ‘으로 설정하는 것입니다. 이는 출력에서 가장 가까운 이웃 만 제공합니다. 매트릭스 계산을 시작하려면 : guilabel :<a href="#id17"><span class="problematic" id="id18">`</span></a>Run`을 클릭하십시오. 처리가 끝나면 : guilabel :<a href="#id19"><span class="problematic" id="id20">`</span></a>Close`를 클릭하십시오.</p></li>
+<li><p>Back in the main QGIS window, you will see a new line layer called <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city</span></code> loaded in the <span class="guilabel">Layers</span> panel. This layer has line features connecting each earthquake point to the nearest populated place. Select the <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city</span></code> layer and click <span class="guilabel">Open Attribute Tabel</span> icon in <span class="guilabel">Toolbar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1319.png" class="align-center" src="../../_images/1319.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>처리가 완료되면``거리 매트릭스 ‘’라는 새 레이어가로드됩니다. 이 도구의 출력은 * MultiPoint * 형상을 포함하는 레이어입니다. 각 기능에는 소스와 대상의 2 가지 포인트가 있습니다. 레이어의 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Attribute Table`을여십시오. 각 지형지 물에는 지진을 가장 가까운 곳에 배치하는 속성이 있습니다. 여기서의 거리는 레이어의 CRS 단위 (도)입니다.</p></li>
+<li><p>Scroll right to the last columns, and you will see 2 new attributes called <strong>HubName</strong> and <strong>HubDist</strong> added to the original earthquake features. This is the name of the distance to the nearest neighbor from the populated places layer.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1417.png" class="align-center" src="../../_images/1417.png" />
-</div></blockquote>
-<ol class="arabic simple" start="15">
-<li><p>이제 레이어를 마우스 오른쪽 버튼으로 클릭하고 : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>Export-&gt; Save Features As`를 선택하여 원하는 형식으로 결과를 저장할 수 있습니다. 결과를 더 잘 시각화하려면 피쳐의 형상에서 허브 스포크 렌더링을 쉽게 만들 수 있습니다. <a href="#id3"><span class="problematic" id="id4">``</span></a>거리 매트릭스 ‘’레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id5"><span class="problematic" id="id6">`</span></a>Properties`를 선택하십시오.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
-</div></blockquote>
-<ol class="arabic simple" start="16">
-<li><p>: guilabel :<cite>Properties</cite> 대화 상자에서 : guilabel :<cite>Symbology</cite> 탭으로 전환하십시오. <a href="#id1"><span class="problematic" id="id2">``</span></a>Simple marker ‘’하위 렌더링을 클릭하고 : guilabel :<cite>Symbol layer type`으로``Geometry generator ‘’를 선택하십시오. ``LineString / MultiLineString ‘’을 : guilabel :`Geometry type`으로 설정하십시오. : guilabel :`Expression</cite> 버튼을 클릭하십시오.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
-</div></blockquote>
-<ol class="arabic simple" start="17">
-<li><p>여기에서 각 다 지점 소스 지오메트리 내의 2 개 점에서 선 지오메트리를 작성하는 표현식을 입력 할 수 있습니다. 다음 식을 입력하십시오.</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make_line(point_n( $geometry, 1), point_n( $geometry, 2))
-</pre></div>
-</div>
-<img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
-</div></blockquote>
-<ol class="arabic simple" start="18">
-<li><p>: guilabel :<cite>Symbology</cite> 탭으로 돌아가서 원하는대로 선 스타일을 설정하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>OK`를 클릭하십시오.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
-</div></blockquote>
-<ol class="arabic simple" start="19">
-<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>거리 매트릭스 ‘’레이어가 이제 점 대신 선으로 렌더링됩니다. 이 시각화를 위해 새 레이어를 만들 필요는 없습니다. 레이어에는 여전히 MultiPoint 지오메트리가 포함되지만 표현식을 기반으로 선으로 동적으로 렌더링됩니다.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 </section>
 </section>
@@ -432,8 +340,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      최종 업데이트: 12월 01, 2021<br/>
+        &copy; Copyright 2021, Ujaval Gandhi.<br/>
+      최종 업데이트: 12월 09, 2021<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

@@ -166,71 +166,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<p>Want to learn QGIS in a structured way? Check out <a href="https://spatialthoughts.com/" target="_blank">Spatial Thoughts Academy</a> for more learning materials and instructor-led online programs with QGIS.org certification.</p>
-
-<hr>
-<!-- EmailOctopus Form -->
-
-<link rel="stylesheet"
-      href="https://emailoctopus.com/bundles/emailoctopuslist/css/1.6/form.css"
->
-<div class="emailoctopus-form-wrapper emailoctopus-form-default null"
-     style="font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(26, 26, 26);"
->
-  <p class="emailoctopus-heading">
-    Subscribe to my newsletter
-  </p>
-  <p class="emailoctopus-success-message">
-  </p>
-  <p class="emailoctopus-error-message">
-  </p>
-  <form action="https://emailoctopus.com/lists/7325d131-1dbb-11eb-a3d0-06b4694bee2a/members/embedded/1.3/add"
-        method="post"
-        data-message-success="Thanks for subscribing!"
-        data-message-missing-email-address="Your email address is required."
-        data-message-invalid-email-address="Your email address looks incorrect, please try again."
-        data-message-bot-submission-error="This doesn't look like a human submission."
-        data-message-consent-required="Please check the checkbox to indicate your consent."
-        data-message-invalid-parameters-error="This form has missing or invalid fields."
-        data-message-unknown-error="Sorry, an unknown error has occurred. Please try again later."
-        class="emailoctopus-form"
-  >
-    <div class="emailoctopus-form-row">
-      <label for="field_0">
-        Email address
-      </label>
-      <input id="field_0"
-             name="field_0"
-             type="email"
-             placeholder
-             required="required"
-      >
-    </div>
-    <div aria-hidden="true"
-         class="emailoctopus-form-row-hp"
-    >
-      <input type="text"
-             name="hpc4b27b6e-eb38-11e9-be00-06b4694bee2a"
-             tabindex="-1"
-             autocomplete="nope"
-      >
-    </div>
-    <div class="emailoctopus-form-row-subscribe">
-      <input type="hidden"
-             name="successRedirectUrl"
-      >
-      <button type="submit"
-              style="background-color: rgb(224, 224, 224); color: rgb(0, 0, 0); font-family: inherit;"
-      >
-        Subscribe
-      </button>
-    </div>
-  </form>
-</div>
-<script src="https://emailoctopus.com/bundles/emailoctopuslist/js/1.6/form-embed.js">
-</script>
-
-<hr>
+<p>Want to learn QGIS in a structured way? Check out <a href="https://spatialthoughts.com/" target="_blank">Spatial Thoughts</a> for more learning materials and instructor-led online programs with QGIS.org certification.</p>
 
 
 <h4>Change Language</h4>
@@ -265,23 +201,28 @@
 
   <section id="nearest-neighbor-analysis-qgis3">
 <h1>Nächster Nachbar Analyse (QGIS3)<a class="headerlink" href="#nearest-neighbor-analysis-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>GIS ist sehr nützlich, um räumliche Beziehungen zwischen Features zu analysieren. Eine solcher Analysen ist die Ermittlung welche Features am nächsten zu einem anderen gegebenen Feature liegen. Es gibt mehrere Wege, solch eine Analyse in QGIS durchzuführen. In dieser Anleitung erkunden wir die Tools  <strong>Abstand zum nächsten Knoten</strong> und <strong>Distanzmatrix</strong>, um die Nächster Nachbar Analyse durchzuführen.</p>
+<p>GIS is very useful in analyzing spatial relationship between features. One such analysis is finding out which features are closest to a given feature. There are multiple ways to do this analysis in QGIS. You can do a spatial join using the <strong>Join Attributes by Nearest</strong> or get the distances to all features from another layer using the <strong>Distance Matrix</strong> tool from the Processing Toolbox.  In this tutorial, we will explore a tool named <strong>Distance to nearest hub</strong> from the Processing Toolbox that can not only find the distance to the closest feature but join it with a line to it for visualizing the results.</p>
 <section id="overview-of-the-task">
 <h2>Aufgabenübersicht<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
-<p>Zur gegebenen Lage aller bekannten signifikanten Erdbeben, finden wir den nächsten bewohnten Ort.</p>
-<section id="other-skills-you-will-learn">
-<h3>Weitere Fähigkeiten, die wir erlernen.<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
-<ul class="simple">
-<li><p>Benutzung des <em>Geometriegenerators</em> um dynamisch Linien aus einem Mehrfachpunktlayer zu erzeugen.</p></li>
-</ul>
-</section>
+<p>Given the locations of all known earthquakes between years 1900 and 2000, find out the nearest populated place for each location where the earthquake happened.</p>
 </section>
 <section id="get-the-data">
 <h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
-<p>Als Layer der bedeutenden Erdbeben verwenden wir die Daten <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Significant Earthquake Database</a> des nationalen geophysikalischen Datenzentrums der NOAA. Lade folgende Daten herunter: <a class="reference external" href="https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">tab-delimited earthquake data</a>.</p>
+<ol class="arabic simple">
+<li><p>For this tutorial we will download a dataset of earthquakes between 1900-2000 from NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Visit the NOAA NCEI portal</a> and enter <span class="guilabel">Min</span> as <code class="docutils literal notranslate"><span class="pre">1900</span></code> and <span class="guilabel">Max</span> as <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  This will return all earthquake incidents that occurred and were recorded by NOAA between those years. For other specific results, you can filter with different parameters. Click <span class="guilabel">Search</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>As a result, we got <em>2585</em> earthquake incidents. Click on the <span class="guilabel">Download TSV</span> icon.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
+</div></blockquote>
 <p>Bei Natural Earth findet man einen schönen Datensatz der bewohnten Orte: <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Populated Places</a>. Lade folgenden Datensatz herunter: <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">simple (less columns) dataset</a>.</p>
 <p>Der Einfachheit halber können wir beide Datensätze unter folgenden links herunterladen:</p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
+<p><a class="reference external" href="https://www.qgistutorials.com/downloads/earthquakes-2021-11-25_14-31-59_+0530.tsv">earthquakes_2021_11_25_14_31_59_+0530.tsv</a></p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/ne_10m_populated_places_simple.zip">ne_10m_populated_places_simple.zip</a></p>
 <p>Data Sources: <a class="reference internal" href="../credits.html#ncei" id="id1"><span>[NCEI]</span></a> <a class="reference internal" href="../credits.html#naturalearth" id="id2"><span>[NATURALEARTH]</span></a></p>
 </section>
@@ -291,122 +232,89 @@
 <li><p>Finde die Datei <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.zip</span></code> im <span class="guilabel">Browser</span> Bereich und erweitere sie. Ziehe die Datei <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.shp</span></code> in den Arbeitsbereich.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/013.png" class="align-center" src="../../_images/013.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Wir sehen den neuen Layer <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> der im <span class="guilabel">Layer</span> Bereich angezeigt wird. Dieser Layer enthält Punkte für die bewohnten Orte. Jetzt werden wir den Erdbebenlayer laden. Dieser Layer liegt als <em>Tab Serepated Values (TSV)</em> Textdatei vor. Um diese Datei zu laden, klicken wir auf den Knopf <span class="guilabel">Datenquellenverwaltung öffnen</span> in der <span class="guilabel">Datenquellenverwaltungsleiste</span>. Man kann alternativ die Tastenkombination <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> verwenden.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
+<div><img alt="../../_images/023.png" class="align-center" src="../../_images/023.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Klicke auf den Knopf <span class="guilabel">…</span> neben <span class="guilabel">File name</span> und gehe zu der heruntergeladenen Datei <code class="docutils literal notranslate"><span class="pre">signif.txt</span></code>. Nach dem Laden sollten die Felder <span class="guilabel">Dateiformat</span> und <span class="guilabel">Geometriedefinition</span> automatisch mit den richtigen Werten gefüllt sein. Klicke auf <span class="guilabel">Hinzufügen</span> und danach auf <span class="guilabel">Schließen</span>.</p></li>
+<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, select <span class="guilabel">Delimited Text</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/335.png" class="align-center" src="../../_images/335.png" />
+<div><img alt="../../_images/033.png" class="align-center" src="../../_images/033.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Zoome hinein und untersuche beide Datensätze. Jeder gelbe Punkt steht für ein signifikantes Erdbeben und jeder rote Punkt für einen bewohnten Ort. Unser Ziel ist es, für jeden Punkt aus dem Erdbebenlayer den nächsten Punkt aus dem Layer der bewohnten Orte zu finden.</p></li>
+<li><p>Click the <span class="guilabel">…</span> button next to <span class="guilabel">File name</span> and browse to the downloaded <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530.tsv</span></code> file. Depending upon the operating system, you may not see the file at the downloaded directory. If that is the case, switch to <span class="guilabel">All files (*; .)</span> in the <span class="guilabel">Choose a Delimited Text File to Open</span> dialog. Once opened, select  <span class="guilabel">Custom delimiters</span> in the <span class="guilabel">File format</span> section, and check <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. In the <span class="guilabel">Geometry definition</span> section, choose <span class="guilabel">Point coordinates</span>. By default <span class="guilabel">X field</span> and <span class="guilabel">Y field</span>  values will be auto-populated with the appropriate fields in the input. In our case, they are <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> CRS. If your file contains coordinates in a different CRS, you could select the appropriate CRS here. Click <span class="guilabel">Add</span> followed by <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/417.png" class="align-center" src="../../_images/417.png" />
+<div><img alt="../../_images/043.png" class="align-center" src="../../_images/043.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Bevor wir die Analyse beginnen, müssen wir unsere Eingangsdaten vorbereiten. Der Layer <code class="docutils literal notranslate"><span class="pre">signif</span></code> enthält viele Einträge mit einer ungültigen Geometrie. Diese Einträge wurden mit einer <strong>NULL</strong> Geometrie importiert. Diese Einträge entfernen wir als Erstes. Wir gehen zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p></li>
+<li><p>Zoom around and explore both datasets. Each red point represents the location of an earthquake incidence, and each green point represents the location of a populated place. Our goal is to find out the nearest point from the populated places layer for each of the points in the earthquake layer. Let’s inspect the Attribute table of the earthquakes layer. Select the layer and click on <span class="guilabel">Open Attribute Table</span> icon in <span class="guilabel">Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/518.png" class="align-center" src="../../_images/518.png" />
+<div><img alt="../../_images/053.png" class="align-center" src="../../_images/053.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Wir suchen das Werkzeug <span class="menuselection">Vektorgeometrie ‣ Leergeometrien entfernen</span> und klicken doppelt darauf, um es zu staten.</p></li>
+<li><p>There are <code class="docutils literal notranslate"><span class="pre">2586</span></code> features, but the data contains few entries with no latitude or longitude infomation. We have to remove that before proceeding further. Close the Attribute Table.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/618.png" class="align-center" src="../../_images/618.png" />
+<div><img alt="../../_images/063.png" class="align-center" src="../../_images/063.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Wähle <code class="docutils literal notranslate"><span class="pre">signif</span></code> als <span class="guilabel">Eingabelayer</span> und klicke auf <span class="guilabel">Starte</span>. Nachdem der Prozess abgeschlossen ist, klicken wir auf <span class="guilabel">Schließen</span>.</p></li>
+<li><p>Go to <span class="menuselection">Processing ‣ Toolbox ‣ Vector geometry ‣ Remove null geometries</span> tool. Double-click to open it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/717.png" class="align-center" src="../../_images/717.png" />
+<div><img alt="../../_images/073.png" class="align-center" src="../../_images/073.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Wir sehen nun einen neuen Layer <code class="docutils literal notranslate"><span class="pre">Nicht</span> <span class="pre">leere</span> <span class="pre">Geometrien</span></code> im <span class="guilabel">Layer</span> Bereich. Wir werden diesen Layer anstelle des originalen <code class="docutils literal notranslate"><span class="pre">signif</span></code> Layers für die weiteren Analysen verwenden. Entferne den Haken beim Layer <code class="docutils literal notranslate"><span class="pre">signif</span></code> im <span class="guilabel">Layer</span> Bereich, um ihn auszublenden. Jetzt können wir mit der Nächster Nachbar Analyse beginnen. Suche das Werkzeug <span class="menuselection">Vektoranalyse ‣ Abstand zum nächsten Knoten (Linie zu Knoten)</span> und klicke doppelt darauf, um es zu starten.</p></li>
+<li><p>In the <span class="guilabel">Remove Null Geometries</span> dialog box, Select <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530</span></code> as the <span class="guilabel">Input layer</span> and check the <span class="guilabel">Also remove empty geometries</span>. Click <span class="guilabel">Run</span>. Once the processing finishes, click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/817.png" class="align-center" src="../../_images/817.png" />
+<div><img alt="../../_images/082.png" class="align-center" src="../../_images/082.png" />
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Bemerkung</p>
-<p>Wenn man einen Punktlayer als Ausgabe benötigt, kann man stattdessen das Tool <em>Abstand zum nächsten Knoten (Punkte)</em> verwenden.</p>
-</div>
 <ol class="arabic simple" start="9">
-<li><p>Im Dialogfenster <span class="guilabel">Abstand zum nächsten Knoten (Linie zu Knoten)</span> wählen wir <code class="docutils literal notranslate"><span class="pre">Nicht</span> <span class="pre">leere</span> <span class="pre">Geometrien</span></code> als <span class="guilabel">Quellpunktlayer</span>. Wähle <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> als <span class="guilabel">Zielnabenlayer</span>. Wähle <code class="docutils literal notranslate"><span class="pre">name</span></code> als <span class="guilabel">Nabenlayernamensattribut</span>. Das Tool wird außerdem die Luftliniendistanz zwischen bewohntem Ort und dem nächsten Erdbeben berechnen. Setze <code class="docutils literal notranslate"><span class="pre">Kilometer</span></code> als <span class="guilabel">Maßeinheit</span> ein. Klicke auf <span class="guilabel">Starte</span>. Nachdem der Prozess beendet ist , klicke auf <span class="guilabel">Schließen</span>.</p></li>
+<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> will be added to the <span class="guilabel">Layers</span> panel. For analysis we will use this layer instead of the original layer. Un-check the <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530</span></code> layer in the <span class="guilabel">Layers</span> panel to hide it. Select the <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> layer and click the <span class="guilabel">Open Attribute Table</span> button from the <span class="guilabel">Attributes Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/917.png" class="align-center" src="../../_images/917.png" />
+<div><img alt="../../_images/092.png" class="align-center" src="../../_images/092.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>Zurück im QGIS Hauptfenster sehen wir einen neuen Linienlayer <code class="docutils literal notranslate"><span class="pre">Knotenabstand</span></code> der im <span class="guilabel">Layer</span> Bereich angezeigt wird. Dieser Layer enthält Linienfeatures, die jeden Punkt eines Erdbebens mit der am nächsten gelegenden Ortschaft verbinden. Klicke mit der rechten Maustaste auf den Layer <code class="docutils literal notranslate"><span class="pre">Knotendistanz</span></code> und wähle <span class="guilabel">Attributtabelle öffnen</span>.</p></li>
+<li><p>You will see a lower count for total features as all rows with empty latitude and longitude values were removed. Close the attribute table.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1019.png" class="align-center" src="../../_images/1019.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Wenn man in der Tabelle ganz nach rechts scrollt, sieht man 2 neue Attributspalten: <strong>HubName</strong> und <strong>HubDist</strong>. Dabei handelt es sich um den Namen und den Abstand der am nächsten zu einem Erdbeben gelegenen Ortschaft.</p></li>
+<li><p>Now it is time to perform the nearest neighbor analysis. Search and locate the <span class="menuselection">Processing ‣ Toolbox ‣ Vector analysis ‣ Distance to nearest hub (line to hub)</span> tool. Double-click to launch it.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1122.png" class="align-center" src="../../_images/1122.png" />
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>We can also add a point layer as output, use the <em>Distance to nearest hub (points)</em> tool for that.</p>
+</div>
 <ol class="arabic simple" start="12">
-<li><p>Unsere Analyse ist nun abgeschlossen. Wir schauen uns jetzt ein anderes Tool an, das etwas ähnliches tut. <strong>Distanzmatrix</strong> ist ein mächtiges Werkzeug, das nicht nur den Abstand zum nächesten Punkt, sondern zu allen Punkten eines anderen Layers bestimmt. Wir können das Tool als Alternative zum Werkzeug <em>Abstand zum nächsten Knoten</em> verwenden. Wir entfernen den Haken beim Layer <code class="docutils literal notranslate"><span class="pre">Knotenabstand</span></code> um ihn auszublenden. Gehe zum Werkzeug <span class="menuselection">Vektoranalyse ‣ Distanzmatrix</span>.</p></li>
+<li><p>In the <span class="guilabel">Distance to Nearest Hub (Line to Hub)</span> dialog box, select <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code>  as the <span class="guilabel">Source points layer</span>. Select <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> as the <span class="guilabel">Destination hubs layer</span>. Select <code class="docutils literal notranslate"><span class="pre">name</span></code> as the <span class="guilabel">Hub layer name attribute</span>. The tool will also compute the straight-line distance between the populated place and the nearest earthquake. Set <code class="docutils literal notranslate"><span class="pre">Kilometers</span></code> as the <span class="guilabel">Measurement unit</span>. Click on <code class="docutils literal notranslate"><span class="pre">...</span></code>  in <span class="guilabel">Hub Distance</span> and click <span class="guilabel">Save to File…</span> to save the file as <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city.gpkg</span></code> . Click <span class="guilabel">Run</span>.  Once the processing finishes, click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1220.png" class="align-center" src="../../_images/1220.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>Im Dialogfenster <span class="guilabel">Distanzmatrix</span> setzen wir <code class="docutils literal notranslate"><span class="pre">Nicht</span> <span class="pre">leere</span> <span class="pre">Geometrien</span></code> als <span class="guilabel">Eingabepunktlayer</span> und <code class="docutils literal notranslate"><span class="pre">I_D</span></code> als <span class="guilabel">Eindeutiges Schlüsselfeld der Eingabe</span>. Als  <span class="guilabel">Zielpunktlayer</span> verwenden wir <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> und als <span class="guilabel">Eindeutiges Schlüsselfeld des Ziels</span> wählen wir <code class="docutils literal notranslate"><span class="pre">name</span></code>. Als <span class="guilabel">Typ der Ausgabematrix</span> wählen wir <code class="docutils literal notranslate"><span class="pre">Lineare</span> <span class="pre">(N*k</span> <span class="pre">x</span> <span class="pre">3)</span> <span class="pre">Distanzmatrix</span></code>. Entscheidend ist es, den Wert für <span class="guilabel">Nur (k) nächste Zielpunkte verwenden</span> auf <code class="docutils literal notranslate"><span class="pre">1</span></code> zu setzen, damit für die Ausgabe nur der nächste Nachbar ermittelt wird. Klicke auf <span class="guilabel">Starte</span>, um die Distanzmatrix zu berechnen. Klicke nach Ende der Berechnung auf <span class="guilabel">Schließen</span>.</p></li>
+<li><p>Back in the main QGIS window, you will see a new line layer called <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city</span></code> loaded in the <span class="guilabel">Layers</span> panel. This layer has line features connecting each earthquake point to the nearest populated place. Select the <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city</span></code> layer and click <span class="guilabel">Open Attribute Tabel</span> icon in <span class="guilabel">Toolbar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1319.png" class="align-center" src="../../_images/1319.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>Nachdem die Berechnung abgeschlossen wurde, wird ein neuer Layer <code class="docutils literal notranslate"><span class="pre">Distanzmatrix</span></code> geladen. Beachte, dass die Ausgabedatei eine sogenannte <em>MultiPoint</em> Geometrie besitzt. Jedes Feature besteht aus 2 Punkten - Quelle und Ziel. Öffne die <span class="guilabel">Attributtabelle</span> des Layers. Wir sehen, dass für jedes Feature eine Zuordnung des nächsten bewohnten Ortes zu einem Erdbeben erfolgt ist. Beachte, dass die Distanz in einer Einheit entsprechend des KBS des Layers (Grad) angegeben ist.</p></li>
+<li><p>Scroll right to the last columns, and you will see 2 new attributes called <strong>HubName</strong> and <strong>HubDist</strong> added to the original earthquake features. This is the name of the distance to the nearest neighbor from the populated places layer.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1417.png" class="align-center" src="../../_images/1417.png" />
-</div></blockquote>
-<ol class="arabic simple" start="15">
-<li><p>An dieser Stelle können wir die Ausgabedatei in einem Format unserer Wahl speichern. Klicke mit der rechten Maustaste auf den Layer und wähle <span class="menuselection">Exportieren ‣ Objekt speichern als</span>. Zur besseren Visualisierung des Ergebnisses können wir auf einfache Weise eine Nabe-Speiche-Darstellung erzeugen. Klicke mit rechten Maustaste auf den Layer <code class="docutils literal notranslate"><span class="pre">Distanzmatrix</span></code> und wähle <span class="guilabel">Eigenschaften</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
-</div></blockquote>
-<ol class="arabic simple" start="16">
-<li><p>Wir gehen im Dialogfenster <span class="guilabel">Layereigenschaften</span> zum Punkt <span class="guilabel">Symbolisierung</span> und klicken auf <code class="docutils literal notranslate"><span class="pre">Einfache</span> <span class="pre">Markierung</span></code> und wählen <code class="docutils literal notranslate"><span class="pre">Geometriegenerator</span></code> als <span class="guilabel">Symbollayertyp</span>. Wir stellen <code class="docutils literal notranslate"><span class="pre">LineString</span> <span class="pre">/</span> <span class="pre">MultiLineString</span></code> als <span class="guilabel">Geometrietyp</span> ein und klicken auf den <span class="guilabel">Ausdruck</span> Knopf.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
-</div></blockquote>
-<ol class="arabic simple" start="17">
-<li><p>Hier können wir einen Ausdruck verwenden, der die 2 Punkte der Multi-point-Features mit einer Linie verbindet. Gebe folgenden Ausdruck ein.</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make_line(point_n( $geometry, 1), point_n( $geometry, 2))
-</pre></div>
-</div>
-<img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
-</div></blockquote>
-<ol class="arabic simple" start="18">
-<li><p>Zurück im <span class="guilabel">Symbolisierungs</span> Bereich können wir den Stil der Linien an unsere Vorstellungen anpassen. Klicke danach auf <span class="guilabel">OK</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
-</div></blockquote>
-<ol class="arabic simple" start="19">
-<li><p>Wir sehen, dass der Layer <code class="docutils literal notranslate"><span class="pre">Distanzmatrix</span></code> jetzt mit Linien anstelle von Punkten dargestellt wird. Wir brauchten dafür keinen neuen Layer erstellen. Der Layer besteht immer noch aus einer MultiPoint Geometrie. Die Darstellung als Linien erfolgt dynamisch basierend auf dem verwendeten Ausdruck.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 </section>
 </section>
@@ -432,8 +340,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Dez. 01, 2021.<br/>
+        &copy; Copyright 2021, Ujaval Gandhi.<br/>
+      Zuletzt aktualisiert am Dez. 09, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

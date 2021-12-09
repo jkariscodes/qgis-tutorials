@@ -166,71 +166,7 @@
 <p>Ujaval Gandhi</p>
 <a href="https://twitter.com/intent/follow?screen_name=spatialthoughts" class="twitter-follow-button" data-show-count="false">Follow @spatialthoughts</a>
 <hr>
-<p>Want to learn QGIS in a structured way? Check out <a href="https://spatialthoughts.com/" target="_blank">Spatial Thoughts Academy</a> for more learning materials and instructor-led online programs with QGIS.org certification.</p>
-
-<hr>
-<!-- EmailOctopus Form -->
-
-<link rel="stylesheet"
-      href="https://emailoctopus.com/bundles/emailoctopuslist/css/1.6/form.css"
->
-<div class="emailoctopus-form-wrapper emailoctopus-form-default null"
-     style="font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(26, 26, 26);"
->
-  <p class="emailoctopus-heading">
-    Subscribe to my newsletter
-  </p>
-  <p class="emailoctopus-success-message">
-  </p>
-  <p class="emailoctopus-error-message">
-  </p>
-  <form action="https://emailoctopus.com/lists/7325d131-1dbb-11eb-a3d0-06b4694bee2a/members/embedded/1.3/add"
-        method="post"
-        data-message-success="Thanks for subscribing!"
-        data-message-missing-email-address="Your email address is required."
-        data-message-invalid-email-address="Your email address looks incorrect, please try again."
-        data-message-bot-submission-error="This doesn't look like a human submission."
-        data-message-consent-required="Please check the checkbox to indicate your consent."
-        data-message-invalid-parameters-error="This form has missing or invalid fields."
-        data-message-unknown-error="Sorry, an unknown error has occurred. Please try again later."
-        class="emailoctopus-form"
-  >
-    <div class="emailoctopus-form-row">
-      <label for="field_0">
-        Email address
-      </label>
-      <input id="field_0"
-             name="field_0"
-             type="email"
-             placeholder
-             required="required"
-      >
-    </div>
-    <div aria-hidden="true"
-         class="emailoctopus-form-row-hp"
-    >
-      <input type="text"
-             name="hpc4b27b6e-eb38-11e9-be00-06b4694bee2a"
-             tabindex="-1"
-             autocomplete="nope"
-      >
-    </div>
-    <div class="emailoctopus-form-row-subscribe">
-      <input type="hidden"
-             name="successRedirectUrl"
-      >
-      <button type="submit"
-              style="background-color: rgb(224, 224, 224); color: rgb(0, 0, 0); font-family: inherit;"
-      >
-        Subscribe
-      </button>
-    </div>
-  </form>
-</div>
-<script src="https://emailoctopus.com/bundles/emailoctopuslist/js/1.6/form-embed.js">
-</script>
-
-<hr>
+<p>Want to learn QGIS in a structured way? Check out <a href="https://spatialthoughts.com/" target="_blank">Spatial Thoughts</a> for more learning materials and instructor-led online programs with QGIS.org certification.</p>
 
 
 <h4>Change Language</h4>
@@ -265,23 +201,28 @@
 
   <section id="nearest-neighbor-analysis-qgis3">
 <h1>Análisis del Vecino Más Cercano (QGIS3)<a class="headerlink" href="#nearest-neighbor-analysis-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>El SIG es muy útil para analizar la relación espacial entre objetos espaciales. Uno de los análisis es descubrir qué objetos espaciales están más cerca a un objeto espacial dado. Hay múltiples maneras para hacer este análisis en QGIS. En este tutorial, exploraremos la <strong>Distancia al centro más cercano</strong> y las herramientas de <strong>Matriz de distancia</strong> para llevar a cabo el análisis del vecino más cercano.</p>
+<p>GIS is very useful in analyzing spatial relationship between features. One such analysis is finding out which features are closest to a given feature. There are multiple ways to do this analysis in QGIS. You can do a spatial join using the <strong>Join Attributes by Nearest</strong> or get the distances to all features from another layer using the <strong>Distance Matrix</strong> tool from the Processing Toolbox.  In this tutorial, we will explore a tool named <strong>Distance to nearest hub</strong> from the Processing Toolbox that can not only find the distance to the closest feature but join it with a line to it for visualizing the results.</p>
 <section id="overview-of-the-task">
 <h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Dadas las ubicaciones de todos los sismos significativos conocidos, descubrir los centros poblados más cercanos para cada ubicación donde ocurrió un sismo.</p>
-<section id="other-skills-you-will-learn">
-<h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
-<ul class="simple">
-<li><p>Usar el representador <em>Generador de Geometría</em> para crear dinámicamente líneas a partir de una capa multipunto.</p></li>
-</ul>
-</section>
+<p>Given the locations of all known earthquakes between years 1900 and 2000, find out the nearest populated place for each location where the earthquake happened.</p>
 </section>
 <section id="get-the-data">
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Usaremos la <a class="reference external" href="http://www.ngdc.noaa.gov/nndc/struts/form?t=101650&amp;s=1&amp;d=1">Base de datos de Sismos Significativos</a> del National Geophysical Data Center de NOAA como nuestra capa que representa todos los sismos principales. Descargue los <a class="reference external" href="https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&amp;query_0=$ID&amp;t=101650&amp;s=13&amp;d=189&amp;dfn=signif.txt">datos de sismo delimitados por tabulación</a>.</p>
+<ol class="arabic simple">
+<li><p>For this tutorial we will download a dataset of earthquakes between 1900-2000 from NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Visit the NOAA NCEI portal</a> and enter <span class="guilabel">Min</span> as <code class="docutils literal notranslate"><span class="pre">1900</span></code> and <span class="guilabel">Max</span> as <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  This will return all earthquake incidents that occurred and were recorded by NOAA between those years. For other specific results, you can filter with different parameters. Click <span class="guilabel">Search</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>As a result, we got <em>2585</em> earthquake incidents. Click on the <span class="guilabel">Download TSV</span> icon.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
+</div></blockquote>
 <p>Natural Earth tiene un agradable conjunto de datos de <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Centros Poblados</a>. Descargue el <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">conjunto de datos simple (menos columnas)</a>.</p>
 <p>Para su comodidad, puede descargar directamente una copia de ambos conjuntos de datos desde los enlaces abajo:</p>
-<p><a class="reference external" href="https://www.qgistutorials.com/downloads/signif.txt">signif.txt</a></p>
+<p><a class="reference external" href="https://www.qgistutorials.com/downloads/earthquakes-2021-11-25_14-31-59_+0530.tsv">earthquakes_2021_11_25_14_31_59_+0530.tsv</a></p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/ne_10m_populated_places_simple.zip">ne_10m_populated_places_simple.zip</a></p>
 <p>Data Sources: <a class="reference internal" href="../credits.html#ncei" id="id1"><span>[NCEI]</span></a> <a class="reference internal" href="../credits.html#naturalearth" id="id2"><span>[NATURALEARTH]</span></a></p>
 </section>
@@ -291,122 +232,89 @@
 <li><p>Ubique el archivo descargado <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.zip</span></code> en el panel <span class="guilabel">Navegador</span> y expándalo. Arrastre el archivo <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.shp</span></code> a la pantalla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/013.png" class="align-center" src="../../_images/013.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Verá cargada una nueva capa <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> en el panel <span class="guilabel">Capas</span>. Esta capa contiene los puntos que representan centros poblados. Ahora cargaremos la capa de sismos. Esta capa viene como un archivo texto <em>Valores Separados por Tabulaciones (TSV)</em>. Para cargar este archivo, clic el botón <span class="guilabel">Abrir Administrador de Fuente de Datos</span> en la <span class="guilabel">Barra de Herramientas de Fuente de Datos</span>. También puede usar el atajo de teclado <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
+<div><img alt="../../_images/023.png" class="align-center" src="../../_images/023.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Clic el botón <span class="guilabel">…</span> junto a <span class="guilabel">Nombre de archivo</span> y navegue al archivo``signif.txt`` descargado. Una vez cargado, los campos <span class="guilabel">Formato de Archivo</span> y <span class="guilabel">Definición de Geometría</span> deberían autollenarse con los valores correctos. Clic en <span class="guilabel">Añadir</span> seguido por <span class="guilabel">Cerrar</span>.</p></li>
+<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, select <span class="guilabel">Delimited Text</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/335.png" class="align-center" src="../../_images/335.png" />
+<div><img alt="../../_images/033.png" class="align-center" src="../../_images/033.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Haga un acercamiento y explore ambos conjuntos de datos. Cada punto amarillo representa la ubicación de un sismo significativo y cada punto rojo representa la ubicación de un centro poblado. Nuestra meta es descubrir el punto más cercano de la capa centros poblados para cada punto de la capa sismos.</p></li>
+<li><p>Click the <span class="guilabel">…</span> button next to <span class="guilabel">File name</span> and browse to the downloaded <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530.tsv</span></code> file. Depending upon the operating system, you may not see the file at the downloaded directory. If that is the case, switch to <span class="guilabel">All files (*; .)</span> in the <span class="guilabel">Choose a Delimited Text File to Open</span> dialog. Once opened, select  <span class="guilabel">Custom delimiters</span> in the <span class="guilabel">File format</span> section, and check <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. In the <span class="guilabel">Geometry definition</span> section, choose <span class="guilabel">Point coordinates</span>. By default <span class="guilabel">X field</span> and <span class="guilabel">Y field</span>  values will be auto-populated with the appropriate fields in the input. In our case, they are <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> CRS. If your file contains coordinates in a different CRS, you could select the appropriate CRS here. Click <span class="guilabel">Add</span> followed by <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/417.png" class="align-center" src="../../_images/417.png" />
+<div><img alt="../../_images/043.png" class="align-center" src="../../_images/043.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Antes que hagamos el análisis, necesitamos limpiar nuestras entradas. La capa <code class="docutils literal notranslate"><span class="pre">signif</span></code> contiene varios registros sin sin una geometría válida. Estos registros fueron importados con una geometría <strong>NULA</strong>. Entonces, eliminemos estos registros primero. Vaya a <span class="menuselection">Procesos ‣ Caja de herramientas</span>.</p></li>
+<li><p>Zoom around and explore both datasets. Each red point represents the location of an earthquake incidence, and each green point represents the location of a populated place. Our goal is to find out the nearest point from the populated places layer for each of the points in the earthquake layer. Let’s inspect the Attribute table of the earthquakes layer. Select the layer and click on <span class="guilabel">Open Attribute Table</span> icon in <span class="guilabel">Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/518.png" class="align-center" src="../../_images/518.png" />
+<div><img alt="../../_images/053.png" class="align-center" src="../../_images/053.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Busque y ubique la herramienta <span class="menuselection">Geometría vectorial ‣ Eliminar geometrías nulas</span>. Doble-clic para iniciarla.</p></li>
+<li><p>There are <code class="docutils literal notranslate"><span class="pre">2586</span></code> features, but the data contains few entries with no latitude or longitude infomation. We have to remove that before proceeding further. Close the Attribute Table.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/618.png" class="align-center" src="../../_images/618.png" />
+<div><img alt="../../_images/063.png" class="align-center" src="../../_images/063.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">signif</span></code> como la <span class="guilabel">Capa de entrada</span> y clic en <span class="guilabel">Ejecutar</span>. Una vez que finalice el procesamiento, clic en <span class="guilabel">Cerrar</span>.</p></li>
+<li><p>Go to <span class="menuselection">Processing ‣ Toolbox ‣ Vector geometry ‣ Remove null geometries</span> tool. Double-click to open it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/717.png" class="align-center" src="../../_images/717.png" />
+<div><img alt="../../_images/073.png" class="align-center" src="../../_images/073.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Verá una nueva capa llamada <code class="docutils literal notranslate"><span class="pre">Geometrías</span> <span class="pre">no</span> <span class="pre">nulas</span></code> cargada en el panel <span class="guilabel">Capas</span>. Usaremos esta capa en vez de la capa <code class="docutils literal notranslate"><span class="pre">signif</span></code> original en el análisis posterior. Desmarque la capa <code class="docutils literal notranslate"><span class="pre">signif</span></code> en el panel <span class="guilabel">Capas</span> para ocultarla. Ahora es momento de realizar un análisis de vecino más cercano. Busque y ubique la herramienta <span class="menuselection">Análisis de vector ‣ Distancia al eje más próximo (línea a eje)</span>. Doble-clic para iniciarla.</p></li>
+<li><p>In the <span class="guilabel">Remove Null Geometries</span> dialog box, Select <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530</span></code> as the <span class="guilabel">Input layer</span> and check the <span class="guilabel">Also remove empty geometries</span>. Click <span class="guilabel">Run</span>. Once the processing finishes, click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/817.png" class="align-center" src="../../_images/817.png" />
+<div><img alt="../../_images/082.png" class="align-center" src="../../_images/082.png" />
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Si necesita una capa punto como salida, en vez de ello use la herramienta <em>Distancia al eje más próximo (puntos)</em>.</p>
-</div>
 <ol class="arabic simple" start="9">
-<li><p>En el diálogo <span class="guilabel">Distancia al Eje Más Próximo (Línea a Eje)</span>, seleccione <code class="docutils literal notranslate"><span class="pre">Geometrías</span> <span class="pre">no</span> <span class="pre">nulas</span></code> como la <span class="guilabel">Capa de puntos fuente</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> como la <span class="guilabel">Capa de eje destino</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">name</span></code> como el <span class="guilabel">Atributo de nombre de capa eje</span>. La herramienta también calculará la distancia en línea recta entre el centro poblado y el sismo más cercano. Defina <code class="docutils literal notranslate"><span class="pre">Kilómetros</span></code> como la <span class="guilabel">Unidad de medida</span>. Clic en <span class="guilabel">Ejecutar</span>. Una vez finalice el procesamiento, clic en <span class="guilabel">Cerrar</span>.</p></li>
+<li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> will be added to the <span class="guilabel">Layers</span> panel. For analysis we will use this layer instead of the original layer. Un-check the <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530</span></code> layer in the <span class="guilabel">Layers</span> panel to hide it. Select the <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> layer and click the <span class="guilabel">Open Attribute Table</span> button from the <span class="guilabel">Attributes Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/917.png" class="align-center" src="../../_images/917.png" />
+<div><img alt="../../_images/092.png" class="align-center" src="../../_images/092.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>De vuelta en la ventana principal QGIS, verá una nueva capa línea llamada <code class="docutils literal notranslate"><span class="pre">Distancia</span> <span class="pre">eje</span></code> cargada en el panel <span class="guilabel">Capas</span>. Esta capa tiene objetos espaciales línea que conectan cada punto sismo con el centro poblado más cercano. Clic-derecho a la capa <code class="docutils literal notranslate"><span class="pre">Distancia</span> <span class="pre">eje</span></code> y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>.</p></li>
+<li><p>You will see a lower count for total features as all rows with empty latitude and longitude values were removed. Close the attribute table.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1019.png" class="align-center" src="../../_images/1019.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Deslice hacia la derecha a las últimas columnas y verá 2 nuevos atributos llamados <strong>HubName</strong> y <strong>HubDist</strong> agregados a los objetos originales de sismos. Este es el nombre de la distancia al vecino más cercano de la capa de centros poblados.</p></li>
+<li><p>Now it is time to perform the nearest neighbor analysis. Search and locate the <span class="menuselection">Processing ‣ Toolbox ‣ Vector analysis ‣ Distance to nearest hub (line to hub)</span> tool. Double-click to launch it.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1122.png" class="align-center" src="../../_images/1122.png" />
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>We can also add a point layer as output, use the <em>Distance to nearest hub (points)</em> tool for that.</p>
+</div>
 <ol class="arabic simple" start="12">
-<li><p>Nuestro análisis está completo. Podemos ahora explorar otra herramienta que también puede hacer un análisis similar. <strong>Matriz de Distancia</strong> es una herramienta poderosa que le permite no sólo calcular distancia al punto más cercano, sino a todos los puntos de otra capa. Podemos usar este método como una alternativa a la herramienta <em>Distancia al eje más cercano</em>. Desmarque la capa <code class="docutils literal notranslate"><span class="pre">Hub</span> <span class="pre">distance</span></code> para esconderla. Busque y localice la herramienta <span class="menuselection">Análisis de vector ‣ Matriz de distancia</span>.</p></li>
+<li><p>In the <span class="guilabel">Distance to Nearest Hub (Line to Hub)</span> dialog box, select <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code>  as the <span class="guilabel">Source points layer</span>. Select <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> as the <span class="guilabel">Destination hubs layer</span>. Select <code class="docutils literal notranslate"><span class="pre">name</span></code> as the <span class="guilabel">Hub layer name attribute</span>. The tool will also compute the straight-line distance between the populated place and the nearest earthquake. Set <code class="docutils literal notranslate"><span class="pre">Kilometers</span></code> as the <span class="guilabel">Measurement unit</span>. Click on <code class="docutils literal notranslate"><span class="pre">...</span></code>  in <span class="guilabel">Hub Distance</span> and click <span class="guilabel">Save to File…</span> to save the file as <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city.gpkg</span></code> . Click <span class="guilabel">Run</span>.  Once the processing finishes, click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1220.png" class="align-center" src="../../_images/1220.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>En el diálogo <span class="guilabel">Matriz de distancia</span>, defina <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> para la <span class="guilabel">Capa de puntos de entrada</span> y <code class="docutils literal notranslate"><span class="pre">I_D</span></code> como el <span class="guilabel">Campo ID único de entrada</span>. Defina <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> como la <span class="guilabel">Capa de puntos objetivo</span> y <code class="docutils literal notranslate"><span class="pre">name</span></code> como el <span class="guilabel">Campo ID único objetivo</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">Matriz</span> <span class="pre">de</span> <span class="pre">distancia</span> <span class="pre">lineal</span> <span class="pre">(N*k</span> <span class="pre">x</span> <span class="pre">3)</span></code> como el <span class="guilabel">Tipo de matriz de salida</span>. La clave aquí es definir el parámetro <span class="guilabel">Usar sólo los puntos objetivos más cercanos (k)</span> como <code class="docutils literal notranslate"><span class="pre">1</span></code> - que le dará sólo el vecino más cercano en la salida. Clic en <span class="guilabel">Ejecutar</span> para iniciar el cálculo de la matriz. Una vez que termine el procesamiento, clic en <span class="guilabel">Cerrar</span>.</p></li>
+<li><p>Back in the main QGIS window, you will see a new line layer called <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city</span></code> loaded in the <span class="guilabel">Layers</span> panel. This layer has line features connecting each earthquake point to the nearest populated place. Select the <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city</span></code> layer and click <span class="guilabel">Open Attribute Tabel</span> icon in <span class="guilabel">Toolbar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1319.png" class="align-center" src="../../_images/1319.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>Una vez que termine el procesamiento, se cargará una nueva capa llamada <code class="docutils literal notranslate"><span class="pre">Distance</span> <span class="pre">matrix</span></code>. Note que la salida de esta herramienta es una capa que contiene geometrías <em>MultiPunto</em>. Cada objeto contiene 2 puntos - fuente y objetivo. Abra la <span class="guilabel">Tabla de atributos</span> para la capa. Verá que cada objeto tiene atributos que mapean el sismo de su centro poblado más cercano. Note que la distancia aquí está en la unidades SRC de la capa (grados).</p></li>
+<li><p>Scroll right to the last columns, and you will see 2 new attributes called <strong>HubName</strong> and <strong>HubDist</strong> added to the original earthquake features. This is the name of the distance to the nearest neighbor from the populated places layer.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1417.png" class="align-center" src="../../_images/1417.png" />
-</div></blockquote>
-<ol class="arabic simple" start="15">
-<li><p>En este punto, puede guardar sus resultados en el formato de su elección haciendo clic-derecho en la capa y seleccionando <span class="menuselection">Exportar ‣ Guardar Objetos Como</span>. Si quiere visualizar mejor los resultados, podemos fácilmente crear una representación eje-radios a partir de la geometría de objetos. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">Distance</span> <span class="pre">matrix</span></code> y seleccione <span class="guilabel">Propiedades</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
-</div></blockquote>
-<ol class="arabic simple" start="16">
-<li><p>En el diálogo <span class="guilabel">Propiedades</span>, cámbiese a la pestaña <span class="guilabel">Simbología</span>. Clic en el sub-representador <code class="docutils literal notranslate"><span class="pre">Marcador</span> <span class="pre">simple</span></code> y seleccione <code class="docutils literal notranslate"><span class="pre">Generador</span> <span class="pre">de</span> <span class="pre">geometría</span></code> como el <span class="guilabel">Tipo de capa de símbolo</span>. Defina <code class="docutils literal notranslate"><span class="pre">LineString</span> <span class="pre">/</span> <span class="pre">MultiLineString</span></code> como el <span class="guilabel">Tipo de geometría</span>. Clic el botón <span class="guilabel">Expresión</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
-</div></blockquote>
-<ol class="arabic simple" start="17">
-<li><p>Aquí podemos ingresar una expresión para crear una geometría línea a partir de 2 puntos dentro de cada geometría fuente multi-punto. Ingrese la siguiente expresión.</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make_line(point_n( $geometry, 1), point_n( $geometry, 2))
-</pre></div>
-</div>
-<img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
-</div></blockquote>
-<ol class="arabic simple" start="18">
-<li><p>De vuelta en la pestaña <span class="guilabel">Simbología</span>, defina el estilo de la línea según su gusto y clic en <span class="guilabel">Aceptar</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
-</div></blockquote>
-<ol class="arabic simple" start="19">
-<li><p>Verá ahora la capa <code class="docutils literal notranslate"><span class="pre">Distance</span> <span class="pre">matrix</span></code> representada con líneas en vez de puntos. Note que no tuvimos que crear una nueva capa para esta visualización. La capa todavía contiene geometrías MultiPunto, pero es representada dinámicamente como líneas en base a la expresión.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 </section>
 </section>
@@ -432,8 +340,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2019, Ujaval Gandhi.<br/>
-      Actualizado por última vez en dic. 01, 2021.<br/>
+        &copy; Copyright 2021, Ujaval Gandhi.<br/>
+      Actualizado por última vez en dic. 09, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
