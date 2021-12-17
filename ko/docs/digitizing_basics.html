@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">가장 가까운 기-종점 매트릭스 위치 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Openrouteservice를 이용한 서비스 영역 분석(QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -221,7 +222,7 @@ from the <a class="reference external" href="http://www.linz.govt.nz/topography/
 <ol class="arabic simple">
 <li><p>메뉴 레이어 –&gt; 래스터 레이어 추가  :menuselection:<a href="#id1"><span class="problematic" id="id2">`</span></a>Layer –&gt; Add Raster Layer`로 갑니다. 다운로드한 <a href="#id3"><span class="problematic" id="id4">``</span></a>BX24_GeoTifv1-02.tif``를 찾고 열기 :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Open`를 클릭합니다.</p></li>
 </ol>
-<img alt="../_images/1166.png" class="align-center" src="../_images/1166.png" />
+<img alt="../_images/1167.png" class="align-center" src="../_images/1167.png" />
 <ol class="arabic simple" start="2">
 <li><p>이 파일은 대용량 래스터 파일로 지도에서 확대 혹은 축소 기능을 사용하면 이미지를 구현하는데 약간의 시간이 걸립니다. QGIS는 <a href="#id1"><span class="problematic" id="id2">**</span></a>Image Pyramids**기능을 사용하여 래스터로딩 속도를 단축하는 간편한 해결책을 제공합니다. QGIS는 다른 해상도에서 사전 렌더링 된 타일을 생성하여 전체 래스터 이미지 대신 보여줍니다. 이 기능은 지도 찾기를 신속하면서 즉각적으로 반응하도록 만듭니다.  <a href="#id3"><span class="problematic" id="id4">``</span></a>BX24_GeoTifv1-02``레이어를 우측클릭하고 속성 :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Properties`을 선택합니다.</p></li>
 </ol>
@@ -257,7 +258,7 @@ from the <a class="reference external" href="http://www.linz.govt.nz/topography/
 <ol class="arabic simple" start="10">
 <li><p>일단 레이어가 불러들여지면 레이어를 편집모드로 바꾸기 위해 편집전환 <span class="guilabel">Toggle Editing</span> 단추를 클릭합니다.</p></li>
 </ol>
-<img alt="../_images/1044.png" class="align-center" src="../_images/1044.png" />
+<img alt="../_images/1045.png" class="align-center" src="../_images/1045.png" />
 <ol class="arabic simple" start="11">
 <li><p>객체 추가 <span class="guilabel">Add feature</span> 단추를 클릭합니다. 새로운 버텍스를 추가하기 위하여 지도위를 클릭합니다. 도로 객체를 따라서 새로운 버텍스를 추가하십시오. 도로 세크먼트를 디지타이징했다면 마우스 오른쪽 버튼 클릭을 해서 종료하십시오.</p></li>
 </ol>
@@ -265,35 +266,35 @@ from the <a class="reference external" href="http://www.linz.govt.nz/topography/
 <p class="admonition-title">참고</p>
 <p>디지타이징을 하는 동안 마우스의 스크롤을 사용하여 확대와 축소를 할 수 있습니다. 또한 스크롤 단추를 눌러서 마우스를 팬 기능으로 사용할 수 있습니다.</p>
 </div>
-<img alt="../_images/1167.png" class="align-center" src="../_images/1167.png" />
+<img alt="../_images/1168.png" class="align-center" src="../_images/1168.png" />
 <ol class="arabic simple" start="12">
 <li><p>객체 작업을 마우스 오른쪽 버튼을 클릭해서 끝내면 속성 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Attributes`이라고 하는 팝업 다이알로그가 나타납니다. 여기서 새롭게 만들어진 객체의 속성을 입력할 수 있습니다. <a href="#id3"><span class="problematic" id="id4">**</span></a>pkuid**가 자동증가 필드이므로 수동적으로 값을 입력하지 않아도 됩니다. 이것을 비워둔 채로 두고 지형도위에 나타난 것처럼 도로명을 입력합니다. 선택적으로 도로의 등급치를 지정할 수 있습니다.  :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>OK`를 클릭합니다.</p></li>
 </ol>
-<img alt="../_images/1246.png" class="align-center" src="../_images/1246.png" />
+<img alt="../_images/1247.png" class="align-center" src="../_images/1247.png" />
 <ol class="arabic simple" start="13">
 <li><p>새로운 선형 레이어의 기본 스타일은 얉은 선입니다. 이것을 바꿔봅시다. 그래서 캔버스 위에서 디지타이징한 객체를 보다 잘 볼 수 있습니다. <a href="#id1"><span class="problematic" id="id2">``</span></a>Roads``레이어를 우측클릭하고 속성 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>Properties`을 선택합니다.</p></li>
 </ol>
-<img alt="../_images/1345.png" class="align-center" src="../_images/1345.png" />
+<img alt="../_images/1346.png" class="align-center" src="../_images/1346.png" />
 <ol class="arabic simple" start="14">
 <li><p>레이어 속성 <span class="guilabel">Layer Properties`에서 스타일 :guilabel:`Style</span>  탭을 선택합니다. 미리 정의된 스타일에서 <span class="guilabel">Primary</span> 와 같은 두꺼운 선을 선택합니다.</p></li>
 </ol>
-<img alt="../_images/1442.png" class="align-center" src="../_images/1442.png" />
+<img alt="../_images/1443.png" class="align-center" src="../_images/1443.png" />
 <ol class="arabic simple" start="15">
 <li><p>이제 명확하게 디지타이징된 도로 객체를 명확하게 볼 수 있을 것입니다.새로운 객체를 디스크에 저장하기 위해 레이어 수정사항 저장  :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Save Layer Edits`을 클릭합니다.</p></li>
 </ol>
-<img alt="../_images/1540.png" class="align-center" src="../_images/1540.png" />
+<img alt="../_images/1541.png" class="align-center" src="../_images/1541.png" />
 <ol class="arabic simple" start="16">
 <li><p>남아 있는 도로를 디지타이징하기 전에 에러없는 레이어를 만들기위해 중요한 다른 세팅을 업데이트하는 것이 중요합니다. 메뉴 설정 –&gt; 맞추기 옵션 :menuselection:<a href="#id1"><span class="problematic" id="id2">`</span></a>Settings –&gt; Snapping Options…`으로 갑니다.</p></li>
 </ol>
-<img alt="../_images/1637.png" class="align-center" src="../_images/1637.png" />
+<img alt="../_images/1638.png" class="align-center" src="../_images/1638.png" />
 <ol class="arabic simple" start="17">
 <li><p>맞추기 옵션 <span class="guilabel">Snapping Options</span> 다이알로그에서 토포로지 활성화 편집 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Enable topological editing`을 체크합니다. 이 옵션은 폴리곤레이어에서 일반 경계가 바르게 유지될 수 있도록 해줍니다. 또한 배경 레이어의 교차선에서 맞추기를 할 수 있도록 교차선에서 맞추기 활성화  :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>Enable snapping on intersection`를 체크합니다.</p></li>
 </ol>
-<img alt="../_images/1734.png" class="align-center" src="../_images/1734.png" />
+<img alt="../_images/1735.png" class="align-center" src="../_images/1735.png" />
 <ol class="arabic simple" start="18">
 <li><p>이제 객체 추가 <span class="guilabel">Add feature</span> 단추를 클릭하고 공원의 다른 도로를 디지타이징 할 수 있습니다. 새로운 객체를 추가한 후에는 편집 저장 <span class="guilabel">Save Edits`을 클릭하는 것을 확실히 해야합니다. 디지타이징을 돕는 유용한 툴로 노드 도구 **Node Tool**가 있습니다.  노드도구 :guilabel:`Node Tool</span> 단추를 클릭합니다.</p></li>
 </ol>
-<img alt="../_images/1832.png" class="align-center" src="../_images/1832.png" />
+<img alt="../_images/1833.png" class="align-center" src="../_images/1833.png" />
 <ol class="arabic simple" start="19">
 <li><p>일단 노드 도구가 활성화되면 버텍스를 보이기 위해 아무 객체나 클릭합니다. 그것을 선택하기 위해 아무 버텍스나 클릭하십시오. 버텍스는 선택되면 색깔이 바뀔 것입니다. 이제 버텍스를 마우스로 움직이기 위하여 클릭하고 드래그 할 수 있습니다. 이것은 버텍스가 만들어진 후에 보정을 할 때 매우 유용합니다. <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Delete`키를</kbd> <kbd class="kbd docutils literal notranslate">눌러서</kbd> <kbd class="kbd docutils literal notranslate">선택된</kbd> <kbd class="kbd docutils literal notranslate">버텍스를</kbd> <kbd class="kbd docutils literal notranslate">지울</kbd> <kbd class="kbd docutils literal notranslate">수도</kbd> <kbd class="kbd docutils literal notranslate">있습니다.</kbd> <kbd class="kbd docutils literal notranslate">(맥에서는</kbd> <kbd class="kbd docutils literal notranslate">:kbd:`Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd>)</p></li>
 </ol>

@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">가장 가까운 기-종점 매트릭스 위치 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Openrouteservice를 이용한 서비스 영역 분석(QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -225,7 +226,7 @@ earthquake data</a>.</p>
 <ol class="arabic simple">
 <li><p>메뉴 레이어 -&gt; 레이어 추가 -&gt; 구분자로 분리된 텍스트 레이어를 추가  <span class="menuselection">Layer ‣ Add Layer ‣ Add Delimited Text Layer</span> 를 열고 다운로드한 <code class="docutils literal notranslate"><span class="pre">signif.txt</span></code> 파일을 찾습니다.</p></li>
 </ol>
-<img alt="../_images/1182.png" class="align-center" src="../_images/1182.png" />
+<img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
 <ol class="arabic simple" start="2">
 <li><p>이 파일은 탭으로 구분된 파일  <a href="#id1"><span class="problematic" id="id2">*</span></a>tab-delimited file*이므로 파일포맷 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>File format`으로 구분자정의를 체크하고 탭 :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Tab`을 선택합니다. X필드 :guilabel:<a href="#id7"><span class="problematic" id="id8">`</span></a>X field`와 Y필드 :guilabel:<a href="#id9"><span class="problematic" id="id10">`</span></a>Y field`가 자동적으로 채워집니다. 확인 :guilabel:<a href="#id11"><span class="problematic" id="id12">`</span></a>OK`를 클릭합니다.</p></li>
 </ol>
@@ -269,7 +270,7 @@ earthquake data</a>.</p>
 <ol class="arabic simple" start="10">
 <li><p>테이블로 불러들여진 CSV파일을 보게 될 것입니다. 테이블 레이어를 우측클릭하고 속성테이블열기 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Open Attribute Table`를 선택합니다.</p></li>
 </ol>
-<img alt="../_images/1051.png" class="align-center" src="../_images/1051.png" />
+<img alt="../_images/1052.png" class="align-center" src="../_images/1052.png" />
 <ol class="arabic simple" start="11">
 <li><p>이제 결과의 내용을 볼 수 있을 겁니다. <span class="guilabel">InputID</span> 필드는 지진레이어의 필드명을 담고 있습니다. <span class="guilabel">TargetID</span> 필드는 지진발생지점으로 가장 가까운 인구밀집지역으로부터의 객체명을 포함고 있습니다. :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Distance`필드는 2점간의 거리입니다.</p></li>
 </ol>
@@ -277,35 +278,35 @@ earthquake data</a>.</p>
 <p class="admonition-title">참고</p>
 <p>거리 <em>distance*의 계산은 레이어의 좌표계를 사용한 것임을 기억해야 합니다. 여기서 거리는  원 레이어 좌표가 degree이기 때문에  *decimal degrees</em> 단위가 될 것입니다. 거리의 단위로 미터를 원한다면 툴을 구동시키기 전에 레이어를 재투영해야 합니다.</p>
 </div>
-<img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
+<img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
 <ol class="arabic simple" start="12">
 <li><p>이것이 원래 찾던 결과와 가장 가까운 것입니다. 몇 사용자들에게 이 테이블은 충분할 것입니다. 그러나 이 결과를 테이블 결합 <a href="#id1"><span class="problematic" id="id2">**</span></a>Table Join**을 사용해서 원 지진레이어에 통합시킬 수 있습니다. 지진 레이어를 우측클릭하고 속성 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>Properties`을 선택합니다.</p></li>
 </ol>
-<img alt="../_images/1253.png" class="align-center" src="../_images/1253.png" />
+<img alt="../_images/1254.png" class="align-center" src="../_images/1254.png" />
 <ol class="arabic simple" start="13">
 <li><p>결합 <span class="guilabel">Joins</span> 탭으로 가서 <span class="guilabel">+</span> 버튼을 클릭하십시오.</p></li>
 </ol>
-<img alt="../_images/1448.png" class="align-center" src="../_images/1448.png" />
+<img alt="../_images/1449.png" class="align-center" src="../_images/1449.png" />
 <ol class="arabic simple" start="14">
 <li><p>이 레이어의 분석 결과에서 데이터를 결합하고자 합니다. 각 레이어가 같은 값을 갖고 있는 필드는 선택할 필요가 있습니다. 조인 레이어 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Join layer``로써 <a href="#id3"><span class="problematic" id="id4">``</span></a>matrix``를 선택하고 조인필드 :guilabel:<a href="#id5"><span class="problematic" id="id6">`</span></a>Join field`로 <a href="#id7"><span class="problematic" id="id8">``</span></a>InputID``를 선택합니다. 대상 필드:guilabel:<a href="#id9"><span class="problematic" id="id10">`</span></a>Target field`는 <a href="#id11"><span class="problematic" id="id12">``</span></a>I_D``가 될 것입니다. 나머지 옵션은 그대로 두고 확인  :guilabel:<a href="#id13"><span class="problematic" id="id14">`</span></a>OK`을 누릅니다.</p></li>
 </ol>
-<img alt="../_images/1448.png" class="align-center" src="../_images/1448.png" />
+<img alt="../_images/1449.png" class="align-center" src="../_images/1449.png" />
 <ol class="arabic simple" start="15">
 <li><p>결합  :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Joins`탭에서 결합이 나타날 것입니다. :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p></li>
 </ol>
-<img alt="../_images/1546.png" class="align-center" src="../_images/1546.png" />
+<img alt="../_images/1547.png" class="align-center" src="../_images/1547.png" />
 <ol class="arabic simple" start="16">
 <li><p>이제  <a href="#id1"><span class="problematic" id="id2">``</span></a>signif``레이어의 속성 테이블을 오른쪽 클릭으로 열고 속성테이블열기 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>Open Attribute Table`를 선택합니다.</p></li>
 </ol>
-<img alt="../_images/1643.png" class="align-center" src="../_images/1643.png" />
+<img alt="../_images/1644.png" class="align-center" src="../_images/1644.png" />
 <ol class="arabic simple" start="17">
 <li><p>모든 지진 객체에 대해 최근린(인구밀집지역에 가장 가까운) 그리고 최근린 거리의 속성을 가지는 것을 볼 수 있을 것입니다.</p></li>
 </ol>
-<img alt="../_images/1739.png" class="align-center" src="../_images/1739.png" />
+<img alt="../_images/1740.png" class="align-center" src="../_images/1740.png" />
 <ol class="arabic simple" start="18">
 <li><p>이제 이러한 결과들을 시각화 할 방법을 찾아야 합니다. 첫째, 영구 테이블 결합을 새로운 레이어로 저장하여 만들 필요가 있습니다.  <a href="#id1"><span class="problematic" id="id2">``</span></a>signif``레이어를 오른쪽 클릭하고 새 이름으로 저장 :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>Save As…`을 선택합니다.</p></li>
 </ol>
-<img alt="../_images/1837.png" class="align-center" src="../_images/1837.png" />
+<img alt="../_images/1838.png" class="align-center" src="../_images/1838.png" />
 <ol class="arabic simple" start="19">
 <li><p>새 이름으로 저장  <span class="guilabel">Save as</span>  라벨 옆에 있는 탐색  <span class="guilabel">Browse</span> 단추를 클릭하고 출력 레이어를 <a href="#id1"><span class="problematic" id="id2">``</span></a>earthquake_with_places.shp``라고 입력합니다. 저장된 파일을 지도에 추가  <span class="guilabel">Add saved file to map</span> 상자가 체크되어 있는 지 확인하고 확인  :guilabel:<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`을 누릅니다.</p></li>
 </ol>

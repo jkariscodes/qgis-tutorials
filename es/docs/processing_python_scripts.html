@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Visualización y Enrutamiento Básico de Red (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Localizando la Instalación Más Cercana con Matriz Origen-Destino (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Análisis de Área de Servicio usando Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calcular la Precipitación Media de Área (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Iniciándote con la Programación Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Ejecutar Algoritmos de Procesamiento vía Python (QGIS3)</a></li>
@@ -217,7 +218,7 @@
 <ol class="arabic simple">
 <li><p>Abra QGIS y vaya a <span class="menuselection">Capa ‣ Añadir capa ‣ Añadir Capa Vectorial</span>. Explore el archivo descargado <code class="docutils literal notranslate"><span class="pre">ne_10_admin_0_countries.zip</span></code> y cargue la capa <code class="docutils literal notranslate"><span class="pre">ne_10_admin_0_countries</span></code>. Vaya a <span class="menuselection">Procesos ‣ Caja de Herramientas</span>.</p></li>
 </ol>
-<img alt="../_images/1196.png" class="align-center" src="../_images/1196.png" />
+<img alt="../_images/1197.png" class="align-center" src="../_images/1197.png" />
 <ol class="arabic simple" start="2">
 <li><p>Expanda el grupo <span class="guilabel">Scripts</span> en la <span class="guilabel">Caja de herramientas de Procesos</span> y seleccione <span class="guilabel">Crear script nuevo</span>.</p></li>
 </ol>
@@ -277,15 +278,15 @@
 <ol class="arabic simple" start="10">
 <li><p>Verá un diálogo de error. Esto era esperado ya que el script está incompleto y aún no genera ninguna salida.</p></li>
 </ol>
-<img alt="../_images/1057.png" class="align-center" src="../_images/1057.png" />
+<img alt="../_images/1058.png" class="align-center" src="../_images/1058.png" />
 <ol class="arabic simple" start="11">
 <li><p>En la ventana principal QGIS, verá la salida de depuración del script impresa en la consola. Esta es una forma útil para agregar instrucciones de impresión y ver valores intermedios de variable.</p></li>
 </ol>
-<img alt="../_images/1197.png" class="align-center" src="../_images/1197.png" />
+<img alt="../_images/1198.png" class="align-center" src="../_images/1198.png" />
 <ol class="arabic simple" start="12">
 <li><p>Volvamos a la edición del script haciendo clic derecho al script y seleccionando <span class="guilabel">Editar Script</span>.</p></li>
 </ol>
-<img alt="../_images/1258.png" class="align-center" src="../_images/1258.png" />
+<img alt="../_images/1259.png" class="align-center" src="../_images/1259.png" />
 <ol class="arabic simple" start="13">
 <li><p>Ingrese el siguiente código para completar el script. Note que estamos usando el algoritmo existente de disolución en QGIS mediante el procesamiento usando el método <code class="docutils literal notranslate"><span class="pre">processing.runalg()</span></code>.</p></li>
 </ol>
@@ -315,7 +316,7 @@
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1356.png" class="align-center" src="../_images/1356.png" />
+<img alt="../_images/1357.png" class="align-center" src="../_images/1357.png" />
 <ol class="arabic simple" start="14">
 <li><p>Ejecute el algoritmo seleccionado <code class="docutils literal notranslate"><span class="pre">SUBREGION</span></code> como el <span class="guilabel">campo de disolución</span> y <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> como el <span class="guilabel">campo de suma</span>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
@@ -323,11 +324,11 @@
 <p class="admonition-title">Nota</p>
 <p>El algoritmo de procesamiento puede tomar hasta 10 minutos para finalizar dependiendo de su sistema.</p>
 </div>
-<img alt="../_images/1453.png" class="align-center" src="../_images/1453.png" />
+<img alt="../_images/1454.png" class="align-center" src="../_images/1454.png" />
 <ol class="arabic simple" start="15">
 <li><p>Una vez que termine el procesamiento, puede usar la herramienta <span class="guilabel">Identificar</span> y hacer clic en cualquier polígono. Verá el campo recién agregado <code class="docutils literal notranslate"><span class="pre">SUM</span></code> con los valores <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> de todos los polígonos originales sumados.</p></li>
 </ol>
-<img alt="../_images/1550.png" class="align-center" src="../_images/1550.png" />
+<img alt="../_images/1551.png" class="align-center" src="../_images/1551.png" />
 <ol class="arabic simple" start="16">
 <li><p>Notará que todos los otros campos en la salida aún están presentes. Cuando disuelve varios objetos espaciales para crear un solo objeto, no toma en cuenta la mantención de los campos originales en la salida. Vuelva al <span class="guilabel">Editor de script</span> y agregue el siguiente código para borrar todos los campos excepto el campo <code class="docutils literal notranslate"><span class="pre">SUM</span></code> y el campo que fue usado para disolver la capa original. Clic en el botón <span class="guilabel">Guardar</span> y cierre la ventana.</p></li>
 </ol>
@@ -341,18 +342,18 @@
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1647.png" class="align-center" src="../_images/1647.png" />
+<img alt="../_images/1648.png" class="align-center" src="../_images/1648.png" />
 <ol class="arabic simple" start="17">
 <li><p>Una de las funcionalidades escondidas del Marco de Procesamiento es que todos los algoritmos pueden trabajar sobre los objetos espaciales seleccionados de una capa. Esto es muy útil cuando quiere ejecutar un algoritmo en un subconjunto de una capa. Como nuestro script usa el método <code class="docutils literal notranslate"><span class="pre">processing.features()</span></code> para leer los objetos, respetará la selección actual. Para demostrar eso, hagamos primero una selección. Clic en el botón <span class="guilabel">Seleccionar objetos espaciales usando una expresión</span>.</p></li>
 </ol>
-<img alt="../_images/1743.png" class="align-center" src="../_images/1743.png" />
+<img alt="../_images/1744.png" class="align-center" src="../_images/1744.png" />
 <ol class="arabic simple" start="18">
 <li><p>Ingrese la siguiente expresión para seleccionar objetos espaciales de Norte y Sud América y clic en <span class="guilabel">Seleccionar</span>.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
 </pre></div>
 </div>
-<img alt="../_images/1841.png" class="align-center" src="../_images/1841.png" />
+<img alt="../_images/1842.png" class="align-center" src="../_images/1842.png" />
 <ol class="arabic simple" start="19">
 <li><p>Verá que los objetos seleccionados son resaltados en amarillo. Clic-derecho el script <code class="docutils literal notranslate"><span class="pre">dissolve_with_sum</span></code> y seleccione <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>

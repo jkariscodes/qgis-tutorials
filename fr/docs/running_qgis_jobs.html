@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -294,7 +295,7 @@ topological cleaning tools. These are available in QGIS via the <code class="doc
 algorithm. Search for this algorithm in the <span class="guilabel">Processing Toolbox</span>
 and double-click it to launch the dialog.</p></li>
 </ol>
-<img alt="../_images/1060.png" class="align-center" src="../_images/1060.png" />
+<img alt="../_images/1061.png" class="align-center" src="../_images/1061.png" />
 <ol class="arabic simple" start="11">
 <li><p>You can read more about various tools and options in the <span class="guilabel">Help</span>
 tab. For this tutorial, we will be using the <code class="docutils literal notranslate"><span class="pre">snap</span></code> tool to remove
@@ -304,7 +305,7 @@ the <span class="guilabel">Cleaning tool</span>.  Enter <code class="docutils li
 <span class="guilabel">Threshold</span>. Leave the other fields blank and click
 <span class="guilabel">Run</span>.</p></li>
 </ol>
-<img alt="../_images/11101.png" class="align-center" src="../_images/11101.png" />
+<img alt="../_images/11102.png" class="align-center" src="../_images/11102.png" />
 <ol class="arabic simple" start="12">
 <li><p>Once the processing finishes, you will see 2 new layers added to QGIS. The
 <code class="docutils literal notranslate"><span class="pre">Cleaned</span> <span class="pre">vector</span> <span class="pre">layer</span></code> is the layer with topological errors corrected.
@@ -312,12 +313,12 @@ You will also have a <code class="docutils literal notranslate"><span class="pre
 which were repaired. You can use the errors layer as a guide and zoom in to
 see vertices that were removed.</p></li>
 </ol>
-<img alt="../_images/1261.png" class="align-center" src="../_images/1261.png" />
+<img alt="../_images/1262.png" class="align-center" src="../_images/1262.png" />
 <ol class="arabic simple" start="13">
 <li><p>Go to <span class="menuselection">Processing ‣ History and Log</span> dialog and note the
 full processing command for later use.</p></li>
 </ol>
-<img alt="../_images/1359.png" class="align-center" src="../_images/1359.png" />
+<img alt="../_images/1360.png" class="align-center" src="../_images/1360.png" />
 <ol class="arabic simple" start="14">
 <li><p>We are ready to start coding now. See the <strong>A Text Editor or a Python IDE</strong>
 section in the <a class="reference internal" href="building_a_python_plugin.html"><span class="doc">Building a Python Plugin</span></a> tutorial for instructions to
@@ -354,7 +355,7 @@ python c:\Users\Ujaval\Desktop\download_and_clean.py
 pause
 </pre></div>
 </div>
-<img alt="../_images/1456.png" class="align-center" src="../_images/1456.png" />
+<img alt="../_images/1457.png" class="align-center" src="../_images/1457.png" />
 <ol class="arabic simple" start="15">
 <li><p>Create a new python file and enter the following code. Name the file as
 <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code> and save it on your Desktop.</p></li>
@@ -363,7 +364,7 @@ pause
 <span class="nb">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1553.png" class="align-center" src="../_images/1553.png" />
+<img alt="../_images/1554.png" class="align-center" src="../_images/1554.png" />
 <ol class="arabic simple" start="16">
 <li><p>Switch to your Desktop and locate the <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> icon. Double-click it
 to launch a new command window and run the script. If you see <code class="docutils literal notranslate"><span class="pre">Hello</span>
@@ -371,7 +372,7 @@ to launch a new command window and run the script. If you see <code class="docut
 fine. If you see errors or do not see the text, check your <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code>
 file and make sure all the paths match the locations on your system.</p></li>
 </ol>
-<img alt="../_images/1650.png" class="align-center" src="../_images/1650.png" />
+<img alt="../_images/1651.png" class="align-center" src="../_images/1651.png" />
 <ol class="arabic simple" start="17">
 <li><p>Back in your text editor, modify the <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code> script to
 add the following code. This is the bootstrap code to initialize QGIS.
@@ -401,7 +402,7 @@ script.</p></li>
 <span class="nb">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1746.png" class="align-center" src="../_images/1746.png" />
+<img alt="../_images/1747.png" class="align-center" src="../_images/1747.png" />
 <ol class="arabic simple" start="18">
 <li><p>Recall the first processing command that we had saved from the log. This
 was the command to re-project a layer. Paste the command to your script and
@@ -416,7 +417,7 @@ the path to the output layers as a dictionary. We are storing this as the
 <span class="nb">print</span> <span class="n">output</span>
 </pre></div>
 </div>
-<img alt="../_images/1844.png" class="align-center" src="../_images/1844.png" />
+<img alt="../_images/1845.png" class="align-center" src="../_images/1845.png" />
 <ol class="arabic simple" start="19">
 <li><p>Run the script via <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> and you will see the path to the newly
 created reprojected layer.</p></li>

@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Noțiuni de Bază Despre Programarea în Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -252,7 +253,7 @@
 <ol class="arabic simple">
 <li><p>Deschideți QGIS. Mergeți la <span class="menuselection">Plugins ‣ Plugin Builder ‣ Plugin Builder</span>.</p></li>
 </ol>
-<img alt="../_images/1156.png" class="align-center" src="../_images/1156.png" />
+<img alt="../_images/1157.png" class="align-center" src="../_images/1157.png" />
 <ol class="arabic simple" start="2">
 <li><p>Veți vedea un formular în dialogul <span class="guilabel">QGIS Plugin Builder</span>. Aveți posibilitatea să completați formularul cu datele referitoare la pluginul nostru. În  <span class="guilabel">Numele clasei</span> se va introduce numele clasei Python care conține logica plugin-ului. Acesta va fi, de asemenea, și numele de folder care conține toate fișierele plugin-ului. Introduceți <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> ca nume al clasei. <span class="guilabel">Numele Pluginului</span> este numele sub care plugin-ul va apărea în <span class="guilabel">Managerul de Pluginuri</span>. Introduceți denumirea <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Attributes</span></code>. Adăugați o descriere în câmpul <span class="guilabel">Descriere</span>. <span class="guilabel">Numele modulului</span> va fi numele principalului fișier python al pluginului. Introduceți-l ca <code class="docutils literal notranslate"><span class="pre">save_attributes</span></code>. Lăsați numerele de versiune așa cum sunt. Valoarea <span class="guilabel">Textul pentru elementul de meniu</span> va reprezenta modul în care utilizatorii vor găsi plugin-ul în meniul QGIS. Introduceți-l ca <code class="docutils literal notranslate"><span class="pre">Salvare</span> <span class="pre">Atribute</span> <span class="pre">ca</span> <span class="pre">CSV</span></code>. Introduceți numele dvs. și adresa de e-mail în câmpurile corespunzătoare. Câmpul <span class="guilabel">Meniu</span> va decide locul din QGIS în care este adăugat elementul pluginului. Deoarece pluginul nostru este pentru date vectoriale, selectați <code class="docutils literal notranslate"><span class="pre">Vector</span></code>. Bifați caseta <span class="guilabel">Marchează pluginul ca experimental</span> din partea de jos. Faceți clic pe <span class="guilabel">OK</span>.</p></li>
 </ol>
@@ -306,39 +307,39 @@
 <ol class="arabic simple" start="10">
 <li><p>Vom proiecta acum caseta noastră de dialog și vom adăuga unele elemente de interfață cu utilizatorul la ea. Deschideți programul <code class="docutils literal notranslate"><span class="pre">Qt</span> <span class="pre">Creator</span></code> și mergeți la <span class="guilabel">Fișier –&gt; Deschidere Fișier sau Proiect…</span>.</p></li>
 </ol>
-<img alt="../_images/1039.png" class="align-center" src="../_images/1039.png" />
+<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
 <ol class="arabic simple" start="11">
 <li><p>Navigați la folderul pluginului apoi selectați fișierul <code class="docutils literal notranslate"><span class="pre">save_attributes_dialog_base.ui</span></code>. Faceți clic pe <span class="guilabel">Open</span>.</p></li>
 </ol>
-<img alt="../_images/1157.png" class="align-center" src="../_images/1157.png" />
+<img alt="../_images/1158.png" class="align-center" src="../_images/1158.png" />
 <ol class="arabic simple" start="12">
 <li><p>Veți vedea un dialog gol, în cadrul pluginului. Puteți glisape el elemente din panoul din stânga. Vom adăuga o <span class="guilabel">Casetă combo</span> de tipul <span class="guilabel">Input Widget</span>. Glisați-o pe dialogul pluginului.</p></li>
 </ol>
-<img alt="../_images/1242.png" class="align-center" src="../_images/1242.png" />
+<img alt="../_images/1243.png" class="align-center" src="../_images/1243.png" />
 <ol class="arabic simple" start="13">
 <li><p>Redimensionați caseta combo și ajustați-i dimensiunea. Acum glisați o  <span class="guilabel">Etichetă</span> de tip <span class="guilabel">Display Widget</span> în fereastra de dialog.</p></li>
 </ol>
-<img alt="../_images/1341.png" class="align-center" src="../_images/1341.png" />
+<img alt="../_images/1342.png" class="align-center" src="../_images/1342.png" />
 <ol class="arabic simple" start="14">
 <li><p>Faceți clic pe textul etichetei și introduceți <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">a</span> <span class="pre">layer</span></code>.</p></li>
 </ol>
-<img alt="../_images/1438.png" class="align-center" src="../_images/1438.png" />
+<img alt="../_images/1439.png" class="align-center" src="../_images/1439.png" />
 <ol class="arabic simple" start="15">
 <li><p>Salvați acest fișier accesând <span class="menuselection">Fișier ‣ Salvați save_attributes_dialog_base.ui</span>. Rețineți că numele obiectului casetă combo este <code class="docutils literal notranslate"><span class="pre">comboBox</span></code>. Pentru a interacționa cu acest obiect folosind codul python, va trebui să vă referiți la el cu acest nume.</p></li>
 </ol>
-<img alt="../_images/1536.png" class="align-center" src="../_images/1536.png" />
+<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
 <ol class="arabic simple" start="16">
 <li><p>Haideți să reîncărcăm plugin-ul nostru, astfel încât să putem vedea modificările în fereastra de dialog. Mergeți la <span class="menuselection">Plugin ‣ Plugin Reloader ‣ Alegeți un plugin pentru a fi reîncărcat</span>.</p></li>
 </ol>
-<img alt="../_images/1634.png" class="align-center" src="../_images/1634.png" />
+<img alt="../_images/1635.png" class="align-center" src="../_images/1635.png" />
 <ol class="arabic simple" start="17">
 <li><p>Selectați <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> din dialogul <span class="guilabel">Configurare Încărcător de Plugin-uri</span>.</p></li>
 </ol>
-<img alt="../_images/1731.png" class="align-center" src="../_images/1731.png" />
+<img alt="../_images/1732.png" class="align-center" src="../_images/1732.png" />
 <ol class="arabic simple" start="18">
 <li><p>Acum faceți clic pe butonul <span class="guilabel">Salvează Atributele ca CSV</span>. Veți vedea caseta de dialog nou proiectată.</p></li>
 </ol>
-<img alt="../_images/1829.png" class="align-center" src="../_images/1829.png" />
+<img alt="../_images/1830.png" class="align-center" src="../_images/1830.png" />
 <ol class="arabic simple" start="19">
 <li><p>Haideți să adăugăm plugin-ului ceva logică, pentru a popula caseta combo cu straturile încărcate în QGIS. Mergeți la directorul plugin-ului și încărcați fișierul <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> într-un editor de text. Derulați în jos pentru a găsi metoda <code class="docutils literal notranslate"><span class="pre">run(self)</span></code>. Această metodă va fi apelată atunci când faceți clic pe butonul din bara de instrumente, sau când selectați elementul de meniu al plugin-ului. Adăugați următorul cod la începutul metodei. Acest cod preia straturile încărcate în QGIS și le adaugă obiectului <code class="docutils literal notranslate"><span class="pre">comboBox</span></code> din dialogul plugin-ului.</p></li>
 </ol>

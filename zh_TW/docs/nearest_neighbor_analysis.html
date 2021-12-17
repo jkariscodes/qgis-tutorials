@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Python 程式設計的初步上手 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -222,7 +223,7 @@
 <ol class="arabic simple">
 <li><p>打開 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入分隔文字圖層</span>，然後選擇剛下載的 <code class="docutils literal notranslate"><span class="pre">signif.txt</span></code>。</p></li>
 </ol>
-<img alt="../_images/1182.png" class="align-center" src="../_images/1182.png" />
+<img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
 <ol class="arabic simple" start="2">
 <li><p>這個檔案是 <em>Tab 分隔檔</em>，所以我們可以在 <span class="guilabel">檔案格式</span> 欄位選擇 <span class="guilabel">定位鍵</span>。程式會自動選擇 <span class="guilabel">X</span> 和 <span class="guilabel">Y</span> 欄位，所以按下 <span class="guilabel">確定</span> 即可。</p></li>
 </ol>
@@ -266,7 +267,7 @@
 <ol class="arabic simple" start="10">
 <li><p>現在此 CSV 檔案已以表格的形式匯入 QGIS 中。在這個表格上按右鍵，選擇 <span class="guilabel">開啟屬性表格</span>，</p></li>
 </ol>
-<img alt="../_images/1051.png" class="align-center" src="../_images/1051.png" />
+<img alt="../_images/1052.png" class="align-center" src="../_images/1052.png" />
 <ol class="arabic simple" start="11">
 <li><p>現在就可以看到近鄰分析的結果了。<span class="guilabel">InputID</span> 欄位是從地震的圖層過來的，<span class="guilabel">TargetID</span> 則是從人口聚居地的圖層過來的，代表距離地震最近的人口聚居點。<span class="guilabel">Distance</span> 則是 2 個點的距離。</p></li>
 </ol>
@@ -274,35 +275,35 @@
 <p class="admonition-title">備註</p>
 <p>這裡距離的計算是使用圖層的 CRS，也就是說因為我們的來源圖層是經緯度座標，輸入距離的單位也會是<em>角度</em>。如果你想要把距離用公尺呈現，在執行近鄰分析之前，要先重投影輸入的圖層。</p>
 </div>
-<img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
+<img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
 <ol class="arabic simple" start="12">
 <li><p>本結果已相當接近我們想要的樣子。對某些使用者來說，得到一張表格已顯足夠；然而，我們可以把結果進一步<strong>連接</strong>到原本的地震圖層屬性表格上。以右鍵點選地震圖層，選擇 <span class="guilabel">屬性</span>。</p></li>
 </ol>
-<img alt="../_images/1253.png" class="align-center" src="../_images/1253.png" />
+<img alt="../_images/1254.png" class="align-center" src="../_images/1254.png" />
 <ol class="arabic simple" start="13">
 <li><p>前往 <span class="guilabel">連結（Joins）</span>的分頁，按下 <span class="guilabel">+</span> 按鈕。</p></li>
 </ol>
-<img alt="../_images/1448.png" class="align-center" src="../_images/1448.png" />
+<img alt="../_images/1449.png" class="align-center" src="../_images/1449.png" />
 <ol class="arabic simple" start="14">
 <li><p>我們要作的是連接我們的分析結果到此圖層上，所以必須要為兩個表格各選擇一個能夠連接起來（具有相同數值）的欄位。為 <span class="guilabel">連結（Join）圖層</span> 選擇 <code class="docutils literal notranslate"><span class="pre">matrix</span></code>，再為 <span class="guilabel">連結欄位</span> 選擇 <code class="docutils literal notranslate"><span class="pre">InputID</span></code>，而 <span class="guilabel">目標欄位</span> 就選擇 <code class="docutils literal notranslate"><span class="pre">I_D</span></code>。其他選項使用預設值，最後按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1448.png" class="align-center" src="../_images/1448.png" />
+<img alt="../_images/1449.png" class="align-center" src="../_images/1449.png" />
 <ol class="arabic simple" start="15">
 <li><p>在 <span class="guilabel">連結（Joins）</span>的分頁中，就出現了一筆連接資訊。按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1546.png" class="align-center" src="../_images/1546.png" />
+<img alt="../_images/1547.png" class="align-center" src="../_images/1547.png" />
 <ol class="arabic simple" start="16">
 <li><p>現在在 <code class="docutils literal notranslate"><span class="pre">signif</span></code> 圖層上按右鍵選 <span class="guilabel">開啟屬性表格</span>。</p></li>
 </ol>
-<img alt="../_images/1643.png" class="align-center" src="../_images/1643.png" />
+<img alt="../_images/1644.png" class="align-center" src="../_images/1644.png" />
 <ol class="arabic simple" start="17">
 <li><p>現在每個地震的圖徵，都多了新屬性顯示最近的 (人口聚居地) 點圖徵，以及其距離。</p></li>
 </ol>
-<img alt="../_images/1739.png" class="align-center" src="../_images/1739.png" />
+<img alt="../_images/1740.png" class="align-center" src="../_images/1740.png" />
 <ol class="arabic simple" start="18">
 <li><p>接下來我們要來看看怎麼視覺畫這些結果。首先，我們要另存新圖層，把資料表連接的結果永久保存下來。以右鍵點選 <code class="docutils literal notranslate"><span class="pre">signif</span></code> 然後選擇 <span class="guilabel">存檔為…</span>，</p></li>
 </ol>
-<img alt="../_images/1837.png" class="align-center" src="../_images/1837.png" />
+<img alt="../_images/1838.png" class="align-center" src="../_images/1838.png" />
 <ol class="arabic simple" start="19">
 <li><p>點選在 <span class="guilabel">另存為</span> 欄位側邊的 <span class="guilabel">瀏覽</span> 鈕，把新檔案命名為 <code class="docutils literal notranslate"><span class="pre">earthquake_with_places.shp</span></code>，確認一下 <span class="guilabel">加入儲存檔案至地圖中</span> 有開啟，最後按下 <span class="guilabel">確定</span>。</p></li>
 </ol>

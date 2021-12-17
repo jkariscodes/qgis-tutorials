@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Noțiuni de Bază Despre Programarea în Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -221,7 +222,7 @@ dissolved region.</p>
 <ol class="arabic simple">
 <li><p>În QGIS, mergeți la <span class="menuselection">Layers ‣ Add Vector ‣ Add Vector Layer</span>. Navigați la fișierul descărcat <code class="docutils literal notranslate"><span class="pre">ne_10_admin_0_countries.zip</span></code> și încărcați stratul <code class="docutils literal notranslate"><span class="pre">ne_10_admin_0_countries</span></code>. Mergeți la <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
-<img alt="../_images/1196.png" class="align-center" src="../_images/1196.png" />
+<img alt="../_images/1197.png" class="align-center" src="../_images/1197.png" />
 <ol class="arabic simple" start="2">
 <li><p>Extinteți grupul <span class="guilabel">Scripts</span> din <span class="guilabel">Processing Toolbox</span> și selectați <span class="guilabel">Create a new script</span>.</p></li>
 </ol>
@@ -281,15 +282,15 @@ dissolved region.</p>
 <ol class="arabic simple" start="10">
 <li><p>Veți vedea un dialog de eroare. Acest lucru este de așteptat, deoarece script-ul este incomplet și nu generează nici o ieșire încă.</p></li>
 </ol>
-<img alt="../_images/1057.png" class="align-center" src="../_images/1057.png" />
+<img alt="../_images/1058.png" class="align-center" src="../_images/1058.png" />
 <ol class="arabic simple" start="11">
 <li><p>În principalele ferestrele QGIS, veți vedea ieșirea de depanare a script-ului afișat în consolă. Acest lucru este un mod util de a adăuga instrucțiuni de imprimare și de a vedea valorile variabile intermediare.</p></li>
 </ol>
-<img alt="../_images/1197.png" class="align-center" src="../_images/1197.png" />
+<img alt="../_images/1198.png" class="align-center" src="../_images/1198.png" />
 <ol class="arabic simple" start="12">
 <li><p>Să ne întoarcem la editarea script-ului printr-un clic dreapta pe script, apoi selectați <span class="guilabel">Edit script</span>.</p></li>
 </ol>
-<img alt="../_images/1258.png" class="align-center" src="../_images/1258.png" />
+<img alt="../_images/1259.png" class="align-center" src="../_images/1259.png" />
 <ol class="arabic simple" start="13">
 <li><p>Introduceți codul de mai jos pentru a finaliza script-ul. Rețineți că folosim algoritmul existent de dizolvare din QGIS, prin procesarea cu ajutorul metodei <code class="docutils literal notranslate"><span class="pre">processing.runalg()</span></code>.</p></li>
 </ol>
@@ -319,7 +320,7 @@ dissolved region.</p>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1356.png" class="align-center" src="../_images/1356.png" />
+<img alt="../_images/1357.png" class="align-center" src="../_images/1357.png" />
 <ol class="arabic simple" start="14">
 <li><p>Rulează algoritmul prin selectarea <code class="docutils literal notranslate"><span class="pre">SUBREGIUNII</span></code> ca și <span class="guilabel">câmp dizolvat</span>, și <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> ca și <span class="guilabel">câmp însumat</span>. Clic pe <span class="guilabel">Run</span>.</p></li>
 </ol>
@@ -327,11 +328,11 @@ dissolved region.</p>
 <p class="admonition-title">Notă</p>
 <p>Algoritmul de procesare poate dura până la 10 minute pentru a termina, în funcție de sistemul dumneavoastră.</p>
 </div>
-<img alt="../_images/1453.png" class="align-center" src="../_images/1453.png" />
+<img alt="../_images/1454.png" class="align-center" src="../_images/1454.png" />
 <ol class="arabic simple" start="15">
 <li><p>După ce prelucrarea se încheie, puteți folosi instrumentul de <span class="guilabel">Identificare</span>, pentru a efectua clic pe orice poligon. Veți vedea adăugat noul câmp, <code class="docutils literal notranslate"><span class="pre">SUM</span></code>, cu valorile <code class="docutils literal notranslate"><span class="pre">POP_EST</span></code> adăugate din toate poligoanele originale.</p></li>
 </ol>
-<img alt="../_images/1550.png" class="align-center" src="../_images/1550.png" />
+<img alt="../_images/1551.png" class="align-center" src="../_images/1551.png" />
 <ol class="arabic simple" start="16">
 <li><p>Veți observa că toate celelalte câmpuri ale rezultatului sunt încă prezente. Când se dizolvă mai multe entități pentru a crea o singură entitate, nu are sens să se păstreze câmpurile originale în rezultat. Mergeți înapoi la: guilabel: <cite>Script editor</cite> și adăugați următorul cod pentru a șterge toate domeniile, cu excepția câmpului <code class="docutils literal notranslate"><span class="pre">SUM</span></code> și a câmpului care a fost folosit pentru a dizolva stratul original. Faceți clic pe butonul <span class="guilabel">Save</span> și închideți fereastra.</p></li>
 </ol>
@@ -345,18 +346,18 @@ dissolved region.</p>
 <span class="n">outlayer</span><span class="o">.</span><span class="n">commitChanges</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1647.png" class="align-center" src="../_images/1647.png" />
+<img alt="../_images/1648.png" class="align-center" src="../_images/1648.png" />
 <ol class="arabic simple" start="17">
 <li><p>Una dintre funcționalitățile ascunse ale Cadrului de Procesare este aceea că toți algoritmii pot lucra pe entitățile selectate ale unui strat. Acest lucru este foarte util atunci când doriți să rulați un algoritm pe subsetul unui strat. Deoarece script-ul nostru folosește metoda <code class="docutils literal notranslate"><span class="pre">processing.features()</span></code> pentru a citi entitățile, se va respecta selecția curentă. Pentru a demonstra aceasta, haideți să facem mai întâi o selecție. Faceți clic pe butonul <span class="guilabel">Selectare entități utilizând o expresie</span>.</p></li>
 </ol>
-<img alt="../_images/1743.png" class="align-center" src="../_images/1743.png" />
+<img alt="../_images/1744.png" class="align-center" src="../_images/1744.png" />
 <ol class="arabic simple" start="18">
 <li><p>Introduceți următoarea expresie pentru a selecta entitățile din America de Nord și cea din Sud, apoi faceți clic pe <span class="guilabel">Select</span>.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;CONTINENT&quot; = &#39;North America&#39; OR &quot;CONTINENT&quot; = &#39;South America&#39;
 </pre></div>
 </div>
-<img alt="../_images/1841.png" class="align-center" src="../_images/1841.png" />
+<img alt="../_images/1842.png" class="align-center" src="../_images/1842.png" />
 <ol class="arabic simple" start="19">
 <li><p>Veți vedea entitățile selectate, evidențiate cu galben. Efectuați clic-dreapta pe script-ul <code class="docutils literal notranslate"><span class="pre">dissolve_with_sum</span></code>, apoi selectați <span class="guilabel">Execute</span>.</p></li>
 </ol>

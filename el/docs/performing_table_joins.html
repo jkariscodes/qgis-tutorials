@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -225,7 +226,7 @@ links below:</p>
 <ol class="arabic simple">
 <li><p>Θα φορτώσουμε αρχικά το shapefile της απογραφής εκτάσεων. Πηγαίνετε στο <span class="menuselection">Layer ‣ Add Vector Layer</span>.</p></li>
 </ol>
-<img alt="../_images/1189.png" class="align-center" src="../_images/1189.png" />
+<img alt="../_images/1190.png" class="align-center" src="../_images/1190.png" />
 <ol class="arabic simple" start="2">
 <li><p>Browse to the downloaded zip file <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract.zip</span></code> and select it. QGIS
 can open zip files directly so no need to uncompress it first.</p></li>
@@ -270,20 +271,20 @@ file. You can also <a class="reference external" href="../../downloads/ca_tracts
 <ol class="arabic simple" start="10">
 <li><p>Μεταβείτε στο φάκελο που περιέχει το CSV αρχείο και επιλέξτε το. Βεβαιωθείτε ότι έχετε επιλέξει <span class="guilabel">File format</span> ως <span class="guilabel">CSV (comma separated values)</span>. Από τη στιγμή που το εισάγουμε αυτό ως πίνακα, πρέπει να προσδιορίσουμε ότι ο φάκελός μας δεν περιέχει γεωμετρία. Επιλέξτε την επιλογή <span class="guilabel">No geometry (attribute only table)</span>. Κάντε κλικ στο <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1054.png" class="align-center" src="../_images/1054.png" />
+<img alt="../_images/1055.png" class="align-center" src="../_images/1055.png" />
 <ol class="arabic simple" start="11">
 <li><p>Το CSV δε θα εισαχθεί σαν πίνακας στο QGIS.</p></li>
 </ol>
-<img alt="../_images/1190.png" class="align-center" src="../_images/1190.png" />
+<img alt="../_images/1191.png" class="align-center" src="../_images/1191.png" />
 <ol class="arabic simple" start="12">
 <li><p>Select the <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code> layer. Right-click on it and select
 <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/1256.png" class="align-center" src="../_images/1256.png" />
+<img alt="../_images/1257.png" class="align-center" src="../_images/1257.png" />
 <ol class="arabic simple" start="13">
 <li><p>Στο <span class="guilabel">Layer Properties</span> παράθυρο διαλόγου, επιλέξτε την καρτέλα <span class="guilabel">Joins</span>. Κάντε κλικ στο κουμπί <cite>+</cite> στο κάτω μέρος για να δημιουργήσετε μια νέα συγχώνευση πίνακα.</p></li>
 </ol>
-<img alt="../_images/1354.png" class="align-center" src="../_images/1354.png" />
+<img alt="../_images/1355.png" class="align-center" src="../_images/1355.png" />
 <ol class="arabic simple" start="14">
 <li><p>In the <span class="guilabel">Add vector join</span> dialog, select <code class="docutils literal notranslate"><span class="pre">ca_tracts_pop</span></code> as the
 <span class="guilabel">Join layer</span>. Next we have to select the field with unique ids in
@@ -291,26 +292,26 @@ both the shapefile and the CSV. Select <cite>GEO.id2</cite> and <cite>GEOID</cit
 <span class="guilabel">Join field</span> and <span class="guilabel">Target field</span> respectively. Click
 <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1451.png" class="align-center" src="../_images/1451.png" />
+<img alt="../_images/1452.png" class="align-center" src="../_images/1452.png" />
 <ol class="arabic simple" start="15">
 <li><p>Close the <span class="guilabel">Layer Properties</span> dialog and return to the main QGIS
 window. At this point, the fields from the CSV file are joined with the
 shapefile. Right-click on the <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code> layer and select
 <span class="guilabel">Open Attribute Table</span>.</p></li>
 </ol>
-<img alt="../_images/1548.png" class="align-center" src="../_images/1548.png" />
+<img alt="../_images/1549.png" class="align-center" src="../_images/1549.png" />
 <ol class="arabic simple" start="16">
 <li><p>Τώρα μπορείτε να δείτε μια σειρά από πεδία συμπεριλαμβανομένου το πεδίο <span class="guilabel">ca_tracts_pop_D001</span> που προστέθηκε σε κάθε χαρακτηριστικό. Τώρα έχετε πρόσβαση στην τιμή του πληθυσμού για κάθε περιοχή από το φάκελο CSV. Κλείστε τον πίνακα χαρακτηριστικών και επιστρέψτε στο κυρίως παράθυρο του QGIS.</p></li>
 </ol>
-<img alt="../_images/1645.png" class="align-center" src="../_images/1645.png" />
+<img alt="../_images/1646.png" class="align-center" src="../_images/1646.png" />
 <ol class="arabic simple" start="17">
 <li><p>Right-click the <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code> layer and select <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/1741.png" class="align-center" src="../_images/1741.png" />
+<img alt="../_images/1742.png" class="align-center" src="../_images/1742.png" />
 <ol class="arabic simple" start="18">
 <li><p>Επιλέξτε την καρτέλα <span class="guilabel">Style</span> tab. Επιλέξτε το <span class="guilabel">Graduated</span> από το αναδυόμενο μενού. Καθώς ψάχνουμε να δημιουργήσουμε έναν πληθυσμιακό χάρτη, θέλουμε να ορίσουμε διαφορετικό χρώμα για κάθε χαρακτηριστικό περιοχής απογραφής σύμφωνα με τον υπολογισμό του πληθυσμού. Επιλέξτε <span class="guilabel">ca_tracts_pop_D001</span> από το <span class="guilabel">Column</span>. Επιλέξτε μια απόχρωση χρώματος της αρεσκείας σας από το <span class="guilabel">Color ramp</span> drop-down. Στο  <span class="guilabel">Mode</span>, επιλέξτε select <span class="guilabel">Quantile (Equal Count)</span>. Στη συνέχεια κάντε κλικ στο <span class="guilabel">Classify</span>. Θα δείτε να αποδίδεται ένα διαφορετικό χρώμα σε συγκεκριμένες περιοχές του πληθυσμού. Κάντε κλικ στο <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1839.png" class="align-center" src="../_images/1839.png" />
+<img alt="../_images/1840.png" class="align-center" src="../_images/1840.png" />
 <ol class="arabic simple" start="19">
 <li><p>Θα δείτε τώρα μια ωραία απεικόνιση της καταγραφής των εκτάσεων όπως διαμορφώνονται με τις τιμές του πληθυσμού. Χρησιμοποιήστε το εργαλείο <span class="guilabel">Zoom in</span> για να επιλέξετε την μικρότερη περιοχή από το επίπεδο.</p></li>
 </ol>

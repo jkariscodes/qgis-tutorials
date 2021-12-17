@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -221,7 +222,7 @@
 <ol class="arabic simple">
 <li><p>Nous allons d’abord charger les données des zones de recensement. Aller à <span class="menuselection">Couche ‣ Ajouter une couche ‣ Ajouter une couche vecteur</span>.</p></li>
 </ol>
-<img alt="../_images/1189.png" class="align-center" src="../_images/1189.png" />
+<img alt="../_images/1190.png" class="align-center" src="../_images/1190.png" />
 <ol class="arabic simple" start="2">
 <li><p>Ouvrez le dossier où se trouve le fichier zip « tl_2013_06_tract.zip » et sélectionnez-le. QGIS peut ouvrir les fichiers zip directement donc vous n’avez pas besoin de le décompresser au préable.</p></li>
 </ol>
@@ -257,39 +258,39 @@
 <ol class="arabic simple" start="10">
 <li><p>Explorez le dossier contenant le fichier CSV et sélectionnez-le. Assurez-vous d’avoir selectionné  <span class="guilabel">Format de fichier</span> as <span class="guilabel">CSV (comma separated values)</span>. Comme nous importons le fichier comme une table, nous devons préciser à QGIS qu’il ne comporte pas de colonne géométrie. Sélectionnez l’option <span class="guilabel">Pas de géométrie (juste la table)</span>.  Puis, cliquez sur <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1054.png" class="align-center" src="../_images/1054.png" />
+<img alt="../_images/1055.png" class="align-center" src="../_images/1055.png" />
 <ol class="arabic simple" start="11">
 <li><p>Le fichier CSV va être importé sous forme de table dans QGIS.</p></li>
 </ol>
-<img alt="../_images/1190.png" class="align-center" src="../_images/1190.png" />
+<img alt="../_images/1191.png" class="align-center" src="../_images/1191.png" />
 <ol class="arabic simple" start="12">
 <li><p>Sélectionnez la couche <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code>. Faites un clic droit dessus et sélectionnez <span class="guilabel">Propriétés</span>.</p></li>
 </ol>
-<img alt="../_images/1256.png" class="align-center" src="../_images/1256.png" />
+<img alt="../_images/1257.png" class="align-center" src="../_images/1257.png" />
 <ol class="arabic simple" start="13">
 <li><p>Dans la fenêtre <cite>Propriétés de la couche</cite>, selectionnez l’onglet <cite>Jointure</cite> . Cliquez sur le button <cite>+</cite> situé en bas de la fenêtre afin de créer une nouvelle jointure de table.</p></li>
 </ol>
-<img alt="../_images/1354.png" class="align-center" src="../_images/1354.png" />
+<img alt="../_images/1355.png" class="align-center" src="../_images/1355.png" />
 <ol class="arabic simple" start="14">
 <li><p>Dans la fenêtre <span class="guilabel">Ajouter une jointure vectorielle</span>, sélectionnez <code class="docutils literal notranslate"><span class="pre">ca_tracts_pop</span></code> dans le menu déroulant <span class="guilabel">Joindre la couche</span>. Ensuite nous devons sélectionner le champ avec un identifiant unique dans le fichier shapefile et dans le fichier CSV. Sélectionnez <cite>GEO.id2</cite> et <cite>GEOID</cite> en tant que <span class="guilabel">Couche jointe</span> et <span class="guilabel">Couche cible</span>. Cliquez sur OK.</p></li>
 </ol>
-<img alt="../_images/1451.png" class="align-center" src="../_images/1451.png" />
+<img alt="../_images/1452.png" class="align-center" src="../_images/1452.png" />
 <ol class="arabic simple" start="15">
 <li><p>Fermez la fenêtre <span class="guilabel">Propriétés de la couche</span> et retournez sur le fenêtre principale de QGIS. A ce stade, les champs du fichier CSV sont joints avec le shapefile. Faites un clic droit sur la couche <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code> et sélectionnez <span class="guilabel">Ouvrir la table d’attributs</span>.</p></li>
 </ol>
-<img alt="../_images/1548.png" class="align-center" src="../_images/1548.png" />
+<img alt="../_images/1549.png" class="align-center" src="../_images/1549.png" />
 <ol class="arabic simple" start="16">
 <li><p>Vous pouvez maintenant voir une nouvelle série de champs, notamment le champ <span class="guilabel">ca_tracts_pop_D001</span> qui a été ajouté à toutes les lignes de la table. Vous avez maintenant accès à la valeur de la population de chaque polygone grâce à la jointure avec le fichier CSV. Fermez la table attributaire et retournez sur la fenêtre principale de QGIS.</p></li>
 </ol>
-<img alt="../_images/1645.png" class="align-center" src="../_images/1645.png" />
+<img alt="../_images/1646.png" class="align-center" src="../_images/1646.png" />
 <ol class="arabic simple" start="17">
 <li><p>Faites un clic droit sur la couche <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code> et sélectionnez <cite>Propriétés</cite>.</p></li>
 </ol>
-<img alt="../_images/1741.png" class="align-center" src="../_images/1741.png" />
+<img alt="../_images/1742.png" class="align-center" src="../_images/1742.png" />
 <ol class="arabic simple" start="18">
 <li><p>Sélectionnez l’onglet  <span class="guilabel">Style</span>. Selectionnez <span class="guilabel">Gradué</span> depuis le menu déroulant. Notre objectif étant de créer une carte de population, il nous faut attribuer differentes couleurs à chacun des polygones (census tract) en fonction de la quantité de population. Sélectionnez <span class="guilabel">ca_tracts_pop_D001</span> en tant que <span class="guilabel">Colonne</span>. Sélectionnez l’échelle de couleur que vous préférez depuis le menu déroulant <span class="guilabel">Palette de couleurs</span>. Dans le menu déroulant <span class="guilabel">Mode</span>, sélectionnez <span class="guilabel">Quantiles (Effectifs égaux)</span>. Ensuite, cliquez sur <span class="guilabel">Classer</span>. Vous pouvez voir différentes couleurs attribuées à des classes de populations. Cliquez sur <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1839.png" class="align-center" src="../_images/1839.png" />
+<img alt="../_images/1840.png" class="align-center" src="../_images/1840.png" />
 <ol class="arabic simple" start="19">
 <li><p>Vous allez maintenant voir une belle représentation de nos données, basée sur le style et les classes de population que nous venons de définir. Utilisez l’outil <span class="guilabel">Zoom in</span> pour zoomer sur une petite portion de la carte.</p></li>
 </ol>

@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Noțiuni de Bază Despre Programarea în Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -220,7 +221,7 @@
 <ol class="arabic simple">
 <li><p>Mergeți la <span class="menuselection">Layer ‣ Add Vector Layer</span>.</p></li>
 </ol>
-<img alt="../_images/1158.png" class="align-center" src="../_images/1158.png" />
+<img alt="../_images/1159.png" class="align-center" src="../_images/1159.png" />
 <ol class="arabic simple" start="2">
 <li><p>Navigați la fișierul <code class="docutils literal notranslate"><span class="pre">ne_10m_railroads_north_america.zip</span></code> și faceți clic pe <span class="guilabel">OK</span>.</p></li>
 </ol>
@@ -260,39 +261,39 @@
 <p class="admonition-title">Notă</p>
 <p>Funcțiile interne, care utilizează geometria entităților pentru calcule, folosesc unitățile CRS-ului stratului.  Sistemele de Coordonate de Referință (CRS) Geografice, cum ar fi <em>EPSG:4326</em> au ca unități <strong>gradele</strong> - astfel încât lungimea entităților va fi în <strong>grade</strong> iar suprafața ar putea fi în <strong>grade pătrate</strong> - lucru lipsit de sens. Este necesară utilizarea unui Sistem de Coordonate de Referință Proiectat, cu unitățile în <strong>metri</strong> sau <strong>picioare</strong>,  pentru efectuarea calculelor.</p>
 </div>
-<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
+<img alt="../_images/1041.png" class="align-center" src="../_images/1041.png" />
 <ol class="arabic simple" start="11">
 <li><p>Din moment ce suntem interesați în calculul lungimii, haideți să selectăm o proiecție echidistantă. Tastați <span class="guilabel">north america equ</span> în <span class="guilabel">Filter</span>. În panoul de rezultate de mai jos, selectați <span class="guilabel">North_America_Equidistant_Conic EPSG: 102010</span> ca CRS. Faceți clic pe <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1159.png" class="align-center" src="../_images/1159.png" />
+<img alt="../_images/1160.png" class="align-center" src="../_images/1160.png" />
 <ol class="arabic simple" start="12">
 <li><p>În fereastra de dialog <span class="guilabel">Save vector layer as…</span> bifați <span class="guilabel">Add saved file to map</span> și apăsați <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1243.png" class="align-center" src="../_images/1243.png" />
+<img alt="../_images/1244.png" class="align-center" src="../_images/1244.png" />
 <ol class="arabic simple" start="13">
 <li><p>O dată ce s-a terminat procesul de export, veți vedea un nou strat <code class="docutils literal notranslate"><span class="pre">usa_railroads</span></code> încărcat în QGIS. Aveți posibilitatea să debifați caseta de lângă numele stratului <code class="docutils literal notranslate"><span class="pre">ne_10m_railroads_north_america</span></code> pentru a-l ascunde, atât timp cât nu mai avem nevoie de el.</p></li>
 </ol>
-<img alt="../_images/1342.png" class="align-center" src="../_images/1342.png" />
+<img alt="../_images/1343.png" class="align-center" src="../_images/1343.png" />
 <ol class="arabic simple" start="14">
 <li><p>Clic dreapta pe stratul <code class="docutils literal notranslate"><span class="pre">usa_railroads</span></code> și selectați <span class="guilabel">Open Attribute Table</span>.</p></li>
 </ol>
-<img alt="../_images/1439.png" class="align-center" src="../_images/1439.png" />
+<img alt="../_images/1440.png" class="align-center" src="../_images/1440.png" />
 <ol class="arabic simple" start="15">
 <li><p>Acum este timpul să adăugăm o coloană cu lungimea fiecărei entități. Puneți stratul în modul de editare, făcând clic pe butonul <span class="guilabel">Toggle editing</span>. O dată activat modul de editare, efectuați clic pe butonul <span class="guilabel">Open field calculator</span>.</p></li>
 </ol>
-<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
+<img alt="../_images/1538.png" class="align-center" src="../_images/1538.png" />
 <ol class="arabic simple" start="16">
 <li><p>În <span class="guilabel">Field Calculator</span> bifați <span class="guilabel">Create a new field</span>. Introduceți <strong>length_km</strong> ca <span class="guilabel">Output field name</span>. Selectați <strong>Decimal number (real)</strong> ca <span class="guilabel">Output field type</span>. Introduceți <strong>2</strong> în <span class="guilabel">Precision</span>. În panoul <span class="guilabel">Function list</span>, găsiți <span class="guilabel">$length</span> sub <span class="guilabel">Geometry</span>. Faceți dublu-clic pe funcție pentru a o adăuga în <span class="guilabel">Expression</span>. Completați expresia ca <code class="docutils literal notranslate"><span class="pre">$length</span> <span class="pre">/</span> <span class="pre">1000</span></code>, deoarece unitățile CRS-ului stratului nostru sunt în  <strong>metri</strong> și ne dorim ieșirea în <strong>km</strong>. Faceți clic pe <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1635.png" class="align-center" src="../_images/1635.png" />
+<img alt="../_images/1636.png" class="align-center" src="../_images/1636.png" />
 <ol class="arabic simple" start="17">
 <li><p>Mergând înapoi la <span class="guilabel">Attribute Table</span>, veți observa o nouă coloană <span class="guilabel">length_km</span>. Faceți clic pe butonul <span class="guilabel">Toggle editing</span> pentru a salva modificările din tabela de atribute.</p></li>
 </ol>
-<img alt="../_images/1732.png" class="align-center" src="../_images/1732.png" />
+<img alt="../_images/1733.png" class="align-center" src="../_images/1733.png" />
 <ol class="arabic simple" start="18">
 <li><p>Acum, că avem lungimile fiecărei linii din stratul nostru, le putem însuma cu ușurință pe toate, pentru a găsi lungimea <strong>Totală</strong>. Mergeți la <span class="menuselection">Vector ‣ Analysis Tools ‣ Basic Statistics</span>.</p></li>
 </ol>
-<img alt="../_images/1830.png" class="align-center" src="../_images/1830.png" />
+<img alt="../_images/1831.png" class="align-center" src="../_images/1831.png" />
 <ol class="arabic simple" start="19">
 <li><p>Selectați <code class="docutils literal notranslate"><span class="pre">usa_railroads</span></code> ca <span class="guilabel">Input Vector layer</span>. Alegeți <code class="docutils literal notranslate"><span class="pre">length_km</span></code> pentru <span class="guilabel">Target field</span> și faceți clic pe <span class="guilabel">OK</span>. Veți vedea apărând diverse statistici. Valoarea <span class="guilabel">Sum</span> reprezintă exact ceea ce căutăm, și anume lungimea totală a căilor ferate.</p></li>
 </ol>

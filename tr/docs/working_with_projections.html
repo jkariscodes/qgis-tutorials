@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -267,15 +268,15 @@ required for this tutorial)</p>
 <ol class="arabic simple" start="10">
 <li><p><span class="guilabel">Save vector layer as…</span> penceresinde yeni CRS’nin seçildiğini göreceksiniz.</p></li>
 </ol>
-<img alt="../_images/1067.png" class="align-center" src="../_images/1067.png" />
+<img alt="../_images/1068.png" class="align-center" src="../_images/1068.png" />
 <ol class="arabic simple" start="11">
 <li><p>Yeni oluşturduğumuz katman yüklenince farklı projeksiyonda olmalarına rağmen <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> katmanıyla mükemmel şekilde hizalandığını göreceksiniz. Bunu sebebi QGIS’in eşzamanlı projeksiyon dönüştürme özelliğine sahip olmasıdır. QGIS penceresinin alt kısmındaki projeksiyon metninde <span class="guilabel">EPSG:4326`</span> yanında <code class="docutils literal notranslate"><span class="pre">OTF</span></code> ifadesi bulunmaktadır. Bu konuda daha fazla şey öğrenmek için QGIS CRS menüsünü araştırabilirsiniz.</p></li>
 </ol>
-<img alt="../_images/11107.png" class="align-center" src="../_images/11107.png" />
+<img alt="../_images/11108.png" class="align-center" src="../_images/11108.png" />
 <ol class="arabic simple" start="12">
 <li><p>Şuraya gidin <span class="menuselection">Settings ‣ Options…</span>.</p></li>
 </ol>
-<img alt="../_images/1267.png" class="align-center" src="../_images/1267.png" />
+<img alt="../_images/1268.png" class="align-center" src="../_images/1268.png" />
 <ol class="arabic simple" start="13">
 <li><p>Switch to the <span class="guilabel">CRS</span> tab in the <span class="guilabel">Options</span> dialog. You
 will see that the default is <span class="guilabel">Automatically enable ‘on the fly’
@@ -284,15 +285,15 @@ detects that you have loaded layers with different CRS, it will
 automatically re-project them back to a common CRS so they line up with
 each other. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1365.png" class="align-center" src="../_images/1365.png" />
+<img alt="../_images/1366.png" class="align-center" src="../_images/1366.png" />
 <ol class="arabic simple" start="14">
 <li><p>Bu seçeneği kapatın ve neler olacağını görelim. Sağ alt kısımnda <span class="guilabel">Current CRS</span> metnini tıklayın.</p></li>
 </ol>
-<img alt="../_images/1462.png" class="align-center" src="../_images/1462.png" />
+<img alt="../_images/1463.png" class="align-center" src="../_images/1463.png" />
 <ol class="arabic simple" start="15">
 <li><p><span class="guilabel">Project Properties</span>  penceresinde <span class="guilabel">Enable ‘on the fly’ CRS transformation`seçeneğini kaldıralım ve :guilabel:`OK</span> yapalım.</p></li>
 </ol>
-<img alt="../_images/1558.png" class="align-center" src="../_images/1558.png" />
+<img alt="../_images/1559.png" class="align-center" src="../_images/1559.png" />
 <ol class="arabic simple" start="16">
 <li><p>Back in the main QGIS window, you will see the nice World map disappear.
 This is because the Project CRS changed to
@@ -300,15 +301,15 @@ This is because the Project CRS changed to
 different now. Right-click the <code class="docutils literal notranslate"><span class="pre">united_states</span></code> layer and select
 <span class="guilabel">Zoom to Layer</span>.</p></li>
 </ol>
-<img alt="../_images/1655.png" class="align-center" src="../_images/1655.png" />
+<img alt="../_images/1656.png" class="align-center" src="../_images/1656.png" />
 <ol class="arabic simple" start="17">
 <li><p>Şimdi seçili projeksiyonda ABD’yi görüyorsunuz. Dikkat ederseniz <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> katmanındaki objeler farklı bir projeksiyonda olduğundan ekranda görünmüyorlar. Tekrar <span class="guilabel">Project Properties</span> penceresine gidin ve <span class="guilabel">Enable ‘on the fly’ CRS transformation</span> yeniden etkinleştirin.</p></li>
 </ol>
-<img alt="../_images/1750.png" class="align-center" src="../_images/1750.png" />
+<img alt="../_images/1751.png" class="align-center" src="../_images/1751.png" />
 <ol class="arabic simple" start="18">
 <li><p>Şimdi br raster katman ekleyelim. <code class="docutils literal notranslate"><span class="pre">minisc_gb.zip</span></code> dosyasını açtığınız klasöre gidin. TIFF (GeoTIFF değil) dosyalarını içeren <code class="docutils literal notranslate"><span class="pre">RGB_TIF_COMPRESSED</span></code> klasörünü bulun. Bu dosyalarda projeksiyon bilgisi bulunmamaktadır. Bu resimleri CBS amaçları için kullanmak istiyorsak coğrafi referanslama yapmamız gerekir. Bir coğrafi referans 2 farklı bilgi içerir: kaplam ve projeksiyon. Kaplamlar genellikle <a class="reference external" href="https://en.wikipedia.org/wiki/World_file">World dosyası</a> olarak saklanır ve <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> or <code class="docutils literal notranslate"><span class="pre">.jgw</span></code> gibi uzantılara sahip olur. Birçok CBS yazılımı gibi QGIS de görüntüyle aynı klasörde bulunmak ve aynı isimde olmak şartıyla bu world dosyalarını okuyabilir. Bazı raster dosyaları için <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> bilgisi ayrı bir klasör içinde <code class="docutils literal notranslate"><span class="pre">georeferencing_files</span></code> adıyla saklanır.</p></li>
 </ol>
-<img alt="../_images/1848.png" class="align-center" src="../_images/1848.png" />
+<img alt="../_images/1849.png" class="align-center" src="../_images/1849.png" />
 <ol class="arabic simple" start="19">
 <li><p><code class="docutils literal notranslate"><span class="pre">georeferencing_files</span></code> klasörü altındaki <code class="docutils literal notranslate"><span class="pre">ESRI_TFW_FILES</span></code> klasörünü açın. <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> dosyaları metin dosyalarıdır. Bir tanesini Notepa gibi bir metin editörü ile açın.</p></li>
 </ol>

@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Noțiuni de Bază Despre Programarea în Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -261,19 +262,19 @@
 <ol class="arabic simple" start="10">
 <li><p>Acum, vom rula operația de curățare. GRASS având un set foarte puternic de instrumente de curățare topologică. Acestea sunt disponibile în QGIS prin algoritmul <code class="docutils literal notranslate"><span class="pre">v.clean</span></code>. Căutați acest algoritm în <span class="guilabel">Instrumentarul de Procesare</span>, apoi faceți dublu clic pe el pentru a lansa dialogul.</p></li>
 </ol>
-<img alt="../_images/1060.png" class="align-center" src="../_images/1060.png" />
+<img alt="../_images/1061.png" class="align-center" src="../_images/1061.png" />
 <ol class="arabic simple" start="11">
 <li><p>Puteți citi despre mai multe instrumente diferite și despre opțiunile acestora în fila <span class="guilabel">Ajutor</span>. Pentru acest tutorial, vom folosi instrumentul <code class="docutils literal notranslate"><span class="pre">snap</span></code> pentru a elimina vertexurile duplicate, care se află cel mult la 1 metru unul față de celălalt. Selectați <code class="docutils literal notranslate"><span class="pre">Stratul</span> <span class="pre">reproiectat</span></code> ca <span class="guilabel">Stratul de curățat</span>. Alegeți <code class="docutils literal notranslate"><span class="pre">snap</span></code> ca <span class="guilabel">Instrument de curățare</span>. Introduceți <code class="docutils literal notranslate"><span class="pre">1.00</span></code> ca <span class="guilabel">Prag</span>. Lăsați celelalte câmpuri goale și faceți clic pe <span class="guilabel">Rulează</span>.</p></li>
 </ol>
-<img alt="../_images/11101.png" class="align-center" src="../_images/11101.png" />
+<img alt="../_images/11102.png" class="align-center" src="../_images/11102.png" />
 <ol class="arabic simple" start="12">
 <li><p>După ce termină prelucrarea, veți vedea 2 straturi noi adăugate în QGIS. <code class="docutils literal notranslate"><span class="pre">Stratul</span> <span class="pre">vectorial</span> <span class="pre">curățat</span></code> este stratul cu erori topologice corectate. Veți avea, de asemenea, un <code class="docutils literal notranslate"><span class="pre">Strat</span> <span class="pre">cu</span> <span class="pre">erori</span></code> care va evidenția entitățile care au fost reparate. Puteți utiliza stratul erorilor ca un ghid și să-l măriți, pentru a vedea vertexurile care au fost eliminate.</p></li>
 </ol>
-<img alt="../_images/1261.png" class="align-center" src="../_images/1261.png" />
+<img alt="../_images/1262.png" class="align-center" src="../_images/1262.png" />
 <ol class="arabic simple" start="13">
 <li><p>Mergeți în dialogul <span class="menuselection">Procesare ‣ Istoric și Jurnal</span> și notați comanda de procesare completă, pentru o utilizare ulterioară.</p></li>
 </ol>
-<img alt="../_images/1359.png" class="align-center" src="../_images/1359.png" />
+<img alt="../_images/1360.png" class="align-center" src="../_images/1360.png" />
 <ol class="arabic simple" start="14">
 <li><p>Acum suntem gata să începem codificarea. Vedeți secțiunea unui <strong>Editor de Text sau IDE Python</strong> în tutorialul <a class="reference internal" href="building_a_python_plugin.html"><span class="doc">Construirea unui Plugin Python</span></a> pentru instrucțiunile de instalare. Pentru rularea script-urilor python standalone, care utilizează QGIS, trebuie să setați diverse opțiuni de configurare. O modalitate bună de a rula scripturi independente este de a le lansa printr-un fișier <code class="docutils literal notranslate"><span class="pre">.bat</span></code>. Acest fișier va stabili mai întâi opțiunile de configurare corecte, apoi va apela script-ul python. Creați un nou fișier numit <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> și introduceți textul următor. Modificați valorile în funcție de configurația QGIS. Nu uitați să înlocuiți numele de utilizator cu al dvs. în calea către script-ul python. Căile din acest fișier vor fi similare pe sistemul dumneavoastră, cu acelea ale QGIS, dacă l-ați instalat prin <code class="docutils literal notranslate"><span class="pre">Programul</span> <span class="pre">de</span> <span class="pre">instalare</span> <span class="pre">OSGeo4W</span></code>. Salvați fișierul pe desktop.</p></li>
 </ol>
@@ -298,7 +299,7 @@ python c:\Users\Ujaval\Desktop\download_and_clean.py
 pause
 </pre></div>
 </div>
-<img alt="../_images/1456.png" class="align-center" src="../_images/1456.png" />
+<img alt="../_images/1457.png" class="align-center" src="../_images/1457.png" />
 <ol class="arabic simple" start="15">
 <li><p>Creați un nou fișier python și introduceți următorul cod. Denumiți fișierul ca <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code>, apoi salvați-l pe desktop.</p></li>
 </ol>
@@ -306,11 +307,11 @@ pause
 <span class="nb">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1553.png" class="align-center" src="../_images/1553.png" />
+<img alt="../_images/1554.png" class="align-center" src="../_images/1554.png" />
 <ol class="arabic simple" start="16">
 <li><p>Comutați la Desktop-ul dvs. și localizați pictograma <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code>. Faceți dublu clic pe el pentru a lansa o nouă fereastră de comandă și rulați scriptul. Dacă vedeți <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code> afișat în fereastra de comandă, instalarea și configurarea au fost corecte. Dacă vedeți erori sau nu vedeți textul, verificați fișierul <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> și asigurați-vă că toate căile se potrivesc cu locațiile de pe sistemul dumneavoastră.</p></li>
 </ol>
-<img alt="../_images/1650.png" class="align-center" src="../_images/1650.png" />
+<img alt="../_images/1651.png" class="align-center" src="../_images/1651.png" />
 <ol class="arabic simple" start="17">
 <li><p>Înapoi în editorul de text, modificați scriptul <code class="docutils literal notranslate"><span class="pre">download_and_clean.py</span></code> și adăugați următorul cod. Acesta este codul bootstrap de inițializare a QGIS. El este inutil dacă scriptul se execută din interiorul QGIS. Dar din moment ce îl executăm din afară, este necesar să-l adăugăm la început. Asigurați-vă că înlocuiți numele de utilizator cu al dvs. După efectuarea acestor modificări, salvați din nou fișierul, apoi rulați <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code>. Dacă apare afișat <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">QGIS!</span></code>, sunteți gata să adăugați logica de procesare a script-ului.</p></li>
 </ol>
@@ -333,7 +334,7 @@ pause
 <span class="nb">print</span> <span class="s1">&#39;Hello QGIS!&#39;</span>
 </pre></div>
 </div>
-<img alt="../_images/1746.png" class="align-center" src="../_images/1746.png" />
+<img alt="../_images/1747.png" class="align-center" src="../_images/1747.png" />
 <ol class="arabic simple" start="18">
 <li><p>Reveniți la prima comandă de prelucrare pe care am salvat-o în jurnal. Aceasta a fost comanda de reproiectare a unui strat. Lipiți comanda pentru script și adăugați codul înconjurător, după cum urmează. Așa cum se observă, comenzile de prelucrare returnează calea către straturile de ieșire sub formă de dicționar. Această valoare este stocată ca <code class="docutils literal notranslate"><span class="pre">ret</span></code> și afișează calea către stratul reproiectat.</p></li>
 </ol>
@@ -344,7 +345,7 @@ pause
 <span class="nb">print</span> <span class="n">output</span>
 </pre></div>
 </div>
-<img alt="../_images/1844.png" class="align-center" src="../_images/1844.png" />
+<img alt="../_images/1845.png" class="align-center" src="../_images/1845.png" />
 <ol class="arabic simple" start="19">
 <li><p>Rulați scriptul, cu ajutorul <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code>, apoi veți vedea calea către noul strat reproiectat creat.</p></li>
 </ol>

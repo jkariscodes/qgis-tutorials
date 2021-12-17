@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -219,7 +220,7 @@
 <ol class="arabic simple">
 <li><p>Installiamo il plugin <code class="docutils literal notranslate"><span class="pre">qgis2leaf</span></code> andando su <span class="menuselection">Plugins ‣ Istalla e gestisci Plugin</span>.  Tenete conto del fatto che questo plugin è attualmente classificato come <strong>sperimentale</strong>,  quindi la casella che corrisponde alla voce <span class="guilabel">Mostra anche plugin sperimentali</span>  dovrà essere spuntata. (Vedi <a class="reference internal" href="using_plugins.html"><span class="doc">Usare i Plugins</span></a>  per maggiori dettagli sull’installazione dei plugin in QGIS).</p></li>
 </ol>
-<img alt="../_images/1178.png" class="align-center" src="../_images/1178.png" />
+<img alt="../_images/1179.png" class="align-center" src="../_images/1179.png" />
 <ol class="arabic simple" start="2">
 <li><p>Estraete il file appena scaricato <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.zip</span></code>. Aprite QGIS e andate su <span class="menuselection">Layer ‣ Aggiungi Vettore…</span> Individuate la cartella in cui i file sono stati decompressi e selezionate <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.shp</span></code>. Fate click su <span class="guilabel">OK</span>.</p></li>
 </ol>
@@ -261,23 +262,23 @@ END
 <ol class="arabic simple" start="10">
 <li><p>A questo punto, vedrete una mappa degli aeroporti ben tematizzata. Ora esportiamo questa mappa in una finestra interattiva che potrebbe essere presente su web. Andiamo su <span class="menuselection">Web ‣ qgis2leaf ‣ Exports a QGIS Project to a working leaflet webmap</span>.</p></li>
 </ol>
-<img alt="../_images/1049.png" class="align-center" src="../_images/1049.png" />
+<img alt="../_images/1050.png" class="align-center" src="../_images/1050.png" />
 <ol class="arabic simple" start="11">
 <li><p>Nella finestra di dialogo di <span class="guilabel">QGIS 2 Leaflet</span>  fate click su <span class="guilabel">Get Layers</span>  per avere la lista dei layer. Selezionate l’opzione Full screen per avere una mappa web a schermo intero. Scegliete layer extent come Extent della mappa da esportare. Scegliete sul vostro sistema una cartella per la cartella di output su cui il plugin andrà a scrivere i file di output. Click su <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1179.png" class="align-center" src="../_images/1179.png" />
+<img alt="../_images/1180.png" class="align-center" src="../_images/1180.png" />
 <ol class="arabic simple" start="12">
 <li><p>Terminato il processo di esportazione, andate sulla cartella in cui avete indirizzato il processo di output. Aprite il file <code class="docutils literal notranslate"><span class="pre">index.html</span></code> in un browser. Vedrete una mappa web interattiva che è una replica della mappa di QGIS. Potete effettuare operazioni di zoom e di pan intorno alla mappa e, facendo click sugli elementi, otterrete una finestra di popup con una serie di informazioni riguardanti l’aeroporto su cui avete fatti click. Per avere una vera web map sarà sufficiente copiare il contenuto di questa cartella su un web server.</p></li>
 </ol>
-<img alt="../_images/1251.png" class="align-center" src="../_images/1251.png" />
+<img alt="../_images/1252.png" class="align-center" src="../_images/1252.png" />
 <ol class="arabic simple" start="13">
 <li><p>Ora esamineremo alcune funzioni avanzate di questo plugin che vi permetteranno di personalizzare la mappa. Per esempio, alcuni attributi non sono molto utili e le finestre di popup nell’insieme sono piuttosto brutte. Possiamo modificare il popup di default con del nostro codice HTML per renderlo molto più attraente. Questo risultato si ottiene aggiungendo il nostro codice HTML in una colonna chiamata <code class="docutils literal notranslate"><span class="pre">html_exp</span></code>. . Fate click con il tasto destro sul layer <code class="docutils literal notranslate"><span class="pre">ne_10m_airports</span></code> e selezionate <span class="guilabel">Apri Tabella Attributi</span>.</p></li>
 </ol>
-<img alt="../_images/1350.png" class="align-center" src="../_images/1350.png" />
+<img alt="../_images/1351.png" class="align-center" src="../_images/1351.png" />
 <ol class="arabic simple" start="14">
 <li><p>Nella finestra della tabella degli attributi fate click sul pulsante  <span class="guilabel">Modalità di Modifica</span>  e quindi sul pulsante <span class="guilabel">Apri il calcolatore dei campi</span> .</p></li>
 </ol>
-<img alt="../_images/1446.png" class="align-center" src="../_images/1446.png" />
+<img alt="../_images/1447.png" class="align-center" src="../_images/1447.png" />
 <ol class="arabic simple" start="15">
 <li><p>Spuntate la casella <span class="guilabel">Crea un nuovo campo</span> e digitate <code class="docutils literal notranslate"><span class="pre">html_exp</span></code> come <span class="guilabel">Nome campo in output</span>. Scegliete <span class="guilabel">Testo (stringa)</span>  alla voce  <span class="guilabel">Tipo campo in output</span>. Dal momento che creeremo una stringa HTML piuttosto lunga, scegliete  <code class="docutils literal notranslate"><span class="pre">200</span></code> come  <span class="guilabel">larghezza campo in output</span>. Inserite l’espressione di seguito nello spazio <span class="guilabel">Espressione</span>. L’espressione è complessa solo in apparenza, in realtà definisce una tabella HTMLe sostituisce le intestazioni delle celle <code class="docutils literal notranslate"><span class="pre">iata_code</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code> e <code class="docutils literal notranslate"><span class="pre">type</span></code>. Controllate l”<span class="guilabel">anteprima</span>  in basso per assicurarvi che l’espressione abbia svolto il suo compito come  previsto.</p></li>
 </ol>
@@ -290,19 +291,19 @@ END
 <p class="admonition-title">Nota</p>
 <p>Il formato shapefile può contenere un massimo di 254 caratteri in un campo. Se volete immagazzinare quantitativi di dati maggiori dovete scegliere un diverso formato.</p>
 </div>
-<img alt="../_images/1544.png" class="align-center" src="../_images/1544.png" />
+<img alt="../_images/1545.png" class="align-center" src="../_images/1545.png" />
 <ol class="arabic simple" start="16">
 <li><p>Torniamo nella finestra della :guilabel:` Tabella Attributi` e vedrete la nuova colonna che si è aggiunta in fondo alla tabella.  Verificate che la nostra espressione abbia lavorato in modo corretto e quindi fate premete il pulsante  <span class="guilabel">Modalità Modifica</span> per salvare i cambiamenti appena realizzati.</p></li>
 </ol>
-<img alt="../_images/1641.png" class="align-center" src="../_images/1641.png" />
+<img alt="../_images/1642.png" class="align-center" src="../_images/1642.png" />
 <ol class="arabic simple" start="17">
 <li><p>Adesso esportiamo la mappa di nuovo, usando <span class="menuselection">Web ‣ qgis2leaf ‣ Exports a QGIS Project to a working leaflet webmap</span>.</p></li>
 </ol>
-<img alt="../_images/1737.png" class="align-center" src="../_images/1737.png" />
+<img alt="../_images/1738.png" class="align-center" src="../_images/1738.png" />
 <ol class="arabic simple" start="18">
 <li><p>Impostate le opzioni esattamente come avete fatto sopra.</p></li>
 </ol>
-<img alt="../_images/1835.png" class="align-center" src="../_images/1835.png" />
+<img alt="../_images/1836.png" class="align-center" src="../_images/1836.png" />
 <ol class="arabic simple" start="19">
 <li><p>Quando il processo sarà concluso, andate nella cartella in cui avete indirizzato l’output. Troverete una sottocartella che ha come nome la data e l’ora in cui è stato lanciato il processo. Trovate al suo interno il file <code class="docutils literal notranslate"><span class="pre">index.html</span></code> e apritelo in un browser. Fate click su qualsiasi geometria e date un’occhiata alla nuova finestra di popup.</p></li>
 </ol>

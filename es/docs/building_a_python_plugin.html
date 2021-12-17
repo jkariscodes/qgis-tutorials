@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Visualización y Enrutamiento Básico de Red (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Localizando la Instalación Más Cercana con Matriz Origen-Destino (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Análisis de Área de Servicio usando Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calcular la Precipitación Media de Área (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Iniciándote con la Programación Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Ejecutar Algoritmos de Procesamiento vía Python (QGIS3)</a></li>
@@ -252,7 +253,7 @@
 <ol class="arabic simple">
 <li><p>Abra QGIS. Vaya a <span class="menuselection">Complementos ‣ Plugin Builder ‣ Plugin Builder</span>.</p></li>
 </ol>
-<img alt="../_images/1156.png" class="align-center" src="../_images/1156.png" />
+<img alt="../_images/1157.png" class="align-center" src="../_images/1157.png" />
 <ol class="arabic simple" start="2">
 <li><p>Verá el diálogo <span class="guilabel">QGIS Plugin Builder</span> con un formulario. Puede llenar el formulario con detalles relacionados a nuestro complemento. El <span class="guilabel">Class name</span> será el nombre de la Clase Python que contiene la lógica del complemento. Esto también será el nombre de la carpeta que contiene todos los archivos del complemento. Ingrese <code class="docutils literal notranslate"><span class="pre">SaveAttributes</span></code> como el nombre de la clase. El <span class="guilabel">Plugin name</span> es el nombre bajo el cual aparecerá el complemento en el <span class="guilabel">Plugin Manager</span>. Ingrese el nombre como <code class="docutils literal notranslate"><span class="pre">Guardar</span> <span class="pre">Atributos</span></code>. Agregue una descripción en el campo <span class="guilabel">Description</span>. El <span class="guilabel">Module name</span> será el nombre del archivo python principal para el complemento. Ingréselo como <code class="docutils literal notranslate"><span class="pre">save_attributes</span></code>. Deje los números de versión como están. El valor <span class="guilabel">Text for menu item</span> será como los usuarios encontrarán su complemento en el menú QGIS. Ingréselo como <code class="docutils literal notranslate"><span class="pre">Guardar</span> <span class="pre">Atributos</span> <span class="pre">como</span> <span class="pre">CSV</span></code>. Ingrese su nombre y dirección de correo electrónico en los campos apropiados. El campo <span class="guilabel">Menu</span> decidirá donde es agregado el elemento complemento en QGIS. Debido a que el nuestro es para datos vectoriales, seleccione <code class="docutils literal notranslate"><span class="pre">Vectorial</span></code>. Marque la casilla <span class="guilabel">Señale el complemento como experimental</span> abajo. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
@@ -306,39 +307,39 @@
 <ol class="arabic simple" start="10">
 <li><p>Ahora diseñaremos nuestra caja de diálogo y le agregaremos algunos elementos de interfaz de usuario. Abra el programa <code class="docutils literal notranslate"><span class="pre">Qt</span> <span class="pre">Creator</span></code> y vaya a <span class="guilabel">Archivo –&gt; Abrir Archivo o Proyecto…</span>.</p></li>
 </ol>
-<img alt="../_images/1039.png" class="align-center" src="../_images/1039.png" />
+<img alt="../_images/1040.png" class="align-center" src="../_images/1040.png" />
 <ol class="arabic simple" start="11">
 <li><p>Explore el directorio del complemento y seleccione el archivo <code class="docutils literal notranslate"><span class="pre">save_attributes_dialog_base.ui</span></code>. Clic en <span class="guilabel">Abrir</span>.</p></li>
 </ol>
-<img alt="../_images/1157.png" class="align-center" src="../_images/1157.png" />
+<img alt="../_images/1158.png" class="align-center" src="../_images/1158.png" />
 <ol class="arabic simple" start="12">
 <li><p>Verá al diálogo vacío del complemento. Puede arrastrar y soltar elementos del panel de la izquierda en el diálogo. Agregaremos un tipo <span class="guilabel">Caja Combo</span> de <span class="guilabel">Widgets de Entrada</span>. Arrástrela al diálogo del complemento.</p></li>
 </ol>
-<img alt="../_images/1242.png" class="align-center" src="../_images/1242.png" />
+<img alt="../_images/1243.png" class="align-center" src="../_images/1243.png" />
 <ol class="arabic simple" start="13">
 <li><p>Redimensione la caja combinada y ajuste su tamaño. Ahora arrastre una  <span class="guilabel">Etiqueta</span> tipo <span class="guilabel">Display Widget</span> en el diálogo.</p></li>
 </ol>
-<img alt="../_images/1341.png" class="align-center" src="../_images/1341.png" />
+<img alt="../_images/1342.png" class="align-center" src="../_images/1342.png" />
 <ol class="arabic simple" start="14">
 <li><p>Selecciona la etiqueta del texto y  escribe «Seleccionar una capa».</p></li>
 </ol>
-<img alt="../_images/1438.png" class="align-center" src="../_images/1438.png" />
+<img alt="../_images/1439.png" class="align-center" src="../_images/1439.png" />
 <ol class="arabic simple" start="15">
 <li><p>Guarde este archivo yendo a <span class="menuselection">Archivo ‣ Guardar save_attributes_dialog_base.ui</span>. Note que el nombre del objeto caja combo es <code class="docutils literal notranslate"><span class="pre">comboBox</span></code>. Para interactuar con este objeto uso código python, tendremos que referirnos a él por su nombre.</p></li>
 </ol>
-<img alt="../_images/1536.png" class="align-center" src="../_images/1536.png" />
+<img alt="../_images/1537.png" class="align-center" src="../_images/1537.png" />
 <ol class="arabic simple" start="16">
 <li><p>Volvamos a cargar de nuevo nuestro complemento de manera que podamos ver los cambios en la ventana de diálogo. Vaya a <span class="menuselection">Complemento ‣ Plugin Reloader ‣ Escoger un complemento a ser recargado</span>.</p></li>
 </ol>
-<img alt="../_images/1634.png" class="align-center" src="../_images/1634.png" />
+<img alt="../_images/1635.png" class="align-center" src="../_images/1635.png" />
 <ol class="arabic simple" start="17">
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">GuardarAtributos</span></code> en el diálogo <span class="guilabel">Configurar Plugin reloader</span>.</p></li>
 </ol>
-<img alt="../_images/1731.png" class="align-center" src="../_images/1731.png" />
+<img alt="../_images/1732.png" class="align-center" src="../_images/1732.png" />
 <ol class="arabic simple" start="18">
 <li><p>Ahora clic en el botón <span class="guilabel">Guardar Atributos como CSV</span>. Verá la caja de diálogo recientemente diseñada.</p></li>
 </ol>
-<img alt="../_images/1829.png" class="align-center" src="../_images/1829.png" />
+<img alt="../_images/1830.png" class="align-center" src="../_images/1830.png" />
 <ol class="arabic simple" start="19">
 <li><p>Agreguemos alguna lógica al complemento que poblará la caja combo con las capas cargadas en QGIS. Vaya al directorio del complemento y cargue el archivo <code class="docutils literal notranslate"><span class="pre">save_attributes.py</span></code> en un editor de texto. Deslícese hacia abajo y encuentre el método <code class="docutils literal notranslate"><span class="pre">run(self)</span></code>. Este método será llamado cuando haga clic en el botón de la barra de herramientas o seleccione el elemento complemento del menú. Agregue el siguiente código al inicio del método. Este código hace que se cargue las capas en QGIS y las agrega al objeto <code class="docutils literal notranslate"><span class="pre">comboBox</span></code> del diálogo del complemento.</p></li>
 </ol>

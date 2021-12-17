@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Visualización y Enrutamiento Básico de Red (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Localizando la Instalación Más Cercana con Matriz Origen-Destino (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Análisis de Área de Servicio usando Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calcular la Precipitación Media de Área (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Iniciándote con la Programación Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Ejecutar Algoritmos de Procesamiento vía Python (QGIS3)</a></li>
@@ -221,7 +222,7 @@
 <ol class="arabic simple">
 <li><p>Primero cargareos el archivo shape de las zonas censales. Vaya a <span class="menuselection">Capa ‣ Agregar Capa Vectorial</span>.</p></li>
 </ol>
-<img alt="../_images/1189.png" class="align-center" src="../_images/1189.png" />
+<img alt="../_images/1190.png" class="align-center" src="../_images/1190.png" />
 <ol class="arabic simple" start="2">
 <li><p>Navegue al archivo descargado zip <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract.zip</span></code> y selecciónelo. QGIS puede abrir archivos zip directamente de manera que no hay necesidad de descomprimirlos primero.</p></li>
 </ol>
@@ -257,39 +258,39 @@
 <ol class="arabic simple" start="10">
 <li><p>Explore la carpeta que contiene el archivo CSV y selecciónelo. Asegúrese que ha seleccionado para el  <span class="guilabel">Formato de archivo</span> <span class="guilabel">CSV (valores separados por coma)</span>. Como estamos importando esto como una tabla, debemos especificar que nuestro archivo no contenga geometría. Seleccione la opción <span class="guilabel">Ninguna geometría (tabla sólo de atributos)</span>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
-<img alt="../_images/1054.png" class="align-center" src="../_images/1054.png" />
+<img alt="../_images/1055.png" class="align-center" src="../_images/1055.png" />
 <ol class="arabic simple" start="11">
 <li><p>El CSV será ahora importado como una tabla en QGIS.</p></li>
 </ol>
-<img alt="../_images/1190.png" class="align-center" src="../_images/1190.png" />
+<img alt="../_images/1191.png" class="align-center" src="../_images/1191.png" />
 <ol class="arabic simple" start="12">
 <li><p>Seleccione la capa <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code>. Haga clic-derecho en ella y seleccione <span class="guilabel">Propiedades</span>.</p></li>
 </ol>
-<img alt="../_images/1256.png" class="align-center" src="../_images/1256.png" />
+<img alt="../_images/1257.png" class="align-center" src="../_images/1257.png" />
 <ol class="arabic simple" start="13">
 <li><p>En el diálogo <span class="guilabel">Propiedades de la Capa</span>, seleccione la pestaña <span class="guilabel">Uniones</span>. Clic en el botón <cite>+</cite> para crear una nueva unión de tabla.</p></li>
 </ol>
-<img alt="../_images/1354.png" class="align-center" src="../_images/1354.png" />
+<img alt="../_images/1355.png" class="align-center" src="../_images/1355.png" />
 <ol class="arabic simple" start="14">
 <li><p>En el diálogo <span class="guilabel">Añadir unión vectorial</span>, seleccione <code class="docutils literal notranslate"><span class="pre">ca_tracts_pop</span></code> como la <span class="guilabel">Capa de unión</span>. A continuación tenemos que seleccionar el campo con ids únicos tanto en el archivo shape como el CSV. Seleccione <cite>GEO.id2</cite> y <cite>GEOID</cite> como el <span class="guilabel">Campo de unión</span> y <span class="guilabel">Campo destino</span> respectivamente. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
-<img alt="../_images/1451.png" class="align-center" src="../_images/1451.png" />
+<img alt="../_images/1452.png" class="align-center" src="../_images/1452.png" />
 <ol class="arabic simple" start="15">
 <li><p>Cierre el diálogo <span class="guilabel">Propiedades de capa</span> y regrese a la ventana principal QGIS. En este punto, los campos del archivo CSV están unidos al archivo shape. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code> y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>.</p></li>
 </ol>
-<img alt="../_images/1548.png" class="align-center" src="../_images/1548.png" />
+<img alt="../_images/1549.png" class="align-center" src="../_images/1549.png" />
 <ol class="arabic simple" start="16">
 <li><p>Ahora puede ver un nuevo conjunto de campos, incluyendo el campo <span class="guilabel">ca_tracts_pop_D001</span> agregado a cada objeto espacial. Ahora tiene acceso al valor de población de cada zona desde el archivo CSV. Cierre la tabla de atributos y regrese a la ventana principal QGIS.</p></li>
 </ol>
-<img alt="../_images/1645.png" class="align-center" src="../_images/1645.png" />
+<img alt="../_images/1646.png" class="align-center" src="../_images/1646.png" />
 <ol class="arabic simple" start="17">
 <li><p>Clic-derecho la capa <code class="docutils literal notranslate"><span class="pre">tl_2013_06_tract</span></code> y seleccione <span class="guilabel">Propiedades</span>.</p></li>
 </ol>
-<img alt="../_images/1741.png" class="align-center" src="../_images/1741.png" />
+<img alt="../_images/1742.png" class="align-center" src="../_images/1742.png" />
 <ol class="arabic simple" start="18">
 <li><p>Seleccione la pestaña <span class="guilabel">Estilo</span>. Seleccione <span class="guilabel">Graduado</span> desde el menú desplegable. Como estamos buscando crear un mapa de población, queremos asignar un color diferente a cada objeto de zona censal basado en el conteo de población. Seleccione <span class="guilabel">ca_tracts_pop_D001</span> como la <span class="guilabel">Columna</span>. Seleccione una rampa de color de su gusto de la lista desplegable <span class="guilabel">Rampa de color</span>. En el <span class="guilabel">Modo</span>, seleccione <span class="guilabel">Cuantil (Conteo Igual)</span>. A continuación haga clic en <span class="guilabel">Clasificar</span>. Verá un color diferente asignado a ciertos rangos de población. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
-<img alt="../_images/1839.png" class="align-center" src="../_images/1839.png" />
+<img alt="../_images/1840.png" class="align-center" src="../_images/1840.png" />
 <ol class="arabic simple" start="19">
 <li><p>Ahora verá una agradable visualización de las zonas censales con estilo que usa valores de población. Use la herramienta <span class="guilabel">Acercar zoom</span> para seleccionar un área menor de la capa.</p></li>
 </ol>

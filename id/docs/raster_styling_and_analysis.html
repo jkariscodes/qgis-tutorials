@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -258,19 +259,19 @@ links below:</p>
 <ol class="arabic simple" start="10">
 <li><p>Untuk visualisasi pola kepadatan penduduk yang lebih baik, kita perlu untuk melakukan perubahan dalam stylenya. Klik kanan pada nama layer dan pilih <span class="guilabel">Properties</span> . Anda dapat mengdobel-klik pada nama layer di Table of Content atau TOC untuk memunculkan dialog Layer Properties</p></li>
 </ol>
-<img alt="../_images/1059.png" class="align-center" src="../_images/1059.png" />
+<img alt="../_images/1060.png" class="align-center" src="../_images/1060.png" />
 <ol class="arabic simple" start="11">
 <li><p>Pada tab <span class="guilabel">Style</span>, ubah <span class="guilabel">Render type</span> ke <span class="guilabel">Singleband pseudocolor</span> . kemudian, klik <span class="guilabel">Classify</span> di <span class="guilabel">Generate a new color map</span> . Anda akan lihat 5 nilai warna baru tercipta. Klik <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/11100.png" class="align-center" src="../_images/11100.png" />
+<img alt="../_images/11101.png" class="align-center" src="../_images/11101.png" />
 <ol class="arabic simple" start="12">
 <li><p>Kembali ke kanvas QGIS, anda akan melihat sebuah hasil render dari raster menyerupai peta panas. Ulangi proses untuk raster yang lain.</p></li>
 </ol>
-<img alt="../_images/1260.png" class="align-center" src="../_images/1260.png" />
+<img alt="../_images/1261.png" class="align-center" src="../_images/1261.png" />
 <ol class="arabic simple" start="13">
 <li><p>Untuk analisis kita, kita perlu menemukan area dengan perubahan populasi terbesar antara tahun 1990 dan 2000. Cara untuk menuntaskannya dengan menemukan perbedaan antara tiap nilai pixel grid pada kedua layer. Pilih <span class="menuselection">Raster ‣ Raster calculator</span>.</p></li>
 </ol>
-<img alt="../_images/1358.png" class="align-center" src="../_images/1358.png" />
+<img alt="../_images/1359.png" class="align-center" src="../_images/1359.png" />
 <ol class="arabic simple" start="14">
 <li><p>In the <span class="guilabel">Raster bands</span> section, you can select the layer by
 double-clicking on them. The bands are named after the raster name followed
@@ -282,23 +283,23 @@ formula to subtract the 1990 population density from 2000. Enter
 <code class="docutils literal notranslate"><span class="pre">pop_density_change_2000_1990.tif</span></code> and check the box next to
 <span class="guilabel">Add result to project</span>. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1455.png" class="align-center" src="../_images/1455.png" />
+<img alt="../_images/1456.png" class="align-center" src="../_images/1456.png" />
 <ol class="arabic simple" start="15">
 <li><p>Ketika perhitungan selesai, anda akan melihat layer baru muncul di QGIS.</p></li>
 </ol>
-<img alt="../_images/1552.png" class="align-center" src="../_images/1552.png" />
+<img alt="../_images/1553.png" class="align-center" src="../_images/1553.png" />
 <ol class="arabic simple" start="16">
 <li><p>Visualisai level abu-abu atau grayscale berguna, tapi kita dapat membuat hasil yang jauh lebih informatif. Klik kanan pada layer <code class="docutils literal notranslate"><span class="pre">pop_density_change_2000_1990</span></code> dan pilih <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/1649.png" class="align-center" src="../_images/1649.png" />
+<img alt="../_images/1650.png" class="align-center" src="../_images/1650.png" />
 <ol class="arabic simple" start="17">
 <li><p>Kita ingin melakukan style pada layer sehingga nilai pixel dalam rentang tertentu mendapatkan warna yang sama. Sebelum kita menyelami hal ini, akses tab <span class="guilabel">Metadata</span> dan lihat properti dari raster tersebut. Perhatikan nilai minimum dan maksimum layer ini.</p></li>
 </ol>
-<img alt="../_images/1745.png" class="align-center" src="../_images/1745.png" />
+<img alt="../_images/1746.png" class="align-center" src="../_images/1746.png" />
 <ol class="arabic simple" start="18">
 <li><p>Sekarang akses tab <span class="guilabel">Style</span> . Pilih guilabel:<cite>Singleband pseudocolor</cite> sebagai guilabel:<cite>Render type</cite> di <span class="guilabel">Band Rendering</span> . Atur guilabel:<cite>Color interpolation</cite> ke <span class="guilabel">Discrete</span> . Klik tombol guilabel:<cite>Add entry</cite> 4x untuk mebuat 4 kelas unik. Klik pada awal bagian untuk merubah nilai. Cara kerja pemetaan warna adalah dengan semua nilai yang lebih rendah daripada nilai yang dimasukkan akan mendapat warna entry tersebut. Karena nilai minimum raster kita tepat di atas -2000, kita pilih -2000 sebagai entry pertama. Ini untuk nilai yang tidak punya data. Masukkan nilai dan label untuk entry yang lain seperti di bawah dan klik <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1843.png" class="align-center" src="../_images/1843.png" />
+<img alt="../_images/1844.png" class="align-center" src="../_images/1844.png" />
 <ol class="arabic simple" start="19">
 <li><p>Sekarang anda akan melihat visualisasi yang lebih kuat dimana anda dapat melihat area yang mempunyai perubuhan penduduk baik positif ataupun negatif. Klik tombol <span class="guilabel">Zoom In</span> dan gambar sebuah segi empat di sekitar Eropa untuk mengeksplor daerah lebih detail.</p></li>
 </ol>

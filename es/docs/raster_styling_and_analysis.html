@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Visualización y Enrutamiento Básico de Red (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Localizando la Instalación Más Cercana con Matriz Origen-Destino (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Análisis de Área de Servicio usando Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calcular la Precipitación Media de Área (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Iniciándote con la Programación Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Ejecutar Algoritmos de Procesamiento vía Python (QGIS3)</a></li>
@@ -257,39 +258,39 @@
 <ol class="arabic simple" start="10">
 <li><p>Para visualizar mejor el patrón de densidad de población, necesitaríamos darle estilo. Clic-derecho en el nombre de la capa y seleccione <span class="guilabel">Propiedades</span>. También puede hacer doble-clic en el nombre de la capa en la TDC para traer el diálogo Propiedades de Capa.</p></li>
 </ol>
-<img alt="../_images/1059.png" class="align-center" src="../_images/1059.png" />
+<img alt="../_images/1060.png" class="align-center" src="../_images/1060.png" />
 <ol class="arabic simple" start="11">
 <li><p>Bajo la pestaña <span class="guilabel">Estilo</span>, cambie el <span class="guilabel">Tipo de representador</span> a <span class="guilabel">Pseudocolor banda única</span>. A continuación, clic en <span class="guilabel">Clasificar</span> bajo <span class="guilabel">Generar un nuevo mapa de color</span>. Verá 5 nuevos valores de color creados. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
-<img alt="../_images/11100.png" class="align-center" src="../_images/11100.png" />
+<img alt="../_images/11101.png" class="align-center" src="../_images/11101.png" />
 <ol class="arabic simple" start="12">
 <li><p>De vuelta en el lienzo QGIS, verá una representación como mapa de calor del ráster. Repita también el mismo proceso para el otro ráster.</p></li>
 </ol>
-<img alt="../_images/1260.png" class="align-center" src="../_images/1260.png" />
+<img alt="../_images/1261.png" class="align-center" src="../_images/1261.png" />
 <ol class="arabic simple" start="13">
 <li><p>Para nuestro análisis, nos gustaría encontrar áreas con los mayores cambios de población entre 1990 y 2000. La manera de lograr esto es encontrando la diferencia entre los valores de píxeles grid en ambas capas. Seleccione <span class="menuselection">Ráster ‣ Calculadora ráster</span>.</p></li>
 </ol>
-<img alt="../_images/1358.png" class="align-center" src="../_images/1358.png" />
+<img alt="../_images/1359.png" class="align-center" src="../_images/1359.png" />
 <ol class="arabic simple" start="14">
 <li><p>En la sección <span class="guilabel">Bandas ráster</span>, puede seleccionar la capa haciendo doble-clic en ellas. Las bandas toman el nombre del ráster seguido por &#64; y un número de banda. Debido a que nuestros rásters sólo tiene 1 banda, verá sólo 1 entrada por ráster. La calculadora ráster puede aplicar operaciones matemáticas sobre los píxeles rásters. En este caso queremos ingresar una fórmula simple para restar la densidad de población 1990 del 2000. Ingrese <code class="docutils literal notranslate"><span class="pre">glds00ag60&#64;1</span> <span class="pre">-</span> <span class="pre">glds90ag60&#64;1</span></code> como fórmula. Nombre su capa de salida como <code class="docutils literal notranslate"><span class="pre">pop_density_change_2000_1990.tif</span></code> y marque la casilla junto a <span class="guilabel">Añadir resultado al proyecto</span>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
-<img alt="../_images/1455.png" class="align-center" src="../_images/1455.png" />
+<img alt="../_images/1456.png" class="align-center" src="../_images/1456.png" />
 <ol class="arabic simple" start="15">
 <li><p>Una vez esté completa la operación, verá que se carga la nueva capa en QGIS.</p></li>
 </ol>
-<img alt="../_images/1552.png" class="align-center" src="../_images/1552.png" />
+<img alt="../_images/1553.png" class="align-center" src="../_images/1553.png" />
 <ol class="arabic simple" start="16">
 <li><p>La visualización de escala de grises es útil, pero podemos crear una salida mucho más informativa. Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">pop_density_change_2000_1990</span></code> y seleccione <span class="guilabel">Propiedades</span>.</p></li>
 </ol>
-<img alt="../_images/1649.png" class="align-center" src="../_images/1649.png" />
+<img alt="../_images/1650.png" class="align-center" src="../_images/1650.png" />
 <ol class="arabic simple" start="17">
 <li><p>Queremos dar estilo a la capa de manera que píxeles en ciertos rangos tengan el mismo color. Antes que nos dediquemos a ello, vaya a la pestaña <span class="guilabel">Metadatos</span> y mire las propiedades del ráster. Anote los valores mínimo y máximo de esta capa.</p></li>
 </ol>
-<img alt="../_images/1745.png" class="align-center" src="../_images/1745.png" />
+<img alt="../_images/1746.png" class="align-center" src="../_images/1746.png" />
 <ol class="arabic simple" start="18">
 <li><p>Ahora vaya a la pestaña <span class="guilabel">Estilo</span>. Seleccione <span class="guilabel">Pseudocolor banda única</span> como el <span class="guilabel">Tipo de representador</span> bajo <span class="guilabel">Representación de banda</span>. Defina la <span class="guilabel">Interpolación color</span> como <span class="guilabel">Discreta</span>. Clic el botón <span class="guilabel">Añadir entrada</span> 4 veces para crear 4 clases únicas. Clic en una entrada para cambiar los valores. La manera como funciona el mapa de colo es que a todos los valores bajo el valor ingresado se les dará el color dado en la entrada. Debido a que el valor mínimo de nuestro ráster es justo encima de -2000, escogemos -2000 como la primera entrada. Esto será para los valores Sin Datos. Ingrese los valores y Etiquetas para las otras entradas y haga clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
-<img alt="../_images/1843.png" class="align-center" src="../_images/1843.png" />
+<img alt="../_images/1844.png" class="align-center" src="../_images/1844.png" />
 <ol class="arabic simple" start="19">
 <li><p>Ahora verá una visualización mucho más poderosa donde puede ver áreas que han visto cambios positivos y negativos en su densidad de población. Clic en el botón <span class="guilabel">Acercar zoom</span> y dibuje un rectángulo alrededor de Europa para explorar la región en más detalle.</p></li>
 </ol>

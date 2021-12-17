@@ -101,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3/basic_network_analysis.html">Basic Network Visualization and Routing (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/origin_destination_matrix.html">Locating Nearest Facility with Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/service_area_analysis.html">Service Area Analysis using Openrouteservice (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/areal_mean_rainfall.html">Calculating Areal Mean Rainfall (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/getting_started_with_pyqgis.html">Getting Started With Python Programming (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/processing_algorithms_pyqgis.html">Running Processing Algorithms via Python (QGIS3)</a></li>
@@ -221,7 +222,7 @@
 <ol class="arabic simple">
 <li><p>Aprite QGIS e andate su <span class="menuselection">Layer ‣ Aggiungi vettore..</span>.</p></li>
 </ol>
-<img alt="../_images/1176.png" class="align-center" src="../_images/1176.png" />
+<img alt="../_images/1177.png" class="align-center" src="../_images/1177.png" />
 <ol class="arabic simple" start="2">
 <li><p>Individuate lo shapefile appena scaricato <code class="docutils literal notranslate"><span class="pre">Shapefiles.zip</span></code> e selezionatelo. Fate click su <span class="guilabel">Apri</span>.</p></li>
 </ol>
@@ -261,39 +262,39 @@
 <ol class="arabic simple" start="10">
 <li><p>Vedrete il nuovo layer <code class="docutils literal notranslate"><span class="pre">elevation_tin</span></code>  caricato in QGIS. Fate click sul layer e scegliete <span class="guilabel">Zoom all’estensione del layer</span>.</p></li>
 </ol>
-<img alt="../_images/1048.png" class="align-center" src="../_images/1048.png" />
+<img alt="../_images/1049.png" class="align-center" src="../_images/1049.png" />
 <ol class="arabic simple" start="11">
 <li><p>State vedendo l’estensione completa della superficie. Ma l’interpolazione non dà risultati accurati al di fuori dell’area di raccolta dei dati. Andiamo allora a clippare la superficie ottenuta con il layer dei confini del lago.  Andate su <span class="menuselection">Raster ‣ Estrazione ‣ Clipper</span>.</p></li>
 </ol>
-<img alt="../_images/1177.png" class="align-center" src="../_images/1177.png" />
+<img alt="../_images/1178.png" class="align-center" src="../_images/1178.png" />
 <ol class="arabic simple" start="12">
 <li><p>Date al <span class="guilabel">file di output</span> il nome <code class="docutils literal notranslate"><span class="pre">elevation_tin_clipped.tif</span></code>. Selezionate come <span class="guilabel">Modo di clip</span> la casella <span class="guilabel">strato per la maschera</span>. Quindi selezionate sotto <code class="docutils literal notranslate"><span class="pre">Boundary2004_550_stpl83</span></code> come <span class="guilabel">strato per la maschera`</span>. Click su <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1250.png" class="align-center" src="../_images/1250.png" />
+<img alt="../_images/1251.png" class="align-center" src="../_images/1251.png" />
 <ol class="arabic simple" start="13">
 <li><p>Un nuovo raster <code class="docutils literal notranslate"><span class="pre">elevation_tin_clipped</span></code>  sarà caricato in QGIS. Ora potremo finalmente tematizzare questo layer per mostrare i diversi livelli di altezza. Osservate i livelli minimi e massimi del layer <code class="docutils literal notranslate"><span class="pre">elevation_tin</span></code>. Fate click con il tasto destro sul layer  <code class="docutils literal notranslate"><span class="pre">elevation_tin_clipped</span></code> e selezionate <span class="guilabel">Proprietà</span>.</p></li>
 </ol>
-<img alt="../_images/1349.png" class="align-center" src="../_images/1349.png" />
+<img alt="../_images/1350.png" class="align-center" src="../_images/1350.png" />
 <ol class="arabic simple" start="14">
 <li><p>Andate sulla scheda <span class="guilabel">Stile</span> . Selezionate <cite>Falso colore banda singola``e  come   :guilabel:`tipo di visualizzazione</cite>. In <span class="guilabel">Genera nuova mappa di colore</span> selezionate <code class="docutils literal notranslate"><span class="pre">Spectral</span></code> dalla scala dei colori. Dal momento che vogliamo creare una mappa di profondità opposta a una mappa di altezza, barrate la casella <span class="guilabel">Inverti</span> . Questo ci permetterà di assegnare il blu alle zone profonde e il rosso a quelle superficiali. Fate click su <span class="guilabel">Classifica</span>.</p></li>
 </ol>
-<img alt="../_images/1445.png" class="align-center" src="../_images/1445.png" />
+<img alt="../_images/1446.png" class="align-center" src="../_images/1446.png" />
 <ol class="arabic simple" start="15">
 <li><p>Adesso passate sulla scheda <span class="guilabel">Tranparenza</span> . Vogliamo togliere i pixel neri dal nostro output. Inserite <code class="docutils literal notranslate"><span class="pre">0</span></code>  in <span class="guilabel">valori nulli aggiuntivi</span>. Fate click su <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1543.png" class="align-center" src="../_images/1543.png" />
+<img alt="../_images/1544.png" class="align-center" src="../_images/1544.png" />
 <ol class="arabic simple" start="16">
 <li><p>Adesso avete una mappa dei rilievi di elevazione del lago ricavata dal rilevamento delle singole profondità. A questo punto andremo a creare le curve di livello. Andiamo su <span class="menuselection">Raster ‣ Estrazione ‣ Curve di livello</span>.</p></li>
 </ol>
-<img alt="../_images/1640.png" class="align-center" src="../_images/1640.png" />
+<img alt="../_images/1641.png" class="align-center" src="../_images/1641.png" />
 <ol class="arabic simple" start="17">
 <li><p>Nella finestra di dialogo <span class="guilabel">curve di livello</span>  inserite <code class="docutils literal notranslate"><span class="pre">contours</span></code> come <span class="guilabel">File di output per le curve di livello</span>. Andremo a generare delle curve di livello con intervalli di 5 piedi, perciò inseriamo <code class="docutils literal notranslate"><span class="pre">5.00</span></code> alla voce <span class="guilabel">Intervallo fra curve di livello</span>. Barrate la casella <span class="guilabel">nome attributo</span> .  Fate click  su <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1736.png" class="align-center" src="../_images/1736.png" />
+<img alt="../_images/1737.png" class="align-center" src="../_images/1737.png" />
 <ol class="arabic simple" start="18">
 <li><p>Le curve di livello saranno caricate come layer <code class="docutils literal notranslate"><span class="pre">contours</span></code> quando il processo sarà terminato. Fate click con il tasto destro su layer e selezionate <span class="guilabel">Proprietà</span>.</p></li>
 </ol>
-<img alt="../_images/1834.png" class="align-center" src="../_images/1834.png" />
+<img alt="../_images/1835.png" class="align-center" src="../_images/1835.png" />
 <ol class="arabic simple" start="19">
 <li><p>Andate sulla scheda <span class="guilabel">etichette</span>. Sbarrate la casella <span class="guilabel">etichetta questo vettore con …</span> e selezionate <code class="docutils literal notranslate"><span class="pre">ELEV</span></code> come campo . Selezionate <code class="docutils literal notranslate"><span class="pre">intorno</span> <span class="pre">al</span> <span class="pre">punto</span></code> come  <span class="guilabel">Posizionamento</span> e fate click su <span class="guilabel">OK</span>.</p></li>
 </ol>
