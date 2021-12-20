@@ -103,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="basic_network_analysis.html">Basis netwerk visualisatie en routeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origin_destination_matrix.html">Dichtstbijzijnde faciliteit zoeken met Origin-Destination Matrix (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_area_analysis.html">Analyse Servicegebied met Openrouteservice (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="travel_time_analysis.html">Travel Time Analysis with Uber Movement (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="travel_time_analysis.html">Reistijd-analyse met Uber Movement (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="areal_mean_rainfall.html">Berekenen gemiddelde regenval voor gebied (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_pyqgis.html">Beginnen met programmeren in Python (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing_algorithms_pyqgis.html">Algoritmes van Processing uitvoeren via Python (QGIS3)</a></li>
@@ -202,76 +202,76 @@
 
   <section id="importing-spreadsheets-or-csv-files-qgis3">
 <h1>Werkbladen of CSV-bestanden importeren (QGIS3)<a class="headerlink" href="#importing-spreadsheets-or-csv-files-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Many times the GIS data comes in a table or in a spreadsheet. QGIS allows you to import structured text files with coordinates as a vector layer. This tutorial shows how you can use the <strong>Data Source Manager</strong> to import <strong>Delimited Text</strong> files.</p>
+<p>Vaak komen de gegevens voor GIS in een tabel of in een werkblad. QGIS stelt u in staat gestructureerde tekstbestanden met coördinaten te importeren als een vectorlaag. Deze handleiding laat u zien hoe u <strong>Databronnen beheren</strong> kunt gebruiken om bestanden met <strong>Gescheiden tekst</strong> te importeren.</p>
 <section id="overview-of-the-task">
 <h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will be importing a text file with earthquake locations in the tab-separated values (TSV) format to QGIS and create a points layer.</p>
+<p>We zullen een tekstbestand met locaties van aardbevingen  in de indeling tab-gescheiden waarden (TSV) importeren in QGIS en een puntenlaag maken.</p>
 </section>
 <section id="get-the-data">
 <h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li><p>For this tutorial we will download a dataset of earthquakes between 1900-2000 from NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Visit the NOAA NCEI portal</a> and enter <span class="guilabel">Min</span> as <code class="docutils literal notranslate"><span class="pre">1900</span></code> and <span class="guilabel">Max</span> as <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  This will return all earthquake incidents that occurred and were recorded by NOAA between those years. For other specific results, you can filter with different parameters. Click <span class="guilabel">Search</span>.</p></li>
+<li><p>Voor deze handleiding zullen we een gegevensset downloaden van aardbevingen tussen 1900-2000 vanaf NOAA’s National Geophysical Data Center dat een grote gegevensset van alle significante aardbevingen  sinds 2150 VC produceert. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Bezoek het portaal NOAA NCEI</a> en vul <span class="guilabel">Min</span> in met <code class="docutils literal notranslate"><span class="pre">1900</span></code> en <span class="guilabel">Max</span> met <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  Dit zal alle incidenten van aardbevingen teruggeven die werden vastgelegd door NOAA tussen deze jaren. U kunt, voor andere specifieke resultaten, filteren met andere parameters. Klik op <span class="guilabel">Search</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>As a result, we got <em>2585</em> earthquake incidents. Click on the <span class="guilabel">Download TSV</span> icon.</p></li>
+<li><p>Als resultaat krijgen we <em>2585</em> incidenten met aardbevingen. Klik op het pictogram <span class="guilabel">Download TSV</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
 </div></blockquote>
-<p>For convenience, you may directly download a copy of the above datasets from the link below:</p>
+<p>Voor het gemak kunt u direct een kopie van bovengenoemde gegevensset downloaden vanaf de link hieronder:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/earthquakes_2021_11_25_14_31_59_+0530.tsv">earthquakes_2021_11_25_14_31_59_+0530.tsv</a></p>
-<p>Data Source <a class="reference internal" href="../credits.html#ncei" id="id1"><span>[NCEI]</span></a></p>
+<p>Gegevensbron <a class="reference internal" href="../credits.html#ncei" id="id1"><span>[NCEI]</span></a></p>
 </section>
 <section id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Examine your tabular data source. The downloaded earthquake database contains the <code class="docutils literal notranslate"><span class="pre">Latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> fields indicating the location of the earthquake epicenter and other related attributes. We will use these fields to import the file as a point layer. Open the data in a text editor such as Notepad/TextMate to view the contents. You will see that a TAB separates each field.</p></li>
+<li><p>Bekijk uw gegevensbron met gescheiden tekst. De gedownloade database met aardbevingen bevat de velden <code class="docutils literal notranslate"><span class="pre">Latitude</span></code> en <code class="docutils literal notranslate"><span class="pre">Longitude</span></code>, die het epicenter van de locatie van de aardbeving aangeven en andere gerelateerde attributen. We zullen deze velden gebruiken om het bestand als een puntenlaag te importeren. Open de gegevens in een tekstbewerker, zoals Notepad/TextMate, om de inhoud te bekijken. U zult zien dat een TAB elk veld scheid.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/012.png" class="align-center" src="../../_images/012.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
-<p>If you have a spreadsheet, use <cite>Save As</cite> function in your program to save it as a <cite>Tab Delimited File</cite> or a <cite>Comma Separated Values (CSV)</cite> file.</p>
+<p>Als u een werkblad hebt, gebruik dan de functie <cite>Opslaan als</cite> in uw programma om het op te slaan als een  <cite>Tabgescheiden bestand</cite> of een <cite>Kommagescheiden (CSV)</cite> bestand.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>QGIS comes with a unified data manager that allows you to load all the various supported data formats. Click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You may also use <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> keyboard shortcut.</p></li>
+<li><p>QGIS komt met een geüniformeerde gegevensbeheerder die het voor u mogelijk maakt alle verscheidene ondersteunde gegevensindelingen te laden. Klik op de knop <span class="guilabel">Databronnen beheren openen</span> op de <span class="guilabel">werkbalk Databronnen</span>. U kunt ook de toetsenbord sneltoets <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> gebruiken.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/022.png" class="align-center" src="../../_images/022.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, switch to the <span class="guilabel">Delimited Text</span> tab. Click the <span class="guilabel">…</span> button next to the <span class="guilabel">File name</span>.</p></li>
+<li><p>Schakel, in het dialoogvenster van <span class="guilabel">Databronnen beheren</span>, naar <span class="guilabel">Tekengescheiden tekst</span>. Klik op de knop <code class="docutils literal notranslate"><span class="pre">…</span></code>  naast <span class="guilabel">Bestandsnaam</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/032.png" class="align-center" src="../../_images/032.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Depending upon the operating system, you may or may not view the file at the downloaded location. In File formats, switch to <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">files</span> <span class="pre">(*;</span> <span class="pre">*.*)</span></code> to view the <em>tsv</em> file.</p></li>
+<li><p>Afhankelijk van het besturingssysteem, kunt u wel of niet het bestand bekijken op de locatie van downloaden. Schakel, in de bestandsindelingen, naar <code class="docutils literal notranslate"><span class="pre">Alle</span> <span class="pre">bestanden</span> <span class="pre">(*;</span> <span class="pre">*.*)</span></code> om het <em>tsv</em>-bestand te bekijken.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/042.png" class="align-center" src="../../_images/042.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Now you will see the downloaded file. Select that and click <span class="guilabel">Open</span>.</p></li>
+<li><p>Nu zult u het gedownloade bestand zien. Selecteer dat en klik op <span class="guilabel">Openen</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/052.png" class="align-center" src="../../_images/052.png" />
 </div></blockquote>
 <ol class="arabic" start="6">
-<li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, the path to file will be available in <span class="guilabel">File Name</span>. Change the <span class="guilabel">Layer name</span> to <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code>. In the <span class="guilabel">File format</span> section, select <span class="guilabel">Custom delimiters</span> and check <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. In the <span class="guilabel">Geometry definition</span> section, choose <span class="guilabel">Point coordinates</span>. By default <span class="guilabel">X field</span> and <span class="guilabel">Y field</span>  values will be auto-populated if it finds a suitable name field in the input. In our case, they are <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. You may change it if the import selects the wrong fields. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> CRS. If your file contains coordinates in a different CRS, you could select the appropriate CRS here. Click <span class="guilabel">Add</span>.</p>
+<li><p>In het dialoogvenster van <span class="guilabel">Databronnen beheren</span> zal het pad naar het bestand beschikbaar zijn in :guilabel:Bestandsnaam`. Wijzig de <span class="guilabel">Laagnaam</span> naar <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code>. In het gedeelte <span class="guilabel">Bestandsindeling</span>, selecteer <span class="guilabel">Zelfgekozen tekstscheiders</span> en selecteer <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. In het gedeelte <span class="guilabel">Geometrie definitie</span>, kies <span class="guilabel">Punt coördinaten</span>. Standaard zullen de waarden van <span class="guilabel">X-veld</span> en <span class="guilabel">Y-veld</span> automatisch worden gevuld als het een veld met een geschikte naam vind in de invoer. In ons geval zijn dat <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> en <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. U kunt het wijzigen als het importeren de verkeerde velden selecteert. U kunt <span class="guilabel">Geometrie CRS</span> laten staan op het standaard CRS <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code>. Als uw bestand coördinaten in een ander CRS bevat, zou u hier het toepasselijke CRS moeten kiezen. Klik op <span class="guilabel">Toevoegen</span>.</p>
 <img alt="../../_images/062.png" class="align-center" src="../../_images/062.png" />
 </li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
-<p>It is easy to get confused between X and Y coordinates. Latitude specifies the north-south position of a point and hence it is a <strong>Y</strong> coordinate. Similarly Longitude specifies the east-west position of a point and it is a <strong>X</strong> coordinate.</p>
+<p>Het is gemakkelijk om verward te raken met de X- en Y-coördinaten. Latitude specificeert de Noord-Zuid-positie van een punt en daarom is het een <strong>Y</strong>-coördinaat. Overeenkomstig specificeert Longitude de Oost-West-positie van een punt en is het een <strong>X</strong>-coördinaat.</p>
 </div>
 <ol class="arabic simple" start="7">
-<li><p>You will now see that the data will be imported and displayed in the QGIS canvas as a new layer called <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code> with CRS <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>.</p></li>
+<li><p>U zult nu zien dat de gegevens zullen worden geïmporteerd en weergegeven in het kaartvenster van QGIS als een nieuwe laag, genaamd <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code> met CRS <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/072.png" class="align-center" src="../../_images/072.png" />
@@ -301,7 +301,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Laatste aanpassing op dec. 17, 2021.<br/>
+      Laatste aanpassing op dec. 20, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
