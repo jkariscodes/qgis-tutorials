@@ -230,27 +230,27 @@
 <ol class="arabic simple" start="3">
 <li><p>在 <span class="guilabel">選擇要增加的向量圖層</span> 視窗中，按住 <kbd class="kbd docutils literal notranslate">Shift</kbd> 鍵然後選擇 <code class="docutils literal notranslate"><span class="pre">Arlington_Soundings_2007_stpl83.shp</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Boundary2004_550_stpl83.shp</span></code> 兩圖層，按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/378.png" class="align-center" src="../_images/378.png" />
+<img alt="../_images/377.png" class="align-center" src="../_images/377.png" />
 <ol class="arabic simple" start="4">
 <li><p>你會看到 QGIS 中載入了 2 個圖層，<code class="docutils literal notranslate"><span class="pre">Boundary2004_550_stpl83</span></code> 是湖泊的邊界，我們先在圖層選單列表中把這個圖層取消勾選。</p></li>
 </ol>
-<img alt="../_images/450.png" class="align-center" src="../_images/450.png" />
+<img alt="../_images/449.png" class="align-center" src="../_images/449.png" />
 <ol class="arabic simple" start="5">
 <li><p>如此一來第二個圖層 <code class="docutils literal notranslate"><span class="pre">Arlington_Soundings_2007_stpl83</span></code> 會顯現出來。雖然資料看起來像是線，但它其實是一連串很接近的點。</p></li>
 </ol>
-<img alt="../_images/551.png" class="align-center" src="../_images/551.png" />
+<img alt="../_images/550.png" class="align-center" src="../_images/550.png" />
 <ol class="arabic simple" start="6">
 <li><p>點選 <span class="guilabel">放大</span> 鈕，縮放到螢幕中的任一小區域後，就可以看到點了。每個點的座標是<em>差分 GPS</em> 的測量值，其值代表湖泊在特定位置由<em>測深儀</em>測得的深度。</p></li>
 </ol>
-<img alt="../_images/649.png" class="align-center" src="../_images/649.png" />
+<img alt="../_images/648.png" class="align-center" src="../_images/648.png" />
 <ol class="arabic simple" start="7">
 <li><p>選擇 <span class="guilabel">識別圖徵</span> 工具然後點選任一個點，<span class="guilabel">識別圖徵結果</span> 的面板會出現在左側，上面記載此點的屬性值。在本例中，<code class="docutils literal notranslate"><span class="pre">ELEVATION</span></code> 屬性就是湖泊在此點的深度，而我們的任務就是要利用這些數值進行內插，求得湖泊的深度譜面以及等高線。</p></li>
 </ol>
-<img alt="../_images/748.png" class="align-center" src="../_images/748.png" />
+<img alt="../_images/747.png" class="align-center" src="../_images/747.png" />
 <ol class="arabic simple" start="8">
 <li><p>請確認你的 <code class="docutils literal notranslate"><span class="pre">內插附加元件（Interpolation</span> <span class="pre">plugin）</span></code>已啟用，詳細步驟請參考 <a class="reference internal" href="using_plugins.html"><span class="doc">使用附加元件</span></a>。啟用後，選擇 <span class="menuselection">影像 ‣ 內插工具 ‣ 內插工具</span>。</p></li>
 </ol>
-<img alt="../_images/847.png" class="align-center" src="../_images/847.png" />
+<img alt="../_images/846.png" class="align-center" src="../_images/846.png" />
 <ol class="arabic simple" start="9">
 <li><p>在 <span class="guilabel">內插工具</span> 視窗中的 <span class="guilabel">輸入</span> 區塊，<span class="guilabel">向量圖層</span> 選擇 <code class="docutils literal notranslate"><span class="pre">Arlington_Soundings_2007_stpl83</span></code>，<span class="guilabel">內插屬性</span> 選擇 <code class="docutils literal notranslate"><span class="pre">ELEVATION</span></code>，然後按 <span class="guilabel">加入</span>。調整 <span class="guilabel">X座標格子大小</span> 與 <span class="guilabel">Y座標格子大小</span> 到 <code class="docutils literal notranslate"><span class="pre">5</span></code>，這個數值代表輸出網格的每個像素大小。由於本來源資料的投影座標系統是以<strong>呎</strong>來當單位，每個像素最終會是 <strong>5 呎</strong>的方形大小。點選在 <span class="guilabel">輸出檔案</span> 右側的 <span class="guilabel">…</span>，把輸出檔命名為 <code class="docutils literal notranslate"><span class="pre">elevation_tin.tif</span></code>，最後按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
@@ -258,7 +258,7 @@
 <p class="admonition-title">備註</p>
 <p>內插的結果會隨著你選擇的內插方法和參數而有很大的不同。QGIS 支援兩種內插方法，分別為<em>三角內插 (TIN)</em> 以及<em>反距離加權法 (IDW)</em>，TIN 法常被使用於高程資料上，而 IDW 法則在內插其他種類的資料時較為常見，例如礦物富集度、人口等等。更多資訊請參考 QGIS 官方文檔中的 <a class="reference external" href="http://docs.qgis.org/2.2/en/docs/gentle_gis_introduction/spatial_analysis_interpolation.html">Spatial Analysis</a> 模組。</p>
 </div>
-<img alt="../_images/947.png" class="align-center" src="../_images/947.png" />
+<img alt="../_images/946.png" class="align-center" src="../_images/946.png" />
 <ol class="arabic simple" start="10">
 <li><p>看到 <code class="docutils literal notranslate"><span class="pre">elevation_tin</span></code> 圖層載入到 QGIS 後，以右鍵點選，選擇 <span class="guilabel">縮放到圖層範圍</span>，</p></li>
 </ol>
@@ -298,7 +298,7 @@
 <ol class="arabic simple" start="19">
 <li><p>前往到 <span class="guilabel">標記設計</span> 分頁，勾選 <span class="guilabel">Label with</span> 的方框（譯按：或是在下拉式選單中選擇 <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">labels</span> <span class="pre">for</span> <span class="pre">this</span> <span class="pre">layer</span></code>），旁邊欄位選擇 <code class="docutils literal notranslate"><span class="pre">ELEV</span></code>。在底下的 <span class="guilabel">位置</span> 屬性中，選擇 <span class="guilabel">曲線</span>。最後按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1928.png" class="align-center" src="../_images/1928.png" />
+<img alt="../_images/1927.png" class="align-center" src="../_images/1927.png" />
 <ol class="arabic simple" start="20">
 <li><p>最後，你就會看到標籤數值已沿著各等高線標記上去了。</p></li>
 </ol>
@@ -328,7 +328,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      最後更新於 12月 20, 2021。<br/>
+      最後更新於 1月 08, 2022。<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

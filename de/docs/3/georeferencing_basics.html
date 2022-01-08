@@ -211,6 +211,8 @@
 <h3>Weitere Fähigkeiten, die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
 <li><p>Wie man das geodätische Datum und das Koordinatensystem alter Karten bestimmt.</p></li>
+<li><p>Save the GCP created.</p></li>
+<li><p>Edit the created GCP for fine tuning.</p></li>
 </ul>
 </section>
 </section>
@@ -223,63 +225,53 @@
 </section>
 <section id="procedure">
 <h2>Arbeitsablauf<a class="headerlink" href="#procedure" title="Link zu dieser Überschrift">¶</a></h2>
-<p>1.Die Georeferenzierung in QGIS erfolgt mit Hilfe des <strong>Georeferencer GDAL</strong> plugins. Dabei handelt es sich um ein Kernplugin, d.h. es ist bereits Teil der QGIS-Installation. Du musst es nur aktivieren. Gehe zu <span class="menuselection">Plugins ‣ Manage and Install Plugins</span> und aktiviere das <span class="guilabel">Georeferencer GDAL</span> plugin im <span class="guilabel">Installed</span> Bereich. Unter <a class="reference internal" href="../using_plugins.html"><span class="doc">Verwenden von Erweiterungen</span></a> findet man weitere Details zur Arbeit mit plugins.</p>
+<ol class="arabic simple">
+<li><p>Open QGIS and click on <span class="menuselection">Raster ‣ Georeferencer</span> to open the tool.</p></li>
+</ol>
 <blockquote>
-<div><img alt="../../_images/180.png" class="align-center" src="../../_images/180.png" />
+<div><img alt="../../_images/012.png" class="align-center" src="../../_images/012.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Das plugin wird im Raster Menü installiert. Klicke auf <span class="menuselection">Raster ‣ Georeferencer</span>, um das plugin zu öffnen.</p></li>
+<li><p>The Georeferencer is divided into 2 sections. The top section where the image will be displayed and the bottom section where a table showing your GCPs will appear.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
+<div><img alt="../../_images/022.png" class="align-center" src="../../_images/022.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Das plugin-Fenster ist in 2 Bereiche geteilt. Im oberen Bereich wird das Bild angezeigt und im unteren Bereich werden die Passpunkte in einer Tabelle angezeigt.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/326.png" class="align-center" src="../../_images/326.png" />
-</div></blockquote>
-<ol class="arabic simple" start="4">
 <li><p>Jetzt werden wir unser JPG-Bild öffnen. Gehe zu <span class="menuselection">File ‣ Open Raster</span>. Navigiere zu dem heruntergeladenen Bild der gescannten Karte und klicke auf <span class="guilabel">Open</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/411.png" class="align-center" src="../../_images/411.png" />
+<div><img alt="../../_images/032.png" class="align-center" src="../../_images/032.png" />
 </div></blockquote>
-<ol class="arabic simple" start="5">
-<li><p>Im folgenden Fenster muss das Koordinatenreferenzsystem (KBS) des Rasterdatensatzes angegeben werden. Unser Ausgangsbild ist ein reines JPG-Bild ohne Informationen bezüglich des Koordinatensystems. Wir klicken daher auf <span class="guilabel">Cancel</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/512.png" class="align-center" src="../../_images/512.png" />
-</div></blockquote>
-<ol class="arabic simple" start="6">
+<ol class="arabic simple" start="4">
 <li><p>Wir sehen jetzt das Bild, das im oberen Teil des Fensters dargestellt wird. Du kannst die zoom/pan Knöpfe aus der Toolleiste nutzen, um mehr über die Karte zu erfahren.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/612.png" class="align-center" src="../../_images/612.png" />
+<div><img alt="../../_images/042.png" class="align-center" src="../../_images/042.png" />
 </div></blockquote>
-<ol class="arabic simple" start="7">
+<ol class="arabic simple" start="5">
 <li><p>Als nächstes müssen wir Koordinaten für einige Punkte auf der Karte zuweisen. Beim genauen Hinsehen findet man ein beschriftetes Koordinatengitter auf der Karte. Es handelt sich dabei um Linien der Breiten- und Längengrade.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/712.png" class="align-center" src="../../_images/712.png" />
+<div><img alt="../../_images/052.png" class="align-center" src="../../_images/052.png" />
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>Before adding Ground Control Points (GCP), we need to define the Transformation Settings. Click on the gear icon in georeferencing window to open the Transformation settings dialog.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/062.png" class="align-center" src="../../_images/062.png" />
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p>In the <span class="guilabel">Transformation settings</span> dialog, choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_raster/georeferencer.html?highlight=georeferencer#available-transformation-algorithms">QGIS Documentation</a> to learn about different transformation types and their uses. Then select the <span class="guilabel">Resampling method</span> as the <code class="docutils literal notranslate"><span class="pre">Nearest</span> <span class="pre">neighbor</span></code>. Click the <span class="guilabel">Select CRS</span> button next to <span class="guilabel">Target SRS</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/072.png" class="align-center" src="../../_images/072.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Bevor wir anfangen Passpunkte (GCP- Ground Control Points) zu setzen, müssen wir die Transformationseinstellungen festlegen. Gehe zu <span class="menuselection">Settings ‣ Transformation settings</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/812.png" class="align-center" src="../../_images/812.png" />
-</div></blockquote>
-<ol class="arabic simple" start="9">
-<li><p>In the <span class="guilabel">Transformation settings</span> dialog, choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. See <a class="reference external" href="https://docs.qgis.org/3.4/en/docs/user_manual/plugins/core_plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> to learn about different transofrmation types and their uses. Click <span class="guilabel">Select CRS</span> button next to <span class="guilabel">Target SRS</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/912.png" class="align-center" src="../../_images/912.png" />
-</div></blockquote>
-<ol class="arabic simple" start="10">
 <li><p>Wenn man eine gescannte Karte wie diese georeferenziert, kann die Information zum Koordinatensystem der Karte selbst entnommen werden. Wenn wir auf unsere Karte sehen, erkennen wir, dass die Koordinaten in Breiten- und Längengraden enthalten sind. Es ist kein geodätisches Datum auf der Karte verzeichnet, so dass wir hier eine Annahme treffen müssen. Da es sich um Indien handelt und die Karte ziemlich alt ist, wird wahrscheinlich das geodätische Datum Everest 1830 gut passen. Suche nach „everest“ und wähle das Koordinatensystem mit der ältesten Angabe des geodätischen Datums Everest (EPSG:4042). Klicke auf <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1014.png" class="align-center" src="../../_images/1014.png" />
+<div><img alt="../../_images/082.png" class="align-center" src="../../_images/082.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
@@ -292,56 +284,64 @@
 <p class="admonition-title">Bemerkung</p>
 <p>Die meisten Karten verwenden ein projiziertes KBS. Es kann sein, dass die Karte, die georeferenziert werden soll, ein projiziertes KBS verwendet, die Beschriftung an den Koordinatengittern aber im geographischen System (Länge/Breite) erfolgt. In einem solchem Fall kann man ein alternatives Vorgehen wählen, um Verzerrungen zu verringern. Man erstellt dazu ein Vektorgitter und transformieren es in das bekannte projizierte KBS. Man nutzt das Gitter dann als Referenz zur genauen Erfassung der Koordinaten. Weiter Einzelheiten findet man unter folgenden Seite: <a class="reference external" href="https://raisedbeaches.net/2018/02/01/georeferencing-in-qgis/">this page</a>.</p>
 </div>
+<ol class="arabic simple" start="9">
+<li><p>Name your output raster as  <code class="docutils literal notranslate"><span class="pre">1870_southern_india_modified.tif</span></code>. Choose <code class="docutils literal notranslate"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Check the <span class="guilabel">Save GCP points</span> to store the points as seperate file for future purpose. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. Click <span class="guilabel">OK</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/092.png" class="align-center" src="../../_images/092.png" />
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Uncompressed GeoTIFF files can be very large in size. So compressing them is always a good idea. You can learn more about different TIFF compression options (LZW, PACKBITS or DEFLATE) in <a class="reference external" href="https://kokoalberti.com/articles/geotiff-compression-optimization-guide">this article</a>.</p>
+</div>
+<ol class="arabic simple" start="10">
+<li><p>Now we can start adding the Ground Control Points (GCP).  Click on the <span class="guilabel">Add Point</span> button.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/1014.png" class="align-center" src="../../_images/1014.png" />
+</div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Benenne das Ausgaberaster mit <code class="docutils literal notranslate"><span class="pre">1870_southern_india_modified.tif</span></code>. Wähle <code class="docutils literal notranslate"><span class="pre">LZW</span></code> als <span class="guilabel">Compression</span>. Stelle sicher, dass die <span class="guilabel">Load in QGIS when done</span> Option aktiviert ist. Klicke <span class="guilabel">OK</span>.</p></li>
+<li><p>Now place the cross-hair at the intersections of the grid lines and left-click, this will serve as the <em>ground-truth</em> in our case. As the grid lines are labeled, we can determine the X and Y coordinates of the points using them. In the pop-up window, enter the coordinates. Remember that X=longitude and Y=latitude. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1117.png" class="align-center" src="../../_images/1117.png" />
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Bemerkung</p>
-<p>Unkomprimierte GeoTIFF Dateien können sehr viel Platz auf dem Datenträger belegen. Daher ist es immer sinnvoll, sie zu komprimieren. Weiter Informationen über die verschiedenen Möglichkeiten der Kompression von TIFF-Dateien (LZW, PACKBITS oder DEFLATE) findet man unter <a class="reference external" href="https://www.accusoft.com/faqs/differences-compressions-used-tiff-files/">this article</a>.</p>
-</div>
 <ol class="arabic simple" start="12">
-<li><p>Jetzt können wir beginnen, Passpunkte zu erzeugen (Ground Control Points - GCP). Die Schnittpunkte der Koordinatengitterlinien werden uns in diesem Fall als <em>Geländedaten</em> dienen. Da die Gitterlinien beschriftet sind, können wir daraus die X und Y Koordinaten der Schnittpunkte ableiten. Klicke auf <span class="guilabel">Hinzufügen Point</span>.</p></li>
+<li><p>Du wirst bemerken, dass die Passpunkttabelle jetzt eine Zeile mit den Details des ersten Passpunktes enthält.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1215.png" class="align-center" src="../../_images/1215.png" />
 </div></blockquote>
-<p>13 . In the pop-up window, enter the coordinates. Remember that X=longitude and Y=latitude. Click <span class="guilabel">OK</span>.</p>
+<p>13 . Similarly, add more GCPs covering the entire image. The more points you have, the more accurate your image is registered to the target coordinates. The <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code> transform requires at least 6 GCPs. Once you have added the minimum number of points required for the transform, you will notice that the GCPs now have a non-zero <code class="docutils literal notranslate"><span class="pre">dX</span></code>, <code class="docutils literal notranslate"><span class="pre">dY</span></code> and <code class="docutils literal notranslate"><span class="pre">Residual</span></code> error values. If a particular GCP has unusually high error values, that usually means a human-error in entering the coordinate values. So you can delete that GCP and capture it again. You can also edit the coordinate values in the <span class="guilabel">GCP Table</span> by clicking the cell in either <span class="guilabel">Dest. X</span> or <span class="guilabel">Dest. Y</span> columns.</p>
 <blockquote>
 <div><img alt="../../_images/1314.png" class="align-center" src="../../_images/1314.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>Du wirst bemerken, dass die Passpunkttabelle jetzt eine Zeile mit den Details des ersten Passpunktes enthält.</p></li>
+<li><p>Once you are satisfied with the GCPs, click the <span class="guilabel">Start Georeferencing</span> button. This will start the process of warping the image using the GCPs and creating the target raster.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1412.png" class="align-center" src="../../_images/1412.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>Füge auf diese Weise weitere Paspunkte hinzu, die im gesamten Bild verteilt sind. Je mehr Punkte du erstellst, desto genauer wird das Bild auf das Zielkoodinatensystem übertragen. Die <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code> Transformation benötigt mindestens 6 Passpunkte.</p></li>
+<li><p>Once the process finishes, you will see the georeferenced layer loaded in QGIS. The georeferencing is now complete. Also, you will notice the Project CRS in the bottom right is set to <em>EPSG:4042</em> as described in Transformation Settings.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1511.png" class="align-center" src="../../_images/1511.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>Nachdem wir die für die Transformation erforderliche Anzahl an Punkten erfasst haben, sehen wir, dass zu den Passpunkten jetzt „dX“, „dY“ und „Rest“ Fehlerwerte angezeigt werden. Wenn ein bestimmter Passpunkt besonders hohe Fehlerwerte aufweist, ist das in der Regel ein Hinweis auf Eingabefehler der Koordinatenwerte. In diesem Fall kann man diesen Passpunkt löschen und ihn anschließend neu erfassen. Alternativ kann man die Koordinatenwerte auch in der <span class="guilabel">GCP Table</span> durch Klicken auf das Wertefeld in den Spalten <span class="guilabel">Dest. X</span> oder <span class="guilabel">Dest. Y</span>. Wenn du mit der Erfassung der Passpunkte zufrieden bist, gehe zu <span class="menuselection">File ‣ Start georeferencing</span>. Das Bild wird nun mit Hilfe der Passpunkte entzerrt.</p></li>
+<li><p>Drag and drop the <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> as Base Map from the <span class="guilabel">XYZ Tiles</span> dropdown at the bottom of the Browser panel to verify the georeferenced layer. To set the transparency, click on the <span class="guilabel">Open layer styling panel</span> icon  and select <span class="guilabel">Transparency</span> tab. Set the transparency to <code class="docutils literal notranslate"><span class="pre">40</span> <span class="pre">%</span></code>. Now the georeferenced image must overlay with the basemap outline.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1610.png" class="align-center" src="../../_images/1610.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>Nachdem der Prozess abschlossen ist, wird der georeferenzierte Layer in QGIS geladen. Die Georeferenzierung ist damit abgeschlossen.</p></li>
+<li><p>If the georeference needs more fine-tuning, we can start from the collected GCP points. Browse the <code class="docutils literal notranslate"><span class="pre">1870_southern_india_modified.tif</span></code> file location. You can find an additional file, <code class="docutils literal notranslate"><span class="pre">1870_southern_india_modified.tif.points</span></code>. This file will contain the GCP points information.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/1711.png" class="align-center" src="../../_images/1711.png" />
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Bemerkung</p>
-<p>Die Passpunkte werden auch im QGIS Hauptarbeitsbereich angezeigt. Wenn du sie entfernen möchstest, gehe zum Fenster <span class="guilabel">Georeferencer</span> und wähle <span class="menuselection">File ‣ Reset Georeferencer</span>.</p>
-</div>
 <ol class="arabic simple" start="18">
-<li><p>Es ist sinnvoll, das Ergebnis zu überprüfen. Wie können wir beurteilen, ob die Georeferenzierung genau war? In diesem Fall können wie die Landesgrenze als shape-Datei von einer vertrauenswürdigen Quelle wie z.B. Natural Earth dataset herunterladen und sie als Vergleich heranziehen. Du wirst bemerken, dass die Grenze gut passt. Es gibt einige Abweichungen, die weiter verringert werden können indem man mehr Passpunkte erzeugt, die Transforamtionsparameter ändert oder ein anderes geodätisches Datum verwendet.</p></li>
+<li><p>Open the georeferencing tool in QGIS, click <span class="menuselection">File ‣ Load GCP Points</span>, and select the <code class="docutils literal notranslate"><span class="pre">1870_southern_india_modified.tif.points</span></code>. This will load the GCP created previously. Then load the <code class="docutils literal notranslate"><span class="pre">1870_southern_india_modified.tif</span></code> to fine-tune your work.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/189.png" class="align-center" src="../../_images/189.png" />
@@ -371,7 +371,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Dez. 20, 2021.<br/>
+      Zuletzt aktualisiert am Jan. 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

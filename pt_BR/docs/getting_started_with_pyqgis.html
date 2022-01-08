@@ -220,25 +220,25 @@
 <ol class="arabic simple" start="3">
 <li><p>Selecione a ferramenta <span class="guilabel">Identify</span> e clique em qualquer um dos pontos para examinar os atributos disponíveis. Você vai ver que o nome do aeroporto, tem 3 algarismos e estão contidas nos atributos <code class="docutils literal notranslate"><span class="pre">name``e</span> <span class="pre">``iata_code</span></code> respectivamente.</p></li>
 </ol>
-<img alt="../_images/376.png" class="align-center" src="../_images/376.png" />
+<img alt="../_images/375.png" class="align-center" src="../_images/375.png" />
 <ol class="arabic simple" start="4">
 <li><p>QGIS fornece um console built-in onde você pode digitar comandos Python e obter o resultado. Este console é uma ótima maneira de aprender scripting e também para fazer o processamento de dados rápidamente. Abra o <span class="guilabel">Python Console</span> atraves do <span class="menuselection">Plugins ‣ Python Console</span>.</p></li>
 </ol>
-<img alt="../_images/448.png" class="align-center" src="../_images/448.png" />
+<img alt="../_images/447.png" class="align-center" src="../_images/447.png" />
 <ol class="arabic simple" start="5">
 <li><p>Você verá um novo painel aberto na parte inferior do QGIS. Você verá um prompt como <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> na parte inferior onde você pode digitar comandos. Para interagir com o ambiente QGIS, devemos usar avariável  <code class="docutils literal notranslate"><span class="pre">iface</span></code>. Para acessar a camada ativa no momento no QGIS, você pode digitar o seguinte e pressione <kbd class="kbd docutils literal notranslate">Enter</kbd>. Este comando obtém a referência para a camada atualmente carregada e armazena na variável <code class="docutils literal notranslate"><span class="pre">layer</span></code>.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/549.png" class="align-center" src="../_images/549.png" />
+<img alt="../_images/548.png" class="align-center" src="../_images/548.png" />
 <ol class="arabic simple" start="6">
 <li><p>Há uma função útil chamada <code class="docutils literal notranslate"><span class="pre">dir()</span></code> no python que mostra todos os métodos disponíveis para qualquer objeto. Isso é útil quando você não tem certeza do quais funções estão disponíveis para o objeto. Execute o seguinte comando para ver quais as operações que podemos fazer sobre a variável <code class="docutils literal notranslate"><span class="pre">layer</span></code>.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/647.png" class="align-center" src="../_images/647.png" />
+<img alt="../_images/646.png" class="align-center" src="../_images/646.png" />
 <ol class="arabic simple" start="7">
 <li><p>Você verá uma longa lista de funções disponíveis. Por agora, vamos usar uma função chamada <code class="docutils literal notranslate"><span class="pre">getFeatures()</span></code> que recebe a referência a todas as características de uma camada. No nosso caso, cada recurso será um ponto que representa um aeroporto. Você pode digitar o seguinte comando para percorrer cada um dos recursos na camada atual. Certifique-se de adicionar 2 espaços antes de digitar a segunda linha.</p></li>
 </ol>
@@ -246,7 +246,7 @@
   <span class="nb">print</span> <span class="n">f</span>
 </pre></div>
 </div>
-<img alt="../_images/747.png" class="align-center" src="../_images/747.png" />
+<img alt="../_images/746.png" class="align-center" src="../_images/746.png" />
 <ol class="arabic simple" start="8">
 <li><p>Como você verá na saída, cada linha contém uma referência a um recurso dentro da camada. A referência ao recurso é armazenada na variável <code class="docutils literal notranslate"><span class="pre">f</span></code>. Podemos usar a variável <code class="docutils literal notranslate"><span class="pre">f</span></code> para acessar os atributos de cada recurso. Digite o seguinte para imprimir o <code class="docutils literal notranslate"><span class="pre">iata_code</span></code> e o <code class="docutils literal notranslate"><span class="pre">name</span></code>  para cada recurso aeroporto.</p></li>
 </ol>
@@ -254,7 +254,7 @@
   <span class="nb">print</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;iata_code&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<img alt="../_images/846.png" class="align-center" src="../_images/846.png" />
+<img alt="../_images/845.png" class="align-center" src="../_images/845.png" />
 <ol class="arabic simple" start="9">
 <li><p>Então agora você sabe como acessar programaticamente o atributo de cada recurso em uma camada. Agora, vamos ver como podemos acessar as coordenadas do recurso. As coordenadas de um recurso vetorial podem ser acessadas chamando a função  <code class="docutils literal notranslate"><span class="pre">geometry()</span></code>. Esta função retorna um objeto de geometria que pode armazenar na variável <code class="docutils literal notranslate"><span class="pre">geom</span></code>. Você pode executar a função <code class="docutils literal notranslate"><span class="pre">asPoint()</span></code> no objeto de geometria para obter as  coordenadas x e y do ponto. Se o recurso é uma linha ou um polígono, você pode usar as funções <code class="docutils literal notranslate"><span class="pre">asPolyline()</span></code> ou <code class="docutils literal notranslate"><span class="pre">asPolygon()</span></code> . Digite o seguinte código e pressione <kbd class="kbd docutils literal notranslate">Enter</kbd> para ver a coordenadas x e y de cada recurso.</p></li>
 </ol>
@@ -263,7 +263,7 @@
   <span class="nb">print</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/946.png" class="align-center" src="../_images/946.png" />
+<img alt="../_images/945.png" class="align-center" src="../_images/945.png" />
 <ol class="arabic simple" start="10">
 <li><p>O que se poderia fazer para obter apenas a coordenada <code class="docutils literal notranslate"><span class="pre">x</span></code> do recurso? Você pode chamar os função <code class="docutils literal notranslate"><span class="pre">x()</span></code> sobre o objeto de ponto e obter sua coordenada x.</p></li>
 </ol>
@@ -326,7 +326,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Última atualização em dez. 20, 2021.<br/>
+      Última atualização em jan. 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

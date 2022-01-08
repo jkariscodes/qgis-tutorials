@@ -231,12 +231,12 @@
 <ol class="arabic simple" start="3">
 <li><p>Le calque OpenStreetMap est désormais charge sur QGIS. Remarquez le système de coordonnées de reference pour cette couche (SCR) : EPSG 3857 Pseudo Mercator. Il est important de le noter, en effet les coordonnées que nous allons déduire de ce calque seront exprimées dans le même système de coordonnées.</p></li>
 </ol>
-<img alt="../_images/358.png" class="align-center" src="../_images/358.png" />
+<img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
 <ol class="arabic simple" start="4">
 <li><p>La prochaine étape sera de déterminer la position de la zone que nous essayons de géolocaliser. Vous pouvez vous servir des outils Pan et Zoom pour localiser la zone sur le calque OpenStreetMap.
 Voici une autre méthode qui pourra vous etre utile : l’image téléchargée représente Washington Square Park a New-York, nous connaissons donc sa position. Il suffit de charger la page Wikipedia de cet endroit : les coordonnées géographiques y sont mentionnées.</p></li>
 </ol>
-<img alt="../_images/434.png" class="align-center" src="../_images/434.png" />
+<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
 <ol class="arabic simple" start="5">
 <li><p>Vous pouvez remarquer que les coordonnées sont exprimées en Degrés/Minutes/Secondes et Latitude/Longitude. Nous devons transformer ces unités pour obtenir des chiffres compatibles avec la projection Mercator.
 Pour ce faire vous pourrez utiliser l’outil <strong>cs2cs</strong>. Cet outil est déjà installe dans votre système si vous avez installe QGIS avec OSGeo4W, ou bien si le logiciel tourne sous Linux ou Mac.
@@ -246,7 +246,7 @@ Si vous êtes sous Windows, ouvrez une fenêtre de commandes et tapez « cs2cs�
 <p class="admonition-title">Note</p>
 <p>MacOS users can locate the cs2cs tool at /Library/Frameworks/PROJ.Framework/Programs/cs2cs</p>
 </div>
-<img alt="../_images/535.png" class="align-center" src="../_images/535.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p>Maintenant que vous avez vérifie la présence de l’outil cs2cs dans votre système, il est temps de transformer ces chiffres en coordonnées Mercator. Afin d’utiliser l’outil cs2cs vous devrez spécifier un <span class="guilabel">source</span> et une <span class="guilabel">destination</span> SCR. La définition du SCR peut être un <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 string</a>  ou un <a class="reference external" href="http://www.epsg-registry.org/">EPSG code</a>. Nous allons nous appuyer ici sur le code ESPG que nous connaissons grâce aux données d’entree/sortie du SRC. Le moyen le plus simple est d’inscrire les coordonnes directement dans la ligne de commande. Les coordonnées doivent être inscrites selon l’ordre “X Y”, soit “Longitude Latitude”. Entrez la commande suivante dans la fenêtre puis appuyez sur Entrée. Il est possible de remplacer les guillemets ( ») par un double (\). Après avoir valide avec Entrée, vous verrez apparaitre les coordonnes X Y en ESPG 3857 SRC.</p></li>
 </ol>
@@ -259,20 +259,20 @@ Si vous êtes sous Windows, ouvrez une fenêtre de commandes et tapez « cs2cs�
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo -73d59&#39;51 40d43&#39;51 | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 </pre></div>
 </div>
-<img alt="../_images/634.png" class="align-center" src="../_images/634.png" />
+<img alt="../_images/633.png" class="align-center" src="../_images/633.png" />
 <ol class="arabic simple" start="7">
 <li><p>Copiez alors les coordonnées obtenues et revenez dans QGIS. Tout en bas de la fenêtre QGIS repérez le champ  Coordonnées. Entrez-y les coordonnes au format X,Y et validez avec Entrée. Vous verrez alors la carte se déformer un peu. Pour zoomer, sélectionnez alors l’échelle 1:2500 dans la commande située juste a cote du champ de Coordonnées et validez avec Entrée.</p></li>
 </ol>
-<img alt="../_images/734.png" class="align-center" src="../_images/734.png" />
+<img alt="../_images/733.png" class="align-center" src="../_images/733.png" />
 <ol class="arabic simple" start="8">
 <li><p>Voila! Vous arrivez maintenant a visualiser Washington Square Park sur votre écran. Il faut maintenant géolocaliser l’image.
 Lancer le <strong>Georeferencer</strong> depuis <span class="menuselection">Raster ‣ Georeferencer ‣ Georeferencer</span>. Si vous ne voyez pas cette commande vous devrez l’activer en faisant <span class="guilabel">Georeferencer GDAL</span> plugin from <span class="menuselection">Plugins ‣ Manage and install Plugins ‣ Installed</span>.</p></li>
 </ol>
-<img alt="../_images/833.png" class="align-center" src="../_images/833.png" />
+<img alt="../_images/832.png" class="align-center" src="../_images/832.png" />
 <ol class="arabic simple" start="9">
 <li><p>Dans le menu <span class="guilabel">Georeferencer</span> window, go to <span class="menuselection">File ‣ Open raster</span>. Retrouvez le fichier JPG enregistre et cliquez sur</p></li>
 </ol>
-<img alt="../_images/934.png" class="align-center" src="../_images/934.png" />
+<img alt="../_images/933.png" class="align-center" src="../_images/933.png" />
 <ol class="arabic simple" start="10">
 <li><p>Dans le  <span class="guilabel">Coordinate Reference System Selector</span>, sélectionnez  <span class="guilabel">EPSG:3857 Pseudo Mercator</span></p></li>
 </ol>
@@ -313,7 +313,7 @@ Entrez 0 dans <span class="guilabel">No data value</span>. Aussi, dans <span cla
 <ol class="arabic simple" start="19">
 <li><p>Votre image est maintenant parfaitement superposée a la couche de base.</p></li>
 </ol>
-<img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
+<img alt="../_images/1920.png" class="align-center" src="../_images/1920.png" />
 </section>
 </section>
 
@@ -339,7 +339,7 @@ Entrez 0 dans <span class="guilabel">No data value</span>. Aussi, dans <span cla
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Mis à jour le déc. 20, 2021.<br/>
+      Mis à jour le janv. 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

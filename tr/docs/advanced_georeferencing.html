@@ -231,11 +231,11 @@
 <ol class="arabic simple" start="3">
 <li><p>Artık OpenStreetMap katmanı QGIS’e eklenmiş oldu. Katmanın Koordinat Referans Sistemine (CRS) dikkat edin, EPSG 3857 Pseudo Mercator olarak ayarlanmış durumda. Bu çok önemli çünkü bu katmandan elde edeceğimiz koordinatlar bu sistemde olacak.</p></li>
 </ol>
-<img alt="../_images/358.png" class="align-center" src="../_images/358.png" />
+<img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
 <ol class="arabic simple" start="4">
 <li><p>Şimdiki adımda coğrafi referanslama yapacağım alanı tespit etmemiz gerekiyor. Bunu yakınlaştırma ve kaydırma araçlarıyla yapabiliriz ama yeri gelmişken ileride size yardımcı olabilecek başka bir araç kullanacağız. İndirdiğimiz görüntünün New York’ta bulunan Washington Square Park’a ait olduğunu biliyoruz. Eğer wikipedia sitesinde bu parkı aratırsanız koordinatları oradan elde edebilirsiniz.</p></li>
 </ol>
-<img alt="../_images/434.png" class="align-center" src="../_images/434.png" />
+<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
 <ol class="arabic simple" start="5">
 <li><p>Dikkat ederseniz listelenen koordinatlar Derece/Dakika/saniye cinsinden Enlem ve Boylam değerleri. Fakat katmanımız Mercator projeksiyonunda olduğundan parkın Mercator koordinatlarına ihtiyacımız olacak. Burada <strong>cs2cs</strong> komut satırı aracı devreye giriyor. Eğer QGIS’i OSGeo4W yükleyicisi ile indirdiyseniz, araç sisteminizde zaten yüklüdür. Linux ve Mac sürümlerinde de yüklü olarak gelmekte. Bir terminal penceresi açıp <code class="docutils literal notranslate"><span class="pre">cs2cs</span></code> yazarak yüklü olup olmadığını kontrol edebilirsiniz. Windows kullanıcıları  <span class="menuselection">Start ‣ OSGeo4W ‣ MSYS</span> ile terminal penceresi açabilirler.</p></li>
 </ol>
@@ -243,7 +243,7 @@
 <p class="admonition-title">Not</p>
 <p>MacOS users can locate the cs2cs tool at /Library/Frameworks/PROJ.Framework/Programs/cs2cs</p>
 </div>
-<img alt="../_images/535.png" class="align-center" src="../_images/535.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p>cs2cs aracının yüklendiğinden emin olduktan sonra enlem ve boylamlarımızı Mercator koordinatlarına dönüştürebiliriz. Aracı çalıştırmak için bir <span class="guilabel">kaynak</span>  ve bir <span class="guilabel">hedef</span> CRS sağlamamız gerekiyor. CRS tanımını <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">PROJ4 ifadesi</a> veya <a class="reference external" href="http://www.epsg-registry.org/">EPSG kodu</a> olarak verebiliriz. EPSG kodlarını zaten bildiğimiz için bunları kullanacağız. Aracın koordinatları <cite>X Y</cite> sırasıyla aldığını dikkate alarak ‘Boylam Enlem’ olarak giriş yapacağız. Aşağıdaki komutu terminale yazarak enter tuşuna basın. Dikkat ederseniz tırnak işaretlerini (”) ters taksim işareti ile giriş yapıyoruz. Enter tuşuna basınca aracın koordinatları işleyerek EPSG 3857 koordinat referans sisteminde X Y değerlerini ekrana getirdiğini göreceksiniz.</p></li>
 </ol>
@@ -256,19 +256,19 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo -73d59&#39;51 40d43&#39;51 | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 </pre></div>
 </div>
-<img alt="../_images/634.png" class="align-center" src="../_images/634.png" />
+<img alt="../_images/633.png" class="align-center" src="../_images/633.png" />
 <ol class="arabic simple" start="7">
 <li><p>Üretilen koordinatları kopyalayarak QGIS’e geçiş yapın. QGIS penceresinin alt kısmında Koordinatlar yazan bir metin kutusu göreceksiniz. Buraya koordinatları girip ‘Enter’ yapın. Haritanın biraz kaydığını ama yaklaşma olmadığını göreceksiniz. Parka yaklaşmak için hemen koordinatları girdiğiniz alanın hemen yanından 1:2500 ölçeğini seçip ‘Enter’ yapın.</p></li>
 </ol>
-<img alt="../_images/734.png" class="align-center" src="../_images/734.png" />
+<img alt="../_images/733.png" class="align-center" src="../_images/733.png" />
 <ol class="arabic simple" start="8">
 <li><p>Ve işte! Washington Square Park artık ekranınızda. <strong>Georeferencer</strong> eklentisini <cite>Raster –&gt; Georeferencer –&gt; Georeferencer</cite> adımlarını takip ederek başlatın. Eğer eklentiyi göremiyorsanız <span class="guilabel">Georeferencer GDAL</span> etkinleştirmesi yapmanız gerekli. Onu da buradan yapabilirsiniz <span class="menuselection">Plugins ‣ Manage and install Plugins ‣ Installed</span>.</p></li>
 </ol>
-<img alt="../_images/833.png" class="align-center" src="../_images/833.png" />
+<img alt="../_images/832.png" class="align-center" src="../_images/832.png" />
 <ol class="arabic simple" start="9">
 <li><p><span class="guilabel">Georeferencer</span> penceresinden <span class="menuselection">File ‣ Open raster</span> menüsüne gidin. İndirdiğiniz JPG görüntüsünğ seçip <span class="guilabel">Open</span> tıklayın.</p></li>
 </ol>
-<img alt="../_images/934.png" class="align-center" src="../_images/934.png" />
+<img alt="../_images/933.png" class="align-center" src="../_images/933.png" />
 <ol class="arabic simple" start="10">
 <li><p><span class="guilabel">Coordinate Reference System Selector</span> kısmından <span class="guilabel">EPSG:3857 Pseudo Mercator</span> seçin.</p></li>
 </ol>
@@ -308,7 +308,7 @@
 <ol class="arabic simple" start="19">
 <li><p>Şimdi georeferanslanmış imajınızı altlık katman üzerine görebilirsiniz.</p></li>
 </ol>
-<img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
+<img alt="../_images/1920.png" class="align-center" src="../_images/1920.png" />
 </section>
 </section>
 
@@ -334,7 +334,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Son güncelleme: Ara 20, 2021.<br/>
+      Son güncelleme: Oca 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

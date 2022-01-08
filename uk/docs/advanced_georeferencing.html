@@ -230,11 +230,11 @@
 <ol class="arabic simple" start="3">
 <li><p>Тепер у вас є шар OpenStreetMap завантажений в QGIS. Вкажіть систему координат  (СК) для вашого шару. Вибрана EPSG 3857 Pseudo Mercator. Це важливо вибрати, оскільки координати, які ми беремо з цього шару, будуть в цій СК.</p></li>
 </ol>
-<img alt="../_images/358.png" class="align-center" src="../_images/358.png" />
+<img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
 <ol class="arabic simple" start="4">
 <li><p>Тепер задачею є знайти загальні околиці області, яку ми збираємося геоприв’язувати. Ви можете користуватися лише прокруткою і збільшенням аби знайти цю місцевість на  шарі OpenStreetMap. Але ми можемо скористатися цією можливістю аби продемонструвати інший інструмент, який може допомогти в майбутньому. Ми знаємо, що зображення які ми завантажили є парком Вашингтон-сквер в Нью Йорку. Якщо ви пошукаєте це місце, ви зможете знайти сторінку вікіпедії про нього. Координати парку вказані там.</p></li>
 </ol>
-<img alt="../_images/434.png" class="align-center" src="../_images/434.png" />
+<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
 <ol class="arabic simple" start="5">
 <li><p>Ви помітите, що ті координати вказані Градусах/Хвилинах/Секундах і є широтою і довготою. Але оскільки наш шар створений в проекції Меркатор, нам потрібні координати Меркатора, щоб знайти парк. Ось де інструмент командної строки, що називається <strong>cs2cs</strong> буде корисним. Якщо ви встановили  QGIS за допомогою інсталятору OSGeo4W, ви вже маєте його встановленим у вашій системі. У системах Linux і Mac також, він попередньо встановлений разом з QGIS. Запустіть вікно терміналу і наберіть <code class="docutils literal notranslate"><span class="pre">cs2cs</span></code>, щоб перевірити його наявність. Користувачі Windows можуть знайти термінал в меню <span class="menuselection">Start ‣ OSGeo4W ‣ MSYS</span>.</p></li>
 </ol>
@@ -242,7 +242,7 @@
 <p class="admonition-title">Примітка</p>
 <p>MacOS users can locate the cs2cs tool at /Library/Frameworks/PROJ.Framework/Programs/cs2cs</p>
 </div>
-<img alt="../_images/535.png" class="align-center" src="../_images/535.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p>Після того, як ви переконалися, що інструмент cs2cs існує у вашій системі, час перетворити відомі нам Широту і Довготу в координати Меркатора. Відповідно до того, як працює цей інструмент вам необхідно вказати <span class="guilabel">source</span> і <span class="guilabel">destination</span> СК. Визначення СК може бути <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">рядок формату PROJ4</a> або <a class="reference external" href="http://www.epsg-registry.org/">код EPSG</a>. Оскільки ми вже знаємо код EPSG для початкової і вихідної СК, ми використаємо їх. Найпростішим способом використання цього інструменту це задати вхідні координати в командний рядок самостійно. Зверніть увагу, що інструмент приймає координати в порядку <cite>X Y</cite>, тому нам потрібно ввести <cite>Довготу Широту</cite>. ведіть наступну команду в термінал і натисніть Enter. Зверніть увагу, що ми повинні перед лапками (») вказати зворотній слеш (\). Коли ви натиснете Enter, ви побачите як оброблюються ваші координати і виводяться на екран вихідні X Y координати в EPSG 3857 СК.</p></li>
 </ol>
@@ -255,7 +255,7 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo -73d59&#39;51 40d43&#39;51 | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 </pre></div>
 </div>
-<img alt="../_images/634.png" class="align-center" src="../_images/634.png" />
+<img alt="../_images/633.png" class="align-center" src="../_images/633.png" />
 <ol class="arabic simple" start="7">
 <li><p>Copy these coordinates and switch to QGIS. At the bottom of the QGIS window,
 you will see a textbox labeled Coordinates. Enter the coordinates there in
@@ -263,7 +263,7 @@ X,Y form. Press Enter.  You will see the map shift a bit, but not zoom. To
 zoom to the area, select 1:2500 scale from the Scale drop-down next to the
 Coordinate box and press Enter.</p></li>
 </ol>
-<img alt="../_images/734.png" class="align-center" src="../_images/734.png" />
+<img alt="../_images/733.png" class="align-center" src="../_images/733.png" />
 <ol class="arabic simple" start="8">
 <li><p>Voila! you now see Washington Square Park area on your canvas. Now it is
 time to start georeferencing. Launch the <strong>Georeferencer</strong> from
@@ -272,12 +272,12 @@ see that menu item, you will need to enable the <span class="guilabel">Georefere
 GDAL</span> plugin from <span class="menuselection">Plugins ‣ Manage and install Plugins ‣
 Installed</span>.</p></li>
 </ol>
-<img alt="../_images/833.png" class="align-center" src="../_images/833.png" />
+<img alt="../_images/832.png" class="align-center" src="../_images/832.png" />
 <ol class="arabic simple" start="9">
 <li><p>In the <span class="guilabel">Georeferencer</span> window, go to <span class="menuselection">File ‣ Open
 raster</span>. Navigate to the downloaded JPG file and click <span class="guilabel">Open</span>.</p></li>
 </ol>
-<img alt="../_images/934.png" class="align-center" src="../_images/934.png" />
+<img alt="../_images/933.png" class="align-center" src="../_images/933.png" />
 <ol class="arabic simple" start="10">
 <li><p>In the <span class="guilabel">Coordinate Reference System Selector</span>,
 choose <span class="guilabel">EPSG:3857 Pseudo Mercator</span></p></li>
@@ -337,7 +337,7 @@ add 255 as the transparent pixels for each band and enter 100 as the
 <ol class="arabic simple" start="19">
 <li><p>Тепер ви бачите, що ваше геоприв’язане зображення красиво перекриває базовий шар.</p></li>
 </ol>
-<img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
+<img alt="../_images/1920.png" class="align-center" src="../_images/1920.png" />
 </section>
 </section>
 
@@ -363,7 +363,7 @@ add 255 as the transparent pixels for each band and enter 100 as the
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Востаннє оновлено груд. 20, 2021.<br/>
+      Востаннє оновлено січ. 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

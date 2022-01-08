@@ -231,11 +231,11 @@
 <ol class="arabic simple" start="3">
 <li><p>Sekarang anda memiliki layer OpenStreetMap terbuka di QGIS. Perhatikan CRS untuk layer ini. (CRS) ter-set pada EPSG 3857 Pseudo Mercator. Ini penting untuk diperhatikan, karena koordinat yang kita ambil dari layer ini akan berada di CRS ini.</p></li>
 </ol>
-<img alt="../_images/358.png" class="align-center" src="../_images/358.png" />
+<img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
 <ol class="arabic simple" start="4">
 <li><p>Sekarang tugas anda untuk mencari daerah sekeliling area yang akan kita coba untuk kita lakukan georeferensi. Anda dapat menggunakan Pan dan zoom untuk mencari lokasi area tersebut pada layer OpenStreetMap. Tapi kita dapat mengambil kesempatan ini untuk mendemonstrasikan tool lain mungkin akan membantu anda di masa yang akan datang. Kita tahu bahwa citra yang kita unduh adalah Washington Square Park di New York. Jika anda mencari tempat tersebut, anda akan bisa mencari lokasi halaman wikipedia pada tempat tersebut. Koordinat untuk taman terdaftar di sana,</p></li>
 </ol>
-<img alt="../_images/434.png" class="align-center" src="../_images/434.png" />
+<img alt="../_images/433.png" class="align-center" src="../_images/433.png" />
 <ol class="arabic simple" start="5">
 <li><p>Anda akan melihat bahwa koordinat dalam DMS atau Degrees/Minute/Second dan Garis Lintang dan Garis Bujur. Tetapi karena layer kita dalam proyeksi Mercator, kita akan membutuhkan koordinat Mercator untuk mencari lokasi taman. Di sini dimana sebuah tool command-line yang bernama <strong>cs2cs</strong> menjadi berguna. Jika anda menginsstall QGIS dari installer OSGEO4W, anda sudah memiliki tool ini pada sistem anda. Pada Linux dan Mac, tool ini sudah masuk dalam kelengkapan QGIS. Luncurkan sebuah jendela terminak dan ketik <code class="docutils literal notranslate"><span class="pre">cs2cs</span></code> untuk memeriksa apakah ini tersedia. Pengguna Window dapat menemukan sebuah terminal pada <span class="menuselection">Start ‣ OSGeo4W ‣ MSYS</span>.</p></li>
 </ol>
@@ -243,7 +243,7 @@
 <p class="admonition-title">Catatan</p>
 <p>Pengguna MacOS dapat temukan cs2cs di /Library/Frameworks/PROJ.Framework/Programs/cs2cs</p>
 </div>
-<img alt="../_images/535.png" class="align-center" src="../_images/535.png" />
+<img alt="../_images/534.png" class="align-center" src="../_images/534.png" />
 <ol class="arabic simple" start="6">
 <li><p>Ketika anda sudah memverifikasi bahwa tool cs2cs ada pada sistem anda, saatnya untuk mengkonversi garis lintang dan bujur menjadi koordinat Mercator. Cara tool ini bekerja adalah anda harus menentukan sebuah CRS <span class="guilabel">source</span> dan <span class="guilabel">destination</span> . Definisi CRS bisa PROJ4 string &lt;<a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">http://trac.osgeo.org/proj/wiki/GenParms</a>&gt;`_ atau sebuah <a class="reference external" href="http://www.epsg-registry.org/">EPSG code</a>. Karena kita sudah tahu kode EPSG untuk input dan output keluar dari CRS, kita akan menggunakan ini. Cara paling sederhana untuk menggunakan tool ini adalah dengan mengsuplai koordinat input pada command line. Perhatikan bahwa tool menerima koordinat dengan urutan <cite>X Y , jadi kita ingin memasukkan `Longitude Latitude</cite> . Masukkan command berikut di terminal dan tekan enter. Lihat bahwa kita perlu untuk keluar dari quotes (&quot;) dengan sebuah backslash (\). Ketika anda tekan enter, anda akan melihat tool untuk memroses koordinat output dan mencetak output koordinat X Y pada EPSG 3857 CRS.</p></li>
 </ol>
@@ -256,19 +256,19 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo -73d59&#39;51 40d43&#39;51 | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 </pre></div>
 </div>
-<img alt="../_images/634.png" class="align-center" src="../_images/634.png" />
+<img alt="../_images/633.png" class="align-center" src="../_images/633.png" />
 <ol class="arabic simple" start="7">
 <li><p>Kopi koordinat ini dan pindah ke QGIS. Pada bagian bawah jendela QGIS, anda akan melihat sebuah kotakteks berlabel koordinat. Masukkan koordinat di sana dengan bentuk X, Y. Tekan Enter, anda akan melihat Peta bergeser sedikit, tapi bukan zoom. Untuk menzoom area, pilih skala 1:2500 dari dropdown skala disebelah kotak koordinat dan tekan enter.</p></li>
 </ol>
-<img alt="../_images/734.png" class="align-center" src="../_images/734.png" />
+<img alt="../_images/733.png" class="align-center" src="../_images/733.png" />
 <ol class="arabic simple" start="8">
 <li><p>Voila! anda sekarang lihat area Washington Square Poark pada kanvas anda. Sekarang waktunya untuk memulai georeferensi. Luncurkan <strong>Georeferencer</strong> dari menuselection:<cite>Raster --&gt; Georeferencer --&gt; Georeferencer</cite> . Jika anda tidak melihat dari menu item, anda akan perlu mengaktifkan plugin <span class="guilabel">Georeferencer GDAL</span> dari <span class="menuselection">Plugins ‣ Manage and install Plugins ‣ Installed</span>.</p></li>
 </ol>
-<img alt="../_images/833.png" class="align-center" src="../_images/833.png" />
+<img alt="../_images/832.png" class="align-center" src="../_images/832.png" />
 <ol class="arabic simple" start="9">
 <li><p>Pada jendela <span class="guilabel">Georeferencer</span> , akses <span class="menuselection">File ‣ Open raster</span> . Navigasi ke file JPG yang diunduh dan klik <span class="guilabel">Open</span>.</p></li>
 </ol>
-<img alt="../_images/934.png" class="align-center" src="../_images/934.png" />
+<img alt="../_images/933.png" class="align-center" src="../_images/933.png" />
 <ol class="arabic simple" start="10">
 <li><p>Pada <span class="guilabel">Coordinate Reference System Selector</span> , pilih <span class="guilabel">EPSG:3857 Pseudo Mercator</span></p></li>
 </ol>
@@ -308,7 +308,7 @@
 <ol class="arabic simple" start="19">
 <li><p>Sekarang anda akan melihat gambar tergeoreferensi melapisi layer dasar dengan baik.</p></li>
 </ol>
-<img alt="../_images/1921.png" class="align-center" src="../_images/1921.png" />
+<img alt="../_images/1920.png" class="align-center" src="../_images/1920.png" />
 </section>
 </section>
 
@@ -334,7 +334,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Des 20, 2021.<br/>
+      Terakhir diperbarui pada Jan 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

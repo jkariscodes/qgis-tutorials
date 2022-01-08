@@ -220,26 +220,26 @@
 <ol class="arabic simple" start="3">
 <li><p>Selezionate lo strumento <span class="guilabel">Identifica elemento</span>  e fate click su uno dei punti per esaminare gli attributi che abbiamo a disposizione. Vedrete che il nome dell’aeroporto e il suo codice di 3 lettere sono contenuti, rispettivamente,  negli attributi <code class="docutils literal notranslate"><span class="pre">name</span></code> e <code class="docutils literal notranslate"><span class="pre">iata_code</span></code>.</p></li>
 </ol>
-<img alt="../_images/376.png" class="align-center" src="../_images/376.png" />
+<img alt="../_images/375.png" class="align-center" src="../_images/375.png" />
 <ol class="arabic simple" start="4">
 <li><p>QGIS fornisce una console residente dove potete scrivere comandi in Python e verificare il risultato. Questa console è una strada privilegiata per apprendere a scrivere gli script e per effettuare delle rapide elaborazioni di dati.
 Apriamo la <span class="guilabel">Python Console</span>  andando su <span class="menuselection">Plugins ‣ Console Python</span>.</p></li>
 </ol>
-<img alt="../_images/448.png" class="align-center" src="../_images/448.png" />
+<img alt="../_images/447.png" class="align-center" src="../_images/447.png" />
 <ol class="arabic simple" start="5">
 <li><p>Vedrete comparire un nuovo pannello che si aprirà alla base della finestra principale di QGIS. Noterete un prompt fatto così <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> alla base del pannello, dove si digitano i comandi. Per interagire con l’ambiente QGIS dobbiamo usare la variabile <code class="docutils literal notranslate"><span class="pre">iface</span></code>.  Per avere accesso al layer attualmente attivo in QGIS, dovete digitare la riga di codice che segue e quindi premere il tasto <kbd class="kbd docutils literal notranslate">Enter</kbd>. Questo comando porta il controllo sul layer corrente e lo memorizza nella varabile <a href="#id1"><span class="problematic" id="id2">``</span></a>layer`.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/549.png" class="align-center" src="../_images/549.png" />
+<img alt="../_images/548.png" class="align-center" src="../_images/548.png" />
 <ol class="arabic simple" start="6">
 <li><p>Esiste in Python una comoda funzione chiamata <code class="docutils literal notranslate"><span class="pre">dir()</span></code> che vi mostra tutti i metodi a disposizione per ciascun oggetto. Questo è  utile quando non avete chiaro quali funzioni sono a disposizione per un dato oggetto. Lanciate il comando che segue per vedere quali operazioni possiamo fare sulla variabile  <code class="docutils literal notranslate"><span class="pre">layer</span></code> .</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/647.png" class="align-center" src="../_images/647.png" />
+<img alt="../_images/646.png" class="align-center" src="../_images/646.png" />
 <ol class="arabic simple" start="7">
 <li><p>Vedrete una lunga lista di funzioni disponibili. Per ora, useremo una funzione chiamata <code class="docutils literal notranslate"><span class="pre">getFeatures()</span></code> che vi darà il controllo su tutte le geometrie del layer. Nel nostro caso, ciscun elemento sarà un punto che rappresenta un areoporto. Potete digitare il comando che segue per realizzare un’iterazione di ciascuna delle geometrie presenti nel layer corrente. Assicuratevi di aver battuto 2 spazi prima di digitare la seconda linea di codice.</p></li>
 </ol>
@@ -247,7 +247,7 @@ Apriamo la <span class="guilabel">Python Console</span>  andando su <span class=
   <span class="nb">print</span> <span class="n">f</span>
 </pre></div>
 </div>
-<img alt="../_images/747.png" class="align-center" src="../_images/747.png" />
+<img alt="../_images/746.png" class="align-center" src="../_images/746.png" />
 <ol class="arabic simple" start="8">
 <li><p>Come potete vedere nell’output, ciascuna linea contiene un riferimento ad una geometria presente all’interno del layer. Il riferimento all’elemento è contenuto nella variabile <code class="docutils literal notranslate"><span class="pre">f</span></code>. Possiamo quindi usare la variabile <code class="docutils literal notranslate"><span class="pre">f</span></code> per accedere agli attributi di ciascun elemento. Digitate il comando seguente per stampare il <code class="docutils literal notranslate"><span class="pre">name</span></code>  e lo <code class="docutils literal notranslate"><span class="pre">iata_code</span></code>  per ciascuna geometria rappresentata da un areoporto.</p></li>
 </ol>
@@ -255,7 +255,7 @@ Apriamo la <span class="guilabel">Python Console</span>  andando su <span class=
   <span class="nb">print</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;iata_code&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<img alt="../_images/846.png" class="align-center" src="../_images/846.png" />
+<img alt="../_images/845.png" class="align-center" src="../_images/845.png" />
 <ol class="arabic simple" start="9">
 <li><p>Così, adesso sapete come accedere agli attributi di ciascuna geometria di un layer. Adesso vediamo come possiamo accedere alle coordinate della  geometria. Le coordinate di un elemento vettoriale possono essere ottenute con una chiamata alla funzione  <code class="docutils literal notranslate"><span class="pre">geometry()</span></code> . Questa funzione restituisce un oggetto geometrico che noi possiamo depositare nella variabile  <code class="docutils literal notranslate"><span class="pre">geom</span></code>. Potete lanciare la funzione <code class="docutils literal notranslate"><span class="pre">asPoint()</span></code> per quegli oggetti che restituiscono le coordinate X e Y di un punto. Nel caso in cui la geometria fosse una linea o un poligono, dovreste usare, rispettivamente, le funzioni <code class="docutils literal notranslate"><span class="pre">asPolyline()</span></code> e <code class="docutils literal notranslate"><span class="pre">asPolygon()</span></code>. Scrivete il codice seguente al prompt e premete <kbd class="kbd docutils literal notranslate">Enter</kbd>  per vedere le coordinate X e Y di ciascun elemento.</p></li>
 </ol>
@@ -264,7 +264,7 @@ Apriamo la <span class="guilabel">Python Console</span>  andando su <span class=
   <span class="nb">print</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/946.png" class="align-center" src="../_images/946.png" />
+<img alt="../_images/945.png" class="align-center" src="../_images/945.png" />
 <ol class="arabic simple" start="10">
 <li><p>Che fare nel caso in cui desiderassimo conoscere la sola coordinata  <code class="docutils literal notranslate"><span class="pre">x</span></code>  del punto?
 Possiamo chiamare la funzione <code class="docutils literal notranslate"><span class="pre">x()</span></code> sull’oggetto punto e ottenere la sua coordinata X.</p></li>
@@ -328,7 +328,7 @@ Possiamo chiamare la funzione <code class="docutils literal notranslate"><span c
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento dic 20, 2021.<br/>
+      Ultimo aggiornamento gen 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

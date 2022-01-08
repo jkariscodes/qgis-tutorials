@@ -238,49 +238,49 @@
 <li><p>O primeiro passo na análise de sobreposição é converter cada camada de dados em Raster. Uma consideração importante é que todos os rasters devem ter a mesma extensão. Usaremos a camada `` limite ‘’ como extensão para todos os rasters. Vá para: menuselection: <cite>Processar -&gt; Caixa de Ferramentas</cite>. Pesquise e localize o algoritmo: menuelection: <cite>GDAL -&gt; Conversão de vetor -&gt; Converter vetor para raster (rasterizar)</cite> <a href="#id1"><span class="problematic" id="id2">`</span></a>. Clique duas vezes para iniciá-lo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/250.png" class="align-center" src="../../_images/250.png" />
+<div><img alt="../../_images/249.png" class="align-center" src="../../_images/249.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Na caixa de diálogo: guilabel: <cite>Converter vetor para raster (rasterizar)</cite>, selecione <code class="docutils literal notranslate"><span class="pre">roads</span></code> como a: guilabel: <cite>Camada de entrada</cite>. Queremos criar um raster de saída em que os valores de pixel sejam 1 onde há uma estrada e 0 onde não há estradas. Digite `` 1`` como o: guilabel: <cite>Um valor fixo to burn</cite>. As camadas de entrada estão em um CRS projetado métrico. Selecione <code class="docutils literal notranslate"><span class="pre">Unidades</span> <span class="pre">georreferenciadas</span></code> como: guilabel: <cite>Unidades de tamanho da saída</cite>. Definiremos a resolução do Raster de saída como 15 metros. Selecione `` 15`` como ambos: guilabel: <cite>Largura / resolução horizontal</cite> e: guilabel:` Altura / resolução vertical`. Em seguida, clique no botão: guilabel: <cite>…</cite> ao lado de: guilabel: <cite>Extensão da saída</cite> e selecione` <cite>boundary`</cite> para: guilabel:` Usar extensão da camada`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/334.png" class="align-center" src="../../_images/334.png" />
+<div><img alt="../../_images/330.png" class="align-center" src="../../_images/330.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Role para baixo e clique no botão de seta no: guilabel: <cite>Atribua um valor sem dados específicado às bandas de saída</cite>. Esse campo agora deve ser definido como <code class="docutils literal notranslate"><span class="pre">Não</span> <span class="pre">definido</span></code>. Isso é importante porque quando a calculadora raster (que usaremos mais tarde) encontra um pixel com valor não definido em qualquer camada, ela define a saída como não definido, resultando em uma saída incorreta. Defina o raster de saída: guilabel: <cite>Rasterizado</cite> como` <cite>raster_roads.tif`</cite> e clique em: guilabel:` Executar`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/416.png" class="align-center" src="../../_images/416.png" />
+<div><img alt="../../_images/415.png" class="align-center" src="../../_images/415.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Once the processing finishes, you will see a new layer <span class="guilabel">raster_roads</span> loaded in the <span class="guilabel">Layers</span> panel. The default styling will show pixels with roads as white and others as black. We want to convert other 4 vector layers to rasters as well. Rather than running the rasterize algorithm one-by-one, we can use the built-in batch-processing functionality to convert them all at once. See <a class="reference internal" href="batch_processing.html"><span class="doc">Batch Processing using Processing Framework (QGIS3)</span></a> tutorial to learn more about batch processing. Right-click the <code class="docutils literal notranslate"><span class="pre">Rasterize</span> <span class="pre">(vector</span> <span class="pre">to</span> <span class="pre">raster)</span></code> algorithm and select <span class="guilabel">Execute as Batch Process</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/517.png" class="align-center" src="../../_images/517.png" />
+<div><img alt="../../_images/516.png" class="align-center" src="../../_images/516.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Na caixa de diálogo: guilabel: <cite>Processamento em lote</cite>, clique no botão: guilabel:` … <cite>na primeira linha da coluna: guilabel:</cite> Camada de entrada`. Selecione as camadas `` boundary``, `` protected_regions``, `` water_polygons`` e `` water_polylines`` e clique em: guilabel: <cite>OK</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/617.png" class="align-center" src="../../_images/617.png" />
+<div><img alt="../../_images/616.png" class="align-center" src="../../_images/616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>Preencha os parâmetros com os mesmos valores que usamos na camada de estradas. Após preencher a primeira linha do parâmetro, use a opção: menuselection: <cite>Preenchimento automático -&gt; Preencher para baixo</cite> para adicionar o mesmo valor para todas as camadas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/716.png" class="align-center" src="../../_images/716.png" />
+<div><img alt="../../_images/715.png" class="align-center" src="../../_images/715.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>Na última coluna: guilabel: <cite>Rasterized</cite>, clique no botão: guilabel:` … <cite>na primeira linha. Selecione `</cite> Preencher com valores de parâmetros`` como: guilabel: <cite>modo de preenchimento automático</cite> e` <cite>Camada de entrada`</cite> como o: guilabel:` Parâmetro a ser usado`. Clique em: guilabel: <cite>OK</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/816.png" class="align-center" src="../../_images/816.png" />
+<div><img alt="../../_images/815.png" class="align-center" src="../../_images/815.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>Navegue até um diretório no seu computador e nomeie a camada como `` raster_``. A interface de processamento em lote completará automaticamente o nome com o nome da camada e preencherá todas as linhas. Verifique se a caixa: guilabel: <cite>Carregar camadas após a conclusão</cite> está marcada e clique em: guilabel:` OK`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/916.png" class="align-center" src="../../_images/916.png" />
+<div><img alt="../../_images/915.png" class="align-center" src="../../_images/915.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>Quando o processamento terminar, você terá 4 novas camadas raster carregadas no painel: guilabel: <cite>Camadas</cite>. Você notará que temos 2 camadas relacionadas à água - ambas representando água. Podemos mesclá-los para ter uma única camada representando áreas de água na região. Procure e localize: menuelection: <cite>Raster analysis -&gt; Raster calculator</cite> algoritmo na Processing Toolbox. Clique duas vezes para iniciá-lo.</p></li>
@@ -350,7 +350,7 @@
 <li><p>Depois que o processamento terminar, você poderá aplicar o estilo semelhante ao anterior para visualizar melhor os resultados. Se você clicar em torno do raster resultante, verá que é um continuum de valores de 0 a 5000. Para usar esse raster na análise de sobreposição, devemos primeiro classificá-la novamente para criar valores discretos. Abra: menuselection: <cite>Análise de Raster -&gt; Calculadora Raster</cite> novamente.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
+<div><img alt="../../_images/1911.png" class="align-center" src="../../_images/1911.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
 <li><p>Queremos atribuir uma pontuação mais alta aos pixels próximos às estradas. Então, vamos usar o seguinte esquema.</p></li>
@@ -460,7 +460,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Última atualização em dez. 20, 2021.<br/>
+      Última atualização em jan. 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

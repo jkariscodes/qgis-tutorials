@@ -230,31 +230,31 @@ link below:</p>
 <ol class="arabic simple" start="3">
 <li><p>Выберите вкладку <span class="guilabel">Pyramids</span>. Удерживая клавишу <kbd class="kbd docutils literal notranslate">Ctrl</kbd>, выберите все разрешения, предложенные на панели <span class="guilabel">Resolutions</span>. Оставьте остальные опции без изменения и нажмите <span class="guilabel">Build pyramids</span>. Когда процесс будет завершен, нажмите <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/370.png" class="align-center" src="../_images/370.png" />
+<img alt="../_images/369.png" class="align-center" src="../_images/369.png" />
 <ol class="arabic simple" start="4">
 <li><p>Вернувшись в главное окно QGIS, используйте инструмент <span class="guilabel">Zoom</span>, чтобы найти район <em>Хэгли-парк</em> в городе Крайстчерч. Это парк, который мы будем оцифровывать.</p></li>
 </ol>
-<img alt="../_images/444.png" class="align-center" src="../_images/444.png" />
+<img alt="../_images/443.png" class="align-center" src="../_images/443.png" />
 <ol class="arabic simple" start="5">
 <li><p>Перед началом работы нам нужно установить <strong>настройки оцифровки</strong>. Перейдите к пункту <span class="menuselection">Settings ‣ Options…</span>.</p></li>
 </ol>
-<img alt="../_images/545.png" class="align-center" src="../_images/545.png" />
+<img alt="../_images/544.png" class="align-center" src="../_images/544.png" />
 <ol class="arabic simple" start="6">
 <li><p>Выберите вкладку <span class="guilabel">Digitizing</span> в диалоговом окне <span class="guilabel">Options</span>. Установите для режима прилипания <span class="guilabel">Default snap mode</span> значение <span class="guilabel">To vertex and segment</span>. Это позволит прилипать к ближайшей вершине или сегменту. Я также предпочитаю устанавливать порог прилипания <span class="guilabel">Default snapping tolerance</span> и радиус поиска для редактирования вершин <span class="guilabel">Search radius for vertex edits</span> в пикселях, а не в единицах карты. Это гарантирует, что расстояние прилипания не будет зависеть от масштаба. В зависимости от разрешения вашего монитора, вы можете указать подходящее значение. Нажмите <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/643.png" class="align-center" src="../_images/643.png" />
+<img alt="../_images/642.png" class="align-center" src="../_images/642.png" />
 <ol class="arabic simple" start="7">
 <li><p>Теперь мы готовы приступить к оцифровке. Сначала мы создадим слой дорог и оцифруем дороги вокруг парковой зоны. Выберите <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer…</span>. Вместо этого вы можете выбрать для создания <span class="guilabel">New Shapefile Layer…</span>, если вы предпочитаете этот формат. Spatialite - это открытый формат базы данных, аналогичный базе геоданных ESRI. База данных Spatialite хранится в одном файле на вашем жестком диске и может содержать разные типы пространственных (точечных, линейных, полигональных) слоев, а также не-пространственные слои. Это позволяет гораздо проще перемещать данные, по сравнению с кучей shape-файлов. В этом руководстве мы создадим пару полигональных слоев и линейный слой, так что база данных Spatialite подойдет лучше. Вы всегда можете загрузить слой Spatialite и сохранить его как shape-файл или в любом другом желаемом формате.</p></li>
 </ol>
-<img alt="../_images/743.png" class="align-center" src="../_images/743.png" />
+<img alt="../_images/742.png" class="align-center" src="../_images/742.png" />
 <ol class="arabic simple" start="8">
 <li><p>В диалоговом окне <span class="guilabel">New Spatialite Layer</span> нажмите кнопку <span class="guilabel">…</span> и сохраните новую базу данных Spatialite под названием <code class="docutils literal notranslate"><span class="pre">nztopo.sqlite</span></code>. Укажите <span class="guilabel">Layer name</span> <code class="docutils literal notranslate"><span class="pre">Roads</span></code> и выберите  <code class="docutils literal notranslate"><span class="pre">Line</span></code> как <span class="guilabel">Type</span>. Базовая топографическая карта находится в системе координат <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>, так что мы должны выбрать ту же СК для нашего слоя с дорогами. Поставьте галочку в поле <span class="guilabel">Create an autoincrementing primary key</span>. Это создаст поле под названием <strong>pkuid</strong> в таблице атрибутов и присвоит уникальный числовой идентификатор автоматически каждому объекту. При создании ГИС-слоя вы должны определиться с атрибутами, которые будет иметь каждый объект. Поскольку это слой дорог, у нас будет два базовых атрибута: название и класс. Введите  <code class="docutils literal notranslate"><span class="pre">Name</span></code> в поле <span class="guilabel">Name</span> атрибута в секции <span class="guilabel">New attribute</span> и нажмите <span class="guilabel">Add to attribute list.</span></p></li>
 </ol>
-<img alt="../_images/842.png" class="align-center" src="../_images/842.png" />
+<img alt="../_images/841.png" class="align-center" src="../_images/841.png" />
 <ol class="arabic simple" start="9">
 <li><p>Аналогично, создайте новый атрибут «Class» типа <span class="guilabel">Text data</span>. Нажмите <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/943.png" class="align-center" src="../_images/943.png" />
+<img alt="../_images/942.png" class="align-center" src="../_images/942.png" />
 <ol class="arabic simple" start="10">
 <li><p>После того, как слой загрузится, нажмите на кнопку <span class="guilabel">Toggle Editing</span> чтобы перевести слой в режим редактирования.</p></li>
 </ol>
@@ -298,7 +298,7 @@ link below:</p>
 <ol class="arabic simple" start="19">
 <li><p>После того, как инструмент узлов активируется, нажмите на любом объекте, чтобы показать его вершины. Нажмите на любой вершине, чтобы выбрать ее. Выбранная вершина изменит цвет. Теперь вы можете перетащить мышь, чтобы переместить вершину. Это бывает полезно, когда вы хотите внести корректировку после создания объекта. Вы также можете удалить выбранную вершину, нажав клавишу <kbd class="kbd docutils literal notranslate">Delete</kbd>. (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd> на Mac)</p></li>
 </ol>
-<img alt="../_images/1926.png" class="align-center" src="../_images/1926.png" />
+<img alt="../_images/1925.png" class="align-center" src="../_images/1925.png" />
 <ol class="arabic simple" start="20">
 <li><p>Завершив оцифровку всех дорог, нажмите на кнопку <span class="guilabel">Toggle Editing</span>.</p></li>
 </ol>
@@ -322,7 +322,7 @@ link below:</p>
 <ol class="arabic simple" start="25">
 <li><p>Теперь нажмите на <span class="guilabel">Add feature</span> для добавления многоугольника. С опцией <strong>Избегать пересечения новых полигонов</strong>, вы сможете быстро оцифровать новый полигон, не беспокоясь о точном примыкании к соседним полигонам.</p></li>
 </ol>
-<img alt="../_images/2517.png" class="align-center" src="../_images/2517.png" />
+<img alt="../_images/2516.png" class="align-center" src="../_images/2516.png" />
 <ol class="arabic simple" start="26">
 <li><p>Щелкните правой кнопкой мыши, чтобы закончить полигон, и введите атрибуты. Волшебным образом новый полигон сокращается и прилипает точно к границе соседних полигонов! Это очень полезно при оцифровке сложных границ, так как можно быть не очень точным, но по-прежнему получить топологически правильные многоугольники. Нажмите  <span class="guilabel">Toggle Editing</span>, чтобы закончить редактирование слоя <code class="docutils literal notranslate"><span class="pre">Parks</span></code>.</p></li>
 </ol>
@@ -396,7 +396,7 @@ link below:</p>
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Обновлено: дек. 20, 2021.<br/>
+      Обновлено: янв. 08, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
