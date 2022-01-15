@@ -226,7 +226,7 @@
 <li><p>We will first load a basemap layer from <em>OpenStreetMap</em> and then import the CSV data. In the <span class="guilabel">Browser</span> tab, scroll down and locate the <span class="guilabel">XYZ Tiles</span> section.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/140.png" class="align-center" src="../../_images/140.png" />
+<div><img alt="../../_images/130.png" class="align-center" src="../../_images/130.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Expand it to see the <span class="guilabel">OpenStreetMap</span> tile layer. Drag and drop it to the main canvas. Next we will load the CSV file. Click the <span class="guilabel">Open Data Source Manager</span> button.</p></li>
@@ -244,37 +244,37 @@
 <li><p>You will see 2 layers - <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> and <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> loaded in the QGIS <span class="guilabel">Layers</span> panel. Right-click the <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> layer and select <span class="guilabel">Zoom to Layer</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/48.png" class="align-center" src="../../_images/48.png" />
+<div><img alt="../../_images/47.png" class="align-center" src="../../_images/47.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>You will see the crime incident points layer overlaid on the OpenStreetMap basemap. Zoom and Pan to explore the data. The data is quite dense and it is hard to get an idea of where there is a high concentration of crime. This is where a heatmap visualization will come in handy. Select the <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> layer and  click the <span class="guilabel">Open the Layer Styling panel</span> button.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/58.png" class="align-center" src="../../_images/58.png" />
+<div><img alt="../../_images/57.png" class="align-center" src="../../_images/57.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Heatmap</span></code> as the renderer in the dropbox menu. The <span class="guilabel">Layer Styling panel</span> is interactive and you can see the effect of your changes reflected in the canvas immediately. The layer will now be displayed in the default grayscale color-ramp.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/68.png" class="align-center" src="../../_images/68.png" />
+<div><img alt="../../_images/67.png" class="align-center" src="../../_images/67.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>A heatmap is typically renderer using a yellow--to-red or white--to-red color ramp where higher concentration of points result in more <strong>heat</strong>. Click the <span class="guilabel">Color ramp</span> dropdown menu and select <code class="docutils literal notranslate"><span class="pre">Reds</span></code> color-ramp.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/78.png" class="align-center" src="../../_images/78.png" />
+<div><img alt="../../_images/77.png" class="align-center" src="../../_images/77.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>Next you need to choose a <span class="guilabel">Radius</span>. This parameter determines the circular neighborhood around each point where that point will have an influence. This value will largely depend on the type of your input data. For our data, let's assume a crime incident will have an influence upto 5 Kilometers from the location. Notice that the current project CRS is set to <code class="docutils literal notranslate"><span class="pre">EPSG:</span> <span class="pre">3857</span></code> in the bottom-right corner. This CRS has a unit of meter, so we should specify <code class="docutils literal notranslate"><span class="pre">5000</span></code> meters as the radius. Another parameter that is hidden from this menu is the <span class="guilabel">Kernel shape</span>. This is a function that determines how the influence of a point should be spread out over the given radius. The Heatmap renderer uses the <code class="docutils literal notranslate"><span class="pre">Quartic</span></code> function for this calculation. There are other types of kernels such as <code class="docutils literal notranslate"><span class="pre">Triangular</span></code>, <code class="docutils literal notranslate"><span class="pre">Uniform</span></code>, <code class="docutils literal notranslate"><span class="pre">Triweight</span></code> and <code class="docutils literal notranslate"><span class="pre">Epanechnikov</span></code> that can be specified in when using a different heatmap creation method described later in this tutorial. See <a class="reference external" href="https://www.geodose.com/2017/11/qgis-heatmap-using-kernel-density.html">this post</a> for a good explanation and guidance for select the right radius and kernel shape.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/88.png" class="align-center" src="../../_images/88.png" />
+<div><img alt="../../_images/87.png" class="align-center" src="../../_images/87.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>The heatmap visualization is ready. We can adjust the <span class="guilabel">Opacity</span> of the heatmap in the <span class="guilabel">Layer Rendering</span> section at the bottom. Set the opacity to <code class="docutils literal notranslate"><span class="pre">60</span> <span class="pre">%</span></code> so you can see the basemap along with the heatmap.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/98.png" class="align-center" src="../../_images/98.png" />
+<div><img alt="../../_images/97.png" class="align-center" src="../../_images/97.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>For many types of analysis, just considering density of points is good enough. But sometimes, you may want to give different importance to each point. A more violent crime should have more influence on the output heatmap than a robbery. Similarly, sometimes a point may represent multiple observations at a single location which needs to be accounted for in the analysis. To do this, you are able to supply an optional numeric <strong>weight</strong> field which specifies a value for each point. Let's add a weight field and use it to improve the heatmap. Right-click the <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> layer and select <span class="guilabel">Open Attribute Table</span>.</p></li>
@@ -305,37 +305,37 @@ ELSE 1
 END
 </pre></div>
 </div>
-<img alt="../../_images/1310.png" class="align-center" src="../../_images/1310.png" />
+<img alt="../../_images/139.png" class="align-center" src="../../_images/139.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>A new attribute will be added for each feature with the appropriate weight value.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/149.png" class="align-center" src="../../_images/149.png" />
+<div><img alt="../../_images/148.png" class="align-center" src="../../_images/148.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>Back in the <span class="guilabel">Layer Styling</span> panel, click the drop-down menu for <span class="guilabel">Weight points by</span> and select the newly added <code class="docutils literal notranslate"><span class="pre">weight</span></code> field.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/159.png" class="align-center" src="../../_images/159.png" />
+<div><img alt="../../_images/158.png" class="align-center" src="../../_images/158.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>You will see the heatmap rendering change to account for the weight parameter. Close the <span class="guilabel">Layer Styling</span> panel.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/168.png" class="align-center" src="../../_images/168.png" />
+<div><img alt="../../_images/167.png" class="align-center" src="../../_images/167.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>If you need the heatmap visualization to be saved as a permanent raster layer or want to customize the heatmap with advanced options such as different kernels or dynamic radius, you can use the <strong>Heatmap (Kernel Density Estimation)</strong> from the Processing Toolbox. We will now use this algorithm. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/179.png" class="align-center" src="../../_images/179.png" />
+<div><img alt="../../_images/178.png" class="align-center" src="../../_images/178.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Before we can create the heatmap, we need to re-project the source data to a projected CRS. As distance plays an important role in computation of heatmap, it is not correct to use a geographic CRS. Search and find the <span class="menuselection">Vector general ‣ Reproject layer</span> algorithm.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/187.png" class="align-center" src="../../_images/187.png" />
+<div><img alt="../../_images/186.png" class="align-center" src="../../_images/186.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>In the <span class="guilabel">Reproject layer</span> dialog, click the <span class="guilabel">Select CRS</span> button for <span class="guilabel">Target CRS</span>. Search for and select the <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code> CRS. This projected CRS is a good choice for data in the UK. Click <span class="guilabel">Run</span>.</p></li>
@@ -406,7 +406,7 @@ END
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Cập nhật mới nhất vào thg 1 08, 2022.<br/>
+      Cập nhật mới nhất vào thg 1 15, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

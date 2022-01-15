@@ -202,17 +202,16 @@
 
   <section id="georeferencing-aerial-imagery-qgis3">
 <h1>Georeferenzierung von Luftbildern (QGIS3)<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Im Tutorial <a class="reference internal" href="georeferencing_basics.html"><span class="doc">Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)</span></a> haben wir den grundsätzlichen Prozess der Georeferenzierung in QGIS betrachtet. Bei der verwendeten Methode wurden die Koordinaten von der gescannten Karte abgelesen und per Hand als Kontrollpunkte eingetragen. Oftmals sind auf der zu referenzierenden Karte keine Koordinaten vorhanden oder man möchte ein Bild georeferenzieren. In diesen Fällen kann eine andere bereits georeferenzierte Datenquelle als Unterstützung herangezogen werden. In diesem Tutorial lernen wir, wie man existierende frei verfügbare Datensätze bei der Georeferenzierung nutzen kann.</p>
+<p>In the tutorial <a class="reference internal" href="georeferencing_basics.html"><span class="doc">Georeferenzierung von Kartenblättern und eingescannten Karten (QGIS3)</span></a>, we covered the basic georeferencing process in QGIS. That method involved reading the coordinates from your scanned map and entering them manually as control points. Many times though, you may not have the coordinates printed on your map, or you are trying to georeference an image. In that case, you can use another georeferenced data source as your input. This tutorial will teach you how to use existing open data sources in your georeferencing process.</p>
 <section id="overview-of-the-task">
 <h2>Überblick über die Aufgabe<a class="headerlink" href="#overview-of-the-task" title="Link zu dieser Überschrift">¶</a></h2>
-<p>Wir werden hoch aufgelöste Ballon-Luftbilder georeferenzieren. Dabei nutzen wir Referenzkoordinaten aus OpenStreetMap.</p>
+<p>We will georeference a high resolution balloon-imagery using reference coordinates from OpenStreetMap.</p>
 <section id="other-skills-you-will-learn">
 <h3>Weitere Fähigkeiten, die wir erlernen<a class="headerlink" href="#other-skills-you-will-learn" title="Link zu dieser Überschrift">¶</a></h3>
 <ul class="simple">
-<li><p>Herunterladen frei zugänglicher hochauflösender Bilddaten.</p></li>
-<li><p>XYZ-Kachellayer als Hintergrundkarte verwenden.</p></li>
-<li><p>Benutzen des OSM Place Search plugins in QGIS.</p></li>
-<li><p>Festlegen eines benutzerdefinierten no-data-Wertes für einen Layer.</p></li>
+<li><p>Using XYZ Tile Layers as a Basemap in QGIS.</p></li>
+<li><p>Using Built-in Nominatim Geocoder.</p></li>
+<li><p>Setting a user-defined No-Data value for a layer.</p></li>
 </ul>
 </section>
 </section>
@@ -229,122 +228,86 @@
 <li><p>Wir nutzen eine Hintergrundkarte von OpenStreetMap, um Koordinaten zu erfassen. QGIS3 unterstützt von Hause aus Kachellayer. Kachellayer werden auch als „XYZ-Layer“ bezeichnet. Die Layer setzen sich aus einzelnen Kacheln zusammen, die nach Zoomstufe (Z) in einem X,Y-Raster angeordnet werden. Du findest den <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> Layer unter:guilabel:<cite>XYZ Tiles</cite> im <span class="guilabel">Browser Panel</span>. Ziehe den Layer in die Hauptarbeitsfläche. Nachdem der Layer geladen ist, achte auf das unten rechts angezeigte Koordinatensystem (Coordinate Reference System - CRS): <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>. Das ist wichtig, da wir die Koordinaten beim Georeferenzieren in diesem Koordinatensystem vom geladenen Layer ableiten werden.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
+<div><img alt="../../_images/01.png" class="align-center" src="../../_images/01.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
 <p>Hier <a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">this page</a> findest du mehr Details zu „XYZ-Layern“ und wie man weitere Hintergrundkarten in QGIS hinzufügt.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Das Bild, dass wir georeferenzieren ist vom <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code>. Du kannst mit scrollen und zoomen in der Karte versuchen, den Park zu finden. Das ist allerdings mühsam und unpraktisch. Ein einfachere Möglichkeit ist, dass OpenStreetMap (OSM) „Place Search“ plugin zum Suchen der exakten Position zu verweden. Installiere das <code class="docutils literal notranslate"><span class="pre">OSM</span> <span class="pre">Place</span> <span class="pre">Search</span></code> plugin von:menuselection:<cite>Plugins –&gt; Manage and install plugins –&gt; All</cite>. Wenn du das plugin nicht in den Suchergebnissen findest, stelle sicher, dass du folgende Einstellung in QGIS gemacht hast:guilabel:<cite>Also show experimental plugins</cite> unter:guilabel:<cite>Settings</cite>. Weitere Informationen zur Benutzung von plugins in QGIS findet man unter:doc:<cite>../using_plugins</cite>.</p></li>
+<li><p>The image we are georeferencing is for <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code>. You can zoom/pan to locate this park on the map. But that is cumbersome and practical. From QGIS version 3.20 onwards, there is built-in support for the OpenStreetMap based Nominatim Geocoder. Click the search bar in the bottom left of the QGIS window. To use this as a geocoder prefix, the search place with <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. Searching for <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park</span></code> will pop up a list of addresses to choose from. Click the first address.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
+<div><img alt="../../_images/02.png" class="align-center" src="../../_images/02.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Nachdem das plugin installiert wurde, sieht man einen neuen Arbeitsbereich:guilabel:<cite>OSM Place Search…</cite>. Suche nach <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park</span></code> im Feld:guilabel:<cite>Name contains..</cite> box and click <span class="guilabel">-&gt;</span>. Du zum Namen passenden Orte erscheinen dann im Ergebnisbereich. Suche den richtigen Ort aus und klicke den:guilabel:<cite>Zoom</cite> Knopf.</p></li>
+<li><p>The map canvas will be centered to the Square Park. Now let’s start georeferencing. Launch the <strong>Georeferencer</strong> from <span class="menuselection">Raster ‣ Georeferencer</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/3.png" class="align-center" src="../../_images/3.png" />
+<div><img alt="../../_images/03.png" class="align-center" src="../../_images/03.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Wir sehen die bekannte Karte, die die Orientierungspunkte enthält, die wir aus dem JPG-Bild kennen. Du kannst den:guilabel:<cite>OSM Place Search</cite> Bereich nun schließen. Wenn du ihn wieder benötigst, kannst du ihn unter <span class="menuselection">View ‣ Panels ‣ OSM Place Search</span> erneut öffnen.</p></li>
+<li><p>For georeferencing an aerial image, we have to choose coordinate points from the OpenStreetMap, so let’s first dock the Georeferencer tool into to main QGIS window. Select Configure Georeference from <span class="menuselection">Settings ‣ Configure Georeference</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/4.png" class="align-center" src="../../_images/4.png" />
+<div><img alt="../../_images/04.png" class="align-center" src="../../_images/04.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Now it is time to start georeferencing. Launch the <strong>Georeferencer</strong> from <span class="menuselection">Raster ‣ Georeferencer</span>.</p></li>
+<li><p>Check <span class="guilabel">Show georeferencer window docked</span> and click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/5.png" class="align-center" src="../../_images/5.png" />
+<div><img alt="../../_images/05.png" class="align-center" src="../../_images/05.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Gehen im Fenster <span class="guilabel">Georeferencer</span> zu <span class="menuselection">File ‣ Open Raster</span>. Gehe zum heruntergeladenen JPG-Bild und klicke <span class="guilabel">Open</span>.</p></li>
+<li><p>The <span class="guilabel">Georeferencer</span> window will be docked at the bottom of the main QGIS window. Let us load the image file by clicking the <span class="guilabel">Open Raster</span> icon in the <span class="guilabel">Georeference</span> window and navigating to the downloaded JPG file. Click <span class="guilabel">Open.</span></p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/6.png" class="align-center" src="../../_images/6.png" />
+<div><img alt="../../_images/06.png" class="align-center" src="../../_images/06.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Im folgenden Fenster muss das Koordinatensystem (coordinate reference system - CRS) des Rasterdatensatzes angegeben werden. Unser Ausgangsbild ist ein reines JPG-Bild ohne Informationen bezüglich des Koordinatensystems. Wir klicken daher auf <span class="guilabel">Cancel</span>.</p></li>
+<li><p>Before adding Ground Control Points (GCP), we need to define the Transformation Settings. Click on the <span class="guilabel">Transformation Settings</span> icon to open the Transformation Settings dialog. Choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_raster/georeferencer.html?highlight=georeferencer#available-transformation-algorithms">QGIS Documentation</a> to learn about different transformation types and their uses. As noted earlier, our base map is in <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code> CRS, so set that as the <span class="guilabel">Target CRS</span>. You can leave the <span class="guilabel">Output raster</span> name to the default ad choose <code class="docutils literal notranslate"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Check the <span class="guilabel">Use 0 for transparency when needed</span>. Check the <span class="guilabel">Save GCP points</span> to store the points as a separate file for future purposes. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/7.png" class="align-center" src="../../_images/7.png" />
+<div><img alt="../../_images/07.png" class="align-center" src="../../_images/07.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Bevor wir anfangen Passpunkte (GCP- Ground Control Points) zu setzen, müssen wir die Transformationseinstellungen festlegen. Gehe zu <span class="menuselection">Settings ‣ Transformation settings</span>.</p></li>
+<li><p>Now click on the <span class="guilabel">Add Point</span> button on the toolbar and select an easily identifiable location on the image. Corners, intersections, poles etc., make good control points. Once you click on the image at a control point location, you will see a pop-up asking you to enter map coordinates. Click the button <span class="guilabel">From map canvas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/8.png" class="align-center" src="../../_images/8.png" />
+<div><img alt="../../_images/08.png" class="align-center" src="../../_images/08.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>Wähle in den <span class="guilabel">Transformation settings</span> Einstellungen als <span class="guilabel">Transformation type</span> <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code> aus. In der <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> findet man weitere Informationen über die verschiedenen Transformationstypen und deren Einsatz. Wie schon erwähnt, hat unsere Hintergrundkarte das Koordinatensystem <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>, so dass wir dieses Koordinatensystem als <span class="guilabel">Target CRS</span> auswählen. Wir können den Eintrag unter <span class="guilabel">Output raster</span> unverändert lassen und <code class="docutils literal notranslate"><span class="pre">LZW</span></code> als <span class="guilabel">Compression</span> auswählen. Wähle <span class="guilabel">Use 0 for transparency when needed</span>. Achte darauf den Haken bei <span class="guilabel">Load in QGIS when done</span> zu setzen. Klicke <span class="guilabel">OK</span>.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> layer, click on the exact location in the reference layer. The coordinates will be auto-populated from your click on the map canvas. Click <span class="guilabel">Ok</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/9.png" class="align-center" src="../../_images/9.png" />
+<div><img alt="../../_images/09.png" class="align-center" src="../../_images/09.png" />
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Tip: When selecting a GCP on a building, always choose the bottom of the building. Most aerial and satellite imagery have leaning buildings, so picking a point on the rooftop will introduce errors.</p>
+</div>
 <ol class="arabic simple" start="10">
-<li><p>Klicke jetzt auf den <span class="guilabel">Hinzufügen Point</span> Knopf auf der Toolleiste und wähle einen einfach zu identifizierenden Punkt auf dem Bild. Ecken, Kreuzungen, Masten o.ä. sind gute Möglichkeiten für Passpunkte.</p></li>
+<li><p>Similarly, choose at least 6 points on the image and add their coordinates from the reference layer. Once you have added the minimum number of points required for the transform, you will notice that the GCPs now have non-zero <code class="docutils literal notranslate"><span class="pre">dX</span></code>, <code class="docutils literal notranslate"><span class="pre">dY</span></code>, and <code class="docutils literal notranslate"><span class="pre">Residual</span></code> error values. If a particular GCP has unusually high error values, that usually means a human error in entering the coordinate values. So you can delete that GCP and capture it again.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/10.png" class="align-center" src="../../_images/10.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Wenn du auf dem Bild einen Passpunkt anklickst, erscheint ein neues Fenster, das die Eingabe der Koordinaten des Passpunktes erwartet. Klicke auf den Knopf <span class="guilabel">From map canvas</span>.</p></li>
+<li><p>Once you are satisfied with the GCPs, click <span class="guilabel">Start georeferencing</span>. This will start the process of warping the image using the GCPs and creating the target raster. Once the process is finished, you will see the layer loaded in QGIS. Close the <span class="guilabel">Georeferencer</span> window.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/11.png" class="align-center" src="../../_images/11.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>Finde nun diese Stelle auf der Hintergrundkarte und klicke exakt auf diesen Punkt. Die Koordinaten des Passpunktes werden jetzt automatisch mit den Koordinaten des Punktes auf der Hintergrundkarte gefüllt. Klicke auf Ok. Fahre weiter so fort und füge mindestens 6 Passpunkte hinzu und erfasse jeweils ihre Koordinaten von der Hintergrundkarte.</p></li>
+<li><p>Now click on the <span class="guilabel">Open layer styling panel</span> icon and Switch to the <span class="guilabel">Transparency</span> tab. Add <code class="docutils literal notranslate"><span class="pre">255</span></code> as the <span class="guilabel">Additional no data value</span>. This will remove the white border around the image. Now you will see your georeferenced image nicely overlaid on the base layer.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/12.png" class="align-center" src="../../_images/12.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
-<p>Tip: Bei der Auswahl eines Passpunktes an einem Gebäube, sollte man die Unterkante des Gebäudes auswählen. Viele Luftbilder und Satellitenbilder stellen Gebäude geneigt dar, so dass die Auswahl von Passpunkten auf dem Dach zu Fehlern führt.</p>
-</div>
-<ol class="arabic simple" start="13">
-<li><p>Wenn wir die minimale Anzahl an Punkten, die zur Transformation benötigt werden, hinzugefügt haben, sehen wir wie sich die „dX“, „dY“ und „Rest“ Fehlerwerte zu Werten ungleich 0 verändern. Wenn ein bestimmter Passpunkt besonders hohe Fehlerwerte aufweist, ist das in der Regel ein Hinweis auf einen Eingabefehler der Koordinatenwerte. In diesem Fall kann man diesen Passpunkt löschen und ihn anschließend neu erfassen.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
-</div></blockquote>
-<ol class="arabic simple" start="14">
-<li><p>Wenn du mit der Erfassung der Passpunkte zufrieden bist, gehe zu <span class="menuselection">File ‣ Start georeferencing</span>. Das Bild wird nun mit Hilfe der Passpunkte entzerrt.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/14.png" class="align-center" src="../../_images/14.png" />
-</div></blockquote>
-<ol class="arabic simple" start="15">
-<li><p>Nachdem der Prozess abgeschlossen ist, wird der georeferenzierte Layer in QGIS geladen. Wenn alles geklappt hat, wird der erzeugte Layer genau an der richtigen Stelle auf der Hintergrundkarte angezeigt.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
-</div></blockquote>
-<ol class="arabic simple" start="16">
-<li><p>Um das Ergebnis noch schöner zu machen, entfernen wir den weißen Rand. Klicke mit der rechten Maustaste auf den Layer und wähle <span class="guilabel">Properties</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
-</div></blockquote>
-<ol class="arabic simple" start="17">
-<li><p>Switch to the <span class="guilabel">Transparency</span> tab. Add <code class="docutils literal notranslate"><span class="pre">255</span></code> as the <span class="guilabel">Additional no data value</span> and click <span class="guilabel">OK</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
-</div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Bemerkung</p>
 <p>8-bit Bilder haben Pixelwerte von 0-255. Dabei bedeutet 0 schwarz und 255 weiß.</p>
 </div>
-<ol class="arabic simple" start="18">
-<li><p>Nun sehen wir wie das georeferenzierte Bild schön den Hintergundlayer überlagert.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
-</div></blockquote>
 </section>
 </section>
 
@@ -370,7 +333,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am Jan. 08, 2022.<br/>
+      Zuletzt aktualisiert am Jan. 15, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

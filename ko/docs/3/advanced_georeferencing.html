@@ -202,17 +202,16 @@
 
   <section id="georeferencing-aerial-imagery-qgis3">
 <h1>항공사진 지오레퍼런싱 (QGIS3)<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="이 표제에 대한 퍼머링크">¶</a></h1>
-<p>QGIS 예제 :doc:<a href="#id1"><span class="problematic" id="id2">`</span></a>Georeferencing Topo Sheets and Scanned Maps`에서 지오레퍼런시 기본 과정을 살펴보았습니다. 거기서는 스캔된 지도에서 좌표를 읽어내고 수작업으로 좌표를 입력하는 방법이 포함되어 있습니다. 많은 경우 지도에 인쇄된 좌표가 없음에도 이미지에 지오레퍼런싱을 합니다. 그 경우 다른 지오레퍼런스 자료를 입력자료로 사용할 수 있습니다. 이 예제에서는 지오레퍼런싱 과정에서 기존의 오픈 데이터 소스를 어떻게 사용하는 지를 배우게 될 것입니다.</p>
+<p>In the tutorial <a class="reference internal" href="georeferencing_basics.html"><span class="doc">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</span></a>, we covered the basic georeferencing process in QGIS. That method involved reading the coordinates from your scanned map and entering them manually as control points. Many times though, you may not have the coordinates printed on your map, or you are trying to georeference an image. In that case, you can use another georeferenced data source as your input. This tutorial will teach you how to use existing open data sources in your georeferencing process.</p>
 <section id="overview-of-the-task">
 <h2>작업 개요<a class="headerlink" href="#overview-of-the-task" title="이 표제에 대한 퍼머링크">¶</a></h2>
-<p>풍선을 이용해 찍은 고화질 영상을 오픈스트리트맵의 레퍼런스 좌표를 이용하여 지오레퍼런스합니다.</p>
+<p>We will georeference a high resolution balloon-imagery using reference coordinates from OpenStreetMap.</p>
 <section id="other-skills-you-will-learn">
 <h3>배워야 할 다른 기술<a class="headerlink" href="#other-skills-you-will-learn" title="이 표제에 대한 퍼머링크">¶</a></h3>
 <ul class="simple">
-<li><p>초고화질 공공 도메인 영상을 다운로드합니다.</p></li>
-<li><p>XYZ 타일 레이어를 베이스맵으로 활용하기</p></li>
-<li><p>QGIS에서 OSM 장소 검색 플러그인을 사용합니다.</p></li>
-<li><p>데이터값이 없는 레이어를 세팅 합니다.</p></li>
+<li><p>Using XYZ Tile Layers as a Basemap in QGIS.</p></li>
+<li><p>Using Built-in Nominatim Geocoder.</p></li>
+<li><p>Setting a user-defined No-Data value for a layer.</p></li>
 </ul>
 </section>
 </section>
@@ -229,122 +228,86 @@
 <li><p>OpenStreetMap의베이스 맵을 사용하여 지리 참조를위한 좌표를 캡처합니다. QGIS3는 타일 레이어를 기본적으로 지원합니다. x, y 좌표 격자의 각 확대 / 축소 수준 (z)에 대해 개별 맵 타일을 사용하여 만들어 지므로 일반적으로 ‘XYZ’레이어라고합니다. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>브라우저 패널`의 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>XYZ Tiles 아래에서``OpenStreetMap ‘’레이어를 찾을 수 있습니다. 레이어를 기본 캔버스로 드래그하십시오. 일단로드되면 오른쪽 아래 코더에서이 레이어의 좌표계 (CRS)를 확인하십시오. <a href="#id5"><span class="problematic" id="id6">``</span></a>EPSG 3857 Pseudo Mercator ‘’로 설정되어 있습니다. 지리 참조 중에이 레이어에서 추론하는 좌표가이 CRS에 있기 때문에 이것은 중요합니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
+<div><img alt="../../_images/01.png" class="align-center" src="../../_images/01.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">참고</p>
 <p>XYZ 레이어 및 QGIS에 다른베이스 맵을 추가하는 방법에 대한 자세한 내용은`이 페이지 &lt;<a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/</a>&gt;`_를 참조하십시오.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>우리가 지리 참조하는 이미지는``Washington Square Park, New York ‘’입니다. 지도에서이 공원을 확대 / 축소 / 확대 할 수 있습니다. 그러나 이는 성가 시며 실용적이지 않을 수 있습니다. 더 쉬운 방법은 OSM (OpenStreetMap) 장소 검색 플러그인을 사용하여 정확한 위치를 검색하는 것입니다. : menuselection :<cite>Plugins-&gt; 플러그인 관리 및 설치-&gt; All에서``OSM Place Search ‘’플러그인을 설치하십시오. 검색 결과에이 플러그인이 보이지 않으면 : guilabel :`Settings</cite> 아래에서 : guilabel :<cite>또한 실험용 플러그인 표시`를 선택했는지 확인하십시오. QGIS에서 플러그인 사용에 대한 자세한 내용은 : doc :</cite>../ using_plugins`를 참조하십시오.</p></li>
+<li><p>The image we are georeferencing is for <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code>. You can zoom/pan to locate this park on the map. But that is cumbersome and practical. From QGIS version 3.20 onwards, there is built-in support for the OpenStreetMap based Nominatim Geocoder. Click the search bar in the bottom left of the QGIS window. To use this as a geocoder prefix, the search place with <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. Searching for <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park</span></code> will pop up a list of addresses to choose from. Click the first address.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
+<div><img alt="../../_images/02.png" class="align-center" src="../../_images/02.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>플러그인이 설치되면 : guilabel :<cite>OSM Place Search …`라는 새 패널이 표시됩니다. : guilabel :`Name contains..</cite> 상자에서``Washington Square Park ‘’를 검색하고 : guilabel :<cite>-&gt;`를 클릭하십시오. 일치하는 장소 이름이 결과 패널에 나타납니다. 올바른 결과를 선택하고 : guilabel :`Zoom</cite> 버튼을 클릭하십시오.</p></li>
+<li><p>The map canvas will be centered to the Square Park. Now let’s start georeferencing. Launch the <strong>Georeferencer</strong> from <span class="menuselection">Raster ‣ Georeferencer</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/3.png" class="align-center" src="../../_images/3.png" />
+<div><img alt="../../_images/03.png" class="align-center" src="../../_images/03.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>익숙하고 이미지에서 식별 할 수있는 랜드 마크가 포함 된 맵이 표시됩니다. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>OSM 장소 검색`패널을 닫을 수 있습니다. 다시 필요한 경우 : menuselection :<a href="#id3"><span class="problematic" id="id4">`</span></a>View-&gt; Panels-&gt; OSM Place Search`에서 열 수 있습니다.</p></li>
+<li><p>For georeferencing an aerial image, we have to choose coordinate points from the OpenStreetMap, so let’s first dock the Georeferencer tool into to main QGIS window. Select Configure Georeference from <span class="menuselection">Settings ‣ Configure Georeference</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/4.png" class="align-center" src="../../_images/4.png" />
+<div><img alt="../../_images/04.png" class="align-center" src="../../_images/04.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Now it is time to start georeferencing. Launch the <strong>Georeferencer</strong> from <span class="menuselection">Raster ‣ Georeferencer</span>.</p></li>
+<li><p>Check <span class="guilabel">Show georeferencer window docked</span> and click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/5.png" class="align-center" src="../../_images/5.png" />
+<div><img alt="../../_images/05.png" class="align-center" src="../../_images/05.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>지오레퍼런서 <span class="guilabel">Georeferencer</span> 창에서 메뉴 파일 –&gt; 래스터 열기  <span class="menuselection">File ‣ Open raster</span> 로 가십시오. 다운로드한 JPG파일을 찾고 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Open`를 클릭합니다.</p></li>
+<li><p>The <span class="guilabel">Georeferencer</span> window will be docked at the bottom of the main QGIS window. Let us load the image file by clicking the <span class="guilabel">Open Raster</span> icon in the <span class="guilabel">Georeference</span> window and navigating to the downloaded JPG file. Click <span class="guilabel">Open.</span></p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/6.png" class="align-center" src="../../_images/6.png" />
+<div><img alt="../../_images/06.png" class="align-center" src="../../_images/06.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>다음 화면에서 래스터의 좌표 참조 시스템 (CRS)을 선택하라는 메시지가 표시됩니다. 소스 이미지는 일반 JPEG 파일이며 좌표 참조 시스템이 없습니다. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Cancel`을 클릭하십시오.</p></li>
+<li><p>Before adding Ground Control Points (GCP), we need to define the Transformation Settings. Click on the <span class="guilabel">Transformation Settings</span> icon to open the Transformation Settings dialog. Choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_raster/georeferencer.html?highlight=georeferencer#available-transformation-algorithms">QGIS Documentation</a> to learn about different transformation types and their uses. As noted earlier, our base map is in <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code> CRS, so set that as the <span class="guilabel">Target CRS</span>. You can leave the <span class="guilabel">Output raster</span> name to the default ad choose <code class="docutils literal notranslate"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Check the <span class="guilabel">Use 0 for transparency when needed</span>. Check the <span class="guilabel">Save GCP points</span> to store the points as a separate file for future purposes. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/7.png" class="align-center" src="../../_images/7.png" />
+<div><img alt="../../_images/07.png" class="align-center" src="../../_images/07.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>지상 제어점 (GCP) 추가를 시작하기 전에 변환 설정을 정의해야합니다. : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>설정-&gt; 변환 설정`으로 이동하십시오.</p></li>
+<li><p>Now click on the <span class="guilabel">Add Point</span> button on the toolbar and select an easily identifiable location on the image. Corners, intersections, poles etc., make good control points. Once you click on the image at a control point location, you will see a pop-up asking you to enter map coordinates. Click the button <span class="guilabel">From map canvas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/8.png" class="align-center" src="../../_images/8.png" />
+<div><img alt="../../_images/08.png" class="align-center" src="../../_images/08.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>: guilabel :<cite>Transformation settings</cite> 대화 상자에서 : guilabel :<cite>Transformation type`을``Polynomial 2 ‘’로 선택하십시오. 서로 다른 트랜스 포메이션 유형과 사용법에 대해서는 QGIS 설명서 &lt;https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms&gt;`_를 참조하십시오. 앞에서 언급했듯이베이스 맵은``EPSG 3857 Pseudo Mercator ‘’CRS에 있으므로 : guilabel :`Target CRS`로 설정하십시오. : guilabel :`Output raster</cite> 이름을 기본값으로두고 : guilabel :<cite>Compression`으로``LZW ‘’를 선택할 수 있습니다. : guilabel :`필요한 경우 투명도를 0으로 설정하십시오 ‘를 확인하십시오. : guilabel :`로드시 QGIS에로드`옵션이 선택되어 있는지 확인하십시오. 클릭 : guilabel :`OK</cite>.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> layer, click on the exact location in the reference layer. The coordinates will be auto-populated from your click on the map canvas. Click <span class="guilabel">Ok</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/9.png" class="align-center" src="../../_images/9.png" />
+<div><img alt="../../_images/09.png" class="align-center" src="../../_images/09.png" />
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p>Tip: When selecting a GCP on a building, always choose the bottom of the building. Most aerial and satellite imagery have leaning buildings, so picking a point on the rooftop will introduce errors.</p>
+</div>
 <ol class="arabic simple" start="10">
-<li><p>이제 툴바에서 포인트 추가 <span class="guilabel">Add Point</span> 단추를 클릭하고 영상에서 쉽게 구분할 수 장소를 선택합니다. 코너, 교차점, 기둥 등이 좋은 컨트롤 포인트입니다.</p></li>
+<li><p>Similarly, choose at least 6 points on the image and add their coordinates from the reference layer. Once you have added the minimum number of points required for the transform, you will notice that the GCPs now have non-zero <code class="docutils literal notranslate"><span class="pre">dX</span></code>, <code class="docutils literal notranslate"><span class="pre">dY</span></code>, and <code class="docutils literal notranslate"><span class="pre">Residual</span></code> error values. If a particular GCP has unusually high error values, that usually means a human error in entering the coordinate values. So you can delete that GCP and capture it again.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/10.png" class="align-center" src="../../_images/10.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>일단 영상의 컨트롤 포인트 위치를 클릭하면 지도의 좌표를 묻는 팝업창을 만날 것입니다. 지도캔버스에서  <span class="guilabel">From map canvas</span> 단추를 클릭합니다.</p></li>
+<li><p>Once you are satisfied with the GCPs, click <span class="guilabel">Start georeferencing</span>. This will start the process of warping the image using the GCPs and creating the target raster. Once the process is finished, you will see the layer loaded in QGIS. Close the <span class="guilabel">Georeferencer</span> window.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/11.png" class="align-center" src="../../_images/11.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>참조 레이어에서 동일한 위치를 찾아 정확한 지점을 클릭하십시오. 지도 캔버스를 클릭하면 좌표가 자동으로 채워집니다. 확인을 클릭하십시오. 마찬가지로 이미지에서 6 개 이상의 점을 선택하고 참조 레이어에서 좌표를 추가합니다.</p></li>
+<li><p>Now click on the <span class="guilabel">Open layer styling panel</span> icon and Switch to the <span class="guilabel">Transparency</span> tab. Add <code class="docutils literal notranslate"><span class="pre">255</span></code> as the <span class="guilabel">Additional no data value</span>. This will remove the white border around the image. Now you will see your georeferenced image nicely overlaid on the base layer.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/12.png" class="align-center" src="../../_images/12.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>팁 : 건물에서 GCP를 선택할 때는 항상 건물의 바닥을 선택하십시오. 많은 항공 및 위성 이미지에는 건물이 기울어 져 있으므로 옥상에서 지점을 선택하면 오류가 발생합니다.</p>
-</div>
-<ol class="arabic simple" start="13">
-<li><p>변환에 필요한 최소 포인트 수를 추가하면 GCP에 0이 아닌``dX ‘’,``dY ‘’및``잔여 ‘’오류 값이 있음을 알 수 있습니다. 특정 GCP의 오류 값이 비정상적으로 높은 경우 이는 일반적으로 좌표 값을 입력 할 때 발생하는 인적 오류를 의미합니다. 따라서 해당 GCP를 삭제하고 다시 캡처 할 수 있습니다.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
-</div></blockquote>
-<ol class="arabic simple" start="14">
-<li><p>GCP에 만족하면 : menuselection :<a href="#id1"><span class="problematic" id="id2">`</span></a>File-&gt; georeferencing 시작`으로 이동하십시오. GCP를 사용하여 이미지를 워핑하고 대상 래스터를 만드는 프로세스가 시작됩니다.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/14.png" class="align-center" src="../../_images/14.png" />
-</div></blockquote>
-<ol class="arabic simple" start="15">
-<li><p>프로세스가 완료되면 QGIS에 지리 참조 된 레이어가로드 된 것을 볼 수 있습니다. 모든 것이 잘 진행되면베이스 맵을 멋지게 오버레이하는 것을 볼 수 있습니다.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
-</div></blockquote>
-<ol class="arabic simple" start="16">
-<li><p>출력물을 더 멋지게 보이기 위해 흰색 테두리를 제거하겠습니다. 이미지 레이어를 마우스 오른쪽 버튼으로 클릭하고 : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Properties`를 선택하십시오.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
-</div></blockquote>
-<ol class="arabic simple" start="17">
-<li><p>: guilabel :<cite>Transparency</cite> 탭으로 전환하십시오. : guilabel :<a href="#id1"><span class="problematic" id="id2">`</span></a>Additional no data value`로``255 ‘’를 추가하고 : guilabel :<a href="#id3"><span class="problematic" id="id4">`</span></a>OK`를 클릭하십시오.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
-</div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">참고</p>
 <p>8 비트 이미지에는 0-255 범위의 픽셀 값이 있습니다. 0은 검은 색이고 255는 흰색입니다.</p>
 </div>
-<ol class="arabic simple" start="18">
-<li><p>이제 지리 참조 된 이미지가 기본 레이어에 멋지게 겹쳐져있는 것을 볼 수 있습니다.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
-</div></blockquote>
 </section>
 </section>
 
@@ -370,7 +333,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      최종 업데이트: 1월 08, 2022<br/>
+      최종 업데이트: 1월 15, 2022<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

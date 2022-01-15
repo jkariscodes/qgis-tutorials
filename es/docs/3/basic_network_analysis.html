@@ -228,7 +228,7 @@
 <li><p>Localice el archivo descargado <code class="docutils literal notranslate"><span class="pre">Roadway_Block-shp.zip</span></code> en el panel <span class="guilabel">Explorador</span>. Expándalo y arrastre el archivo <code class="docutils literal notranslate"><span class="pre">Roadway_Block.shp</span></code> al lienzo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/116.png" class="align-center" src="../../_images/116.png" />
+<div><img alt="../../_images/115.png" class="align-center" src="../../_images/115.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Verá agregada una nueva capa línea llamada <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> al panel <span class="guilabel">Capas</span>. Esta capa representa cada calle en Washington, DC. Seleccione la herramienta <span class="guilabel">Identificar</span> en la <span class="guilabel">Barra de herramienta Atributos</span>. Clic en cualquier segmento de calle para ver que atributos vienen adjuntos. Hay atributos estándares como nombre, tipo, etc. de calle. Hay un atributo llamado <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code>. Este es un atributo importante para enrutamiento ya que especifica si el segmento es de dos sentidos o de uno solo. Contiene 4 valores diferentes. <code class="docutils literal notranslate"><span class="pre">BD</span></code> (Both Directions) para calles de dos sentidos. <code class="docutils literal notranslate"><span class="pre">OB</span></code> (Out Bound) para calles de un sentido donde el tráfico es permitido en la dirección de la línea (punto de inicio a punto final) y <code class="docutils literal notranslate"><span class="pre">IB</span></code> (In Bound) para calles de un solo sentido donde el tráfico fluye en dirección opuesta a la línea. También hay un valor <code class="docutils literal notranslate"><span class="pre">??</span></code> donde asumiremos tráfico en ambos sentidos. Usaremos ahora la información en ese atributo para mostrar una flecha en calles que son de un solo sentido.</p></li>
@@ -246,19 +246,19 @@
 <li><p>Crearemos un nuevo estilo con un filtro sólo para las vías en un solo sentido. Clic el botón <span class="guilabel">Añadir regla +</span></p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/43.png" class="align-center" src="../../_images/43.png" />
+<div><img alt="../../_images/42.png" class="align-center" src="../../_images/42.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>En el diálogo <span class="guilabel">Editar regla</span> dialog, clic el botón <span class="guilabel">Expresión</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/53.png" class="align-center" src="../../_images/53.png" />
+<div><img alt="../../_images/52.png" class="align-center" src="../../_images/52.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>En el diálogo <span class="guilabel">Constructor de la cadena de expresión</span>, expanda la sección <span class="guilabel">Campos y Valores</span> en el panel del medio. Seleccione el atributo <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> y clic <span class="guilabel">All Unique</span> en el panel a mano derecho. Los 4 valores que discutimos antes aparecerán. Teniendo estos valores aquí como una referencia ayuda cuando se construye la expresión. También, puede hacer doble-clic en cualquier valor para añadirlo a la expresión.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/63.png" class="align-center" src="../../_images/63.png" />
+<div><img alt="../../_images/62.png" class="align-center" src="../../_images/62.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>La meta es crear una expresión que selecciona todas las calles en un solo sentido. Ingrese la siguiente expresión y clic <span class="guilabel">Aceptar</span>.</p></li>
@@ -267,19 +267,19 @@
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;SUMMARYDIR&quot; in (&#39;IB&#39;, &#39;OB&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/73.png" class="align-center" src="../../_images/73.png" />
+<img alt="../../_images/72.png" class="align-center" src="../../_images/72.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>A continuación, cambie el <span class="guilabel">tipo de capa símbolo</span> a <code class="docutils literal notranslate"><span class="pre">Línea</span> <span class="pre">marcador</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/83.png" class="align-center" src="../../_images/83.png" />
+<div><img alt="../../_images/82.png" class="align-center" src="../../_images/82.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">en</span> <span class="pre">punto</span> <span class="pre">centro</span></code> bajo <span class="guilabel">Ubicación de marcador</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/93.png" class="align-center" src="../../_images/93.png" />
+<div><img alt="../../_images/92.png" class="align-center" src="../../_images/92.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>Clic en el símbolo <code class="docutils literal notranslate"><span class="pre">Marcador</span> <span class="pre">simple</span></code>. Deslice hacia abajo y elija el marcador <code class="docutils literal notranslate"><span class="pre">filled_arrowhead</span></code>. Verá que el símbolo similar a una flecha ahora aparece en las calles de un solo sentido. Pero todos ellos están apuntando en un sola dirección, mientras que sabemos que nuestro filtro contiene calles en múltiples direcciones. Podemos refinar más los símbolos con un ajuste definido por datos para el valor <span class="guilabel">Rotación</span>.</p></li>
@@ -291,7 +291,7 @@
 <li><p>Clic el botón <span class="guilabel">Ajuste definido por datos</span> junto a <span class="guilabel">Rotación</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/117.png" class="align-center" src="../../_images/117.png" />
+<div><img alt="../../_images/116.png" class="align-center" src="../../_images/116.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Podemos poner una expresión condicional que devuelve diferentes valores de rotación dependiendo de la dirección en sentido único. Una rotación 180 grados para el camino con dirección opuesta hará la dirección perfecta. En este, haremos que los caminos con atributo <code class="docutils literal notranslate"><span class="pre">IB</span></code> roten 180° de ahí que todos los caminos tendrá la dirección correcta de flujo de tráfico. Ingrese la siguiente expresión y clic <span class="guilabel">Aceptar</span>.</p></li>
@@ -306,31 +306,31 @@
 <li><p>Ahora verá las cabezas de flecha alineadas a la dirección y ángulo correctos. Para mantener el estilo despejado, estamos eligiendo mostrar flechas sólo en calles de un sentido. Las calles sin etiqueta se asumen como de doble sentido. Ahora que tenemos la red con estilo correcto, podemos hacer algún análisis. Vaya a <span class="menuselection">Procesos ‣ Caja de herramientas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/135.png" class="align-center" src="../../_images/135.png" />
+<div><img alt="../../_images/134.png" class="align-center" src="../../_images/134.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Busque y localice el algoritmo <span class="menuselection">Análisis de redes ‣ Ruta más corta (punto a punto)</span>. Doble-clic para iniciarlo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/145.png" class="align-center" src="../../_images/145.png" />
+<div><img alt="../../_images/144.png" class="align-center" src="../../_images/144.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>En el diálogo <span class="guilabel">Ruta más corta (punto a punto)</span>, seleccione <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> como la <span class="guilabel">Capa vectorial que representa la red</span>. Mantenga el <span class="guilabel">Tipo de ruta a calcular</span> como <code class="docutils literal notranslate"><span class="pre">Más</span> <span class="pre">corto</span></code>. A continuación, necesitamos escoger un punto de inicio y final. Puede hace clic en el botón <span class="guilabel">…</span> y clic en cualquier punto en la red en el lienzo. Si quiere replicar los resultados en este tutorial, puede ingresar <code class="docutils literal notranslate"><span class="pre">-76.99730092166396,38.887624846748984</span></code> como el <span class="guilabel">Punto de inicio</span> y <code class="docutils literal notranslate"><span class="pre">-76.99154831062152,38.89151000569929</span></code> como el <span class="guilabel">Punto final</span>. Expanda la sección <span class="guilabel">Parámetro avanzado</span>. Elija <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> como el <span class="guilabel">Campo dirección</span>. Debe estar familiarizado con los valores de dirección un solo sentido para el flujo de tráfico hacia adelante y atrás. Ingrese <code class="docutils literal notranslate"><span class="pre">OB</span></code> como el <span class="guilabel">Valor para la dirección hacia adelante</span> y <code class="docutils literal notranslate"><span class="pre">IB</span></code> como el <span class="guilabel">Valor para la dirección hacia atrás</span>. Mantenga las otras opciones en su valores predeterminados y clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/155.png" class="align-center" src="../../_images/155.png" />
+<div><img alt="../../_images/154.png" class="align-center" src="../../_images/154.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>El algoritmo usará la geometría de la capa y proveerá parámetros para construir un grafo de red. Este grafo es luego usado para encontrar la ruta más corta entre los puntos de inicio y final. Una vez termine el algoritmo, verá agregada una nueva capa <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">path</span></code> al panel <span class="guilabel">Capas</span> que muestra la ruta más corta entre los puntos de inicio y final.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/165.png" class="align-center" src="../../_images/165.png" />
+<div><img alt="../../_images/164.png" class="align-center" src="../../_images/164.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Verá que hay muchas posibles rutas entre los puntos de inicio y final. Pero dadas las limitaciones de la red - como el sentido único, el resultado es la ruta más corta posible. Es siempre una buena idea validar su análisis y supuestos. Una manera fácil de validarlo es usar un servicio de mapeo de terceros para ver si sus resultados coinciden con los que derivó. Aquí está la ruta más corta <a class="reference external" href="https://goo.gl/maps/XwTXTkvuaCuteocr8">sugerida por Google Maps</a> entre los mismos puntos de inicio y final. Como puede ver la ruta más corta recomendada coincide exactamente con nuestros resultados - validando nuestro análisis.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/175.png" class="align-center" src="../../_images/175.png" />
+<div><img alt="../../_images/174.png" class="align-center" src="../../_images/174.png" />
 </div></blockquote>
 </section>
 </section>
@@ -357,7 +357,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en ene. 08, 2022.<br/>
+      Actualizado por última vez en ene. 15, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

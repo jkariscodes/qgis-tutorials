@@ -202,17 +202,16 @@
 
   <section id="georeferencing-aerial-imagery-qgis3">
 <h1>Citra Udara BasisGeo<a class="headerlink" href="#georeferencing-aerial-imagery-qgis3" title="Link permanen untuk headline ini">¶</a></h1>
-<p>In the tutorial <a class="reference internal" href="georeferencing_basics.html"><span class="doc">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</span></a> we covered the basic process of georeferencing in QGIS. That method involved reading the coordinates from your scanned map and entering them manually as control points. Many times though you may not have the coordinates printed on your map, or you are trying to georeference an image. In that case, you can use another georeferenced data-source as your input. In this tutorial, you will learn how to use existing open data sources in your georeferencing process.</p>
+<p>In the tutorial <a class="reference internal" href="georeferencing_basics.html"><span class="doc">Georeferencing Topo Sheets and Scanned Maps (QGIS3)</span></a>, we covered the basic georeferencing process in QGIS. That method involved reading the coordinates from your scanned map and entering them manually as control points. Many times though, you may not have the coordinates printed on your map, or you are trying to georeference an image. In that case, you can use another georeferenced data source as your input. This tutorial will teach you how to use existing open data sources in your georeferencing process.</p>
 <section id="overview-of-the-task">
 <h2>Tinjauan Tugas<a class="headerlink" href="#overview-of-the-task" title="Link permanen untuk headline ini">¶</a></h2>
-<p>We will georeference high resolution balloon-imagery using reference coordinates from OpenStreetMap.</p>
+<p>We will georeference a high resolution balloon-imagery using reference coordinates from OpenStreetMap.</p>
 <section id="other-skills-you-will-learn">
 <h3>Skill lain yang akan anda pelajari<a class="headerlink" href="#other-skills-you-will-learn" title="Link permanen untuk headline ini">¶</a></h3>
 <ul class="simple">
-<li><p>Mengunduh citra domain publik dengan resolusi super tinggi</p></li>
-<li><p>Using XYZ Tile Layers as basemap.</p></li>
-<li><p>Menggunakan plugin OSM Place Search di QGIS</p></li>
-<li><p>Buat data tak bernilai untuk layer.</p></li>
+<li><p>Using XYZ Tile Layers as a Basemap in QGIS.</p></li>
+<li><p>Using Built-in Nominatim Geocoder.</p></li>
+<li><p>Setting a user-defined No-Data value for a layer.</p></li>
 </ul>
 </section>
 </section>
@@ -229,122 +228,86 @@
 <li><p>We will use a basemap from OpenStreetMap to capture the coordinates for georeferencing. QGIS3 comes with  built-in support for tile layers. These are commonly known as 'XYZ' layers since they are made using individual map tiles for each zoom level (z) on a x,y coordinate grid. You can find the <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> layer under <span class="guilabel">XYZ Tiles</span> in the <span class="guilabel">Browser Panel</span>. Drag the layer to the main canvas. Once loaded, note the Coordinate Reference System (CRS) for this layer in the bottom-right corder. It is set as <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code>. This is important because the coordinates we infer from this layer during georeferencing will be in this CRS.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1.png" class="align-center" src="../../_images/1.png" />
+<div><img alt="../../_images/01.png" class="align-center" src="../../_images/01.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Catatan</p>
 <p>See <a class="reference external" href="https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/">this page</a> for more details on XYZ layers and how to add other basemaps in QGIS.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>The image we are georeferencing is for <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code>. You can zoom/pan try to locate this park in the map. But that is cumbersome and may not be practical. An easier way is to use the OpenStreetMap (OSM) Place Search plugin to search for the exact location. Install the <code class="docutils literal notranslate"><span class="pre">OSM</span> <span class="pre">Place</span> <span class="pre">Search</span></code> plugin from <span class="menuselection">Plugins ‣ Manage and install plugins ‣ All</span>. If you do not see this plugin in the search results, make sure you have checked <span class="guilabel">Also show experimental plugins</span> under <span class="guilabel">Settings</span>. See <a class="reference internal" href="../using_plugins.html"><span class="doc">Menggunakan Plugins</span></a> for more information on using plugins in QGIS.</p></li>
+<li><p>The image we are georeferencing is for <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park,</span> <span class="pre">New</span> <span class="pre">York</span></code>. You can zoom/pan to locate this park on the map. But that is cumbersome and practical. From QGIS version 3.20 onwards, there is built-in support for the OpenStreetMap based Nominatim Geocoder. Click the search bar in the bottom left of the QGIS window. To use this as a geocoder prefix, the search place with <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. Searching for <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park</span></code> will pop up a list of addresses to choose from. Click the first address.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2.png" class="align-center" src="../../_images/2.png" />
+<div><img alt="../../_images/02.png" class="align-center" src="../../_images/02.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Once the plugin is installed, you will see a new panel called <span class="guilabel">OSM Place Search...</span>. Search for <code class="docutils literal notranslate"><span class="pre">Washington</span> <span class="pre">Square</span> <span class="pre">Park</span></code> in the <span class="guilabel">Name contains..</span> box and click <span class="guilabel">-&gt;</span>. You will see the matching place names appear in the results panel. Select the correct result and click the <span class="guilabel">Zoom</span> button.</p></li>
+<li><p>The map canvas will be centered to the Square Park. Now let's start georeferencing. Launch the <strong>Georeferencer</strong> from <span class="menuselection">Raster ‣ Georeferencer</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/3.png" class="align-center" src="../../_images/3.png" />
+<div><img alt="../../_images/03.png" class="align-center" src="../../_images/03.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>You will see the map that is familiar and contains the landmarks that we can identify from the image. You may close the <span class="guilabel">OSM Place Search</span> panel now. If you need it again, you can open it from <span class="menuselection">View ‣ Panels ‣ OSM Place Search</span>.</p></li>
+<li><p>For georeferencing an aerial image, we have to choose coordinate points from the OpenStreetMap, so let's first dock the Georeferencer tool into to main QGIS window. Select Configure Georeference from <span class="menuselection">Settings ‣ Configure Georeference</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/4.png" class="align-center" src="../../_images/4.png" />
+<div><img alt="../../_images/04.png" class="align-center" src="../../_images/04.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Now it is time to start georeferencing. Launch the <strong>Georeferencer</strong> from <span class="menuselection">Raster ‣ Georeferencer</span>.</p></li>
+<li><p>Check <span class="guilabel">Show georeferencer window docked</span> and click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/5.png" class="align-center" src="../../_images/5.png" />
+<div><img alt="../../_images/05.png" class="align-center" src="../../_images/05.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Pada jendela <span class="guilabel">Georeferencer</span>, pilih <span class="menuselection">File ‣ Open Raster</span>. Kemudian klik pada berkas JPG yang diunduh <span class="guilabel">Open</span>.</p></li>
+<li><p>The <span class="guilabel">Georeferencer</span> window will be docked at the bottom of the main QGIS window. Let us load the image file by clicking the <span class="guilabel">Open Raster</span> icon in the <span class="guilabel">Georeference</span> window and navigating to the downloaded JPG file. Click <span class="guilabel">Open.</span></p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/6.png" class="align-center" src="../../_images/6.png" />
+<div><img alt="../../_images/06.png" class="align-center" src="../../_images/06.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Pada layar berikut, silahkan pilih gambar raster CRS (Coordinate Reference System). Pastikan gambar menggunakan format JPEG dan tidak terkait dengan CRS lainnya, agar bisa diklik <span class="guilabel">Cancel</span>.</p></li>
+<li><p>Before adding Ground Control Points (GCP), we need to define the Transformation Settings. Click on the <span class="guilabel">Transformation Settings</span> icon to open the Transformation Settings dialog. Choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_raster/georeferencer.html?highlight=georeferencer#available-transformation-algorithms">QGIS Documentation</a> to learn about different transformation types and their uses. As noted earlier, our base map is in <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code> CRS, so set that as the <span class="guilabel">Target CRS</span>. You can leave the <span class="guilabel">Output raster</span> name to the default ad choose <code class="docutils literal notranslate"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Check the <span class="guilabel">Use 0 for transparency when needed</span>. Check the <span class="guilabel">Save GCP points</span> to store the points as a separate file for future purposes. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/7.png" class="align-center" src="../../_images/7.png" />
+<div><img alt="../../_images/07.png" class="align-center" src="../../_images/07.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Before we start adding Ground Control Points (GCP), we need to define the Transformation Settings. Go to <span class="menuselection">Settings ‣ Transformation settings</span>.</p></li>
+<li><p>Now click on the <span class="guilabel">Add Point</span> button on the toolbar and select an easily identifiable location on the image. Corners, intersections, poles etc., make good control points. Once you click on the image at a control point location, you will see a pop-up asking you to enter map coordinates. Click the button <span class="guilabel">From map canvas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/8.png" class="align-center" src="../../_images/8.png" />
+<div><img alt="../../_images/08.png" class="align-center" src="../../_images/08.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>In the <span class="guilabel">Transformation settings</span> dialog, choose the <span class="guilabel">Transformation type</span> as <code class="docutils literal notranslate"><span class="pre">Polynomial</span> <span class="pre">2</span></code>. See <a class="reference external" href="https://docs.qgis.org/testing/en/docs/user_manual/plugins/plugins_georeferencer.html#available-transformation-algorithms">QGIS Documentation</a> to learn about different transofrmation types and their uses. As noted earlier, our basemap is in <code class="docutils literal notranslate"><span class="pre">EPSG</span> <span class="pre">3857</span> <span class="pre">Pseudo</span> <span class="pre">Mercator</span></code> CRS, so set that as the <span class="guilabel">Target CRS</span>. You can leave the <span class="guilabel">Output raster</span> name to the default and choose <code class="docutils literal notranslate"><span class="pre">LZW</span></code> as the <span class="guilabel">Compression</span>. Check the <span class="guilabel">Use 0 for transparency when needed</span>. Make sure the <span class="guilabel">Load in QGIS when done</span> option is checked. CLick <span class="guilabel">OK</span>.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">OpenStreetMap</span></code> layer, click on the exact location in the reference layer. The coordinates will be auto-populated from your click on the map canvas. Click <span class="guilabel">Ok</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/9.png" class="align-center" src="../../_images/9.png" />
+<div><img alt="../../_images/09.png" class="align-center" src="../../_images/09.png" />
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Catatan</p>
+<p>Tip: When selecting a GCP on a building, always choose the bottom of the building. Most aerial and satellite imagery have leaning buildings, so picking a point on the rooftop will introduce errors.</p>
+</div>
 <ol class="arabic simple" start="10">
-<li><p>Now click on the <span class="guilabel">Add Point</span> button on the toolbar and select an easily identifiable location on the image. Corners, intersections, poles etc. make good control points.</p></li>
+<li><p>Similarly, choose at least 6 points on the image and add their coordinates from the reference layer. Once you have added the minimum number of points required for the transform, you will notice that the GCPs now have non-zero <code class="docutils literal notranslate"><span class="pre">dX</span></code>, <code class="docutils literal notranslate"><span class="pre">dY</span></code>, and <code class="docutils literal notranslate"><span class="pre">Residual</span></code> error values. If a particular GCP has unusually high error values, that usually means a human error in entering the coordinate values. So you can delete that GCP and capture it again.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/10.png" class="align-center" src="../../_images/10.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Once you click on the image at a control point location, you will see a pop-up asking you to enter map coordinates. Click the button <span class="guilabel">From map canvas</span>.</p></li>
+<li><p>Once you are satisfied with the GCPs, click <span class="guilabel">Start georeferencing</span>. This will start the process of warping the image using the GCPs and creating the target raster. Once the process is finished, you will see the layer loaded in QGIS. Close the <span class="guilabel">Georeferencer</span> window.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/11.png" class="align-center" src="../../_images/11.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>Find the same location in the reference layer and click at the precise point. The coordinates are auto-populated from your click on the map canvas. Click Ok. Similarly, choose at least 6 points on the image and add their coordinates from the reference layer.</p></li>
+<li><p>Now click on the <span class="guilabel">Open layer styling panel</span> icon and Switch to the <span class="guilabel">Transparency</span> tab. Add <code class="docutils literal notranslate"><span class="pre">255</span></code> as the <span class="guilabel">Additional no data value</span>. This will remove the white border around the image. Now you will see your georeferenced image nicely overlaid on the base layer.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/12.png" class="align-center" src="../../_images/12.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Catatan</p>
-<p>Tip: When selecting a GCP on a building, always choose the bottom of the building. Many aerial and satellite imagery have leaning buildings, so choosing a point on the rooftop will introduce errors.</p>
-</div>
-<ol class="arabic simple" start="13">
-<li><p>Once you have added the minimum number of points required for the transform, you will notice that the GCPs now have a non-zero <code class="docutils literal notranslate"><span class="pre">dX</span></code>, <code class="docutils literal notranslate"><span class="pre">dY</span></code> and <code class="docutils literal notranslate"><span class="pre">Residual</span></code> error values. If a particular GCP has unusually high error values, that usually means a human-error in entering the coordinate values. So you can delete that GCP and capture it again.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
-</div></blockquote>
-<ol class="arabic simple" start="14">
-<li><p>Once you are satisfied with the GCPs, go to <span class="menuselection">File ‣ Start georeferencing</span>. This will start the process of warping the image using the GCPs and creating the target raster.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/14.png" class="align-center" src="../../_images/14.png" />
-</div></blockquote>
-<ol class="arabic simple" start="15">
-<li><p>Once the process finishes, you will see the georeferenced layer loaded in QGIS. If all went well, you will see it nicely overlay the basemap.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
-</div></blockquote>
-<ol class="arabic simple" start="16">
-<li><p>Agar lebih cantik, hapus kotak putih. Klik kanan pada lapisan gambar dan pilih <span class="guilabel">Properties</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
-</div></blockquote>
-<ol class="arabic simple" start="17">
-<li><p>Switch to the <span class="guilabel">Transparency</span> tab. Add <code class="docutils literal notranslate"><span class="pre">255</span></code> as the <span class="guilabel">Additional no data value</span> and click <span class="guilabel">OK</span>.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
-</div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Catatan</p>
 <p>8-bit images have pixel values in the range 0-255. 0 is black and 255 is white.</p>
 </div>
-<ol class="arabic simple" start="18">
-<li><p>Sekarang terlihat citra BasisGeo terletak di layer dasar.</p></li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
-</div></blockquote>
 </section>
 </section>
 
@@ -370,7 +333,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Jan 08, 2022.<br/>
+      Terakhir diperbarui pada Jan 15, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

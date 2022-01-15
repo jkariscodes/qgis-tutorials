@@ -222,7 +222,7 @@ link below:</p>
 <ol class="arabic simple">
 <li><p>Akses <span class="menuselection">Layer ‣ Add Raster Layer</span> . Cari lokasi file yang sudah diunduh <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02.tif</span></code> dan klik <span class="guilabel">Open</span>.</p></li>
 </ol>
-<img alt="../_images/1167.png" class="align-center" src="../_images/1167.png" />
+<img alt="../_images/1166.png" class="align-center" src="../_images/1166.png" />
 <ol class="arabic simple" start="2">
 <li><p>Ini adalah sebuah file raster yang besar dan anda mungkin sadar bahwa jika anda men-zoom atau pan di sekitar peta, peta tersebut mengkonsumsi sedikit waktu untuk merender gambar atau citra. QGIS menawarkan sebuah solusi sederhana untuk membuka raster lebih cepat menggunakan <strong>Image Pyramids</strong> . QGIS menghasilkan ubin atau tiles yang belum dirender pada resolusi yang berbeda dan inilah yang diperlihatkan pada anda bukan raster yang komplit. Hal ini membuat navigasi peta menjadi cepat dan responsif. Klik kanan layer <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02</span></code> dan pilih <span class="guilabel">Properties</span>.</p></li>
 </ol>
@@ -230,31 +230,31 @@ link below:</p>
 <ol class="arabic simple" start="3">
 <li><p>Pilih tab <span class="guilabel">Pyramids</span>. Tahan <kbd class="kbd docutils literal notranslate">Ctrl</kbd> dan pilih semua resolusi yang ditawarkan pada panel <span class="guilabel">Resolutions</span> . Biarkan opsi lain sebagaimana adanya dan klik <span class="guilabel">Build pyramids</span>  . Ketika proses selesai, klik <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/369.png" class="align-center" src="../_images/369.png" />
+<img alt="../_images/368.png" class="align-center" src="../_images/368.png" />
 <ol class="arabic simple" start="4">
 <li><p>Kembali pada jendela utama QGIS, gunakan tool <span class="guilabel">Zoom</span> untuk mencari lokasi area <em>Hagley Park</em> di Christchurch. Jadi ini adalah taman yang kita digitalisasi.</p></li>
 </ol>
-<img alt="../_images/443.png" class="align-center" src="../_images/443.png" />
+<img alt="../_images/442.png" class="align-center" src="../_images/442.png" />
 <ol class="arabic simple" start="5">
 <li><p>Sebelum kita mulai, kita perlu mensetting awal <strong>Digitizing Options</strong> . Akses <span class="menuselection">Settings ‣ Options...</span>.</p></li>
 </ol>
-<img alt="../_images/544.png" class="align-center" src="../_images/544.png" />
+<img alt="../_images/543.png" class="align-center" src="../_images/543.png" />
 <ol class="arabic simple" start="6">
 <li><p>Pilih tab <span class="guilabel">Digitizing</span> di dialog <span class="guilabel">Options</span> . Atur <span class="guilabel">Default snap mode</span> ke <span class="guilabel">To vertex and segment</span> . Ini akan membuatnya secara otomatis terpasang atau bisa disebut snap pada verteks terdekat atau segment garis. Saya juga lebih suka untuk mengatur <span class="guilabel">Default snapping tolerance</span> dan <span class="guilabel">Search radius for vertex edits</span> dalam pixel ketimbang map unit. Ini akan memastikan jarak snap tetap konstan tidak terpengerauh level zoom. Bergantung pada resolusi layar komputer anda, anda mungkin memilih nilai yang pantas atau cocok. Klik <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/642.png" class="align-center" src="../_images/642.png" />
+<img alt="../_images/641.png" class="align-center" src="../_images/641.png" />
 <ol class="arabic simple" start="7">
 <li><p>Sekarang kita siap untuk mulai digitalisasi. Pertama-tama kita akan menciptakan layer jalan dan mendigitalisasi jalan di sekitar area taman. Pilih <span class="menuselection">Layer ‣ New ‣ New Spatialite Layer...</span> . Anda juga bisa memilih untuk membuat  <span class="guilabel">New Shapefile Layer...</span> jika anda lebih nyaman dengan ini, Spatiallite adalah sebuah format database terbuka seperti format geodatabase ESRI. Database SpatialLite terkandung dalam sebuah file tunggal pada hard drive anda dan dapat mengandung tipe-tipe spasial yang berbeda (titik/poin, garis, poligon) sebagaimana layer non-spasial. Hal ini memudahkan dalam memindahkannya di sekitar ketimbang beberapa shapefile yang terpisah. Dalam tutorial ini, kita membuat beberapa layer poligon dan sebuah layer garis, sehingga sebuah database Spatialite dapat menjadi lebih cocok. Anda selalu dapat membuka sebuah layer spatialite dan menyimpannya sebagai shapefile atau format lain sesuai dengan yang anda inginkan</p></li>
 </ol>
-<img alt="../_images/742.png" class="align-center" src="../_images/742.png" />
+<img alt="../_images/741.png" class="align-center" src="../_images/741.png" />
 <ol class="arabic simple" start="8">
 <li><p>Pada dialog <span class="guilabel">New Spatialite Layer</span>, klik tombol <span class="guilabel">...</span> dan simpan database spatialite yang baru bernama <code class="docutils literal notranslate"><span class="pre">nztopo.sqlite</span></code> . Pilih <span class="guilabel">Layer name</span> sebagai <code class="docutils literal notranslate"><span class="pre">Roads</span></code>  dan pilih <code class="docutils literal notranslate"><span class="pre">Line</span></code> pada <span class="guilabel">Type</span> . Peta topografi dasar dalam CRS <cite>EPSG:2193 - NZGD 2000`</cite> , jadi kita bisa memilih CRS yang sama untuk layer jalan kita. Beri tanda cek pada  kotak <span class="guilabel">Create an autoincrementing primary key</span> . Ini akan menghasilkan kolom bernama <strong>pkuid</strong> di dalam tabel attribut dan memasangkan id numerik yang unik secara otomatis ke setiap fitur. Saat membuat sebuah layer GIS, anda harus memutuskan pada attribut yang setiap fitur akan miliki. Karena ini adalah layer jalan, kita akan punya 2 atribut dasar - Nama dan Kelas. Masukkan <code class="docutils literal notranslate"><span class="pre">Name</span></code>  pada <span class="guilabel">Name</span> dari attribut di bagian  <span class="guilabel">New attribute</span> dan klik <span class="guilabel">Add to attribute list.</span></p></li>
 </ol>
-<img alt="../_images/841.png" class="align-center" src="../_images/841.png" />
+<img alt="../_images/840.png" class="align-center" src="../_images/840.png" />
 <ol class="arabic simple" start="9">
 <li><p>Sama halnya dengan membuat attribut yang baru  <code class="docutils literal notranslate"><span class="pre">Class</span></code> dengan tipe <span class="guilabel">Text data</span> . Klik:guilabel:<cite>OK</cite>.</p></li>
 </ol>
-<img alt="../_images/942.png" class="align-center" src="../_images/942.png" />
+<img alt="../_images/941.png" class="align-center" src="../_images/941.png" />
 <ol class="arabic simple" start="10">
 <li><p>Ketika layer sudah dimunculkan, klik tombol <span class="guilabel">Toggle Editing</span> untuk membuat layer dalam posisi pengeditan</p></li>
 </ol>
@@ -266,7 +266,7 @@ link below:</p>
 <p class="admonition-title">Catatan</p>
 <p>Anda dapat mengunakan roda scroll pada mouse utnuk menzoom ke dalam atau ke luar saat proses digitalisasi. Anda dapat menekan dan menahan tombol scroll dan menggerakkan mouse untuk melakukan pan.</p>
 </div>
-<img alt="../_images/1168.png" class="align-center" src="../_images/1168.png" />
+<img alt="../_images/1167.png" class="align-center" src="../_images/1167.png" />
 <ol class="arabic simple" start="12">
 <li><p>Setelah anda meng-klik kanan to mengakhiri fitur, anda akan mendapat dialog yang muncul bernama <span class="guilabel">Attributes</span> . Di sini anda dapat memasukkan attribut dari fitur yang baru saja dibuat. Sejak <strong>pkuid</strong> adalah kolom auto-increminating, anda tidak akan bisa memasukkan nilai secara manual. Biarkan ini kosong dan masukkan nama jalan sesuai yang muncul di peta topografi. Secara opsional, tetapkan nilai dari kelas jalan. Klik <span class="guilabel">OK</span>.</p></li>
 </ol>
@@ -274,7 +274,7 @@ link below:</p>
 <ol class="arabic simple" start="13">
 <li><p>Style awal dari layer garis yang baru adalah sebuah garis tipis. Mari kita ubah sehingga kita dapat lebih jelas melihat fitur yang terdigitalisasi pada kanvas. Klik kanan pada layer <code class="docutils literal notranslate"><span class="pre">Roads</span></code> dan pilih <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/1346.png" class="align-center" src="../_images/1346.png" />
+<img alt="../_images/1345.png" class="align-center" src="../_images/1345.png" />
 <ol class="arabic simple" start="14">
 <li><p>Pilih tab <span class="guilabel">Style</span> pada dialog:guilabel:<cite>Layer Properties</cite>. Pilih sebuah style garis yang lebih tebal seperti <span class="guilabel">Primary</span> dari style yang sudah terdifinisi. Klik <span class="guilabel">OK</span>.</p></li>
 </ol>
@@ -282,23 +282,23 @@ link below:</p>
 <ol class="arabic simple" start="15">
 <li><p>Sekarang anda akan melihat fitur jalan yang sudah terdigitalisasi secara jelas. Klik <span class="guilabel">Save Layer Edits</span> untuk mengaktualisasikan fitur baru pada disk</p></li>
 </ol>
-<img alt="../_images/1541.png" class="align-center" src="../_images/1541.png" />
+<img alt="../_images/1540.png" class="align-center" src="../_images/1540.png" />
 <ol class="arabic simple" start="16">
 <li><p>Sebelum kita mendigitalisasi jalan yang tersisa, penting untuk mengupdate beberapa aturan lain untuk menghasilkan layer bebas error. Akses <span class="menuselection">Settings ‣ Snapping Options...</span>.</p></li>
 </ol>
-<img alt="../_images/1638.png" class="align-center" src="../_images/1638.png" />
+<img alt="../_images/1637.png" class="align-center" src="../_images/1637.png" />
 <ol class="arabic simple" start="17">
 <li><p>Pada dialog <span class="guilabel">Snapping Options</span>, Beri tanda cek pada <span class="guilabel">Enable topological editing</span> . Opsi ini akan memastikan bahwa batas yang sama dipertahankan dengan baik pada layer poligon. beri tanda cek juga pada <span class="guilabel">Enable snapping on intersection</span> yang membolehkan anda untuk snap pada sebuah persimpangan pada layer latar belakang</p></li>
 </ol>
-<img alt="../_images/1735.png" class="align-center" src="../_images/1735.png" />
+<img alt="../_images/1734.png" class="align-center" src="../_images/1734.png" />
 <ol class="arabic simple" start="18">
 <li><p>Sekarang anda dapat mengklik tombol <span class="guilabel">Add feature</span> dan mendigitalisasi jalan-jalan lain di sekitar jalan. Pastikan untuk mengklik <span class="guilabel">Save Edits</span> setelah anda menambah fitur baru untuk menyimpan pekerjaan anda. Sebuah tool sederhana akan menolong anda dalam digitalisasi adalah <strong>Node Tool</strong> , Klik tombol <span class="guilabel">Node Tool</span> button.</p></li>
 </ol>
-<img alt="../_images/1833.png" class="align-center" src="../_images/1833.png" />
+<img alt="../_images/1832.png" class="align-center" src="../_images/1832.png" />
 <ol class="arabic simple" start="19">
 <li><p>Ketika node tool sudah aktif, klik pada sembarang fitur untuk memperlihatkan simpul-simpul. Klik pada sembarang verteks untuk memilihnya. Verteks akan merubah warna ketika itu terpilih. Sekarang anda dapat mengklik dan mendrag mouse untuk menggerakkan verteks. Ini menjadi berguna saat anda ingin melakukan perubahan setelah sebuah fitur sudah ditambahkan. Anda dapat juga menghapus verteks terpilih dengan mengklik <kbd class="kbd docutils literal notranslate">Delete</kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd> untuk mac)</p></li>
 </ol>
-<img alt="../_images/1925.png" class="align-center" src="../_images/1925.png" />
+<img alt="../_images/1924.png" class="align-center" src="../_images/1924.png" />
 <ol class="arabic simple" start="20">
 <li><p>Ketika anda sudah selesai mendigitalisasi semua jalan, klik tombol <span class="guilabel">Toggle Editing</span></p></li>
 </ol>
@@ -366,7 +366,7 @@ link below:</p>
 <ol class="arabic simple" start="36">
 <li><p>Simpan editan layer dan klik <span class="guilabel">Toggle Editing</span> ketika anda sudah selesai dalam pendigitalisasian semua bangunan. Anda dapat mendrag layer-layer untuk mengubah urutan tampilan.</p></li>
 </ol>
-<img alt="../_images/3610.png" class="align-center" src="../_images/3610.png" />
+<img alt="../_images/369.png" class="align-center" src="../_images/369.png" />
 <ol class="arabic simple" start="37">
 <li><p>Tugas digitalisasikan sekarang sudah selesai. Anda dapat bermain-main dengan opsi styling dan labelling pada properti layer untuk menghasilkan sebuah peta yang terlihat bagus dari data yang sudah anda hasilkan</p></li>
 </ol>
@@ -396,7 +396,7 @@ link below:</p>
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Jan 08, 2022.<br/>
+      Terakhir diperbarui pada Jan 15, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

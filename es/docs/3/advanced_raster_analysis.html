@@ -202,7 +202,7 @@
 
   <section id="advanced-raster-analysis-qgis3">
 <h1>Análisis Avanzado de Ráster (QGIS3)<a class="headerlink" href="#advanced-raster-analysis-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>En el tutorial anterior <a class="reference internal" href="raster_styling_and_analysis.html"><span class="doc">Estilos y Análisis Básicos Ráster (QGIS3)</span></a>, aprendió a realizar álgebra de ráster con la <em>Calculadora de raster</em>. Este tutorial se basa en estas técnicas y le muestra cómo utilizar otras herramientas de análisis ráster de la caja de herramientas de procesamiento. Aprenderá a procesar con los rásteres de Uso del Suelo (LULC) en QGIS para extraer ciertos tipos de clases de cobertura del suelo y mapear los cambios.</p>
+<p>En el tutorial anterior <a class="reference internal" href="raster_styling_and_analysis.html"><span class="doc">Estilos y Análisis Básicos Ráster (QGIS3)</span></a>, aprendió a realizar álgebra de ráster con la <em>Calculadora de raster</em>. Este tutorial se basa en estas técnicas y le muestra cómo utilizar otras herramientas de análisis ráster de la caja de herramientas de procesamiento. Aprenderá a procesar con los rásteres de Uso y Cobertura de la Tierra (UCT) en QGIS para extraer ciertos tipos de clases de cobertura del suelo y mapear los cambios.</p>
 <section id="overview-of-the-task">
 <h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Utilizaremos el conjunto de datos South African National Land Cover para identificar y extraer los asentamientos informales en la ciudad de Johannesburgo (Sudáfrica). También utilizaremos un conjunto de datos de evaluación de cambios para identificar los patrones de crecimiento urbano en la ciudad desde 2014 hasta 2018.</p>
@@ -219,8 +219,8 @@
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Para este tutorial descargaremos los siguientes conjuntos de datos</p>
 <ol class="arabic simple">
-<li><p><em>El conjunto de datos South African National Land Cover 2018</em>: El nuevo conjunto de datos South African National Land-Cover 2018 se ha generado a partir de imágenes satelitales Sentinel 2 multiestacionales de 20 metros y contiene 73 clases de cobertura del suelo.</p></li>
-<li><p><em>Evaluaciones de cambio de la cubierta terrestre nacional de Sudáfrica 2018</em>: Este conjunto de datos compara el cambio en 20 clases de cobertura del suelo desde 2014 hasta 2018.</p></li>
+<li><p><em>El conjunto de datos South African National Land Cover 2018</em>: El nuevo conjunto de datos South African National Land-Cover 2018 se ha generado a partir de imágenes satelitales Sentinel 2 multitemporales de 20 metros y contiene 73 clases de cobertura de la tierra.</p></li>
+<li><p><em>Evaluaciones de cambio de la cobertura de la tierra nacional de Sudáfrica 2018</em>: Este conjunto de datos compara el cambio en 20 clases de cobertura de la tierra desde 2014 hasta 2018.</p></li>
 <li><p><em>Límite de la ciudad de Johannesburgo</em>: Un archivo shape de los límites de la ciudad de Johannesburgo, Sudáfrica.</p></li>
 </ol>
 <p>El portal <a class="reference external" href="https://egis.environment.gov.za/">Environmental Geographical Information Systems (E-GIS)</a> proporciona acceso a datos geoespaciales medioambientales de Sudáfrica. De este portal descargaremos los rásteres de South African National Land-Cover (SANLC).</p>
@@ -279,55 +279,55 @@
 <li><p>Busque la carpeta descargada y descomprimida en el navegador. Expándala y arrastra y suelta el <code class="docutils literal notranslate"><span class="pre">SA_NLC_2018_ALBERS_CALC.tif</span></code> en el lienzo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/01.png" class="align-center" src="../../_images/01.png" />
+<div><img alt="../../_images/011.png" class="align-center" src="../../_images/011.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Una vez cargada la capa, podrá observar que el SRC estará configurado como <span class="guilabel">SRC Desconocido</span> en la parte inferior derecha. Haga doble clic en él para abrir el cuadro de diálogo <span class="guilabel">Propiedades del proyecto - SRC</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/02.png" class="align-center" src="../../_images/02.png" />
+<div><img alt="../../_images/021.png" class="align-center" src="../../_images/021.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>En la parte inferior, verá una vista previa de la extensión de la proyección. Esta <em>SRC desconocida</em> es una <em>proyección de área equitativa de Lambert</em> personalizada definida para el país de Sudáfrica. Más adelante reproyectaremos esta capa a otra proyección. Haga clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/03.png" class="align-center" src="../../_images/03.png" />
+<div><img alt="../../_images/031.png" class="align-center" src="../../_images/031.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Cargue las otras dos capas <code class="docutils literal notranslate"><span class="pre">SA_NLC_2014_2018_CLASS_CHANGE_ALBERS_CALC.tif</span></code> y <code class="docutils literal notranslate"><span class="pre">COJ_Boundary</span></code>. Verá que la capa rasterizada cubre todo el país. Para nuestro análisis, sólo nos interesa el área cubierta por la capa <code class="docutils literal notranslate"><span class="pre">COJ_Boundary</span></code>. Ahora recortaremos la capa rasterizada a esta región. Vaya a <span class="menuselection">Procesamiento ‣ Caja de herramientas ‣ GDAL ‣ Extracción de rásteres ‣ Recortar ráster por capa de máscara</span>. Haga doble clic para abrirla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/04.png" class="align-center" src="../../_images/04.png" />
+<div><img alt="../../_images/041.png" class="align-center" src="../../_images/041.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>En la <span class="guilabel">Cortar ráster por capa de máscara</span>, seleccionamos <code class="docutils literal notranslate"><span class="pre">SA_NLC_2018_ALBERS_CALC</span></code> como <span class="guilabel">Capa de entrada</span>, y luego <code class="docutils literal notranslate"><span class="pre">COJ_Boundary</span></code> como <span class="guilabel">Capa de máscara</span>. También tenemos una opción para reproyectar los datos a otra proyección. Es una buena práctica mantener todas las capas de datos en la misma proyección. Reproyectaremos los rásteres para que el SRC coincida con el de la capa <code class="docutils literal notranslate"><span class="pre">COJ_Boundary</span></code>. Seleccione <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> como <span class="guilabel">SRC objetivo`</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/05.png" class="align-center" src="../../_images/05.png" />
+<div><img alt="../../_images/051.png" class="align-center" src="../../_images/051.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>El formato de datos de salida por defecto es GeoTiff. Los archivos GeoTiff pueden ser muy grandes si no se comprimen. Una buena práctica es aplicar siempre una compresión sin pérdidas al crear nuevas capas rasterizadas. Despliegue <span class="guilabel">Parámetros Avanzados</span> y elija <code class="docutils literal notranslate"><span class="pre">Alta</span> <span class="pre">Compresión</span></code> como <span class="guilabel">Perfil</span>. A continuación, haga clic en el botón <code class="docutils literal notranslate"><span class="pre">...</span></code> junto a <span class="guilabel">Clipped (mask)</span> y seleccione <span class="guilabel">Guardar a archivo… `para introducir el nombre de la capa como ``SA_NLC_2018_Clipped`</span>. Haga clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/06.png" class="align-center" src="../../_images/06.png" />
+<div><img alt="../../_images/061.png" class="align-center" src="../../_images/061.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>Una vez que el algoritmo termine, no cierre la ventana. Vamos a aplicar la misma operación a la otra capa rasterizada. Cambie a la pestaña <span class="guilabel">Parámetros</span> y cambie la <span class="guilabel">Capa de entrada</span> a <code class="docutils literal notranslate"><span class="pre">SA_NLC_2014_2018_CLASS_CHANGE_ALBERS_CALC</span></code>. Mantenga todas las demás opciones pero cambie el nombre de la capa de salida a <code class="docutils literal notranslate"><span class="pre">SA_NLC_2014_2018_CLASS_CHANGE_Clipped</span></code>. Haga clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/07.png" class="align-center" src="../../_images/07.png" />
+<div><img alt="../../_images/071.png" class="align-center" src="../../_images/071.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>Las dos capas recortadas se cargarán ahora en el lienzo. Seleccione la capa original y haga clic en <span class="guilabel">Quitar capa</span> para eliminarlas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/08.png" class="align-center" src="../../_images/08.png" />
+<div><img alt="../../_images/081.png" class="align-center" src="../../_images/081.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>Las tres capas restantes están ahora en el mismo SRC. Ahora podemos cambiar el SRC del proyecto al SRC de las capas. Haga clic con el botón derecho en cualquier capa recortada y elija <span class="menuselection">Capa SRC ‣ Establecer SRC del proyecto desde la capa</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/09.png" class="align-center" src="../../_images/09.png" />
+<div><img alt="../../_images/091.png" class="align-center" src="../../_images/091.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>Ahora el SRC del proyecto se establecerá en <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>.</p></li>
@@ -351,7 +351,7 @@
 <li><p>Vamos a extraer los píxeles que pertenecen a estas clases. Vaya a la herramienta <span class="menuselection">Procesamiento ‣ Caja de herramientas ‣ Análisis rasterizado ‣ Calculadora rasterizada</span>. Haga doble clic para abrirla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/131.png" class="align-center" src="../../_images/131.png" />
+<div><img alt="../../_images/13.png" class="align-center" src="../../_images/13.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>La imagen de origen sólo tiene una banda. El sufijo <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> indica el número de banda. Introduzca la siguiente expresión para seleccionar los píxeles de la clase 51-54.</p></li>
@@ -360,31 +360,31 @@
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;SA_NLC_2018_Clipped@1&quot; &gt;= 51 AND &quot;SA_NLC_2018_Clipped@1&quot; &lt;= 54
 </pre></div>
 </div>
-<img alt="../../_images/141.png" class="align-center" src="../../_images/141.png" />
+<img alt="../../_images/14.png" class="align-center" src="../../_images/14.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>Desplácese hacia abajo y haga clic en el botón <code class="docutils literal notranslate"><span class="pre">...</span></code> junto a <span class="guilabel">Capa(s) de referencia`</span>. Seleccione la capa <code class="docutils literal notranslate"><span class="pre">SA_NLC_2018_Clipped</span></code> y haga clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/151.png" class="align-center" src="../../_images/151.png" />
+<div><img alt="../../_images/15.png" class="align-center" src="../../_images/15.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>A continuación, haga clic en el botón <code class="docutils literal notranslate"><span class="pre">...</span></code> junto a <span class="guilabel">Salida</span> y seleccione <span class="guilabel">Guardar a archivo…</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/161.png" class="align-center" src="../../_images/161.png" />
+<div><img alt="../../_images/16.png" class="align-center" src="../../_images/16.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Nombre el archivo de salida <code class="docutils literal notranslate"><span class="pre">residencial_informal.tif</span></code> y haga clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/171.png" class="align-center" src="../../_images/171.png" />
+<div><img alt="../../_images/17.png" class="align-center" src="../../_images/17.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Una vez finalizado el proceso, se añadirá a QGIS una nueva capa, <code class="docutils literal notranslate"><span class="pre">residencial_informal</span></code>. Esta capa rasterizada sólo tiene valores de dos píxeles: <code class="docutils literal notranslate"><span class="pre">1</span></code> donde nuestra expresión evaluó <em>true</em> y <code class="docutils literal notranslate"><span class="pre">0</span></code> donde fue <em>false</em>. Los píxeles que aparecen en blanco son los que pertenecen a las clases de asentamientos informales. Estilizaremos mejor esta capa para poder ver claramente los asentamientos informales. Haga clic en el botón <span class="guilabel">Abrir el panel de estilo de la capa</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/181.png" class="align-center" src="../../_images/181.png" />
+<div><img alt="../../_images/18.png" class="align-center" src="../../_images/18.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Seleccione la capa <code class="docutils literal notranslate"><span class="pre">residencial_informal</span></code> y cambie el representador para que sea <span class="guilabel">Valores únicos`</span>. Haga clic en el botón <span class="guilabel">Añadir valores manualmente</span> (+).</p></li>
@@ -467,13 +467,13 @@
 <div><img alt="../../_images/29.png" class="align-center" src="../../_images/29.png" />
 </div></blockquote>
 <ol class="arabic simple" start="30">
-<li><p>En el cuadro de diálogo <span class="guilabel">Reclasificar por capa</span>, seleccione <code class="docutils literal notranslate"><span class="pre">SA_NLC_2014_2018_CHANGE_Clipped</span></code> como la <span class="guilabel">Capa ráster</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">reclass</span> <span class="pre">Sheet1</span></code> como <span class="guilabel">Capa que contiene cortes de clase`</span>. Selecciona los campos <code class="docutils literal notranslate"><span class="pre">MIN</span></code>, <code class="docutils literal notranslate"><span class="pre">MAX</span></code> y <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code> para sus respectivos campos.</p></li>
+<li><p>En el cuadro de diálogo <span class="guilabel">Reclasificar por capa</span>, seleccione <code class="docutils literal notranslate"><span class="pre">SA_NLC_2014_2018_CHANGE_Clipped</span></code> como la <span class="guilabel">Capa ráster</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">reclass</span> <span class="pre">Sheet1</span></code> como <span class="guilabel">Capa que contiene cortes de clase`</span>. Seleccione los campos <code class="docutils literal notranslate"><span class="pre">MIN</span></code>, <code class="docutils literal notranslate"><span class="pre">MAX</span></code> y <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code> para sus respectivos campos.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/30.png" class="align-center" src="../../_images/30.png" />
 </div></blockquote>
 <ol class="arabic simple" start="31">
-<li><p>Amplíe la sección <span class="guilabel">Parámetros avanzados</span>. Cambie la etiqueta <span class="guilabel">Límites de rango</span> a <code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">&lt;=</span> <span class="pre">value</span> <span class="pre">&lt;=</span> <span class="pre">max</span></code>. Haga clic en el botón <span class="guilabel">…</span> de <span class="guilabel">Recalificación de la trama</span> e introduzca el nombre del archivo de salida como <code class="docutils literal notranslate"><span class="pre">builtup_change.tif</span></code>. Haga clic en <span class="guilabel">Run</span>.</p></li>
+<li><p>Amplíe la sección <span class="guilabel">Parámetros avanzados</span>. Cambie la etiqueta <span class="guilabel">Límites de rango</span> a <code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">&lt;=</span> <span class="pre">value</span> <span class="pre">&lt;=</span> <span class="pre">max</span></code>. Haga clic en el botón <span class="guilabel">…</span> de <span class="guilabel">Recalificación de la trama</span> e introduzca el nombre del archivo de salida como <code class="docutils literal notranslate"><span class="pre">builtup_change.tif</span></code>. Haga clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/31.png" class="align-center" src="../../_images/31.png" />
@@ -521,7 +521,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en ene. 08, 2022.<br/>
+      Actualizado por última vez en ene. 15, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
