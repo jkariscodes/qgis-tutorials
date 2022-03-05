@@ -223,19 +223,19 @@
 <ol class="arabic simple">
 <li><p>Для этого урока мы будем использовать слой OpenStreetMap в качестве опорного слоя. Установите модуль OpenLayers из меню <span class="menuselection">Модули ‣ Управление модулями…</span>. См. <a class="reference internal" href="using_plugins.html"><span class="doc">Использование модулей расширения</span></a> для получения дополнительной информации об использовании модулей в QGIS.</p></li>
 </ol>
-<img alt="../_images/1148.png" class="align-center" src="../_images/1148.png" />
+<img alt="../_images/1147.png" class="align-center" src="../_images/1147.png" />
 <ol class="arabic simple" start="2">
 <li><p>После установки перейдите в <span class="menuselection">Плагины ‣ Плагин OpenLayers ‣ Добавить слой OpenStreetMap</span>. Это добавит слой предварительно обработанных плиток, созданных из <a class="reference external" href="http://www.openstreetmap.org/">данных OpenStreetMap</a>.</p></li>
 </ol>
-<img alt="../_images/2109.png" class="align-center" src="../_images/2109.png" />
+<img alt="../_images/2121.png" class="align-center" src="../_images/2121.png" />
 <ol class="arabic simple" start="3">
 <li><p>Так вы загрузили слой OpenStreetMap в QGIS. Заметьте, что система отсчёта координат (СОК) для это слоя установлена на EPSG 3857 Pseudo Mercator. Это важно, так как координаты в этом слое будут в этой СОК.</p></li>
 </ol>
-<img alt="../_images/357.png" class="align-center" src="../_images/357.png" />
+<img alt="../_images/356.png" class="align-center" src="../_images/356.png" />
 <ol class="arabic simple" start="4">
 <li><p>Теперь задача состоит в том, чтобы найти общую близость к области, к которой мы выполняем привязку. Вы можете просто использовать перемещение и масштабирование, чтобы найти нужную область на OpenStreetMap. Но есть ещё один инструмент, который может вам помочь. Мы знаем, что у нас изображение Вашингтон-Сквер-парка. Если Вы поищете это место, Вы сможете найти его страницу на Википедии. Там указаны его координаты.</p></li>
 </ol>
-<img alt="../_images/432.png" class="align-center" src="../_images/432.png" />
+<img alt="../_images/431.png" class="align-center" src="../_images/431.png" />
 <ol class="arabic simple" start="5">
 <li><p>Вы можете заметить, что координаты указаны в градусах/минутах/секунд и являются широтой и долготой. Но так как наш слой находится в проекции Mercator’а, нам будут нужны координаты Mercator’а, чтобы определить местонахождение парка. С этим может помочь инструмент командной-строки <strong>cs2cs</strong>. Если вы установили QGIS установщиком OSGeo4W, он у вас уже есть. На Linux и Mac он тоже идёт вместе с QGIS. Откройте терминал и напишите <code class="docutils literal notranslate"><span class="pre">cs2cs</span></code>, чтобы проверить его наличие. Пользователи Windows могут найти терминал в <span class="menuselection">Пуск ‣ OSGeo4W ‣ MSYS</span>.</p></li>
 </ol>
@@ -243,7 +243,7 @@
 <p class="admonition-title">Примечание</p>
 <p>MacOS users can locate the cs2cs tool at /Library/Frameworks/PROJ.Framework/Programs/cs2cs</p>
 </div>
-<img alt="../_images/533.png" class="align-center" src="../_images/533.png" />
+<img alt="../_images/532.png" class="align-center" src="../_images/532.png" />
 <ol class="arabic simple" start="6">
 <li><p>После того, как вы убедились, что инструмент cs2cs существует в вашей системе, пора конвертировать широту и долготу в координаты Mercator. Для работы этого инструмента вам нужно указать <span class="guilabel">исходную</span> и <span class="guilabel">целевую</span> СОК. СОК может быть записана как <a class="reference external" href="http://trac.osgeo.org/proj/wiki/GenParms">строка PROJ4</a> или <a class="reference external" href="http://www.epsg-registry.org/">EPSG код</a>. Так как мы уже знаем код EPSG для наших СОК, мы будем использовать второй вариант. Самый простой способ использовать инструмент - ввести координаты прямо в командную строку. Обратите внимание, что инструмент принимает координаты в порядке <cite>XY</cite>, поэтому мы должны ввести <cite>Долготу Широту</cite>. Введите следующую команду в терминале и нажмите Ввод. Обратите внимание, что мы должны избегать кавычки (») и обратную косую черту (\). После того, как Вы нажмёте Ввод, Вы увидите, как cs2cs обработает координаты и выдаст координаты в СОК EPSG 3857.</p></li>
 </ol>
@@ -256,19 +256,19 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo -73d59&#39;51 40d43&#39;51 | cs2cs +init=EPSG:4326 +to +init=EPSG:3857
 </pre></div>
 </div>
-<img alt="../_images/632.png" class="align-center" src="../_images/632.png" />
+<img alt="../_images/631.png" class="align-center" src="../_images/631.png" />
 <ol class="arabic simple" start="7">
 <li><p>Скопируйте эти координаты и переключитесь на QGIS. В нижней части окна QGIS Вы увидите текстовое поле с надписью «Координаты». Введите туда X,Y координаты и нажмите Ввод. Вы увидите, как карта сдвинулась, но не увеличилась. Для увеличения области, выберите масштаб 1:25000 в выпадающем меню масштаба (рядом с координатами) и нажмите Ввод.</p></li>
 </ol>
-<img alt="../_images/732.png" class="align-center" src="../_images/732.png" />
+<img alt="../_images/731.png" class="align-center" src="../_images/731.png" />
 <ol class="arabic simple" start="8">
 <li><p>Вуаля! Теперь вы видите Вашингтон-Сквер-парк на вашем холсте. Настало время гео-привязки. Запустите <strong>геопривязчик</strong> из <span class="menuselection">Растр ‣ Геопривязчик ‣ Геопривязчик</span>. Если у вас нет этого пункта меню, включить плагин <span class="guilabel">Геопривязчик GDAL</span> из <span class="menuselection">Плагины ‣ Управление и установка плагинов ‣ Установленные</span>.</p></li>
 </ol>
-<img alt="../_images/831.png" class="align-center" src="../_images/831.png" />
+<img alt="../_images/830.png" class="align-center" src="../_images/830.png" />
 <ol class="arabic simple" start="9">
 <li><p>В окне <span class="guilabel">Геопривязчик</span>, перейдите в <span class="menuselection">Файл ‣ Открыть растровое изображение</span>. Найдите скачанное JPG изображение и нажмите <span class="guilabel">Открыть</span>.</p></li>
 </ol>
-<img alt="../_images/932.png" class="align-center" src="../_images/932.png" />
+<img alt="../_images/931.png" class="align-center" src="../_images/931.png" />
 <ol class="arabic simple" start="10">
 <li><p>В :<cite>Выбор системы отсчёта координат</cite> выберите <span class="guilabel">EPSG:3857 Pseudo Mercator</span></p></li>
 </ol>
@@ -276,7 +276,7 @@
 <ol class="arabic simple" start="11">
 <li><p>Теперь нажмите на <span class="guilabel">Добавить точку</span> на панели инструментов и выберите легко узнаваемое место на изображении. Углы, пересечения, столбы и т.п. хорошо подходят в качестве контрольных точек.</p></li>
 </ol>
-<img alt="../_images/1149.png" class="align-center" src="../_images/1149.png" />
+<img alt="../_images/1148.png" class="align-center" src="../_images/1148.png" />
 <ol class="arabic simple" start="12">
 <li><p>Как только Вы нажмёте на изображение в контрольной точке, Вы увидите всплывающее окно с просьбой ввести координаты на карте. Нажмите на кнопку <span class="guilabel">С карты-холста</span>.</p></li>
 </ol>
@@ -334,7 +334,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Обновлено: февр. 11, 2022.<br/>
+      Обновлено: мар. 05, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

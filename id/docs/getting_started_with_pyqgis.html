@@ -212,33 +212,33 @@
 <ol class="arabic simple">
 <li><p>Dalam QGIS, akses <span class="menuselection">Layers ‣ Add Vector Layer</span> . Jelajah ke file <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.zip</span></code> yang sudah terunduh dan klik <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.zip</span></code> . Pilih layer <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.shp</span></code> dan klik <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1173.png" class="align-center" src="../_images/1173.png" />
+<img alt="../_images/1172.png" class="align-center" src="../_images/1172.png" />
 <ol class="arabic simple" start="2">
 <li><p>Anda akan melihat layer <code class="docutils literal notranslate"><span class="pre">ne_10m_airports</span></code> terbuka di QGIS</p></li>
 </ol>
-<img alt="../_images/2138.png" class="align-center" src="../_images/2138.png" />
+<img alt="../_images/2139.png" class="align-center" src="../_images/2139.png" />
 <ol class="arabic simple" start="3">
 <li><p>Pilih tool <span class="guilabel">Identify</span> dan klik pada poin mana saja untuk memeriksa attribut yang tersedia. Anda akan melihat bahwa nama airport dan 3 digit kode didalamnya adalah attribut <code class="docutils literal notranslate"><span class="pre">name</span></code> dan <code class="docutils literal notranslate"><span class="pre">iata_code</span></code> secara berurutan</p></li>
 </ol>
-<img alt="../_images/375.png" class="align-center" src="../_images/375.png" />
+<img alt="../_images/374.png" class="align-center" src="../_images/374.png" />
 <ol class="arabic simple" start="4">
 <li><p>QGIS menyediakan konsol built-in dimana anda bisa mengetik command phyton dan mendapatkan hasilnya. Konsol ini merupakan cara yang sangat baik untuk belajar scripting dan juga melakukan proses data cepat. Buka <span class="guilabel">Python Console</span> dengan mengakses <span class="menuselection">Plugins ‣ Python Console</span>.</p></li>
 </ol>
-<img alt="../_images/446.png" class="align-center" src="../_images/446.png" />
+<img alt="../_images/445.png" class="align-center" src="../_images/445.png" />
 <ol class="arabic simple" start="5">
 <li><p>Anda akan melihat sebuah panel baru di bawah kanvas QGIS. Anda akan melihat sebuah tanda seperti <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> di bawah dimana anda dapat mengetik command. Untuk interaksi dengan environment QGIS, anda harus menggunakan variabel <code class="docutils literal notranslate"><span class="pre">iface</span></code> . Untuk mengakses layer yang sedang aktif di QGIS, anda dapat mengetik sebagai berikut dan tekan <code class="docutils literal notranslate"><span class="pre">iface</span></code> . Command ini menarik referensi ke layer yang sedang dibuka dan menyimpannya sebagai variabel <code class="docutils literal notranslate"><span class="pre">layer</span></code>.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">iface</span><span class="o">.</span><span class="n">activeLayer</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/547.png" class="align-center" src="../_images/547.png" />
+<img alt="../_images/546.png" class="align-center" src="../_images/546.png" />
 <ol class="arabic simple" start="6">
 <li><p>Ada function berguna yang disebut <code class="docutils literal notranslate"><span class="pre">dir()</span></code> di phyton yang menunjukkan anda semua metode yang tersedia untuk objek mana saja. Ini berguna ketika anda tidak yakin function mana yang tersedia untuk obyek tertentu. Jalankan command berikut dan lihat operasi apa yang bisa kita lakukan pada variabel  <code class="docutils literal notranslate"><span class="pre">layer</span></code> .</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/645.png" class="align-center" src="../_images/645.png" />
+<img alt="../_images/644.png" class="align-center" src="../_images/644.png" />
 <ol class="arabic simple" start="7">
 <li><p>Anda akan melihat sebuah daftar panjang dari function yang tersedia. Untuk sekarang, kita akan menggunakan sebuah fungsi bernama <code class="docutils literal notranslate"><span class="pre">getFeatures()</span></code> dimana akan memberikan anda referensi untuk semua fitur pada sebuah layer. Pada kasus kita, setiap fitur akan menjadi sebuah poin yang merepresentasikan airport. Anda dapat mengetik command untuk memgiterasi melalui setiap fitur pada layer yang sedang aktif. Pastikan untuk menambah 2 spasi sebelum mengetik garis kedua.</p></li>
 </ol>
@@ -246,7 +246,7 @@
   <span class="nb">print</span> <span class="n">f</span>
 </pre></div>
 </div>
-<img alt="../_images/745.png" class="align-center" src="../_images/745.png" />
+<img alt="../_images/744.png" class="align-center" src="../_images/744.png" />
 <ol class="arabic simple" start="8">
 <li><p>Seperti yang anda lihat di output, setiap garis mengandung sebuah referensi ke sebuah fitur di layer. Referensi ke fitur disimpan dalam variabel <code class="docutils literal notranslate"><span class="pre">f</span></code> . Kita dapat menggunakan variabel <code class="docutils literal notranslate"><span class="pre">f``untuk</span> <span class="pre">mengakses</span> <span class="pre">attribut</span> <span class="pre">pada</span> <span class="pre">setiap</span> <span class="pre">fitur.</span> <span class="pre">Ketik</span> <span class="pre">sebagai</span> <span class="pre">berikut</span> <span class="pre">untuk</span> <span class="pre">mencetak</span> <span class="pre">``name</span></code> dan <code class="docutils literal notranslate"><span class="pre">iata_code</span></code> untuk setiap fitur airport.</p></li>
 </ol>
@@ -254,7 +254,7 @@
   <span class="nb">print</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;iata_code&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<img alt="../_images/844.png" class="align-center" src="../_images/844.png" />
+<img alt="../_images/843.png" class="align-center" src="../_images/843.png" />
 <ol class="arabic simple" start="9">
 <li><p>Jadi sekarang anda tahu bagaimana secara programatik mengakses attribut dari seitap fitur di layer. Sekarang, mari kita lihat bagaimana mengakses koordinat fitur. Koordinat dari sebuah fitur vektor dapat diakses dengan memanggil function <code class="docutils literal notranslate"><span class="pre">geometry()</span></code> . Function ini memberikan sebuah obyek geometri yang dapat kita simpan pada variable <code class="docutils literal notranslate"><span class="pre">geom</span></code> . Anda dapat menjalankan function  <code class="docutils literal notranslate"><span class="pre">asPoint()</span></code> pada obyek geometri untuk mendapatkan koordinat x dan y poin tersebut. Jika fitur anda adalah sebuah garis atau sebuah poligon, anda dapat menggunakan fungsi <code class="docutils literal notranslate"><span class="pre">asPolyline()</span></code> atau <code class="docutils literal notranslate"><span class="pre">asPolygon()</span></code>. Ketik Kode berikut pada prompt dan tekan <kbd class="kbd docutils literal notranslate">Enter</kbd> untuk melihat koordinat x dan y dari setiap fitur.</p></li>
 </ol>
@@ -263,7 +263,7 @@
   <span class="nb">print</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/944.png" class="align-center" src="../_images/944.png" />
+<img alt="../_images/943.png" class="align-center" src="../_images/943.png" />
 <ol class="arabic simple" start="10">
 <li><p>Bagaimana jika kita hanya ingin mendapatkan koordinat <code class="docutils literal notranslate"><span class="pre">x</span></code> dari fitur ? Anda dapat memanggil fungsi <code class="docutils literal notranslate"><span class="pre">x()</span></code>  pada obyek poin dan mendapatkan koordinat x nya.</p></li>
 </ol>
@@ -282,7 +282,7 @@
          <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
 </pre></div>
 </div>
-<img alt="../_images/1174.png" class="align-center" src="../_images/1174.png" />
+<img alt="../_images/1173.png" class="align-center" src="../_images/1173.png" />
 <ol class="arabic simple" start="12">
 <li><p>Anda dapat melihat outpu tercetak pada konsol. Sebuah cara yang lebih berguna untuk menyimpan output adalah dengan sebuah file. Anda dapat mengetik kode berikut untuk membuat sebuah file dan menulis outputnya di sana, Ganti path atau alamat file dengan sebuah path dalam sistem anda sendiri. Catat bahwa kita menambahkan <code class="docutils literal notranslate"><span class="pre">\n</span></code> di akhir baris. Ini untuk menambah sebuah garis baru setelah kita menambahkan data untuk setiap fitur. Anda seharusnya juga memperhatikan garis <code class="docutils literal notranslate"><span class="pre">unicode_line</span> <span class="pre">=</span> <span class="pre">line.encode('utf-8')</span></code> . Karena layer kita mengandung sejumlah fitur dengan karakter unicode, kita tidak bisa begitu saja menulisnya ke dalam file teks. Kita encode teks menggunakan UTF-8 encoding dan kemudian menulis file teks tersebut.</p></li>
 </ol>
@@ -326,7 +326,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Feb 11, 2022.<br/>
+      Terakhir diperbarui pada Mar 05, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
