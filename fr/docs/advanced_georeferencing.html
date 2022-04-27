@@ -85,12 +85,13 @@
 <li class="toctree-l1"><a class="reference internal" href="3/digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_intersection_density.html">Calcul de densité des intersection de rues (QGIS3)</a></li>
@@ -223,11 +224,11 @@
 <ol class="arabic simple">
 <li><p>Pour ce tutorial pour nous allons utiliser le calque OpenStreetMap en tant que calque de reference. Installez le plugin OpenLayers depuis <span class="menuselection">Plugins ‣ Manage and install plugins ‣ Get more</span>. Voir <a class="reference internal" href="using_plugins.html"><span class="doc">Using Plugins</span></a> pour plus d’informations sur l’utilisation des plgins QGIS.</p></li>
 </ol>
-<img alt="../_images/1147.png" class="align-center" src="../_images/1147.png" />
+<img alt="../_images/1149.png" class="align-center" src="../_images/1149.png" />
 <ol class="arabic simple" start="2">
 <li><p>Une fois le plugin installe, aller a <a href="#id1"><span class="problematic" id="id2">:menuselection:`Plugins --&gt; OpenLayers plugin --&gt; Add OpenStreetMap layer'. Cela va ajouter un calque généré a partir de `OpenStreetMap data &lt;http://www.openstreetmap.org/&gt;`_</span></a>.</p></li>
 </ol>
-<img alt="../_images/2121.png" class="align-center" src="../_images/2121.png" />
+<img alt="../_images/2124.png" class="align-center" src="../_images/2124.png" />
 <ol class="arabic simple" start="3">
 <li><p>Le calque OpenStreetMap est désormais charge sur QGIS. Remarquez le système de coordonnées de reference pour cette couche (SCR) : EPSG 3857 Pseudo Mercator. Il est important de le noter, en effet les coordonnées que nous allons déduire de ce calque seront exprimées dans le même système de coordonnées.</p></li>
 </ol>
@@ -276,19 +277,19 @@ Lancer le <strong>Georeferencer</strong> depuis <span class="menuselection">Rast
 <ol class="arabic simple" start="10">
 <li><p>Dans le  <span class="guilabel">Coordinate Reference System Selector</span>, sélectionnez  <span class="guilabel">EPSG:3857 Pseudo Mercator</span></p></li>
 </ol>
-<img alt="../_images/1036.png" class="align-center" src="../_images/1036.png" />
+<img alt="../_images/1037.png" class="align-center" src="../_images/1037.png" />
 <ol class="arabic simple" start="11">
 <li><p>Maintenant cliquez sur <span class="guilabel">Add Point</span> dans la barre d’outils et choisissez un endroit de l’image facilement identifiable. Les coins, les intersections et les points sont a privilégier et constituent des bons points de contrôle.</p></li>
 </ol>
-<img alt="../_images/1148.png" class="align-center" src="../_images/1148.png" />
+<img alt="../_images/1150.png" class="align-center" src="../_images/1150.png" />
 <ol class="arabic simple" start="12">
 <li><p>Après avoir clique sur un point de l’image, vous verrez apparaitre une fenêtre vous demandant d’insérer les coordonnes de la carte. Appuyez alors sur <span class="guilabel">From map canvas</span>.</p></li>
 </ol>
-<img alt="../_images/1239.png" class="align-center" src="../_images/1239.png" />
+<img alt="../_images/1240.png" class="align-center" src="../_images/1240.png" />
 <ol class="arabic simple" start="13">
 <li><p>Repérez le même endroit sur la couche OpenStreetMap et cliquez dessus. Les coordonnées sont alors generees automatiquement. Procédez de la même façon pour 4 autres points de l’image en ajoutant leurs coordonnées depuis le calque de reference.</p></li>
 </ol>
-<img alt="../_images/1337.png" class="align-center" src="../_images/1337.png" />
+<img alt="../_images/1338.png" class="align-center" src="../_images/1338.png" />
 <ol class="arabic simple" start="14">
 <li><p>Allez maintenant dans <span class="menuselection">Settings ‣ Transformation settings.</span></p></li>
 </ol>
@@ -296,24 +297,24 @@ Lancer le <strong>Georeferencer</strong> depuis <span class="menuselection">Rast
 <ol class="arabic simple" start="15">
 <li><p>Choissisez les options comme suit. Vérifiez que le bouton <span class="guilabel">Load in QGIS when done</span> est bien sélectionne. Cliquez sur OK. Retournez alors dans la fenêtre <span class="guilabel">Georeferencer</span> puis allez a <span class="menuselection">File ‣ Start georeferencing</span>. Cela va enclencher le processus de redressement de l’image et créer un nouveau raster.</p></li>
 </ol>
-<img alt="../_images/1532.png" class="align-center" src="../_images/1532.png" />
+<img alt="../_images/1533.png" class="align-center" src="../_images/1533.png" />
 <ol class="arabic simple" start="16">
 <li><p>Une fois le processus termine, vous verrez apparaitre dans QGIS la nouvelle couche géolocalisee. Si tout a bien fonctionne, la couche devrait se superposer parfaitement au calque OpenStreetMap.</p></li>
 </ol>
-<img alt="../_images/1630.png" class="align-center" src="../_images/1630.png" />
+<img alt="../_images/1631.png" class="align-center" src="../_images/1631.png" />
 <ol class="arabic simple" start="17">
 <li><p>Pour ameliorer le rendu, vous pouvez enlever les valeurs no-data en noir et blanc. Clique-droit sur le calque de l’image puis <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/1728.png" class="align-center" src="../_images/1728.png" />
+<img alt="../_images/1729.png" class="align-center" src="../_images/1729.png" />
 <ol class="arabic simple" start="18">
 <li><p>Allez a l’onglet <span class="guilabel">Transparency</span>. Nous voulons faire en sorte que tous les pixels noirs et blancs de l’image deviennent transparents.
 Entrez 0 dans <span class="guilabel">No data value</span>. Aussi, dans <span class="guilabel">Custom transparency options</span>,  cliquez sur le bouton <span class="guilabel">+</span> et ajoutez 255 aux pixels transparents pour chaque couche, ensuite indiquez 100 dans <span class="guilabel">Percent transparent</span>. Validez avec <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1825.png" class="align-center" src="../_images/1825.png" />
+<img alt="../_images/1826.png" class="align-center" src="../_images/1826.png" />
 <ol class="arabic simple" start="19">
 <li><p>Votre image est maintenant parfaitement superposée a la couche de base.</p></li>
 </ol>
-<img alt="../_images/1919.png" class="align-center" src="../_images/1919.png" />
+<img alt="../_images/1920.png" class="align-center" src="../_images/1920.png" />
 </section>
 </section>
 
@@ -339,7 +340,7 @@ Entrez 0 dans <span class="guilabel">No data value</span>. Aussi, dans <span cla
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Mis à jour le mars 05, 2022.<br/>
+      Mis à jour le avr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

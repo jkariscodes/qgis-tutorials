@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">테이블 결합 작업(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">공간 결합 수행 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">공간 조회 실행(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">최근린 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">점 또는 다각형을 이용한 래스터 데이터 표본 추출 작업(QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -244,13 +245,13 @@
 <li><p>Locate the downloaded <code class="docutils literal notranslate"><span class="pre">Roadway_Block-shp.zip</span></code> file in the <span class="guilabel">Browser</span> panel. Expand it and drag the <code class="docutils literal notranslate"><span class="pre">Roadway_Block.shp</span></code> file to the canvas. Similarly, locate the <code class="docutils literal notranslate"><span class="pre">Adult_Mental_Health_Providers.zip</span></code> file, expand it and add <code class="docutils literal notranslate"><span class="pre">Adult_Mental_Health_Providers.shp</span></code> to the canvas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1101.png" class="align-center" src="../../_images/1101.png" />
+<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Next, locate the <code class="docutils literal notranslate"><span class="pre">Address_Points.zip</span></code> file, expand it and add the <code class="docutils literal notranslate"><span class="pre">Address_Points.shp</span></code>. You will see a lot of points around the city. Each point represents a valid address. We will select 1000 points randomly. This technique is called random sampling. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/250.png" class="align-center" src="../../_images/250.png" />
+<div><img alt="../../_images/260.png" class="align-center" src="../../_images/260.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Search for and locate the <span class="menuselection">Vector Selection ‣ Random extract</span> algorithm.</p></li>
@@ -302,25 +303,25 @@
 <li><p>As many streets in the network are one-way, we need to set the <span class="guilabel">Advanced parameters</span> to specify the direction. See <a class="reference internal" href="basic_network_analysis.html"><span class="doc">Basic Network Visualization and Routing (QGIS3)</span></a> for more details on how these attributes are structured. Choose <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> as the <span class="guilabel">Direction field</span>. Enter <code class="docutils literal notranslate"><span class="pre">OB</span></code> as the <span class="guilabel">Value for the forward direction</span>, <code class="docutils literal notranslate"><span class="pre">IB</span></code> as the <span class="guilabel">Value for backward direction</span>, and <code class="docutils literal notranslate"><span class="pre">BD</span></code> as the <span class="guilabel">Value for the both direction</span>. Set the <span class="guilabel">Topology tolerance</span> as <code class="docutils literal notranslate"><span class="pre">0.0000150</span></code>. Keep other options to their default values and click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1020.png" class="align-center" src="../../_images/1020.png" />
+<div><img alt="../../_images/1021.png" class="align-center" src="../../_images/1021.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>A new table layer called <code class="docutils literal notranslate"><span class="pre">Output</span> <span class="pre">OD</span> <span class="pre">Matrix</span></code> will be added to the <span class="guilabel">Layers</span> panel. Right-click and select <span class="guilabel">Open Attributes Table</span>. You will see that the table contains <em>13000</em> rows. We had 13 origin points and 1000 destination points - so the output contains <em>13x1000 = 13000</em> pairs of origins and destination. The <code class="docutils literal notranslate"><span class="pre">total_cost</span></code> column contains distance in meters between each origin point to every destination point.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1123.png" class="align-center" src="../../_images/1123.png" />
+<div><img alt="../../_images/1124.png" class="align-center" src="../../_images/1124.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>For this tutorial, we are interested in only the destination point with the shortest distance. We can create a SQL query to pick the destination with the least <code class="docutils literal notranslate"><span class="pre">total_cost</span></code> among all destinations. Go to <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1221.png" class="align-center" src="../../_images/1221.png" />
+<div><img alt="../../_images/1222.png" class="align-center" src="../../_images/1222.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Search for and locate the <span class="menuselection">Vector general ‣ Execute SQL</span>, select <code class="docutils literal notranslate"><span class="pre">...</span></code> in <span class="guilabel">Additional input data sources</span> check the <span class="guilabel">Output OD Matrix</span> and, click <span class="guilabel">OK</span>. Now click the <span class="guilabel">Summation</span> under <span class="guilabel">SQL query</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1319.png" class="align-center" src="../../_images/1319.png" />
+<div><img alt="../../_images/1320.png" class="align-center" src="../../_images/1320.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Enter the following query in <span class="guilabel">SQL query</span> dialog box. Enter <code class="docutils literal notranslate"><span class="pre">geometry</span></code> as the <span class="guilabel">Geometry field</span> and, select <code class="docutils literal notranslate"><span class="pre">LineString</span></code> as the <span class="guilabel">Geometry type</span>. Click <span class="guilabel">Run</span>.</p></li>
@@ -336,43 +337,43 @@ from input1 group by origin_id
 <li><p>A new virtual layer <code class="docutils literal notranslate"><span class="pre">SQL</span> <span class="pre">Output</span></code> will be added to the <span class="guilabel">Layers</span> panel. This Layer has the result of our analysis. Nearest Adult mental health center for each of the 1000 origin points. Let’s try a few different ways to visualize and validate these results.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1515.png" class="align-center" src="../../_images/1515.png" />
+<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>To validate this let us build the Shortest path. The point <em>(OBJECTID_1 = 853046)</em> is visually near to Health center <em>(OBJECTID = 3)</em>, but from the SQL query it is connected to health center <em>(OBJECTID = 9)</em>. Let’s validate this by finding the actual distance between these origins and destination. First, let’s run the shortest path algorithm on 1 pair. Locate the <span class="menuselection">QNEAT3 ‣ Routing ‣ Shortest path (point to point)</span> algorithm and launch it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1614.png" class="align-center" src="../../_images/1614.png" />
+<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> as the <span class="guilabel">Network Layer</span>. To pick a start and endpoint. You can click the <span class="guilabel">…</span> button next to the <span class="guilabel">Start point</span> and click on the origin point <em>(OBJECTID_1 = 853046)</em> in the canvas. Similarly, select the destination point <em>(OBJECTID = 3)</em> as the <span class="guilabel">End point</span>. Keep the <span class="guilabel">Optimization Criterion</span> as <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">(distance</span> <span class="pre">optimization)</span></code>. Expand the <span class="guilabel">Advanced parameter</span> section. Choose <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> as the <span class="guilabel">Direction field</span>. Enter <code class="docutils literal notranslate"><span class="pre">OB</span></code> as the <span class="guilabel">Value for forward direction</span> and <code class="docutils literal notranslate"><span class="pre">IB</span></code> as the <span class="guilabel">Value for backward direction</span>. Set the <span class="guilabel">Topology tolerance</span> as <code class="docutils literal notranslate"><span class="pre">0.000015</span></code>. Keep other options to their default values and click <span class="guilabel">Run</span>. Now change the destination point <em>(OBJECTID = 9)</em> in the <span class="guilabel">End point</span> and click <span class="guilabel">Run</span></p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1715.png" class="align-center" src="../../_images/1715.png" />
+<div><img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Two new layers <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> will be added to the <span class="guilabel">Layers</span> panel. You will see that although the destination point <em>(OBJECTID = 9)</em> visually is closed to the origin point, the actual distance is longer when compared to the destination point <em>(OBJECTID = 3)</em>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1813.png" class="align-center" src="../../_images/1813.png" />
+<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Note that even though the lines connecting the origin and destination is a straight-line, the destination was found using the distance along with the network. It will be much useful visualization to show the actual shortest-path between each origin-destination. As of now, there is no easy way to generate the shortest-path between multiple origin-destination pairs the way we generated the distance matrix. But I will demonstrate a way to use some python scripting to generate this visualization. First, let’s run the shortest path algorithm on 1 pair. Locate the <span class="menuselection">QNEAT3 ‣ Routing ‣ Shortest path (point to point)</span> algorithm and launch it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1911.png" class="align-center" src="../../_images/1911.png" />
+<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
 <li><p>In the <span class="guilabel">Shortest Path (Point to Point)</span> dialog, select <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> as the <span class="guilabel">Network Layer</span>. Keep the <span class="guilabel">Optimization criteria</span> as Shortest Path (distance optimization). Next we need to pick a start and end point. You can click the <span class="guilabel">…</span> button next to <span class="guilabel">Start point</span> and click on the origin point in the canvas. Similarly select the destination point as the <span class="guilabel">End point</span>. Expand the <span class="guilabel">Advanced parameter</span> section. Choose <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code> as the <span class="guilabel">Direction field</span>. Enter <code class="docutils literal notranslate"><span class="pre">OB</span></code> as the <span class="guilabel">Value for forward direction</span> and <code class="docutils literal notranslate"><span class="pre">IB</span></code> as the <span class="guilabel">Value for backward direction</span>. In <span class="guilabel">Topology tolerance</span> enter <code class="docutils literal notranslate"><span class="pre">0.000015</span></code>. Keep other options to their default values and click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2011.png" class="align-center" src="../../_images/2011.png" />
+<div><img alt="../../_images/2012.png" class="align-center" src="../../_images/2012.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
 <li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span></code> Layer will be added to the <span class="guilabel">Layers</span> panel. You will see that this path follows the network rather than connecting the origin and destination with a straight line. The reason we ran the algorithm on 1 pair is to easily identify the parameter values that we can use in our script. Select <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>, right-click and select <span class="guilabel">Remove Layer</span>. Click the <span class="guilabel">History</span> button in the <span class="guilabel">Processing Toolbox</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2115.png" class="align-center" src="../../_images/2115.png" />
+<div><img alt="../../_images/2116.png" class="align-center" src="../../_images/2116.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>In the <span class="guilabel">History</span> dialog, Select the latest command(command used for Shortest path). This command displays all the parameters and their values that we used. We can now take these values and put them in a script that can allow us to run this command on many origin-destination pairs. Click <span class="guilabel">Close</span>.</p></li>
@@ -511,13 +512,13 @@ from input1 group by origin_id
         <span class="k">return</span> <span class="n">MatrixToRoutes</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/2411.png" class="align-center" src="../../_images/2411.png" />
+<img alt="../../_images/2412.png" class="align-center" src="../../_images/2412.png" />
 </div></blockquote>
 <ol class="arabic simple" start="25">
 <li><p>Now we can test the script. Select a few connections for the layer <code class="docutils literal notranslate"><span class="pre">SQL</span> <span class="pre">Output</span></code> for which you want the actual routes computed. In the <span class="guilabel">Processing Toolbox</span>, a new dropdown <span class="guilabel">Scripts</span> will be added. Click on it and select <code class="docutils literal notranslate"><span class="pre">Get</span> <span class="pre">Routes</span> <span class="pre">from</span> <span class="pre">Matrix</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
+<div><img alt="../../_images/2511.png" class="align-center" src="../../_images/2511.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">참고</p>
@@ -527,13 +528,13 @@ from input1 group by origin_id
 <li><p>In the <span class="guilabel">Network Layer</span> select <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> and in the <span class="guilabel">Distance Matrix layer</span> select <code class="docutils literal notranslate"><span class="pre">SQL</span> <span class="pre">Output</span></code> then check selected features only. Click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/268.png" class="align-center" src="../../_images/268.png" />
+<div><img alt="../../_images/269.png" class="align-center" src="../../_images/269.png" />
 </div></blockquote>
 <ol class="arabic simple" start="27">
 <li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Network</span> <span class="pre">Routes</span></code> will be added to the <span class="guilabel">Layers</span> panel. This will contain the actual route to the destination.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/279.png" class="align-center" src="../../_images/279.png" />
+<div><img alt="../../_images/2710.png" class="align-center" src="../../_images/2710.png" />
 </div></blockquote>
 </section>
 </section>
@@ -560,7 +561,7 @@ from input1 group by origin_id
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      최종 업데이트: 3월 05, 2022<br/>
+      최종 업데이트: 4월 27, 2022<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

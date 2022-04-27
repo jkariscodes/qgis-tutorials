@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="3/digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">資料表連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">空間連接 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -216,11 +217,11 @@
 <ol class="arabic simple">
 <li><p>首先我們要安裝 <strong>OSM Place Search</strong> 和 <strong>OpenLayers plugin</strong> 這 2 個附加元件才能順利完成本操作。關於如何安裝附加元件，請看 <a class="reference internal" href="using_plugins.html"><span class="doc">使用附加元件</span></a>。（譯註：前者有可能被歸類在實驗性的附加元件的類別下。）</p></li>
 </ol>
-<img alt="../_images/1167.png" class="align-center" src="../_images/1167.png" />
+<img alt="../_images/1169.png" class="align-center" src="../_images/1169.png" />
 <ol class="arabic simple" start="2">
 <li><p><strong>OSM Place Search</strong> 會在 QGIS 中安裝一個叫做 <span class="guilabel">OSM place search…</span> 的面板。</p></li>
 </ol>
-<img alt="../_images/2136.png" class="align-center" src="../_images/2136.png" />
+<img alt="../_images/2139.png" class="align-center" src="../_images/2139.png" />
 <ol class="arabic simple" start="3">
 <li><p><strong>OpenLayers plugin</strong> 會在 <em>附加元件</em> 或是 <em>網路</em> 的選單中新增一個選項。這個外掛讓你可以在 QGIS 中直接瀏覽網路上提供地圖的不同來源。現在我們就來試試看下載開放街圖的底圖，選擇 <span class="menuselection">附加元件（或網路） ‣ OpenLayers plugin ‣ Add OpenStreetMap layer</span> （譯註：實際的位置和名稱，可能會隨著你的 QGIS 版本的不同而有些微變化）。</p></li>
 </ol>
@@ -260,19 +261,19 @@
 <ol class="arabic simple" start="10">
 <li><p>在 <span class="guilabel">輸入XML文件</span> 的地方填上剛才下載的 <code class="docutils literal notranslate"><span class="pre">london.osm</span></code>，然後在 <span class="guilabel">輸出SpatialLite DB文件</span> 那邊把檔案命名為 <code class="docutils literal notranslate"><span class="pre">london.osm.db</span></code>，在按下確定之前，確認 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>導入之後建立連接(SpatialLite)`有被勾選。</p></li>
 </ol>
-<img alt="../_images/1046.png" class="align-center" src="../_images/1046.png" />
+<img alt="../_images/1047.png" class="align-center" src="../_images/1047.png" />
 <ol class="arabic simple" start="11">
 <li><p>最後一步是把剛才的檔案匯到 SpatialLite 圖層內，就可以在 QGIS 內進行分析。請開啟 <span class="menuselection">向量 ‣ OpenStreetMap ‣ 匯出拓撲至SpatialLite</span>。</p></li>
 </ol>
-<img alt="../_images/1168.png" class="align-center" src="../_images/1168.png" />
+<img alt="../_images/1170.png" class="align-center" src="../_images/1170.png" />
 <ol class="arabic simple" start="12">
 <li><p><code class="docutils literal notranslate"><span class="pre">london.osm.db</span></code> 檔案內含有所有 OSM 的資料結構，像是點、線、多邊形等等，不過一個 GIS 圖層通常只能有一種資料結構，所以我們必須要決定要讀取哪一種。我們的任務是要找出酒吧的位置，所以在 <span class="guilabel">導出類型</span> 中，選擇 <span class="guilabel">點(節點)</span> 就可以了。假設今天你要取得的是道路的資料，那麼這邊就要選「<span class="guilabel">線集(總是開口)</span>」。接下來在 <span class="guilabel">輸出圖層名稱</span> 那邊填上 <code class="docutils literal notranslate"><span class="pre">london_points</span></code>。這些點的 GIS 資料有位置和屬性資訊 2 個部分，由於我們要找的只有酒吧這種設施，所以這兩個資訊都要載入。因此在底下的 <span class="guilabel">導出標籤</span> 欄位中，先按一下 <span class="guilabel">從資料庫載入</span>，然後你就可以看到所有存在 <code class="docutils literal notranslate"><span class="pre">london.osm.db</span></code> 裡面的屬性，最後勾選 <span class="guilabel">name</span> 和 <a href="#id1"><span class="problematic" id="id2">:guilabel:`amenity 兩個標籤（譯註：amenity 指福利設施，包含酒吧這種類型的商家）。如果你想知道所有的屬性意思，請參閱 `OSM Tags &lt;http://wiki.openstreetmap.org/wiki/Tags&gt;`_</span></a>。把 <span class="guilabel">處理完成後載入 QGIS 地圖中</span> 打勾，就可以按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1248.png" class="align-center" src="../_images/1248.png" />
+<img alt="../_images/1249.png" class="align-center" src="../_images/1249.png" />
 <ol class="arabic simple" start="13">
 <li><p>回到 QGIS 主畫面中就可以看到有個叫做 <code class="docutils literal notranslate"><span class="pre">london_points</span></code> 的新圖層出現了。這個圖層含有這個視窗下所有的 OSM 資料庫中的點資訊，所以我們還必須要挑出標明為酒吧的點。右鍵按下 <code class="docutils literal notranslate"><span class="pre">london_points</span></code> 圖層然後 <span class="guilabel">開啟屬性表格</span>。</p></li>
 </ol>
-<img alt="../_images/1346.png" class="align-center" src="../_images/1346.png" />
+<img alt="../_images/1347.png" class="align-center" src="../_images/1347.png" />
 <ol class="arabic simple" start="14">
 <li><p>你可以發現有些點的 <span class="guilabel">amenity</span> 屬性欄位中是寫著 <strong>pub</strong>，所以我們要按下 :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>使用表示式選取圖徵`的按鈕…</p></li>
 </ol>
@@ -280,23 +281,23 @@
 <ol class="arabic simple" start="15">
 <li><p>輸入表達式 <cite>「amenity」 = 『pub』</cite>，然後按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1541.png" class="align-center" src="../_images/1541.png" />
+<img alt="../_images/1542.png" class="align-center" src="../_images/1542.png" />
 <ol class="arabic simple" start="16">
 <li><p>在 QGIS 畫布上，搜尋的結果已經變成黃色了。再使用右鍵按下 <code class="docutils literal notranslate"><span class="pre">london_points</span></code> 圖層然後選擇 <span class="guilabel">存檔選取區域為…</span> （譯註：新的 QGIS 版本中，本選項已經與 <span class="guilabel">存檔為…</span> 合併）。</p></li>
 </ol>
-<img alt="../_images/1638.png" class="align-center" src="../_images/1638.png" />
+<img alt="../_images/1639.png" class="align-center" src="../_images/1639.png" />
 <ol class="arabic simple" start="17">
 <li><p>在 <span class="guilabel">儲存向量圖層為…</span> 的視窗中，把新檔案命名為 <code class="docutils literal notranslate"><span class="pre">london_pubs.shp</span></code>，其他選項使用預設設定（譯註：如果有的話，要勾選 <span class="guilabel">儲存僅選取的圖徵</span>），確認一下 <span class="guilabel">加入儲存檔案至地圖中</span> 應該要是開啟的，最後按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1735.png" class="align-center" src="../_images/1735.png" />
+<img alt="../_images/1736.png" class="align-center" src="../_images/1736.png" />
 <ol class="arabic simple" start="18">
 <li><p>現在 QGIS 畫布上又多了一個 <code class="docutils literal notranslate"><span class="pre">london_pubs</span></code> 圖層，而 <code class="docutils literal notranslate"><span class="pre">london_points</span></code> 圖層已經用不著，可以關掉了。</p></li>
 </ol>
-<img alt="../_images/1833.png" class="align-center" src="../_images/1833.png" />
+<img alt="../_images/1834.png" class="align-center" src="../_images/1834.png" />
 <ol class="arabic simple" start="19">
 <li><p>倫敦酒吧的 Shapefile 到這裡總算製作完成。選擇 <span class="guilabel">識別圖徵</span> 工具然後點選任一個點就可以查看其屬性資訊。</p></li>
 </ol>
-<img alt="../_images/1925.png" class="align-center" src="../_images/1925.png" />
+<img alt="../_images/1926.png" class="align-center" src="../_images/1926.png" />
 </section>
 </section>
 
@@ -322,7 +323,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      最後更新於 3月 05, 2022。<br/>
+      最後更新於 4月 27, 2022。<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

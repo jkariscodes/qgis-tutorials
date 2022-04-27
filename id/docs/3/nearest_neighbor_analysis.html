@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -213,13 +214,13 @@
 <li><p>For this tutorial we will download a dataset of earthquakes between 1900-2000 from NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Visit the NOAA NCEI portal</a> and enter <span class="guilabel">Min</span> as <code class="docutils literal notranslate"><span class="pre">1900</span></code> and <span class="guilabel">Max</span> as <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  This will return all earthquake incidents that occurred and were recorded by NOAA between those years. For other specific results, you can filter with different parameters. Click <span class="guilabel">Search</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
+<div><img alt="../../_images/data011.png" class="align-center" src="../../_images/data011.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>As a result, we got <em>2585</em> earthquake incidents. Click on the <span class="guilabel">Download TSV</span> icon.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
+<div><img alt="../../_images/data021.png" class="align-center" src="../../_images/data021.png" />
 </div></blockquote>
 <p>Natural Earth has a nice <a class="reference external" href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/">Populated Places</a> dataset. Download the <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip">simple (less columns) dataset</a></p>
 <p>For convenience, you may directly download a copy of both the datasets from the links
@@ -234,67 +235,67 @@ below:</p>
 <li><p>Locate the downloaded <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.zip</span></code> file in the <span class="guilabel">Browser</span> panel and expand it. Drag the <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple.shp</span></code> file to the canvas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/015.png" class="align-center" src="../../_images/015.png" />
+<div><img alt="../../_images/016.png" class="align-center" src="../../_images/016.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>You will see a new layer <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> loaded in the <span class="guilabel">Layers</span> panel. This layer contains the points representing populated places. Now we will load the earthquakes layer. This layer comes as a <em>Tab Serepated Values (TSV)</em> text file. To load this file, click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You can also use <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> keyboard shortcut.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/025.png" class="align-center" src="../../_images/025.png" />
+<div><img alt="../../_images/026.png" class="align-center" src="../../_images/026.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, select <span class="guilabel">Delimited Text</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/035.png" class="align-center" src="../../_images/035.png" />
+<div><img alt="../../_images/036.png" class="align-center" src="../../_images/036.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Click the <span class="guilabel">...</span> button next to <span class="guilabel">File name</span> and browse to the downloaded <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530.tsv</span></code> file. Depending upon the operating system, you may not see the file at the downloaded directory. If that is the case, switch to <span class="guilabel">All files (*; .)</span> in the <span class="guilabel">Choose a Delimited Text File to Open</span> dialog. Once opened, select  <span class="guilabel">Custom delimiters</span> in the <span class="guilabel">File format</span> section, and check <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. In the <span class="guilabel">Geometry definition</span> section, choose <span class="guilabel">Point coordinates</span>. By default <span class="guilabel">X field</span> and <span class="guilabel">Y field</span>  values will be auto-populated with the appropriate fields in the input. In our case, they are <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> CRS. If your file contains coordinates in a different CRS, you could select the appropriate CRS here. Click <span class="guilabel">Add</span> followed by <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/045.png" class="align-center" src="../../_images/045.png" />
+<div><img alt="../../_images/046.png" class="align-center" src="../../_images/046.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Zoom around and explore both datasets. Each red point represents the location of an earthquake incidence, and each green point represents the location of a populated place. Our goal is to find out the nearest point from the populated places layer for each of the points in the earthquake layer. Let's inspect the Attribute table of the earthquakes layer. Select the layer and click on <span class="guilabel">Open Attribute Table</span> icon in <span class="guilabel">Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/055.png" class="align-center" src="../../_images/055.png" />
+<div><img alt="../../_images/056.png" class="align-center" src="../../_images/056.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>There are <code class="docutils literal notranslate"><span class="pre">2586</span></code> features, but the data contains few entries with no latitude or longitude infomation. We have to remove that before proceeding further. Close the Attribute Table.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/065.png" class="align-center" src="../../_images/065.png" />
+<div><img alt="../../_images/066.png" class="align-center" src="../../_images/066.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>Go to <span class="menuselection">Processing ‣ Toolbox ‣ Vector geometry ‣ Remove null geometries</span> tool. Double-click to open it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/075.png" class="align-center" src="../../_images/075.png" />
+<div><img alt="../../_images/076.png" class="align-center" src="../../_images/076.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>In the <span class="guilabel">Remove Null Geometries</span> dialog box, select <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530</span></code> as the <span class="guilabel">Input layer</span> and check the box <span class="guilabel">Also remove empty geometries</span>. Click <span class="guilabel">Run</span>. Once the processing finishes, click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/084.png" class="align-center" src="../../_images/084.png" />
+<div><img alt="../../_images/085.png" class="align-center" src="../../_images/085.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>A new layer <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> will be added to the <span class="guilabel">Layers</span> panel. For analysis we will use this layer instead of the original layer. Un-check the <code class="docutils literal notranslate"><span class="pre">earthquakes-2021-11-25_13-39-30_+0530</span></code> layer in the <span class="guilabel">Layers</span> panel to hide it. Select the <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code> layer and click the <span class="guilabel">Open Attribute Table</span> button from the <span class="guilabel">Attributes Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/094.png" class="align-center" src="../../_images/094.png" />
+<div><img alt="../../_images/095.png" class="align-center" src="../../_images/095.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>You will see a lower count for total features as all rows with empty latitude and longitude values were removed. Close the attribute table.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1019.png" class="align-center" src="../../_images/1019.png" />
+<div><img alt="../../_images/1020.png" class="align-center" src="../../_images/1020.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Now it is time to perform the nearest neighbor analysis. Search and locate the <span class="menuselection">Processing ‣ Toolbox ‣ Vector analysis ‣ Distance to nearest hub (line to hub)</span> tool. Double-click to launch it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1122.png" class="align-center" src="../../_images/1122.png" />
+<div><img alt="../../_images/1123.png" class="align-center" src="../../_images/1123.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Catatan</p>
@@ -304,13 +305,13 @@ below:</p>
 <li><p>In the <span class="guilabel">Distance to Nearest Hub (Line to Hub)</span> dialog box, select <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">null</span> <span class="pre">geometries</span></code>  as the <span class="guilabel">Source points layer</span>. Select <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> as the <span class="guilabel">Destination hubs layer</span>. Select <code class="docutils literal notranslate"><span class="pre">name</span></code> as the <span class="guilabel">Hub layer name attribute</span>. The tool will also compute the straight-line distance between the populated place and the nearest earthquake. Set <code class="docutils literal notranslate"><span class="pre">Kilometers</span></code> as the <span class="guilabel">Measurement unit</span>. Click on <code class="docutils literal notranslate"><span class="pre">...</span></code>  in <span class="guilabel">Hub Distance</span> and click <span class="guilabel">Save to File...</span> to save the file as <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city.gpkg</span></code> . Click <span class="guilabel">Run</span>.  Once the processing finishes, click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1220.png" class="align-center" src="../../_images/1220.png" />
+<div><img alt="../../_images/1221.png" class="align-center" src="../../_images/1221.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Back in the main QGIS window, you will see a new line layer called <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city</span></code> loaded in the <span class="guilabel">Layers</span> panel. This layer has line features connecting each earthquake point to the nearest populated place. Select the <code class="docutils literal notranslate"><span class="pre">earthquakes_with_nearest_city</span></code> layer and click <span class="guilabel">Open Attribute Tabel</span> icon in <span class="guilabel">Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1318.png" class="align-center" src="../../_images/1318.png" />
+<div><img alt="../../_images/1319.png" class="align-center" src="../../_images/1319.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Scroll right to the last columns, and you will see 2 new attributes called <strong>HubName</strong> and <strong>HubDist</strong> added to the original earthquake features. This is the name of the distance to the nearest neighbor from the populated places layer.</p></li>
@@ -343,7 +344,7 @@ below:</p>
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Mar 05, 2022.<br/>
+      Terakhir diperbarui pada Apr 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

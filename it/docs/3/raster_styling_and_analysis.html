@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizzare unioni tabellari (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizzare unioni spaziali (Spatial Joins)  (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Realizzare Heatmaps (mappe di concentrazione)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Utilizzare le interrogazioni spaziali (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Campionare i dati di un raster usando punti o poligoni (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Realizzare Heatmaps (mappe di concentrazione)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -216,7 +217,7 @@
 <section id="get-the-data">
 <h2>Ottenere i dati necessari.<a class="headerlink" href="#get-the-data" title="Link a questa intestazione">¶</a></h2>
 <p>Useremo il dataset  <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/collection/gpw-v4">Gridded Population of the World (GPW) v4</a> della Columbia University. Specificamente, ci occorre la conta  <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download">Population Count</a> per tutto il pianeta con risoluzione di 2.5 Gradi Minuti in formato GeoTiFF per l’anno 2000 and 2010. Attenzione che avete bisogno di essere registrati al portale <a class="reference external" href="https://urs.earthdata.nasa.gov/home">Earth Data account</a> per scaricare il dato.</p>
-<img alt="../../_images/data18.png" class="align-center" src="../../_images/data18.png" />
+<img alt="../../_images/data116.png" class="align-center" src="../../_images/data116.png" />
 <p>Per comodità, potete scaricare direttamente una copia del dataset dal seguente link:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</a></p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</a></p>
@@ -228,13 +229,13 @@
 <li><p>Aprire QGIS e usate il pannello  <span class="guilabel">Browser</span> per identificare i file scaricati da internet. Espandere il file <code class="docutils literal notranslate"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min_tif.zip</span></code> e trascinare nella vista di QGIS il file``gpw-v4-population-count-rev11_2000_2pt5_min.tif``  .</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1109.png" class="align-center" src="../../_images/1109.png" />
+<div><img alt="../../_images/1133.png" class="align-center" src="../../_images/1133.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Un nuovo livello <code class="docutils literal notranslate"><span class="pre">gpw-v4-population-count-rev11_2000_2pt5_min</span></code> sarà aggiunto al pannello <span class="guilabel">Layers</span>. Anche per il file <code class="docutils literal notranslate"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min_tif.zip</span></code> aggiungete il file <code class="docutils literal notranslate"><span class="pre">gpw-v4-population-count-rev11_2010_2pt5_min.tif</span></code> alla vista.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2102.png" class="align-center" src="../../_images/2102.png" />
+<div><img alt="../../_images/2104.png" class="align-center" src="../../_images/2104.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Vediamo questi livelli. Cliccate il pulsante <span class="guilabel">Identify</span> sul <span class="guilabel">Attributes Toolbar</span>. Quando questo strumento è attivato, cliccate su qualsiasi punto nella vista di QGIS</p></li>
@@ -297,13 +298,13 @@
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;gpw-v4-population-count-rev11_2010_2pt5_min@1&quot; - &quot;gpw-v4-population-count-rev11_2000_2pt5_min@1&quot;
 </pre></div>
 </div>
-<img alt="../../_images/1230.png" class="align-center" src="../../_images/1230.png" />
+<img alt="../../_images/1231.png" class="align-center" src="../../_images/1231.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Inserisci <code class="docutils literal notranslate"><span class="pre">population_change_2010_2000.tif</span></code> come <span class="guilabel">Output file</span>.Clicca il pulsante  <span class="guilabel">OK</span> per iniziare il calcolo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1328.png" class="align-center" src="../../_images/1328.png" />
+<div><img alt="../../_images/1329.png" class="align-center" src="../../_images/1329.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Una volta completato il calcolo verrà aggiunto un nuovo libello <code class="docutils literal notranslate"><span class="pre">population_change_2010_2000</span></code> al pannello <span class="guilabel">Layers</span> . Cambiamo tematizzazione in modo che gli aumenti e diminuzioni di popolazione siano più definiti. Clicca il pulsante <span class="guilabel">Open the layer Styling panel</span> nel pannello <span class="guilabel">Layers</span> panel.</p></li>
@@ -315,31 +316,31 @@
 <li><p>One option is to use the similar styling technique as earlier and choose a diverging color ramp. Click the <span class="guilabel">Color ramp</span> drop-down and select <code class="docutils literal notranslate"><span class="pre">Spectral</span></code> ramp. Click the drop-down again and choose <code class="docutils literal notranslate"><span class="pre">Invert</span> <span class="pre">Color</span> <span class="pre">Ramp</span></code> to assign blues to low values and reds to high values.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1524.png" class="align-center" src="../../_images/1524.png" />
+<div><img alt="../../_images/1525.png" class="align-center" src="../../_images/1525.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Questa è una buona tematizzazione ma possiamo crearne una più facilmente interpretabile con 4 categorie, <code class="docutils literal notranslate"><span class="pre">Diminuzione</span></code>, <code class="docutils literal notranslate"><span class="pre">Neutorale</span></code>, <code class="docutils literal notranslate"><span class="pre">Crescita</span></code> and <code class="docutils literal notranslate"><span class="pre">Forte</span> <span class="pre">crescita</span></code>. Vai alla sezione con le classi ed i colori e seleziona tutte le righe. Tieni premuto il tasto <kbd class="kbd docutils literal notranslate">Shift</kbd> per selezionare tutte le righe. Clicca il pulsante <span class="guilabel">Remove selected row(s)</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1622.png" class="align-center" src="../../_images/1622.png" />
+<div><img alt="../../_images/1623.png" class="align-center" src="../../_images/1623.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Modifica la modalità  <span class="guilabel">Interpolation</span> in <code class="docutils literal notranslate"><span class="pre">Discrete</span></code>. Andremo a creare una mappa manualmente. Clicca il pulsante <span class="guilabel">Add values manually</span> . Inserisci <code class="docutils literal notranslate"><span class="pre">-100</span></code> come <span class="guilabel">Value</span> e <code class="docutils literal notranslate"><span class="pre">Diminuzione</span></code> (Decline) come <span class="guilabel">Label</span>. A questa categoria diamo il colore blu. La mappatura della scala dei colori funziona in modo da dare a tutti i valori uguali o minori del valore inserito il colore assegnato. Vedrete che ora la mappa nella vista fa vedere solo i pixel dove c’è stata una diminuzione della popolazione.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1723.png" class="align-center" src="../../_images/1723.png" />
+<div><img alt="../../_images/1724.png" class="align-center" src="../../_images/1724.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Complete the color-map with suitable values. I chose <code class="docutils literal notranslate"><span class="pre">100</span></code>, <code class="docutils literal notranslate"><span class="pre">1000</span></code> and <code class="docutils literal notranslate"><span class="pre">100000</span></code> as the upper-bounds for the <code class="docutils literal notranslate"><span class="pre">Neutral</span></code>, <code class="docutils literal notranslate"><span class="pre">Growth</span></code> and <code class="docutils literal notranslate"><span class="pre">High</span> <span class="pre">Growth</span></code> categories respectively. Assign colors to each of created categories, for example beige, orange and red.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1820.png" class="align-center" src="../../_images/1820.png" />
+<div><img alt="../../_images/1821.png" class="align-center" src="../../_images/1821.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Una volta soddisfatti, chiudete il pannello <span class="guilabel">Layer Styling</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1916.png" class="align-center" src="../../_images/1916.png" />
+<div><img alt="../../_images/1917.png" class="align-center" src="../../_images/1917.png" />
 </div></blockquote>
 </section>
 </section>
@@ -366,7 +367,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento mar 05, 2022.<br/>
+      Ultimo aggiornamento apr 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

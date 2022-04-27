@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Kaartgegevens digitaliseren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Samenvoegen van tabellen uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Ruimtelijke samenvoegingen uitvoeren (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Ongeldige geometrieën afhandelen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Ruimtelijke query’s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Ongeldige geometrieën afhandelen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Gevorderde rasteranalyses (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Dichtheid van straatkruisingen berekenen (QGIS3)</a></li>
@@ -213,13 +214,13 @@
 <li><p>Voor deze handleiding zullen we een gegevensset downloaden van aardbevingen tussen 1900-2000 vanaf NOAA’s National Geophysical Data Center dat een grote gegevensset van alle significante aardbevingen  sinds 2150 VC produceert. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Bezoek het portaal NOAA NCEI</a> en vul <span class="guilabel">Min</span> in met <code class="docutils literal notranslate"><span class="pre">1900</span></code> en <span class="guilabel">Max</span> met <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  Dit zal alle incidenten van aardbevingen teruggeven die werden vastgelegd door NOAA tussen deze jaren. U kunt, voor andere specifieke resultaten, filteren met andere parameters. Klik op <span class="guilabel">Search</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
+<div><img alt="../../_images/data011.png" class="align-center" src="../../_images/data011.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Als resultaat krijgen we <em>2585</em> incidenten met aardbevingen. Klik op het pictogram <span class="guilabel">Download TSV</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
+<div><img alt="../../_images/data021.png" class="align-center" src="../../_images/data021.png" />
 </div></blockquote>
 <p>Voor het gemak kunt u direct een kopie van bovengenoemde gegevensset downloaden vanaf de link hieronder:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/earthquakes_2021_11_25_14_31_59_+0530.tsv">earthquakes_2021_11_25_14_31_59_+0530.tsv</a></p>
@@ -231,7 +232,7 @@
 <li><p>Bekijk uw gegevensbron met gescheiden tekst. De gedownloade database met aardbevingen bevat de velden <code class="docutils literal notranslate"><span class="pre">Latitude</span></code> en <code class="docutils literal notranslate"><span class="pre">Longitude</span></code>, die het epicenter van de locatie van de aardbeving aangeven en andere gerelateerde attributen. We zullen deze velden gebruiken om het bestand als een puntenlaag te importeren. Open de gegevens in een tekstbewerker, zoals Notepad/TextMate, om de inhoud te bekijken. U zult zien dat een TAB elk veld scheid.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/014.png" class="align-center" src="../../_images/014.png" />
+<div><img alt="../../_images/015.png" class="align-center" src="../../_images/015.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
@@ -241,29 +242,29 @@
 <li><p>QGIS komt met een geüniformeerde gegevensbeheerder die het voor u mogelijk maakt alle verscheidene ondersteunde gegevensindelingen te laden. Klik op de knop <span class="guilabel">Databronnen beheren openen</span> op de <span class="guilabel">werkbalk Databronnen</span>. U kunt ook de toetsenbord sneltoets <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> gebruiken.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/024.png" class="align-center" src="../../_images/024.png" />
+<div><img alt="../../_images/025.png" class="align-center" src="../../_images/025.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Schakel, in het dialoogvenster van <span class="guilabel">Databronnen beheren</span>, naar <span class="guilabel">Tekengescheiden tekst</span>. Klik op de knop <code class="docutils literal notranslate"><span class="pre">…</span></code>  naast <span class="guilabel">Bestandsnaam</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/034.png" class="align-center" src="../../_images/034.png" />
+<div><img alt="../../_images/035.png" class="align-center" src="../../_images/035.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Afhankelijk van het besturingssysteem, kunt u wel of niet het bestand bekijken op de locatie van downloaden. Schakel, in de bestandsindelingen, naar <code class="docutils literal notranslate"><span class="pre">Alle</span> <span class="pre">bestanden</span> <span class="pre">(*;</span> <span class="pre">*.*)</span></code> om het <em>tsv</em>-bestand te bekijken.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/044.png" class="align-center" src="../../_images/044.png" />
+<div><img alt="../../_images/045.png" class="align-center" src="../../_images/045.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Nu zult u het gedownloade bestand zien. Selecteer dat en klik op <span class="guilabel">Openen</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/054.png" class="align-center" src="../../_images/054.png" />
+<div><img alt="../../_images/055.png" class="align-center" src="../../_images/055.png" />
 </div></blockquote>
 <ol class="arabic" start="6">
 <li><p>In het dialoogvenster van <span class="guilabel">Databronnen beheren</span> zal het pad naar het bestand beschikbaar zijn in :guilabel:Bestandsnaam`. Wijzig de <span class="guilabel">Laagnaam</span> naar <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code>. In het gedeelte <span class="guilabel">Bestandsindeling</span>, selecteer <span class="guilabel">Zelfgekozen tekstscheiders</span> en selecteer <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. In het gedeelte <span class="guilabel">Geometrie definitie</span>, kies <span class="guilabel">Punt coördinaten</span>. Standaard zullen de waarden van <span class="guilabel">X-veld</span> en <span class="guilabel">Y-veld</span> automatisch worden gevuld als het een veld met een geschikte naam vind in de invoer. In ons geval zijn dat <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> en <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. U kunt het wijzigen als het importeren de verkeerde velden selecteert. U kunt <span class="guilabel">Geometrie CRS</span> laten staan op het standaard CRS <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code>. Als uw bestand coördinaten in een ander CRS bevat, zou u hier het toepasselijke CRS moeten kiezen. Klik op <span class="guilabel">Toevoegen</span>.</p>
-<img alt="../../_images/064.png" class="align-center" src="../../_images/064.png" />
+<img alt="../../_images/065.png" class="align-center" src="../../_images/065.png" />
 </li>
 </ol>
 <div class="admonition note">
@@ -274,7 +275,7 @@
 <li><p>U zult nu zien dat de gegevens zullen worden geïmporteerd en weergegeven in het kaartvenster van QGIS als een nieuwe laag, genaamd <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code> met CRS <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/074.png" class="align-center" src="../../_images/074.png" />
+<div><img alt="../../_images/075.png" class="align-center" src="../../_images/075.png" />
 </div></blockquote>
 </section>
 </section>
@@ -301,7 +302,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Laatste aanpassing op mrt. 05, 2022.<br/>
+      Laatste aanpassing op apr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

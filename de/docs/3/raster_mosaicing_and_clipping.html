@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Tabellen verbinden (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Räumliche Verbindungen erstellen (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps erstellen (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Räumliche Abfragen ausführen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nächster Nachbar Analyse (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Stichproben aus Rasterdaten mit Hilfe von Punkten und Polygonen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps erstellen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -217,7 +218,7 @@
 <h2>Beschaffung der Daten<a class="headerlink" href="#get-the-data" title="Link zu dieser Überschrift">¶</a></h2>
 <p>Im Land Processes Distributed Active Archive Center (LP DAAC) steht der folgende Datensatz mit Höhendaten als Kacheln zur Verfügung: <a class="reference external" href="https://lpdaac.usgs.gov/products/srtmgl1v003/">NASA Shuttle Radar Topography Mission (SRTM) Global 1 arc second</a>.</p>
 <p>Eine einfache Schnittstelle zum download der Kacheln für ein bestimmtes Gebiet ist der <a class="reference external" href="https://dwtkns.com/srtm30m/">30-Meter SRTM Tile Downloader</a> von Derek Watkins. Wir laden die einzelnen SRTM Kacheln Sri Lankas herunter. Beachte, dass man für den Download einen freien <a class="reference external" href="https://urs.earthdata.nasa.gov/home">Earth Data account</a> benötigt.</p>
-<img alt="../../_images/data17.png" class="align-center" src="../../_images/data17.png" />
+<img alt="../../_images/data115.png" class="align-center" src="../../_images/data115.png" />
 <p>Wir benötigen außerdem folgenden Datensatz: <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Countries</a> von Natural Earth.</p>
 <p>Der Einfachheit halber können wir eine Kopie der Datensätze unter folgenden links herunterladen:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/N05E080.SRTMGL1.hgt.zip">N05E080.SRTMGL1.hgt.zip</a></p>
@@ -240,13 +241,13 @@
 <li><p>Öffne QGIS und gehe im <span class="guilabel">Browser</span> zu den heruntergeladenen Dateien. Erweitere jede zip-Datei, um die <code class="docutils literal notranslate"><span class="pre">.hgt</span></code> Dateien anzuzeigen. Halte die <kbd class="kbd docutils literal notranslate">Ctrl</kbd> Taste gedrückt und wähle alle einzelenen Dateien. Ziehe sie in den Arbeitsbereich.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1108.png" class="align-center" src="../../_images/1108.png" />
+<div><img alt="../../_images/1109.png" class="align-center" src="../../_images/1109.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Wir sehen im <span class="guilabel">Layers</span> Bereich 11 einzelne Layer, die im Arbeitsbereich angezeigt werden. Wir werden die Layer zu einem Mosaik zusammenfügen. Gehe zu <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2101.png" class="align-center" src="../../_images/2101.png" />
+<div><img alt="../../_images/2103.png" class="align-center" src="../../_images/2103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Suche das Tool <span class="menuselection">GDAL ‣ Raster Verschiedenes ‣ Verschmelzen</span> und klicke doppelt darauf, um es zu starten.</p></li>
@@ -294,25 +295,25 @@
 <li><p>Select the newly added <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> layers in the <span class="guilabel">Layers</span> panel. Click the <span class="guilabel">Select Features by area or single click</span> button on the <span class="guilabel">Attributes Toolbar</span>. Once selected, click the polygon for Sri Lanka to select it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1027.png" class="align-center" src="../../_images/1027.png" />
+<div><img alt="../../_images/1028.png" class="align-center" src="../../_images/1028.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Wir belassen die Selektion so und öffnen <span class="menuselection">Verarbeitung ‣ Werkzeugkiste</span>. Suche das Tool <span class="menuselection">GDAL ‣ Rasterextraktion  ‣ Raster auf Layermaske zuschneiden</span> und klicke doppelt daruf, um es zu starten.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1131.png" class="align-center" src="../../_images/1131.png" />
+<div><img alt="../../_images/1132.png" class="align-center" src="../../_images/1132.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Im Dialogfenster <span class="guilabel">Raster auf Layermaske zuschneiden</span> verwenden wir <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code> als <span class="guilabel">Eingabelayer</span>. Wir wählen <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> als <span class="guilabel">Maskenlayer</span> und setzen den Haken bei <span class="guilabel">Nur gewählte Objekte</span>. Wir geben <code class="docutils literal notranslate"><span class="pre">0.0000</span></code> als <span class="guilabel">Legt den Leerwert des Ausgabekanals fest</span> vor. Wie vorher verwenden wir <code class="docutils literal notranslate"><span class="pre">High</span> <span class="pre">compression</span></code> unter <span class="guilabel">Profil</span>. Klicke auf <span class="guilabel">Starte</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1229.png" class="align-center" src="../../_images/1229.png" />
+<div><img alt="../../_images/1230.png" class="align-center" src="../../_images/1230.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Ein neuer Layer <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code> wird nun im <span class="guilabel">Layers</span> Bereich angezeigt. Da wir jetzt zu viele sich überlappende Layer darstellen, ist es schwierig, die Ausgabedatei richtig zu erkennen. Klicke auf den Knopf <span class="guilabel">Kartenthemen verwalten</span> im Bereich <span class="guilabel">Layer</span> und wähle <code class="docutils literal notranslate"><span class="pre">Alle</span> <span class="pre">Layer</span> <span class="pre">ausblenden</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1327.png" class="align-center" src="../../_images/1327.png" />
+<div><img alt="../../_images/1328.png" class="align-center" src="../../_images/1328.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Wir schalten nur den zuletzt erstellten Layer <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code> ein und stellen die Darstellung wie vorher auf <code class="docutils literal notranslate"><span class="pre">Schummerung</span></code> um.</p></li>
@@ -324,7 +325,7 @@
 <li><p>Der zusammengefügte und zugeschnittene Ausgabelayer der Höhendaten Sri Lankas ist nun fertig gestellt.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1523.png" class="align-center" src="../../_images/1523.png" />
+<div><img alt="../../_images/1524.png" class="align-center" src="../../_images/1524.png" />
 </div></blockquote>
 </section>
 </section>
@@ -351,7 +352,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Zuletzt aktualisiert am März 05, 2022.<br/>
+      Zuletzt aktualisiert am Apr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

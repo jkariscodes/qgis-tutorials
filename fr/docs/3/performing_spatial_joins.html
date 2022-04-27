@@ -14,7 +14,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="Recherche" href="../../search.html" />
-    <link rel="next" title="Creating Heatmaps (QGIS3)" href="creating_heatmaps.html" />
+    <link rel="next" title="Performing Spatial Queries (QGIS3)" href="performing_spatial_queries.html" />
     <link rel="prev" title="Performing Table Joins (QGIS3)" href="performing_table_joins.html" />
 
 <meta charset='utf-8'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Performing Spatial Joins (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcul de densité des intersection de rues (QGIS3)</a></li>
@@ -132,7 +133,7 @@
     </a>
   </li>
   <li>
-    <a href="creating_heatmaps.html" title="Next Chapter: Creating Heatmaps (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Creating Heat... &raquo;</span>
+    <a href="performing_spatial_queries.html" title="Next Chapter: Performing Spatial Queries (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Performing Sp... &raquo;</span>
     </a>
   </li>
               
@@ -217,7 +218,7 @@
 <h2>Get the data<a class="headerlink" href="#get-the-data" title="Lien permanent vers ce titre">¶</a></h2>
 <p><a class="reference external" href="https://data.cityofnewyork.us/">NYC Open Data Portal</a> is an excellent source of free data for New York city.</p>
 <p>Download the <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Borough Boundaries</a> zip file using the Export option on the portal.</p>
-<img alt="../../_images/data13.png" class="align-center" src="../../_images/data13.png" />
+<img alt="../../_images/data19.png" class="align-center" src="../../_images/data19.png" />
 <p>Download the <a class="reference external" href="https://data.cityofnewyork.us/Transportation/Street-Pavement-Rating/2cav-chmn">Street Pavement Rating</a> zip file using the Export option on the portal.</p>
 <img alt="../../_images/data22.png" class="align-center" src="../../_images/data22.png" />
 <p>For convenience, you may directly download a copy of the datasets from the links below:</p>
@@ -231,13 +232,13 @@
 <li><p>Locate the <code class="docutils literal notranslate"><span class="pre">nybb_19a.zip</span></code> file in the QGIS Browser and expand it. Select the <code class="docutils literal notranslate"><span class="pre">nybb_19a/nybb.shp</span></code> layer and drag it to the canvas. This is a polygon layer representing the borough boundaries in New York city.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Next, locate the <code class="docutils literal notranslate"><span class="pre">V_SSS_SEGMENTRATING_1.zip</span></code> file and expand it. Select the <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129.shp</span></code> layer and add it to the canvas. This is a line layer of all streets in the city.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/260.png" class="align-center" src="../../_images/260.png" />
+<div><img alt="../../_images/270.png" class="align-center" src="../../_images/270.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Let’s examine the attributes available for each feature of the <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> layer. Right-click and select <span class="guilabel">Open Attribute Table</span>.</p></li>
@@ -292,25 +293,25 @@
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Rating_B</span></code> and click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1021.png" class="align-center" src="../../_images/1021.png" />
+<div><img alt="../../_images/1022.png" class="align-center" src="../../_images/1022.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Similarly, click the <span class="guilabel">…</span> button next to <span class="guilabel">Summaries to calculate</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1124.png" class="align-center" src="../../_images/1124.png" />
+<div><img alt="../../_images/1125.png" class="align-center" src="../../_images/1125.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">mean</span></code> as the summary operator and click <span class="guilabel">OK</span>. Now we are ready to start the processing. Click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1222.png" class="align-center" src="../../_images/1222.png" />
+<div><img alt="../../_images/1223.png" class="align-center" src="../../_images/1223.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>The processing algorithm will work through the features and apply the spatial join. Verify that the processing job was successful and click <span class="guilabel">Close</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1320.png" class="align-center" src="../../_images/1320.png" />
+<div><img alt="../../_images/1321.png" class="align-center" src="../../_images/1321.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Back in the main QGIS window, you will see a new <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer</span></code> layer added to canvas. Open the attribute table for this layer. You will see a new column <code class="docutils literal notranslate"><span class="pre">Rating_B_mean</span></code> is added to the input borough layer with the average rating of all streets that are interesecting with that feature.</p></li>
@@ -322,31 +323,31 @@
 <li><p>Now we can perform a reverse operation. Sometimes your analysis requires getting attributes from another layer based on the spatial relationship but not compute any summary. We can use the <code class="docutils literal notranslate"><span class="pre">Join</span> <span class="pre">attribute</span> <span class="pre">by</span> <span class="pre">location</span></code> algorithm for such analysis. The task is to add the name of the borough to each feature in the streets layer based on which borough polygon it intersects with. Before we run this algorithm, let’s remove the filter from the <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> layer. Click the filter icon and press the <span class="guilabel">Clear</span> in the <span class="guilabel">Query Builder</span>. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
+<div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Turn of the <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer</span></code> in the <span class="guilabel">Layers</span> panel. Find the <span class="menuselection">Vector general ‣ Join attribute by location</span> algorithm in the Processing Toolbox and double-click it to launch.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
+<div><img alt="../../_images/1616.png" class="align-center" src="../../_images/1616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> as the <span class="guilabel">Input layer</span> and <code class="docutils literal notranslate"><span class="pre">nybb</span></code> as the <span class="guilabel">Join layer</span>. You can leave the <span class="guilabel">Geometry predicate</span> to the default <code class="docutils literal notranslate"><span class="pre">Intersects</span></code>. Click the <span class="guilabel">…</span> button next to <span class="guilabel">Fields to add</span>  and select <code class="docutils literal notranslate"><span class="pre">BoroName</span></code>. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
+<div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>The line segment may cross a borough boundary, so we choose the <span class="guilabel">Join type</span> as <code class="docutils literal notranslate"><span class="pre">Crate</span> <span class="pre">separate</span> <span class="pre">feature</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">located</span> <span class="pre">feature</span> <span class="pre">(one-to-many)</span></code>. Click <span class="guilabel">Run</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
+<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Once the processing finishes, open the attribute table of the newly added <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer</span></code>. You will see that there is a new <code class="docutils literal notranslate"><span class="pre">BoroName</span></code> attribute added to each street feature.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
+<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 </section>
 </section>
@@ -373,7 +374,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Mis à jour le mars 05, 2022.<br/>
+      Mis à jour le avr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

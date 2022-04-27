@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">테이블 결합 작업(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">공간 결합 수행 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">공간 조회 실행(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">최근린 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">점 또는 다각형을 이용한 래스터 데이터 표본 추출 작업(QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -213,13 +214,13 @@
 <li><p>For this tutorial we will download a dataset of earthquakes between 1900-2000 from NOAA’s National Geophysical Data Center produces a great dataset of all significant earthquakes since 2150 BC. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Visit the NOAA NCEI portal</a> and enter <span class="guilabel">Min</span> as <code class="docutils literal notranslate"><span class="pre">1900</span></code> and <span class="guilabel">Max</span> as <code class="docutils literal notranslate"><span class="pre">2000</span></code>.  This will return all earthquake incidents that occurred and were recorded by NOAA between those years. For other specific results, you can filter with different parameters. Click <span class="guilabel">Search</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
+<div><img alt="../../_images/data011.png" class="align-center" src="../../_images/data011.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>As a result, we got <em>2585</em> earthquake incidents. Click on the <span class="guilabel">Download TSV</span> icon.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
+<div><img alt="../../_images/data021.png" class="align-center" src="../../_images/data021.png" />
 </div></blockquote>
 <p>For convenience, you may directly download a copy of the above datasets from the link below:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/earthquakes_2021_11_25_14_31_59_+0530.tsv">earthquakes_2021_11_25_14_31_59_+0530.tsv</a></p>
@@ -231,7 +232,7 @@
 <li><p>Examine your tabular data source. The downloaded earthquake database contains the <code class="docutils literal notranslate"><span class="pre">Latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> fields indicating the location of the earthquake epicenter and other related attributes. We will use these fields to import the file as a point layer. Open the data in a text editor such as Notepad/TextMate to view the contents. You will see that a TAB separates each field.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/014.png" class="align-center" src="../../_images/014.png" />
+<div><img alt="../../_images/015.png" class="align-center" src="../../_images/015.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">참고</p>
@@ -241,29 +242,29 @@
 <li><p>QGIS comes with a unified data manager that allows you to load all the various supported data formats. Click the <span class="guilabel">Open Data Source Manager</span> button on the <span class="guilabel">Data Source Toolbar</span>. You may also use <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd> keyboard shortcut.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/024.png" class="align-center" src="../../_images/024.png" />
+<div><img alt="../../_images/025.png" class="align-center" src="../../_images/025.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, switch to the <span class="guilabel">Delimited Text</span> tab. Click the <span class="guilabel">…</span> button next to the <span class="guilabel">File name</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/034.png" class="align-center" src="../../_images/034.png" />
+<div><img alt="../../_images/035.png" class="align-center" src="../../_images/035.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Depending upon the operating system, you may or may not view the file at the downloaded location. In File formats, switch to <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">files</span> <span class="pre">(*;</span> <span class="pre">*.*)</span></code> to view the <em>tsv</em> file.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/044.png" class="align-center" src="../../_images/044.png" />
+<div><img alt="../../_images/045.png" class="align-center" src="../../_images/045.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Now you will see the downloaded file. Select that and click <span class="guilabel">Open</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/054.png" class="align-center" src="../../_images/054.png" />
+<div><img alt="../../_images/055.png" class="align-center" src="../../_images/055.png" />
 </div></blockquote>
 <ol class="arabic" start="6">
 <li><p>In the <span class="guilabel">Data Source Manager</span> dialog box, the path to file will be available in <span class="guilabel">File Name</span>. Change the <span class="guilabel">Layer name</span> to <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code>. In the <span class="guilabel">File format</span> section, select <span class="guilabel">Custom delimiters</span> and check <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. In the <span class="guilabel">Geometry definition</span> section, choose <span class="guilabel">Point coordinates</span>. By default <span class="guilabel">X field</span> and <span class="guilabel">Y field</span>  values will be auto-populated if it finds a suitable name field in the input. In our case, they are <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>. You may change it if the import selects the wrong fields. You can leave the <span class="guilabel">Geometry CRS</span> to the default <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code> CRS. If your file contains coordinates in a different CRS, you could select the appropriate CRS here. Click <span class="guilabel">Add</span>.</p>
-<img alt="../../_images/064.png" class="align-center" src="../../_images/064.png" />
+<img alt="../../_images/065.png" class="align-center" src="../../_images/065.png" />
 </li>
 </ol>
 <div class="admonition note">
@@ -274,7 +275,7 @@
 <li><p>You will now see that the data will be imported and displayed in the QGIS canvas as a new layer called <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code> with CRS <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/074.png" class="align-center" src="../../_images/074.png" />
+<div><img alt="../../_images/075.png" class="align-center" src="../../_images/075.png" />
 </div></blockquote>
 </section>
 </section>
@@ -301,7 +302,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      최종 업데이트: 3월 05, 2022<br/>
+      최종 업데이트: 4월 27, 2022<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

@@ -14,7 +14,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="Búsqueda" href="../../search.html" />
-    <link rel="next" title="Análisis Avanzado de Ráster (QGIS3)" href="advanced_raster_analysis.html" />
+    <link rel="next" title="Calculating Raster Area (QGIS3)" href="calculating_raster_area.html" />
     <link rel="prev" title="Análisis del Vecino Más Cercano (QGIS3)" href="nearest_neighbor_analysis.html" />
 
 <meta charset='utf-8'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalizar Datos del Mapa (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizar Uniones de Tablas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizar Uniones Espaciales (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Análisis Avanzado de Ráster (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
@@ -132,7 +133,7 @@
     </a>
   </li>
   <li>
-    <a href="advanced_raster_analysis.html" title="Next Chapter: Análisis Avanzado de Ráster (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Análisis Avan... &raquo;</span>
+    <a href="calculating_raster_area.html" title="Next Chapter: Calculating Raster Area (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Calculating R... &raquo;</span>
     </a>
   </li>
               
@@ -230,13 +231,13 @@
 <li><p>Descomprima y extraiga tanto <code class="docutils literal notranslate"><span class="pre">2018_Gaz_ua_national.zip</span></code> como <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county.zip</span></code> a una carpeta en su computadora. Abra QGIS y localice el archivo <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float.tif</span></code>. En el Explorador QGIS, arrástrelo a la pantalla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1132.png" class="align-center" src="../../_images/1132.png" />
+<div><img alt="../../_images/1134.png" class="align-center" src="../../_images/1134.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Verá una nueva capa ráster <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> cargada en el panel <span class="guilabel">Capas</span>. Esta capa ráster contiene la temperatura máxima registrada en cada píxel en grados Celsius. A continuación cargaremos el archivo punto de áreas urbanas. Este archivo viene como un archivo texto en el formato Valores Separados por Tabulación (TSV). Clic el botón <span class="guilabel">Abrir Administrador de Fuente de Datos</span> en la <span class="guilabel">Barra de Herramientas Fuente de Datos</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2103.png" class="align-center" src="../../_images/2103.png" />
+<div><img alt="../../_images/2105.png" class="align-center" src="../../_images/2105.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Cambie a la pestaña <span class="guilabel">Texto Delimitado</span>. Clic el botón <span class="guilabel">…</span> junto a <span class="guilabel">Nombre de archivo</span> y especifique la ruta al archivo texto que descargó. En la sección <span class="guilabel">Formato de archivo</span>, seleccione <span class="guilabel">Delimitadores personalizados</span> y marque <span class="guilabel">Tabulación</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">INTPTLONG</span></code> como el <span class="guilabel">campo X</span> y <code class="docutils literal notranslate"><span class="pre">INTPTLAT</span></code> como el <span class="guilabel">campo Y</span>. Clic en <span class="guilabel">Añadir</span> y luego <span class="guilabel">Cerrar</span>.</p></li>
@@ -288,25 +289,25 @@
 <li><p>Se cargará una nueva capa <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code> al panel <span class="guilabel">Capas</span>. Vaya a <span class="menuselection">Procesos ‣ Caja de herramientas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1028.png" class="align-center" src="../../_images/1028.png" />
+<div><img alt="../../_images/1029.png" class="align-center" src="../../_images/1029.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Busque y localice el algoritmo <span class="menuselection">Análisis ráster ‣ Estadísticas zonales</span> y haga doble-clic para iniciarlo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1133.png" class="align-center" src="../../_images/1133.png" />
+<div><img alt="../../_images/1135.png" class="align-center" src="../../_images/1135.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> como la <span class="guilabel">Capa ráster</span> y <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code> como la <span class="guilabel">Capa vectorial que contiene zonas</span>. Ingrese <code class="docutils literal notranslate"><span class="pre">tmax_</span></code> como el <span class="guilabel">Prefijo de columna salida</span>. Clic en <span class="guilabel">…</span> junto a <span class="guilabel">Estadísticas a calcular</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1231.png" class="align-center" src="../../_images/1231.png" />
+<div><img alt="../../_images/1232.png" class="align-center" src="../../_images/1232.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Seleccione sólo el valor <code class="docutils literal notranslate"><span class="pre">Mean</span></code> y clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1329.png" class="align-center" src="../../_images/1329.png" />
+<div><img alt="../../_images/1330.png" class="align-center" src="../../_images/1330.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Clic en <span class="guilabel">Ejecutar</span> para iniciar el procesamiento. El algoritmo puede tomar unos pocos minutos para completar. Clic <span class="guilabel">Cerrar</span>.</p></li>
@@ -318,13 +319,13 @@
 <li><p>Como se hizo notar antes, el algoritmo <strong>Estadísticas zonales</strong> no crea una nueva capa, sino modifica la capa zona. Clic-derecho la capa  <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code>, y seleccione <span class="guilabel">Abrir tabla de atributos</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1525.png" class="align-center" src="../../_images/1525.png" />
+<div><img alt="../../_images/1526.png" class="align-center" src="../../_images/1526.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Verá una nueva columna llamada <code class="docutils literal notranslate"><span class="pre">tmax_mean</span></code> agregada a la tabla de atributos. Ésta contiene el valor de temperatura promedio extraído sobre el polígono de cada objeto. Hay algunos valores nulos debido a que esos condados (que pertenecen a Alaska, Hawaii y Puerto Rico) están fuera de la extensión de la capa ráster.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1623.png" class="align-center" src="../../_images/1623.png" />
+<div><img alt="../../_images/1624.png" class="align-center" src="../../_images/1624.png" />
 </div></blockquote>
 </section>
 </section>
@@ -351,7 +352,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en mar. 05, 2022.<br/>
+      Actualizado por última vez en abr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

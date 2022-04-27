@@ -85,12 +85,13 @@
 <li class="toctree-l1"><a class="reference internal" href="3/digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Realizzare unioni tabellari (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Realizzare unioni spaziali (Spatial Joins)  (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Realizzare Heatmaps (mappe di concentrazione)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Utilizzare le interrogazioni spaziali (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Campionare i dati di un raster usando punti o poligoni (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Realizzare Heatmaps (mappe di concentrazione)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -228,7 +229,7 @@ below:</p>
 <li><p>Open <span class="menuselection">Layer ‣ Add Layer ‣ Add Delimited Text Layer</span> and
 browse to the downloaded <code class="docutils literal notranslate"><span class="pre">signif.txt</span></code> file.</p></li>
 </ol>
-<img alt="../_images/1181.png" class="align-center" src="../_images/1181.png" />
+<img alt="../_images/1183.png" class="align-center" src="../_images/1183.png" />
 <ol class="arabic simple" start="2">
 <li><p>Dal momento che si tratta di tab-delimited file, scegliete <span class="guilabel">Tab</span>  alla voce <span class="guilabel">formato file</span>. I campi X e Y saranno compilati automaticamente. Click su <span class="guilabel">OK</span>.</p></li>
 </ol>
@@ -236,7 +237,7 @@ browse to the downloaded <code class="docutils literal notranslate"><span class=
 <p class="admonition-title">Nota</p>
 <p>Vedrete comparire dei messaggi di errore mentre QGIS sta importando il file. Si tratta di errori di incolonnamento e alcune righe del file non saranno importate. Per quelli che sono gli scopi di questo esercizio questi errori possono essere trascurati senza conseguenze. Chiudete.</p>
 </div>
-<img alt="../_images/2146.png" class="align-center" src="../_images/2146.png" />
+<img alt="../_images/2149.png" class="align-center" src="../_images/2149.png" />
 <ol class="arabic simple" start="3">
 <li><p>As the earthquake dataset has Latitude/Longitude coordinates, it will be
 imported with the default CRS of <code class="docutils literal notranslate"><span class="pre">EPSG:</span> <span class="pre">4326</span></code>. Verify that is the case in
@@ -286,7 +287,7 @@ Layer ‣ Add Delimited Text Layer…</span>.</p></li>
 <ol class="arabic simple" start="10">
 <li><p>Vedrete il file CSV caricato in forma di tabella. Click sul tasto destro del layer tabellare alla voce <span class="guilabel">Apri Tabella degli Attributi</span>.</p></li>
 </ol>
-<img alt="../_images/1052.png" class="align-center" src="../_images/1052.png" />
+<img alt="../_images/1053.png" class="align-center" src="../_images/1053.png" />
 <ol class="arabic simple" start="11">
 <li><p>A questo punto dovreste essere in grado di esaminare il contenuto dei vostri risultati. Il campo <span class="guilabel">InputID</span> contiene il campo nome del layer dei terremoti. Il campo <span class="guilabel">TargetID</span> contiene il nome degli elementi provenienti dal layer dei luoghi abitati che sono più vicini ai punti che indicano i terremoti. Il campo <span class="guilabel">Distance</span> contiene la distanza tra i 2 punti.</p></li>
 </ol>
@@ -294,11 +295,11 @@ Layer ‣ Add Delimited Text Layer…</span>.</p></li>
 <p class="admonition-title">Nota</p>
 <p>Ricordate che il calcolo della <em>distanza</em>  viene ottenuto usando il Sistema di Riferimento dei layer. Qui la distanza è misurata in unità di <em>gradi decimali</em> perché le coordinate del nostro layer sorgente sono in gradi. Qualora desideraste avere le distanze misurate in metri dovreste riproiettare i layer prima di utilizzare lo strumento di analisi.</p>
 </div>
-<img alt="../_images/1182.png" class="align-center" src="../_images/1182.png" />
+<img alt="../_images/1184.png" class="align-center" src="../_images/1184.png" />
 <ol class="arabic simple" start="12">
 <li><p>Questo dato si avvicina abbastanza al risultato che stavamo cercando. Per alcuni utenti questa tabella può essere considerata sufficiente. Tuttavia, noi intendiamo anche integrare i risultati nel nostro layer dei terremoti usando una <strong>Unione Tabellare</strong>. Click con il tasto destro del layer dei terremoti e dal menu selezionate <span class="guilabel">Proprietà</span>.</p></li>
 </ol>
-<img alt="../_images/1254.png" class="align-center" src="../_images/1254.png" />
+<img alt="../_images/1255.png" class="align-center" src="../_images/1255.png" />
 <ol class="arabic simple" start="13">
 <li><p>Spostatevi sulla scheda <span class="guilabel">Join</span>  e fate click sul pulsante <span class="guilabel">+</span> .</p></li>
 </ol>
@@ -314,28 +315,28 @@ Leave other options to their default values and click <span class="guilabel">OK<
 <ol class="arabic simple" start="15">
 <li><p>Vedrete apparire la scheda <span class="guilabel">Join</span>. Click su <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1546.png" class="align-center" src="../_images/1546.png" />
+<img alt="../_images/1547.png" class="align-center" src="../_images/1547.png" />
 <ol class="arabic simple" start="16">
 <li><p>Now open the attribute table of the <code class="docutils literal notranslate"><span class="pre">signif</span></code> layer by right-clicking and
 selecting <span class="guilabel">Open Attribute Table</span>.</p></li>
 </ol>
-<img alt="../_images/1643.png" class="align-center" src="../_images/1643.png" />
+<img alt="../_images/1644.png" class="align-center" src="../_images/1644.png" />
 <ol class="arabic simple" start="17">
 <li><p>Vedrete che, per ogni punto dei terremoti, abbiamo adesso un attributo che è il punto vicino più prossimo (cioè il posto abitato più vicino) e la distanza da questo punto.</p></li>
 </ol>
-<img alt="../_images/1739.png" class="align-center" src="../_images/1739.png" />
+<img alt="../_images/1740.png" class="align-center" src="../_images/1740.png" />
 <ol class="arabic simple" start="18">
 <li><p>We will now explore a way to visualize these results. First, we need to
 make the table join permanent by saving it to a new layer. Right-click the
 <code class="docutils literal notranslate"><span class="pre">signif</span></code> layer and select <span class="guilabel">Save As…</span>.</p></li>
 </ol>
-<img alt="../_images/1837.png" class="align-center" src="../_images/1837.png" />
+<img alt="../_images/1838.png" class="align-center" src="../_images/1838.png" />
 <ol class="arabic simple" start="19">
 <li><p>Click the <span class="guilabel">Browse</span> button next to <span class="guilabel">Save as</span> label and
 name the output layer as <code class="docutils literal notranslate"><span class="pre">earthquake_with_places.shp</span></code>. Make sure the
 <span class="guilabel">Add saved file to map</span> box is checked and click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1929.png" class="align-center" src="../_images/1929.png" />
+<img alt="../_images/1930.png" class="align-center" src="../_images/1930.png" />
 <ol class="arabic simple" start="20">
 <li><p>Once the new layer is loaded, you can turn off the visibility of the
 <code class="docutils literal notranslate"><span class="pre">signif</span></code> layer. As our dataset is quite large, we can run our
@@ -344,12 +345,12 @@ where you can load a subset of features from a layer without having to
 export it to a new layer. Right-click the <code class="docutils literal notranslate"><span class="pre">earthquake_with_places</span></code> layer
 and select <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../_images/2024.png" class="align-center" src="../_images/2024.png" />
+<img alt="../_images/2025.png" class="align-center" src="../_images/2025.png" />
 <ol class="arabic simple" start="21">
 <li><p>In the <span class="guilabel">General</span> tab, scroll down to the <span class="guilabel">Feature
 subset</span> section. Click <span class="guilabel">Query Builder</span>.</p></li>
 </ol>
-<img alt="../_images/2147.png" class="align-center" src="../_images/2147.png" />
+<img alt="../_images/2150.png" class="align-center" src="../_images/2150.png" />
 <ol class="arabic simple" start="22">
 <li><p>For this tutorial, we will visualize the earthquakes and their nearest
 populated places for Mexico. Enter the following expression in the
@@ -373,14 +374,14 @@ Enter the following expression.</p></li>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;adm0name&quot; = &#39;Mexico&#39;
 </pre></div>
 </div>
-<img alt="../_images/2423.png" class="align-center" src="../_images/2423.png" />
+<img alt="../_images/2424.png" class="align-center" src="../_images/2424.png" />
 <ol class="arabic simple" start="25">
 <li><p>Now we are ready to create our visualization. We will use a plugin named
 <code class="docutils literal notranslate"><span class="pre">MMQGIS</span></code>. Find and install the plugin. See <a class="reference internal" href="using_plugins.html"><span class="doc">Usare i Plugins</span></a> for more
 details on how to work with plugins. Once you have the plugin installed, go
 to <span class="menuselection">MMQGIS ‣ Create ‣ Hub Lines</span>.</p></li>
 </ol>
-<img alt="../_images/2520.png" class="align-center" src="../_images/2520.png" />
+<img alt="../_images/2522.png" class="align-center" src="../_images/2522.png" />
 <ol class="arabic simple" start="26">
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">ne_10m_populated_places_simple</span></code> as the <span class="guilabel">Hub Point
 Layer</span> and <code class="docutils literal notranslate"><span class="pre">name</span></code> as the <span class="guilabel">Hub ID Attribute</span>. Similarly, select
@@ -397,13 +398,13 @@ the processing.</p></li>
 <li><p>The processing may take a few minutes. You can see the progress on the
 bottom-left corner of the QGIS window.</p></li>
 </ol>
-<img alt="../_images/2718.png" class="align-center" src="../_images/2718.png" />
+<img alt="../_images/2719.png" class="align-center" src="../_images/2719.png" />
 <ol class="arabic simple" start="28">
 <li><p>Once the processing is done, you will see the <code class="docutils literal notranslate"><span class="pre">earthquake_hub_lines</span></code>
 layer loaded in QGIS. You can see that each earthquake point now has a line
 that connects it to the nearest populated place.</p></li>
 </ol>
-<img alt="../_images/2815.png" class="align-center" src="../_images/2815.png" />
+<img alt="../_images/2816.png" class="align-center" src="../_images/2816.png" />
 </section>
 </section>
 
@@ -429,7 +430,7 @@ that connects it to the nearest populated place.</p></li>
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento mar 05, 2022.<br/>
+      Ultimo aggiornamento apr 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

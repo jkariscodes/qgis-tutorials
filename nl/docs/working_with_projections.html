@@ -85,12 +85,13 @@
 <li class="toctree-l1"><a class="reference internal" href="3/digitizing_basics.html">Kaartgegevens digitaliseren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Samenvoegen van tabellen uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Ruimtelijke samenvoegingen uitvoeren (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Ongeldige geometrieën afhandelen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Ruimtelijke query’s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Ongeldige geometrieën afhandelen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_raster_analysis.html">Gevorderde rasteranalyses (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_intersection_density.html">Dichtheid van straatkruisingen berekenen (QGIS3)</a></li>
@@ -227,11 +228,11 @@
 <ol class="arabic simple">
 <li><p>Open QGIS. Ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Vectorlaag toevoegen…</span>.</p></li>
 </ol>
-<img alt="../_images/1207.png" class="align-center" src="../_images/1207.png" />
+<img alt="../_images/1208.png" class="align-center" src="../_images/1208.png" />
 <ol class="arabic simple" start="2">
 <li><p>Blader naar het gedownloade bestand <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.zip</span></code> en klik op <span class="guilabel">Openen</span>.</p></li>
 </ol>
-<img alt="../_images/2173.png" class="align-center" src="../_images/2173.png" />
+<img alt="../_images/2176.png" class="align-center" src="../_images/2176.png" />
 <ol class="arabic simple" start="3">
 <li><p>Onder in het venster van QGIS zult u het label <span class="guilabel">Coördinaat</span> zien. Wanneer u uw cursor over de kaart beweegt, laat het u de X- en Y-coördinaten van die locatie zien. In de rechter benedenhoek zult u zien <span class="guilabel">EPSG:4326</span>. Dat is de code voor het huidige CRS (projectie) voor het project.</p></li>
 </ol>
@@ -267,19 +268,19 @@
 <ol class="arabic simple" start="10">
 <li><p>U zult het nieuwe CRS zien geselecteerd in het dialoogvenster <span class="guilabel">Vectorlaag opslaan als…</span>. Klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1068.png" class="align-center" src="../_images/1068.png" />
+<img alt="../_images/1069.png" class="align-center" src="../_images/1069.png" />
 <ol class="arabic simple" start="11">
 <li><p>Als de opnieuw geprojecteerde laag wordt geladen zult u zien dat de nieuwe laag <code class="docutils literal notranslate"><span class="pre">united_states</span></code> perfect bovenop de laag <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> valt - zelfs hoewel zij in verschillende projecties staan. Dat komt omdat QGIS een mogelijkheid heeft die is genaamd <strong>Gelijktijdige CRS-transformatie gebruiken</strong>. De tekst van de projectie aan de rechter onderzijde van QGIS heeft nu het woord <code class="docutils literal notranslate"><span class="pre">OTF</span></code> naast <span class="guilabel">EPSG:4326`</span> staan.  Laten we de optie CRS in QGIS verkennen om er meer over te weten te komen.</p></li>
 </ol>
-<img alt="../_images/11107.png" class="align-center" src="../_images/11107.png" />
+<img alt="../_images/11108.png" class="align-center" src="../_images/11108.png" />
 <ol class="arabic simple" start="12">
 <li><p>Ga naar <span class="menuselection">Extra ‣ Opties…</span>.</p></li>
 </ol>
-<img alt="../_images/1268.png" class="align-center" src="../_images/1268.png" />
+<img alt="../_images/1269.png" class="align-center" src="../_images/1269.png" />
 <ol class="arabic simple" start="13">
 <li><p>Schakel naar de tab <span class="guilabel">CRS</span> in het dialoogvenster <span class="guilabel">Opties</span>. U zult zien dat de standaard is <span class="guilabel">Automatisch gelijktijdige CRS-transformatie inschakelen als kaartlagen verschillen van CRS</span>. Dit betekent dat wanneer QGIS detecteert dat u lagen met verschillende CRS-en heeft geladen, ze automatisch opnieuw zal projecteren naar een algemeen CRS zodat zij exact met elkaar uitlijnen. Klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1365.png" class="align-center" src="../_images/1365.png" />
+<img alt="../_images/1366.png" class="align-center" src="../_images/1366.png" />
 <ol class="arabic simple" start="14">
 <li><p>Laten we de <strong>Gelijktijdige CRS-transformatie gebruiken</strong> uitschakelen en zien wat er gebeurd. Klik op de tekst <span class="guilabel">Huidig CRS</span> in de rechter benedenhoek.</p></li>
 </ol>
@@ -287,23 +288,23 @@
 <ol class="arabic simple" start="15">
 <li><p>Deselecteer, in het dialoogvenster <span class="guilabel">Projecteigenschappen</span>, het vak <span class="guilabel">Gelijktijdige CRS-transformatie gebruiken</span> en klik op <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1558.png" class="align-center" src="../_images/1558.png" />
+<img alt="../_images/1559.png" class="align-center" src="../_images/1559.png" />
 <ol class="arabic simple" start="16">
 <li><p>Terug in het hoofdvenster van QGIS zult u de nette kaart van de wereld zien verdwijnen. Dat komt omdat het CRS van het project is gewijzigd naar <code class="docutils literal notranslate"><span class="pre">North_America_Albers_Equal_Area_Conic</span></code> en de coördinaten en schaal zijn nu anders. Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">united_states</span></code> en selecteer <span class="guilabel">Op kaartlaag inzoomen</span>.</p></li>
 </ol>
-<img alt="../_images/1655.png" class="align-center" src="../_images/1655.png" />
+<img alt="../_images/1656.png" class="align-center" src="../_images/1656.png" />
 <ol class="arabic simple" start="17">
 <li><p>Nu zult u de Verenigde Staten in de geselecteerde projectie zien. Merk op dat de objecten van <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> niet verschijnen in het kaartvenster omdat zij in een andere coördinatenruimte staan dan de laag <code class="docutils literal notranslate"><span class="pre">united_states</span></code>. Ga terug naar het dialoogvenster <span class="guilabel">Projecteigenschappen</span> en schakel de optie <span class="guilabel">Gelijktijdige CRS-transformatie gebruiken</span> weer in voor de rest van de handleiding.</p></li>
 </ol>
-<img alt="../_images/1750.png" class="align-center" src="../_images/1750.png" />
+<img alt="../_images/1751.png" class="align-center" src="../_images/1751.png" />
 <ol class="arabic simple" start="18">
 <li><p>Laten we nu eens schakelen en een rasterlaag aan het project toevoegen. Blader naar de map waar u het bestand <code class="docutils literal notranslate"><span class="pre">minisc_gb.zip</span></code> heeft opgeslagen. Lokaliseer de map <code class="docutils literal notranslate"><span class="pre">RGB_TIF_COMPRESSED</span></code> die de tif-bestanden bevat. U zult zien dat de .tif-afbeeldingsbestanden kale TIF-bestanden zijn, geen GeoTIFF-bestanden. Dat betekent dat zij geen enkele informatie over de projectie bevatten. U dient ze te voorzien van geoverwijzingen om deze afbeeldingen in een GIS te kunnen gebruiken. Een geoverwijzing bevat 2 typen informatie - bereik van de afbeelding en de projectie. Gewoonlijk worden de bereiken opgeslagen in een bestand dat bekend staat als <a class="reference external" href="https://en.wikipedia.org/wiki/World_file">World file</a> en zij hebben extensies als <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> of <code class="docutils literal notranslate"><span class="pre">.jgw</span></code>. De meeste GIS-software, inclusief QGIS, zouden in staat moeten zijn de in de worldbestanden opgeslagen informatie te gebruiken zolang als zij zijn opgeslagen in dezelfde map als de originele afbeelding en dezelfde naam heeft. De bestanden <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> voor rasterbestanden van MiniScale staan in een afzonderlijke map, genaamd <code class="docutils literal notranslate"><span class="pre">georeferencing_files</span></code>.</p></li>
 </ol>
-<img alt="../_images/1848.png" class="align-center" src="../_images/1848.png" />
+<img alt="../_images/1849.png" class="align-center" src="../_images/1849.png" />
 <ol class="arabic simple" start="19">
 <li><p>Ga naar de map <code class="docutils literal notranslate"><span class="pre">ESRI_TFW_FILES</span></code> in <code class="docutils literal notranslate"><span class="pre">georeferencing_files</span></code>. De bestanden <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> zijn bestanden met platte tekst. Open een van de bestanden <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> in een tekstbewerker.</p></li>
 </ol>
-<img alt="../_images/1940.png" class="align-center" src="../_images/1940.png" />
+<img alt="../_images/1941.png" class="align-center" src="../_images/1941.png" />
 <ol class="arabic simple" start="20">
 <li><p>De worldbestanden bevatten 6 regels met enkele getallen. Zoals hieornder vermeld behelst elk bestand enige informatie over het rasterbestand. Kennen van deze indeling is nuttig omdat sommige gegevens geen worldbestanden hebben en dan moet u deze hand,matig maken met behulp van de verschafte informatie.</p></li>
 </ol>
@@ -315,11 +316,11 @@ Line 5: C: x-coordinate of the center of the upper left pixel
 Line 6: F: y-coordinate of the center of the upper left pixel
 </pre></div>
 </div>
-<img alt="../_images/2035.png" class="align-center" src="../_images/2035.png" />
+<img alt="../_images/2036.png" class="align-center" src="../_images/2036.png" />
 <ol class="arabic simple" start="21">
 <li><p>Kopieer het bestand <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R17.tfw</span></code> van de map <code class="docutils literal notranslate"><span class="pre">georeferencing_files</span></code> naar de map <code class="docutils literal notranslate"><span class="pre">RGB_TIF_COMPRESSED</span></code>. Op deze manier staan de bestanden <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> en <code class="docutils literal notranslate"><span class="pre">.tif</span></code> in dezelfde map en kan QGIS de informatie gebruiken.</p></li>
 </ol>
-<img alt="../_images/2174.png" class="align-center" src="../_images/2174.png" />
+<img alt="../_images/2177.png" class="align-center" src="../_images/2177.png" />
 <ol class="arabic simple" start="22">
 <li><p>Ga, in het hoofdvenster van QGIS, naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Rasterlaag toevoegen…</span>. Blader naar het bestand <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R17.tif</span></code> en klik op <span class="guilabel">Open</span>.</p></li>
 </ol>
@@ -331,11 +332,11 @@ Line 6: F: y-coordinate of the center of the upper left pixel
 <ol class="arabic simple" start="24">
 <li><p>Als de laag <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R17</span></code> eenmaal is geladen, klik er dan met rechts op en selecteer <span class="guilabel">Op kaartlaag inzoomen</span>.</p></li>
 </ol>
-<img alt="../_images/2430.png" class="align-center" src="../_images/2430.png" />
+<img alt="../_images/2431.png" class="align-center" src="../_images/2431.png" />
 <ol class="arabic simple" start="25">
 <li><p>U zult zien dat de rasterlaag bovenop de vectorlaag <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> ligt. Omdat we de <code class="docutils literal notranslate"><span class="pre">OTF</span></code> hebben ingeschakeld met EPSG:4326, wordt de laag <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R17</span></code> dynamisch opnieuw geprojecteerd naar EPSG:4326 en weergegeven in dezelfde coördinatenruimte als de andere laag.</p></li>
 </ol>
-<img alt="../_images/2526.png" class="align-center" src="../_images/2526.png" />
+<img alt="../_images/2528.png" class="align-center" src="../_images/2528.png" />
 </section>
 </section>
 
@@ -361,7 +362,7 @@ Line 6: F: y-coordinate of the center of the upper left pixel
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Laatste aanpassing op mrt. 05, 2022.<br/>
+      Laatste aanpassing op apr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

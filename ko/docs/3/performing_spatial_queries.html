@@ -15,7 +15,7 @@
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="검색" href="../../search.html" />
     <link rel="next" title="최근린 분석(QGIS3)" href="nearest_neighbor_analysis.html" />
-    <link rel="prev" title="Handling Invalid Geometries (QGIS3)" href="handling_invalid_geometries.html" />
+    <link rel="prev" title="공간 결합 수행 (QGIS3)" href="performing_spatial_joins.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">테이블 결합 작업(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">공간 결합 수행 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">공간 조회 실행(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">최근린 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">점 또는 다각형을 이용한 래스터 데이터 표본 추출 작업(QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -128,7 +129,7 @@
               
                 
   <li>
-    <a href="handling_invalid_geometries.html" title="Previous Chapter: Handling Invalid Geometries (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Handling Inva...</span>
+    <a href="performing_spatial_joins.html" title="Previous Chapter: 공간 결합 수행 (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; 공간 결합 수행 (QGIS3)</span>
     </a>
   </li>
   <li>
@@ -219,7 +220,7 @@
 <h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>City of Melbourne의 Open Data Platform은 도시의 관련 많은 GIS 지원 데이터 세트를 제공합니다.</p>
 <p>메트로 기차 멜버른이 제공하는 접근성 정보가있는 메트로 기차역을 다운로드하십시오. 데이터를 원본 형식으로 내 보냅니다.</p>
-<img alt="../../_images/data14.png" class="align-center" src="../../_images/data14.png" />
+<img alt="../../_images/data110.png" class="align-center" src="../../_images/data110.png" />
 <p>멜버른시의 토지 사용 및 고용 인구 조사 (CLUE)에서 제공하는 후원자 용량 데이터가 포함 된 바와 술집을 다운로드하십시오. 데이터를 CSV로 내 보냅니다.</p>
 <img alt="../../_images/data23.png" class="align-center" src="../../_images/data23.png" />
 <p>편의 상 아래 링크에서 데이터셋 복사본을 직접 다운로드할 수 있습니다.</p>
@@ -233,13 +234,13 @@
 <li><p>QGIS Browser에서 metro_stations_accessbility.zip 파일을 찾아 확장하십시오. metro_stations_accessbility.shp 파일을 선택하고 캔버스로 끕니다. 새 레이어 metro_stations_accessbility가 레이어 패널에 로드됩니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
+<div><img alt="../../_images/1104.png" class="align-center" src="../../_images/1104.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>바와 술집의 데이터 레이어는 CSV 형식입니다. QGIS에로드하려면 레이어 ‣ 레이어 추가 ‣ 구분 된 텍스트 레이어 추가 …로 이동하십시오 (CSV 파일 가져 오기에 대한 자세한 내용은 스포레드시트 및 CSV 파일 불러 오기 (QGIS3) 참조).</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/269.png" class="align-center" src="../../_images/269.png" />
+<div><img alt="../../_images/280.png" class="align-center" src="../../_images/280.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>데이터 소스 관리자에서 | 구분 된 텍스트 대화 상자에서 다운로드 한 Bars_and_pubs__with_patron_capacity.csv 파일을 찾아 파일 이름으로 선택하십시오. X 필드와 Y 필드 열은 각각 x 좌표와 y 좌표로 자동 선택되어야합니다. 추가를 클릭하십시오.</p></li>
@@ -291,25 +292,25 @@
 <li><p>레이어 이름을 묻는 메시지가 표시되면 bars_and_pubs를 입력하고 확인을 클릭하십시오. 레이어를 다시 투영하려면 실행을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1022.png" class="align-center" src="../../_images/1022.png" />
+<div><img alt="../../_images/1023.png" class="align-center" src="../../_images/1023.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>창이 로그 탭으로 전환되고 알고리즘이 실행되고 새 출력 레이어 bar_and_pubs가 생성됩니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1125.png" class="align-center" src="../../_images/1125.png" />
+<div><img alt="../../_images/1126.png" class="align-center" src="../../_images/1126.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>이제 metro_stations_accessbility 레이어를 다시 투영합니다. Reproject 레이어 창의 Paramters 탭으로 다시 전환하십시오. 입력 레이어로 metro_stations_accessbility를 선택하십시오. 동일한 대상 CRS를 유지하십시오. 그런 다음 Reprojected 옆에있는 … 버튼을 클릭하고 GeoPackage에 저장을 선택하십시오. 동일한 출력 파일 공간 쿼리를 선택하십시오 (단일 지오 패키지 파일에 여러 계층이 포함될 수 있으므로 새 계층을 동일한 지오 패키지 파일에 저장함). 레이어 이름으로 metro_stations를 입력하십시오. 실행을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1223.png" class="align-center" src="../../_images/1223.png" />
+<div><img alt="../../_images/1224.png" class="align-center" src="../../_images/1224.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>메인 QGIS 창으로 돌아 가면 레이어 패널에로드 된 2 개의 새로운 레이어 (bar_and_pubs 및 metro_stations)가 나타납니다. 원본 레이어의 가시성을 끌 수 있습니다. 이제 공간 쿼리를 수행 할 준비가되었습니다. 우리는 지하철 역에서 500m 이내에 바와 술집을 선택하는 데 관심이 있기 때문에 첫 번째 단계는 지하철 역 주변에 검색 영역을 나타내는 버퍼를 만드는 것입니다. 처리 도구 상자에서 벡터 지오메트리 ‣ 버퍼 도구를 찾아서 두 번 클릭하여 시작하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1321.png" class="align-center" src="../../_images/1321.png" />
+<div><img alt="../../_images/1322.png" class="align-center" src="../../_images/1322.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Buufer 대화 상자에서 입력 레이어로 metro_stations를 선택하십시오. 거리로 500 미터를 설정하십시오. 출력을 동일한 공간 쿼리 지오 패키지에 저장하고 레이어 이름으로 metro_stations_buffers를 입력하십시오. 실행을 클릭하십시오.</p></li>
@@ -321,7 +322,7 @@
 <li><p>레이어 패널에 새로운 metro_stations_buffers 레이어가로드 된 것을 볼 수 있습니다. 이제 우리는 bars_and_pubs 레이어의 어떤 지점이 metro_stations_buffers 레이어의 다각형 내에 속하는지 알아낼 수 있습니다. Processing Toolbox에서 Vector selection ‣ Extract by Location 도구를 찾아 두 번 클릭하여 시작하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
+<div><img alt="../../_images/1518.png" class="align-center" src="../../_images/1518.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">참고</p>
@@ -331,19 +332,19 @@
 <li><p>위치 별 추출 대화 상자에서 추출 기능으로 bars_and_pubs를 선택하십시오. 지오메트리 술어로 교차를 확인하십시오. 기능과 비교하여 metro_stations_buffers를로 설정하십시오. 선택한 레이어로 출력을 공간 쿼리 지오 패키지에 저장하십시오. 실행을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1616.png" class="align-center" src="../../_images/1616.png" />
+<div><img alt="../../_images/1617.png" class="align-center" src="../../_images/1617.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>처리가 완료되면 선택한 레이어가 레이어 패널에 추가 된 것을 볼 수 있습니다. 이 레이어에는 버퍼 폴리곤 내에있는 bars_and_pubs의 점만 포함됩니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
+<div><img alt="../../_images/1718.png" class="align-center" src="../../_images/1718.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>우리의 분석이 완료되었습니다. 버퍼 다각형이 타원형으로 보일 수 있습니다. 이는 프로젝트 CRS가 여전히 EPSG : 4326 WGS84로 설정되어 있기 때문입니다. 결과를 더 잘 시각화하기 위해 Project ‣ Properties ‣ CRS로 이동하여 분석에 사용한 GDA 2020 / MGA zone 55 EPSG : 7855를 선택할 수 있습니다. 이 CRS로 설정되면 버퍼가 올바른 모양으로 나타납니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
+<div><img alt="../../_images/1816.png" class="align-center" src="../../_images/1816.png" />
 </div></blockquote>
 </section>
 </section>
@@ -370,7 +371,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      최종 업데이트: 3월 05, 2022<br/>
+      최종 업데이트: 4월 27, 2022<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

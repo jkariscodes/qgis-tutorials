@@ -15,7 +15,7 @@
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="Búsqueda" href="../../search.html" />
     <link rel="next" title="Animar Datos de Series de Tiempo (QGIS3)" href="animating_time_series.html" />
-    <link rel="prev" title="Realizar Uniones Espaciales (QGIS3)" href="performing_spatial_joins.html" />
+    <link rel="prev" title="Calculating Raster Area (QGIS3)" href="calculating_raster_area.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalizar Datos del Mapa (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizar Uniones de Tablas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizar Uniones Espaciales (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Crear Mapas de Calor (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Crear Mapas de Calor (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Análisis Avanzado de Ráster (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
@@ -128,7 +129,7 @@
               
                 
   <li>
-    <a href="performing_spatial_joins.html" title="Previous Chapter: Realizar Uniones Espaciales (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Realizar Unio...</span>
+    <a href="calculating_raster_area.html" title="Previous Chapter: Calculating Raster Area (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Calculating R...</span>
     </a>
   </li>
   <li>
@@ -232,7 +233,7 @@
 <li><p>Expand it to see the <span class="guilabel">OpenStreetMap</span> tile layer. Drag and drop it to the main canvas. Next we will load the CSV file. Click the <span class="guilabel">Open Data Source Manager</span> button.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/226.png" class="align-center" src="../../_images/226.png" />
+<div><img alt="../../_images/227.png" class="align-center" src="../../_images/227.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Cámbiese a la pestaña <span class="guilabel">Texto Delimitado</span>. Aquí importaremos los datos de crimen que vienen en un archivo de texto de formato CSV. Clic el botón <span class="guilabel">…</span> junto a <span class="guilabel">Nombre de archivo</span> y explore archivo descargado <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street.csv</span></code>. El <span class="guilabel">Campo X</span> y <span class="guilabel">Campo Y</span> en la sección <span class="guilabel">Definición de Geometría</span> será autopoblado con las columnas <code class="docutils literal notranslate"><span class="pre">Longitud</span></code> y <code class="docutils literal notranslate"><span class="pre">`Latitud</span></code>. El <span class="guilabel">SRC de Geometría</span> debería dejarse en su definición predeterminada <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code>. Asegúrese que los datos se ven correctos en el panel <span class="guilabel">Datos de muestra</span> y clic <span class="guilabel">Añadir</span>, seguido por <span class="guilabel">Cerrar</span>.</p></li>
@@ -280,19 +281,19 @@
 <li><p>Para varios tipos de análisis, el solo considerar la densidad de los puntos es suficiente. Pero algunas, veces, puede querer dar importancia diferente a cada punto. Un crimen más violento debería tener más influencia en el mapa de calor que un robo. De forma similar, algunas veces un punto puede representar múltiples observaciones en una sola ubicación que necesita ser tomado en cuenta en el análisis. Para hacer esto, tu puedes proporcionar un campo opcional numérico <strong>peso</strong> que especifica un valor para cada punto. Agreguemos un campo de peso y usémoslo para mejorar el mapa de calor. Haga clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1010.png" class="align-center" src="../../_images/1010.png" />
+<div><img alt="../../_images/1011.png" class="align-center" src="../../_images/1011.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Verá un campo texto llamado <code class="docutils literal notranslate"><span class="pre">Crime</span> <span class="pre">type</span></code> en los datos de entrada que describe el tipo de crimen. Podemos usar estos para categorizar los diferentes tipos de crimen y asignar un peso mayor a los crímenes más violentos.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1113.png" class="align-center" src="../../_images/1113.png" />
+<div><img alt="../../_images/1114.png" class="align-center" src="../../_images/1114.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Clic en <span class="guilabel">Abrir calculadora de campo</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1211.png" class="align-center" src="../../_images/1211.png" />
+<div><img alt="../../_images/1212.png" class="align-center" src="../../_images/1212.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Ahora ingresaremos una fórmula que usa el <code class="docutils literal notranslate"><span class="pre">Tipo</span> <span class="pre">de</span> <span class="pre">crimen</span></code> y determina el valor de peso. QGIS tiene una forma práctica para agregar tales campos calculados usado <em>Campos Virtuales</em>. El campo virtual es guardado en el proyecto QGIS y no modifica los datos fuentes. También es calculado dinámicamente y puede ser usado en cualquier parte en QGIS tal como cualquier otro valor de atributo. Ingrese <code class="docutils literal notranslate"><span class="pre">weight</span></code> como el <span class="guilabel">Nombre de campo de salida</span> y defina el <span class="guilabel">Tipo de campo de salida</span> como <code class="docutils literal notranslate"><span class="pre">Whole</span> <span class="pre">number</span> <span class="pre">(integer)</span></code>. Ingrese la siguiente expresión en el <span class="guilabel">Editor de expresión</span>. Aquí estamos usando la declaración <strong>CASE</strong> para asignar valores diferentes basados en diferentes condiciones. Clic en <span class="guilabel">Aceptar</span>.</p></li>
@@ -305,61 +306,61 @@ ELSE 1
 END
 </pre></div>
 </div>
-<img alt="../../_images/139.png" class="align-center" src="../../_images/139.png" />
+<img alt="../../_images/1310.png" class="align-center" src="../../_images/1310.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Se agregará un nuevo atributo para cada entidad con el valor de peso apropiado.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/148.png" class="align-center" src="../../_images/148.png" />
+<div><img alt="../../_images/149.png" class="align-center" src="../../_images/149.png" />
 </div></blockquote>
 <ol class="arabic simple" start="15">
 <li><p>De vuelta en el panel <span class="guilabel">Estilo de Capa</span>, clic en el menú desplegable para <span class="guilabel">Dar peso a los puntos por</span> y seleccione el campo <code class="docutils literal notranslate"><span class="pre">weight</span></code> recientemente agregado.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/158.png" class="align-center" src="../../_images/158.png" />
+<div><img alt="../../_images/159.png" class="align-center" src="../../_images/159.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Verá que la representación del mapa de calor cambia para tomar en cuenta el parámetro de peso. Cierre el panel <span class="guilabel">Estilo de Capa</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/167.png" class="align-center" src="../../_images/167.png" />
+<div><img alt="../../_images/168.png" class="align-center" src="../../_images/168.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Si necesita que se guarde la visualización del mapa de calor como una capa ráster permanente o si quiere personalizar el mapa de calor con opciones avanzadas como núcleos diferentes o radio dinámico, puede usar el <strong>Mapa de calor (Estimación de Densidad Núcleo)</strong> de la Caja de Herramientas Procesos. Ahora usaremos este algoritmo. Vaya a <span class="menuselection">Procesos ‣ Caja de herramientas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/178.png" class="align-center" src="../../_images/178.png" />
+<div><img alt="../../_images/179.png" class="align-center" src="../../_images/179.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Antes que podamos crear un mapa de calor, necesitamos reproyectar los datos fuentes a un SRC proyectado. Como la distancia juega un rol importante en el cálculo del mapa de calor, no es correcto usar un SRC geográfico. Busque el algoritmo <span class="menuselection">Vector general ‣ Reproyectar capa</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/186.png" class="align-center" src="../../_images/186.png" />
+<div><img alt="../../_images/187.png" class="align-center" src="../../_images/187.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>En el diálogo <span class="guilabel">Reproyectar capa</span>, clic en el botón <span class="guilabel">Seleccionar SRC</span> para el <span class="guilabel">SRC Destino</span>. Busque el SRC <code class="docutils literal notranslate"><span class="pre">EPSG:27700</span> <span class="pre">OSGB</span> <span class="pre">1936</span> <span class="pre">/</span> <span class="pre">British</span> <span class="pre">National</span> <span class="pre">Grid</span></code>. Este SRC proyectado es una buena elección para datos en el Reino Unido. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/196.png" class="align-center" src="../../_images/196.png" />
+<div><img alt="../../_images/197.png" class="align-center" src="../../_images/197.png" />
 </div></blockquote>
 <ol class="arabic simple" start="20">
 <li><p>Se agregará una nueva capa llamada <code class="docutils literal notranslate"><span class="pre">Reprojected</span></code> al panel <span class="guilabel">Capas</span>. Desmarque la caja junto a la antigua capa <code class="docutils literal notranslate"><span class="pre">2019-02-surrey-street</span></code> para esconderla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/206.png" class="align-center" src="../../_images/206.png" />
+<div><img alt="../../_images/207.png" class="align-center" src="../../_images/207.png" />
 </div></blockquote>
 <ol class="arabic simple" start="21">
 <li><p>Busque el algoritmo <span class="menuselection">Interpolation ‣ Mapa de calor (Estimación de Densidad de Núcleo)</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2110.png" class="align-center" src="../../_images/2110.png" />
+<div><img alt="../../_images/2111.png" class="align-center" src="../../_images/2111.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>En el diálogo <span class="guilabel">Mapa de calor (Estimación de Densidad de Núcleo)</span>, usaremos los parámetros de antes. Seleccione <span class="guilabel">Radio</span> como <code class="docutils literal notranslate"><span class="pre">5000</span></code> metros y <span class="guilabel">Peso desde campo</span> como <code class="docutils literal notranslate"><span class="pre">peso</span></code>. Defina <span class="guilabel">Tamaño de píxel X</span> y <span class="guilabel">Tamaño de píxel Y</span> en <code class="docutils literal notranslate"><span class="pre">50</span></code> metros. Deje <span class="guilabel">Forma de núcleo</span> en el valor predeterminado de <code class="docutils literal notranslate"><span class="pre">Cuártico</span></code>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/227.png" class="align-center" src="../../_images/227.png" />
+<div><img alt="../../_images/228.png" class="align-center" src="../../_images/228.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -369,13 +370,13 @@ END
 <li><p>Una vez que termine el procesamiento, se cargará una nueva capa ráster llamada <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code>. La visualización predeterminada es fea ya que usa el representador <a href="#id1"><span class="problematic" id="id2">``</span></a>Gris banda única`. Clic en el botón <span class="guilabel">Abrir el panel de Estilo de Capa</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/235.png" class="align-center" src="../../_images/235.png" />
+<div><img alt="../../_images/236.png" class="align-center" src="../../_images/236.png" />
 </div></blockquote>
 <ol class="arabic simple" start="24">
 <li><p>Cambie el representador a <code class="docutils literal notranslate"><span class="pre">Pseudocolor</span> <span class="pre">banda</span> <span class="pre">única</span></code> y seleccione la rampa de color <code class="docutils literal notranslate"><span class="pre">Reds</span></code>. La capa ahora se parece a la visualización de mapa de calor que habíamos creado antes.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/246.png" class="align-center" src="../../_images/246.png" />
+<div><img alt="../../_images/247.png" class="align-center" src="../../_images/247.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -406,7 +407,7 @@ END
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en mar. 05, 2022.<br/>
+      Actualizado por última vez en abr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

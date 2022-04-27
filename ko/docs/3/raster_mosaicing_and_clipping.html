@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">테이블 결합 작업(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">공간 결합 수행 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">공간 조회 실행(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">최근린 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">점 또는 다각형을 이용한 래스터 데이터 표본 추출 작업(QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -218,7 +219,7 @@
 <h2>데이터 획득<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>Land Processes Distribyted Active Archive Center(LP DAAC)는 <a class="reference external" href="https://lpdaac.usgs.gov/products/srtmgl1v003/">NASA Shuttle Radar Topography Mission (SRTM) Global 1 arc second</a> dataset as elevation tiles 데이터를 제공합니다.</p>
 <p>예제파일은 Derek Watkins의 <a class="reference external" href="https://urs.earthdata.nasa.gov/home">30-Meter SRTM Tile Downloader &lt;https://dwtkns.com/srtm30m/&gt;`_에서 내려받을 수 있습니다. Sri Lanka의 SRTM 파일을 내려받으세요.  내려받을 시 `Earth Data account</a> 가 필요합니다.</p>
-<img alt="../../_images/data17.png" class="align-center" src="../../_images/data17.png" />
+<img alt="../../_images/data115.png" class="align-center" src="../../_images/data115.png" />
 <p>Natural Earth에서 제공되는 <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Countries</a> 파일도 필요합니다.</p>
 <p>아래 링크에서 이번예제에 사용되는 샘플파일을 쉽게 내려받을 수 있습니다:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/N05E080.SRTMGL1.hgt.zip">N05E080.SRTMGL1.hgt.zip</a></p>
@@ -241,13 +242,13 @@
 <li><p>QGIS를 열고, <span class="guilabel">Browser</span> panel에 내려받은 파일을 불러옵니다. 압축되어있는 .hgt 개별파일들을 엽니다. ‘Ctrl’를 누른 상태로 모든 파일을 선택하여 ‘canvas’로 드래그하여 불러옵니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1108.png" class="align-center" src="../../_images/1108.png" />
+<div><img alt="../../_images/1109.png" class="align-center" src="../../_images/1109.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>11개의 개별 레이어가 Layers 패널에 들어가고, ‘canvas’창에 보여집니다. 이제 우리는 개별 조각들을 하나의 모자이크로 합병할 것입니다. 메뉴선택창에서 ‘공간처리’ –&gt; 툴박스를 클릭합니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2101.png" class="align-center" src="../../_images/2101.png" />
+<div><img alt="../../_images/2103.png" class="align-center" src="../../_images/2103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>공간처리툴박스 검색창에 ‘merge’를 입력한 후 검색결과 중 ‘GDAL —&gt; 레스터 기타 –&gt; 병합’ 을 찾은 후 더블클릭합니다.</p></li>
@@ -296,25 +297,25 @@
 <li><p>Select the newly added <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> layers in the <span class="guilabel">Layers</span> panel. Click the <span class="guilabel">Select Features by area or single click</span> button on the <span class="guilabel">Attributes Toolbar</span>. Once selected, click the polygon for Sri Lanka to select it.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1027.png" class="align-center" src="../../_images/1027.png" />
+<div><img alt="../../_images/1028.png" class="align-center" src="../../_images/1028.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>‘공간처리툴박스’에서 ‘Clip’을 검색하셔서 GDAL –&gt; Raster extraction –&gt; ‘마스크레이어로 래스터 자르기’를 선택해주세요. 더블클릭하셔서 실행해주세요.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1131.png" class="align-center" src="../../_images/1131.png" />
+<div><img alt="../../_images/1132.png" class="align-center" src="../../_images/1132.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>‘마스크레이어로 래스터 자르기’창에서 병합시킨 ‘결과물’레어어를 입력 레이어로 설정해주세요. 그리고 “ne_10m_admin_0_countries”레이어는 마스크 레어어로 설정해주세요. 마스크레이어 창 밑에 ‘선택한 객체만’을 클릭하여 활성화해주세요. ‘산출밴드에 지정한 NODATA값을 할당’에서 “0.0000”을 입력해주시고 확인해주세요. 마지막으로, 프로파일 항목에서 ‘강한 압축’을 선택하시고 ‘실행’창을 눌러주세요.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1229.png" class="align-center" src="../../_images/1229.png" />
+<div><img alt="../../_images/1230.png" class="align-center" src="../../_images/1230.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>레이어창에 새로운 “결과물”창이 생성되었습니다. 이때쯤 되면, 레이어창에 많은 레이어들이 나열되어있기 때문에 새로운 결과물을 제대로 생성되었는지 구별하기 어렵습니다. 그렇다면 레이어 패널창에 ‘맵 테마 관리’에 ‘모든 레이어 숨기기’를 눌러주세요.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1327.png" class="align-center" src="../../_images/1327.png" />
+<div><img alt="../../_images/1328.png" class="align-center" src="../../_images/1328.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>그다음 가장 최근에 생성된 “결과물”레이어를 활성화하고 “음영기복도”랜더링을 해주시면 됩니다.</p></li>
@@ -326,7 +327,7 @@
 <li><p>우리가 원하는 영역으로 병합되고 편집된 스리랑카지역의 고도 데이터 레이어가 준비되었습니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1523.png" class="align-center" src="../../_images/1523.png" />
+<div><img alt="../../_images/1524.png" class="align-center" src="../../_images/1524.png" />
 </div></blockquote>
 </section>
 </section>
@@ -353,7 +354,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      최종 업데이트: 3월 05, 2022<br/>
+      최종 업데이트: 4월 27, 2022<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

@@ -15,7 +15,7 @@
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="Búsqueda" href="../../search.html" />
     <link rel="next" title="Análisis del Vecino Más Cercano (QGIS3)" href="nearest_neighbor_analysis.html" />
-    <link rel="prev" title="Manejar Geometrías No Válidas (QGIS3)" href="handling_invalid_geometries.html" />
+    <link rel="prev" title="Realizar Uniones Espaciales (QGIS3)" href="performing_spatial_joins.html" />
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalizar Datos del Mapa (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizar Uniones de Tablas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizar Uniones Espaciales (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Análisis Avanzado de Ráster (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
@@ -128,7 +129,7 @@
               
                 
   <li>
-    <a href="handling_invalid_geometries.html" title="Previous Chapter: Manejar Geometrías No Válidas (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Manejar Geome...</span>
+    <a href="performing_spatial_joins.html" title="Previous Chapter: Realizar Uniones Espaciales (QGIS3)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Realizar Unio...</span>
     </a>
   </li>
   <li>
@@ -219,7 +220,7 @@
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>La <a class="reference external" href="https://data.melbourne.vic.gov.au/">Plataforma de Datos Abiertos</a> de la Ciudad de Melbourne provee varios conjuntos de datos listos para el SIG para la ciudad.</p>
 <p>Descargar el conjunto de datos <a class="reference external" href="https://data.melbourne.vic.gov.au/Transport-Movement/Metro-Train-Stations-with-Accessibility-Informatio/mgkp-67ad">Estaciones de Tren Metro con Información de Accesibilidad</a> por Metro Trains Melbourne. Exporte los datos en el formato <em>Original</em>.</p>
-<img alt="../../_images/data14.png" class="align-center" src="../../_images/data14.png" />
+<img alt="../../_images/data110.png" class="align-center" src="../../_images/data110.png" />
 <p>Descargue el conjunto de datos <a class="reference external" href="https://data.melbourne.vic.gov.au/Economy/Bars-and-pubs-with-patron-capacity/mffi-m9yn">Bares y tabernas, con capacidad de clientes</a> por el Censo de Uso de la Tierra y Empleo (CLUE) de la Ciudad de Melbourne. Exporte los datos como <em>CSV</em>.</p>
 <img alt="../../_images/data23.png" class="align-center" src="../../_images/data23.png" />
 <p>Para su comodidad, puede descargar directamente una copia de los conjuntos de datos del enlace abajo:</p>
@@ -233,13 +234,13 @@
 <li><p>Localice el archivo <code class="docutils literal notranslate"><span class="pre">metro_stations_accessbility.zip</span></code> en el Explorador QGIS y expándalo. Seleccione el archivo <code class="docutils literal notranslate"><span class="pre">metro_stations_accessbility.shp</span></code> y arrástrelo a la pantalla. Una nueva capa <code class="docutils literal notranslate"><span class="pre">metro_stations_accessbility</span></code> será cargada en el panel <span class="guilabel">Layers</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
+<div><img alt="../../_images/1104.png" class="align-center" src="../../_images/1104.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>La capa de datos para bares y tabernas está en el formato CSV. Para cargarla en QGIS, vaya a <span class="menuselection">Capa ‣ Agregar Capa ‣ Agregar Capa de Texto Deliminatdo…</span>. ( Ver <a class="reference internal" href="importing_spreadsheets_csv.html"><span class="doc">Importar Hojas de Cálculo o archivos CSV (QGIS3)</span></a> para más detalles en la importación de archivos CSV)</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/269.png" class="align-center" src="../../_images/269.png" />
+<div><img alt="../../_images/280.png" class="align-center" src="../../_images/280.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>En el diálogo <span class="guilabel">Administrador de Fuentes de Datos | Texto Delimitado</span>, explore y seleccione el archivo descargado <code class="docutils literal notranslate"><span class="pre">Bars_and_pubs__with_patron_capacity.csv</span></code> para el <span class="guilabel">Nombre de archivo</span>. Las columnas <span class="guilabel">campo X</span> y <span class="guilabel">campo Y</span> debería seleccionarse automáticamente como <code class="docutils literal notranslate"><span class="pre">coordenada</span> <span class="pre">x</span></code> y <code class="docutils literal notranslate"><span class="pre">coordenada</span> <span class="pre">y</span></code> respectivamente. Clic en <span class="guilabel">Agregar</span>.</p></li>
@@ -291,25 +292,25 @@
 <li><p>Cuando se le pida un nombre de capa, ingrese <code class="docutils literal notranslate"><span class="pre">bars_and_pubs</span></code> y clic <span class="guilabel">Aceptar</span>. Clic <span class="guilabel">Ejecutar</span> para reproyectar la capa.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1022.png" class="align-center" src="../../_images/1022.png" />
+<div><img alt="../../_images/1023.png" class="align-center" src="../../_images/1023.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>La ventana se cambiará a la pestaña <span class="guilabel">Bitácora</span> y verá que el algoritmo se ejecuta y crea la nueva capa de salida <code class="docutils literal notranslate"><span class="pre">bars_and_pubs</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1125.png" class="align-center" src="../../_images/1125.png" />
+<div><img alt="../../_images/1126.png" class="align-center" src="../../_images/1126.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Ahora vamos a reproyectar la capa <code class="docutils literal notranslate"><span class="pre">metro_stations_accessbility</span></code>. Cámbiese de vuelta a la pestaña <span class="guilabel">Parámetros</span> en la ventana <span class="guilabel">Reproyectar capa</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">metro_stations_accessbility</span></code> como la <span class="guilabel">Capa de entrada</span>. Mantenga el mismo <span class="guilabel">SRC Destino</span>. A continuación, clic en el botón <span class="guilabel">…</span> junto a <span class="guilabel">Reprojected</span> y seleccione <cite>Guardar a Geopackage</cite>. Seleccione el mismo archivo de salida <code class="docutils literal notranslate"><span class="pre">spatialquery</span></code> (Recuerde que un solo archivo geopackage puede contener múltiples capas, por lo que guardaremos la nueva capa en el mismo archivo geopackage). Ingrese <code class="docutils literal notranslate"><span class="pre">metro_stations</span></code> como el <span class="guilabel">Nombre de capa</span>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1223.png" class="align-center" src="../../_images/1223.png" />
+<div><img alt="../../_images/1224.png" class="align-center" src="../../_images/1224.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>De vuelta en la ventana principal QGIS, veremos 2 nuevas capas agregadas en el panel <span class="guilabel">Capas</span>: <code class="docutils literal notranslate"><span class="pre">bars_and_pubs</span></code> y <code class="docutils literal notranslate"><span class="pre">metro_stations</span></code>. Puede desactivar la visibilidad de las capas originales. Ahora, estamos listos para hacer la consulta espacial. Como estamos interesados en seleccionar bares y tabernas a 500 m de las estaciones de metro, el primer paso es crear un área de influencia alrededor de las estaciones de metro que represente nuestra área de búsqueda. Busque y localice la herramienta <span class="menuselection">Geometría vectorial ‣ Buffer</span> en la <span class="guilabel">Caja de herramientas de Procesos</span> y haga doble-clic para iniciarla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1321.png" class="align-center" src="../../_images/1321.png" />
+<div><img alt="../../_images/1322.png" class="align-center" src="../../_images/1322.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>En el diálogo <span class="guilabel">Buffer</span>, seleccione <code class="docutils literal notranslate"><span class="pre">metro_stations</span></code> como la <span class="guilabel">Capa de entrada</span>. Defina <code class="docutils literal notranslate"><span class="pre">500</span></code> metros como la <span class="guilabel">Distancia</span>. Guarde la salida en el mismo geopackage <code class="docutils literal notranslate"><span class="pre">spatialquery</span></code> e ingrese <code class="docutils literal notranslate"><span class="pre">metro_stations_buffers</span></code> como el <span class="guilabel">Nombre de capa</span>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
@@ -321,7 +322,7 @@
 <li><p>Verá una nueva capa <code class="docutils literal notranslate"><span class="pre">metro_stations_buffers</span></code> cargada en el panel <span class="guilabel">Capas</span>. Ahora podemos averiguar qué puntos de la capa <code class="docutils literal notranslate"><span class="pre">bars_and_pubs</span></code> caen en los polígonos de la capa <code class="docutils literal notranslate"><span class="pre">metro_station_buffers</span></code>. Localice la herramienta <span class="menuselection">Selección vectorial ‣ Extraer por ubicación</span> desde la  <span class="guilabel">Caja de herramientas de Procesos</span> y haga doble-clic para iniciarla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
+<div><img alt="../../_images/1518.png" class="align-center" src="../../_images/1518.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -331,19 +332,19 @@
 <li><p>En el diálogo <span class="guilabel">Extraer por ubicación</span>, seleccione <code class="docutils literal notranslate"><span class="pre">bars_and_pubs</span></code> como <span class="guilabel">Extraer objetos de</span>. Marque <code class="docutils literal notranslate"><span class="pre">Intersectan</span></code> como el <span class="guilabel">Predicado geométrico</span>. Defina <code class="docutils literal notranslate"><span class="pre">metro_station_buffers</span></code> como <span class="guilabel">Comparando los objetos de</span>. Guarde la salida al geopackage <code class="docutils literal notranslate"><span class="pre">spatialquery</span></code> como la capa <code class="docutils literal notranslate"><span class="pre">selected</span></code>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1616.png" class="align-center" src="../../_images/1616.png" />
+<div><img alt="../../_images/1617.png" class="align-center" src="../../_images/1617.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Una vez que termine el procesamiento, verá la capa <code class="docutils literal notranslate"><span class="pre">selected</span></code> agregada al panel <span class="guilabel">Capas</span>. Note que esta capa sólo contiene puntos de <code class="docutils literal notranslate"><span class="pre">bars_and_pubs</span></code> que caen dentro de los polígonos del área de influencia.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
+<div><img alt="../../_images/1718.png" class="align-center" src="../../_images/1718.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>Nuestro análisis está completo. Puede que note que los polígonos del área de influencia lucen una forma oval. Esto es debido a que nuestro SRC de Proyecto aún está definido como <strong>EPSG:4326 WGS84</strong>. Para visualizar mejor los resultados, puede ir a <span class="menuselection">Proyecto ‣ Propiedades ‣ SRC</span> y seleccionar <code class="docutils literal notranslate"><span class="pre">GDA</span> <span class="pre">2020</span> <span class="pre">/</span> <span class="pre">MGA</span> <span class="pre">zone</span> <span class="pre">55</span> <span class="pre">EPSG:7855</span></code> que usamos para el análisis. Una vez que se defina este SRC, el área de influencia aparecerá con la forma correcta.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
+<div><img alt="../../_images/1816.png" class="align-center" src="../../_images/1816.png" />
 </div></blockquote>
 </section>
 </section>
@@ -370,7 +371,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en mar. 05, 2022.<br/>
+      Actualizado por última vez en abr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

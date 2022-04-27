@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalizar Datos del Mapa (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizar Uniones de Tablas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizar Uniones Espaciales (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Análisis Avanzado de Ráster (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
@@ -217,7 +218,7 @@
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El Land Processes Distributed Active Archive Center (LP DAAC) provee conjuntos de datos <a class="reference external" href="https://lpdaac.usgs.gov/products/srtmgl1v003/">NASA Shuttle Radar Topography Mission (SRTM) Global 1 arc second</a> como teselas de elevación.</p>
 <p>Un interfaz sencillo para descargar teselas para un área dada es el <a class="reference external" href="https://dwtkns.com/srtm30m/">Descargador de Tesela SRTM de 30-Metros</a> por Derek Watkins. Descargue las teselas individuales SRTM que cubren Sri Lanka. Note que necesitará una <a class="reference external" href="https://urs.earthdata.nasa.gov/home">cuenta Earth Data</a> gratuita para descargar los datos.</p>
-<img alt="../../_images/data17.png" class="align-center" src="../../_images/data17.png" />
+<img alt="../../_images/data115.png" class="align-center" src="../../_images/data115.png" />
 <p>También necesitaremos el archivo shape <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Países</a> de  Natural Earth.</p>
 <p>Para su comodidad, puede descargar directamente una copia de los conjuntos de datos de los enlaces abajo:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/N05E080.SRTMGL1.hgt.zip">N05E080.SRTMGL1.hgt.zip</a></p>
@@ -240,13 +241,13 @@
 <li><p>Abra QGIS y localice los archivos descargados en el panel <span class="guilabel">Explorador</span>. Expanda los archivos zip individuales para mostrar los archivos <code class="docutils literal notranslate"><span class="pre">.hgt</span></code>. Mantenga presionada la tecla <kbd class="kbd docutils literal notranslate">Ctrl</kbd> y seleccione todos los archivos individuales. Una vez seleccionado, arrástrelos a la pantalla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1108.png" class="align-center" src="../../_images/1108.png" />
+<div><img alt="../../_images/1109.png" class="align-center" src="../../_images/1109.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Verá 11 capas individuales cargadas en el panel <span class="guilabel">Capas</span> y mostradas en pantalla. Vamos a fusionar estas teselas individuales en un solo mosaico. Vaya a <span class="menuselection">Procesos ‣ Caja de herramientas</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2101.png" class="align-center" src="../../_images/2101.png" />
+<div><img alt="../../_images/2103.png" class="align-center" src="../../_images/2103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Busque y localice la herramienta <span class="menuselection">GDAL ‣ Miscelánea ráster ‣ Combinar</span>. Haga doble-clic para iniciarla.</p></li>
@@ -294,25 +295,25 @@
 <li><p>Seleccione la capa recién agregada <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> en el panel <span class="guilabel">Capas</span>. Clic el botón <span class="guilabel">Seleccionar Objetos por área con un solo clic</span> en la <span class="guilabel">Barra de herramientas de Atributos</span>. Una vez seleccionada, clic el polígono para Sri Lanka para seleccionarlo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1027.png" class="align-center" src="../../_images/1027.png" />
+<div><img alt="../../_images/1028.png" class="align-center" src="../../_images/1028.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Mantenga la selección como está y abra <span class="menuselection">Procesos ‣ Caja de herramientas</span>. Busque y ubique la herramienta <span class="menuselection">GDAL ‣ Extracción ráster ‣ Cortar ráster por capa de máscara</span>. Haga doble-clic para iniciarla.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1131.png" class="align-center" src="../../_images/1131.png" />
+<div><img alt="../../_images/1132.png" class="align-center" src="../../_images/1132.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>En el diálogo <span class="guilabel">Cortar Ráster por Capa de Máscara</span>, defina <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code> como la <span class="guilabel">Capa de entrada</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> como la <span class="guilabel">Capa máscara</span>, y marque la casilla <span class="guilabel">Sólo objetos seleccionados</span>. Ingrese <code class="docutils literal notranslate"><span class="pre">0.0000</span></code> como el <span class="guilabel">Asignar un valor sin datos especificado para las bandas de salida</span>. Como antes, elija <code class="docutils literal notranslate"><span class="pre">Alta</span> <span class="pre">compresión</span></code> como el <span class="guilabel">Perfil</span>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1229.png" class="align-center" src="../../_images/1229.png" />
+<div><img alt="../../_images/1230.png" class="align-center" src="../../_images/1230.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Una nueva capa <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code> será agregada al panel <span class="guilabel">Capas</span>. En este punto, puede que sea difícil ver la salida debido a que tenemos demasiadas capas sobrepuestas visibles. Clic el botón <span class="guilabel">Gestionar Temas de Mapa</span> en el panel <span class="guilabel">Capas</span> y elija <code class="docutils literal notranslate"><span class="pre">Esconder</span> <span class="pre">todas</span> <span class="pre">las</span> <span class="pre">capas</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1327.png" class="align-center" src="../../_images/1327.png" />
+<div><img alt="../../_images/1328.png" class="align-center" src="../../_images/1328.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Active sólo la última capa <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code> y dele estilo con el representador <code class="docutils literal notranslate"><span class="pre">Hillshade</span></code> como se hizo antes.</p></li>
@@ -324,7 +325,7 @@
 <li><p>La capa de elevación salida fusionada y recortada para Sri Lanka está lista.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1523.png" class="align-center" src="../../_images/1523.png" />
+<div><img alt="../../_images/1524.png" class="align-center" src="../../_images/1524.png" />
 </div></blockquote>
 </section>
 </section>
@@ -351,7 +352,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en mar. 05, 2022.<br/>
+      Actualizado por última vez en abr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

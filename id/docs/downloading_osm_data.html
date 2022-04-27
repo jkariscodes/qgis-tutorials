@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="3/digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -216,11 +217,11 @@
 <ol class="arabic simple">
 <li><p>Kita akan menggunakan 2 plugins untuk menuntaskan tugas ini. Pastikan anda sudah menginstall plugin <strong>OSM Place Search</strong> dan <strong>OpenLayers</strong> . Lihat <span class="xref std std-doc">docs/using_plugins</span> untuk instruksi dalam mengunduh plugins.</p></li>
 </ol>
-<img alt="../_images/1167.png" class="align-center" src="../_images/1167.png" />
+<img alt="../_images/1169.png" class="align-center" src="../_images/1169.png" />
 <ol class="arabic simple" start="2">
 <li><p>Plugins <strong>OSM Place Search</strong> akan terinstall otomatis sebagai <em>Panel</em> di QGIS. Anda dapat melihat sebuah panel berjudul <span class="guilabel">OSM place search...</span> di QGIS</p></li>
 </ol>
-<img alt="../_images/2136.png" class="align-center" src="../_images/2136.png" />
+<img alt="../_images/2139.png" class="align-center" src="../_images/2139.png" />
 <ol class="arabic simple" start="3">
 <li><p>Plugin <strong>OpenLayers</strong> terinstall pada menu <em>Plugin</em>. Plugin ini membolehkan anda untuk mengakses basemap fari berbagai provider di QGIS. Mari buka basemap OpenStreetMap di QGIS dengan mengakses <span class="menuselection">Plugins ‣ OpenLayers plugin ‣ Add OpenStreetMap layer</span>.</p></li>
 </ol>
@@ -260,19 +261,19 @@
 <ol class="arabic simple" start="10">
 <li><p>Pilih file <code class="docutils literal notranslate"><span class="pre">london.osm</span></code> yang udah diunduh sebagai <span class="guilabel">Input XML file</span> . Beri nama <span class="guilabel">Output SpatiaLite DB file</span> sebagai <code class="docutils literal notranslate"><span class="pre">london.osm.db</span></code> . Patikan tombol <span class="guilabel">Create connection (SpatiaLite) after import</span> tercontreng atau aktif</p></li>
 </ol>
-<img alt="../_images/1046.png" class="align-center" src="../_images/1046.png" />
+<img alt="../_images/1047.png" class="align-center" src="../_images/1047.png" />
 <ol class="arabic simple" start="11">
 <li><p>Sekarang untuk langkah terakhir. Kita perlu untuk membuat layer geometri SpatialLite yang bisa dilihat dan dianalisis di QGIS. Hal ini dapat dilakukan menggunakan <cite>Vector --&gt; OpenStreetMap --&gt; Export topology to SpatialLite</cite>.</p></li>
 </ol>
-<img alt="../_images/1168.png" class="align-center" src="../_images/1168.png" />
+<img alt="../_images/1170.png" class="align-center" src="../_images/1170.png" />
 <ol class="arabic simple" start="12">
 <li><p>File <code class="docutils literal notranslate"><span class="pre">london.osm.db</span></code> mengandung semua tipe fitur pada database OSM - Poin,Garis dan Polygon. Layer GIS secara tipikal mngandung hanya satu tipe fitur, jadi anda perlu untuk memilih satu. Karena kita tertarik pada lokasi point bar, di sini anda bisa memilih <span class="guilabel">Point (nodes)</span> sebagai <span class="guilabel">Export type</span> . Anda pilih <span class="guilabel">Polylines (open ways)</span> jika anda ingin mendapatkan jaringan jalan. Beri nama <span class="guilabel">Output layer name</span> sebagai <cite>london_points`</cite> . Data Gis terbagi menjadi 2 - lokasi dan attribut. Kita juga bisa mengetahui <strong>name</strong> pub - tidak hanya lokasinya, jadi kita perlu mengekspor informasi ini juga. Klik <span class="guilabel">Load from DB</span> pada bagian <span class="guilabel">Exported tags</span> . Ini akan mengambil semua attribut dari file <code class="docutils literal notranslate"><span class="pre">london.osm.db</span></code> . Beri tanda cek pada tag <span class="guilabel">name</span> dan <span class="guilabel">amenity</span> . Lihat <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Tags">OSM Tags</a> untuk mengetahui lebih lanjut arti dari setiap attribut. Pastikan <span class="guilabel">Load into canvas when finished</span>  aktif , dan klik <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1248.png" class="align-center" src="../_images/1248.png" />
+<img alt="../_images/1249.png" class="align-center" src="../_images/1249.png" />
 <ol class="arabic simple" start="13">
 <li><p>Anda akan melihat sebuah layer poin baru bernama <code class="docutils literal notranslate"><span class="pre">london_points</span></code> yang dibuka di QGIS. Perhatikan bahwa layer ini mengandung <strong>ALL</strong> poin pada database OSM untuk viewport. Sejak kita hanya tertarik pada bar-barnya, kita harus menulis sebuah query untuk memilih. Klik kanan pada layer <code class="docutils literal notranslate"><span class="pre">london_points</span></code> dan pilih <span class="guilabel">Open Attribute Table</span>.</p></li>
 </ol>
-<img alt="../_images/1346.png" class="align-center" src="../_images/1346.png" />
+<img alt="../_images/1347.png" class="align-center" src="../_images/1347.png" />
 <ol class="arabic simple" start="14">
 <li><p>Anda akan melihat bahwa sejumlah fitur mempunyai nilai attribut bernilai <strong>pubs</strong> yang terdaftar di bawah kolom <span class="guilabel">amenity</span> . Klik tombol <span class="guilabel">Select features using an expression</span></p></li>
 </ol>
@@ -280,23 +281,23 @@
 <ol class="arabic simple" start="15">
 <li><p>Masukkan ekpresi <cite>&quot;amenity&quot; = 'pub'</cite> dan klik <span class="guilabel">Select</span>.</p></li>
 </ol>
-<img alt="../_images/1541.png" class="align-center" src="../_images/1541.png" />
+<img alt="../_images/1542.png" class="align-center" src="../_images/1542.png" />
 <ol class="arabic simple" start="16">
 <li><p>Kembali ke Kanvas QGIS, anda dapat melihat sejumlah poin yang ditandai dengan warna kuning. Ini adalah hasil dari query. Klik kanan pada layer <code class="docutils literal notranslate"><span class="pre">london_points</span></code> dan pilih <span class="guilabel">Save Selection As...</span>.</p></li>
 </ol>
-<img alt="../_images/1638.png" class="align-center" src="../_images/1638.png" />
+<img alt="../_images/1639.png" class="align-center" src="../_images/1639.png" />
 <ol class="arabic simple" start="17">
 <li><p>Pada dialog <span class="guilabel">Save vector layer as...</span>. masukkan nama untuk file hasil sebagai <code class="docutils literal notranslate"><span class="pre">london_pubs.shp</span></code> . Biarkan semua opsi yang lain sebagaimana adanya dan pastikan opsi <span class="guilabel">Add saved file to map</span> aktif. Klik <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1735.png" class="align-center" src="../_images/1735.png" />
+<img alt="../_images/1736.png" class="align-center" src="../_images/1736.png" />
 <ol class="arabic simple" start="18">
 <li><p>Anda akan melihat layer yang baru yang bernama <code class="docutils literal notranslate"><span class="pre">london_pubs</span></code> di kanvas QGIS. Nonaktifkan layer <code class="docutils literal notranslate"><span class="pre">london_points</span></code> karena kita sudah tidak menggunakannya kembali.</p></li>
 </ol>
-<img alt="../_images/1833.png" class="align-center" src="../_images/1833.png" />
+<img alt="../_images/1834.png" class="align-center" src="../_images/1834.png" />
 <ol class="arabic simple" start="19">
 <li><p>Hasil ekstraksi dari shapefile bar sekarang sudah tuntas. Anda dapat menggunakan tool <span class="guilabel">Identify</span> untuk mengklik poin sehingga dapat melihat attribut dari setiap poin yang tertunjuk</p></li>
 </ol>
-<img alt="../_images/1925.png" class="align-center" src="../_images/1925.png" />
+<img alt="../_images/1926.png" class="align-center" src="../_images/1926.png" />
 </section>
 </section>
 
@@ -322,7 +323,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Terakhir diperbarui pada Mar 05, 2022.<br/>
+      Terakhir diperbarui pada Apr 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

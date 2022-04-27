@@ -14,7 +14,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="جستجو" href="../../search.html" />
-    <link rel="next" title="Creating Heatmaps (QGIS3)" href="creating_heatmaps.html" />
+    <link rel="next" title="Performing Spatial Queries (QGIS3)" href="performing_spatial_queries.html" />
     <link rel="prev" title="اجرای اتصال جدول (QGIS3)" href="performing_table_joins.html" />
 
 <meta charset='utf-8'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">رقومی کردن داده های نقشه (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">اجرای اتصال جدول (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">اجرای اتصال مکانی (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">محاسبه تراکم تقاطع خیابان(QGIS3)</a></li>
@@ -132,7 +133,7 @@
     </a>
   </li>
   <li>
-    <a href="creating_heatmaps.html" title="Next Chapter: Creating Heatmaps (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Creating Heat... &raquo;</span>
+    <a href="performing_spatial_queries.html" title="Next Chapter: Performing Spatial Queries (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Performing Sp... &raquo;</span>
     </a>
   </li>
               
@@ -217,7 +218,7 @@
 <h2>اخذ داده<a class="headerlink" href="#get-the-data" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p><a href="#id1"><span class="problematic" id="id2">`</span></a>پر تال داده NYC Open Data Portal &lt;<a class="reference external" href="https://data.cityofnewyork.us/">https://data.cityofnewyork.us/</a>&gt;`_یک منبع اطلاعات مفید برای شهر نیویورک است.</p>
 <p>مرز اداری شهر e <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Borough Boundaries</a>  بصورت فایل زیپ  با استفاده از Export  دانلود کنید.</p>
-<img alt="../../_images/data13.png" class="align-center" src="../../_images/data13.png" />
+<img alt="../../_images/data19.png" class="align-center" src="../../_images/data19.png" />
 <p>داده رتبه بندی <a class="reference external" href="https://data.cityofnewyork.us/Transportation/Street-Pavement-Rating/2cav-chmn">Street Pavement Rating</a> بصورت فایل زیپ با استفاده از Export دانلود کنید.</p>
 <img alt="../../_images/data22.png" class="align-center" src="../../_images/data22.png" />
 <p>برای راحتی کار ، می توانید مستقیماً یک کپی از مجموعه داده ها را از پیوندهای زیر بارگیری کنید:</p>
@@ -231,13 +232,13 @@
 <li><p>فایل  <code class="docutils literal notranslate"><span class="pre">nybb_19a.zip</span></code>  را درمرورگر  QGIS Browser پیدا کرده و آن را باز کنید. لایه``nybb_19a/nybb.shp``  nybb_19a / nybb.shp&quot; را انتخاب کنید و آن را به پنجره اصلی نمایش نقشه بکشید. این یک لایه چند ضلعی است که مرزهای منطقه را در شهر نیویورک نشان می دهد.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>بعد ، فایل <cite>V_SSS_SEGMENTRATING_1.zip`</cite>  را پیدا کرده و آن را باز کنید. لایه <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129.shp</span></code> را انتخاب کرده و به پنجره اصلی نمایش نقشه اضافه کنید. این یک لایه خطوط خیابانهای شهر است.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/260.png" class="align-center" src="../../_images/260.png" />
+<div><img alt="../../_images/270.png" class="align-center" src="../../_images/270.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>بیایید ستونهای موجود هر عارضه در لایه   <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> را بررسی کنیم. کلیک راست کرده و  برای نمایش جدول توصیفی، گزینه <span class="guilabel">Open Attribute Table</span> را انتخاب کنید.</p></li>
@@ -292,25 +293,25 @@
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Rating_B</span></code> and click <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1021.png" class="align-center" src="../../_images/1021.png" />
+<div><img alt="../../_images/1022.png" class="align-center" src="../../_images/1022.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>مثل قبل، بر دکمه  <span class="guilabel">...</span>  در کنار <span class="guilabel">Summaries to calculate</span>. کلیک نمایید .</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1124.png" class="align-center" src="../../_images/1124.png" />
+<div><img alt="../../_images/1125.png" class="align-center" src="../../_images/1125.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>دستور میانگیری <code class="docutils literal notranslate"><span class="pre">mean</span></code> را به عنوان عملگر خلاصه انتخاب کنید و روی دکمه  <span class="guilabel">OK`کلیک کنید. اکنون ما آماده شروع پردازش هستیم. با کلیک بر دکمه  :guilabel:`Run</span> آن را اجرا کنید.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1222.png" class="align-center" src="../../_images/1222.png" />
+<div><img alt="../../_images/1223.png" class="align-center" src="../../_images/1223.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>الگوریتم پردازش از طریق عراضه ها  عمل می کند و اتصال  مکانی را اعمال می کند. بررسی کنید که کار پردازش موفقیت آمیز بوده و بر دکمه guilabel:<cite>Close</cite> کلیک کنید تا بسته شود.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1320.png" class="align-center" src="../../_images/1320.png" />
+<div><img alt="../../_images/1321.png" class="align-center" src="../../_images/1321.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>به پنجره اصلی QGIS باز می شوید ، یک لایه جدید &quot;Joined layer&quot; به پنجره اصلی  نرم  افزار اضافه می شود. جدول توصیفی این لایه را باز کنید. خواهید دید که ستون جدیدی با عنوان &quot;Rating_B_mean&quot; به لایه ورودی منطقه با میانگین گیری امتیاز کلیه خیابانهایی که با این لایه موردنظر  اضافه می شود.</p></li>
@@ -322,31 +323,31 @@
 <li><p>اکنون می توانیم یک عمل معکوس انجام دهیم. گاهی اوقات تجزیه و تحلیل شما مستلزم گرفتن  ستون های از لایه دیگر بر اساس رابطه مکانی است اما هیچ خلاصه ای را محاسبه نمی کند. برای چنین تجزیه و تحلیل می توانیم از برنامه <code class="docutils literal notranslate"><span class="pre">Join</span> <span class="pre">attribute</span> <span class="pre">by</span> <span class="pre">location</span></code> استفاده کنیم. وظیفه این است که نام منطقه را به هر عارضه در لایه خیابانها اضافه کنید که بر اساس آن با چند ضلعی بخش متصل می شود. قبل از اجرای این الگوریتم ، اجازه دهید فیلتر را از لایه  <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> حذف کنیم. روی نماد فیلتر کلیک کنید و  <span class="guilabel">Clear</span> را در: guilabel: &quot;Query Builder&quot; فشار دهید. بر دکمه  <span class="guilabel">OK</span> کلیک کنید.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
+<div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Turn of the <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer</span></code> in the <span class="guilabel">Layers</span> panel. Find the <span class="menuselection">Vector general ‣ Join attribute by location</span> algorithm in the Processing Toolbox and double-click it to launch.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
+<div><img alt="../../_images/1616.png" class="align-center" src="../../_images/1616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>لایه  <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code>  را به عنوان &quot;لایه ورودی&quot; <span class="guilabel">Input layer</span>  و &quot;nybb&quot; را به عنوان لایه اتصال <span class="guilabel">Join layer</span> انتخاب کنید. می توانید گزینه <span class="guilabel">Geometry predicate</span>   پیش بینی هندسی : guilabel: <cite>Geometry predict</cite> را به حالت پیش فرض اشتراک``Intersects``بگذارید. روی دکمه <span class="guilabel">...</span>  در کنار:guilabel:<cite>Fields to add</cite> کلیک کنید و <code class="docutils literal notranslate"><span class="pre">BoroName</span></code>. را انتخاب کنید. بر دکمه <span class="guilabel">OK</span> کلیک کنید.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
+<div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>خط ممکن است از یک محدوده مرز اداری عبور کند ، بنابراین ما  <span class="guilabel">Join type</span>  را به عنوان &quot;عارضه جداگانه برای هر ویژگی واقع شده (یک به چند)&quot;  <code class="docutils literal notranslate"><span class="pre">Crate</span> <span class="pre">separate</span> <span class="pre">feature</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">located</span> <span class="pre">feature</span> <span class="pre">(one-to-many)</span></code> انتخاب می کنیم. بر <span class="guilabel">Run</span>.کلیک کنید  تا اجرا شود.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
+<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>پس از پایان پردازش ، جدول  توصیفی &quot;Joined layer&quot; را که اخیراً اضافه شده است ، باز کنید. خواهید دید که ویژگی جدید &quot;BoroName&quot; به هر عارضه خیابان اضافه شده است.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
+<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 </section>
 </section>
@@ -373,7 +374,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      آخرین بروز رسانی در مارس 05, 2022 .<br/>
+      آخرین بروز رسانی در آوریل 27, 2022 .<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

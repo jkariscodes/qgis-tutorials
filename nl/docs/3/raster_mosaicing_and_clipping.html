@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Kaartgegevens digitaliseren</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Samenvoegen van tabellen uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Ruimtelijke samenvoegingen uitvoeren (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Ongeldige geometrieën afhandelen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Ruimtelijke query’s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Ongeldige geometrieën afhandelen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Gevorderde rasteranalyses (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpoleren van puntgegevens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Dichtheid van straatkruisingen berekenen (QGIS3)</a></li>
@@ -217,7 +218,7 @@
 <h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
 <p>Land Processes Distributed Active Archive Center (LP DAAC) verschaft <a class="reference external" href="https://lpdaac.usgs.gov/products/srtmgl1v003/">NASA Shuttle Radar Topography Mission (SRTM) Global 1 arc second</a> gegevensset als hoogtetegels.</p>
 <p>Een gemakkelijke interface o om tegels voor een bepaald gebied te downloaden is de <a class="reference external" href="https://dwtkns.com/srtm30m/">30-Meter SRTM Tile Downloader</a> door Derek Watkins. Download de individuele SRTM-tegels die Sri Lanka bedekken. Onthoud dat u een gratis <a class="reference external" href="https://urs.earthdata.nasa.gov/home">account voor Earth Data</a> nodig hebt om de gegevens te kunnen downloaden.</p>
-<img alt="../../_images/data17.png" class="align-center" src="../../_images/data17.png" />
+<img alt="../../_images/data115.png" class="align-center" src="../../_images/data115.png" />
 <p>We zullen ook het <a class="reference external" href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip">Admin 0 - Countries</a> shapefile van Natural Earth nodig hebben.</p>
 <p>Voor het gemak kunt u direct een kopie van de gegevensset downloaden vanaf de links hieronder:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/N05E080.SRTMGL1.hgt.zip">N05E080.SRTMGL1.hgt.zip</a></p>
@@ -240,13 +241,13 @@
 <li><p>Open QGIS en zoek de gedownloade bestanden op in het paneel <span class="guilabel">Browser</span>. Vergroot individuele zip-bestanden zodat zij de <code class="docutils literal notranslate"><span class="pre">.hgt</span></code>-bestanden weergeven. Houdt de <kbd class="kbd docutils literal notranslate">Ctrl</kbd>-toets ingedrukt en selecteer alle individuele bestanden. Eenmaal geselecteerd, sleep ze in het kaartvenster.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1108.png" class="align-center" src="../../_images/1108.png" />
+<div><img alt="../../_images/1109.png" class="align-center" src="../../_images/1109.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>U zult 11 individuele lagen zien geladen in het paneel <span class="guilabel">Lagen</span> en weergegeven in het kaartvenster. We zullen deze individuele bestanden samenvoegen tot één enkele mozaïek. Ga naar <span class="menuselection">Processing ‣ Toolbox</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2101.png" class="align-center" src="../../_images/2101.png" />
+<div><img alt="../../_images/2103.png" class="align-center" src="../../_images/2103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Zoek en lokaliseer het algoritme <span class="menuselection">GDAL ‣ Raster diversen ‣ Merge</span>. Dubbelklik om het te openen.</p></li>
@@ -294,25 +295,25 @@
 <li><p>Selecteer de nieuw toegevoegde laag <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> in het paneel <span class="guilabel">Lagen</span>. Klik op de knop <span class="guilabel">Objecten selecteren</span> op de <span class="guilabel">werkbalk Attributen</span>. Eenmaal geselecteerd, klik op de polygoon voor Sri Lanka om die te selecteren.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1027.png" class="align-center" src="../../_images/1027.png" />
+<div><img alt="../../_images/1028.png" class="align-center" src="../../_images/1028.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Behoud de selectie zoals die is en open <span class="menuselection">Processing ‣ Toolbox</span>. Zoek en lokaliseer het algoritme <span class="menuselection">GDAL ‣ Raster uitnemen ‣ Raster op maskerlaag clippen</span>. Dubbelklik om het te openen.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1131.png" class="align-center" src="../../_images/1131.png" />
+<div><img alt="../../_images/1132.png" class="align-center" src="../../_images/1132.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Selecteer, in het dialoogvenster <span class="guilabel">Raster op maskerlaag clippen</span>, <code class="docutils literal notranslate"><span class="pre">Samengevoegd</span></code> in als de <span class="guilabel">Invoerlaag</span>. Selecteer <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> als de <span class="guilabel">Maskeerlaag</span>, en selecteer het keuzevak <span class="guilabel">Alleen geselecteerde objecten</span>. Voer <code class="docutils literal notranslate"><span class="pre">0.0000</span></code> in als <span class="guilabel">Wijs een specifieke waarde Geen data toe aan de uitvoerbanden</span>. Kis, zoals eerder, <code class="docutils literal notranslate"><span class="pre">Hoge</span> <span class="pre">compressie</span></code> als the <span class="guilabel">Profiel</span>. Klik op <span class="guilabel">Uitvoeren</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1229.png" class="align-center" src="../../_images/1229.png" />
+<div><img alt="../../_images/1230.png" class="align-center" src="../../_images/1230.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Een nieuwe laag <code class="docutils literal notranslate"><span class="pre">Geclipt</span> <span class="pre">(masker)</span></code> zal worden toegevoegd aan het paneel <span class="guilabel">Lagen</span>. Op dit punt zou het moeilijk kunnen zijn de uitvoer te zien omdat we teveel overlappende lagen zichtbaar hebben. Klik op de knop <span class="guilabel">Kaartthema’s beheren</span> in het paneel <span class="guilabel">Lagen</span> en kies <code class="docutils literal notranslate"><span class="pre">Alle</span> <span class="pre">lagen</span> <span class="pre">verbergen</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1327.png" class="align-center" src="../../_images/1327.png" />
+<div><img alt="../../_images/1328.png" class="align-center" src="../../_images/1328.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Schakel alleen de laatste laag <code class="docutils literal notranslate"><span class="pre">Geclipt</span> <span class="pre">(masker)</span></code> in en maak die op met de renderer <code class="docutils literal notranslate"><span class="pre">Schaduw</span> <span class="pre">voor</span> <span class="pre">heuvels</span></code> zoals we eerder deden.</p></li>
@@ -324,7 +325,7 @@
 <li><p>De samengevoegde en verkleinde uitvoer voor de hoogtelaag voor Sri Lanka is klaar.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1523.png" class="align-center" src="../../_images/1523.png" />
+<div><img alt="../../_images/1524.png" class="align-center" src="../../_images/1524.png" />
 </div></blockquote>
 </section>
 </section>
@@ -351,7 +352,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Laatste aanpassing op mrt. 05, 2022.<br/>
+      Laatste aanpassing op apr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

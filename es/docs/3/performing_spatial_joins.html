@@ -14,7 +14,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="Búsqueda" href="../../search.html" />
-    <link rel="next" title="Crear Mapas de Calor (QGIS3)" href="creating_heatmaps.html" />
+    <link rel="next" title="Realizar Consultas Espaciales (QGIS3)" href="performing_spatial_queries.html" />
     <link rel="prev" title="Realizar Uniones de Tablas (QGIS3)" href="performing_table_joins.html" />
 
 <meta charset='utf-8'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalizar Datos del Mapa (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizar Uniones de Tablas (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Realizar Uniones Espaciales (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Análisis Avanzado de Ráster (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
@@ -132,7 +133,7 @@
     </a>
   </li>
   <li>
-    <a href="creating_heatmaps.html" title="Next Chapter: Crear Mapas de Calor (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Crear Mapas d... &raquo;</span>
+    <a href="performing_spatial_queries.html" title="Next Chapter: Realizar Consultas Espaciales (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Realizar Cons... &raquo;</span>
     </a>
   </li>
               
@@ -217,7 +218,7 @@
 <h2>Obtener los datos<a class="headerlink" href="#get-the-data" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El <a class="reference external" href="https://data.cityofnewyork.us/">Portal de Datos Abiertos NYC</a> es una fuente excelente de datos libres para la ciudad de Nueva York.</p>
 <p>Descargue el archivo zip <a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">Límites de Distrito</a> usando la opción Exportar en el portal.</p>
-<img alt="../../_images/data13.png" class="align-center" src="../../_images/data13.png" />
+<img alt="../../_images/data19.png" class="align-center" src="../../_images/data19.png" />
 <p>Descargue el archivo zip <a class="reference external" href="https://data.cityofnewyork.us/Transportation/Street-Pavement-Rating/2cav-chmn">Valuación de Pavimento de calle</a> usando la opción Exportar en el portal.</p>
 <img alt="../../_images/data22.png" class="align-center" src="../../_images/data22.png" />
 <p>Para su comodidad, puede descargar directamente una copia de los conjuntos de datos de los enlaces abajo:</p>
@@ -231,13 +232,13 @@
 <li><p>Localice el archivo``nybb_19a.zip`` en el Explorador QGIS y expándalo. Seleccione la capa <code class="docutils literal notranslate"><span class="pre">nybb_19a/nybb.shp</span></code> y  arrástrela a la pantalla. Ésta es una capa polígono que representa los límites de distrito en la ciudad de Nueva York.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>A continuación, localice el archivo <code class="docutils literal notranslate"><span class="pre">V_SSS_SEGMENTRATING_1.zip</span></code> y expándalo. Seleccione la capa <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129.shp</span></code> y agréguela a la pantalla. Ésta es una capa línea de todas las calles en la ciudad.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/260.png" class="align-center" src="../../_images/260.png" />
+<div><img alt="../../_images/270.png" class="align-center" src="../../_images/270.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Examinenos los atributos disponibles para cada entidad de la capa <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code>. Clic-derecho y seleccione <span class="guilabel">Abrir Tabla de Atributos</span>.</p></li>
@@ -292,25 +293,25 @@
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">Rating_B</span></code> y clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1021.png" class="align-center" src="../../_images/1021.png" />
+<div><img alt="../../_images/1022.png" class="align-center" src="../../_images/1022.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>De forma similar, clic en el botón <span class="guilabel">…</span> junto a <span class="guilabel">Resúmenes a calcular</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1124.png" class="align-center" src="../../_images/1124.png" />
+<div><img alt="../../_images/1125.png" class="align-center" src="../../_images/1125.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">media</span></code> como el operador de resumen y clic en <span class="guilabel">Aceptar</span>. Ahora estamos listos para iniciar el procesamiento.  Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1222.png" class="align-center" src="../../_images/1222.png" />
+<div><img alt="../../_images/1223.png" class="align-center" src="../../_images/1223.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>El algoritmo de procesamiento trabajará a través de los objetos espaciales y aplicará la unión espacial. Verifique que el trabajo de procesamiento sea exitoso y clic en <span class="guilabel">Cerrar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1320.png" class="align-center" src="../../_images/1320.png" />
+<div><img alt="../../_images/1321.png" class="align-center" src="../../_images/1321.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>De vuelta en la ventana principal QGIS, verá agregada una nueva capa <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer</span></code> a la pantalla. Abra la tabla de atributos para esta capa. Verá agregada una nueva columna <code class="docutils literal notranslate"><span class="pre">Rating_B_mean</span></code> a la capa entrada de distritos con la clasificación promedio de todas las calles que se intersectan con ese objeto espacial.</p></li>
@@ -322,31 +323,31 @@
 <li><p>Ahora podemos realizar una operación inversa. Algunas veces nuestro análisis requiere obtener atributos de otra capa en base a la relación espacial pero sin calcular ningún resumen. Podemos usar el algoritmo <code class="docutils literal notranslate"><span class="pre">Unir</span> <span class="pre">atributos</span> <span class="pre">por</span> <span class="pre">ubicación</span> <span class="pre">(resumen)</span></code> para tal análisis. La tarea es agregar el nombre del distrito a cada objeto en la capa de calles en base a en cuál polígono de distrito intersecta. Antes de ejecutar esta algoritmo, quitemos el filtro de la capa <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code>. Clic el icono de filtro y presione <span class="guilabel">Limpiar</span> en <span class="guilabel">Constructor de Consulta</span>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
+<div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Active <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer</span></code> en el panel <span class="guilabel">Capas</span>. Encuentre el algoritmo <span class="menuselection">Vectorial general ‣ Unir atributos por ubicación (resumen)</span> en la Caja de Herramientas Procesos y haga doble clic para iniciarlo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
+<div><img alt="../../_images/1616.png" class="align-center" src="../../_images/1616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>Seleccione <code class="docutils literal notranslate"><span class="pre">dot_V_SSS_SEGMENTRATING_1_20190129</span></code> como la <span class="guilabel">Capa de entrada</span> y <code class="docutils literal notranslate"><span class="pre">nybb</span></code> como la <span class="guilabel">Capa de unión</span>. Puede dejar el <span class="guilabel">Predicado de geometría</span> al predeterminado <code class="docutils literal notranslate"><span class="pre">Intersecta</span></code>. Clic el botón <span class="guilabel">…</span> junto a <span class="guilabel">Campos a agregar</span> y seleccione <code class="docutils literal notranslate"><span class="pre">BoroName</span></code>. Clic en <span class="guilabel">Aceptar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
+<div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>El segmento de línea puede cruzar el límite de distrito, por lo que escogemos para el <span class="guilabel">Tipo de unión</span> <code class="docutils literal notranslate"><span class="pre">Crear</span> <span class="pre">objetos</span> <span class="pre">separados</span> <span class="pre">para</span> <span class="pre">cada</span> <span class="pre">objeto</span> <span class="pre">identificado</span> <span class="pre">(uno-a-muchos)</span></code>. Clic en <span class="guilabel">Ejecutar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
+<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>Una vez que termine el procesamiento, abra la tabla de atributos de la recién agregada <code class="docutils literal notranslate"><span class="pre">Joined</span> <span class="pre">layer</span></code>. Verá que hay un nuevo atributo <code class="docutils literal notranslate"><span class="pre">BoroName</span></code> agregado a cada objeto de calle.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
+<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 </section>
 </section>
@@ -373,7 +374,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en mar. 05, 2022.<br/>
+      Actualizado por última vez en abr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

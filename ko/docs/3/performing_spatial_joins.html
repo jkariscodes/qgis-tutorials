@@ -14,7 +14,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="검색" href="../../search.html" />
-    <link rel="next" title="열지도 만들기 (QGIS3)" href="creating_heatmaps.html" />
+    <link rel="next" title="공간 조회 실행(QGIS3)" href="performing_spatial_queries.html" />
     <link rel="prev" title="테이블 결합 작업(QGIS3)" href="performing_table_joins.html" />
 
 <meta charset='utf-8'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">테이블 결합 작업(QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">공간 결합 수행 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">공간 조회 실행(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">최근린 분석(QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">점 또는 다각형을 이용한 래스터 데이터 표본 추출 작업(QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">열지도 만들기 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -132,7 +133,7 @@
     </a>
   </li>
   <li>
-    <a href="creating_heatmaps.html" title="Next Chapter: 열지도 만들기 (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">열지도 만들기 (QGIS3) &raquo;</span>
+    <a href="performing_spatial_queries.html" title="Next Chapter: 공간 조회 실행(QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">공간 조회 실행(QGIS3) &raquo;</span>
     </a>
   </li>
               
@@ -217,7 +218,7 @@
 <h2>데이터 가져오기<a class="headerlink" href="#get-the-data" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>NYC Open Data Portal &lt;<a class="reference external" href="https://data.cityofnewyork.us/">https://data.cityofnewyork.us/</a>&gt;`_은 뉴욕시를 위한 훌륭한 무료 데이터 소스입니다.</p>
 <p>포털에서 내보내기 옵션을 사용하여 자치구 경계 zip 파일 &lt;<a class="reference external" href="https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm">https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm</a>&gt;`_을 다운로드하십시오.</p>
-<img alt="../../_images/data13.png" class="align-center" src="../../_images/data13.png" />
+<img alt="../../_images/data19.png" class="align-center" src="../../_images/data19.png" />
 <p>포털에서 내보내기 옵션을 사용하여 Street Pavement Rating zip 파일&lt;<a class="reference external" href="https://data.cityofnewyork.us/Transportation/Street-Pavement-Rating/2cav-chmn">https://data.cityofnewyork.us/Transportation/Street-Pavement-Rating/2cav-chmn</a>&gt;`_ 을 다운로드하십시오.</p>
 <img alt="../../_images/data22.png" class="align-center" src="../../_images/data22.png" />
 <p>편의를 위해 아래 링크에서 데이터 세트 사본을 직접 다운로드 할 수 있습니다.</p>
@@ -231,13 +232,13 @@
 <li><p>QGIS 창에서 nybb_19a.zip 파일을 찾아 확장하십시오. nybb_19a / nybb.shp 레이어를 선택하고 캔버스로 이동시킵니다. 이는 뉴욕시의 자치구 경계를 나타내는 다각형 레이어입니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/1103.png" class="align-center" src="../../_images/1103.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>다음으로 V_SSS_SEGMENTRATING_1.zip 파일을 찾아 확장하십시오. dot_V_SSS_SEGMENTRATING_1_20190129.shp 레이어를 선택하여 캔버스에 추가하십시오. 이것은 뉴욕시 모든 거리의 선 레이어입니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/260.png" class="align-center" src="../../_images/260.png" />
+<div><img alt="../../_images/270.png" class="align-center" src="../../_images/270.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>dot_V_SSS_SEGMENTRATING_1_20190129 레이어의 각 객체에서 사용 가능한 속성을 살펴보겠습니다. 마우스 오른쪽 단추를 클릭하고 속성 테이블 열기를 선택하십시오.</p></li>
@@ -292,25 +293,25 @@
 <li><p>Rating_B를 선택하고 확인을 클릭합니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1021.png" class="align-center" src="../../_images/1021.png" />
+<div><img alt="../../_images/1022.png" class="align-center" src="../../_images/1022.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>마찬가지로 계산할 결합 옆에 있는 … 아이콘을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1124.png" class="align-center" src="../../_images/1124.png" />
+<div><img alt="../../_images/1125.png" class="align-center" src="../../_images/1125.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>결합 연산자로 평균을 선택하고 확인을 클릭하십시오. 이제 과정을 시작할 준비가 되었습니다. 실행을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1222.png" class="align-center" src="../../_images/1222.png" />
+<div><img alt="../../_images/1223.png" class="align-center" src="../../_images/1223.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>처리 알고리즘은 객체를 통해 작동하고 공간 결합을 적용합니다. 처리 작업이 완료되었는지 확인하고 닫기를 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1320.png" class="align-center" src="../../_images/1320.png" />
+<div><img alt="../../_images/1321.png" class="align-center" src="../../_images/1321.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>기본 QGIS 창으로 돌아가면 캔버스에 새로운 결합 레이어가 추가된 것을 볼 수 있습니다. 이 레이어의 속성 테이블을 엽니다. 해당 객체와 교차하는 모든 거리의 평균 등급과 함께 입력 자치구 레이어에 Rating_B_mean 열이 추가된 것을 확인할 수 있습니다.</p></li>
@@ -322,31 +323,31 @@
 <li><p>이제 역동작을 수행할 수 있습니다. 때로는 분석에서 공간 관계에 따라 다른 레이어에서 속성을 가져와야하지만 결합의 경우 계산하지 않아도 됩니다. 이러한 분석을 위해 위치 알고리즘별로 결합 속성을 사용할 수 있습니다. 이 작업을 통해 교차하는 자치구 다각형을 기준으로 거리 레이어의 각 객체에 자치구 이름을 추가합니다. 이 알고리즘을 실행하기 전에 dot_V_SSS_SEGMENTRATING_1_20190129 레이어에서 필터를 제거하겠습니다. 필터 아이콘을 클릭하고 쿼리 작성기에서 초기화를 선택합니다. 다음 확인을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1516.png" class="align-center" src="../../_images/1516.png" />
+<div><img alt="../../_images/1517.png" class="align-center" src="../../_images/1517.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>레이어 패널에서 결합된 레이어를 켭니다. 공간처리 툴박스에서 위치 알고리즘을 기준으로 벡터 일반 ‣ 위치에 따라 속성을 결합를 찾아 두 번 클릭하여 시작합니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1615.png" class="align-center" src="../../_images/1615.png" />
+<div><img alt="../../_images/1616.png" class="align-center" src="../../_images/1616.png" />
 </div></blockquote>
 <ol class="arabic simple" start="17">
 <li><p>입력 레이어로 dot_V_SSS_SEGMENTRATING_1_20190129를 선택하고 결합 레이어로 nybb를 선택하십시오. 기하학적 조건을 기본 교차로 둘 수 있습니다. 추가할 필드 옆에 있는 … 아이콘을 클릭하고 자치구 이름을 선택하십시오. 확인을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1716.png" class="align-center" src="../../_images/1716.png" />
+<div><img alt="../../_images/1717.png" class="align-center" src="../../_images/1717.png" />
 </div></blockquote>
 <ol class="arabic simple" start="18">
 <li><p>선분이 자치구 경계를 가로 지르기 때문에 우리는 결합 유형을 각 위치된 객체에 의한 결합된 별도 객체(일 대 다수)로 선택합니다. 실행을 클릭하십시오.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1814.png" class="align-center" src="../../_images/1814.png" />
+<div><img alt="../../_images/1815.png" class="align-center" src="../../_images/1815.png" />
 </div></blockquote>
 <ol class="arabic simple" start="19">
 <li><p>알고리즘 처리가 완료되면 새로 추가된 결합 레이어의 속성 표를 엽니다. 각 거리의 객체에 새로운 자치구 이름 속성이 추가된 것을 볼 수 있습니다.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1912.png" class="align-center" src="../../_images/1912.png" />
+<div><img alt="../../_images/1913.png" class="align-center" src="../../_images/1913.png" />
 </div></blockquote>
 </section>
 </section>
@@ -373,7 +374,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      최종 업데이트: 3월 05, 2022<br/>
+      최종 업데이트: 4월 27, 2022<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

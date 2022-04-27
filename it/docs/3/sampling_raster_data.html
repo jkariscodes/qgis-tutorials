@@ -14,7 +14,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/translations.js"></script>
     <link rel="search" title="Cerca" href="../../search.html" />
-    <link rel="next" title="Advanced Raster Analysis (QGIS3)" href="advanced_raster_analysis.html" />
+    <link rel="next" title="Calculating Raster Area (QGIS3)" href="calculating_raster_area.html" />
     <link rel="prev" title="Nearest Neighbor Analysis (QGIS3)" href="nearest_neighbor_analysis.html" />
 
 <meta charset='utf-8'>
@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizzare unioni tabellari (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizzare unioni spaziali (Spatial Joins)  (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Realizzare Heatmaps (mappe di concentrazione)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Utilizzare le interrogazioni spaziali (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Campionare i dati di un raster usando punti o poligoni (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Realizzare Heatmaps (mappe di concentrazione)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -132,7 +133,7 @@
     </a>
   </li>
   <li>
-    <a href="advanced_raster_analysis.html" title="Next Chapter: Advanced Raster Analysis (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Advanced Rast... &raquo;</span>
+    <a href="calculating_raster_area.html" title="Next Chapter: Calculating Raster Area (QGIS3)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Calculating R... &raquo;</span>
     </a>
   </li>
               
@@ -230,13 +231,13 @@
 <li><p>Estrai i file che trovi nel file complresso <code class="docutils literal notranslate"><span class="pre">2018_Gaz_ua_national.zip</span></code> e <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county.zip</span></code> in una cartella nel tuo PC. Apri QGIS e usa il browser i QGIS per aprire il file <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float.tif</span></code> e aggiungerlo nella mappa.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1132.png" class="align-center" src="../../_images/1132.png" />
+<div><img alt="../../_images/1134.png" class="align-center" src="../../_images/1134.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Vedrete un nuovo livello <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code>  aggiunto al pannello <span class="guilabel">Layers</span> .  Questo livello raster contiene le temperature massime registrate in ogni pixel in gradi Celsius. Dopo carichiamo i punti con le aree urbane. Questo file è in formato testo, con colonne separate da TAB (Tab Separated Values - TSV). Clicca il pulsante <span class="guilabel">Open Data Source Manager</span> nella barra degli strumenti <span class="guilabel">Data Source Toolbar</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2103.png" class="align-center" src="../../_images/2103.png" />
+<div><img alt="../../_images/2105.png" class="align-center" src="../../_images/2105.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Nella finestra di dialogo <span class="guilabel">Crea un vettore da un file di testo delimitato</span>  fate click su <span class="guilabel">…</span> e specificate il percorso del file di testo che avete scaricato. Nella sezione  <span class="guilabel">Formato file</span> selezionate <span class="guilabel">Delimitatori personalizzati</span> e sbarrate la casella <span class="guilabel">Tab</span>. I due campi di coordinate X e Y. Nel nostro caso essi sono  <em>INTPTLONG</em> e <em>INTPTLAT</em>.   Click su <span class="guilabel">OK</span>.</p></li>
@@ -288,25 +289,25 @@
 <li><p>Un nuovo livello <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code> sarà caricato nel pannello <span class="guilabel">Layers</span>. Andate su <span class="menuselection">Processing ‣ Strumenti</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1028.png" class="align-center" src="../../_images/1028.png" />
+<div><img alt="../../_images/1029.png" class="align-center" src="../../_images/1029.png" />
 </div></blockquote>
 <ol class="arabic simple" start="11">
 <li><p>Cercare e trovare nel pannello Strumenti di Processing (Processing Toolbox) la voce del menu: <cite>Analisi Raster -&gt; Statistiche zonali</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1133.png" class="align-center" src="../../_images/1133.png" />
+<div><img alt="../../_images/1135.png" class="align-center" src="../../_images/1135.png" />
 </div></blockquote>
 <ol class="arabic simple" start="12">
 <li><p>Seleziona <code class="docutils literal notranslate"><span class="pre">us.tmax_nohads_ll_20190501_float</span></code> come livello <span class="guilabel">Raster layer</span> e <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code> come livello  <span class="guilabel">Vector layer containing zones</span>. Inserisci <code class="docutils literal notranslate"><span class="pre">tmax_</span></code> come <span class="guilabel">Output column prefix</span>. Clicca the <span class="guilabel">…</span> vicino a <span class="guilabel">Statistics to calculate</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1231.png" class="align-center" src="../../_images/1231.png" />
+<div><img alt="../../_images/1232.png" class="align-center" src="../../_images/1232.png" />
 </div></blockquote>
 <ol class="arabic simple" start="13">
 <li><p>Selezionare come statistiche <code class="docutils literal notranslate"><span class="pre">Mean</span></code> (Media) e cliccare <span class="guilabel">OK</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1329.png" class="align-center" src="../../_images/1329.png" />
+<div><img alt="../../_images/1330.png" class="align-center" src="../../_images/1330.png" />
 </div></blockquote>
 <ol class="arabic simple" start="14">
 <li><p>Click <span class="guilabel">Run</span> per lanciare il processo. Può richiedere diversi minuti di elaborazione. Click <span class="guilabel">Close</span>.</p></li>
@@ -318,13 +319,13 @@
 <li><p>Come detto prima, il modulo <strong>Zonal Statistics</strong> non crea un nuovo livello. Fate tasto destro sul livello <code class="docutils literal notranslate"><span class="pre">tl_2018_us_county</span></code> e selezionate <span class="guilabel">Open Attribute Table</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1525.png" class="align-center" src="../../_images/1525.png" />
+<div><img alt="../../_images/1526.png" class="align-center" src="../../_images/1526.png" />
 </div></blockquote>
 <ol class="arabic simple" start="16">
 <li><p>Troverete una nuova colonna <code class="docutils literal notranslate"><span class="pre">tmax_mean</span></code> nella tabella. Contiene la temperatura media dei pixel dentro il poligono. Dove vedere valori NULL vuol dire che i poligoni non si sovrappongono con il raster delle temperature (e.g. Alaska, Hawaii and Puerto Rico)</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1623.png" class="align-center" src="../../_images/1623.png" />
+<div><img alt="../../_images/1624.png" class="align-center" src="../../_images/1624.png" />
 </div></blockquote>
 </section>
 </section>
@@ -351,7 +352,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Ultimo aggiornamento mar 05, 2022.<br/>
+      Ultimo aggiornamento apr 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

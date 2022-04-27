@@ -85,12 +85,13 @@
 <li class="toctree-l1"><a class="reference internal" href="3/digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">Performing Table Joins (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">Performing Spatial Joins (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">Creating Heatmaps (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -212,11 +213,11 @@
 <ol class="arabic simple">
 <li><p>No QGIS, acesse <span class="menuselection">Layers ‣ Add Vector Layer</span>. Navegue até o arquivo <code class="docutils literal notranslate"><span class="pre">ne_10m_airports.zip`</span> <span class="pre">baixado</span> <span class="pre">e</span> <span class="pre">clique</span> <span class="pre">em</span>&#160; <span class="pre">:guilabel:`Open`.</span> <span class="pre">Selecione</span> <span class="pre">a</span> <span class="pre">camada</span> <span class="pre">``ne_10m_airports.shp</span></code> e clique em <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../_images/1172.png" class="align-center" src="../_images/1172.png" />
+<img alt="../_images/1174.png" class="align-center" src="../_images/1174.png" />
 <ol class="arabic simple" start="2">
 <li><p>Você vai ver a camada <code class="docutils literal notranslate"><span class="pre">ne_10m_airports</span></code> carregada no QGIS.</p></li>
 </ol>
-<img alt="../_images/2139.png" class="align-center" src="../_images/2139.png" />
+<img alt="../_images/2142.png" class="align-center" src="../_images/2142.png" />
 <ol class="arabic simple" start="3">
 <li><p>Selecione a ferramenta <span class="guilabel">Identify</span> e clique em qualquer um dos pontos para examinar os atributos disponíveis. Você vai ver que o nome do aeroporto, tem 3 algarismos e estão contidas nos atributos <code class="docutils literal notranslate"><span class="pre">name``e</span> <span class="pre">``iata_code</span></code> respectivamente.</p></li>
 </ol>
@@ -272,7 +273,7 @@
   <span class="nb">print</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1048.png" class="align-center" src="../_images/1048.png" />
+<img alt="../_images/1049.png" class="align-center" src="../_images/1049.png" />
 <ol class="arabic simple" start="11">
 <li><p>Agora temos todas as peças que possamos unir para gerar a saída desejada. Digite o seguinte código para imprimir o nome, iata_code, latitude e longitude de cada uma das características do aeroporto. O <code class="docutils literal notranslate"><span class="pre">%s</span></code> e <code class="docutils literal notranslate"><span class="pre">%f</span></code> são maneiras de formatar uma string e número de variáveis.</p></li>
 </ol>
@@ -282,7 +283,7 @@
          <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">geom</span><span class="o">.</span><span class="n">asPoint</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
 </pre></div>
 </div>
-<img alt="../_images/1173.png" class="align-center" src="../_images/1173.png" />
+<img alt="../_images/1175.png" class="align-center" src="../_images/1175.png" />
 <ol class="arabic simple" start="12">
 <li><p>Você pode ver a saída impressa no console. Uma maneira mais útil para armazenar a saída seria em um arquivo. Você pode digitar o seguinte código para criar um arquivo e escrever a saída nele. Substitua o caminho do arquivo com um caminho em seu próprio sistema. Note que nós adicionamos <code class="docutils literal notranslate"><span class="pre">\n</span></code> no final da nossa formatação de linha. Este vai adicionar uma nova linha depois de adicionar os dados para cada recurso. Você também deve observar a linha <code class="docutils literal notranslate"><span class="pre">unicode_line</span> <span class="pre">=</span> <span class="pre">line.encode</span> <span class="pre">('utf-8')</span></code>. Desde a nossa camada contém algumas características com caracteres Unicode, não podemos simplesmente escrevê-lo para um arquivo de texto. Nós precisamos codificar o texto usando a codificação UTF-8 e, em seguida, escrever para o arquivo de texto.</p></li>
 </ol>
@@ -296,11 +297,11 @@
 <span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1250.png" class="align-center" src="../_images/1250.png" />
+<img alt="../_images/1251.png" class="align-center" src="../_images/1251.png" />
 <ol class="arabic simple" start="13">
 <li><p>Você pode ir para o local do arquivo de saída especificado e abrir o arquivo de texto. Você vai ver os dados do shapefile aeroportos que extraímos usando python scripting.</p></li>
 </ol>
-<img alt="../_images/1348.png" class="align-center" src="../_images/1348.png" />
+<img alt="../_images/1349.png" class="align-center" src="../_images/1349.png" />
 </section>
 </section>
 
@@ -326,7 +327,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Última atualização em mar. 05, 2022.<br/>
+      Última atualização em abr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

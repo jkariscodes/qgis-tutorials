@@ -87,12 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="digitizing_basics.html">Digitalizar Datos del Mapa (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_table_joins.html">Realizar Uniones de Tablas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_joins.html">Realizar Uniones Espaciales (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Realizar Consultas Espaciales (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Análisis del Vecino Más Cercano (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Muestrear Datos Ráster usando Puntos o Polígonos (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Crear Mapas de Calor (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Animar Datos de Series de Tiempo (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Manejar Geometrías No Válidas (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_raster_analysis.html">Análisis Avanzado de Ráster (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpolating_point_data.html">Interpolar Datos Punto (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="calculating_intersection_density.html">Calcular Densidad de Intersección de Calle (QGIS3)</a></li>
@@ -213,13 +214,13 @@
 <li><p>Para este tutorial vamos a descargar un conjunto de datos de terremotos entre 1900-2000 del Centro Nacional de Datos Geofísicos de la NOAA, que produce un gran conjunto de datos de todos los terremotos importantes desde el año 2150 a.C. <a class="reference external" href="https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search">Visite el portal del NCEI de la NOAA</a> e introduzca <span class="guilabel">Min</span> como <code class="docutils literal notranslate"><span class="pre">1900</span></code> y <span class="guilabel">Max</span> como <code class="docutils literal notranslate"><span class="pre">2000</span></code>. Esto devolverá todos los incidentes sísmicos ocurridos y registrados por la NOAA entre esos años. Para otros resultados específicos, puede filtrar con diferentes parámetros. Haga clic en <span class="guilabel">Búsqueda</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/data01.png" class="align-center" src="../../_images/data01.png" />
+<div><img alt="../../_images/data011.png" class="align-center" src="../../_images/data011.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Como resultado, tenemos <em>2585</em> incidentes de terremotos. Haga clic en el icono <span class="guilabel">Descargar TSV</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/data02.png" class="align-center" src="../../_images/data02.png" />
+<div><img alt="../../_images/data021.png" class="align-center" src="../../_images/data021.png" />
 </div></blockquote>
 <p>Para mayor comodidad, puede descargar directamente una copia de los conjuntos de datos mencionados en el siguiente enlace:</p>
 <p><a class="reference external" href="https://www.qgistutorials.com/downloads/earthquakes_2021_11_25_14_31_59_+0530.tsv">earthquakes_2021_11_25_14_31_59_+0530.tsv</a></p>
@@ -231,7 +232,7 @@
 <li><p>Examine su fuente de datos tabulares. La base de datos de terremotos descargada contiene los campos <code class="docutils literal notranslate"><span class="pre">Latitud</span></code> y <code class="docutils literal notranslate"><span class="pre">Longitud</span></code> que indican la ubicación del epicentro del terremoto y otros atributos relacionados. Utilizaremos estos campos para importar el archivo como una capa de puntos. Abra los datos en un editor de texto como Notepad/TextMate para ver el contenido. Verá que una TAB separa cada campo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/014.png" class="align-center" src="../../_images/014.png" />
+<div><img alt="../../_images/015.png" class="align-center" src="../../_images/015.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -241,29 +242,29 @@
 <li><p>QGIS dispone de un gestor de datos unificado que permite cargar todos los formatos de datos soportados. Haga clic en el botón <span class="guilabel">Abrir administrador de fuentes de datos</span> de la <span class="guilabel">Barra de herramientas de fuentes de datos</span>. También puede utilizar el atajo de teclado <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/024.png" class="align-center" src="../../_images/024.png" />
+<div><img alt="../../_images/025.png" class="align-center" src="../../_images/025.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>En el cuadro de diálogo <span class="guilabel">Administrador de Fuentes de Datos</span>, cambie a la pestaña <span class="guilabel">Texto delimitado</span>. Haga clic en el botón <span class="guilabel">…</span> situado junto al <span class="guilabel">Nombre de archivo</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/034.png" class="align-center" src="../../_images/034.png" />
+<div><img alt="../../_images/035.png" class="align-center" src="../../_images/035.png" />
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Dependiendo del sistema operativo, puede o no ver el archivo en la ubicación descargada. En Formatos de archivo, cambie a <code class="docutils literal notranslate"><span class="pre">Todos</span> <span class="pre">los</span> <span class="pre">archivos</span> <span class="pre">(*;</span> <span class="pre">*.*)</span></code> para ver el archivo <em>tsv</em>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/044.png" class="align-center" src="../../_images/044.png" />
+<div><img alt="../../_images/045.png" class="align-center" src="../../_images/045.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li><p>Ahora verá el archivo descargado. Selecciónelo y haga clic en <span class="guilabel">Abrir</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/054.png" class="align-center" src="../../_images/054.png" />
+<div><img alt="../../_images/055.png" class="align-center" src="../../_images/055.png" />
 </div></blockquote>
 <ol class="arabic" start="6">
 <li><p>En el cuadro de diálogo <span class="guilabel">Administrador de Fuentes de Datos</span>, la ruta del archivo estará disponible en <span class="guilabel">Nombre de archivo</span>. Cambie el <span class="guilabel">Nombre de la capa</span> por <code class="docutils literal notranslate"><span class="pre">1900_2000_terremotos</span></code>. En la sección <span class="guilabel">Formato de archivo</span>, seleccione <span class="guilabel">Delimitadores personalizados</span> y marque <code class="docutils literal notranslate"><span class="pre">Tab</span></code>. En la sección <span class="guilabel">Definición de geometría</span>, seleccione <span class="guilabel">Coordenadas de punto</span>. Por defecto, los valores de <span class="guilabel">Campo X</span> y <span class="guilabel">Campo Y</span> se rellenarán automáticamente si se encuentra un campo de nombre adecuado en la entrada. En nuestro caso, son <code class="docutils literal notranslate"><span class="pre">Longitud</span></code> y <code class="docutils literal notranslate"><span class="pre">Latitud</span></code>. Puedes cambiarlo si la importación selecciona los campos equivocados. Puede dejar la etiqueta <span class="guilabel">SRC Geometría</span> en el SRC por defecto <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span> <span class="pre">-</span> <span class="pre">WGS</span> <span class="pre">84</span></code>. Si su archivo contiene coordenadas en un SRC diferente, puede seleccionar el SRC apropiado aquí. Haga clic en <span class="guilabel">Añadir</span>.</p>
-<img alt="../../_images/064.png" class="align-center" src="../../_images/064.png" />
+<img alt="../../_images/065.png" class="align-center" src="../../_images/065.png" />
 </li>
 </ol>
 <div class="admonition note">
@@ -274,7 +275,7 @@
 <li><p>Ahora verá que los datos serán importados y mostrados en el lienzo de QGIS como una nueva capa llamada <code class="docutils literal notranslate"><span class="pre">1900_2000_earthquakes</span></code> con SRC <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/074.png" class="align-center" src="../../_images/074.png" />
+<div><img alt="../../_images/075.png" class="align-center" src="../../_images/075.png" />
 </div></blockquote>
 </section>
 </section>
@@ -301,7 +302,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en mar. 05, 2022.<br/>
+      Actualizado por última vez en abr. 27, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

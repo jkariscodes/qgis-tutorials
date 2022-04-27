@@ -85,12 +85,13 @@
 <li class="toctree-l1"><a class="reference internal" href="3/digitizing_basics.html">Digitizing Map Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_table_joins.html">資料表連接 (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_joins.html">空間連接 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/performing_spatial_queries.html">Performing Spatial Queries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/nearest_neighbor_analysis.html">Nearest Neighbor Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/sampling_raster_data.html">Sampling Raster Data using Points or Polygons (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/calculating_raster_area.html">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/creating_heatmaps.html">製作熱區圖 (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/animating_time_series.html">Animating Time Series Data (QGIS3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3/handling_invalid_geometries.html">Handling Invalid Geometries (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/advanced_raster_analysis.html">Advanced Raster Analysis (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/interpolating_point_data.html">Interpolating Point Data (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3/calculating_intersection_density.html">Calculating Street Intersection Density (QGIS3)</a></li>
@@ -227,11 +228,11 @@
 <ol class="arabic simple">
 <li><p>打開 QGIS，選擇 <span class="menuselection">圖層 ‣ 加入向量圖層</span>。</p></li>
 </ol>
-<img alt="../_images/1207.png" class="align-center" src="../_images/1207.png" />
+<img alt="../_images/1208.png" class="align-center" src="../_images/1208.png" />
 <ol class="arabic simple" start="2">
 <li><p>選擇 <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries.zip</span></code> 並按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/2173.png" class="align-center" src="../_images/2173.png" />
+<img alt="../_images/2176.png" class="align-center" src="../_images/2176.png" />
 <ol class="arabic simple" start="3">
 <li><p>在 QGIS 視窗的底部有個 <span class="guilabel">座標</span> 欄位，在移動滑鼠時，它會即時顯示目前區域的 X 和 Y 座標。另外在右下角還有一個寫著 <span class="guilabel">EPSG:4326</span> 的地方，這個就是本專案的 CRS (投影法)。</p></li>
 </ol>
@@ -267,19 +268,19 @@
 <ol class="arabic simple" start="10">
 <li><p>回到剛才的 <span class="guilabel">儲存向量圖層為…</span> 視窗，此時新的 CRS 已經選取了。按下<span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1068.png" class="align-center" src="../_images/1068.png" />
+<img alt="../_images/1069.png" class="align-center" src="../_images/1069.png" />
 <ol class="arabic simple" start="11">
 <li><p>當這個重投影的圖層載入到 QGIS 中時，你會發現就算這兩個圖層的投影法不同， <code class="docutils literal notranslate"><span class="pre">美國</span></code> 還是位於與 <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> 完全相同的位置上。這是因為 QGIS 中有個稱為「<strong>即時 CRS 轉換</strong>」的功能，你會看到 QGIS 視窗右下角的投影欄，在 <span class="guilabel">EPSG:4326`</span> 旁邊多了 <code class="docutils literal notranslate"><span class="pre">OTF</span></code> 的字樣，讓我們來稍微了解一下這個東西。</p></li>
 </ol>
-<img alt="../_images/11107.png" class="align-center" src="../_images/11107.png" />
+<img alt="../_images/11108.png" class="align-center" src="../_images/11108.png" />
 <ol class="arabic simple" start="12">
 <li><p>選擇 <span class="menuselection">設定 ‣ 選項</span>。</p></li>
 </ol>
-<img alt="../_images/1268.png" class="align-center" src="../_images/1268.png" />
+<img alt="../_images/1269.png" class="align-center" src="../_images/1269.png" />
 <ol class="arabic simple" start="13">
 <li><p>在 <span class="guilabel">選項</span> 視窗中切換到 <span class="guilabel">CRS</span> 分頁，你可以看到有個預設值是 <span class="guilabel">如果圖層之間有不同的CRS，自動啟用即時座標投影轉換</span>。這是說當 QGIS 偵測到讀入的圖層跟已經存在的圖層有不同的 CRS 時，它會自動把新圖曾以舊圖層的投影法重新投影，這樣他們就可以在正確的座標下自動對齊。按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1365.png" class="align-center" src="../_images/1365.png" />
+<img alt="../_images/1366.png" class="align-center" src="../_images/1366.png" />
 <ol class="arabic simple" start="14">
 <li><p>來關掉<strong>即時CRS轉換</strong>看會發生什麼事。點選視窗右下角的 <span class="guilabel">現在的CRS</span> 鈕，</p></li>
 </ol>
@@ -287,7 +288,7 @@
 <ol class="arabic simple" start="15">
 <li><p>在 <span class="guilabel">專案屬性</span> 視窗中，取消 <span class="guilabel">開啟即時CRS轉換</span> 的勾選，然後按下<span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/1558.png" class="align-center" src="../_images/1558.png" />
+<img alt="../_images/1559.png" class="align-center" src="../_images/1559.png" />
 <ol class="arabic simple" start="16">
 <li><p>Back in the main QGIS window, you will see the nice World map disappear.
 This is because the Project CRS changed to
@@ -295,19 +296,19 @@ This is because the Project CRS changed to
 different now. Right-click the <code class="docutils literal notranslate"><span class="pre">united_states</span></code> layer and select
 <span class="guilabel">Zoom to Layer</span>.</p></li>
 </ol>
-<img alt="../_images/1655.png" class="align-center" src="../_images/1655.png" />
+<img alt="../_images/1656.png" class="align-center" src="../_images/1656.png" />
 <ol class="arabic simple" start="17">
 <li><p>現在就可以看到美國以選擇的投影法呈現出來了。注意 <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> 圖層完全沒有顯示在畫面中，因為它和 <code class="docutils literal notranslate"><span class="pre">united_states</span></code> 圖層佔據了完全不同的座標。現在請回到 <span class="guilabel">專案屬性</span> 視窗中把 <span class="guilabel">開啟即時CRS轉換</span> 再度打開，本教學接下來都會在此模式下操作。</p></li>
 </ol>
-<img alt="../_images/1750.png" class="align-center" src="../_images/1750.png" />
+<img alt="../_images/1751.png" class="align-center" src="../_images/1751.png" />
 <ol class="arabic simple" start="18">
 <li><p>現在我們要切換到另一個地方，然後再加入一個影像圖層到專案中。找到先前的 <code class="docutils literal notranslate"><span class="pre">minisc_gb.zip</span></code> 然後把它解壓縮，內有一個稱為 <code class="docutils literal notranslate"><span class="pre">RGB_TIF_COMPRESSED</span></code> 的資料夾。你會發現內含的 .tif 圖片就只是 TIF 圖片，而不像 GeoTIFF 圖片般會含有投影資訊。如果我們想要在 GIS 系統中使用這張圖片，必須要先進行「空間對位」才行。空間對位檔案含有 2 種參數設置：影像的涵蓋範圍，或是投影方法。一般來說，影像涵蓋範圍的空間對位檔案，附檔名會是 <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> 或 <code class="docutils literal notranslate"><span class="pre">.jgw</span></code>，通常我們會把它叫做  <a class="reference external" href="https://en.wikipedia.org/wiki/World_file">World file</a>。大部分的 GIS 軟體如 QGIS 都可以讀取 World file 內儲存的地理空間資訊，並把他套用在相同資料夾下、相同主檔名的影像檔上。這張影像的 <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> 檔案目前存在叫做 <code class="docutils literal notranslate"><span class="pre">georeferencing_files</span></code> 的資料夾內。</p></li>
 </ol>
-<img alt="../_images/1848.png" class="align-center" src="../_images/1848.png" />
+<img alt="../_images/1849.png" class="align-center" src="../_images/1849.png" />
 <ol class="arabic simple" start="19">
 <li><p>進入 <code class="docutils literal notranslate"><span class="pre">georeferencing_files</span></code> 內的 <code class="docutils literal notranslate"><span class="pre">ESRI_TFW_FILES</span></code> 資料夾，<code class="docutils literal notranslate"><span class="pre">.tfw</span></code> 檔案實際上是純文字檔，所以請用文字編輯器打開任一個 <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> 檔看看。</p></li>
 </ol>
-<img alt="../_images/1940.png" class="align-center" src="../_images/1940.png" />
+<img alt="../_images/1941.png" class="align-center" src="../_images/1941.png" />
 <ol class="arabic simple" start="20">
 <li><p>World file 總共會有 6 行，每行都是數字。就如以下的說明所示，每行其實都是某個有關於影像檔的資訊。此格式相當有用，因為有時候有些檔案會沒有 world file，你必須要依照所知的資料，自己建立對應的 world file 才行。</p></li>
 </ol>
@@ -319,11 +320,11 @@ Line 5: C: x-coordinate of the center of the upper left pixel
 Line 6: F: y-coordinate of the center of the upper left pixel
 </pre></div>
 </div>
-<img alt="../_images/2035.png" class="align-center" src="../_images/2035.png" />
+<img alt="../_images/2036.png" class="align-center" src="../_images/2036.png" />
 <ol class="arabic simple" start="21">
 <li><p>從 <code class="docutils literal notranslate"><span class="pre">georeferencing_files</span></code> 資料夾內複製 <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R17.tfw</span></code> 到 <code class="docutils literal notranslate"><span class="pre">RGB_TIF_COMPRESSED</span></code> 底下，把 <code class="docutils literal notranslate"><span class="pre">.tfw</span></code> 和 <code class="docutils literal notranslate"><span class="pre">.tif</span></code> 檔擺在相同目錄，以供 QGIS 辨識。</p></li>
 </ol>
-<img alt="../_images/2174.png" class="align-center" src="../_images/2174.png" />
+<img alt="../_images/2177.png" class="align-center" src="../_images/2177.png" />
 <ol class="arabic simple" start="22">
 <li><p>在 QGIS 中選擇 <span class="menuselection">圖層 ‣ 加入圖層 ‣ 加入影像圖層</span>，選擇 <code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R17.tif</span></code> 然後按 <span class="guilabel">開啟</span>。</p></li>
 </ol>
@@ -335,11 +336,11 @@ Line 6: F: y-coordinate of the center of the upper left pixel
 <ol class="arabic simple" start="24">
 <li><p><code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R17</span></code> 圖層載入後，以右鍵點選，選擇 <span class="guilabel">縮放到圖層範圍</span>。</p></li>
 </ol>
-<img alt="../_images/2430.png" class="align-center" src="../_images/2430.png" />
+<img alt="../_images/2431.png" class="align-center" src="../_images/2431.png" />
 <ol class="arabic simple" start="25">
 <li><p>最後我們就可以看到此圖層已經疊到 <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> 向量圖層之上了。因為我們已經啟用 <code class="docutils literal notranslate"><span class="pre">OTF</span></code> 模式而且把 CRS 設成 EPSG:4326，<code class="docutils literal notranslate"><span class="pre">MiniScale_(standard)_R17</span></code> 圖層會自動重新投影到 EPSG:4326，使用與其它圖層相同的座標系統顯示在畫面中。</p></li>
 </ol>
-<img alt="../_images/2526.png" class="align-center" src="../_images/2526.png" />
+<img alt="../_images/2528.png" class="align-center" src="../_images/2528.png" />
 </section>
 </section>
 
@@ -365,7 +366,7 @@ Line 6: F: y-coordinate of the center of the upper left pixel
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      最後更新於 3月 05, 2022。<br/>
+      最後更新於 4月 27, 2022。<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
