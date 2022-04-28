@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Calculating Raster Area (QGIS3) &#8212; QGIS Tutorials and Tips</title>
+    <title>Rastergebied berekenen (QGIS3) &#8212; QGIS Tutorials and Tips</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -90,7 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performing_spatial_queries.html">Ruimtelijke query’s uitvoeren (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nearest_neighbor_analysis.html">Analyse Nearest Neighbor (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling_raster_data.html">Monsters nemen van rastergegevens met behulp van punten of polygonen (QGIS3)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Calculating Raster Area (QGIS3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Rastergebied berekenen (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_heatmaps.html">Heatmaps maken (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animating_time_series.html">Geanimeerde gegevens tijdreeks (QGIS3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="handling_invalid_geometries.html">Ongeldige geometrieën afhandelen (QGIS3)</a></li>
@@ -202,29 +202,29 @@
       
 
   <section id="calculating-raster-area-qgis3">
-<h1>Calculating Raster Area (QGIS3)<a class="headerlink" href="#calculating-raster-area-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Many applications require quantifying the landuse patterns in a region. Land Use Land Cover (LULC) datasets come as raster files where each pixel is assigned a class value. GIS analysts often needs to generate reports based on this data by computing the area per class in a given region. QGIS comes with many built-in tools to calculate and summarize raster area.</p>
+<h1>Rastergebied berekenen (QGIS3)<a class="headerlink" href="#calculating-raster-area-qgis3" title="Permalink naar deze titel">¶</a></h1>
+<p>Vel toepassingen vereisen het kwantificeren van patronen van landgebruik in een regio. Gegevenssets van Land Use Land Cover (LULC) zijn rasterbestanden, waarin aan elke pixel een klassewaarde is toegewezen. GIS-analisten moeten vaak rapporten maken die zijn gebaseerd op deze gegevens door het berekenen van het gebied per klasse in een bepaalde regio. QGIS heeft vele ingebouwde gereedschappen om rastergebieden te berekenen en samen te vatten.</p>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
-<p>Historically the suggested approach for calculating areas for rasters was to convert the raster to a vector layer and use vector area calculation techniques. This approach is quite computationally intensive and error-prone. The recommended approach is to use the processing tool <strong>Raster layer unique values report</strong> which can directly compute the pixel areas. If you have a layer with many polygons and need areas for each of them, you can use the <strong>Zonal histogram</strong> tool to get pixel counts for each class and then multiply it with the area of each pixel.</p>
+<p>Historisch was de voorgestelde benadering voor het berekenen van gebieden voor rasters om het raster te converteren naar een vectorlaag en technieken voor het berekenen van het vectorgebied te gebruiken. Deze benadering vereist intensieve berekeningen van de computer en foutgevoelig. De aanbevolen benadering is om het gereedschap van Processing <strong>Rasterlaag rapport unieke waarden</strong> te gebruiken, dat direct de pixelgebieden kan berekenen. Als u een laag heft met veel polygonen en gebieden voor elk daarvan  nodig hebt, kunt u het gereedschap <strong>Zonehistogram</strong> gebruiken om tellingen van pixels te verkrijgen voor elke klasse en ze dan vermenigvuldigen met het gebied van elke pixel.</p>
 </div>
 <section id="overview-of-the-task">
-<h2>Overview of the task<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
-<p>We will be using a raster layer with 11 land cover classes and calculate the area of each class within a national park. We will also post-process the results to create a spreadsheet with class names and areas.</p>
+<h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen een rasterlaag gebruiken met 11 klassen voor landgebruik en het gebied van elke klasse berekenen binnen een nationaal park. We zullen ook achteraf de resultaten bewerken om een werkblad te maken met namen van klassen en hun gebieden.</p>
 <section id="other-skills-you-will-learn">
-<h3>Other skills you will learn<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
-<li><p>How to apply symbology to a layer from a style file in the <cite>.qml</cite> format.</p></li>
-<li><p>How to write expressions with multiple if/else conditions using the <cite>CASE</cite> statement.</p></li>
-<li><p>How to export a QGIS table as an Excel spreadsheet.</p></li>
+<li><p>Hoe symbologie toe te passen op een laag vanuit een stijlbestand in de indeling <cite>.qml</cite>.</p></li>
+<li><p>Hoe expressies te schrijven met meerdere voorwaarden if/else met het argument <cite>CASE</cite>.</p></li>
+<li><p>Hoe een tabel van QGIS te exporteren als een werkblad voor Excel.</p></li>
 </ul>
 </section>
 </section>
 <section id="get-the-data">
-<h2>Get the data<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
-<p>We will be downloading the following datasets</p>
+<h2>De gegevens ophalen<a class="headerlink" href="#get-the-data" title="Permalink naar deze titel">¶</a></h2>
+<p>We zullen de volgende gegevenssets downloaden</p>
 <ol class="arabic simple">
-<li><p>World Database on Protected Areas (WDPA): We will download the shapefile for the boundary of the <em>Kaziranga National Park</em> in India.</p></li>
+<li><p>World Database on Protected Areas (WDPA): We zullen het shapefile voor de grenzen van het <em>Kaziranga National Park</em> in India downloaden.</p></li>
 <li><p>ESA WorldCover 2020: The European Space Agency (ESA) WorldCover 10 m 2020 product provides a global land cover map for 2020 at 10 m resolution. We will download the tile covering our region of interest.</p></li>
 </ol>
 <section id="park-boundary">
@@ -506,7 +506,7 @@ END
 <div><img alt="../../_images/286.png" class="align-center" src="../../_images/286.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
-<li><p>You can also change the order of fields in the table using the <span class="guilabel">Move Selected Fields</span> button. Once you are done with the edits, click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> button next to <span class="guilabel">Refactored</span>, and choose <span class="guilabel">Save To File…</span>. Enter the name as <code class="docutils literal notranslate"><span class="pre">park_area_by_landcover.xlxs</span></code>. Click <span class="guilabel">Run</span>.</p></li>
+<li><p>You can also change the order of fields in the table using the <span class="guilabel">Move Selected Fields</span> button. Once you are done with the edits, click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> button next to <span class="guilabel">Refactored</span> and choose <span class="guilabel">Save To File…</span>. Select <code class="docutils literal notranslate"><span class="pre">XLSX</span> <span class="pre">Files</span> <span class="pre">(*.xlsx)</span></code> as the format. Enter the file name as <code class="docutils literal notranslate"><span class="pre">park_area_by_landcover.xlxs</span></code> and click <span class="guilabel">Save</span>. In the <span class="guilabel">Refactor Fields</span> dialog, click <span class="guilabel">Run</span> to apply your changes.</p></li>
 </ol>
 <blockquote>
 <div><img alt="../../_images/295.png" class="align-center" src="../../_images/295.png" />
