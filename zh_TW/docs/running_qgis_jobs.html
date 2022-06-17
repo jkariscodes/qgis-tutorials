@@ -231,35 +231,35 @@
 <ol class="arabic simple" start="2">
 <li><p>選擇下載後解壓縮的內容中的 <code class="docutils literal notranslate"><span class="pre">roads.shp</span></code> 並按下 <span class="guilabel">確定</span>。</p></li>
 </ol>
-<img alt="../_images/2165.png" class="align-center" src="../_images/2165.png" />
+<img alt="../_images/2164.png" class="align-center" src="../_images/2164.png" />
 <ol class="arabic simple" start="3">
 <li><p>第一件事是重投影道路圖層到專案的 CRS，這樣一來我們就可以使用 <em>公尺</em> 而不是角度來當作等下分析使用的單位。選擇 <span class="menuselection">地理運算 ‣ 工具箱</span>。</p></li>
 </ol>
-<img alt="../_images/390.png" class="align-center" src="../_images/390.png" />
+<img alt="../_images/392.png" class="align-center" src="../_images/392.png" />
 <ol class="arabic simple" start="4">
 <li><p>尋找 <span class="guilabel">Reproject layer</span> 工具，點兩下開啟對話窗。</p></li>
 </ol>
-<img alt="../_images/460.png" class="align-center" src="../_images/460.png" />
+<img alt="../_images/464.png" class="align-center" src="../_images/464.png" />
 <ol class="arabic simple" start="5">
 <li><p>在 <span class="guilabel">Reproject layer</span> 視窗中，<span class="guilabel">輸入圖層</span> 選擇 <code class="docutils literal notranslate"><span class="pre">roads</span></code>，<span class="guilabel">目標 CRS</span> 選擇 <code class="docutils literal notranslate"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code>，按下 <span class="guilabel">Run</span>。</p></li>
 </ol>
-<img alt="../_images/562.png" class="align-center" src="../_images/562.png" />
+<img alt="../_images/561.png" class="align-center" src="../_images/561.png" />
 <ol class="arabic simple" start="6">
 <li><p>處理完成後可以看到重投影的圖層已載入到 QGIS 中。選擇 <span class="menuselection">地理運算 ‣ 歷程與日誌</span>。</p></li>
 </ol>
-<img alt="../_images/659.png" class="align-center" src="../_images/659.png" />
+<img alt="../_images/658.png" class="align-center" src="../_images/658.png" />
 <ol class="arabic simple" start="7">
 <li><p>在 <span class="guilabel">歷程與日誌</span> 視窗中，展開 <span class="guilabel">Algorithm</span> 資料夾然後選擇最新一筆的紀錄，就會看到完整的處理指令顯示在下方面板中。這就是我們等下要使用在腳本內的指令。</p></li>
 </ol>
-<img alt="../_images/758.png" class="align-center" src="../_images/758.png" />
+<img alt="../_images/757.png" class="align-center" src="../_images/757.png" />
 <ol class="arabic simple" start="8">
 <li><p>回到 QGIS 視窗，按下右下角的 <span class="guilabel">CRS</span> 按鈕。</p></li>
 </ol>
-<img alt="../_images/856.png" class="align-center" src="../_images/856.png" />
+<img alt="../_images/855.png" class="align-center" src="../_images/855.png" />
 <ol class="arabic simple" start="9">
 <li><p>在 <span class="guilabel">專案屬性 | CRS</span> 視窗中，勾選 <span class="guilabel">開啟即時 CRS 轉換</span>，然後選擇 <code class="docutils literal notranslate"><span class="pre">EPSG:3460</span> <span class="pre">Fiji</span> <span class="pre">1986</span> <span class="pre">/</span> <span class="pre">Fiji</span> <span class="pre">Map</span> <span class="pre">Grid</span></code> 為專案 CRS，這樣就能確保原本的圖層和重投影過的圖層都會正確顯示。</p></li>
 </ol>
-<img alt="../_images/955.png" class="align-center" src="../_images/955.png" />
+<img alt="../_images/954.png" class="align-center" src="../_images/954.png" />
 <ol class="arabic simple" start="10">
 <li><p>現在我們要來執行清理操作了。GRASS 具有強大的拓樸清理工具，在 QGIS 中可透過 <code class="docutils literal notranslate"><span class="pre">v.clean</span></code> 運算法存取。在 <span class="guilabel">地理運算工具箱</span> 中尋找此演算法，然後點兩下開啟視窗。</p></li>
 </ol>
@@ -267,7 +267,7 @@
 <ol class="arabic simple" start="11">
 <li><p>有關此工具的更多說明，可以在 <span class="guilabel">Help</span> 分頁中找到，而在此教學中，我們要使用 <code class="docutils literal notranslate"><span class="pre">snap</span></code> 工具來清除任何在 1 公尺之內多餘的線條頂點。在 <span class="guilabel">Layer to clean</span> 中選擇 <code class="docutils literal notranslate"><span class="pre">Reprojected</span> <span class="pre">layer</span></code>，然後在 <span class="guilabel">Cleaning tool</span> 中選擇 <code class="docutils literal notranslate"><span class="pre">snap</span></code>，在 <span class="guilabel">Threshold</span> 中輸入 <code class="docutils literal notranslate"><span class="pre">1.00</span></code>，其他欄位留白，按下 <span class="guilabel">Run</span>。</p></li>
 </ol>
-<img alt="../_images/11102.png" class="align-center" src="../_images/11102.png" />
+<img alt="../_images/11101.png" class="align-center" src="../_images/11101.png" />
 <ol class="arabic simple" start="12">
 <li><p>處理完成後，會有 2 個新圖層加入 QGIS 中。<code class="docutils literal notranslate"><span class="pre">Cleaned</span></code> 是經過拓樸誤差修正後的圖層，而 <code class="docutils literal notranslate"><span class="pre">Errors</span></code> 則顯示了有修改過的圖徵，因此你可以參考 Errors 圖層，縮放地圖以查看被移除的頂點們。</p></li>
 </ol>
@@ -390,7 +390,7 @@ pause
                 <span class="n">roads_shp_path</span> <span class="o">=</span> <span class="n">file_path</span>
 </pre></div>
 </div>
-<img alt="../_images/2166.png" class="align-center" src="../_images/2166.png" />
+<img alt="../_images/2165.png" class="align-center" src="../_images/2165.png" />
 <ol class="arabic simple" start="22">
 <li><p>執行完成的腳本。每次執行腳本之後，就會有一份新的資料被下載並進行處理。</p></li>
 </ol>
@@ -410,7 +410,7 @@ pause
 <ol class="arabic simple" start="25">
 <li><p>在 <span class="guilabel">觸發程序</span> 設定中選擇 <code class="docutils literal notranslate"><span class="pre">每天</span></code>，然後按 <span class="guilabel">下一步</span>。</p></li>
 </ol>
-<img alt="../_images/2525.png" class="align-center" src="../_images/2525.png" />
+<img alt="../_images/2524.png" class="align-center" src="../_images/2524.png" />
 <ol class="arabic simple" start="26">
 <li><p>選擇你喜歡的時段然後按 <span class="guilabel">下一步</span>。</p></li>
 </ol>
@@ -422,7 +422,7 @@ pause
 <ol class="arabic simple" start="28">
 <li><p>按下 <span class="guilabel">瀏覽</span> 然後選擇 <code class="docutils literal notranslate"><span class="pre">launch.bat</span></code> 腳本，按下 <span class="guilabel">下一步</span>。</p></li>
 </ol>
-<img alt="../_images/2819.png" class="align-center" src="../_images/2819.png" />
+<img alt="../_images/2820.png" class="align-center" src="../_images/2820.png" />
 <ol class="arabic simple" start="29">
 <li><p>在最後一個視窗按下 <span class="guilabel">完成</span>，就完成了例行排程的設定。從現在開始腳本就會每天在你選擇的時段執行，然後新的、處理過的資料就會每天產生。</p></li>
 </ol>
@@ -513,7 +513,7 @@ pause
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      最後更新於 5月 05, 2022。<br/>
+      最後更新於 6月 17, 2022。<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

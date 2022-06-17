@@ -203,15 +203,18 @@
 
   <section id="digitizing-map-data-qgis3">
 <h1>Digitalizar Datos del Mapa (QGIS3)<a class="headerlink" href="#digitizing-map-data-qgis3" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>La digitalización es una de las tareas más comunes que un Especialista SIG tiene que hacer. A menudo una gran cantidad de <em>tiempo SIG</em> es utilizado en digitalizar datos ráster para crear capas vector que utiliza en su análisis. QGIS tiene capacidades poderosas de digitalización en pantalla y edición que exploraremos en este tutorial.</p>
+<p>Digitizing is one of the most common tasks a GIS Specialist has to do.
+Often a large amount of <em>GIS time</em> is spent digitizing raster data to create
+vector layers that you use in your analysis. QGIS has powerful on-screen
+digitizing and editing capabilities that we will explore in this tutorial.</p>
 <section id="overview-of-the-task">
 <h2>Vista general de la tarea<a class="headerlink" href="#overview-of-the-task" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Usaremos un mapa topográfico ráster y crearemos varias capas ráster que representan entidades alrededor de un parque.</p>
 <section id="other-skills-you-will-learn">
-<h3>Otras habilidades que aprenderá<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>Other skills you will learn.<a class="headerlink" href="#other-skills-you-will-learn" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
 <li><p>Construir pirámides para grandes conjuntos de datos ráster para acelerar las operaciones de acercamiento y desplazamiento.</p></li>
-<li><p>Trabajar con una base de datos Spatialite.</p></li>
+<li><p>Create and edit GeoPackage.</p></li>
 </ul>
 </section>
 </section>
@@ -226,161 +229,285 @@
 <section id="procedure">
 <h2>Procedimiento<a class="headerlink" href="#procedure" title="Enlazar permanentemente con este título">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Vaya a <span class="menuselection">Capa ‣ Agregar Capa Ráster</span>. Localice el <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02.tif</span></code> descargado y clic en <span class="guilabel">Abrir</span>.</p></li>
+<li><p>In QGIS, let’s load the image file. Go to <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer</span>.</p></li>
 </ol>
-<img alt="../../_images/150.png" class="align-center" src="../../_images/150.png" />
+<blockquote>
+<div><img alt="../../_images/014.png" class="align-center" src="../../_images/014.png" />
+</div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Éste es un archivo ráster grande y podría notar que cuando se acerca o desplaza alrededor del mapa, toma un poco de tiempo para que el mapa sea representado como imagen. QGIS ofrece una solución simple para hacer que los rásters cargue mucho más rápido usando <strong>Pirámides de Imagen</strong>. QGIS crea teselas pre-representadas a diferentes resoluciones y estas le son presentadas en vez del ráster completo. Esto hace que la navegación del mapa sea rápida y responda rápido. Clic-derecho a la capa <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02</span></code> y elija  <span class="guilabel">Propiedades</span>.</p></li>
+<li><p>In the <span class="guilabel">Data Source Manager</span> dialog select <span class="guilabel">Raster.</span> Under <span class="guilabel">Source</span> click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> and locate the downloaded <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02.tif</span></code> and click <span class="guilabel">Open</span>. Then click <span class="guilabel">Add</span> followed by <span class="guilabel">Close.</span></p></li>
 </ol>
-<img alt="../../_images/230.png" class="align-center" src="../../_images/230.png" />
+<blockquote>
+<div><img alt="../../_images/024.png" class="align-center" src="../../_images/024.png" />
+</div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Elija la pestaña <span class="guilabel">Pirámides</span>. Presione la tecla <kbd class="kbd docutils literal notranslate">Ctrl</kbd> y seleccione todas las resoluciones ofrecidas en el panel <span class="guilabel">Resoluciones</span>. Deje las otras opciones predeterminadas y clic en <span class="guilabel">Construir Pirámides</span>. Una vez que finalice el proceso, clic en <span class="guilabel">Aceptar</span>.</p></li>
+<li><p>This is a large raster file, and you may notice that when you zoom or pan around the map, the map takes a little time to render the image. QGIS offers a simple solution to make rasters load much faster by using <strong>Image Pyramids</strong>. QGIS creates pre-rendered tiles at different resolutions, and these are presented to you instead of the full raster. This makes map navigation snappy and responsive. Right-click the <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02</span></code> layer and choose <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../../_images/320.png" class="align-center" src="../../_images/320.png" />
+<blockquote>
+<div><img alt="../../_images/034.png" class="align-center" src="../../_images/034.png" />
+</div></blockquote>
 <ol class="arabic simple" start="4">
+<li><p>In the <span class="guilabel">Layer Properties</span> dialog, Choose the <span class="guilabel">Pyramids</span> tab. Hold the <kbd class="kbd docutils literal notranslate">Ctrl</kbd> key and select all the resolutions offered in the <span class="guilabel">Resolutions</span> panel. Leave other options to defaults and click <span class="guilabel">Build pyramids</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/044.png" class="align-center" src="../../_images/044.png" />
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Once the process finishes, the dialog box will show the pyramids without a cross. This indicates the Image Pyramids build is completed. Click <span class="guilabel">OK</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/054.png" class="align-center" src="../../_images/054.png" />
+</div></blockquote>
+<ol class="arabic simple" start="6">
 <li><p>Antes de comenzar, necesitamos establecer las <strong>Opciones de Digitalización</strong> predeterminadas. Vaya a <span class="menuselection">Configuración ‣ Opciones…</span>.</p></li>
 </ol>
-<img alt="../../_images/48.png" class="align-center" src="../../_images/48.png" />
-<ol class="arabic simple" start="5">
-<li><p>Seleccione la pestaña <span class="guilabel">Digitalización</span> en el diálogo <span class="guilabel">Opciones</span>. Defina el <span class="guilabel">Modo de autoajuste predeterminado</span> a <span class="guilabel">Vértice</span>. Esto le permitirá autoajustar al vértice más cercano. También prefiero establecer la <span class="guilabel">Tolerancia predeterminada de autoajuste</span> y <span class="guilabel">Radio de búsqueda para ediciones de vértice</span> en píxeles en vez de unidades de mapa. Esto asegurará que la distancia de autoajuste permanece constante sin importar el nivel de acercamiento. Dependiendo de su resolución de pantalla de computadora,  podría elegir un valor apropiado. Clic en <span class="guilabel">Aceptar</span>.</p></li>
-</ol>
-<img alt="../../_images/59.png" class="align-center" src="../../_images/59.png" />
-<ol class="arabic simple" start="6">
-<li><p>Ahora estamos listos para comenzar a digitalizar. Primero vamos a crear una capa de caminos y digitalizar los caminos alrededor del área de parque. Seleccione el icono <span class="guilabel">Nueva Capa GeoPackage…</span> de Paneles. Un GeoPackage es un formato de datos abierto, no-propietario, independiente de plataforma, y basado en estándares para sistema de información geográfica implementado como un contenedor de base de datos SQLite. Esto hace mucho más fácil moverlo en vez de un montón de archivos shape. En este tutorial, estamos creando un par de capas polígono y una capa línea, por lo que un GeoPackage será lo más apropiado. Siempre puede cargar un GeoPackage y exportar capas como archivo shape o cualquier otro formato que desee.</p></li>
-</ol>
-<img alt="../../_images/69.png" class="align-center" src="../../_images/69.png" />
+<blockquote>
+<div><img alt="../../_images/064.png" class="align-center" src="../../_images/064.png" />
+</div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>En el diálogo <span class="guilabel">Nueva Capa GeoPackage</span>, clic el botón <span class="guilabel">…</span> y guarde una nueva base de datos GeoPackage con nombre <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Elija el <span class="guilabel">Nombre de tabla</span> como <code class="docutils literal notranslate"><span class="pre">Roads</span></code> y seleccione <code class="docutils literal notranslate"><span class="pre">Line</span></code> para el <span class="guilabel">Tipo</span>. El mapa topográfico base está en el SRC <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>.</p></li>
+<li><p>Select the <span class="guilabel">Digitizing</span> tab in the <span class="guilabel">Options</span> dialog. Check the <span class="guilabel">Enable snapping by default</span>  under <span class="guilabel">Snapping</span> section. In <span class="guilabel">Default snap mode</span> choose <span class="guilabel">Vertex</span>. This will allow you to snap to the nearest vertex. I also prefer to set the <span class="guilabel">Default snapping tolerance</span> and <span class="guilabel">Search radius for vertex edits</span> in pixels instead of map units. This will ensure that the snapping distance remains constant regardless of zoom level. Depending on your computer screen resolution, you may choose an appropriate value. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/79.png" class="align-center" src="../../_images/79.png" />
+<blockquote>
+<div><img alt="../../_images/074.png" class="align-center" src="../../_images/074.png" />
+</div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Cuando se crea una capa SIG, usted debe decidir sobre los atributos que cada objeto espacial tendrá. Debido a que esta es una capa de caminos, tendremos 2 atributos básicos adicionales - Nombre y Clase. En <span class="guilabel">Nuevo Campo</span> ingrese <code class="docutils literal notranslate"><span class="pre">Name</span></code> del tipo <span class="guilabel">Datos texto</span>, con <code class="docutils literal notranslate"><span class="pre">50</span></code> como la <span class="guilabel">Longitud Máxima</span> y clic en <span class="guilabel">Añadir a lista de atributos.</span> Ahora cree un nuevo atributo <code class="docutils literal notranslate"><span class="pre">Class</span></code> del tipo <span class="guilabel">Datos texto</span>, con <code class="docutils literal notranslate"><span class="pre">50</span></code> como <span class="guilabel">Longitud máxima</span>. Clic <span class="guilabel">Aceptar</span>.</p></li>
+<li><p>Now we are ready to start digitizing. We will first create a road layer and digitize the roads around the park area. Click <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer…</span> icon from Panels. A GeoPackage is an open, non-proprietary, platform-independent, and standards-based data format for a geographic information system implemented as an SQLite database container. This makes it much easier to move it around instead of a bunch of shapefiles. In this tutorial, we create a couple of polygon layers and a line layer so that a GeoPackage will be better suited. You can always load a GeoPackage and export layers as a shapefile or any other format you want.</p></li>
 </ol>
-<img alt="../../_images/89.png" class="align-center" src="../../_images/89.png" />
+<blockquote>
+<div><img alt="../../_images/084.png" class="align-center" src="../../_images/084.png" />
+</div></blockquote>
 <ol class="arabic simple" start="9">
+<li><p>In the <span class="guilabel">New GeoPackage Layer</span> dialog, click the <span class="guilabel">…</span> button and save a new GeoPackage database named <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Choose the <span class="guilabel">Table name</span> as <code class="docutils literal notranslate"><span class="pre">Roads</span></code> and select <code class="docutils literal notranslate"><span class="pre">LineString</span></code> as the <span class="guilabel">Geometry type</span>. The base topographic map is the <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code> CRS.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/094.png" class="align-center" src="../../_images/094.png" />
+</div></blockquote>
+<ol class="arabic simple" start="10">
+<li><p>When creating a GIS layer, you must decide on each feature’s attributes. Since this is a road layer, we additionally will have two primary attributes - Name and Class. In <span class="guilabel">New Field</span> Enter <code class="docutils literal notranslate"><span class="pre">Name</span></code> of the type <span class="guilabel">Text data,</span> with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span> and click <span class="guilabel">Add to attribute list.</span> Now create a new attribute <code class="docutils literal notranslate"><span class="pre">Class</span></code> of the type <span class="guilabel">Text data</span>, with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span>. Click <span class="guilabel">OK</span></p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/1013.png" class="align-center" src="../../_images/1013.png" />
+</div></blockquote>
+<ol class="arabic simple" start="11">
 <li><p>Una vez que la capa <code class="docutils literal notranslate"><span class="pre">Roads</span></code> esté cargada, clic el botón guilabel:<cite>Conmutar edición</cite> para poner a la capa en modo edición.</p></li>
 </ol>
-<img alt="../../_images/99.png" class="align-center" src="../../_images/99.png" />
-<ol class="arabic simple" start="10">
+<blockquote>
+<div><img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
+</div></blockquote>
+<ol class="arabic simple" start="12">
 <li><p>Clic el botón <span class="guilabel">Añadir Objeto espacial Línea</span>. Clic en el lienzo del mapa para agregar un nuevo vértice. Agregue nuevos vértices a lo largo del objeto espacial camino. Una vez que haya digitalizado un segmento de camino, clic-derecho para terminar el objeto espacial.</p></li>
 </ol>
+<blockquote>
+<div><img alt="../../_images/1214.png" class="align-center" src="../../_images/1214.png" />
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Puede usar la rueda del ratón para acercarse o alejarse cuando digitaliza. También puede mantener presionado el botón de deslizamiento y mover el ratón para desplazarse.</p>
 </div>
-<img alt="../../_images/1013.png" class="align-center" src="../../_images/1013.png" />
-<ol class="arabic simple" start="11">
-<li><p>Después de hacer clic-derecho para finalizar el objeto espacial, obtendrá una diálogo emergente llamado <span class="guilabel">Camino - Atributos de Objeto espacial</span>. Aquí puede ingresar atributos del objeto espacial recientemente creado. Debido a que <strong>fid</strong> es un campo Autogenerado, no podrá ingresar un valor manualmente. Déjelo como está e ingrese el nombre del camino como aparece en el mapa topo. Opcionalmente, también asigne un valor Road Class. Clic en <span class="guilabel">Aceptar</span>.</p></li>
-</ol>
-<img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
-<ol class="arabic simple" start="12">
-<li><p>El estilo predeterminado de la nueva capa línea es una línea delgada. Cambiémoslo de manera que podamos ver mejor los objetos espaciales digitalizados en el lienzo. Clic-derecho la capa <code class="docutils literal notranslate"><span class="pre">Roads</span></code> y seleccione <span class="guilabel">Propiedades</span>.</p></li>
-</ol>
-<img alt="../../_images/1214.png" class="align-center" src="../../_images/1214.png" />
 <ol class="arabic simple" start="13">
-<li><p>Seleccione la pestaña <span class="guilabel">Simbología</span> en el diálogo <span class="guilabel">Propiedades de Capa</span>. Elija una línea más gruesa como la <span class="guilabel">topo road</span> de los estilos predefinidos. Clic en <span class="guilabel">Aceptar</span>.</p></li>
+<li><p>After you right-click to end the feature, you will get a pop-up dialog called <span class="guilabel">Road - Feature Attributes</span>. Here you can enter attributes of the newly created feature. Skip entering any value for <strong>fid</strong> as it is a sequential id that will be autogenerated. Enter the road name as it appears on the topo map. Optionally, assign a Road Class value as well. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/1312.png" class="align-center" src="../../_images/1312.png" />
+<blockquote>
+<div><img alt="../../_images/1312.png" class="align-center" src="../../_images/1312.png" />
+</div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>Ahora verá la entidad camino digitalizada claramente. Clic en <span class="guilabel">Guardar Ediciones de Capa</span> para guardar el nuevo objeto espacial en el disco.</p></li>
+<li><p>The default style of the new line layer is a thin line. Let’s change it to better see the digitized features on the canvas. Select the <code class="docutils literal notranslate"><span class="pre">Roads</span></code> layer and click <span class="guilabel">Layer Styling Panel</span>.</p></li>
 </ol>
-<img alt="../../_images/1410.png" class="align-center" src="../../_images/1410.png" />
+<blockquote>
+<div><img alt="../../_images/1410.png" class="align-center" src="../../_images/1410.png" />
+</div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>Antes de que digitalicemos los caminos restantes, es importante actualizar algunas definiciones de autoajuste que son importante para crear una capa sin errores. Clic-derecho en cualquier espacio en blaco en el área de barra de herramienta y active la <span class="guilabel">Barra de autoajuste</span></p></li>
+<li><p>In the <span class="guilabel">Layer Styling Panel</span>, search for different <cite>road</cite> layer styles. Select <code class="docutils literal notranslate"><span class="pre">topo</span> <span class="pre">road</span></code>. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
+<blockquote>
+<div><img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
+</div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>Ahora aparecerá un (Icono Magneto) <span class="guilabel">Habilitar Autoajuste</span> en el panel. Clic en él para habilitarlo y seleccione <span class="guilabel">Todas las Capas</span> y seleccion <code class="docutils literal notranslate"><span class="pre">Abrir</span> <span class="pre">Opciones</span> <span class="pre">de</span> <span class="pre">Autoajuste..</span></code>.</p></li>
+<li><p>Now the road layer will be clearly visible. If you are satisfied with the work, click <span class="guilabel">Save Layer Edits</span> button to save the changes.</p></li>
 </ol>
-<img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
+<blockquote>
+<div><img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
+</div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>En el diálogo <span class="guilabel">Opciones de autoajuste</span>, clic <span class="guilabel">Ajuste en intersección</span> que le permite ajustar en una intersección de una capa de fondo.</p></li>
+<li><p>Before we digitize the remaining roads, it is essential to update some other important snap settings to create an error-free layer. Right-click on any space on the toolbar area and activate the <span class="guilabel">Snapping toolbar.</span></p></li>
 </ol>
-<img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
+<blockquote>
+<div><img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
+</div></blockquote>
 <ol class="arabic simple" start="18">
-<li><p>Ahora puede hacer clic en el botón <span class="guilabel">Añadir objeto espacial</span> y digitalizar otros caminos alrededor del parque. Asegúrese de hacer clic en <span class="guilabel">Guardar ediciones</span> después de que agregue un nuevo objeto espacial para guardar su trabajo. Una herramienta útil para ayudarle a digitalizar es la <strong>Herramienta Vértice</strong>. Clic el botón <span class="guilabel">Herramienta Vértice</span> y seleccione <code class="docutils literal notranslate"><span class="pre">Herramienta</span> <span class="pre">Vértice</span> <span class="pre">(Capa</span> <span class="pre">Actual)</span></code>.</p></li>
+<li><p>Now an <span class="guilabel">Enable Snapping</span> (Magnet Icon) will appear on the panel. Click on it to enable it and select <span class="guilabel">All Layers</span> and choose <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">Snapping</span> <span class="pre">Options..</span></code>.</p></li>
 </ol>
-<img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
+<blockquote>
+<div><img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
+</div></blockquote>
 <ol class="arabic simple" start="19">
-<li><p>Una vez que la herramienta de nodo esté activada, clic en cualquier objeto espacial para mostrar los vértices. Clic en cualquier vértice para seleccionarlo. El vértice cambiará el color una vez que es seleccionado. Ahora puede hacer clic en arrastrar su ratón para mover el vértice. Esto es útil cuando quiere hacer ajustes después de que el objeto espacial es creado. También puede borrar un vértice seleccionado presionando la tecla <kbd class="kbd docutils literal notranslate">Borrar</kbd>. (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd> en una Mac)</p></li>
+<li><p>In the <span class="guilabel">Snapping options</span> dialog, click the <span class="guilabel">Snapping on Intersection</span>, which allows you to snap on an intersection of a background layer.</p></li>
 </ol>
-<img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
+<blockquote>
+<div><img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
+</div></blockquote>
 <ol class="arabic simple" start="20">
+<li><p>Now you can click <span class="guilabel">Add feature</span> button and digitize other roads around the park. Make sure to click <span class="guilabel">Save Edits</span> after adding a new feature to save your work. A helpful tool to help you digitize is the <strong>Vertex Tool</strong>. Click the <span class="guilabel">Vertex Tool</span> button and select <code class="docutils literal notranslate"><span class="pre">Vertex</span> <span class="pre">Tool</span> <span class="pre">(Current</span> <span class="pre">Layer)</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
+</div></blockquote>
+<ol class="arabic simple" start="21">
+<li><p>Once the node tool is activated, click on any feature to show the vertices. Click on any vertex to select it. The vertex will change the color once it is selected. Now you can click and drag your mouse to move the vertex. This is useful when you want to make adjustments after the feature is created. You can also delete a selected vertex by clicking the <kbd class="kbd docutils literal notranslate">Delete</kbd> key.    (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd> on a mac)</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/21.gif" class="align-center" src="../../_images/21.gif" />
+</div></blockquote>
+<ol class="arabic simple" start="22">
 <li><p>Una vez que haya terminado de digitalizar todos los caminos, clic el botón <span class="guilabel">Conmutar Edición</span>. Clic <span class="guilabel">Guardar</span></p></li>
 </ol>
-<img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
-<ol class="arabic simple" start="21">
-<li><p>En el diálogo <span class="guilabel">Nueva Capa GeoPackage</span>, clic el botón <span class="guilabel">…</span> y seleccione la base de datos GeoPackage llamada <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Nombre la nueva capa como un atributo llamado <code class="docutils literal notranslate"><span class="pre">Parks</span></code> y seleccione <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> como el <span class="guilabel">Tipo</span>. El mapa topográfico base está en el SRC <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>. Clic <span class="guilabel">Aceptar</span>. En <span class="guilabel">Nuevo Campo</span> ingrese <code class="docutils literal notranslate"><span class="pre">Name</span></code> del tipo <span class="guilabel">Text data</span>, con <code class="docutils literal notranslate"><span class="pre">50</span></code> como <span class="guilabel">Longitud máxima</span> y clic <span class="guilabel">Añadir a la lista de atributos.</span></p></li>
+<blockquote>
+<div><img alt="../../_images/2210.png" class="align-center" src="../../_images/2210.png" />
+</div></blockquote>
+<ol class="arabic simple" start="23">
+<li><p>Now we will create another layer to digitize the parks as polygons. Click <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer…</span> icon from Panels. In the <span class="guilabel">New GeoPackage Layer</span> dialog, click the <span class="guilabel">…</span> button and select the GeoPackage database named <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Name the new layer as an attribute called <code class="docutils literal notranslate"><span class="pre">Parks</span></code>. Select <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> as the <span class="guilabel">Type</span>. The base topographic map is the <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code> CRS. Click <span class="guilabel">OK</span>. In <span class="guilabel">New Field</span> Enter <code class="docutils literal notranslate"><span class="pre">Name</span></code>, and the <span class="guilabel">type</span> as <span class="guilabel">Text data</span>, with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span> and click :guilabel:` Add to Fields List.`. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
+<blockquote>
+<div><img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p><strong>Polígono</strong> - Superficie Plana definida por 1 borde exterior y 0 o más bordes interiores. Cada borde interior define un hueco en el Polígono. <strong>Multi-Polígono</strong> - Es usado para representar áreas con huecos adentro o que que consiste de múltiples áreas disjuntas. Por ej., 3 polígonos discontinuos pueden ser dibujados y agrupados como un solo objeto espacial.</p>
+<p><strong>Polygon vs Multi-Polygon</strong></p>
+<p><strong>Polygon</strong> - Planar Surface defined by 1 exterior boundary and 0 or more interior boundaries. Each interior boundary defines a hole in the Polygon.</p>
+<p><strong>Multi-Polygon</strong> - It is used to represent areas with holes inside or consisting of multiple disjoint areas. For eg, 3 discontinuous polygons can be drawn and grouped as a single feature.</p>
 </div>
-<img alt="../../_images/2112.png" class="align-center" src="../../_images/2112.png" />
-<ol class="arabic simple" start="22">
-<li><p>Ahora seleccione la capa <code class="docutils literal notranslate"><span class="pre">Parks</span></code>, luego <span class="guilabel">Conmutar Edición</span> y clic el botón <span class="guilabel">Añadir Objeto Espacial</span> y clic en el lienzo del mapa para añadir un vértice de polígono. Digitalice el polígono que representa el parque. Asegúrese que se ajusta a los vértices del camino de manera que no hayan vacíos entre los polígonos del parque y las líneas de camino. Clic-derecho para terminar el polígono.</p></li>
+<ol class="arabic simple" start="24">
+<li><p>A pop-up dialog will appear. Select the <span class="guilabel">Add New Layer</span> button.</p></li>
 </ol>
-<img alt="../../_images/2210.png" class="align-center" src="../../_images/2210.png" />
-<ol class="arabic simple" start="23">
+<blockquote>
+<div><img alt="../../_images/248.png" class="align-center" src="../../_images/248.png" />
+</div></blockquote>
+<ol class="arabic simple" start="25">
+<li><p>Now select layer <code class="docutils literal notranslate"><span class="pre">Parks</span></code> then clickroad <span class="guilabel">Toggle Editing</span> and click the <span class="guilabel">Add feature</span> button and click on the map canvas to add a polygon vertex. Digitize the polygon representing the park. Make sure you snap to the road’s vertices so there are no gaps between the park polygons and road lines. Right-click to finish the polygon.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
+</div></blockquote>
+<ol class="arabic simple" start="26">
 <li><p>Ingrese el nombre del parque en la ventana emergente <span class="guilabel">Parks - Atributos de Objeto Espacial</span>.</p></li>
 </ol>
-<img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
-<ol class="arabic simple" start="24">
-<li><p>Las capas multipolígono ofrecen otra configuración muy útil llamada <strong>Evitar intersecciones de nuevos polígonos</strong>. Seleccione <span class="guilabel">Habilitar Autoajuste</span> (Icono Magneto), clic en él para habilitarlo y clic <span class="guilabel">Todas las Capas</span> y seleccione <code class="docutils literal notranslate"><span class="pre">Configuración</span> <span class="pre">Avanzada</span></code>. Elija <code class="docutils literal notranslate"><span class="pre">Evitar</span> <span class="pre">Sobreponer</span> <span class="pre">en</span> <span class="pre">capas</span> <span class="pre">Activas</span></code> del botón adelante en la barra de herramientas Habilitar autoajuste. Ahora en <span class="guilabel">Editar Configuración Avanzada</span> marque la casilla en la columna <span class="guilabel">Evitar Sobreposición</span> en la fila para la capa <code class="docutils literal notranslate"><span class="pre">Parks</span></code>.</p></li>
+<blockquote>
+<div><img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
+</div></blockquote>
+<ol class="arabic simple" start="27">
+<li><p>Now digitize the upper region of the park. Enter the park name and save the changes.</p></li>
 </ol>
-<img alt="../../_images/248.png" class="align-center" src="../../_images/248.png" />
-<ol class="arabic simple" start="25">
+<blockquote>
+<div><img alt="../../_images/277.png" class="align-center" src="../../_images/277.png" />
+</div></blockquote>
+<ol class="arabic simple" start="28">
+<li><p>Now, before digitizing the inner polygon lets set settings that can ease this work. Multi-Polygon layers offer another useful setting called <strong>Avoid intersections of new polygons</strong>. Select <span class="guilabel">Enable Snapping</span> (Magnet Icon), click on it to enable it, and click <span class="guilabel">All Layers</span> and select <code class="docutils literal notranslate"><span class="pre">Advanced</span> <span class="pre">Configuration</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/287.png" class="align-center" src="../../_images/287.png" />
+</div></blockquote>
+<ol class="arabic simple" start="29">
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Avoid</span> <span class="pre">Overlap</span> <span class="pre">on</span> <span class="pre">Active</span> <span class="pre">layers</span></code> button in the snapping toolbar.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/296.png" class="align-center" src="../../_images/296.png" />
+</div></blockquote>
+<ol class="arabic simple" start="30">
+<li><p>Now in <span class="guilabel">Edit Advanced Configuration</span>, select the <span class="guilabel">Units</span> as <code class="docutils literal notranslate"><span class="pre">pixels</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/306.png" class="align-center" src="../../_images/306.png" />
+</div></blockquote>
+<ol class="arabic simple" start="31">
+<li><p>Check the box in the <span class="guilabel">Avoid Overlap</span> column in the row for the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> layer.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/3110.png" class="align-center" src="../../_images/3110.png" />
+</div></blockquote>
+<ol class="arabic simple" start="32">
 <li><p>Clic en <span class="guilabel">Añadir objeto espacial</span> para añadir un polígono. Con el <strong>Evitar Sobreposición</strong>, será capaz de digitalizar rápidamente un nuevo polígono sin preocuparse de ajustar exáctamente a los polígonos vecinos.</p></li>
 </ol>
-<img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
-<ol class="arabic simple" start="26">
-<li><p>Clic-derecho para terminar el polígono e ingrese los atributos. Mágicamente el nuevo polígono es encogido y ajustado exactamente al límite de los polígonos vecinos! Esto es muy útil cuando digitaliza límites complejos donde no necesita ser muy preciso y tener todavía un polígono topológicamente correcto. Clic <span class="guilabel">Conmutar Edición</span> para terminar la edición de la capa <code class="docutils literal notranslate"><span class="pre">Parks</span></code>.</p></li>
-</ol>
-<img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
-<ol class="arabic simple" start="27">
-<li><p>Ahora es tiempo de digitalizar una capa de edificios. Cree una nueva capa polígono llamada <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> haciendo clic en el icono <span class="guilabel">Nueva Capa GeoPackage…</span> de Paneles.</p></li>
-</ol>
-<img alt="../../_images/277.png" class="align-center" src="../../_images/277.png" />
-<ol class="arabic simple" start="28">
-<li><p>Una vez que se agregue la capa <code class="docutils literal notranslate"><span class="pre">Buildings</span></code>, desactive las capas <code class="docutils literal notranslate"><span class="pre">Parks</span></code> y <code class="docutils literal notranslate"><span class="pre">Roads</span></code> de manera que esté visible el mapa base topo. Seleccione la capa <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> y clic en <span class="guilabel">Conmutar Edición</span>.</p></li>
-</ol>
-<img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
-<ol class="arabic simple" start="29">
-<li><p>La digitalización de edificios puede ser una tarea engorrosa. Además, es difícil añadir vértices manualmente para que las aristas sean perpendiculares y formen un rectángulo. Utilizaremos una barra de herramientas de QGIS llamada <strong>Digitalización de formas</strong> para ayudarnos en esta tarea. Haz clic con el botón derecho del ratón en cualquier espacio vacío del área de la barra de herramientas y activa la barra de herramientas de digitalización de formas.</p></li>
-</ol>
-<img alt="../../_images/296.png" class="align-center" src="../../_images/296.png" />
-<ol class="arabic simple" start="30">
-<li><p>Acérquese a un área con los edificios y clic en el botón  <span class="guilabel">Rectángulo por Extensión</span>. Clic y arrastre el ratón para dibujar un rectángulo perfecto. De forma similar, agregue los edificios restantes.</p></li>
-</ol>
-<img alt="../../_images/306.png" class="align-center" src="../../_images/306.png" />
-<ol class="arabic simple" start="31">
-<li><p>Notará que algunos edificios no son verticales. Necesitaremos dibujar un rectángulo en un ángulo que coincida con la huella del edificio. Clic en <span class="guilabel">Rectángulo desde el centro</span>.</p></li>
-</ol>
-<img alt="../../_images/3110.png" class="align-center" src="../../_images/3110.png" />
-<ol class="arabic simple" start="32">
-<li><p>Clic en el centro del edificio y arrastre el ratón para dibujar un rectángulo vertical.</p></li>
-</ol>
-<img alt="../../_images/324.png" class="align-center" src="../../_images/324.png" />
+<blockquote>
+<div><img alt="../../_images/324.png" class="align-center" src="../../_images/324.png" />
+</div></blockquote>
 <ol class="arabic simple" start="33">
+<li><p>Right-click to finish the polygon and enter the attributes. Magically the new polygon is shrunk and snapped exactly to the boundary of the neighboring polygons! This is very useful when digitizing complex boundaries where you need not be precise and still have topologically correct polygon. Click <span class="guilabel">Toggle Editing</span> to finish editing the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> layer.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/332.png" class="align-center" src="../../_images/332.png" />
+</div></blockquote>
+<ol class="arabic simple" start="34">
+<li><p>Now it is time to digitize a buildings layer. Create a new polygon layer named <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> by clicking <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer…</span> icon from Panels. Set the <span class="guilabel">Buildings</span> and <span class="guilabel">MuiltiPolygon</span>. Choose the CRS as <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>. Click <span class="guilabel">OK</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/342.png" class="align-center" src="../../_images/342.png" />
+</div></blockquote>
+<ol class="arabic simple" start="35">
+<li><p>Once the <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> layer is added, turn off the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> and <code class="docutils literal notranslate"><span class="pre">Roads</span></code> layers to make the base topo map visible. Select the <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> layer and click <span class="guilabel">Toggle Editing</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/352.png" class="align-center" src="../../_images/352.png" />
+</div></blockquote>
+<ol class="arabic simple" start="36">
+<li><p>Digitizing buildings can be a cumbersome task, and also, it is challenging to add vertices manually so that the edges are perpendicular and form a rectangle. We will use a QGIS toolbar called <strong>Shape Digitizing</strong> to help with this task. Right-click on any empty space on the toolbar area and activate the <code class="docutils literal notranslate"><span class="pre">Shape</span> <span class="pre">Digitizing</span> <span class="pre">Toolbar</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/361.png" class="align-center" src="../../_images/361.png" />
+</div></blockquote>
+<ol class="arabic simple" start="37">
+<li><p>Enable editing by pressing the pencil icon <span class="guilabel">Toggle Editing</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/371.png" class="align-center" src="../../_images/371.png" />
+</div></blockquote>
+<ol class="arabic simple" start="38">
+<li><p>Now under <span class="guilabel">Add Rectangle dropdown</span> select <span class="guilabel">Add Rectangle from Extent</span> button.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/381.png" class="align-center" src="../../_images/381.png" />
+</div></blockquote>
+<ol class="arabic simple" start="39">
+<li><p>Zoom to an area with the buildings. Click and drag the mouse to draw a perfect rectangle. Similarly, add the remaining buildings.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/391.png" class="align-center" src="../../_images/391.png" />
+</div></blockquote>
+<ol class="arabic simple" start="40">
+<li><p>You will notice that some buildings are not vertical, and we will need to draw a rectangle at an angle to match the building footprint. Under <span class="guilabel">Add Rectangle dropdown</span> select <span class="guilabel">Add Rectangle from Center and a Point</span> button.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/40.png" class="align-center" src="../../_images/40.png" />
+</div></blockquote>
+<ol class="arabic simple" start="41">
+<li><p>Zoom to an area of diamond-shaped buildings. Click on the center to drop a point and drag the mouse to draw a rectangle.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/411.png" class="align-center" src="../../_images/411.png" />
+</div></blockquote>
+<ol class="arabic simple" start="42">
 <li><p>Necesitamos rotar este rectángulo para hacer coincidir con la imagen en el mapa topo. La herramienta rotar está disponible en la barra de herramientas <strong>Digitalización avanzada</strong>. Clic-derecho en un área vacía en la sección barra de herramientas y habilite la barra de herramientas <span class="guilabel">Edición avanzada</span>.</p></li>
 </ol>
-<img alt="../../_images/332.png" class="align-center" src="../../_images/332.png" />
-<ol class="arabic simple" start="34">
-<li><p>Clic el botón <span class="guilabel">Rotar Objeto(s)</span>.</p></li>
+<blockquote>
+<div><img alt="../../_images/421.png" class="align-center" src="../../_images/421.png" />
+</div></blockquote>
+<ol class="arabic simple" start="43">
+<li><p>Click the <span class="guilabel">Rotate Feature</span> button.</p></li>
 </ol>
-<img alt="../../_images/342.png" class="align-center" src="../../_images/342.png" />
-<ol class="arabic simple" start="35">
-<li><p>Use la herramienta <span class="guilabel">Seleccionar objeto único</span> para seleccionar el polígono que quiere rotar. Una vez esté activada la herramienta <span class="guilabel">Rotar Objeto(s)</span>, verá una mira en el centro del polígono. Clic exáctamente en esa mira y arrastre el ratón mientras mantiene presionado el botón izquierdo. Aparecerá una previsualización del objeto rotado. Suelte el botón del ratón cuando el polígono se alinee con la huella del edificio.</p></li>
+<blockquote>
+<div><img alt="../../_images/431.png" class="align-center" src="../../_images/431.png" />
+</div></blockquote>
+<ol class="arabic simple" start="44">
+<li><p>Use the <span class="guilabel">Select Single feature</span> tool to select the polygon you want to rotate. Once the <span class="guilabel">Rotate Feature</span> tool is activated, you will see crosshairs at the center of the polygon. Click exactly on that crosshairs and drag the mouse while holding the left-click button. A preview of the rotated feature will appear. Let go of the mouse button when the polygon aligns with the building footprint.</p></li>
 </ol>
-<img alt="../../_images/352.png" class="align-center" src="../../_images/352.png" />
-<ol class="arabic simple" start="36">
-<li><p>Guarde las ediciones de capa y clic <span class="guilabel">Conmutar edición</span> una vez que termine de digitalizar todos los edificios. Puede arrastrar las capas para cambiar su orden de apariencia.</p></li>
+<blockquote>
+<div><img alt="../../_images/441.png" class="align-center" src="../../_images/441.png" />
+</div></blockquote>
+<ol class="arabic simple" start="45">
+<li><p>Save the layer edits and click <span class="guilabel">Toggle Editing</span> once you finish digitizing all buildings. You can drag the layers to change their order of appearance. The digitizing task is now complete. You can play with the styling and labeling options in layer properties to create a nice-looking map from the data you created.</p></li>
 </ol>
-<img alt="../../_images/361.png" class="align-center" src="../../_images/361.png" />
-<ol class="arabic simple" start="37">
-<li><p>La tarea de digitalización ahora está completa. Puede jugar con las opciones de estilo y etiquetado en las propiedades de capa para crear un mapa agradable a partir de los datos que creó.</p></li>
-</ol>
-<img alt="../../_images/371.png" class="align-center" src="../../_images/371.png" />
+<blockquote>
+<div><img alt="../../_images/451.png" class="align-center" src="../../_images/451.png" />
+</div></blockquote>
 </section>
 </section>
 
@@ -406,7 +533,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en may. 05, 2022.<br/>
+      Actualizado por última vez en jun. 17, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

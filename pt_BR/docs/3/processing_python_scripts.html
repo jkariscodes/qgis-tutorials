@@ -225,7 +225,7 @@
 <ol class="arabic simple">
 <li><p>No Painel do Navegador QGIS, encontre o diretório onde você salvou seus dados baixados. Expanda o registro <code class="docutils literal notranslate"><span class="pre">zip</span></code> ou o <code class="docutils literal notranslate"><span class="pre">gpkg</span></code> e selecione a camada <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code>. Arrate a camada para a tela.</p></li>
 </ol>
-<img alt="../../_images/1108.png" class="align-center" src="../../_images/1108.png" />
+<img alt="../../_images/1107.png" class="align-center" src="../../_images/1107.png" />
 <ol class="arabic simple" start="2">
 <li><p>Vá em <span class="menuselection">Processar ‣ Caixa de Ferramentas</span>. Clique no :guilabel:botão <cite>Scripts</cite> na barra de ferramentas e selecione <span class="guilabel">Criar Novo Script a partir de Modelo</span>.</p></li>
 </ol>
@@ -237,11 +237,11 @@
 <ol class="arabic simple" start="4">
 <li><p>As you scroll down, you will see methods that assign name, group, description etc. to the script. Change the return values for <em>name</em> method to be <code class="docutils literal notranslate"><span class="pre">dissolve_with_sum</span></code>, <em>displayName</em> method to <code class="docutils literal notranslate"><span class="pre">Dissolve</span> <span class="pre">with</span> <span class="pre">Sum</span></code>, <em>group</em> method and <em>groupId</em> method to  <code class="docutils literal notranslate"><span class="pre">scripts</span></code>. Change the return value of <em>shortHelpString</em> method to a description that will appear to the user. Click the <span class="guilabel">Save</span> button.</p></li>
 </ol>
-<img alt="../../_images/421.png" class="align-center" src="../../_images/421.png" />
+<img alt="../../_images/422.png" class="align-center" src="../../_images/422.png" />
 <ol class="arabic simple" start="5">
 <li><p>Nomeie o script com <code class="docutils literal notranslate"><span class="pre">dissolve_with_sum</span></code> e salve-o no local padrão na pasta <span class="menuselection">profiles ‣ default ‣ processing ‣ scripts</span>.</p></li>
 </ol>
-<img alt="../../_images/522.png" class="align-center" src="../../_images/522.png" />
+<img alt="../../_images/521.png" class="align-center" src="../../_images/521.png" />
 <ol class="arabic simple" start="6">
 <li><p>Agora iremos definir as entradas para o script. O modelo já contém uma definição para uma camada vetorial <cite>INPUT`</cite> e uma camada <code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code>. Nós iremos adicionar 2 novas camadas de entradas, que permitirão ao usuário selecionar o campo para dissolver, <code class="docutils literal notranslate"><span class="pre">DISSOLVE_FIELD</span></code>, e o campo para somar, <code class="docutils literal notranslate"><span class="pre">SUM_FIELD</span></code>. Adicione um novo comando de import no topo e o código a seguir no método <code class="docutils literal notranslate"><span class="pre">initAlgorithm</span></code>. Clique no botão <span class="guilabel">Run</span> para visualizar as mudanças.</p></li>
 </ol>
@@ -267,7 +267,7 @@
 <ol class="arabic simple" start="7">
 <li><p>Você verá uma janela <span class="guilabel">Dissolve with Sum</span> com as nossas novas entradas que definimos. Selecione a camada <code class="docutils literal notranslate"><span class="pre">ne_10m_admin_0_countries</span></code> como <span class="guilabel">Input layer`</span>. Ambos os campos <span class="guilabel">Dissolve Field</span> e <span class="guilabel">Sum Fields</span> são filtrados tendo como referência a camada de entrada, ou seja, eles serão preenchidos com os campos existentes da camada de entrada. Clique no botão <span class="guilabel">Close</span>.</p></li>
 </ol>
-<img alt="../../_images/721.png" class="align-center" src="../../_images/721.png" />
+<img alt="../../_images/720.png" class="align-center" src="../../_images/720.png" />
 <ol class="arabic simple" start="8">
 <li><p>Now we define our custom logic for processing data in the <code class="docutils literal notranslate"><span class="pre">processAlgorithm</span></code> method. This method gets passed a dictionary called <code class="docutils literal notranslate"><span class="pre">parameters</span></code>. It contains the inputs that the user has selected. There are helper methods that allow you to take these inputs and create appropriate objects. We first get our inputs using <code class="docutils literal notranslate"><span class="pre">parameterAsSource</span></code> and <code class="docutils literal notranslate"><span class="pre">parameterAsString</span></code> methods. Next we want to create a feature sink where we will write the output. QGIS3 has a new class called <code class="docutils literal notranslate"><span class="pre">QgsFeatureSink</span></code> which is the preferred way to create objects that can accept new features. The output needs only 2 fields - one for the value of dissolved field and another for the sum of the selected field.</p></li>
 </ol>
@@ -320,7 +320,7 @@
         <span class="n">sum_unique_values</span><span class="p">[</span><span class="n">unique_value</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">val_list</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/921.png" class="align-center" src="../../_images/921.png" />
+<img alt="../../_images/920.png" class="align-center" src="../../_images/920.png" />
 <ol class="arabic simple" start="10">
 <li><p>Next, we will call the built-in processing algorithm <code class="docutils literal notranslate"><span class="pre">native:dissolve</span></code> on the input layer to generate the dissolved geometries. Once we have the dissolved geometries, we iterate through the output of the dissolve algorithm and create new features to be added to the output. At the end we return the <code class="docutils literal notranslate"><span class="pre">dest_id</span></code> FeatureSink as the output. Now the script is ready. Click the <span class="guilabel">Run</span> button.</p></li>
 </ol>
@@ -605,7 +605,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Última atualização em mai. 05, 2022.<br/>
+      Última atualização em jun. 17, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

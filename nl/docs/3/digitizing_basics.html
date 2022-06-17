@@ -203,15 +203,18 @@
 
   <section id="digitizing-map-data-qgis3">
 <h1>Kaartgegevens digitaliseren<a class="headerlink" href="#digitizing-map-data-qgis3" title="Permalink naar deze titel">¶</a></h1>
-<p>Digitaliseren is één van de meest voorkomende taken die een specialist in GIS moet uitvoeren. Vaak wordt een groot gedeelte van <em>GIS-tijd</em> gebruikt voor het digitaliseren van rastergegevens naar het maken van vectorlagen die u gebruikt in uw analyses. QGIS heeft krachtige mogelijkheden voor het digitaliseren en bewerken op het scherm, die we in deze handleiding zullen verkennen.</p>
+<p>Digitizing is one of the most common tasks a GIS Specialist has to do.
+Often a large amount of <em>GIS time</em> is spent digitizing raster data to create
+vector layers that you use in your analysis. QGIS has powerful on-screen
+digitizing and editing capabilities that we will explore in this tutorial.</p>
 <section id="overview-of-the-task">
 <h2>Overzicht van de taak<a class="headerlink" href="#overview-of-the-task" title="Permalink naar deze titel">¶</a></h2>
 <p>We zullen een raster topografische kaart gebruiken en verschillende vectorlagen maken die objecten rondom een park weergeven.</p>
 <section id="other-skills-you-will-learn">
-<h3>Andere vaardigheden die u zult leren<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
+<h3>Other skills you will learn.<a class="headerlink" href="#other-skills-you-will-learn" title="Permalink naar deze titel">¶</a></h3>
 <ul class="simple">
 <li><p>Piramiden bouwen voor grote raster-gegevenssets om bewerkingen voor zoomen en verschuiven te versnellen.</p></li>
-<li><p>Werken met een database van SpatiaLite.</p></li>
+<li><p>Create and edit GeoPackage.</p></li>
 </ul>
 </section>
 </section>
@@ -226,161 +229,285 @@
 <section id="procedure">
 <h2>Procedure<a class="headerlink" href="#procedure" title="Permalink naar deze titel">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Ga naar <span class="menuselection">Kaartlagen ‣ Laag toevoegen ‣ Rasterlaag toevoegen</span>. Zoek het gedownloade <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-03.tif</span></code> op en klik op <span class="guilabel">Openen</span>.</p></li>
+<li><p>In QGIS, let’s load the image file. Go to <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer</span>.</p></li>
 </ol>
-<img alt="../../_images/150.png" class="align-center" src="../../_images/150.png" />
+<blockquote>
+<div><img alt="../../_images/014.png" class="align-center" src="../../_images/014.png" />
+</div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Dit is een groot rasterbestand en het zou u kunnen opvallen dat wanneer u op de kaart inzoomt of die verschuift, dat het enige tijd vergt voor de afbeelding is gerenderd. QGIS biedt een eenvoudige oplossing om rasters veel sneller te laden door <strong>Afbeeldingspiramiden</strong> te gebruiken. QGIS maakt vooraf gerenderde tegels in verschillende resoluties en deze worden aan u gepresenteerd in plaats van het volledige raster. Dat maakt het navigeren over de kaart snel en responsief. Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-03</span></code> en kies <span class="guilabel">Eigenschappen</span>.</p></li>
+<li><p>In the <span class="guilabel">Data Source Manager</span> dialog select <span class="guilabel">Raster.</span> Under <span class="guilabel">Source</span> click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> and locate the downloaded <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02.tif</span></code> and click <span class="guilabel">Open</span>. Then click <span class="guilabel">Add</span> followed by <span class="guilabel">Close.</span></p></li>
 </ol>
-<img alt="../../_images/230.png" class="align-center" src="../../_images/230.png" />
+<blockquote>
+<div><img alt="../../_images/024.png" class="align-center" src="../../_images/024.png" />
+</div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Kies de tab <span class="guilabel">Piramiden</span>. Houdt de <kbd class="kbd docutils literal notranslate">Ctrl</kbd>-toets ingedrukt en selecteer alle aangeboden resoluties in het paneel <span class="guilabel">Resoluties</span>. Laat de andere opties op hun standaarden staan en klik op <span class="guilabel">Piramiden bouwen</span>. Als het proces voltooid is, klik dan op <span class="guilabel">OK</span>.</p></li>
+<li><p>This is a large raster file, and you may notice that when you zoom or pan around the map, the map takes a little time to render the image. QGIS offers a simple solution to make rasters load much faster by using <strong>Image Pyramids</strong>. QGIS creates pre-rendered tiles at different resolutions, and these are presented to you instead of the full raster. This makes map navigation snappy and responsive. Right-click the <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02</span></code> layer and choose <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../../_images/320.png" class="align-center" src="../../_images/320.png" />
+<blockquote>
+<div><img alt="../../_images/034.png" class="align-center" src="../../_images/034.png" />
+</div></blockquote>
 <ol class="arabic simple" start="4">
+<li><p>In the <span class="guilabel">Layer Properties</span> dialog, Choose the <span class="guilabel">Pyramids</span> tab. Hold the <kbd class="kbd docutils literal notranslate">Ctrl</kbd> key and select all the resolutions offered in the <span class="guilabel">Resolutions</span> panel. Leave other options to defaults and click <span class="guilabel">Build pyramids</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/044.png" class="align-center" src="../../_images/044.png" />
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Once the process finishes, the dialog box will show the pyramids without a cross. This indicates the Image Pyramids build is completed. Click <span class="guilabel">OK</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/054.png" class="align-center" src="../../_images/054.png" />
+</div></blockquote>
+<ol class="arabic simple" start="6">
 <li><p>Voor we beginnen moeten we de standaard opties voor <strong>Digitaliseren</strong> instellen. Ga naar <span class="menuselection">Extra ‣ Opties…</span>.</p></li>
 </ol>
-<img alt="../../_images/48.png" class="align-center" src="../../_images/48.png" />
-<ol class="arabic simple" start="5">
-<li><p>Selecteer de tab <span class="guilabel">Digitaliseren</span> in het dialoogvenster <span class="guilabel">Opties</span>. Stel de <span class="guilabel">Standaard ‘snap’-modus</span> in op <span class="guilabel">Hoekpunt</span>. Dit stelt u in staat te snappen aan het dichtstbijzijnde hoekpunt. Ik heb zelf de voorkeur om de <span class="guilabel">Standaard ‘snapping’-tolerantie</span> en <span class="guilabel">Zoekradius voor hoekpuntaanpassingen</span> in te stellen op pixels in plaats van op kaarteenheden. Dat zal er voor zorgen dat de afstand voor snappen hetzelfde blijft, ongeacht het zoomniveau. Afhankelijk van de resolutie van uw computerscherm, kunt u een toepasselijke waarde kiezen. Klik op <span class="guilabel">OK</span>.</p></li>
-</ol>
-<img alt="../../_images/59.png" class="align-center" src="../../_images/59.png" />
-<ol class="arabic simple" start="6">
-<li><p>Nu zijn we klaar om te beginnen met digitaliseren. We zullen eerst een wegenlaag maken en de wegen rondom het gebied van het park digitaliseren. Selecteer het pictogram <span class="menuselection">Nieuwe GeoPackage-laag…</span> uit Panelen. Een GeoPackage is een open, niet-gesloten, platform-onafhankelijke en op standaarden gebaseerde gegevensindeling voor geografische informatiesystemen, geïmplementeerd als een container voor een database van SQLite. Dat maakt het veel eenvoudiger om het te verplaatsen dan een stapel Shapefiles. In deze handleiding maken we een aantal polygoonlagen en een lijnlaag, dus is een Geopackage meer geschikt. U kunt altijd een Geopackage laden en lagen exporteren als een shapefile of enige andere indeling die u wilt.</p></li>
-</ol>
-<img alt="../../_images/69.png" class="align-center" src="../../_images/69.png" />
+<blockquote>
+<div><img alt="../../_images/064.png" class="align-center" src="../../_images/064.png" />
+</div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>In het dialoogvenster <span class="guilabel">Nieuwe laag voor GeoPackage</span>, klik op de knop <span class="guilabel">…</span> en sla een nieuwe database voor GeoPackage op, genaamd <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Kies de <span class="guilabel">Tabelnaam</span> als <code class="docutils literal notranslate"><span class="pre">Roads</span></code> en selecteer <code class="docutils literal notranslate"><span class="pre">Lijn</span></code> als het <span class="guilabel">Type geometrie</span>. De basis topografische kaart is in het CRS <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>.</p></li>
+<li><p>Select the <span class="guilabel">Digitizing</span> tab in the <span class="guilabel">Options</span> dialog. Check the <span class="guilabel">Enable snapping by default</span>  under <span class="guilabel">Snapping</span> section. In <span class="guilabel">Default snap mode</span> choose <span class="guilabel">Vertex</span>. This will allow you to snap to the nearest vertex. I also prefer to set the <span class="guilabel">Default snapping tolerance</span> and <span class="guilabel">Search radius for vertex edits</span> in pixels instead of map units. This will ensure that the snapping distance remains constant regardless of zoom level. Depending on your computer screen resolution, you may choose an appropriate value. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/79.png" class="align-center" src="../../_images/79.png" />
+<blockquote>
+<div><img alt="../../_images/074.png" class="align-center" src="../../_images/074.png" />
+</div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Bij het maken van een GIS-laag moet u een beslissing nemen over de attributen die elk object zal hebben. Omdat dit een laag met wegen is, zullen we aanvullend twee 2 basisattributen hebben - Naam en Klasse. Voer, in <span class="guilabel">Nieuw veld</span>, in <code class="docutils literal notranslate"><span class="pre">Naam</span></code> van het type <span class="guilabel">Tekstgegevens</span>, met <code class="docutils literal notranslate"><span class="pre">50</span></code> als <span class="guilabel">Maximumlengte</span> en klik op <span class="guilabel">Aan lijst met velden toevoegen.</span> Maak nu een nieuw attribuut <code class="docutils literal notranslate"><span class="pre">Klasse</span></code> van het type <span class="guilabel">Tekstgegevens</span>, met <code class="docutils literal notranslate"><span class="pre">50</span></code> als <span class="guilabel">Maximumlengte</span>. Klik op <span class="guilabel">OK</span></p></li>
+<li><p>Now we are ready to start digitizing. We will first create a road layer and digitize the roads around the park area. Click <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer…</span> icon from Panels. A GeoPackage is an open, non-proprietary, platform-independent, and standards-based data format for a geographic information system implemented as an SQLite database container. This makes it much easier to move it around instead of a bunch of shapefiles. In this tutorial, we create a couple of polygon layers and a line layer so that a GeoPackage will be better suited. You can always load a GeoPackage and export layers as a shapefile or any other format you want.</p></li>
 </ol>
-<img alt="../../_images/89.png" class="align-center" src="../../_images/89.png" />
+<blockquote>
+<div><img alt="../../_images/084.png" class="align-center" src="../../_images/084.png" />
+</div></blockquote>
 <ol class="arabic simple" start="9">
+<li><p>In the <span class="guilabel">New GeoPackage Layer</span> dialog, click the <span class="guilabel">…</span> button and save a new GeoPackage database named <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Choose the <span class="guilabel">Table name</span> as <code class="docutils literal notranslate"><span class="pre">Roads</span></code> and select <code class="docutils literal notranslate"><span class="pre">LineString</span></code> as the <span class="guilabel">Geometry type</span>. The base topographic map is the <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code> CRS.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/094.png" class="align-center" src="../../_images/094.png" />
+</div></blockquote>
+<ol class="arabic simple" start="10">
+<li><p>When creating a GIS layer, you must decide on each feature’s attributes. Since this is a road layer, we additionally will have two primary attributes - Name and Class. In <span class="guilabel">New Field</span> Enter <code class="docutils literal notranslate"><span class="pre">Name</span></code> of the type <span class="guilabel">Text data,</span> with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span> and click <span class="guilabel">Add to attribute list.</span> Now create a new attribute <code class="docutils literal notranslate"><span class="pre">Class</span></code> of the type <span class="guilabel">Text data</span>, with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span>. Click <span class="guilabel">OK</span></p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/1013.png" class="align-center" src="../../_images/1013.png" />
+</div></blockquote>
+<ol class="arabic simple" start="11">
 <li><p>Klik, als de laag <code class="docutils literal notranslate"><span class="pre">Roads</span></code> eenmaal is geladen, op de knop <span class="guilabel">Bewerken aan-/uitzetten</span> om de laag in de modus Bewerken te zetten.</p></li>
 </ol>
-<img alt="../../_images/99.png" class="align-center" src="../../_images/99.png" />
-<ol class="arabic simple" start="10">
+<blockquote>
+<div><img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
+</div></blockquote>
+<ol class="arabic simple" start="12">
 <li><p>Klik op de knop <span class="guilabel">Lijnobject toevoegen</span>. Klik op het kaartvenster om een nieuw punt toe te voegen. Voeg nieuwe punten toe langs het object weg. Als u eenmaal een segment van de weg hebt gedigitaliseerd, klik met rechts om het object te beëindigen.</p></li>
 </ol>
+<blockquote>
+<div><img alt="../../_images/1214.png" class="align-center" src="../../_images/1214.png" />
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
 <p>U kunt het wieltje van de muis gebruiken om in- of uit te zoomen tijdens het digitaliseren. U kunt ook het muiswiel ingedrukt houden en de muis verplaatsen om te verschuiven.</p>
 </div>
-<img alt="../../_images/1013.png" class="align-center" src="../../_images/1013.png" />
-<ol class="arabic simple" start="11">
-<li><p>Nadat u met rechts heeft geklikt om het object te beëindigen, zult u een pop-up dialoogvenster krijgen, genaamd <span class="guilabel">Roads - Object-attributen</span>. Hier kunt u attributen invoeren voor het nieuw gemaakte object. Omdat <strong>fid</strong> een automatisch gemaakt veld is, zult u niet in staat zijn daar handmatig een waarde in te geven. Laat het zoals het is en voer de naam van de weg in zoals die verschijnt op de topografische kaart. Wijs ook, optioneel, een waarde voor Klasse toe. Klik op <span class="guilabel">OK</span>.</p></li>
-</ol>
-<img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
-<ol class="arabic simple" start="12">
-<li><p>De standaard stijl voor de nieuwe lijnlaag is een dunne lijn. Laten we die wijzigen zodat we de gedigitaliseerde objecten in het kaartvenster beter kunnen zien. Klik met rechts op de laag <code class="docutils literal notranslate"><span class="pre">Roads</span></code> en selecteer <span class="guilabel">Eigenschappen</span>.</p></li>
-</ol>
-<img alt="../../_images/1214.png" class="align-center" src="../../_images/1214.png" />
 <ol class="arabic simple" start="13">
-<li><p>Selecteer de tab <span class="guilabel">Symbologie</span> in het dialoogvenster <span class="guilabel">Laageigenschappen</span>. Kies een dikkere lijnstijl zoals <span class="guilabel">topo road</span> uit de vooraf gedefinieerde stijlen. Klik op <span class="guilabel">OK</span>.</p></li>
+<li><p>After you right-click to end the feature, you will get a pop-up dialog called <span class="guilabel">Road - Feature Attributes</span>. Here you can enter attributes of the newly created feature. Skip entering any value for <strong>fid</strong> as it is a sequential id that will be autogenerated. Enter the road name as it appears on the topo map. Optionally, assign a Road Class value as well. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/1312.png" class="align-center" src="../../_images/1312.png" />
+<blockquote>
+<div><img alt="../../_images/1312.png" class="align-center" src="../../_images/1312.png" />
+</div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>Nu zult u het gedigitaliseerde wegobject duidelijk zien. Klik op <span class="guilabel">Opslaan voor geselecteerde laag/lagen</span> om het nieuwe object op schijf te bewaren.</p></li>
+<li><p>The default style of the new line layer is a thin line. Let’s change it to better see the digitized features on the canvas. Select the <code class="docutils literal notranslate"><span class="pre">Roads</span></code> layer and click <span class="guilabel">Layer Styling Panel</span>.</p></li>
 </ol>
-<img alt="../../_images/1410.png" class="align-center" src="../../_images/1410.png" />
+<blockquote>
+<div><img alt="../../_images/1410.png" class="align-center" src="../../_images/1410.png" />
+</div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>Voor we de resterende wegen gaan digitaliseren, is het belangrijk om enkele andere instellingen bij te werken die belangrijk zijn om een foutenvrije laag te maken. Klik met rechts op een lege ruimte op de werkbalk en activeer de <span class="guilabel">Werkbalk Snappen</span>.</p></li>
+<li><p>In the <span class="guilabel">Layer Styling Panel</span>, search for different <cite>road</cite> layer styles. Select <code class="docutils literal notranslate"><span class="pre">topo</span> <span class="pre">road</span></code>. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
+<blockquote>
+<div><img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
+</div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>Nu zal een knop <span class="guilabel">Snappen inschakelen</span> (pictogram Magneet) verschijnen op het paneel. Klik er op om het in te schakelen en selecteer <span class="guilabel">Alle lagen</span> en selecteer <code class="docutils literal notranslate"><span class="pre">Opties</span> <span class="pre">voor</span> <span class="pre">snappen</span> <span class="pre">openen…</span></code>.</p></li>
+<li><p>Now the road layer will be clearly visible. If you are satisfied with the work, click <span class="guilabel">Save Layer Edits</span> button to save the changes.</p></li>
 </ol>
-<img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
+<blockquote>
+<div><img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
+</div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>Klik, in het dialoogvenster <span class="guilabel">Instellingen voor snappen in project</span>, op <span class="guilabel">Snappen op snijpunten</span> wat u in staat stelt te snappen op een snijpunt op de laag op de achtergrond.</p></li>
+<li><p>Before we digitize the remaining roads, it is essential to update some other important snap settings to create an error-free layer. Right-click on any space on the toolbar area and activate the <span class="guilabel">Snapping toolbar.</span></p></li>
 </ol>
-<img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
+<blockquote>
+<div><img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
+</div></blockquote>
 <ol class="arabic simple" start="18">
-<li><p>Nu kunt u klikken op de knop <span class="guilabel">Object toevoegen</span> en andere wegen rondom het park digitaliseren. Zorg er voor om op <span class="guilabel">Wijzigingen laag opslaan</span> te klikken nadat u een nieuw object heeft toegevoegd, om uw werk op te slaan. Een handig gereedschap om u te helpen met digitaliseren is het <strong>Gereedschap Punten</strong>. Klik op de knop <span class="guilabel">Gereedschap Punten</span> en selecteer <code class="docutils literal notranslate"><span class="pre">Gereedschap</span> <span class="pre">Punten</span> <span class="pre">(Huidige</span> <span class="pre">laag)</span></code>.</p></li>
+<li><p>Now an <span class="guilabel">Enable Snapping</span> (Magnet Icon) will appear on the panel. Click on it to enable it and select <span class="guilabel">All Layers</span> and choose <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">Snapping</span> <span class="pre">Options..</span></code>.</p></li>
 </ol>
-<img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
+<blockquote>
+<div><img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
+</div></blockquote>
 <ol class="arabic simple" start="19">
-<li><p>Klik, als het gereedschap Punten eenmaal is geactiveerd, op een willekeurig object om de punten weer te geven. Klik op een punt om het te selecteren. Het punt zal van kleur wijzigen als het eenmaal is geselecteerd. Nu kunt u klikken en slepen om het punt te verplaatsen. Dit is handig als u aanpassingen wilt maken nadat het object is gemaakt. U kunt een geselecteerd punt ook verwijderen door op de toets <kbd class="kbd docutils literal notranslate">Delete</kbd> te klikken. (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd> op een Mac)</p></li>
+<li><p>In the <span class="guilabel">Snapping options</span> dialog, click the <span class="guilabel">Snapping on Intersection</span>, which allows you to snap on an intersection of a background layer.</p></li>
 </ol>
-<img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
+<blockquote>
+<div><img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
+</div></blockquote>
 <ol class="arabic simple" start="20">
+<li><p>Now you can click <span class="guilabel">Add feature</span> button and digitize other roads around the park. Make sure to click <span class="guilabel">Save Edits</span> after adding a new feature to save your work. A helpful tool to help you digitize is the <strong>Vertex Tool</strong>. Click the <span class="guilabel">Vertex Tool</span> button and select <code class="docutils literal notranslate"><span class="pre">Vertex</span> <span class="pre">Tool</span> <span class="pre">(Current</span> <span class="pre">Layer)</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
+</div></blockquote>
+<ol class="arabic simple" start="21">
+<li><p>Once the node tool is activated, click on any feature to show the vertices. Click on any vertex to select it. The vertex will change the color once it is selected. Now you can click and drag your mouse to move the vertex. This is useful when you want to make adjustments after the feature is created. You can also delete a selected vertex by clicking the <kbd class="kbd docutils literal notranslate">Delete</kbd> key.    (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd> on a mac)</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/21.gif" class="align-center" src="../../_images/21.gif" />
+</div></blockquote>
+<ol class="arabic simple" start="22">
 <li><p>Klik op de knop <span class="guilabel">Bewerken aan/uitzetten</span> als u eenmaal klaar bent met het digitaliseren van alle wegen. Klik op <span class="guilabel">Save</span>.</p></li>
 </ol>
-<img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
-<ol class="arabic simple" start="21">
-<li><p>In het dialoogvenster <span class="guilabel">Nieuwe laag voor GeoPackage</span>, klik op de knop <span class="guilabel">…</span> en sla een nieuwe database voor GeoPackage op, genaamd <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Noem de nieuwe laag als een attribuut genaamd <code class="docutils literal notranslate"><span class="pre">Parks</span></code> en selecteer <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> als het <span class="guilabel">Type geometrie</span>. De basis topografische kaart is in het CRS <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>. Klik op <span class="guilabel">OK</span>. Voer, in <span class="guilabel">Nieuw veld</span> in <code class="docutils literal notranslate"><span class="pre">Naam</span></code> van het type <span class="guilabel">Tekstgegevens</span>, met <code class="docutils literal notranslate"><span class="pre">50</span></code> als <span class="guilabel">Maximumlengte</span> en klik op :guilabel:` Aan lijst met velden toevoegen.`</p></li>
+<blockquote>
+<div><img alt="../../_images/2210.png" class="align-center" src="../../_images/2210.png" />
+</div></blockquote>
+<ol class="arabic simple" start="23">
+<li><p>Now we will create another layer to digitize the parks as polygons. Click <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer…</span> icon from Panels. In the <span class="guilabel">New GeoPackage Layer</span> dialog, click the <span class="guilabel">…</span> button and select the GeoPackage database named <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Name the new layer as an attribute called <code class="docutils literal notranslate"><span class="pre">Parks</span></code>. Select <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> as the <span class="guilabel">Type</span>. The base topographic map is the <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code> CRS. Click <span class="guilabel">OK</span>. In <span class="guilabel">New Field</span> Enter <code class="docutils literal notranslate"><span class="pre">Name</span></code>, and the <span class="guilabel">type</span> as <span class="guilabel">Text data</span>, with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span> and click :guilabel:` Add to Fields List.`. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
+<blockquote>
+<div><img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Notitie</p>
-<p><strong>Polygoon</strong> - Planair oppervlak gedefinieerd door 1 buitenring en 0 of meer binnenringen. Elke binnenring definieert een gat in de polygoon. <strong>Multi-Polygon</strong> - Het wordt gebruikt om gebieden met gaten weer te geven in of bestaande uit meerdere losse gebieden. Bijvoorbeeld 3 losse polygonen kunnen worden getekend en gegroepeerd als één enkel object.</p>
+<p><strong>Polygon vs Multi-Polygon</strong></p>
+<p><strong>Polygon</strong> - Planar Surface defined by 1 exterior boundary and 0 or more interior boundaries. Each interior boundary defines a hole in the Polygon.</p>
+<p><strong>Multi-Polygon</strong> - It is used to represent areas with holes inside or consisting of multiple disjoint areas. For eg, 3 discontinuous polygons can be drawn and grouped as a single feature.</p>
 </div>
-<img alt="../../_images/2112.png" class="align-center" src="../../_images/2112.png" />
-<ol class="arabic simple" start="22">
-<li><p>Selecteer nu de laag <code class="docutils literal notranslate"><span class="pre">Parks</span></code> en <span class="guilabel">Bewerken aan-/uitzetten</span> en klik op de knop <span class="guilabel">Object toevoegen</span> en klik op het kaartvenster om een polygoonpunt toe te voegen. Digitaliseer de polygoon die het park weergeeft. Zorg er voor dat u aan de punten van de wegen snapt, zodat er geen gaten tussen de polygonen van het park en de lijnen van de wegen zijn. Klik met rechts om de polygoon te voltooien.</p></li>
+<ol class="arabic simple" start="24">
+<li><p>A pop-up dialog will appear. Select the <span class="guilabel">Add New Layer</span> button.</p></li>
 </ol>
-<img alt="../../_images/2210.png" class="align-center" src="../../_images/2210.png" />
-<ol class="arabic simple" start="23">
+<blockquote>
+<div><img alt="../../_images/248.png" class="align-center" src="../../_images/248.png" />
+</div></blockquote>
+<ol class="arabic simple" start="25">
+<li><p>Now select layer <code class="docutils literal notranslate"><span class="pre">Parks</span></code> then clickroad <span class="guilabel">Toggle Editing</span> and click the <span class="guilabel">Add feature</span> button and click on the map canvas to add a polygon vertex. Digitize the polygon representing the park. Make sure you snap to the road’s vertices so there are no gaps between the park polygons and road lines. Right-click to finish the polygon.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
+</div></blockquote>
+<ol class="arabic simple" start="26">
 <li><p>Voer de naam van het park in het pop-upvenster <span class="guilabel">Parks - Object-attributen</span> in.</p></li>
 </ol>
-<img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
-<ol class="arabic simple" start="24">
-<li><p>Lagen Multipolygon bieden nog een andere zeer nuttige instelling, genaamd <strong>Avoid intersections of new polygons</strong>. Selecteer <span class="guilabel">Snappen inschakelen</span> (pictogram Magneet), klik erop om het in te schakelen en klik op :guilabel:` Alle lagen` en selecteer <code class="docutils literal notranslate"><span class="pre">Gevorderde</span> <span class="pre">configuratie</span></code>. Kies <code class="docutils literal notranslate"><span class="pre">Overlappen</span> <span class="pre">vermijden</span> <span class="pre">op</span> <span class="pre">actieve</span> <span class="pre">laag</span></code> vanaf de vierde knop op de werkbalk Snappen inschakelen.  Selecteer nu, in <span class="guilabel">Gevorderde configuratie bewerken</span> het vak box in de kolom <span class="guilabel">Overlapping vermijden</span> in de rij voor de laag <code class="docutils literal notranslate"><span class="pre">Parks</span></code>.</p></li>
+<blockquote>
+<div><img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
+</div></blockquote>
+<ol class="arabic simple" start="27">
+<li><p>Now digitize the upper region of the park. Enter the park name and save the changes.</p></li>
 </ol>
-<img alt="../../_images/248.png" class="align-center" src="../../_images/248.png" />
-<ol class="arabic simple" start="25">
+<blockquote>
+<div><img alt="../../_images/277.png" class="align-center" src="../../_images/277.png" />
+</div></blockquote>
+<ol class="arabic simple" start="28">
+<li><p>Now, before digitizing the inner polygon lets set settings that can ease this work. Multi-Polygon layers offer another useful setting called <strong>Avoid intersections of new polygons</strong>. Select <span class="guilabel">Enable Snapping</span> (Magnet Icon), click on it to enable it, and click <span class="guilabel">All Layers</span> and select <code class="docutils literal notranslate"><span class="pre">Advanced</span> <span class="pre">Configuration</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/287.png" class="align-center" src="../../_images/287.png" />
+</div></blockquote>
+<ol class="arabic simple" start="29">
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Avoid</span> <span class="pre">Overlap</span> <span class="pre">on</span> <span class="pre">Active</span> <span class="pre">layers</span></code> button in the snapping toolbar.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/296.png" class="align-center" src="../../_images/296.png" />
+</div></blockquote>
+<ol class="arabic simple" start="30">
+<li><p>Now in <span class="guilabel">Edit Advanced Configuration</span>, select the <span class="guilabel">Units</span> as <code class="docutils literal notranslate"><span class="pre">pixels</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/306.png" class="align-center" src="../../_images/306.png" />
+</div></blockquote>
+<ol class="arabic simple" start="31">
+<li><p>Check the box in the <span class="guilabel">Avoid Overlap</span> column in the row for the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> layer.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/3110.png" class="align-center" src="../../_images/3110.png" />
+</div></blockquote>
+<ol class="arabic simple" start="32">
 <li><p>Klik op <span class="guilabel">Object toevoegen</span> om een polygoon toe te voegen. Met <strong>Overlapping vermijden</strong> zult u in staat zijn om snel een nieuwe polygoon te digitaliseren, zonder u zorgen te hoeven maken over het exact snappen aan de nabijgelegen polygonen.</p></li>
 </ol>
-<img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
-<ol class="arabic simple" start="26">
-<li><p>klik met rechts om de polygoon te voltooien en voer de attributen in. Magisch wordt de nieuwe polygoon verkleind en exact gesnapt aan de grenzen van de nabijgelegen polygonen! Dit is zeer handig bij het digitaliseren van complexe grenzen waar u niet erg precies hoeft te zijn en nog steeds een topologisch juiste polygoon verkrijgt. Klik op <span class="guilabel">Bewerken aan/uitzetten</span> om het bewerken van de laag <code class="docutils literal notranslate"><span class="pre">Parks</span></code> te voltooien.</p></li>
-</ol>
-<img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
-<ol class="arabic simple" start="27">
-<li><p>Nu is het tijd om een laag met gebouwen te digitaliseren. Maak een nieuwe polygoonlaag, genaamd <code class="docutils literal notranslate"><span class="pre">Buildings</span></code>, door te klikken op het pictogram <span class="guilabel">Nieuwe laag voor GeoPackage…</span> in Panelen.</p></li>
-</ol>
-<img alt="../../_images/277.png" class="align-center" src="../../_images/277.png" />
-<ol class="arabic simple" start="28">
-<li><p>Als de laag <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> eenmaal is toegevoegd, schakel dan de lagen <code class="docutils literal notranslate"><span class="pre">Parks</span></code> en <code class="docutils literal notranslate"><span class="pre">Roads</span></code> uit zodat de basis topokaart zichtbaar is. Selecteer de laag <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> en klik op <span class="guilabel">Bewerken aan/uitzetten</span>.</p></li>
-</ol>
-<img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
-<ol class="arabic simple" start="29">
-<li><p>Digitaliseren van gebouwen kan een langdurige taak zijn. Het is ook moeilijk om handmatig punten toe te voegen zodat de randen loodrecht staan en een rechthoek vormen. We zullen een werkbalk voor QGIS gebruiken, genaamd <strong>Werkbalk Regelmatige vorm digitaliseren</strong> om met deze taak te helpen. Klik met rechts op een lege ruimte in het gebied van de werkbalk en activeer de <code class="docutils literal notranslate"><span class="pre">Werkbalk</span> <span class="pre">Regelmatige</span> <span class="pre">vorm</span> <span class="pre">digitaliseren</span></code>.</p></li>
-</ol>
-<img alt="../../_images/296.png" class="align-center" src="../../_images/296.png" />
-<ol class="arabic simple" start="30">
-<li><p>Zoom naar een gebied met gebouwen en klik op de knop <span class="guilabel">Rechthoek toevoegen uit bereik</span>. Klik en sleep de muis om een perfecte rechthoek te tekenen. Voeg op soortgelijk wijze andere gebouwen toe.</p></li>
-</ol>
-<img alt="../../_images/306.png" class="align-center" src="../../_images/306.png" />
-<ol class="arabic simple" start="31">
-<li><p>Het zal u opvallen dat sommige gebouwen niet verticaal staan. We zullen een rechthoek onder een hoek moeten tekenen om met de omtrek van het gebouw overeen te komen. Klik op <span class="guilabel">Rechthoek toevoegen uit middelpunt en een punt</span>.</p></li>
-</ol>
-<img alt="../../_images/3110.png" class="align-center" src="../../_images/3110.png" />
-<ol class="arabic simple" start="32">
-<li><p>Klik in het midden van het gebouw en sleep de muis om een verticale rechthoek te tekenen.</p></li>
-</ol>
-<img alt="../../_images/324.png" class="align-center" src="../../_images/324.png" />
+<blockquote>
+<div><img alt="../../_images/324.png" class="align-center" src="../../_images/324.png" />
+</div></blockquote>
 <ol class="arabic simple" start="33">
+<li><p>Right-click to finish the polygon and enter the attributes. Magically the new polygon is shrunk and snapped exactly to the boundary of the neighboring polygons! This is very useful when digitizing complex boundaries where you need not be precise and still have topologically correct polygon. Click <span class="guilabel">Toggle Editing</span> to finish editing the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> layer.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/332.png" class="align-center" src="../../_images/332.png" />
+</div></blockquote>
+<ol class="arabic simple" start="34">
+<li><p>Now it is time to digitize a buildings layer. Create a new polygon layer named <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> by clicking <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer…</span> icon from Panels. Set the <span class="guilabel">Buildings</span> and <span class="guilabel">MuiltiPolygon</span>. Choose the CRS as <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>. Click <span class="guilabel">OK</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/342.png" class="align-center" src="../../_images/342.png" />
+</div></blockquote>
+<ol class="arabic simple" start="35">
+<li><p>Once the <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> layer is added, turn off the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> and <code class="docutils literal notranslate"><span class="pre">Roads</span></code> layers to make the base topo map visible. Select the <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> layer and click <span class="guilabel">Toggle Editing</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/352.png" class="align-center" src="../../_images/352.png" />
+</div></blockquote>
+<ol class="arabic simple" start="36">
+<li><p>Digitizing buildings can be a cumbersome task, and also, it is challenging to add vertices manually so that the edges are perpendicular and form a rectangle. We will use a QGIS toolbar called <strong>Shape Digitizing</strong> to help with this task. Right-click on any empty space on the toolbar area and activate the <code class="docutils literal notranslate"><span class="pre">Shape</span> <span class="pre">Digitizing</span> <span class="pre">Toolbar</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/361.png" class="align-center" src="../../_images/361.png" />
+</div></blockquote>
+<ol class="arabic simple" start="37">
+<li><p>Enable editing by pressing the pencil icon <span class="guilabel">Toggle Editing</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/371.png" class="align-center" src="../../_images/371.png" />
+</div></blockquote>
+<ol class="arabic simple" start="38">
+<li><p>Now under <span class="guilabel">Add Rectangle dropdown</span> select <span class="guilabel">Add Rectangle from Extent</span> button.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/381.png" class="align-center" src="../../_images/381.png" />
+</div></blockquote>
+<ol class="arabic simple" start="39">
+<li><p>Zoom to an area with the buildings. Click and drag the mouse to draw a perfect rectangle. Similarly, add the remaining buildings.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/391.png" class="align-center" src="../../_images/391.png" />
+</div></blockquote>
+<ol class="arabic simple" start="40">
+<li><p>You will notice that some buildings are not vertical, and we will need to draw a rectangle at an angle to match the building footprint. Under <span class="guilabel">Add Rectangle dropdown</span> select <span class="guilabel">Add Rectangle from Center and a Point</span> button.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/40.png" class="align-center" src="../../_images/40.png" />
+</div></blockquote>
+<ol class="arabic simple" start="41">
+<li><p>Zoom to an area of diamond-shaped buildings. Click on the center to drop a point and drag the mouse to draw a rectangle.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/411.png" class="align-center" src="../../_images/411.png" />
+</div></blockquote>
+<ol class="arabic simple" start="42">
 <li><p>We moeten deze rechthoek draaien om overeen te komen met de afbeelding op de topokaart. Het gereedschap om te draaien is beschikbaar op de werkbalk <strong>Geavanceerd digitaliseren</strong>. Klik met rechts op een leeg gebied in het gedeelte van de werkbalk en schakel de werkbalk <span class="guilabel">Geavanceerd digitaliseren</span> in.</p></li>
 </ol>
-<img alt="../../_images/332.png" class="align-center" src="../../_images/332.png" />
-<ol class="arabic simple" start="34">
-<li><p>Klik op de knop <span class="guilabel">Object draaien</span>.</p></li>
+<blockquote>
+<div><img alt="../../_images/421.png" class="align-center" src="../../_images/421.png" />
+</div></blockquote>
+<ol class="arabic simple" start="43">
+<li><p>Click the <span class="guilabel">Rotate Feature</span> button.</p></li>
 </ol>
-<img alt="../../_images/342.png" class="align-center" src="../../_images/342.png" />
-<ol class="arabic simple" start="35">
-<li><p>Gebruik het gereedschap <span class="guilabel">Object(en) selecteren</span> om de polygoon te selecteren die u wilt draaien. Als het gereedschap <span class="guilabel">Object draaien</span> eenmaal is geactiveerd, zult u een kruisdraad in het midden van de polygoon zien. Klik exact op die kruisdraad en sleep met de muis terwijl u de linkermuisknop ingedrukt houdt. Een voorbeeld van het gedraaide object zal verschijnen. Laat de muisknop los als de polygoon is uitgelijnd met de omtrek van het gebouw.</p></li>
+<blockquote>
+<div><img alt="../../_images/431.png" class="align-center" src="../../_images/431.png" />
+</div></blockquote>
+<ol class="arabic simple" start="44">
+<li><p>Use the <span class="guilabel">Select Single feature</span> tool to select the polygon you want to rotate. Once the <span class="guilabel">Rotate Feature</span> tool is activated, you will see crosshairs at the center of the polygon. Click exactly on that crosshairs and drag the mouse while holding the left-click button. A preview of the rotated feature will appear. Let go of the mouse button when the polygon aligns with the building footprint.</p></li>
 </ol>
-<img alt="../../_images/352.png" class="align-center" src="../../_images/352.png" />
-<ol class="arabic simple" start="36">
-<li><p>Sla de bewerkingen op de laag op en klik op <span class="guilabel">Bewerken aan/uitzetten</span> als u gereed bent met het digitaliseren van alle gebouwen. U kunt de lagen verslepen om hun volgorde van weergave te wijzigen.</p></li>
+<blockquote>
+<div><img alt="../../_images/441.png" class="align-center" src="../../_images/441.png" />
+</div></blockquote>
+<ol class="arabic simple" start="45">
+<li><p>Save the layer edits and click <span class="guilabel">Toggle Editing</span> once you finish digitizing all buildings. You can drag the layers to change their order of appearance. The digitizing task is now complete. You can play with the styling and labeling options in layer properties to create a nice-looking map from the data you created.</p></li>
 </ol>
-<img alt="../../_images/361.png" class="align-center" src="../../_images/361.png" />
-<ol class="arabic simple" start="37">
-<li><p>De taak van het digitaliseren is nu voltooid. U kunt nog spelen met de opties voor opmaak en labelen in Laageigenschappen om een goed uitziende kaart te maken van de gegevens die u heeft gemaakt.</p></li>
-</ol>
-<img alt="../../_images/371.png" class="align-center" src="../../_images/371.png" />
+<blockquote>
+<div><img alt="../../_images/451.png" class="align-center" src="../../_images/451.png" />
+</div></blockquote>
 </section>
 </section>
 
@@ -406,7 +533,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Laatste aanpassing op mei 05, 2022.<br/>
+      Laatste aanpassing op jun. 17, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

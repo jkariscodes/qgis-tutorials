@@ -233,13 +233,13 @@
 <li><p>Navegue até o arquivos <code class="docutils literal notranslate"><span class="pre">assam.gpkg</span></code> no QGIS Browser. Expanda e arraste cada uma das 5 camadas de dados individuais para a tela do mapa. Você verá as camadas <code class="docutils literal notranslate"><span class="pre">boundary</span></code>, <code class="docutils literal notranslate"><span class="pre">roads</span></code>, <code class="docutils literal notranslate"><span class="pre">protected_regions</span></code>, <code class="docutils literal notranslate"><span class="pre">water_polygons</span></code> and <code class="docutils literal notranslate"><span class="pre">water_polylines</span></code> carregadas no painel <span class="guilabel">Layers</span> de camadas</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1101.png" class="align-center" src="../../_images/1101.png" />
+<div><img alt="../../_images/1100.png" class="align-center" src="../../_images/1100.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>O primeiro passo na análise de sobreposição é converter cada camada de dados em Raster. Uma consideração importante é que todos os rasters devem ter a mesma extensão. Usaremos a camada `` limite ‘’ como extensão para todos os rasters. Vá para: menuselection: <cite>Processar -&gt; Caixa de Ferramentas</cite>. Pesquise e localize o algoritmo: menuelection: <cite>GDAL -&gt; Conversão de vetor -&gt; Converter vetor para raster (rasterizar)</cite> <a href="#id1"><span class="problematic" id="id2">`</span></a>. Clique duas vezes para iniciá-lo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
+<div><img alt="../../_images/250.png" class="align-center" src="../../_images/250.png" />
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Na caixa de diálogo: guilabel: <cite>Converter vetor para raster (rasterizar)</cite>, selecione <code class="docutils literal notranslate"><span class="pre">roads</span></code> como a: guilabel: <cite>Camada de entrada</cite>. Queremos criar um raster de saída em que os valores de pixel sejam 1 onde há uma estrada e 0 onde não há estradas. Digite `` 1`` como o: guilabel: <cite>Um valor fixo to burn</cite>. As camadas de entrada estão em um CRS projetado métrico. Selecione <code class="docutils literal notranslate"><span class="pre">Unidades</span> <span class="pre">georreferenciadas</span></code> como: guilabel: <cite>Unidades de tamanho da saída</cite>. Definiremos a resolução do Raster de saída como 15 metros. Selecione `` 15`` como ambos: guilabel: <cite>Largura / resolução horizontal</cite> e: guilabel:` Altura / resolução vertical`. Em seguida, clique no botão: guilabel: <cite>…</cite> ao lado de: guilabel: <cite>Extensão da saída</cite> e selecione` <cite>boundary`</cite> para: guilabel:` Usar extensão da camada`.</p></li>
@@ -257,31 +257,31 @@
 <li><p>Once the processing finishes, you will see a new layer <span class="guilabel">raster_roads</span> loaded in the <span class="guilabel">Layers</span> panel. The default styling will show pixels with roads as white and others as black. We want to convert other 4 vector layers to rasters as well. Rather than running the rasterize algorithm one-by-one, we can use the built-in batch-processing functionality to convert them all at once. See <a class="reference internal" href="batch_processing.html"><span class="doc">Batch Processing using Processing Framework (QGIS3)</span></a> tutorial to learn more about batch processing. Right-click the <code class="docutils literal notranslate"><span class="pre">Rasterize</span> <span class="pre">(vector</span> <span class="pre">to</span> <span class="pre">raster)</span></code> algorithm and select <span class="guilabel">Execute as Batch Process</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/515.png" class="align-center" src="../../_images/515.png" />
+<div><img alt="../../_images/514.png" class="align-center" src="../../_images/514.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Na caixa de diálogo: guilabel: <cite>Processamento em lote</cite>, clique no botão: guilabel:` … <cite>na primeira linha da coluna: guilabel:</cite> Camada de entrada`. Selecione as camadas `` boundary``, `` protected_regions``, `` water_polygons`` e `` water_polylines`` e clique em: guilabel: <cite>OK</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/615.png" class="align-center" src="../../_images/615.png" />
+<div><img alt="../../_images/614.png" class="align-center" src="../../_images/614.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>Preencha os parâmetros com os mesmos valores que usamos na camada de estradas. Após preencher a primeira linha do parâmetro, use a opção: menuselection: <cite>Preenchimento automático -&gt; Preencher para baixo</cite> para adicionar o mesmo valor para todas as camadas.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/714.png" class="align-center" src="../../_images/714.png" />
+<div><img alt="../../_images/713.png" class="align-center" src="../../_images/713.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>Na última coluna: guilabel: <cite>Rasterized</cite>, clique no botão: guilabel:` … <cite>na primeira linha. Selecione `</cite> Preencher com valores de parâmetros`` como: guilabel: <cite>modo de preenchimento automático</cite> e` <cite>Camada de entrada`</cite> como o: guilabel:` Parâmetro a ser usado`. Clique em: guilabel: <cite>OK</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/814.png" class="align-center" src="../../_images/814.png" />
+<div><img alt="../../_images/813.png" class="align-center" src="../../_images/813.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>Navegue até um diretório no seu computador e nomeie a camada como `` raster_``. A interface de processamento em lote completará automaticamente o nome com o nome da camada e preencherá todas as linhas. Verifique se a caixa: guilabel: <cite>Carregar camadas após a conclusão</cite> está marcada e clique em: guilabel:` OK`.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/914.png" class="align-center" src="../../_images/914.png" />
+<div><img alt="../../_images/913.png" class="align-center" src="../../_images/913.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>Quando o processamento terminar, você terá 4 novas camadas raster carregadas no painel: guilabel: <cite>Camadas</cite>. Você notará que temos 2 camadas relacionadas à água - ambas representando água. Podemos mesclá-los para ter uma única camada representando áreas de água na região. Procure e localize: menuelection: <cite>Raster analysis -&gt; Raster calculator</cite> algoritmo na Processing Toolbox. Clique duas vezes para iniciá-lo.</p></li>
@@ -371,7 +371,7 @@
 <li><p>Once the re-classification process finishes, a new layer <code class="docutils literal notranslate"><span class="pre">roads_reclass</span></code> will be added to the <span class="guilabel">Layers</span> panel. This layer has only 3 different values, 10, 50 and 100 indicating relative suitability of the pixels with regards to distance from roads. Open <span class="menuselection">Raster analysis ‣ Raster calculator</span> algorithm again.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2115.png" class="align-center" src="../../_images/2115.png" />
+<div><img alt="../../_images/2114.png" class="align-center" src="../../_images/2114.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>Repita o processo de reclassificação para a camada `` water_proximity``. Aqui o esquema será inverso, onde os pixels mais distantes da água terão uma pontuação mais alta.</p></li>
@@ -410,7 +410,7 @@
 <li><p>Selecione o renderizador `` singleband_pseudocolor`` e a rampa de cor `` Spectral``. Clique em: guilabel: <cite>Classificar</cite> para aplicar a rampa de cores no raster.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2510.png" class="align-center" src="../../_images/2510.png" />
+<div><img alt="../../_images/259.png" class="align-center" src="../../_images/259.png" />
 </div></blockquote>
 <ol class="arabic simple" start="26">
 <li><p>Clique nos valores padrão das etiquetas ao lado de cada cor e insira as etiquetas apropriadas. Os rótulos também aparecerão como a legenda na camada `` overlay``.</p></li>
@@ -428,7 +428,7 @@
 <li><p>Para que o efeito do renderizador seja mostrado, ele precisa estar da lista de camadas. Clique com o botão direito do mouse na camada `` boundary`` e selecione: guilabel: <cite>Mover para cima</cite>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/288.png" class="align-center" src="../../_images/288.png" />
+<div><img alt="../../_images/289.png" class="align-center" src="../../_images/289.png" />
 </div></blockquote>
 <ol class="arabic simple" start="29">
 <li><p>Verifique a camada e a tela do mapa será atualizada para mostrar o raster `` overlay`` cortada na camada <code class="docutils literal notranslate"><span class="pre">boundary</span></code>. Esta é a saída final que mostra áreas dentro do estado que são adequadas para o desenvolvimento.</p></li>
@@ -461,7 +461,7 @@
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Última atualização em mai. 05, 2022.<br/>
+      Última atualização em jun. 17, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

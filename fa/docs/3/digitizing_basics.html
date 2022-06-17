@@ -203,15 +203,18 @@
 
   <section id="digitizing-map-data-qgis3">
 <h1>رقومی کردن داده های نقشه (QGIS3)<a class="headerlink" href="#digitizing-map-data-qgis3" title="پیوند ثابت به این سر مقاله">¶</a></h1>
-<p>رقومی کردن یکی از متداول ترین کارهایی است که متخصص GIS باید انجام دهد. اغلب مقدار زیادی از*زمان GIS * صرف رقومی کردن داده های رستری برای ایجاد لایه های برداری می شود که در تحلیل خود استفاده می کنید. QGIS دارای قابلیت های رقومی سازی و ویرایش روی مانیتور است که در این آموزش به بررسی آنها می پردازیم.</p>
+<p>Digitizing is one of the most common tasks a GIS Specialist has to do.
+Often a large amount of <em>GIS time</em> is spent digitizing raster data to create
+vector layers that you use in your analysis. QGIS has powerful on-screen
+digitizing and editing capabilities that we will explore in this tutorial.</p>
 <section id="overview-of-the-task">
 <h2>نمای کلی تمرین<a class="headerlink" href="#overview-of-the-task" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <p>ما از یک نقشه توپوگرافی رستری استفاده خواهیم کرد و چندین لایه برداری را که نمایانگر عارضه های اطراف پارک هستند ، ایجاد خواهیم کرد.</p>
 <section id="other-skills-you-will-learn">
-<h3>سایر مهارت های شما  می آموزید<a class="headerlink" href="#other-skills-you-will-learn" title="پیوند ثابت به این سر مقاله">¶</a></h3>
+<h3>Other skills you will learn.<a class="headerlink" href="#other-skills-you-will-learn" title="پیوند ثابت به این سر مقاله">¶</a></h3>
 <ul class="simple">
 <li><p>ایجاد هرم برای مجموعه داده های بزرگ رستریبرای سرعت بخشیدن به عملیات بزرگنمایی و تغییر مکان.</p></li>
-<li><p>کار با پایگاه داده ماهواره ای</p></li>
+<li><p>Create and edit GeoPackage.</p></li>
 </ul>
 </section>
 </section>
@@ -226,165 +229,285 @@
 <section id="procedure">
 <h2>مراحل<a class="headerlink" href="#procedure" title="پیوند ثابت به این سر مقاله">¶</a></h2>
 <ol class="arabic simple">
-<li><p>به منوی <span class="menuselection">Layer ‣ Add Raster Layer</span>. داده دانلود  شده  <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02.tif</span></code> را پیدا کنید و  دکمه  <span class="guilabel">Open</span> کلیک کنید.</p></li>
+<li><p>In QGIS, let's load the image file. Go to <span class="menuselection">Layer ‣ Add Layer ‣ Add Raster Layer</span>.</p></li>
 </ol>
-<img alt="../../_images/150.png" class="align-center" src="../../_images/150.png" />
+<blockquote>
+<div><img alt="../../_images/014.png" class="align-center" src="../../_images/014.png" />
+</div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>این یک  فایل بزرگ رستری است و ممکن است متوجه شوید که هنگام بزرگنمایی یا تغییر مکان در نقشه ، ارائه نقشه به کمی زمان نیاز دارد تا نمایش داده شود.  QGIS یک راه حل ساده برای بارگیری سریعتر رسترها با استفاده از هرم تصویری ** Image Pyramids ** ارائه می دهد. QGIS موزاییک ها تصاویر از پیش  در رزولوشن های مختلف ایجاد می کند و این موارد  را به جای رستر کامل ارائه می شوند. این امر نمایش نقشه را راجتر می کند.  روی لایه &quot;BX24_GeoTifv1-02&quot; راست کلیک کرده و گزینه :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Properties`را انتخاب کنید.</p></li>
+<li><p>In the <span class="guilabel">Data Source Manager</span> dialog select <span class="guilabel">Raster.</span> Under <span class="guilabel">Source</span> click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> and locate the downloaded <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02.tif</span></code> and click <span class="guilabel">Open</span>. Then click <span class="guilabel">Add</span> followed by <span class="guilabel">Close.</span></p></li>
 </ol>
-<img alt="../../_images/230.png" class="align-center" src="../../_images/230.png" />
+<blockquote>
+<div><img alt="../../_images/024.png" class="align-center" src="../../_images/024.png" />
+</div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>تب <span class="guilabel">Pyramids</span>  را انتخاب کنید. دکمه کلید <kbd class="kbd docutils literal notranslate">Ctrl</kbd>  از صفحه کلید فشار دهید و تمام و مقادیر رزولوشن های ارائه شده در پنل  <span class="guilabel">Resolutions</span>  را انتخاب کنید. گزینه های دیگر را به صورت پیش فرض بگذارید و کلیک کنید: بر دکمه  <span class="guilabel">Build pyramids</span> کلیک نمایید پس از پایان فرایند ، روی  <span class="guilabel">OK</span> کلیک کنید.</p></li>
+<li><p>This is a large raster file, and you may notice that when you zoom or pan around the map, the map takes a little time to render the image. QGIS offers a simple solution to make rasters load much faster by using <strong>Image Pyramids</strong>. QGIS creates pre-rendered tiles at different resolutions, and these are presented to you instead of the full raster. This makes map navigation snappy and responsive. Right-click the <code class="docutils literal notranslate"><span class="pre">BX24_GeoTifv1-02</span></code> layer and choose <span class="guilabel">Properties</span>.</p></li>
 </ol>
-<img alt="../../_images/320.png" class="align-center" src="../../_images/320.png" />
+<blockquote>
+<div><img alt="../../_images/034.png" class="align-center" src="../../_images/034.png" />
+</div></blockquote>
 <ol class="arabic simple" start="4">
+<li><p>In the <span class="guilabel">Layer Properties</span> dialog, Choose the <span class="guilabel">Pyramids</span> tab. Hold the <kbd class="kbd docutils literal notranslate">Ctrl</kbd> key and select all the resolutions offered in the <span class="guilabel">Resolutions</span> panel. Leave other options to defaults and click <span class="guilabel">Build pyramids</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/044.png" class="align-center" src="../../_images/044.png" />
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Once the process finishes, the dialog box will show the pyramids without a cross. This indicates the Image Pyramids build is completed. Click <span class="guilabel">OK</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/054.png" class="align-center" src="../../_images/054.png" />
+</div></blockquote>
+<ol class="arabic simple" start="6">
 <li><p>قبل از شروع ، باید پیش فرض ها در ** گزینه های رقومی سازی Digitizing Options* * را تنظیم کنیم .  به منوی  <span class="menuselection">Settings ‣ Options...</span>. برویید.</p></li>
 </ol>
-<img alt="../../_images/48.png" class="align-center" src="../../_images/48.png" />
-<ol class="arabic simple" start="5">
-<li><p>تب  <span class="guilabel">Digitizing</span>  در کادر محاوره ای <span class="guilabel">Options</span> انتخاب کنید. برای حالت اتصال پیشفرض <span class="guilabel">Default snap mode</span> به حالت <span class="guilabel">Vertex</span> تنظیم نمایید. در هنگام رقومی سازی، به شما این امکان را می دهد تا به نزدیکترین نقطه میانی اتصال کنید. من همچنین ترجیح می دهم به جای واحدهای نقشه، حد آستانه اتصال پیشفرض <span class="guilabel">Default snapping tolerance</span> و شعاع جستجو برای ویرایش نقاط میانی:guilabel:<cite>Search radius for vertex edits</cite>   را به جای واحد نقشه به   پیکسل تنظیم کنم. با این کار بدون در نظر گرفتن سطح بزرگنمایی ، ثابت ماندن فاصله اتصال تضمین می شود. بسته به وضوح صفحه رایانه ، ممکن است مقدار مناسبی را انتخاب کنید. بر <span class="guilabel">OK</span> کلیک کنید.</p></li>
-</ol>
-<img alt="../../_images/59.png" class="align-center" src="../../_images/59.png" />
-<ol class="arabic simple" start="6">
-<li><p>اکنون ما آماده رقومی کردن هستیم. ما ابتدا یک لایه جاده ایجاد می کنیم و جاده های اطراف منطقه پارک را رقومیمی کنیم. نماد <span class="guilabel">New GeoPackage Layer...</span> را از پنل ها انتخاب کنید. یک  GeoPackage فرمت داده باز ، غیر اختصاصی ، مستقل از سیستم عامل و مبتنی بر استانداردها برای سیستم اطلاعات جغرافیایی است که به عنوان یک ظرف پایگاه داده SQLite اجرا می شود. این کار باعث می شود تا به جای shapefile ، مدیریت آن به راحتی انجام شود. در این آموزش ، ما در حال ایجاد چند لایه چند ضلعی و یک لایه خط هستیم ، بنابراین یک GeoPackage مناسب تر خواهد بود. شما همیشه می توانید GeoPackage را بارگیری کرده و لایه ها را به عنوان فایل خروجی shapefile یا هر فرمتدیگری که می خواهید ذخیرهکنید.</p></li>
-</ol>
-<img alt="../../_images/69.png" class="align-center" src="../../_images/69.png" />
+<blockquote>
+<div><img alt="../../_images/064.png" class="align-center" src="../../_images/064.png" />
+</div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>در کادرمحاوره ای <span class="guilabel">New GeoPackage Layer</span>  بر روی دکمه:guilabel:<cite>...</cite>   کلیک کنید و یک پایگاه داده جدید ژئوپکیج با نام  <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code> ذخیره کنید.  <span class="guilabel">Table name</span>  به عنوان &quot;Roads&quot; و &quot;Line&quot; را به عنوان <span class="guilabel">Type</span>. انتخاب کنید.  سیستم مختصات مرجع نقشه توپوگرافی پایه &quot;EPSG: 2193 - NZGD 2000&quot; است.</p></li>
+<li><p>Select the <span class="guilabel">Digitizing</span> tab in the <span class="guilabel">Options</span> dialog. Check the <span class="guilabel">Enable snapping by default</span>  under <span class="guilabel">Snapping</span> section. In <span class="guilabel">Default snap mode</span> choose <span class="guilabel">Vertex</span>. This will allow you to snap to the nearest vertex. I also prefer to set the <span class="guilabel">Default snapping tolerance</span> and <span class="guilabel">Search radius for vertex edits</span> in pixels instead of map units. This will ensure that the snapping distance remains constant regardless of zoom level. Depending on your computer screen resolution, you may choose an appropriate value. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/79.png" class="align-center" src="../../_images/79.png" />
+<blockquote>
+<div><img alt="../../_images/074.png" class="align-center" src="../../_images/074.png" />
+</div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>هنگام ایجاد یک لایه GIS ، باید در مورد خصوصیات توصیفی هایی که هر عارضه خواهد داشت تصمیم بگیرید. از آنجا که این یک لایه جاده است ، ما علاوه بر این 2 خصوصیات توصیفی  به نام Name برای نام و Class  برای کلاس اساسی خواهیم داشت . در جعبه   <span class="guilabel">New Field</span>    عبارت  <code class="docutils literal notranslate"><span class="pre">Name</span></code>  وارد کنید و نوع آن متنی  <span class="guilabel">Text data</span> با حداکثر  طول حروف برابر با <code class="docutils literal notranslate"><span class="pre">50</span></code>  در <span class="guilabel">Maximum length</span> وارد کنید. بر <span class="guilabel">Add to attribute list.</span>  کلیک نمایید تا به فهرست اطلاعات توصیفی افزوده شود . حال ستون توصیفی به نام   <code class="docutils literal notranslate"><span class="pre">Class</span></code> نوع <span class="guilabel">Text data</span>, با <code class="docutils literal notranslate"><span class="pre">50</span></code> به عنوان <span class="guilabel">Maximum length</span>. بر <span class="guilabel">OK</span> کلیک نمایید.</p></li>
+<li><p>Now we are ready to start digitizing. We will first create a road layer and digitize the roads around the park area. Click <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer...</span> icon from Panels. A GeoPackage is an open, non-proprietary, platform-independent, and standards-based data format for a geographic information system implemented as an SQLite database container. This makes it much easier to move it around instead of a bunch of shapefiles. In this tutorial, we create a couple of polygon layers and a line layer so that a GeoPackage will be better suited. You can always load a GeoPackage and export layers as a shapefile or any other format you want.</p></li>
 </ol>
-<img alt="../../_images/89.png" class="align-center" src="../../_images/89.png" />
+<blockquote>
+<div><img alt="../../_images/084.png" class="align-center" src="../../_images/084.png" />
+</div></blockquote>
 <ol class="arabic simple" start="9">
+<li><p>In the <span class="guilabel">New GeoPackage Layer</span> dialog, click the <span class="guilabel">...</span> button and save a new GeoPackage database named <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Choose the <span class="guilabel">Table name</span> as <code class="docutils literal notranslate"><span class="pre">Roads</span></code> and select <code class="docutils literal notranslate"><span class="pre">LineString</span></code> as the <span class="guilabel">Geometry type</span>. The base topographic map is the <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code> CRS.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/094.png" class="align-center" src="../../_images/094.png" />
+</div></blockquote>
+<ol class="arabic simple" start="10">
+<li><p>When creating a GIS layer, you must decide on each feature's attributes. Since this is a road layer, we additionally will have two primary attributes - Name and Class. In <span class="guilabel">New Field</span> Enter <code class="docutils literal notranslate"><span class="pre">Name</span></code> of the type <span class="guilabel">Text data,</span> with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span> and click <span class="guilabel">Add to attribute list.</span> Now create a new attribute <code class="docutils literal notranslate"><span class="pre">Class</span></code> of the type <span class="guilabel">Text data</span>, with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span>. Click <span class="guilabel">OK</span></p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/1013.png" class="align-center" src="../../_images/1013.png" />
+</div></blockquote>
+<ol class="arabic simple" start="11">
 <li><p>پس از باز نمودن لایه &quot;Roads&quot; ، روی دکمه <span class="guilabel">Toggle Editing</span>  کلیک کنید تا لایه در حالت ویرایش قرار گیرد.</p></li>
 </ol>
-<img alt="../../_images/99.png" class="align-center" src="../../_images/99.png" />
-<ol class="arabic simple" start="10">
+<blockquote>
+<div><img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
+</div></blockquote>
+<ol class="arabic simple" start="12">
 <li><p>روی دکمه  <span class="guilabel">Add Line Feature</span>  کلیک کنید. برای افزودن نقطه جدید بر روی  پنجره نقشه اصلی کلیک کنید. نقاط جدید را به همراه عارضه جاده اضافه کنید. وقتی بخش جاده را رقومی کردید ، برای پایان دادن ویرایش  عارضه کلیک راست کنید.</p></li>
 </ol>
+<blockquote>
+<div><img alt="../../_images/1214.png" class="align-center" src="../../_images/1214.png" />
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">توجه</p>
 <p>برای بزرگنمایی یا کوچک کردن هنگام رقومی کردن ، می توانید از حرکت ماوس استفاده کنید. همچنین می توانید دکمه پیمایش را نگه دارید و ماوس را برای چرخاندن حرکت دهید.</p>
 </div>
-<img alt="../../_images/1013.png" class="align-center" src="../../_images/1013.png" />
-<ol class="arabic simple" start="11">
-<li><p>بعد از کلیک راست برای خاتمه ویرایش عارضه ، یک پنجره محاوره ای بازشو به نام <span class="guilabel">Road - Feature Attributes</span> ظاهر خواهد شد.  در اینجا می توانید  خصوصیات توصیفی عارضه جدید ایجاد شده را وارد کنید. از آنجا که ** fid ** به عنوان Autogenerate field  ایجاد خودکار است ، نمی توانید مقدار آن  را به صورت دستی وارد کنید. آن را به همین ترتیب بگذارید و نام جاده را همانطور که در نقشه توپو گرافی نشان داده شده وارد کنید. به صورت اختیاری ، مقدار Road Class را نیز اختصاص دهید. بر دکمه :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>OK`کلیک کنید.</p></li>
-</ol>
-<img alt="../../_images/1116.png" class="align-center" src="../../_images/1116.png" />
-<ol class="arabic simple" start="12">
-<li><p>قالب پیشفرض لایه خط جدید یک خط نازک است. بیایید آن را تغییر دهیم تا بتوانیم عارضه رقومی شده روی پنجره نقشه اصلی را بهتر ببینیم. روی لایه &quot;Roads&quot; کلیک راست کرده و گزینه <span class="guilabel">Properties</span> را انتخاب کنید.</p></li>
-</ol>
-<img alt="../../_images/1214.png" class="align-center" src="../../_images/1214.png" />
 <ol class="arabic simple" start="13">
-<li><p>تب <span class="guilabel">Symbology</span>   را در کادر محاوره ای <span class="guilabel">Layer Properties</span> انتخاب کنید. قالب خط ضخیم تری مانند <span class="guilabel">topo road</span>  را از قالبهای تعریف شده قبلی  انتخاب کنید. <span class="guilabel">OK</span> کلیک کنید.`</p></li>
+<li><p>After you right-click to end the feature, you will get a pop-up dialog called <span class="guilabel">Road - Feature Attributes</span>. Here you can enter attributes of the newly created feature. Skip entering any value for <strong>fid</strong> as it is a sequential id that will be autogenerated. Enter the road name as it appears on the topo map. Optionally, assign a Road Class value as well. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/1312.png" class="align-center" src="../../_images/1312.png" />
+<blockquote>
+<div><img alt="../../_images/1312.png" class="align-center" src="../../_images/1312.png" />
+</div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>اکنون عاضه جاده روقومی  شده را اشکارا مشاهده خواهید کرد. کلیک کنید: برای ذخیره  عارضه جدید روی دیسک بر <span class="guilabel">Save Layer Edits</span>  کلیک نمایید.</p></li>
+<li><p>The default style of the new line layer is a thin line. Let's change it to better see the digitized features on the canvas. Select the <code class="docutils literal notranslate"><span class="pre">Roads</span></code> layer and click <span class="guilabel">Layer Styling Panel</span>.</p></li>
 </ol>
-<img alt="../../_images/1410.png" class="align-center" src="../../_images/1410.png" />
+<blockquote>
+<div><img alt="../../_images/1410.png" class="align-center" src="../../_images/1410.png" />
+</div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>قبل از اینکه  بقیه جاده ها را رقومیکنیم ، مهم است که برخی از تنظیماتدیگر  اتصال را که برای ایجاد یک لایه بدون خطا مهم هستند به روز کنید. در یک فضای خالی در نوار ابزار کلیک راست کرده و ابزار :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Snapping toolbar`را فعال کنید.</p></li>
+<li><p>In the <span class="guilabel">Layer Styling Panel</span>, search for different <cite>road</cite> layer styles. Select <code class="docutils literal notranslate"><span class="pre">topo</span> <span class="pre">road</span></code>. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
-<img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
+<blockquote>
+<div><img alt="../../_images/1510.png" class="align-center" src="../../_images/1510.png" />
+</div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>اکنون یک <span class="guilabel">Enable Snapping</span>  (آیکون مگنت) در صفحه ظاهر می شود. روی آن کلیک کنید تا فعال شود و گزینه  <span class="guilabel">All Layers</span>   را انتخاب کرده و <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">Snapping</span> <span class="pre">Options..</span></code> را انتخاب کنید.</p></li>
+<li><p>Now the road layer will be clearly visible. If you are satisfied with the work, click <span class="guilabel">Save Layer Edits</span> button to save the changes.</p></li>
 </ol>
-<img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
+<blockquote>
+<div><img alt="../../_images/169.png" class="align-center" src="../../_images/169.png" />
+</div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>در کادر محاروه ای <span class="guilabel">Snapping options</span>  بر روی <span class="guilabel">Snapping on intersection</span>  کلیک کنید که به شما امکان می دهد در تقاطع لایه پس زمینه اتصال بزنید.</p></li>
+<li><p>Before we digitize the remaining roads, it is essential to update some other important snap settings to create an error-free layer. Right-click on any space on the toolbar area and activate the <span class="guilabel">Snapping toolbar.</span></p></li>
 </ol>
-<img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
+<blockquote>
+<div><img alt="../../_images/1710.png" class="align-center" src="../../_images/1710.png" />
+</div></blockquote>
 <ol class="arabic simple" start="18">
-<li><p>اکنون می توانید بر دکمه  <span class="guilabel">Add feature</span>  کلیک کنید و سایر جاده های اطراف پارک را رقومی کنید. پس از افزودن عارضه جدید برای ذخیره کار خود ، حتماً روی  <span class="guilabel">Save Edits</span>   کلیک کنید. ابزاری مفید برای کمک به شما در رقومی سازی ، ابزار نقطه میانی <strong>Vertex Tool</strong>  است. روی دکمه <span class="guilabel">Vertex Tool</span> کلیک کنید و لایه فعلی  <cite>Vertex Tool (Current Layer)`</cite> را انتخاب کنید.</p></li>
+<li><p>Now an <span class="guilabel">Enable Snapping</span> (Magnet Icon) will appear on the panel. Click on it to enable it and select <span class="guilabel">All Layers</span> and choose <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">Snapping</span> <span class="pre">Options..</span></code>.</p></li>
 </ol>
-<img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
+<blockquote>
+<div><img alt="../../_images/188.png" class="align-center" src="../../_images/188.png" />
+</div></blockquote>
 <ol class="arabic simple" start="19">
-<li><p>پس از فعال شدن ابزار گره ، بر روی هر عارضه کلیک کنید تا رئوس (ورتکس-نقاط میانی) را نشان دهد. برای انتخاب هر راس کلیک کنید. راس پس از انتخاب رنگ تغییر خواهد کرد. اکنون می توانید ماوس خود را کلیک کرده و بکشید تا راس حرکت کند. این کار هنگامی مفید است که بخواهید بعد از ایجاد عارضه تنظیماتی انجام دهید. همچنین می توانید یک راس انتخاب شده را با کلیک روی کلید  <kbd class="kbd docutils literal notranslate">Delete</kbd>  از روی صفحه کلید حذف کنید (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd>  در مکینتاش).</p></li>
+<li><p>In the <span class="guilabel">Snapping options</span> dialog, click the <span class="guilabel">Snapping on Intersection</span>, which allows you to snap on an intersection of a background layer.</p></li>
 </ol>
-<img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
+<blockquote>
+<div><img alt="../../_images/198.png" class="align-center" src="../../_images/198.png" />
+</div></blockquote>
 <ol class="arabic simple" start="20">
+<li><p>Now you can click <span class="guilabel">Add feature</span> button and digitize other roads around the park. Make sure to click <span class="guilabel">Save Edits</span> after adding a new feature to save your work. A helpful tool to help you digitize is the <strong>Vertex Tool</strong>. Click the <span class="guilabel">Vertex Tool</span> button and select <code class="docutils literal notranslate"><span class="pre">Vertex</span> <span class="pre">Tool</span> <span class="pre">(Current</span> <span class="pre">Layer)</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
+</div></blockquote>
+<ol class="arabic simple" start="21">
+<li><p>Once the node tool is activated, click on any feature to show the vertices. Click on any vertex to select it. The vertex will change the color once it is selected. Now you can click and drag your mouse to move the vertex. This is useful when you want to make adjustments after the feature is created. You can also delete a selected vertex by clicking the <kbd class="kbd docutils literal notranslate">Delete</kbd> key.    (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Option</kbd>+<kbd class="kbd docutils literal notranslate">Delete</kbd></kbd> on a mac)</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/21.gif" class="align-center" src="../../_images/21.gif" />
+</div></blockquote>
+<ol class="arabic simple" start="22">
 <li><p>هنگامی که رقومی کردن تمام جاده ها به پایان رسید ، روی دکمه <span class="guilabel">Toggle Editing</span>  کلیک کنید. برای ذخیره دکمه <span class="guilabel">Save</span> کلیک کنید.</p></li>
 </ol>
-<img alt="../../_images/208.png" class="align-center" src="../../_images/208.png" />
-<ol class="arabic simple" start="21">
-<li><p>در کادرمحاوره ای  <span class="guilabel">New GeoPackage Layer</span>  بر روی دکمه: <span class="guilabel">...</span>  کلیک کنید و پایگاه داده GeoPackage با نام <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code> را انتخاب کنید. لایه جدید را به عنوان Name نام &quot;Parks&quot; نامگذاری کنید. و``MultiPolygon`` را به عنوان  نوع  guilabel:<cite>Type</cite>  انتخاب کنید. سیستم مختصات مرجع  نقشه توپوگرافی پایه  &quot;EPSG: 2193 - NZGD 2000&quot; است. بر روی  <span class="guilabel">OK</span> کلیک نمایید و در کادر نام ستون جدید .:guilabel:<cite>New Field</cite> Enter ``  عبارت  <code class="docutils literal notranslate"><span class="pre">Name</span></code>  وارد کنید:  نوع داده  متنی <span class="guilabel">Text data</span>, با &quot;50&quot;حداکثر طول حروف <span class="guilabel">Maximum length</span>    وارد کنید وبر دکمه  :guilabel:` Add to attribute list.`  کلیک کنید تا به فهرست ستون لایه اضافه شود.</p></li>
+<blockquote>
+<div><img alt="../../_images/2210.png" class="align-center" src="../../_images/2210.png" />
+</div></blockquote>
+<ol class="arabic simple" start="23">
+<li><p>Now we will create another layer to digitize the parks as polygons. Click <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer...</span> icon from Panels. In the <span class="guilabel">New GeoPackage Layer</span> dialog, click the <span class="guilabel">...</span> button and select the GeoPackage database named <code class="docutils literal notranslate"><span class="pre">digitizing.gpkg</span></code>. Name the new layer as an attribute called <code class="docutils literal notranslate"><span class="pre">Parks</span></code>. Select <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> as the <span class="guilabel">Type</span>. The base topographic map is the <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code> CRS. Click <span class="guilabel">OK</span>. In <span class="guilabel">New Field</span> Enter <code class="docutils literal notranslate"><span class="pre">Name</span></code>, and the <span class="guilabel">type</span> as <span class="guilabel">Text data</span>, with <code class="docutils literal notranslate"><span class="pre">50</span></code> as <span class="guilabel">Maximum length</span> and click :guilabel:` Add to Fields List.`. Click <span class="guilabel">OK</span>.</p></li>
 </ol>
+<blockquote>
+<div><img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">توجه</p>
-<p><strong>Polygon</strong> - Planar Surface defined by 1 exterior boundary and 0 or more interior boundaries. Each interior boundary defines a hole in the Polygon.
-<strong>Multi-Polygon</strong> - It is used to represent areas with holes inside or consisting of multiple disjoint areas. For eg, 3 discontinuous polygons can be drawn and grouped as a single feature.</p>
+<p><strong>Polygon vs Multi-Polygon</strong></p>
+<p><strong>Polygon</strong> - Planar Surface defined by 1 exterior boundary and 0 or more interior boundaries. Each interior boundary defines a hole in the Polygon.</p>
+<p><strong>Multi-Polygon</strong> - It is used to represent areas with holes inside or consisting of multiple disjoint areas. For eg, 3 discontinuous polygons can be drawn and grouped as a single feature.</p>
 </div>
-<img alt="../../_images/2112.png" class="align-center" src="../../_images/2112.png" />
-<ol class="arabic simple" start="22">
-<li><p>اکنون لایه &quot;Parks&quot; را انتخاب کرده و سپس <span class="guilabel">Toggle Editing</span> را فشار داده و دکمه:guilabel:<cite>Add feature</cite>  را کلیک کرده و بر روی پنجره  اصلی نقشه کلیک کنید تا یک راس چند ضلعی ایجاد شود. چندضلعی عارضه پارک را رقومی کنید. مطمئن شوید که به نقاط میانی جاده متصل شود  تا هیچ فاصله ای بین چند ضلعی پارک و خطوط جاده وجود نداشته باشد. برای اتمام رقومی کردن  چند ضلعی کلیک راست کنید.</p></li>
+<ol class="arabic simple" start="24">
+<li><p>A pop-up dialog will appear. Select the <span class="guilabel">Add New Layer</span> button.</p></li>
 </ol>
-<img alt="../../_images/2210.png" class="align-center" src="../../_images/2210.png" />
-<ol class="arabic simple" start="23">
+<blockquote>
+<div><img alt="../../_images/248.png" class="align-center" src="../../_images/248.png" />
+</div></blockquote>
+<ol class="arabic simple" start="25">
+<li><p>Now select layer <code class="docutils literal notranslate"><span class="pre">Parks</span></code> then clickroad <span class="guilabel">Toggle Editing</span> and click the <span class="guilabel">Add feature</span> button and click on the map canvas to add a polygon vertex. Digitize the polygon representing the park. Make sure you snap to the road's vertices so there are no gaps between the park polygons and road lines. Right-click to finish the polygon.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
+</div></blockquote>
+<ol class="arabic simple" start="26">
 <li><p>نام پارک را در پنجره بازشو <span class="guilabel">Parks - Feature Attributes</span> وارد کنید.</p></li>
 </ol>
-<img alt="../../_images/237.png" class="align-center" src="../../_images/237.png" />
-<ol class="arabic simple" start="24">
-<li><p>تنظیم لایه های چندضلعی تحت  Multi-Polygon مزایای مفید دیگری نیز دارد؛   گزینه ای برای  جلوگیری  از همپوشانی چندضلعی های جدید <strong>Avoid intersections of new polygons</strong> ارائه می دهند.  آیکون <span class="guilabel">Enable Snapping</span> را انتخاب کنید:  روی آن کلیک کنید تا فعال شود و روی  :guilabel:` All Layers`   کلیک کنید و `` Advanced Configuration``را انتخاب کنید. &quot;جلوگیری از همپوشانی روی لایه های فعال&quot; را از دکمه چهارم در Enable snapping toolbar انتخاب کنید. اکنون در کادر <span class="guilabel">Edit Advanced Configuration</span> تیک در ستون:guilabel:<cite>Avoid Overlap</cite>   برای جلوگیری از همپوشانی در لایه &quot;Parks&quot; علامت بزنید.</p></li>
+<blockquote>
+<div><img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
+</div></blockquote>
+<ol class="arabic simple" start="27">
+<li><p>Now digitize the upper region of the park. Enter the park name and save the changes.</p></li>
 </ol>
-<img alt="../../_images/248.png" class="align-center" src="../../_images/248.png" />
-<ol class="arabic simple" start="25">
+<blockquote>
+<div><img alt="../../_images/277.png" class="align-center" src="../../_images/277.png" />
+</div></blockquote>
+<ol class="arabic simple" start="28">
+<li><p>Now, before digitizing the inner polygon lets set settings that can ease this work. Multi-Polygon layers offer another useful setting called <strong>Avoid intersections of new polygons</strong>. Select <span class="guilabel">Enable Snapping</span> (Magnet Icon), click on it to enable it, and click <span class="guilabel">All Layers</span> and select <code class="docutils literal notranslate"><span class="pre">Advanced</span> <span class="pre">Configuration</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/287.png" class="align-center" src="../../_images/287.png" />
+</div></blockquote>
+<ol class="arabic simple" start="29">
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Avoid</span> <span class="pre">Overlap</span> <span class="pre">on</span> <span class="pre">Active</span> <span class="pre">layers</span></code> button in the snapping toolbar.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/296.png" class="align-center" src="../../_images/296.png" />
+</div></blockquote>
+<ol class="arabic simple" start="30">
+<li><p>Now in <span class="guilabel">Edit Advanced Configuration</span>, select the <span class="guilabel">Units</span> as <code class="docutils literal notranslate"><span class="pre">pixels</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/306.png" class="align-center" src="../../_images/306.png" />
+</div></blockquote>
+<ol class="arabic simple" start="31">
+<li><p>Check the box in the <span class="guilabel">Avoid Overlap</span> column in the row for the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> layer.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/3110.png" class="align-center" src="../../_images/3110.png" />
+</div></blockquote>
+<ol class="arabic simple" start="32">
 <li><p>برای افزودن یک چند ضلعی ، روی <span class="guilabel">Add feature</span> t  کلیک کنید. با تنظیم <strong>Avoid Overlap</strong>، بدون نگرانی از اینکه دقیقاً به چند ضلعی های همسایه همپ.شانی داشته باشد ، می توانید یک چند ضلعی جدید را به سرعت رقومی کنید.</p></li>
 </ol>
-<img alt="../../_images/257.png" class="align-center" src="../../_images/257.png" />
-<ol class="arabic simple" start="26">
-<li><p>برای پایان دادن  به ویرایش چند ضلعی کلیک راست کرده و اطلاعات توضیفی را وارد کنید. به طرز جادویی چند ضلعی جدید کوچک شده و دقیقاً تا مرز چند ضلعی های همسایه شکسته می شود! این امر هنگام رقومی کردن مرزهای پیچیده که نیازی به دقت کافی ندارند و هنوز چند ضلعی از نظر توپولوژیی درست هستند ، بسیار مفید است. برای تکمیل ویرایش لایه &quot;Parks&quot;  بر <span class="guilabel">Toggle Editing</span> کلیک کنید.</p></li>
-</ol>
-<img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
-<ol class="arabic simple" start="27">
-<li><p>اکنون زمان روقومی کردن لایه ساختمان است. با کلیک روی آیکون  <span class="guilabel">New GeoPackage Layer...</span>  از پانل یک لایه چند ضلعی جدید به نام&quot; Buildings &quot;ایجاد کنید.</p></li>
-</ol>
-<img alt="../../_images/277.png" class="align-center" src="../../_images/277.png" />
-<ol class="arabic simple" start="28">
-<li><p>هنگامی که لایه &quot;Buildings&quot; اضافه شد ، لایه &quot;Parks&quot; و &quot;Roads&quot; را خاموش کنید تا نقشه پایه توپوگرافی قابل مشاهده باشد. لایه &quot;Buildings&quot; را انتخاب کرده و روی: guilabel: &quot;Toggle Editing&quot; کلیک کنید.</p></li>
-</ol>
-<img alt="../../_images/266.png" class="align-center" src="../../_images/266.png" />
-<ol class="arabic simple" start="29">
-<li><p>Digitizing buildings can be a cumbersome task. Also, it is difficult to add
-vertices manually so that the edges are perpendicular and form a rectangle.
-We will use a QGIS toolbar called <strong>Shapes Digitizing</strong> to help with
-this task. Right-click on any empty space on the toolbar area and activate  the <code class="docutils literal notranslate"><span class="pre">Shapes</span> <span class="pre">Digitizing</span> <span class="pre">Toolbar</span></code>.</p></li>
-</ol>
-<img alt="../../_images/296.png" class="align-center" src="../../_images/296.png" />
-<ol class="arabic simple" start="30">
-<li><p>به منطقه ای از ساختمان ها بزرگنمایی کرده و روی دکمه :guilabel:<a href="#id1"><span class="problematic" id="id2">`</span></a>Rectangle by Extent`کلیک کنید. پس از کلیک با ماوس،  بکشید تا یک مستطیل کامل ترسیم شود. به همین ترتیب ، باقیمانده ساختمانها را نیز اضافه کنید.</p></li>
-</ol>
-<img alt="../../_images/306.png" class="align-center" src="../../_images/306.png" />
-<ol class="arabic simple" start="31">
-<li><p>مشاهده خواهید کرد که برخی از ساختمان ها عمودی نیستند. برای اینکه با طرح ساختمان مطابقت داشته باشد ، باید یک مستطیل را با یک زاویه ترسیم کنیم. روی  <span class="guilabel">Rectangle from center</span> کلیک کنید.</p></li>
-</ol>
-<img alt="../../_images/3110.png" class="align-center" src="../../_images/3110.png" />
-<ol class="arabic simple" start="32">
-<li><p>بر روی مرکز ساختمان کلیک کنید و ماوس را بکشید تا یک مستطیل عمودی ترسیم شود.</p></li>
-</ol>
-<img alt="../../_images/324.png" class="align-center" src="../../_images/324.png" />
+<blockquote>
+<div><img alt="../../_images/324.png" class="align-center" src="../../_images/324.png" />
+</div></blockquote>
 <ol class="arabic simple" start="33">
+<li><p>Right-click to finish the polygon and enter the attributes. Magically the new polygon is shrunk and snapped exactly to the boundary of the neighboring polygons! This is very useful when digitizing complex boundaries where you need not be precise and still have topologically correct polygon. Click <span class="guilabel">Toggle Editing</span> to finish editing the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> layer.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/332.png" class="align-center" src="../../_images/332.png" />
+</div></blockquote>
+<ol class="arabic simple" start="34">
+<li><p>Now it is time to digitize a buildings layer. Create a new polygon layer named <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> by clicking <span class="menuselection">Layer ‣ Create Layer ‣ New GeoPackage Layer...</span> icon from Panels. Set the <span class="guilabel">Buildings</span> and <span class="guilabel">MuiltiPolygon</span>. Choose the CRS as <code class="docutils literal notranslate"><span class="pre">EPSG:2193</span> <span class="pre">-</span> <span class="pre">NZGD</span> <span class="pre">2000</span></code>. Click <span class="guilabel">OK</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/342.png" class="align-center" src="../../_images/342.png" />
+</div></blockquote>
+<ol class="arabic simple" start="35">
+<li><p>Once the <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> layer is added, turn off the <code class="docutils literal notranslate"><span class="pre">Parks</span></code> and <code class="docutils literal notranslate"><span class="pre">Roads</span></code> layers to make the base topo map visible. Select the <code class="docutils literal notranslate"><span class="pre">Buildings</span></code> layer and click <span class="guilabel">Toggle Editing</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/352.png" class="align-center" src="../../_images/352.png" />
+</div></blockquote>
+<ol class="arabic simple" start="36">
+<li><p>Digitizing buildings can be a cumbersome task, and also, it is challenging to add vertices manually so that the edges are perpendicular and form a rectangle. We will use a QGIS toolbar called <strong>Shape Digitizing</strong> to help with this task. Right-click on any empty space on the toolbar area and activate the <code class="docutils literal notranslate"><span class="pre">Shape</span> <span class="pre">Digitizing</span> <span class="pre">Toolbar</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/361.png" class="align-center" src="../../_images/361.png" />
+</div></blockquote>
+<ol class="arabic simple" start="37">
+<li><p>Enable editing by pressing the pencil icon <span class="guilabel">Toggle Editing</span>.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/371.png" class="align-center" src="../../_images/371.png" />
+</div></blockquote>
+<ol class="arabic simple" start="38">
+<li><p>Now under <span class="guilabel">Add Rectangle dropdown</span> select <span class="guilabel">Add Rectangle from Extent</span> button.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/381.png" class="align-center" src="../../_images/381.png" />
+</div></blockquote>
+<ol class="arabic simple" start="39">
+<li><p>Zoom to an area with the buildings. Click and drag the mouse to draw a perfect rectangle. Similarly, add the remaining buildings.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/391.png" class="align-center" src="../../_images/391.png" />
+</div></blockquote>
+<ol class="arabic simple" start="40">
+<li><p>You will notice that some buildings are not vertical, and we will need to draw a rectangle at an angle to match the building footprint. Under <span class="guilabel">Add Rectangle dropdown</span> select <span class="guilabel">Add Rectangle from Center and a Point</span> button.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/40.png" class="align-center" src="../../_images/40.png" />
+</div></blockquote>
+<ol class="arabic simple" start="41">
+<li><p>Zoom to an area of diamond-shaped buildings. Click on the center to drop a point and drag the mouse to draw a rectangle.</p></li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/411.png" class="align-center" src="../../_images/411.png" />
+</div></blockquote>
+<ol class="arabic simple" start="42">
 <li><p>باید این مستطیل را بچرخانیم تا با تصویر موجود در نقشه topo مطابقت داشته باشد. ابزار چرخش در نوار ابزار ** Advanced Digitizing ** موجود است. روی قسمت خالی قسمت نوار ابزار کلیک راست کرده و نوار ابزار <span class="guilabel">Advanced Digitizing</span> را فعال کنید.</p></li>
 </ol>
-<img alt="../../_images/332.png" class="align-center" src="../../_images/332.png" />
-<ol class="arabic simple" start="34">
-<li><p>Click the <span class="guilabel">Rotate Feature(s)</span> button.</p></li>
+<blockquote>
+<div><img alt="../../_images/421.png" class="align-center" src="../../_images/421.png" />
+</div></blockquote>
+<ol class="arabic simple" start="43">
+<li><p>Click the <span class="guilabel">Rotate Feature</span> button.</p></li>
 </ol>
-<img alt="../../_images/342.png" class="align-center" src="../../_images/342.png" />
-<ol class="arabic simple" start="35">
-<li><p>برای انتخاب چندضلعی مورد ظر جهت چرخش از ابزار:guilabel:<cite>Select Single feature</cite>   استفاده کنید. پس از فعال شدن ابزار <span class="guilabel">Rotate Feature(s)</span>، خطوط متقاطع را در مرکز چندضلعی مشاهده خواهید کرد. دقیقاً روی آن خطوط کلیک کنید و در حالی که دکمه کلیک چپ را دارید ، ماوس را بکشید. پیش نمایش عارضه چرخانده شده ظاهر می شود. هنگامی که چندضلعی با طرح ساختمان همسو می شود ، دکمه ماوس را رها کنید.</p></li>
+<blockquote>
+<div><img alt="../../_images/431.png" class="align-center" src="../../_images/431.png" />
+</div></blockquote>
+<ol class="arabic simple" start="44">
+<li><p>Use the <span class="guilabel">Select Single feature</span> tool to select the polygon you want to rotate. Once the <span class="guilabel">Rotate Feature</span> tool is activated, you will see crosshairs at the center of the polygon. Click exactly on that crosshairs and drag the mouse while holding the left-click button. A preview of the rotated feature will appear. Let go of the mouse button when the polygon aligns with the building footprint.</p></li>
 </ol>
-<img alt="../../_images/352.png" class="align-center" src="../../_images/352.png" />
-<ol class="arabic simple" start="36">
-<li><p>ویرایشهای لایه را ذخیره کرده و روی:guilabel:<cite>Toggle Editing</cite>   کلیک کنید تا رقومی کردن تمام ساختمان ها به پایان برسد. می توانید لایه ها را بکشید تا ترتیب شکل ظاهری آنها تغییر کند.</p></li>
+<blockquote>
+<div><img alt="../../_images/441.png" class="align-center" src="../../_images/441.png" />
+</div></blockquote>
+<ol class="arabic simple" start="45">
+<li><p>Save the layer edits and click <span class="guilabel">Toggle Editing</span> once you finish digitizing all buildings. You can drag the layers to change their order of appearance. The digitizing task is now complete. You can play with the styling and labeling options in layer properties to create a nice-looking map from the data you created.</p></li>
 </ol>
-<img alt="../../_images/361.png" class="align-center" src="../../_images/361.png" />
-<ol class="arabic simple" start="37">
-<li><p>کار رقومی کردن اکنون کامل شده است. برای ایجاد یک نقشه زیبا از داده های ایجاد شده ، می توانید با گزینه های یک ظاهر طراحی شده و برچسب گذاری در عارضه های لایه بازی کنید.</p></li>
-</ol>
-<img alt="../../_images/371.png" class="align-center" src="../../_images/371.png" />
+<blockquote>
+<div><img alt="../../_images/451.png" class="align-center" src="../../_images/451.png" />
+</div></blockquote>
 </section>
 </section>
 
@@ -410,7 +533,7 @@ this task. Right-click on any empty space on the toolbar area and activate  the 
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      آخرین بروز رسانی در مهٔ 05, 2022 .<br/>
+      آخرین بروز رسانی در ژوئن 17, 2022 .<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>

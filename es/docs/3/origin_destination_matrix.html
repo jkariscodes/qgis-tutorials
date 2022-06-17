@@ -245,7 +245,7 @@
 <li><p>Localice el archivo descargado <code class="docutils literal notranslate"><span class="pre">Roadway_Block-shp.zip</span></code> en el panel <span class="guilabel">Explorador</span>. Expándalo y arrastre el archivo <code class="docutils literal notranslate"><span class="pre">Roadway_Block.shp</span></code> al lienzo. De forma similar, localice el archivo <code class="docutils literal notranslate"><span class="pre">Adult_Mental_Health_Providers.zip</span></code>, expándalo y agregue <code class="docutils literal notranslate"><span class="pre">Adult_Mental_Health_Providers.shp</span></code> al lienzo.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/1102.png" class="align-center" src="../../_images/1102.png" />
+<div><img alt="../../_images/1101.png" class="align-center" src="../../_images/1101.png" />
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>A continuación, localice el archivo <code class="docutils literal notranslate"><span class="pre">Address_Points.zip</span></code>, expándalo y agregue <code class="docutils literal notranslate"><span class="pre">Address_Points.shp</span></code>. Verá bastantes puntos alrededor de la ciudad. Cada punto representa una dirección válida. Seleccionaremos 1000 puntos al azar. Esta técnica es llamada muestreo aleatorio. Vaya a <span class="menuselection">Procesos ‣ Caja de Herramientas</span>.</p></li>
@@ -273,31 +273,31 @@
 <li><p>Se agregará una nueva capa <code class="docutils literal notranslate"><span class="pre">address_point_subset</span></code> al panel <span class="guilabel">Capas</span>, pueden deshabilitar la visibilidad de la capa de puntos de direcciones <code class="docutils literal notranslate"><span class="pre">Address_Points</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/516.png" class="align-center" src="../../_images/516.png" />
+<div><img alt="../../_images/515.png" class="align-center" src="../../_images/515.png" />
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Clic-derecho en la capa <code class="docutils literal notranslate"><span class="pre">address_point_subset</span></code> y seleccione <span class="guilabel">Renombrar capa</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/616.png" class="align-center" src="../../_images/616.png" />
+<div><img alt="../../_images/615.png" class="align-center" src="../../_images/615.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
 <li><p>Renombremos esta capa como <code class="docutils literal notranslate"><span class="pre">origin_points</span></code>. De forma similar, renombre la capa <code class="docutils literal notranslate"><span class="pre">Adult_Mental_Health_Providers</span></code> que representa las instalaciones sanitarias como <code class="docutils literal notranslate"><span class="pre">destination_points</span></code>. Nombrando de esta manera las capas facilita identificarlas en el procesamiento posterior.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/715.png" class="align-center" src="../../_images/715.png" />
+<div><img alt="../../_images/714.png" class="align-center" src="../../_images/714.png" />
 </div></blockquote>
 <ol class="arabic simple" start="8">
 <li><p>Localice el algoritmo <span class="menuselection">QNEAT3 ‣ Matrices de distancia ‣ OD Matrix from Layers as Line (m:n)</span>. Si no ve este algoritmo en la caja de herramientas, asegúrese que tiene instalado el complemento <strong>QNEAT3</strong>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/815.png" class="align-center" src="../../_images/815.png" />
+<div><img alt="../../_images/814.png" class="align-center" src="../../_images/814.png" />
 </div></blockquote>
 <ol class="arabic simple" start="9">
 <li><p>Este algoritmo ayuda a encontrar las distancias a lo largo de la red entre el origen seleccionado y las capas destino. Seleccione <code class="docutils literal notranslate"><span class="pre">Roadway_Block</span></code> como la <span class="guilabel">Capa de red</span>. Seleccione <code class="docutils literal notranslate"><span class="pre">origin_points</span></code> como la <span class="guilabel">Capa de puntos Desde</span> y <code class="docutils literal notranslate"><span class="pre">OBJECTID_1</span></code> como el <span class="guilabel">Campo ID único de punto</span>. De forma similar, defina <code class="docutils literal notranslate"><span class="pre">destination_points</span></code> como la <span class="guilabel">Capa de punto Hacia</span> y <code class="docutils literal notranslate"><span class="pre">OBJECTID</span></code>  como el <span class="guilabel">Campo ID único de punto</span>. Defina el <span class="guilabel">Criterio de Optimización</span> como <code class="docutils literal notranslate"><span class="pre">Ruta</span> <span class="pre">más</span> <span class="pre">corta</span> <span class="pre">(optimización</span> <span class="pre">de</span> <span class="pre">distancia)</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/915.png" class="align-center" src="../../_images/915.png" />
+<div><img alt="../../_images/914.png" class="align-center" src="../../_images/914.png" />
 </div></blockquote>
 <ol class="arabic simple" start="10">
 <li><p>Como muchas calles en la red son de un solo sentido, necesitamos definir los <span class="guilabel">Parámetros avanzados</span> para especificar la dirección. Vea <a class="reference internal" href="basic_network_analysis.html"><span class="doc">Visualización y Enrutamiento Básico de Red (QGIS3)</span></a> para más detalles sobre cómo están estructurados estos atributos. Elija <code class="docutils literal notranslate"><span class="pre">SUMMARYDIR</span></code>  como el <span class="guilabel">Campo dirección</span>. Ingrese <code class="docutils literal notranslate"><span class="pre">OB</span></code> como el <span class="guilabel">Valor para la dirección adelante</span>, <code class="docutils literal notranslate"><span class="pre">IB</span></code> como el <span class="guilabel">Valor para dirección atrás</span>, y <code class="docutils literal notranslate"><span class="pre">BD</span></code> como el <span class="guilabel">Valor para ambas direcciones</span>. Defina la <span class="guilabel">Tolerancia de topología</span> como <code class="docutils literal notranslate"><span class="pre">0.0000150</span></code>. Mantenga las otras opciones en sus valores predeterminados y clic en <span class="guilabel">Ejecutar</span>.</p></li>
@@ -373,7 +373,7 @@ from input1 group by origin_id
 <li><p>Una nueva capa <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">Layer</span></code> se agregará al panel <span class="guilabel">Capas</span>. Verá que esta ruta sigue la red en vez de conectar el origen y destino con una línea recta. La razón que ejecutamos el algoritmo en 1 para es para identificar fácilemente los valores parámetro que podemos usar en nuestro script. Seleccione <code class="docutils literal notranslate"><span class="pre">Shortest</span> <span class="pre">Path</span> <span class="pre">layer</span></code>, clic-derecho y seleccione <span class="guilabel">Quitar capa</span>. Clic el botón <span class="guilabel">Historia</span> en la <span class="guilabel">Caja de herramientas Procesos</span>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2116.png" class="align-center" src="../../_images/2116.png" />
+<div><img alt="../../_images/2115.png" class="align-center" src="../../_images/2115.png" />
 </div></blockquote>
 <ol class="arabic simple" start="22">
 <li><p>En el diálogo <span class="guilabel">Historia</span>, Seleccione el último comando (comando usado para Ruta más corta). Este comando muestra todos los parámetros y los valores que usamos. Ahora podemos tomar estos valores y ponerlos en un script que nos puede permitir ejecutar este comando en muchos pares origen-destino. Clic <span class="guilabel">Cerrar</span>.</p></li>
@@ -518,7 +518,7 @@ from input1 group by origin_id
 <li><p>Ahora podemos probar el script. Seleccione unas pocas conexiones para la capa <code class="docutils literal notranslate"><span class="pre">SQL</span> <span class="pre">Output</span></code> para la que quiere que se calculen las rutas actuales. En la <span class="guilabel">Caja de Herramientas de Procesos</span>, se agregará un nueva lista desplegable <span class="guilabel">Scripts</span>. Clic en ella y seleccione <code class="docutils literal notranslate"><span class="pre">Obtener</span> <span class="pre">Rutas</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">Matriz</span></code>.</p></li>
 </ol>
 <blockquote>
-<div><img alt="../../_images/2511.png" class="align-center" src="../../_images/2511.png" />
+<div><img alt="../../_images/2510.png" class="align-center" src="../../_images/2510.png" />
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -561,7 +561,7 @@ from input1 group by origin_id
     </p>
     <p>
         &copy; Copyright 2021, Ujaval Gandhi.<br/>
-      Actualizado por última vez en may. 05, 2022.<br/>
+      Actualizado por última vez en jun. 17, 2022.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
